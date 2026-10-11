@@ -1,4 +1,4 @@
-# OpenAuto AI 0.1.5 – Sprachfunktion für OpenAI und Claude
+# OpenAuto AI 0.1.6 – Sprachfunktion für OpenAI und Claude
 
 Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
 die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
@@ -7,13 +7,15 @@ Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
 von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Teststand 0.1.5:** Drei Debug-APKs gebaut; 44 JVM-Tests und 28 Gerätetests bestanden.
-Android-Lint: 0 Fehler (Assistant: 7 Warnungen; DHU: 6). Die automatisierten Tests
-verwenden künstliche Antworten und kein Mikrofon. Den Stand des praktischen
-Sprachtests und seine Grenzen dokumentieren [Sprachanleitung](docs/VOICE.md)
-und [Testbericht](docs/BUILD_AND_TEST.md).
+**Korrektur 0.1.6:** Der eigene Wiedergabefokus wird nur beim Vorlesen gehalten.
+Damit kollidiert er nicht mehr mit dem Fokus des gestarteten Spracherkennungsdienstes,
+der auf dem Pixel den sofortigen Abbruch von 0.1.5 ausgelöst hat.
+57 JVM-Tests bestehen, darunter 13 neue Fokus-Regressionsprüfungen. Assistant und
+DHU sind gebaut, Lint meldet 0 Fehler (7 / 6 bestehende Warnungen).
+**Noch nicht auf dem Pixel installiert:** Nach der Diagnose war kein Gerät mehr über ADB verbunden. Die Gerätetests konnten für diese Version deshalb nicht erneut laufen. Der praktische Sprachtest steht noch aus.
+Details: [Sprachanleitung](docs/VOICE.md) und [Testbericht](docs/BUILD_AND_TEST.md).
 
-Die **Assistenten-APK ist 0.1.5-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
+Die **Assistenten-APK ist 0.1.6-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
 dem bestätigten **0.1.2-prototype**-Stand mit Auswahl, Titel und Starten.
 Die neuen Sprachbausteine sind nur in der Assistenten-App eingebunden.
 

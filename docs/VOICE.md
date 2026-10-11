@@ -1,4 +1,4 @@
-# Smartphone-Sprachfunktion – 0.1.5
+# Smartphone-Sprachfunktion – 0.1.6
 
 OpenAI und Claude verwenden jetzt denselben getesteten Gesprächsablauf:
 Android erkennt die Sprache, der gewählte Anbieter verarbeitet den erkannten
@@ -62,10 +62,10 @@ Zum sofortigen lokalen Stoppen die Schaltfläche oder Benachrichtigung verwenden
 
 | Zustand | Verhalten |
 |---|---|
-| Vorbereiten | Chat und Zugangsdaten prüfen; Vordergrunddienst, Audiofokus und TTS vorbereiten |
+| Vorbereiten | Chat und Zugangsdaten prüfen; Vordergrunddienst und TTS vorbereiten; keinen Wiedergabefokus anfordern |
 | Zuhören | Genau ein kurzer Android-Erkennungsdurchlauf; keine parallele Anbieteranfrage |
 | Anbieter antwortet | Nutzernachricht archivieren, gewählten Adapter einmal aufrufen; Mikrofon aus |
-| Vorlesen | Antwort archivieren, dann vorlesen; lange Texte innerhalb des TTS-Limits aufteilen |
+| Vorlesen | Antwort archivieren, Wiedergabefokus anfordern und vorlesen; Fokus danach freigeben; lange Texte aufteilen |
 | Beendet | Aufnahme, TTS, Zeitgeber und ausstehende lokale Verarbeitung abbrechen; Audiofokus freigeben |
 
 Jeder Schritt hat eine eigene Kennung. Doppelte oder verspätete Rückmeldungen
@@ -87,7 +87,9 @@ zehn Minuten und kann ausdrücklich erneut gestartet werden.
 Zeitlimits: Chat laden/Anbieter wechseln 15 s, TTS vorbereiten 12 s, einzelner
 Erkennungsdurchlauf 45 s, Anfrage einschließlich Speicherung 70 s, Vorlesen 120 s.
 Beim Entfernen der App aus der Übersicht beendet Android auch den Sprachdienst.
-Ein anderer Audiovorgang mit höherem Fokus beendet das Gespräch ebenfalls.
+Während des Vorlesens beendet ein verlorener oder verweigerter Audiofokus das Gespräch.
+Bei Vorbereitung, Zuhören und API-Wartezeit beansprucht die App keinen eigenen
+Wiedergabefokus. Der installierte Erkennungsdienst verwaltet seinen Fokus selbst.
 
 Android verlangt Erkennungsaufrufe auf dem Hauptthread und Freigabe per `destroy()`.
 Die Implementierung erstellt für jeden Erkennungsdurchlauf eine eigene Instanz und
@@ -99,7 +101,7 @@ einzigartige Äußerungskennungen schützen vor veralteten Fertig-Rückmeldungen
 ## Architektur
 
 - `voice`: plattformunabhängige Gesprächssteuerung, Sprach-/Worker-Schnittstellen,
-  Archiv-/Anbieteranbindung und TTS-Textaufteilung.
+  Archiv-/Anbieteranbindung, Fokus-Lebensdauer beim Vorlesen und TTS-Textaufteilung.
 - `app/voice`: Android SpeechRecognizer, TTS, Audiofokus, Hauptthread-Zeitgeber und
   abbrechbare Hintergrundaufgaben.
 - `VoiceService`: Mikrofon-Vordergrunddienst und Beenden-Benachrichtigung. Er wird
@@ -131,19 +133,39 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
 ```
 
-Für die Download-APK den Pfad auf `OpenAutoAI-0.1.5-assistant-debug.apk` ändern.
+Für die Download-APK den Pfad auf `OpenAutoAI-0.1.6-assistant-debug.apk` ändern.
 Bei anderen Geräten die Seriennummer ersetzen. Bei abweichender Signatur nicht
 deinstallieren oder Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 Die bestehenden [DHU-Schritte](START_WINDOWS.md) bleiben gültig.
 
+## Korrektur des sofortigen Abbruchs in 0.1.6
+
+Auf dem Pixel forderte `dev.openautoai.app` am 12.10.2026 um 00:58:52.043
+Wiedergabefokus an. Um 00:58:52.627 forderte der gestartete Google-Sprachdienst
+(`com.google.android.tts`) eigenen exklusiven Fokus an. OpenAuto AI erhielt dabei
+`AUDIOFOCUS_LOSS_TRANSIENT` und beendete die gerade gestartete Erkennung.
+Dieses Muster wiederholte sich bei weiteren Versuchen. Der Paketname des
+Google-Dienstes ist hier kein Nachweis für bereits laufendes Vorlesen; der
+Aufnahmeverlauf meldete `VOICE_RECOGNITION`.
+
+Die App fordert deshalb erst unmittelbar zum Vorlesen eigenen Fokus an und gibt
+ihn vor dem nächsten Erkennungsdurchlauf frei. Bei Fokusverweigerung wird nichts
+abgespielt. Echter Fokusverlust während der Ausgabe stoppt sie weiterhin; es gibt
+kein automatisches Wiederanlaufen. Veraltete Fokus-Rückmeldungen wirken nicht auf
+einen späteren Durchlauf. Das folgt Androids Empfehlung, Fokus direkt vor der
+Wiedergabe anzufordern und danach abzugeben:
+[Audiofokus](https://developer.android.com/media/optimize/audio-focus).
+
 ## Teststand und Grenzen
 
-72 automatisierte Tests sind bestanden. Neue Tests prüfen den Gesprächsablauf
-und beide echten Adapter mit künstlichen Antworten, ohne Mikrofonaufnahme,
-TTS-Wiedergabe oder echte API-Aufrufe. Sie ersetzen keinen physischen Sprachtest.
+57 JVM-Tests bestehen, darunter 13 neue Regressionstests für die Fokus-Lebensdauer
+und den Gesprächsablauf beider Anbieter. Diese Prüfungen verwenden künstliche
+Antworten und Audio-/Fokus-Simulationen, keine echte Mikrofonaufnahme oder TTS-Ausgabe.
+**Noch nicht auf dem Pixel installiert:** Nach der Diagnose war kein Gerät mehr über ADB verbunden. Die Gerätetests konnten für diese Version deshalb nicht erneut laufen.
+
 Android-Auto-Audio, Bluetooth-Routing, gesperrtes Gerät und reale Fahrzeugnutzung
 sind nicht bestätigt. Die experimentelle Car-App-Oberfläche bleibt ein UI-Test.
 Details und Wiederholung: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
 
 **Manueller Sprachtest:**
-Noch keine Rückmeldung zum echten Sprachtest. Mikrofonaufnahme, hörbare Ausgabe, API-Kontozugriff und Stoppen während echter Audiowiedergabe sind noch nicht praktisch bestätigt.
+0.1.5 scheiterte beim Nutzer wiederholt mit „Ein anderer Audiovorgang hat Vorrang“. Die Ursache ist im Geräteprotokoll nachvollzogen und in 0.1.6 korrigiert. Ein neuer praktischer Sprachtest mit OpenAI und Claude steht noch aus; Erkennung, hörbare Antwort und Beenden sind für 0.1.6 noch nicht vom Nutzer bestätigt.

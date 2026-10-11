@@ -28,7 +28,7 @@ class VoiceService : Service() {
         val backend = ConversationVoiceBackend(ConversationStore(applicationContext), credentials,
             ProviderChatClient(credentials), AndroidVoiceTasks(worker, main), selection::forProvider,
             { selection.select(it) }, { main.post { if (!destroying) AppState.changed() } })
-        val audio = AndroidVoiceAudio(this, main) { controller.stop(VoiceProblem.AUDIO_FOCUS.message) }
+        val audio = PlaybackFocusAudio(AndroidVoiceAudio(this, main), AndroidPlaybackFocus(this, main))
         controller = VoiceController(audio, backend, AndroidVoiceScheduler(main), ::publish)
     }
 

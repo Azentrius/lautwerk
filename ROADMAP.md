@@ -1,4 +1,4 @@
-# Roadmap ab 0.1.5
+# Roadmap ab 0.1.6
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
@@ -9,6 +9,8 @@ die bestehenden DHU-Regressionstests bestehen weiterhin. 0.1.4 kapselt die vorha
 Chat-/Schlüsselspeicherung mit kompatiblem Format, gemeinsamen Sperren und
 geprüften Fehlerfällen. 0.1.5 ergänzt eine gemeinsame Sprachsteuerung, Android-Audio-
 Adapter und Hintergrundzugriff für den Sprachablauf; 72 automatisierte Tests bestehen.
+0.1.6 korrigiert die beim manuellen Test entdeckte Kollision mit dem Fokus der
+Spracherkennung. 57 JVM-Tests bestehen; praktischer Wiederholungstest steht aus.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.

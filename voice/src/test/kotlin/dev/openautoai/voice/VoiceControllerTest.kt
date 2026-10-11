@@ -57,7 +57,17 @@ class VoiceControllerTest {
         val backend = Backend()
         val clock = Clock()
         val states = mutableListOf<VoiceState>()
-        val controller = VoiceController(audio, backend, clock) { states += it }
+        var focusHeld = false
+        var focusGranted = true
+        var lostFocus: (() -> Unit)? = null
+        val focusedAudio = PlaybackFocusAudio(audio, PlaybackFocus { lost ->
+            lostFocus = lost
+            if (focusGranted) {
+                focusHeld = true
+                Cancel { focusHeld = false }
+            } else null
+        })
+        val controller = VoiceController(focusedAudio, backend, clock) { states += it }
         fun conversation(provider: Provider = Provider.OPENAI) = Conversation(provider.name, "Test", provider, ModelCatalog.default(provider), 0, emptyList())
         fun ready(provider: Provider = Provider.OPENAI) {
             controller.start(provider.name)
@@ -72,16 +82,20 @@ class VoiceControllerTest {
     @Test fun bothProvidersFollowListenThinkSpeakAndListenWithoutOverlap() {
         Provider.entries.forEach { provider ->
             val f = Fixture(); f.ready(provider)
+            assertNull(f.lostFocus) // No playback focus request during recognition.
             f.phrase("Guten Morgen")
             assertEquals(VoicePhase.THINKING, f.controller.state.phase)
+            assertFalse(f.focusHeld)
             assertEquals(1, f.audio.listens)
             f.backend.replied(Result.success(ChatReply("Guten Morgen zurück")))
             assertEquals(VoicePhase.SPEAKING, f.controller.state.phase)
+            assertTrue(f.focusHeld)
             f.clock.advance(1000)
             assertEquals(1, f.audio.listens)
             f.audio.finished(null)
             f.clock.advance(350)
             assertEquals(2, f.audio.listens)
+            assertFalse(f.focusHeld)
             assertEquals(provider, f.controller.state.conversation!!.provider)
             assertEquals(listOf("Guten Morgen zurück"), f.audio.spoken)
             assertTrue(f.states.none { !it.active }) // Start does not publish a spurious Stop to the Service.
@@ -235,5 +249,29 @@ class VoiceControllerTest {
         currentDeadline()
         assertFalse(f.controller.state.active)
         assertTrue(f.controller.state.notice!!.contains("zehn Minuten"))
+    }
+
+    @Test fun playbackFocusLossEndsEitherProviderWithoutResumingOrRetrying() {
+        Provider.entries.forEach { provider ->
+            val f = Fixture(); f.ready(provider); f.phrase("Hallo")
+            f.backend.replied(Result.success(ChatReply("Antwort")))
+            f.lostFocus!!()
+            f.audio.finished(null); f.clock.advance(1000)
+            assertFalse(f.focusHeld)
+            assertFalse(f.controller.state.active)
+            assertEquals(VoiceProblem.AUDIO_FOCUS.message, f.controller.state.notice)
+            assertEquals(1, f.audio.listens)
+            assertEquals(1, f.backend.phrases.size)
+        }
+    }
+
+    @Test fun playbackFocusDenialStopsBothProvidersBeforeTts() {
+        Provider.entries.forEach { provider ->
+            val f = Fixture(); f.focusGranted = false; f.ready(provider); f.phrase("Hallo")
+            f.backend.replied(Result.success(ChatReply("Antwort")))
+            assertFalse(f.controller.state.active)
+            assertEquals(VoiceProblem.AUDIO_FOCUS.message, f.controller.state.notice)
+            assertTrue(f.audio.spoken.isEmpty())
+        }
     }
 }

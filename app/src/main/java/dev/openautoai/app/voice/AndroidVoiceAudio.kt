@@ -4,9 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.AudioAttributes
-import android.media.AudioFocusRequest
-import android.media.AudioManager
 import android.os.Bundle
 import android.os.Handler
 import android.speech.RecognitionListener
@@ -20,14 +17,8 @@ import java.util.Locale
 /** Android speech services may process audio online. No raw audio is recorded or archived by this app. */
 internal class AndroidVoiceAudio(
     private val context: Context,
-    private val main: Handler,
-    private val interrupted: () -> Unit
+    private val main: Handler
 ) : VoiceAudio {
-    private val audioManager = context.getSystemService(AudioManager::class.java)
-    private val attributes = AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ASSISTANT)
-        .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build()
-    private var focus: AudioFocusRequest? = null
-    private var focusGeneration = 0L
     private var tts: TextToSpeech? = null
     private var recognizer: SpeechRecognizer? = null
     private var operation = 0L
@@ -48,17 +39,6 @@ internal class AndroidVoiceAudio(
             complete(VoiceProblem.RECOGNIZER_UNAVAILABLE)
             return Cancel {}
         }
-        val focusToken = ++focusGeneration
-        val request = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
-            .setAudioAttributes(attributes).setAcceptsDelayedFocusGain(false)
-            .setOnAudioFocusChangeListener({ change ->
-                if (focus != null && focusToken == focusGeneration && change != AudioManager.AUDIOFOCUS_GAIN) interrupted()
-            }, main).build()
-        focus = request
-        if (audioManager.requestAudioFocus(request) != AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            complete(VoiceProblem.AUDIO_FOCUS)
-            return Cancel { if (operation == token) close() }
-        }
         tts = TextToSpeech(context) { status -> main.post {
             if (token != operation) return@post
             val engine = tts
@@ -67,7 +47,7 @@ internal class AndroidVoiceAudio(
                     engine.setLanguage(Locale.getDefault()) < TextToSpeech.LANG_AVAILABLE) {
                     complete(VoiceProblem.TTS_UNAVAILABLE)
                 } else {
-                    engine.setAudioAttributes(attributes)
+                    engine.setAudioAttributes(AndroidPlaybackFocus.attributes)
                     engine.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
                         override fun onStart(utteranceId: String?) = Unit
                         override fun onDone(utteranceId: String?) { main.post {
@@ -179,7 +159,6 @@ internal class AndroidVoiceAudio(
 
     override fun close() {
         operation++
-        focusGeneration++
         ready = false
         utterance = null
         speechCallback = null
@@ -189,9 +168,7 @@ internal class AndroidVoiceAudio(
         tts = null
         runCatching { oldTts?.stop() }
         runCatching { oldTts?.shutdown() }
-        val oldFocus = focus
-        focus = null
-        if (oldFocus != null) runCatching { audioManager.abandonAudioFocusRequest(oldFocus) }
+
     }
 
     companion object {

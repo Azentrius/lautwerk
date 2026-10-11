@@ -1,4 +1,4 @@
-# OpenAI-/Claude-Adapter – Projektstand 0.1.5
+# OpenAI-/Claude-Adapter – Projektstand 0.1.6
 
 ## Verhalten und Grenzen
 
@@ -112,7 +112,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für das Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.5-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
+`OpenAutoAI-0.1.6-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
 `adb devices -l` ermitteln. Bei Signaturkonflikten nicht automatisch deinstallieren,
 da das gespeicherte Daten löschen würde; denselben Debug-Schlüssel verwenden.
 
