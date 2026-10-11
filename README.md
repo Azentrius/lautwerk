@@ -5,6 +5,10 @@ Die sieben ursprünglichen Kotlin-Dateien bleiben im Modul `app` erhalten.
 Der kleine Sichtbarkeitstest liegt separat in `prototype-app`; `car-ui` liefert
 CarAppService, Session und die echte Car-App-Library-Template-Oberfläche.
 
+**Bestätigter Teststand:** Alle drei Debug-APKs bauen; beide Gerätetests bestehen.
+Der Nutzer bestätigt im echten DHU Launcher-Sichtbarkeit, korrekten Titel und den
+Statuswechsel nach „Starten“. Siehe [Testbericht](docs/BUILD_AND_TEST.md).
+
 ## Schnellstart unter Windows
 
 1. Dieses Projekt in Android Studio öffnen, Gradle-JDK auf **JDK 17** stellen.
@@ -84,7 +88,8 @@ Beschreibungen unter `docs/history/`.
 
 Quellen, Wrapper, Lizenz, Dokumentation und Tests gehören ins Repository.
 `local.properties`, `.gradle`, Build-Verzeichnisse, Schlüssel und Diagnoseausgaben
-sind ausgeschlossen. Es ist noch kein Remote eingerichtet oder Upload erfolgt.
+sind ausgeschlossen. Zielrepository: [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai).
+Der Quellcode liegt auf `main`; APKs sind nicht Bestandteil der Git-Historie.
 Die bereits gelieferte Apache-2.0-Lizenz bleibt erhalten; siehe [LICENSE](LICENSE).
 
 ## Offizielle Referenzen (geprüft am 11.10.2026)

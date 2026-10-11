@@ -4,7 +4,9 @@
 
 Der Nutzer hat nach Installation der DHU-Test-App bestätigt:
 **„Ja, sichtbar“** auf die Frage nach „OpenAuto AI“ im DHU-App-Launcher.
-Damit ist das primäre Sichtbarkeitsziel für seine aktuelle Einrichtung manuell bestätigt.
+Zusätzlich hat der Nutzer das Öffnen der App, den korrekten Titel und den Wechsel
+zu „Gestartet · Test 1“ nach Antippen von „Starten“ bestätigt: **„Ja, beides funktioniert“**.
+Damit sind Launcher-Sichtbarkeit und der einfache UI-Ablauf im echten DHU manuell bestätigt.
 Das ist keine Freigabe für reale Fahrzeuge oder für eine allgemeine KI-App-Kategorie.
 
 | Prüfung | Ergebnis / Aussagegrenze |
@@ -21,7 +23,7 @@ Das ist keine Freigabe für reale Fahrzeuge oder für eine allgemeine KI-App-Kat
 | CarTemplateTest | Bestanden: Titel, Starten-Aktion und Statuswechsel über echten ClickDelegate |
 | Instrumentierung | `OK (2 tests)`, Laufzeit 62,22 s; auf realem Pixel ausgeführt |
 | Echte DHU-Launcher-Sichtbarkeit | Vom Nutzer bestätigt: „Ja, sichtbar“ |
-| Template-Öffnen und Starten im echten DHU | Nicht separat manuell bestätigt; automatischer Template-Test ist kein Ersatz dafür |
+| Template-Öffnen und Starten im echten DHU | Vom Nutzer bestätigt: Titel korrekt, Starten wechselt zu „Gestartet · Test 1“ |
 | API-/Sprach-End-to-End des Assistant-Moduls | Nicht getestet; keine API-Schlüssel eingegeben, keine bezahlten Aufrufe |
 
 ## Umgebung
@@ -31,7 +33,7 @@ Das ist keine Freigabe für reale Fahrzeuge oder für eine allgemeine KI-App-Kat
 - compileSdk / targetSdk 36; Build Tools 35.0.0; JDK Temurin 17.0.19.
 - Gradle 8.13, Android Gradle Plugin 8.13.2, Kotlin 2.2.20.
 - Car App Library 1.8.0-rc01 (explizite Vorabversion mit dokumentiertem Sicherheitsfix).
-- Eine DHU-Sitzung war bereits eingerichtet. Ihre Launcher-Anzeige wurde vom Nutzer beurteilt.
+- Eine DHU-Sitzung war bereits eingerichtet. Launcher, Titel und Starten-Statuswechsel wurden vom Nutzer bestätigt.
 
 Die neuen Testpakete sind unabhängig von `dev.openautoai.app`. Die alte Assistant-App
 wurde gebaut, aber nicht auf dem Pixel installiert oder mit Nutzerdaten verwendet.
