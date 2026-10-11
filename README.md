@@ -12,7 +12,7 @@ Damit kollidiert er nicht mehr mit dem Fokus des gestarteten Spracherkennungsdie
 der auf dem Pixel den sofortigen Abbruch von 0.1.5 ausgelöst hat.
 57 JVM-Tests bestehen, darunter 13 neue Fokus-Regressionsprüfungen. Assistant und
 DHU sind gebaut, Lint meldet 0 Fehler (7 / 6 bestehende Warnungen).
-**Noch nicht auf dem Pixel installiert:** Nach der Diagnose war kein Gerät mehr über ADB verbunden. Die Gerätetests konnten für diese Version deshalb nicht erneut laufen. Der praktische Sprachtest steht noch aus.
+Die Assistenten-App **0.1.6-dev / Code 7** wurde als Update auf dem Pixel 10 Pro / Android 17 installiert; die Paketversion und ein erfolgreicher Kaltstart sind geprüft. **14 Gerätetests bestehen erneut** (7 Assistant, 7 DHU/Auswahl), insgesamt mit den JVM-Tests **71 automatisierte Prüfungen**. Bestehende App-Daten wurden nicht gelöscht. Der praktische Sprachtest steht noch aus.
 Details: [Sprachanleitung](docs/VOICE.md) und [Testbericht](docs/BUILD_AND_TEST.md).
 
 Die **Assistenten-APK ist 0.1.6-dev**. Die DHU-/Phone-Testoberflächen bleiben auf

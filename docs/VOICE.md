@@ -161,7 +161,7 @@ Wiedergabe anzufordern und danach abzugeben:
 57 JVM-Tests bestehen, darunter 13 neue Regressionstests für die Fokus-Lebensdauer
 und den Gesprächsablauf beider Anbieter. Diese Prüfungen verwenden künstliche
 Antworten und Audio-/Fokus-Simulationen, keine echte Mikrofonaufnahme oder TTS-Ausgabe.
-**Noch nicht auf dem Pixel installiert:** Nach der Diagnose war kein Gerät mehr über ADB verbunden. Die Gerätetests konnten für diese Version deshalb nicht erneut laufen.
+Die Assistenten-App **0.1.6-dev / Code 7** wurde als Update auf dem Pixel 10 Pro / Android 17 installiert; die Paketversion und ein erfolgreicher Kaltstart sind geprüft. **14 Gerätetests bestehen erneut** (7 Assistant, 7 DHU/Auswahl), insgesamt mit den JVM-Tests **71 automatisierte Prüfungen**. Bestehende App-Daten wurden nicht gelöscht.
 
 Android-Auto-Audio, Bluetooth-Routing, gesperrtes Gerät und reale Fahrzeugnutzung
 sind nicht bestätigt. Die experimentelle Car-App-Oberfläche bleibt ein UI-Test.

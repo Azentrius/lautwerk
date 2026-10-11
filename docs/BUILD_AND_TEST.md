@@ -4,7 +4,7 @@ Stand: 12.10.2026. **57 JVM-Tests bestanden** (38 Voice, 17 Anbieter, 2 Kern).
 Assistant- und DHU-Debug-APK sind gebaut. Die DHU-/Phone-Oberfläche bleibt bei
 **0.1.2-prototype / Code 3**, die Assistenten-App ist **0.1.6-dev / Code 7**.
 
-**Noch nicht auf dem Pixel installiert:** Nach der Diagnose war kein Gerät mehr über ADB verbunden. Die Gerätetests konnten für diese Version deshalb nicht erneut laufen.
+Die Assistenten-App **0.1.6-dev / Code 7** wurde als Update auf dem Pixel 10 Pro / Android 17 installiert; die Paketversion und ein erfolgreicher Kaltstart sind geprüft. **14 Gerätetests bestehen erneut** (7 Assistant, 7 DHU/Auswahl), insgesamt mit den JVM-Tests **71 automatisierte Prüfungen**. Bestehende App-Daten wurden nicht gelöscht.
 
 ## Fehlerbefund und Änderung
 
@@ -28,13 +28,19 @@ weiterhin beachtet. Keine Aufnahme-/Schlüsseldaten wurden zur Diagnose gelesen.
 | `:providers:test` / `:core:test` | 17 / 2 bestanden |
 | `:app:assembleDebug` / `:app:assembleDebugAndroidTest` | Erfolgreich |
 | `:prototype-app:assembleDhuDebug` | Erfolgreich |
+| Assistant-Gerätetests | 7 bestanden |
+| DHU-/Auswahl-Gerätetests | 7 bestanden |
 | `:app:lintDebug` | 0 Fehler, 7 bestehende Warnungen |
 | `:prototype-app:lintDhuDebug` | 0 Fehler, 6 bestehende Warnungen |
 
 Die automatisierten Voice-Tests simulieren Audio und Fokus. Sie belegen nicht
 den vollständigen Ablauf mit realem Mikrofon, hörbarem TTS oder einem echten API-Konto.
-Die 28 bestandenen Gerätetests aus 0.1.5 sind historische Ergebnisse und keine
-erneute Geräteprüfung von 0.1.6.
+Die 7 Assistant-Tests (`ProviderAndroidSmokeTest`, `StorageUiTest`, `AndroidVoiceTasksTest`)
+und 7 DHU-/Auswahltests (`CarTemplateTest`, `ModelSelectionStoreTest`, `PhoneSmokeTest`)
+wurden mit `adb shell am instrument -w` erneut ausgeführt: jeweils `OK (7 tests)`.
+Die Tests verwenden isolierte Testdaten; sie starten keine echte Mikrofonaufnahme oder KI-Anfrage.
+`am start -W` bestätigt anschließend den erfolgreichen Kaltstart der Assistenten-App (507 ms).
+Die DHU-App bleibt auf 0.1.2-prototype / Code 3. Dies ist keine neue manuelle DHU-Sitzung.
 Die unveränderten 14 Speichertests wurden für diese reine Audiofokus-Korrektur nicht wiederholt.
 
 ## Erhaltener Stand und Grenzen
