@@ -3,4 +3,5 @@
     <string name="car_ready">Bereit für den UI-Test.</string>
     <string name="car_started">Gestartet · Test %1$d</string>
     <string name="car_start">Starten</string>
+    <string name="car_selection">%1$s\n%2$s · %3$s</string>
 </resources>

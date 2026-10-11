@@ -1,13 +1,21 @@
-# OpenAuto AI 0.1.1 – DHU-Sichtbarkeitstest
+# OpenAuto AI 0.1.3 – gemeinsame KI-Auswahl und Anbieter-Adapter
 
-Fortsetzung des gelieferten `OpenAutoAI_0.1.0_Quellcode.zip` vom 11.10.2026.
-Die sieben ursprünglichen Kotlin-Dateien bleiben im Modul `app` erhalten.
-Der kleine Sichtbarkeitstest liegt separat in `prototype-app`; `car-ui` liefert
-CarAppService, Session und die echte Car-App-Library-Template-Oberfläche.
+Fortsetzung des gelieferten Quellcodes 0.1.0, des DHU-Prototyps 0.1.1 und der
+gemeinsamen Anbieter-/Modellauswahl 0.1.2. Die bestehende Assistenten-App verwendet
+jetzt getrennte Adapter für OpenAI und Claude hinter einer gemeinsamen Chat-Schnittstelle.
+API-Fehler, leere Antworten, Ablehnungen und am Limit abgeschnittene Antworten
+werden explizit behandelt. Fehlermeldungen erscheinen auch im Gesprächsbereich.
 
-**Bestätigter Teststand:** Alle drei Debug-APKs bauen; beide Gerätetests bestehen.
-Der Nutzer bestätigt im echten DHU Launcher-Sichtbarkeit, korrekten Titel und den
-Statuswechsel nach „Starten“. Siehe [Testbericht](docs/BUILD_AND_TEST.md).
+**Teststand 0.1.3:** Alle drei APKs gebaut; 19 JVM-Tests und 9 Gerätetests bestanden.
+Android-Lint: 0 Fehler (Assistant: 12 Warnungen; DHU: 6).
+Getestet wurden simulierte API-Antworten, Android-JSON und die bestehende DHU-UI;
+kein echter API-Aufruf und kein vollständiger Sprachtest mit einem API-Konto.
+Siehe [Testbericht](docs/BUILD_AND_TEST.md) und [Anbieter-Anbindung](docs/PROVIDER_ADAPTERS.md).
+
+Die **Assistenten-APK ist 0.1.3-dev**. Die Oberflächen von `prototype-app` bleiben
+auf dem funktionierenden **0.1.2-prototype**-Stand: Auswahl, Titel und Starten.
+Der Nutzer hat diese Auswahl und Starten bereits im echten DHU bestätigt.
+Der neue Netzwerkbaustein ist ausschließlich in `app` eingebunden.
 
 ## Schnellstart unter Windows
 
@@ -16,7 +24,7 @@ Statuswechsel nach „Starten“. Siehe [Testbericht](docs/BUILD_AND_TEST.md).
 3. Build-Variante `prototype-app: dhuDebug` wählen; diese APK enthält Smartphone-UI UND Auto-Service.
 4. Die Schritte in [docs/START_WINDOWS.md](docs/START_WINDOWS.md) ausführen.
 
-`OpenAuto AI` und `Starten` erscheinen auf dem Smartphone. Im Auto-Template
+`OpenAuto AI`, Anbieter-/Modellauswahl und `Starten` erscheinen auf dem Smartphone. Im Auto-Template
 ändert Starten den Text von „Bereit für den UI-Test.“ zu „Gestartet · Test 1“.
 Es gibt in diesem Test keine Netzwerk- oder Mikrofonberechtigung und keine API-Aufrufe.
 
@@ -28,8 +36,12 @@ Es gibt in diesem Test keine Netzwerk- oder Mikrofonberechtigung und keine API-A
 | `prototype-app:phoneDebug` | `dev.openautoai.prototype.phone` | Vergleichs-App ohne Auto-Registrierung |
 | `app:debug` | `dev.openautoai.app` | Fortgeführte Smartphone-App aus 0.1.0 mit Anbietern, Verlauf und Voice |
 
-Die neuen Testpakete ersetzen die alte App nicht und übernehmen keine ihrer Daten.
-Phone- und Auto-Testzustand sind unabhängig, nur im Speicher; auf dem Smartphone
+Die Testpakete ersetzen die alte App nicht und übernehmen keine ihrer Daten.
+Smartphone und DHU innerhalb von `dev.openautoai.prototype.dhu` teilen ihre
+Auswahl. Die drei getrennten APKs nutzen denselben Auswahlcode, haben aber
+jeweils einen eigenen privaten Speicher. Der Modellkatalog enthält die fünf
+IDs aus 0.1.0; die Auswahl prüft keinen tatsächlichen API-Kontozugriff.
+Phone- und Auto-Testzähler sind unabhängig, nur im Speicher; auf dem Smartphone
 bleibt der Testzähler bei Activity-Neuerstellung erhalten. Keine persistente Testsitzung.
 
 ## Kategorie: bewusst begrenztes Experiment
@@ -57,18 +69,20 @@ offizieller Verteilungsweg, aber keine Zusage der Kategoriezulässigkeit.
 
 ## Bausteine und spätere Arbeit
 
-- `app`: vorhandene `Provider`, `ChatApi`, `SecretStore`, `ConversationStore`,
-  `VoiceService`, `AppState` und Compose-`MainActivity` bleiben zusammen erhalten.
-- `core`: kleiner unabhängiger Kotlin-Zustand für den UI-Test.
-- `car-ui`: Car-App-Service, Hostprüfung, Session, MessageTemplate und Starten-Aktion.
-- `prototype-app`: Zusammenbau und zwei Testvarianten.
+- `core`: Provider-/Modelltypen, validierte Auswahl, Chat-Schnittstelle und UI-Testzähler.
+- `providers`: OpenAI-/Claude-Adapter, austauschbarer HTTP-Transport und sichere Fehlerzuordnung; nur in der Assistenten-App eingebunden.
+- `settings`: app-private Speicherung der Auswahl, pro Anbieter ein Modell,
+  Beobachtung von Änderungen während der UI-Lebensdauer. Keine Schlüssel/Chatdaten.
+- `app`: fortgeführte Compose-/Voice-App mit gemeinsamem Katalog und Auswahlstore.
+  Die Namen `OPENAI`/`CLAUDE`, Schlüsselkennungen und Archivformate bleiben erhalten.
+- `car-ui`: bestehender Car-App-Service mit Hostprüfung, MessageTemplate,
+  Starten-Aktion und aktueller Auswahl als Text.
+- `prototype-app`: Smartphone-Auswahl und zwei Testvarianten; keine API-/Audio-Aufrufe.
 
-Nächster Architektur-Schritt nach einem nachgewiesenen DHU-Ergebnis:
-`Provider`/Modelle als gemeinsame Domänentypen auslagern; `ChatApi` hinter
-Anbieter-Adaptern (OpenAI/Claude), Verlauf hinter einem Repository und Voice
-hinter einer eigenen Schnittstelle integrieren. Die jetzige Providerliste ist
-unverifiziert aus 0.1.0 übernommen. Keine API-/Audio-Kompatibilität wird durch
-den UI-Test bestätigt. Einzelheiten: [ROADMAP.md](ROADMAP.md).
+Weitere Arbeit: Credential-/Verlaufs-Repository und Voice-Schnittstelle sowie echte, kontrollierte API-/Sprachtests.
+Ein Anbieterwechsel im bisherigen VoiceService verwendet jetzt das pro Anbieter
+gemerkte Modell und beginnt weiterhin einen neuen Chat ohne fremden Verlauf.
+API-/Voice-End-to-End wurde dabei nicht getestet. Einzelheiten: [ROADMAP.md](ROADMAP.md).
 
 ## Build-Werkzeuge
 

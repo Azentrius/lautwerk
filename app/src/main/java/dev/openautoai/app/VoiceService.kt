@@ -1,5 +1,11 @@
 package dev.openautoai.app
 
+import dev.openautoai.settings.ModelSelectionStore
+import dev.openautoai.core.ai.ChatFailure
+import dev.openautoai.core.ai.Completion
+import dev.openautoai.core.ai.Provider
+import dev.openautoai.core.ai.ModelCatalog
+
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -105,6 +111,7 @@ class VoiceService : Service(), RecognitionListener {
 
     private fun startConversation(session: Conversation) {
         if (active) return
+        AppState.reportIssue(null)
         provider = session.provider
         modelId = session.modelId
         sessionId = session.id
@@ -200,11 +207,14 @@ class VoiceService : Service(), RecognitionListener {
             speak("Für ${newProvider.displayName} ist noch kein Zugang eingerichtet.")
             return
         }
-        val newModel = ModelCatalog.default(newProvider)
+        val selections = ModelSelectionStore(applicationContext)
+        val chosen = selections.forProvider(newProvider)
+        val newModel = chosen.modelId
         val newSession = runCatching { conversations.create(newProvider, newModel) }.getOrElse {
             speak("Neues Gespräch konnte nicht erstellt werden.")
             return
         }
+        selections.select(chosen)
         provider = newProvider
         modelId = newModel
         sessionId = newSession.id
@@ -217,6 +227,7 @@ class VoiceService : Service(), RecognitionListener {
     private fun sendPhrase(phrase: String) {
         if (processing || !active) return
         processing = true
+        AppState.reportIssue(null)
         history += Turn("user", phrase)
         try {
             sessionId?.let { conversations.append(it, Turn("user", phrase)) }
@@ -240,13 +251,22 @@ class VoiceService : Service(), RecognitionListener {
                 if (!active || generation != expectedGeneration) return@post
                 processing = false
                 result.onSuccess { response ->
-                    history += Turn("assistant", response)
-                    runCatching { sessionId?.let { conversations.append(it, Turn("assistant", response)) } }
-                        .onFailure { update("KI-Antwort konnte nicht gespeichert werden") }
+                    history += Turn("assistant", response.text)
+                    runCatching { sessionId?.let { conversations.append(it, Turn("assistant", response.text)) } }
+                        .onFailure { AppState.reportIssue("KI-Antwort konnte nicht gespeichert werden") }
                     AppState.changed()
-                    speak(response)
+                    if (response.completion == Completion.TRUNCATED) {
+                        val notice = "Die Antwort wurde am Limit gekürzt."
+                        AppState.reportIssue(notice)
+                        // The notice is local UI/speech feedback, never inserted into the archived model text.
+                        speak("$notice ${response.text}")
+                    } else {
+                        speak(response.text)
+                    }
                 }.onFailure { error ->
-                    speak(error.message ?: "Die Anfrage ist fehlgeschlagen")
+                    val message = (error as? ChatFailure)?.message ?: "Die Anfrage ist fehlgeschlagen."
+                    AppState.reportIssue(message)
+                    speak(message)
                 }
             }
         }

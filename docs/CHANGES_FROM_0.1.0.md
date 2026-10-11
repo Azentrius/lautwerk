@@ -1,4 +1,8 @@
-# Änderungen gegenüber 0.1.0
+# Änderungen von 0.1.0 zu 0.1.1 (historischer Stand)
+
+Die folgenden Hashvergleiche beschreiben ausschließlich 0.1.1.
+Seit 0.1.2 liegen Anbieter und Modelle im gemeinsamen `core`-Modul;
+die aktuellen Änderungen stehen in [MODEL_SELECTION.md](MODEL_SELECTION.md).
 
 ## Herkunft
 
