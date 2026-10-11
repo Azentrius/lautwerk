@@ -1,4 +1,4 @@
-# OpenAI-/Claude-Adapter – Projektstand 0.1.4
+# OpenAI-/Claude-Adapter – Projektstand 0.1.5
 
 ## Verhalten und Grenzen
 
@@ -20,6 +20,7 @@ API-Fehler werden als feste deutsche Hinweise ausgegeben: fehlender/ungültiger
 Schlüssel, abgelehnte Anmeldung, fehlende Berechtigung, nicht gefundenes Modell,
 Rate-Limit, Guthaben/Nutzungslimit, Serverfehler, Zeitüberschreitung und Netzwerkfehler.
 Rohe Server-Fehlermeldungen und Ausnahmeursachen werden weder angezeigt noch vorgelesen.
+Der neue Sprachablauf beendet die Sitzung bei Fehlern und zeigt den Hinweis auf dem Smartphone.
 HTTP-404 wird bewusst als „Modell oder API-Endpunkt nicht gefunden“ formuliert;
 die genaue Ursache kann ohne echten Kontotest nicht zugesichert werden.
 
@@ -29,8 +30,8 @@ die genaue Ursache kann ohne echten Kontotest nicht zugesichert werden.
 |---|---|
 | `core` | `ChatClient`, `ChatRequest`, `ChatMessage`, `ChatReply`, `Completion`, `CredentialSource`, `ChatFailure` |
 | `providers` | `OpenAiAdapter`, `ClaudeAdapter`, `ProviderChatClient`, `HttpTransport`, `UrlConnectionTransport` |
-| `app/ChatApi` | Kleine Brücke vom bestehenden `Turn`-Format und `CredentialStore` zur gemeinsamen Schnittstelle |
-| `app/VoiceService` | Verwendet strukturierte Antworten; speichert nur Antworttext, spricht sichere Fehler und zeigt Hinweise |
+| `app/ChatApi` | Weiterhin vorhandene Kompatibilitätsbrücke vom bestehenden `Turn`-Format und `CredentialStore` zur gemeinsamen Schnittstelle |
+| `voice` / `app/VoiceService` | Gemeinsamer Ablauf; speichert Antworttext, liest Modellantworten vor und zeigt feste Fehlerhinweise |
 | `settings`, `prototype-app`, `car-ui` | Keine neue API-Abhängigkeit; DHU bleibt Auswahl-/UI-Test |
 
 `providers` ist ein Kotlin/JVM-Modul. Android liefert `org.json` zur Laufzeit;
@@ -59,8 +60,9 @@ Der Transport akzeptiert nur die beiden festen HTTPS-Endpunkte. Weiterleitungen
 werden nicht verfolgt. Verbindungs- und Lese-Timeout bleiben bei 15 bzw. 50 Sekunden;
 Antworten werden auf 1 MiB begrenzt. Streams und Verbindungen werden geschlossen.
 Ein laufender blockierender HTTP-Aufruf lässt sich noch nicht garantiert sofort
-abbrechen; der bisherige Voice-Lebenszyklus verwirft spätere Antworten nach Stoppen.
-Vollständige Netzwerk-/Voice-Abbruchsteuerung ist ein weiterer Entwicklungsschritt.
+abbrechen.
+Die neue Sprachsteuerung verwirft veraltete Rückmeldungen; sofortiger Transportabbruch
+bleibt ein weiterer Schritt. Siehe [VOICE.md](VOICE.md).
 
 Die Fehlerklassifikation nutzt HTTP-Status und bekannte maschinenlesbare Codes,
 keine Interpretation beliebiger Servertexte. OpenAI-Guthaben-/Kontolimits werden
@@ -84,7 +86,7 @@ keine echten Zugangsdaten gelesen, keine Anbieter-Endpunkte aufgerufen und keine
 Mikrofonaufnahme gestartet. Diese Tests belegen kein tatsächliches Kontoguthaben,
 keinen Modellzugriff und keinen erfolgreichen Voice-End-to-End-Ablauf.
 
-## Späterer manueller Test der Assistenten-App
+## Manueller Test der Assistenten-App
 
 1. `app:debug` installieren. Das Paket heißt `dev.openautoai.app`, während der
    DHU-Test weiterhin `dev.openautoai.prototype.dhu` heißt. Beide tragen derzeit
@@ -96,7 +98,7 @@ keinen Modellzugriff und keinen erfolgreichen Voice-End-to-End-Ablauf.
 4. Gespräch beenden. Den anderen Anbieter separat wählen und testen. Vorhandene
    Chats müssen bei ihrem Anbieter und Modell bleiben.
 
-Der oben beschriebene echte API-/Sprachtest wurde noch nicht ausgeführt.
+Der aktuelle Rückmeldungsstand zum echten API-/Sprachtest steht in [VOICE.md](VOICE.md).
 Der DHU-Starten-Button löst auch nach diesem Schritt weiterhin keine API-Anfrage aus.
 
 ```powershell
@@ -110,7 +112,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für das Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.4-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
+`OpenAutoAI-0.1.5-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
 `adb devices -l` ermitteln. Bei Signaturkonflikten nicht automatisch deinstallieren,
 da das gespeicherte Daten löschen würde; denselben Debug-Schlüssel verwenden.
 

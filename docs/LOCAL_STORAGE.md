@@ -1,4 +1,4 @@
-# Lokale Chats und API-Schlüssel – 0.1.4
+# Lokale Chats und API-Schlüssel – Projektstand 0.1.5
 
 Die vorhandene Speicherung aus 0.1.0–0.1.3 ist jetzt ein eigener Baustein.
 Die Smartphone-Oberfläche, die Anbieter-Brücke und der Sprachdienst verwenden
@@ -63,7 +63,7 @@ Die Verschlüsselung nutzt weiterhin den Android Keystore.
 
 ## Auf dem Pixel prüfen
 
-0.1.4-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
+0.1.5-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
 ist ein anderes Paket mit eigenem Speicher. Bei einem Signaturkonflikt nicht
 deinstallieren oder App-Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 
@@ -76,7 +76,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für die Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.4-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
+`OpenAutoAI-0.1.5-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
 Seriennummer aus `adb devices -l` verwenden.
 
 Vorhandene Chats lassen sich ohne API-Aufruf öffnen und lesen. Zum späteren
@@ -93,8 +93,9 @@ keine echten Schlüssel, Chatdaten, Sprachaufnahme oder Anbieteranfrage.
 ## Grenzen und nächster Schritt
 
 Die Sperren gelten innerhalb eines Prozesses. Mehrprozesszugriffe werden nicht
-unterstützt. Die Schnittstellen arbeiten synchron, und die bestehende Oberfläche
-sowie Teile des Sprachdiensts greifen weiterhin auf dem Hauptthread darauf zu.
+unterstützt. Die Schnittstellen arbeiten synchron. Seit 0.1.5 führt der Sprachablauf diese
+Arbeit auf einem Worker aus; die übrige Speicheroberfläche greift noch auf dem
+Hauptthread darauf zu.
 Das gesamte Archiv wird eingelesen und bei Änderungen neu verschlüsselt. Sehr
 große Verläufe können deshalb verzögern; Hintergrundzugriff und eine begrenzte
 Verlaufsansicht sind spätere Arbeiten.
@@ -107,5 +108,6 @@ ersetzt keinen geprüften Ablauf für Gerätewechsel.
 
 Ein kompletter Sprachdialog mit echtem API-Konto sowie Mikrofon-/TTS-Lebenszyklus
 und sofortiger Netzwerkabbruch sind weiterhin nicht getestet. Die geprüfte lokale
-Speicherung ist die Grundlage für die nächste Voice-Überarbeitung.
+Speicherung wird seit 0.1.5 vom neuen [Sprachablauf](VOICE.md) verwendet. Dort steht
+auch der aktuelle Stand des praktischen Sprachtests.
 Alle Ergebnisse: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).

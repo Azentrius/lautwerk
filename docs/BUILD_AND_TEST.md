@@ -1,89 +1,85 @@
-# Build- und Testbericht 0.1.4
+# Build- und Testbericht 0.1.5
 
-Stand: 12.10.2026. **45 automatisierte Tests bestanden:** 19 JVM-Tests und
-26 Gerätetests auf dem Pixel 10 Pro mit Android 17. Alle drei Debug-Varianten
-sind gebaut. Die Assistenten-App 0.1.4-dev / Code 5 ist als Update installiert.
-Die DHU-Test-App bleibt 0.1.2-prototype / Code 3.
+Stand: 12.10.2026. **72 automatisierte Tests bestanden:** 44 JVM-Tests und
+28 Gerätetests auf Pixel 10 Pro / Android 17. Alle drei Debug-APKs sind gebaut.
+Die Assistenten-App **0.1.5-dev / Code 6** ist installiert und startet erfolgreich.
+Die DHU-/Phone-Testoberflächen bleiben auf **0.1.2-prototype / Code 3**.
 
 | Prüfung | Ergebnis |
 |---|---|
-| `:core:test` | 2 Modell-/Provider-Tests bestanden |
-| `:providers:test` | 17 bestehende Adapter-/Transporttests bestanden, ausschließlich simuliertes HTTP |
-| `EncryptedStorageTest` | 14 Tests auf Android bestanden: altes Archiv-/Schlüsselformat, echte Keystore-Verschlüsselung, parallele Instanzen, beschädigte Daten, fehlende Schlüssel, Backup-Wiederherstellung, Schreibabbrüche, Fehlerbehandlung und gelöschte Chats |
-| `ProviderAndroidSmokeTest` | 2 Tests bestanden: Android-JSON und bestehende Anbieter-Brücke |
-| `StorageUiTest` | 3 Tests bestanden: Archivfehler und erneutes Laden, Schlüsselfehler ohne Voice-Start, lesbarer Altchat mit nicht mehr gelistetem Modell |
-| Phone-, SelectionStore- und CarTemplate-Tests | 7 bestehende Gerätetests bestanden; Auswahl, Wiederherstellung und Starten geprüft |
-| Assistenten-, Phone- und DHU-Debug-APK | Erfolgreich gebaut |
-| `:app:lintDebug` | 0 Fehler, 8 Warnungen |
-| `:storage:lintDebug` | 0 Fehler, 3 Warnungen |
+| `:voice:test` | 25 neue Tests: 15 Gesprächssteuerung, 8 Archiv-/Anbieteranbindung, 2 TTS-Textaufteilung |
+| `:core:test` | 2 bestehende Tests erfolgreich |
+| `:providers:test` | 17 bestehende Adapter-/Transporttests erfolgreich |
+| `AndroidVoiceTasksTest` | 2 neue Tests: blockierende Arbeit außerhalb des Hauptthreads, Rückmeldung auf dem Hauptthread, keine späten Rückmeldungen nach Abbruch |
+| `ProviderAndroidSmokeTest` / `StorageUiTest` | 5 bestehende Tests erfolgreich |
+| Phone-, SelectionStore-, CarTemplate-Tests | 7 bestehende Tests erfolgreich; Auswahl und Starten bleiben funktionsfähig |
+| `EncryptedStorageTest` | 14 bestehende Tests erfolgreich, mit separaten Testdaten und Keystore-Aliasen |
+| Assistenten-, Phone-, DHU-Debug-APK | Build erfolgreich |
+| `:app:lintDebug` | 0 Fehler, 7 Warnungen |
 | `:prototype-app:lintDhuDebug` | 0 Fehler, 6 Warnungen |
-| Echte Anbieter-/Voice-End-to-End-Aufrufe | Nicht ausgeführt |
 
-Die Speichertests laufen in `dev.openautoai.storage.test`, getrennt von der
-Assistenten-App. Testdateien, Zugangsdaten und Keystore-Aliase sind künstlich und
-werden danach entfernt. Die Oberflächentests injizieren Attrappen und starten
-keinen Dienst. Die vorhandenen DHU-Auswahlwerte werden von den Tests gesichert
-und danach wiederhergestellt. Es wurden keine persönlichen API-Schlüssel gelesen.
+Die 25 neuen JVM-Tests prüfen beide Anbieter, vollständigen Zuhören/Anfrage/Vorlesen-
+Ablauf, doppelte Rückmeldungen, Stoppen und Neustart, verspätete Antworten, TTS-/
+Erkennungsfehler, zweimalige Stille, genaue Sprachbefehle, getrennte Anbieter-Chats,
+fehlende Schlüssel, Schreibfehler, Kontextbegrenzung, sichere Fehlertexte,
+Zeitlimits und lange Texte mit Emoji. Die Android-Tests prüfen zusätzlich die
+tatsächliche Thread-Grenze. Alle Anbieteraufrufe in Tests verwenden Fake-Transport
+oder Fake-Client; Androids Mikrofon und TTS werden von den Tests nicht gestartet.
 
-## Testumgebung und behobene Testprobleme
+Eine ADB-Installation meldete zunächst einen Fehler ohne erklärenden Text.
+Die direkte Paketprüfung zeigte anschließend bereits Version 0.1.5-dev / Code 6.
+Nach regulärem Beenden der wieder aktiven DHU-Sitzung durch den Nutzer liefen
+die Gerätetests erfolgreich. `am start -W` bestätigt einen erfolgreichen Kaltstart
+der Assistenten-Activity. Keine Deinstallation und keine Löschung von Nutzerdaten.
 
-Die neuen Compose-Tests scheiterten zunächst in einer transitiven älteren
-Espresso-Version an `InputManager.getInstance`. Das Assistenten-Testpaket verwendet
-jetzt Espresso 3.7.0, Runner 1.7.0 und JUnit-Erweiterung 1.3.0. Die produktive
-Compose-Version bleibt gleich. Google dokumentiert die Umstellung auf öffentliche
-InputManager-/TestLooperManager-Schnittstellen in
-[AndroidX Test 3.7.0](https://developer.android.com/jetpack/androidx/releases/test#espresso-3.7.0).
+## Praktischer Sprachtest
 
-Ein erster DHU-Regressionslauf wurde von der aktiven Maps/Android-Auto-Sitzung
-gestört: ein Auswahlvergleich schlug fehl, eine neu erstellte Activity blieb
-gestoppt. Nach regulärem Beenden des DHU durch den Nutzer und mit entsperrtem
-Pixel wurden die Gerätetests erneut erfolgreich ausgeführt. Keine Android-Auto-
-Daten wurden gelöscht und keine Host-/Plattformsicherheitsprüfung abgeschaltet.
+Noch keine Rückmeldung zum echten Sprachtest. Mikrofonaufnahme, hörbare Ausgabe, API-Kontozugriff und Stoppen während echter Audiowiedergabe sind noch nicht praktisch bestätigt.
 
-## DHU bleibt beim bestätigten Stand
+Die ausführbaren manuellen Schritte, Grenzen von lokalem Stoppen und Datenfluss
+stehen in [VOICE.md](VOICE.md). Reales Audio-Routing, Nutzung bei gesperrtem Gerät
+und Android-Auto-Audio sind nicht bestätigt. Die gültige Kategorie für allgemeine
+KI-Gespräche in Android Auto ist weiterhin ungeklärt.
 
-Die Smartphone-/Car-Testoberflächen, Registrierung und Modellliste sind gegenüber
-0.1.2 unverändert. `storage` und `providers` sind nur in `app` eingebunden.
-Das DHU-Paket bleibt ohne INTERNET/RECORD_AUDIO. Titel, Auswahl und Starten hat
-der Nutzer im vorherigen Schritt im echten DHU bestätigt. Dieser Schritt prüft
-die Regression automatisiert; eine neue manuelle DHU-Bestätigung wird nicht behauptet.
+## Erhaltener Stand
 
-POI-Debug-Platzhalter, signierte Hostprüfung und deaktivierter DHU-Release bleiben
-erhalten. Es gibt weiterhin keine nachgewiesene zulässige Android-Auto-Kategorie
-für einen allgemeinen KI-Assistenten. Historische Teststände:
-[0.1.3](history/BUILD_AND_TEST-0.1.3.md), [0.1.2](history/BUILD_AND_TEST-0.1.2.md),
-[0.1.1](history/BUILD_AND_TEST-0.1.1.md).
+`prototype-app`, `car-ui`, Modellkatalog, `providers`, `storage` und `settings`
+bleiben im Produktivcode unverändert. Nur die Assistenten-App verwendet `voice`.
+Im DHU-Paket gibt es weiterhin keine INTERNET-/RECORD_AUDIO-Berechtigung.
+Signierte Hostprüfung, erklärter POI-Debug-Platzhalter und deaktivierter DHU-Release
+bleiben bestehen. Die manuelle DHU-Bestätigung des Nutzers gilt für 0.1.2;
+dieser Schritt bestätigt automatisierte Regression, keine neue manuelle DHU-Sitzung.
 
-## Bekannte Grenzen
+Historische Berichte: [0.1.4](history/BUILD_AND_TEST-0.1.4.md),
+[0.1.3](history/BUILD_AND_TEST-0.1.3.md), [0.1.2](history/BUILD_AND_TEST-0.1.2.md).
 
-Lint meldet weiterhin Versionshinweise, Backup-/Gerätetransfer-Regeln, ein fehlendes
-Assistant-Launcher-Icon, einen unbenutzten Namen und eine überflüssige SDK-Abfrage.
-Im Speichermodul ist die Warnung zu synchronem `commit()` bewusst nachvollziehbar:
-die Rückmeldung wird geprüft. Die zwei anderen Speicherwarnungen betreffen
-Testbibliotheksversionen. DHU: Versionshinweise, exportierter Car-Service, Backup
-und Hintergrundfarbe. Bestehende Permission-/TTS-Callbacks erzeugen Compilerwarnungen.
+## Lint und offene Punkte
 
-Speicherzugriff bleibt synchron und prozesslokal. Vollständiger API-/Voice-Ablauf,
-Gerätewechsel, große Archive und Wiederherstellung bei Schlüsselverlust sind nicht
-validiert. Details: [LOCAL_STORAGE.md](LOCAL_STORAGE.md) und
-[PROVIDER_ADAPTERS.md](PROVIDER_ADAPTERS.md).
+Assistant: Versionshinweise, Backup-/Gerätetransfer-Regeln, unbenutzter app_name
+und fehlendes Launcher-Icon. DHU: unverändert Versionshinweise, exportierter
+Car-Service, Backup und Hintergrundfarbe. Ein Android-TTS-Callback erzeugt noch
+eine Compilerwarnung zur Veraltung. Keine Lint-Fehler.
+
+Der vorhandene HTTP-Transport garantiert keinen sofortigen Netzwerkabbruch.
+Schlüssel-/Verlaufsbedienung außerhalb des Sprachdiensts bleibt synchron;
+große Archive sowie Backup-/Gerätetransfer sind offen. Audiofokus- und Android-
+Sprachadapter benötigen weiterhin den praktischen Gerätest. Der Dienst ist kein
+Always-on-Assistent: begrenzte Sitzung, kein automatischer Neustart.
 
 ## Wiederholen
 
-JDK 17 / Android SDK wie in [START_WINDOWS.md](START_WINDOWS.md) setzen. Das Projekt
-verwendet weiterhin Gradle 8.13, AGP 8.13.2, Kotlin 2.2.20 und compile/target SDK 36.
-Pixel entsperrt lassen, DHU regulär schließen und während UI-Tests nicht bedienen.
-Bei mehreren Geräten `ANDROID_SERIAL` auf das gewünschte Gerät setzen.
+JDK 17 und Android SDK setzen wie in [START_WINDOWS.md](START_WINDOWS.md).
+Gradle 8.13, AGP 8.13.2, Kotlin 2.2.20 und compile/target SDK 36 bleiben erhalten.
+DHU vor den UI-Tests regulär beenden, Pixel entsperrt und unbedient lassen.
 
 ```powershell
-.\gradlew.bat :core:test :providers:test :app:assembleDebug :app:lintDebug :storage:lintDebug
+.\gradlew.bat :core:test :providers:test :voice:test :app:assembleDebug :app:lintDebug
 .\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:assemblePhoneDebug :prototype-app:lintDhuDebug
-.\gradlew.bat :storage:connectedDebugAndroidTest
 .\gradlew.bat :app:connectedDebugAndroidTest
 .\gradlew.bat :prototype-app:connectedDhuDebugAndroidTest
+.\gradlew.bat :storage:connectedDebugAndroidTest
 ```
 
-In diesem Lauf wurden die APKs mit Gradle gebaut, per `adb install -r` installiert
-und die Instrumentierungen mit `adb shell am instrument -w` ausgeführt. Prüfen,
-dass tatsächlich `OK (14 tests)`, `OK (5 tests)` und `OK (7 tests)` erscheinen;
-ein ADB-Exitcode 0 allein belegt keinen erfolgreichen Testlauf.
+In diesem Lauf wurden die APKs mit Gradle gebaut und die drei Gerätetestpakete
+über `adb shell am instrument -w` ausgeführt. Die Ergebnisse waren `OK (7 tests)`,
+`OK (7 tests)` und `OK (14 tests)`. Der ADB-Exitcode allein ist kein Testnachweis.
