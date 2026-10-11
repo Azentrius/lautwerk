@@ -34,6 +34,7 @@ enum class VoiceProblem(val message: String) {
     RECOGNITION_NETWORK("Die Spracherkennung hat keine Verbindung. Bitte später erneut starten."),
     RECOGNITION_FAILED("Die Spracherkennung ist fehlgeschlagen. Bitte erneut starten."),
     TTS_UNAVAILABLE("Keine nutzbare Sprachausgabe für die Gerätesprache verfügbar. Bitte die Android-Sprachausgabe prüfen."),
+    TTS_VOICE_UNAVAILABLE("Die gewählte Stimme ist nicht mehr verfügbar. Bitte unter Stimme und Tempo eine andere Stimme oder Android-Standard wählen."),
     TTS_FAILED("Die Antwort konnte nicht vorgelesen werden. Gespeicherte Antworten stehen im Chatverlauf."),
     AUDIO_FOCUS("Ein anderer Audiovorgang hat Vorrang. Das Gespräch wurde beendet."),
     TIMEOUT("Der Sprachvorgang hat zu lange gedauert. Bitte erneut starten.")

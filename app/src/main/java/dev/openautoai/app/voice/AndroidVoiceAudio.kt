@@ -43,9 +43,10 @@ internal class AndroidVoiceAudio(
             if (token != operation) return@post
             val engine = tts
             try {
-                if (status != TextToSpeech.SUCCESS || engine == null ||
-                    engine.setLanguage(Locale.getDefault()) < TextToSpeech.LANG_AVAILABLE) {
-                    complete(VoiceProblem.TTS_UNAVAILABLE)
+                val problem = if (status != TextToSpeech.SUCCESS || engine == null) VoiceProblem.TTS_UNAVAILABLE
+                    else AndroidSpeechSettings.apply(engine, SpeechSettingsStore(context).load())
+                if (problem != null || engine == null) {
+                    complete(problem ?: VoiceProblem.TTS_UNAVAILABLE)
                 } else {
                     engine.setAudioAttributes(AndroidPlaybackFocus.attributes)
                     engine.setOnUtteranceProgressListener(object : UtteranceProgressListener() {

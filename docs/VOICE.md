@@ -1,4 +1,4 @@
-# Smartphone-Sprachfunktion – 0.1.6
+# Smartphone-Sprachfunktion – 0.1.7
 
 OpenAI und Claude verwenden jetzt denselben getesteten Gesprächsablauf:
 Android erkennt die Sprache, der gewählte Anbieter verarbeitet den erkannten
@@ -9,6 +9,47 @@ auch [OpenAI Voice agents](https://developers.openai.com/api/docs/guides/voice-a
 
 Die DHU-Test-App bleibt bei Titel, Auswahl und Starten. Sie bekommt weder
 Mikrofonzugriff noch Netzwerkanbindung oder eine behauptete neue Auto-Kategorie.
+
+## Stimme auswählen und vergleichen
+
+1. Auf der Smartphone-Hauptseite **„Stimme und Tempo“** öffnen. Während eines
+   laufenden Gesprächs ist diese Schaltfläche deaktiviert.
+2. Die Stimmwahl öffnen und eine Variante wählen. Das Pixel meldet aktuell
+   **fünf Stimmen auf dem Gerät und vier Online-Stimmen für Deutsch (de-DE)**.
+   Die Nummern dienen der Orientierung; gespeichert wird die tatsächliche
+   Stimmenkennung zusammen mit dem Sprachdienst, nicht die Nummer.
+3. **„Hörprobe abspielen“** liest einen festen Beispielsatz ohne Mikrofon,
+   Chatdaten oder KI-Anfrage vor. Mit **„Hörprobe stoppen“** jederzeit beenden.
+4. Bei Bedarf „Etwas langsamer“, „Normal“ oder „Etwas schneller“ wählen.
+   Stimme und Tempo werden sofort nur für OpenAuto AI gespeichert. Die
+   systemweiten Android-Einstellungen bleiben unverändert.
+5. **„Zurück zum Gespräch“** wählen und ein Gespräch starten. Beide Anbieter
+   verwenden dieselbe Auswahl. Beim Verlassen der Einstellungsseite wird die
+   Hörprobe gestoppt und ihr Audiofokus freigegeben.
+
+Online-Stimmen benötigen laut Sprachdienst eine Verbindung; beim Auswählen
+erscheint ein Hinweis zur Übertragung des vorzulesenden Textes. Die Auswahl
+erfolgt ausdrücklich. Auch „Android-Standard“ folgt dem installierten Dienst
+und ist keine Offline-Zusage. Es gibt keine zusätzliche OpenAI- oder Claude-
+Sprach-API und keine eigene Speicherung von Audio. Androids Sprachdienst kann
+seine eigenen Datenverarbeitungsregeln haben.
+
+Auf dem getesteten Pixel sind **2/6, 3/7, 4/8 und 5/9** jeweils lokale/Online-
+Varianten mit derselben Basiskennung (`dea`, `deb`, `deg`, `nfh`). Sie können
+sehr ähnlich klingen. Ein weiterer Eintrag heißt `de-DE-language`; auch Android-
+Standard kann eine der gelisteten Stimmen verwenden. Die Nummern gelten für den
+hier geprüften Katalog und können sich nach einem Sprachdienst-Update ändern.
+Diese Varianten sind verschiedene vom Dienst gemeldete Konfigurationen, keine
+neun garantierten unterschiedlichen Sprecheridentitäten.
+
+Die App verspricht keine bestimmte Klangqualität. Stimmenangebot und Klang
+bestimmt der installierte Dienst. Fehlt eine gespeicherte Stimme oder wurde der
+Sprachdienst gewechselt, wird vor der Aufnahme ein verständlicher Fehler gezeigt;
+bitte eine neue Stimme oder „Android-Standard“ wählen. Es gibt keinen stillen
+Wechsel auf eine andere Online-Stimme.
+
+Technische Grundlage: [Android TextToSpeech](https://developer.android.com/reference/android/speech/tts/TextToSpeech)
+und [Voice-Metadaten](https://developer.android.com/reference/android/speech/tts/Voice).
 
 ## Auf dem Pixel ausprobieren
 
@@ -133,7 +174,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
 ```
 
-Für die Download-APK den Pfad auf `OpenAutoAI-0.1.6-assistant-debug.apk` ändern.
+Für die Download-APK den Pfad auf `OpenAutoAI-0.1.7-assistant-debug.apk` ändern.
 Bei anderen Geräten die Seriennummer ersetzen. Bei abweichender Signatur nicht
 deinstallieren oder Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 Die bestehenden [DHU-Schritte](START_WINDOWS.md) bleiben gültig.
@@ -158,14 +199,15 @@ Wiedergabe anzufordern und danach abzugeben:
 
 ## Teststand und Grenzen
 
-57 JVM-Tests bestehen, darunter 13 neue Regressionstests für die Fokus-Lebensdauer
-und den Gesprächsablauf beider Anbieter. Diese Prüfungen verwenden künstliche
-Antworten und Audio-/Fokus-Simulationen, keine echte Mikrofonaufnahme oder TTS-Ausgabe.
-Die Assistenten-App **0.1.6-dev / Code 7** wurde als Update auf dem Pixel 10 Pro / Android 17 installiert; die Paketversion und ein erfolgreicher Kaltstart sind geprüft. **14 Gerätetests bestehen erneut** (7 Assistant, 7 DHU/Auswahl), insgesamt mit den JVM-Tests **71 automatisierte Prüfungen**. Bestehende App-Daten wurden nicht gelöscht.
-
-Android-Auto-Audio, Bluetooth-Routing, gesperrtes Gerät und reale Fahrzeugnutzung
-sind nicht bestätigt. Die experimentelle Car-App-Oberfläche bleibt ein UI-Test.
-Details und Wiederholung: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+**75 automatisierte Prüfungen bestehen:** 57 JVM-Tests, 11 Assistant-Gerätetests
+und 7 DHU-/Auswahltests. 0.1.7-dev / Code 8 ist als Update auf dem Pixel installiert.
+Vier neue Android-Tests prüfen Speicherung, Katalogfilter, echte TTS-Konfiguration
+und die Einstellungsseite. Sie starten keine hörbare Ausgabe, Mikrofonaufnahme
+oder echte KI-Anfrage; vorhandene Auswahl und persönliche Daten werden nicht verändert.
 
 **Manueller Sprachtest:**
-0.1.5 scheiterte beim Nutzer wiederholt mit „Ein anderer Audiovorgang hat Vorrang“. Die Ursache ist im Geräteprotokoll nachvollzogen und in 0.1.6 korrigiert. Ein neuer praktischer Sprachtest mit OpenAI und Claude steht noch aus; Erkennung, hörbare Antwort und Beenden sind für 0.1.6 noch nicht vom Nutzer bestätigt.
+Der Nutzer hat Erkennung, Vorlesen und Beenden für OpenAI und Claude unter 0.1.6 bestätigt: „Es funktioniert alles, die Stimme ist allerdings furchtbar.“ Für die Stimmwahl unter 0.1.7 meldet der Nutzer: „Klingt definitiv besser.“ Er fragt nach ähnlich klingenden Einträgen; die Stimmenkennungen zeigen vier lokale/Online-Variantenpaare. Eine gesonderte Bestätigung aller Vorschau-Abbruchfälle liegt noch nicht vor.
+
+Android-Auto-Audio, Bluetooth-Routing, gesperrtes Gerät und reale Fahrzeugnutzung
+sind nicht bestätigt. Die DHU-Oberfläche bleibt unverändert bei 0.1.2-prototype.
+Details: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).

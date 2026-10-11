@@ -64,7 +64,8 @@ class MainActivity : ComponentActivity() {
                         store = remember { SecretStore(applicationContext) },
                         conversations = remember { ConversationStore(applicationContext) },
                         onStart = ::requestStart,
-                        onStop = ::stopConversation
+                        onStop = ::stopConversation,
+                        onSpeechSettings = { startActivity(Intent(this, SpeechSettingsActivity::class.java)) }
                     )
                 }
             }
@@ -125,7 +126,8 @@ internal fun MainContent(
     store: CredentialStore,
     conversations: ConversationRepository,
     onStart: (Conversation) -> Unit,
-    onStop: () -> Unit
+    onStop: () -> Unit,
+    onSpeechSettings: () -> Unit = {}
 ) {
     var selection by remember { mutableStateOf(selections.load()) }
     val selectedProvider = selection.provider
@@ -200,6 +202,9 @@ internal fun MainContent(
             }) { Text("Entfernen") }
         }
         if (saveStatus.isNotBlank()) Text(saveStatus)
+        OutlinedButton(onClick = onSpeechSettings, enabled = !AppState.active, modifier = Modifier.fillMaxWidth()) {
+            Text("Stimme und Tempo")
+        }
         Text("Gespräch", style = MaterialTheme.typography.titleMedium)
         Text("Spracheingabe und Vorlesen nutzen die Android-Sprachdienste. Diese können Audio online verarbeiten. Erkannter Text wird an den ausgewählten KI-Anbieter gesendet.")
         Text("Während der Antwort ist das Mikrofon pausiert. Beenden ist jederzeit hier oder über die Benachrichtigung möglich.")

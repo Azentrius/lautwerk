@@ -1,75 +1,75 @@
-# Build- und Testbericht 0.1.6
+# Build- und Testbericht 0.1.7
 
-Stand: 12.10.2026. **57 JVM-Tests bestanden** (38 Voice, 17 Anbieter, 2 Kern).
-Assistant- und DHU-Debug-APK sind gebaut. Die DHU-/Phone-Oberfläche bleibt bei
-**0.1.2-prototype / Code 3**, die Assistenten-App ist **0.1.6-dev / Code 7**.
+Stand: 12.10.2026. **75 automatisierte Prüfungen bestanden:** 57 JVM-Tests und
+18 Gerätetests (11 Assistant, 7 DHU/Auswahl). Assistant **0.1.7-dev / Code 8**
+ist als Update auf dem Pixel 10 Pro / Android 17 installiert. Keine Datenlöschung.
+DHU-/Phone-Oberfläche bleibt **0.1.2-prototype / Code 3**.
 
-Die Assistenten-App **0.1.6-dev / Code 7** wurde als Update auf dem Pixel 10 Pro / Android 17 installiert; die Paketversion und ein erfolgreicher Kaltstart sind geprüft. **14 Gerätetests bestehen erneut** (7 Assistant, 7 DHU/Auswahl), insgesamt mit den JVM-Tests **71 automatisierte Prüfungen**. Bestehende App-Daten wurden nicht gelöscht.
+## Bestätigter Ausgangspunkt und neue Funktion
 
-## Fehlerbefund und Änderung
+Der Nutzer hat Erkennung, Vorlesen und Beenden für OpenAI und Claude unter 0.1.6 bestätigt: „Es funktioniert alles, die Stimme ist allerdings furchtbar.“ Für die Stimmwahl unter 0.1.7 meldet der Nutzer: „Klingt definitiv besser.“ Er fragt nach ähnlich klingenden Einträgen; die Stimmenkennungen zeigen vier lokale/Online-Variantenpaare. Eine gesonderte Bestätigung aller Vorschau-Abbruchfälle liegt noch nicht vor.
 
-0.1.5 scheiterte beim Nutzer wiederholt mit „Ein anderer Audiovorgang hat Vorrang“. Die Ursache ist im Geräteprotokoll nachvollzogen und in 0.1.6 korrigiert. Ein neuer praktischer Sprachtest mit OpenAI und Claude steht noch aus; Erkennung, hörbare Antwort und Beenden sind für 0.1.6 noch nicht vom Nutzer bestätigt.
-
-Der technische Fokusverlauf zeigte bei mehreren Starts: OpenAuto AI fordert
-Fokus an; anschließend übernimmt der Google-Spracherkennungsdienst Fokus;
-OpenAuto AI erhält `AUDIOFOCUS_LOSS_TRANSIENT` und beendet die Aufnahme.
-Die Korrektur begrenzt den eigenen Fokus auf das Vorlesen. Initialisierung,
-Erkennung und API-Wartezeit benötigen keinen eigenen Wiedergabefokus.
-Fokusverweigerung und tatsächliche Unterbrechungen während der Ausgabe werden
-weiterhin beachtet. Keine Aufnahme-/Schlüsseldaten wurden zur Diagnose gelesen.
+Die neue Smartphone-Seite bietet Stimmwahl, drei Sprechgeschwindigkeiten und eine
+abbrechbare Hörprobe mit festem Text. Die Auswahl gilt für beide Anbieter und ist
+in separaten nicht geheimen App-Einstellungen gespeichert. Systemweite TTS-Einstellungen,
+API-Schlüssel und Chatverläufe werden nicht verändert. Online-Stimmen werden vor
+dem Speichern ausdrücklich bestätigt. Fehlende Stimmen werden vor Gesprächsbeginn gemeldet.
 
 ## Ausgeführte Prüfungen
 
 | Prüfung | Ergebnis |
 |---|---|
-| `PlaybackFocusAudioTest` | 11 neue Tests: kein Fokus bei Vorbereitung/Erkennung, Anforderung vor TTS, Freigabe vor nächster Aufnahme, Ablehnung, Verlust, Stoppen, Schließen, veraltete Rückmeldungen, synchrone Rückmeldungen, TTS-Fehler |
-| `VoiceControllerTest` | 17 Tests; alle verwenden jetzt die Fokus-Schicht, darunter 2 neue Anbieter-Regressionsfälle |
-| Übrige Voice-Tests | 8 Archiv-/Anbieteranbindung und 2 TTS-Textaufteilung bestanden |
+| `:voice:test` | 38 bestanden; Gesprächsablauf, Fokus, Abbruch, Anbieteranbindung, Textaufteilung |
 | `:providers:test` / `:core:test` | 17 / 2 bestanden |
-| `:app:assembleDebug` / `:app:assembleDebugAndroidTest` | Erfolgreich |
-| `:prototype-app:assembleDhuDebug` | Erfolgreich |
-| Assistant-Gerätetests | 7 bestanden |
-| DHU-/Auswahl-Gerätetests | 7 bestanden |
-| `:app:lintDebug` | 0 Fehler, 7 bestehende Warnungen |
-| `:prototype-app:lintDhuDebug` | 0 Fehler, 6 bestehende Warnungen |
+| Bestehende Assistant-Gerätetests | 7 bestanden |
+| `SpeechSettingsTest` | 3 bestanden: getrennte Speicherung und ungültige Raten; Sprach-/Installationsfilter; echte lokale TTS-Stimme setzen und fehlende Stimme/falschen Dienst ablehnen |
+| `SpeechSettingsScreenTest` | 1 bestanden: Seite lädt und öffnet Stimmwahl, ohne Hörprobe zu starten oder Auswahl zu ändern |
+| DHU-/Auswahl-Gerätetests | 7 bestanden; Car-Template, Auswahl, Starten |
+| Debug-APK / Test-APK | Build erfolgreich, Update installiert |
+| `:app:lintDebug` | 0 Fehler, 9 Warnungen: 7 bestehende Hinweise plus 2 KTX-Vorschläge für SharedPreferences |
 
-Die automatisierten Voice-Tests simulieren Audio und Fokus. Sie belegen nicht
-den vollständigen Ablauf mit realem Mikrofon, hörbarem TTS oder einem echten API-Konto.
-Die 7 Assistant-Tests (`ProviderAndroidSmokeTest`, `StorageUiTest`, `AndroidVoiceTasksTest`)
-und 7 DHU-/Auswahltests (`CarTemplateTest`, `ModelSelectionStoreTest`, `PhoneSmokeTest`)
-wurden mit `adb shell am instrument -w` erneut ausgeführt: jeweils `OK (7 tests)`.
-Die Tests verwenden isolierte Testdaten; sie starten keine echte Mikrofonaufnahme oder KI-Anfrage.
-`am start -W` bestätigt anschließend den erfolgreichen Kaltstart der Assistenten-App (507 ms).
-Die DHU-App bleibt auf 0.1.2-prototype / Code 3. Dies ist keine neue manuelle DHU-Sitzung.
-Die unveränderten 14 Speichertests wurden für diese reine Audiofokus-Korrektur nicht wiederholt.
+Der echte Google-Sprachdienst meldet auf dem Pixel **5 lokale und 4 Online-Stimmen
+für de-DE**. Das Setzen einer lokalen Stimme wurde am echten TTS-Objekt geprüft.
+Es wurde dabei nichts hörbar abgespielt. Die Kennungen `dea`, `deb`, `deg` und `nfh` erscheinen jeweils als lokale und Netzwerkvariante; der neunte Eintrag ist `de-DE-language`. Der Nutzer hat den Klang der Stimmwahl als deutlich besser bestätigt.
+Die automatisierten Tests bewerten keine subjektive Klangqualität. Die automatisierten KI-Tests verwenden
+künstliche Antworten. Unveränderte Speichertests wurden nicht wiederholt.
+
+Der PC stürzte während der Arbeit ab. Das erste Protokoll mit zehn erfolgreichen
+Assistant-Tests war vollständig erhalten. Danach wurden Build und Gerätetests
+einschließlich des neuen Oberflächentests abgeschlossen. Der Quellcode wurde
+weiterverwendet; kein Projekt wurde neu erzeugt und keine App-Daten zurückgesetzt.
 
 ## Erhaltener Stand und Grenzen
 
-Produktivcode und Konfiguration von `prototype-app`, `car-ui`, `core`, `providers`,
-`storage` und `settings` sind gegenüber 0.1.5 unverändert. Die DHU-App erhält
-keine Netzwerk-/Mikrofonberechtigung. Hostprüfung und deaktivierter DHU-Release
-bleiben bestehen. Die bisherige manuelle DHU-Bestätigung gilt für 0.1.2.
+`prototype-app`, `car-ui`, `core`, `providers`, `storage` und `settings` bleiben
+gegenüber 0.1.6 unverändert. Keine neuen DHU-Berechtigungen, keine geänderte
+Hostprüfung oder behauptete KI-Kategorie. Die manuelle DHU-Bestätigung gilt für
+0.1.2; dieser Lauf prüft die vorhandenen Templates automatisiert.
 
-Auto-Audio, Bluetooth-Routing und Betrieb bei gesperrtem Gerät bleiben ungeprüft.
-Der HTTP-Transport garantiert keinen sofortigen Abbruch einer bereits begonnenen
-Anfrage. Die übrige Speicheroberfläche arbeitet weiterhin synchron. Die App
-beansprucht keine offiziell unterstützte Kategorie für allgemeine KI-Gespräche.
+Fokus wird weiterhin nur beim Vorlesen beansprucht. Vorschau und Gespräch
+verwenden dieselbe Stimmenkonfiguration; die Vorschau hat weder Mikrofon- noch
+Anbieteranbindung. Beim Hintergrundwechsel wird die Vorschau gestoppt. Online-
+Stimmen und Android-Standard sind keine Offline-Zusage. Klang und Verfügbarkeit
+hängen vom Android-Sprachdienst ab; es wurde keine zusätzliche Cloud-Sprach-API eingebaut.
+
+Auto-Audio, Bluetooth-Routing und gesperrtes Gerät sind weiterhin ungeprüft.
+Der bestehende HTTP-Transport garantiert keinen sofortigen Abbruch bereits
+begonnener Anfragen. Die übrige Speicheroberfläche arbeitet weiter synchron.
 
 ## Wiederholen
 
-JDK 17 und Android SDK wie in [START_WINDOWS.md](START_WINDOWS.md) setzen.
-Keine SDK-/Bibliotheksmigration und keine Datenmigration in dieser Korrektur.
+JDK 17 und SDK wie in [START_WINDOWS.md](START_WINDOWS.md) setzen.
+Für UI-Tests DHU regulär beenden und Pixel entsperrt lassen.
 
 ```powershell
-.\gradlew.bat :voice:test :core:test :providers:test
+.\gradlew.bat :voice:test :providers:test :core:test
 .\gradlew.bat :app:assembleDebug :app:assembleDebugAndroidTest :app:lintDebug
-.\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:lintDhuDebug
-# Mit verbundenem, entsperrtem Pixel und regulär beendeter DHU-Sitzung:
 .\gradlew.bat :app:connectedDebugAndroidTest
 .\gradlew.bat :prototype-app:connectedDhuDebugAndroidTest
 ```
 
-Installation und manueller Test: [VOICE.md](VOICE.md).
-Historische Berichte: [0.1.5](history/BUILD_AND_TEST-0.1.5.md),
-[0.1.4](history/BUILD_AND_TEST-0.1.4.md), [0.1.3](history/BUILD_AND_TEST-0.1.3.md),
-[0.1.2](history/BUILD_AND_TEST-0.1.2.md).
+In diesem Lauf wurden die gebauten Testpakete mit `adb shell am instrument -w`
+ausgeführt: `OK (11 tests)` und `OK (7 tests)`.
+Stimmwahl, Installation und manueller Test: [VOICE.md](VOICE.md).
+Historische Berichte: [0.1.6](history/BUILD_AND_TEST-0.1.6.md),
+[0.1.5](history/BUILD_AND_TEST-0.1.5.md), [0.1.4](history/BUILD_AND_TEST-0.1.4.md).

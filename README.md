@@ -1,4 +1,4 @@
-# OpenAuto AI 0.1.6 – Sprachfunktion für OpenAI und Claude
+# OpenAuto AI 0.1.7 – Sprachfunktion für OpenAI und Claude
 
 Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
 die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
@@ -7,15 +7,16 @@ Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
 von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Korrektur 0.1.6:** Der eigene Wiedergabefokus wird nur beim Vorlesen gehalten.
-Damit kollidiert er nicht mehr mit dem Fokus des gestarteten Spracherkennungsdienstes,
-der auf dem Pixel den sofortigen Abbruch von 0.1.5 ausgelöst hat.
-57 JVM-Tests bestehen, darunter 13 neue Fokus-Regressionsprüfungen. Assistant und
-DHU sind gebaut, Lint meldet 0 Fehler (7 / 6 bestehende Warnungen).
-Die Assistenten-App **0.1.6-dev / Code 7** wurde als Update auf dem Pixel 10 Pro / Android 17 installiert; die Paketversion und ein erfolgreicher Kaltstart sind geprüft. **14 Gerätetests bestehen erneut** (7 Assistant, 7 DHU/Auswahl), insgesamt mit den JVM-Tests **71 automatisierte Prüfungen**. Bestehende App-Daten wurden nicht gelöscht. Der praktische Sprachtest steht noch aus.
+**Neu in 0.1.7:** „Stimme und Tempo“ bietet eine gemeinsame Stimmwahl für beide
+Anbieter, drei Sprechgeschwindigkeiten und eine abbrechbare Hörprobe. Das Pixel
+meldet fünf lokale und vier Online-Stimmen. Die Auswahl bleibt app-intern gespeichert.
+Der Nutzer hat den Sprachablauf unter 0.1.6 bestätigt; die neue Stimmwahl soll den
+als unangenehm empfundenen Klang durch Vergleich mehrerer Varianten verbessern.
+75 automatisierte Prüfungen bestehen. Assistant 0.1.7-dev ist auf dem Pixel installiert;
+Lint meldet 0 Fehler und 9 Warnungen. Der Nutzer bestätigt einen deutlich besseren Klang mit der Stimmwahl.
 Details: [Sprachanleitung](docs/VOICE.md) und [Testbericht](docs/BUILD_AND_TEST.md).
 
-Die **Assistenten-APK ist 0.1.6-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
+Die **Assistenten-APK ist 0.1.7-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
 dem bestätigten **0.1.2-prototype**-Stand mit Auswahl, Titel und Starten.
 Die neuen Sprachbausteine sind nur in der Assistenten-App eingebunden.
 
