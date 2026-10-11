@@ -3,7 +3,10 @@
     <string name="start">Starten</string>
     <string name="ready">Bereit für den UI-Test.</string>
     <string name="started">Gestartet · Test %1$d</string>
-    <string name="prototype_note">Dieser Prototyp prüft nur die Oberfläche. KI und Sprache folgen später.</string>
-    <string name="dhu_note">Experiment für den Desktop Head Unit Emulator. Die Anzeige hängt von Android Auto ab.</string>
+    <string name="prototype_note">Wähle Anbieter und Modell für den UI-Test. Die Auswahl bleibt gespeichert; Starten führt noch keine KI-Anfrage aus.</string>
+    <string name="dhu_note">Die Auswahl erscheint auch im DHU. Experimentelle Auto-Oberfläche; KI und Sprache folgen später.</string>
     <string name="phone_note">Smartphone-Test ohne Android-Auto-Registrierung.</string>
+    <string name="provider_label">KI-Anbieter</string>
+    <string name="model_label">Modell</string>
+    <string name="selection_saved">Auswahl gespeichert: %1$s · %2$s</string>
 </resources>

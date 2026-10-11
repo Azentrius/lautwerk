@@ -1,5 +1,8 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.ai.Provider
+import dev.openautoai.core.ai.ModelCatalog
+
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -17,6 +20,8 @@ object AppState {
         private set
     var status by mutableStateOf("Bereit")
         private set
+    var notice by mutableStateOf<String?>(null)
+        private set
     var revision by mutableIntStateOf(0)
         private set
 
@@ -28,4 +33,5 @@ object AppState {
         this.status = status
     }
     fun changed() { revision++ }
+    fun reportIssue(message: String?) { notice = message }
 }

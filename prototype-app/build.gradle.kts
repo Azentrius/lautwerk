@@ -10,8 +10,8 @@ android {
         applicationId = "dev.openautoai.prototype"
         minSdk = 28
         targetSdk = 36
-        versionCode = 2
-        versionName = "0.1.1-prototype"
+        versionCode = 3
+        versionName = "0.1.2-prototype"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     flavorDimensions += "surface"
@@ -43,6 +43,7 @@ androidComponents {
 }
 
 dependencies {
+    implementation(project(":settings"))
     implementation(project(":core"))
     "dhuImplementation"(project(":car-ui"))
     androidTestImplementation("androidx.test:core:1.6.1")
