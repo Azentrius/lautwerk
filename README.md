@@ -89,7 +89,7 @@ Beschreibungen unter `docs/history/`.
 Quellen, Wrapper, Lizenz, Dokumentation und Tests gehören ins Repository.
 `local.properties`, `.gradle`, Build-Verzeichnisse, Schlüssel und Diagnoseausgaben
 sind ausgeschlossen. Zielrepository: [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai).
-Der Quellcode liegt auf `main`; APKs sind nicht Bestandteil der Git-Historie.
+Der Standardbranch ist `main`; APKs sind nicht Bestandteil der Git-Historie.
 Die bereits gelieferte Apache-2.0-Lizenz bleibt erhalten; siehe [LICENSE](LICENSE).
 
 ## Offizielle Referenzen (geprüft am 11.10.2026)

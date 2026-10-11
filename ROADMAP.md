@@ -16,5 +16,6 @@
 6. VoiceService hinter einer Voice-Schnittstelle anbinden, Wiederaufnahme,
    Abbruch und TTS-/Recognizer-Fehler testen. CarAudioRecord/Audio-Routing erst
    nach geklärter Plattformberechtigung und eigenem Test; kein Mikrofonzugriff im DHU-Prototyp.
-7. GitHub-Repository und CI einrichten, anschließend reale Testergebnisse und
-   kategoriekonformen Umfang bewerten. Kein automatischer Upload durch diesen Auftrag.
+7. Quellcode in [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai) pflegen;
+   als nächsten Infrastruktur-Schritt CI einrichten. Reale Testergebnisse und
+   kategoriekonformen Umfang vor weiteren Auto-Funktionen bewerten.
