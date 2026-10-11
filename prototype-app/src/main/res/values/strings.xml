@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OpenAuto AI</string>
+    <string name="start">Starten</string>
+    <string name="ready">Bereit für den UI-Test.</string>
+    <string name="started">Gestartet · Test %1$d</string>
+    <string name="prototype_note">Dieser Prototyp prüft nur die Oberfläche. KI und Sprache folgen später.</string>
+    <string name="dhu_note">Experiment für den Desktop Head Unit Emulator. Die Anzeige hängt von Android Auto ab.</string>
+    <string name="phone_note">Smartphone-Test ohne Android-Auto-Registrierung.</string>
+</resources>

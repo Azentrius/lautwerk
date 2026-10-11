@@ -1,0 +1,6 @@
+<resources>
+    <string name="car_title">OpenAuto AI</string>
+    <string name="car_ready">Bereit für den UI-Test.</string>
+    <string name="car_started">Gestartet · Test %1$d</string>
+    <string name="car_start">Starten</string>
+</resources>
