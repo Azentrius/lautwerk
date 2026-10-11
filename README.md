@@ -1,16 +1,21 @@
-# OpenAuto AI 0.1.2 – gemeinsame Anbieter- und Modellauswahl
+# OpenAuto AI 0.1.3 – gemeinsame KI-Auswahl und Anbieter-Adapter
 
-Fortsetzung des gelieferten `OpenAutoAI_0.1.0_Quellcode.zip` und des vom Nutzer
-bestätigten DHU-Prototyps 0.1.1. Auf dem Smartphone lassen sich OpenAI und Claude
-sowie ein passendes Modell auswählen. Die Wahl bleibt lokal gespeichert;
-jeder Anbieter merkt sich sein zuletzt gewähltes Modell. Das DHU-Template zeigt
-diese Auswahl unter dem bisherigen Teststatus. Titel und Starten-Aktion bleiben erhalten.
+Fortsetzung des gelieferten Quellcodes 0.1.0, des DHU-Prototyps 0.1.1 und der
+gemeinsamen Anbieter-/Modellauswahl 0.1.2. Die bestehende Assistenten-App verwendet
+jetzt getrennte Adapter für OpenAI und Claude hinter einer gemeinsamen Chat-Schnittstelle.
+API-Fehler, leere Antworten, Ablehnungen und am Limit abgeschnittene Antworten
+werden explizit behandelt. Fehlermeldungen erscheinen auch im Gesprächsbereich.
 
-**Teststand 0.1.2:** Drei Debug-APKs gebaut, zwei JVM-Tests und sieben Gerätetests
-auf dem Pixel 10 Pro bestanden. Lint: 0 Fehler, 6 Warnungen. Die Smartphone-UI
-wurde sichtbar geprüft. Der Nutzer bestätigt im echten DHU auch für 0.1.2:
-„Ja, Auswahl und Starten funktionieren“. Die Bestätigung aus 0.1.1 bleibt dokumentiert.
-Siehe [Testbericht](docs/BUILD_AND_TEST.md) und [Auswahl/Architektur](docs/MODEL_SELECTION.md).
+**Teststand 0.1.3:** Alle drei APKs gebaut; 19 JVM-Tests und 9 Gerätetests bestanden.
+Android-Lint: 0 Fehler (Assistant: 12 Warnungen; DHU: 6).
+Getestet wurden simulierte API-Antworten, Android-JSON und die bestehende DHU-UI;
+kein echter API-Aufruf und kein vollständiger Sprachtest mit einem API-Konto.
+Siehe [Testbericht](docs/BUILD_AND_TEST.md) und [Anbieter-Anbindung](docs/PROVIDER_ADAPTERS.md).
+
+Die **Assistenten-APK ist 0.1.3-dev**. Die Oberflächen von `prototype-app` bleiben
+auf dem funktionierenden **0.1.2-prototype**-Stand: Auswahl, Titel und Starten.
+Der Nutzer hat diese Auswahl und Starten bereits im echten DHU bestätigt.
+Der neue Netzwerkbaustein ist ausschließlich in `app` eingebunden.
 
 ## Schnellstart unter Windows
 
@@ -64,7 +69,8 @@ offizieller Verteilungsweg, aber keine Zusage der Kategoriezulässigkeit.
 
 ## Bausteine und spätere Arbeit
 
-- `core`: gemeinsame Provider-/Modelltypen, validierte Auswahl und UI-Testzähler.
+- `core`: Provider-/Modelltypen, validierte Auswahl, Chat-Schnittstelle und UI-Testzähler.
+- `providers`: OpenAI-/Claude-Adapter, austauschbarer HTTP-Transport und sichere Fehlerzuordnung; nur in der Assistenten-App eingebunden.
 - `settings`: app-private Speicherung der Auswahl, pro Anbieter ein Modell,
   Beobachtung von Änderungen während der UI-Lebensdauer. Keine Schlüssel/Chatdaten.
 - `app`: fortgeführte Compose-/Voice-App mit gemeinsamem Katalog und Auswahlstore.
@@ -73,7 +79,7 @@ offizieller Verteilungsweg, aber keine Zusage der Kategoriezulässigkeit.
   Starten-Aktion und aktueller Auswahl als Text.
 - `prototype-app`: Smartphone-Auswahl und zwei Testvarianten; keine API-/Audio-Aufrufe.
 
-Weitere Arbeit: Anbieter-Adapter, Credential-/Verlaufs-Repository und Voice-Schnittstelle.
+Weitere Arbeit: Credential-/Verlaufs-Repository und Voice-Schnittstelle sowie echte, kontrollierte API-/Sprachtests.
 Ein Anbieterwechsel im bisherigen VoiceService verwendet jetzt das pro Anbieter
 gemerkte Modell und beginnt weiterhin einen neuen Chat ohne fremden Verlauf.
 API-/Voice-End-to-End wurde dabei nicht getestet. Einzelheiten: [ROADMAP.md](ROADMAP.md).

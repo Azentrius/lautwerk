@@ -20,6 +20,8 @@ object AppState {
         private set
     var status by mutableStateOf("Bereit")
         private set
+    var notice by mutableStateOf<String?>(null)
+        private set
     var revision by mutableIntStateOf(0)
         private set
 
@@ -31,4 +33,5 @@ object AppState {
         this.status = status
     }
     fun changed() { revision++ }
+    fun reportIssue(message: String?) { notice = message }
 }
