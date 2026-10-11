@@ -1,5 +1,8 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.ai.Provider
+import dev.openautoai.core.ai.ModelCatalog
+
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf

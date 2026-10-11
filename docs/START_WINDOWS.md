@@ -23,7 +23,7 @@ werden benötigt. Der erste Build lädt öffentliche Maven-Abhängigkeiten.
 
 Das wichtigste APK liegt anschließend hier:
 `prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk`.
-Die separat gelieferte Datei `OpenAutoAI-0.1.1-dhu-debug.apk` ist dieselbe Testvariante.
+Die separat gelieferte Datei `OpenAutoAI-0.1.2-dhu-debug.apk` ist dieselbe Testvariante.
 Die Smartphone-Vergleichsvariante `phoneDebug` registriert absichtlich KEINE Auto-App.
 
 ## 2. Nur den DHU-Prototypen installieren
@@ -50,6 +50,10 @@ Für das heruntergeladene APK stattdessen `$apk` auf dessen vollständigen Pfad 
 Bei nur einem verbundenen Gerät darf `-s $serial` überall entfallen.
 Erwartet: `Success`; auf dem Handy „OpenAuto AI“ und „Starten“.
 Ein Tippen muss „Gestartet · Test 1“ anzeigen. Das beweist noch keine Auto-Sichtbarkeit.
+Zusätzlich Anbieter und Modell wählen; die Auswahl bleibt gespeichert.
+Für 0.1.2 den [Auswahltest](MODEL_SELECTION.md#prüfung-im-echten-dhu) durchführen:
+Claude / Haiku wählen, App neu öffnen, Auswahl im DHU prüfen und anschließend
+auf OpenAI / GPT-5.4 wechseln. Das Template zeigt die Auswahl unter dem Teststatus.
 
 Bei `INSTALL_FAILED_UPDATE_INCOMPATIBLE` wurde das Paket mit einem anderen
 Debug-Zertifikat gebaut. Nicht automatisch deinstallieren: das würde Paketdaten

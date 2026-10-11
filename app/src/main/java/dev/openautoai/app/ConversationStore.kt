@@ -1,5 +1,8 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.ai.Provider
+import dev.openautoai.core.ai.ModelCatalog
+
 import android.content.Context
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties

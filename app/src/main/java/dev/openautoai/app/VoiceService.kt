@@ -1,5 +1,9 @@
 package dev.openautoai.app
 
+import dev.openautoai.settings.ModelSelectionStore
+import dev.openautoai.core.ai.Provider
+import dev.openautoai.core.ai.ModelCatalog
+
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -200,11 +204,14 @@ class VoiceService : Service(), RecognitionListener {
             speak("Für ${newProvider.displayName} ist noch kein Zugang eingerichtet.")
             return
         }
-        val newModel = ModelCatalog.default(newProvider)
+        val selections = ModelSelectionStore(applicationContext)
+        val chosen = selections.forProvider(newProvider)
+        val newModel = chosen.modelId
         val newSession = runCatching { conversations.create(newProvider, newModel) }.getOrElse {
             speak("Neues Gespräch konnte nicht erstellt werden.")
             return
         }
+        selections.select(chosen)
         provider = newProvider
         modelId = newModel
         sessionId = newSession.id

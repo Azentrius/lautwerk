@@ -1,4 +1,4 @@
-package dev.openautoai.app
+package dev.openautoai.core.ai
 
 enum class Provider(val displayName: String, val keyId: String) {
     OPENAI("ChatGPT / OpenAI", "openai"),
@@ -7,7 +7,7 @@ enum class Provider(val displayName: String, val keyId: String) {
 
 data class ModelOption(val id: String, val label: String, val provider: Provider)
 
-/** Conservative model list for first prototype. Access depends on the user's API account. */
+/** Versioned starter catalog, retained from 0.1.0. API access depends on the account. */
 object ModelCatalog {
     val options = listOf(
         ModelOption("gpt-5.4-mini", "GPT-5.4 mini", Provider.OPENAI),
@@ -20,5 +20,3 @@ object ModelCatalog {
     fun default(provider: Provider): String = forProvider(provider).first().id
     fun valid(provider: Provider, id: String) = options.any { it.provider == provider && it.id == id }
 }
-
-data class Turn(val role: String, val content: String)
