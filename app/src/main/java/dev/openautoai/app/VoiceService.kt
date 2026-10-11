@@ -1,5 +1,8 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.storage.ConversationRepository
+import dev.openautoai.core.storage.CredentialStore
+import dev.openautoai.core.storage.StorageFailure
 import dev.openautoai.settings.ModelSelectionStore
 import dev.openautoai.core.ai.ChatFailure
 import dev.openautoai.core.ai.Completion
@@ -45,8 +48,8 @@ class VoiceService : Service(), RecognitionListener {
     private var modelId = ModelCatalog.default(Provider.OPENAI)
     private var sessionId: String? = null
     private val history = mutableListOf<Turn>()
-    private lateinit var conversations: ConversationStore
-    private lateinit var store: SecretStore
+    private lateinit var conversations: ConversationRepository
+    private lateinit var store: CredentialStore
     private lateinit var chatApi: ChatApi
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -94,15 +97,20 @@ class VoiceService : Service(), RecognitionListener {
             ACTION_STOP -> stopConversation()
             ACTION_START -> {
                 val id = intent.getStringExtra(EXTRA_SESSION_ID)
-                val chosen = id?.let { conversations.get(it) }
-                if (chosen == null) {
-                    update("Gespräch nicht gefunden")
+                try {
+                    val chosen = id?.let { conversations.get(it) }
+                    if (chosen == null) {
+                        AppState.reportIssue("Gespräch nicht gefunden")
+                        stopSelf()
+                    } else if (store.read(chosen.provider).isNullOrBlank()) {
+                        AppState.reportIssue("Kein API-Schlüssel für ${chosen.provider.displayName}")
+                        stopSelf()
+                    } else {
+                        startConversation(chosen)
+                    }
+                } catch (error: StorageFailure) {
+                    AppState.reportIssue(error.message)
                     stopSelf()
-                } else if (store.read(chosen.provider).isNullOrBlank()) {
-                    update("Kein API-Schlüssel für ${chosen.provider.displayName}")
-                    stopSelf()
-                } else {
-                    startConversation(chosen)
                 }
             }
         }
@@ -203,7 +211,12 @@ class VoiceService : Service(), RecognitionListener {
     }
 
     private fun changeProvider(newProvider: Provider) {
-        if (store.read(newProvider).isNullOrBlank()) {
+        val key = try { store.read(newProvider) } catch (error: StorageFailure) {
+            AppState.reportIssue(error.message)
+            speak(error.message.orEmpty())
+            return
+        }
+        if (key.isNullOrBlank()) {
             speak("Für ${newProvider.displayName} ist noch kein Zugang eingerichtet.")
             return
         }
@@ -211,7 +224,9 @@ class VoiceService : Service(), RecognitionListener {
         val chosen = selections.forProvider(newProvider)
         val newModel = chosen.modelId
         val newSession = runCatching { conversations.create(newProvider, newModel) }.getOrElse {
-            speak("Neues Gespräch konnte nicht erstellt werden.")
+            val message = (it as? StorageFailure)?.message ?: "Neues Gespräch konnte nicht erstellt werden."
+            AppState.reportIssue(message)
+            speak(message)
             return
         }
         selections.select(chosen)
@@ -228,16 +243,17 @@ class VoiceService : Service(), RecognitionListener {
         if (processing || !active) return
         processing = true
         AppState.reportIssue(null)
-        history += Turn("user", phrase)
         try {
             sessionId?.let { conversations.append(it, Turn("user", phrase)) }
             AppState.changed()
-        } catch (_: Exception) {
-            update("Chatverlauf konnte nicht gespeichert werden")
+        } catch (error: Exception) {
+            val message = (error as? StorageFailure)?.message ?: "Das Gespräch konnte nicht sicher gespeichert werden."
+            AppState.reportIssue(message)
             processing = false
-            speak("Das Gespräch konnte nicht sicher gespeichert werden.")
+            speak(message)
             return
         }
+        history += Turn("user", phrase)
         // Bound the context to a small number of exchanges to limit cost and response time.
         while (history.size > 12) history.removeAt(0)
         val messages = history.toList()

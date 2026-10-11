@@ -1,3 +1,3 @@
 package dev.openautoai.app
 
-data class Turn(val role: String, val content: String)
+typealias Turn = dev.openautoai.core.storage.Turn

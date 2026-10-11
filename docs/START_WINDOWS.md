@@ -1,7 +1,7 @@
 # Windows: Bauen, Installieren und DHU prüfen
 
-Projektstand 0.1.3: Die DHU-/Phone-Oberfläche bleibt auf 0.1.2-prototype.
-Die neue Assistenten-App 0.1.3-dev ist separat; ihre Installation und der noch
+Projektstand 0.1.4: Die DHU-/Phone-Oberfläche bleibt auf 0.1.2-prototype.
+Die neue Assistenten-App 0.1.4-dev ist separat; ihre Installation und der noch
 offene echte API-/Sprachtest stehen in [PROVIDER_ADAPTERS.md](PROVIDER_ADAPTERS.md).
 
 ## 1. Projekt bauen
@@ -153,6 +153,9 @@ macht eine unzulässige Kategorie nicht zulässig.
 .\gradlew.bat :prototype-app:lintDhuDebug :prototype-app:connectedDhuDebugAndroidTest
 ```
 
+Vor UI-Tests den DHU regulär beenden und das Pixel entsperrt lassen. Eine aktive
+Android-Auto/Maps-Sitzung kann die Test-Activity verdrängen.
+
 Das installiert Test-App und Testpaket auf dem angeschlossenen Android-Gerät.
 Die Tests prüfen die Smartphone-Schaltfläche samt Zustandswiederherstellung sowie
 das echte Car-Template und seinen Klick-Callback. Diese Tests laufen mit einem
@@ -165,4 +168,6 @@ wählen oder übrige Testgeräte trennen.
 `:app:assembleDebug` erzeugt `app\build\outputs\apk\debug\app-debug.apk`.
 Dieses Modul trägt weiterhin das ursprüngliche Paket `dev.openautoai.app`.
 Es wurde für den DHU-Sichtbarkeitstest nicht mit dem Car-Service verbunden.
-API-, Keystore-, Chat-Archiv- und Sprach-End-to-End-Tests sind ein späterer Schritt.
+Lokale Speicherung, Keystore und Fehlerfälle sind mit isolierten Testdaten geprüft;
+Details in [LOCAL_STORAGE.md](LOCAL_STORAGE.md). Echte API-/Sprach-End-to-End-Tests
+bleiben ein späterer Schritt.

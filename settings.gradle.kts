@@ -6,4 +6,4 @@ dependencyResolutionManagement {
     repositories { google(); mavenCentral() }
 }
 rootProject.name = "OpenAutoAI"
-include(":app", ":prototype-app", ":core", ":settings", ":car-ui", ":providers")
+include(":app", ":prototype-app", ":core", ":settings", ":car-ui", ":providers", ":storage")
