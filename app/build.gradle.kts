@@ -10,8 +10,8 @@ android {
         applicationId = "dev.openautoai.app"
         minSdk = 29
         targetSdk = 36
-        versionCode = 2
-        versionName = "0.1.1-dev"
+        versionCode = 3
+        versionName = "0.1.2-dev"
     }
     buildFeatures { compose = true }
     compileOptions {
@@ -21,6 +21,7 @@ android {
 }
 kotlin { jvmToolchain(17) }
 dependencies {
+    implementation(project(":settings"))
     implementation(platform("androidx.compose:compose-bom:2025.08.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.foundation:foundation")

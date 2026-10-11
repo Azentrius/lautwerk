@@ -1,5 +1,11 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.ai.ModelSelection
+import dev.openautoai.settings.ModelSelectionStore
+import androidx.compose.runtime.DisposableEffect
+import dev.openautoai.core.ai.Provider
+import dev.openautoai.core.ai.ModelCatalog
+
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -41,6 +47,7 @@ class MainActivity : ComponentActivity() {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     MainContent(
+                        selections = remember { ModelSelectionStore(applicationContext) },
                         store = remember { SecretStore(applicationContext) },
                         conversations = remember { ConversationStore(applicationContext) },
                         onStart = ::requestStart,
@@ -87,13 +94,19 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun MainContent(
+    selections: ModelSelectionStore,
     store: SecretStore,
     conversations: ConversationStore,
     onStart: (Conversation) -> Unit,
     onStop: () -> Unit
 ) {
-    var selectedProvider by remember { mutableStateOf(Provider.OPENAI) }
-    var selectedModel by remember { mutableStateOf(ModelCatalog.default(Provider.OPENAI)) }
+    var selection by remember { mutableStateOf(selections.load()) }
+    val selectedProvider = selection.provider
+    val selectedModel = selection.modelId
+    DisposableEffect(selections) {
+        val subscription = selections.observe { selection = it }
+        onDispose { subscription.close() }
+    }
     var selectedSessionId by remember { mutableStateOf<String?>(null) }
     var keyText by remember(selectedProvider) { mutableStateOf("") }
     var saveStatus by remember { mutableStateOf("") }
@@ -117,19 +130,23 @@ private fun MainContent(
                 FilterChip(
                     selected = selectedProvider == provider,
                     onClick = {
-                        selectedProvider = provider
-                        selectedModel = ModelCatalog.default(provider)
+                        selection = selections.selectProvider(provider)
                         selectedSessionId = null
                         saveStatus = ""
-                    }, label = { Text(if (provider == Provider.OPENAI) "ChatGPT" else "Claude") }
+                    }, enabled = !AppState.active, label = { Text(if (provider == Provider.OPENAI) "OpenAI" else "Claude") }
                 )
             }
         }
+        Text("Die Auswahl bleibt gespeichert; jeder Anbieter merkt sich sein zuletzt gewähltes Modell.")
         Text("Modell – Zugang hängt von deinem API-Konto ab")
         ModelCatalog.forProvider(selectedProvider).forEach { option ->
             FilterChip(
                 selected = selectedModel == option.id,
-                onClick = { selectedModel = option.id; selectedSessionId = null },
+                onClick = {
+                    selection = selections.select(ModelSelection(selectedProvider, option.id))
+                    selectedSessionId = null
+                },
+                enabled = !AppState.active,
                 label = { Text(option.label) }
             )
         }
@@ -185,9 +202,13 @@ private fun MainContent(
         sessions.forEach { c ->
             OutlinedButton(
                 onClick = {
-                    selectedSessionId = c.id
-                    selectedProvider = c.provider
-                    selectedModel = c.modelId
+                    // Do not fall back to a different model when reopening an archived chat.
+                    if (ModelCatalog.valid(c.provider, c.modelId)) {
+                        selection = selections.select(ModelSelection(c.provider, c.modelId))
+                        selectedSessionId = c.id
+                    } else {
+                        saveStatus = "Das Modell dieses Chats ist nicht mehr im Katalog. Der Verlauf bleibt erhalten."
+                    }
                 }, modifier = Modifier.fillMaxWidth(), enabled = !AppState.active
             ) { Text("${c.title} · ${c.modelId} (${c.turns.size} Nachrichten)") }
         }

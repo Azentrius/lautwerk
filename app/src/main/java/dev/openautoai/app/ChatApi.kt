@@ -1,5 +1,8 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.ai.Provider
+import dev.openautoai.core.ai.ModelCatalog
+
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
