@@ -52,5 +52,6 @@ oder eine vollständige Sicherheitsprüfung des Altstands.
 
 - Keine KI-/Voice-Integration in den Auto-Sichtbarkeitstest.
 - Keine verifizierte Kategorie für einen allgemeinen KI-Assistenten.
-- Keine Veröffentlichung, keine Google-Play-Einreichung, kein GitHub-Remote/Push.
+- Keine Google-Play-Einreichung. Das vom Nutzer angegebene GitHub-Ziel für den Quellcode ist
+  [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai).
 - Keine Behauptung, dass der erfolgreiche DHU-Launcher-Test reale Fahrzeugfreigabe bedeutet.
