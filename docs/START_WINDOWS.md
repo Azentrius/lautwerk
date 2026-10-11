@@ -1,5 +1,9 @@
 # Windows: Bauen, Installieren und DHU prüfen
 
+Projektstand 0.1.3: Die DHU-/Phone-Oberfläche bleibt auf 0.1.2-prototype.
+Die neue Assistenten-App 0.1.3-dev ist separat; ihre Installation und der noch
+offene echte API-/Sprachtest stehen in [PROVIDER_ADAPTERS.md](PROVIDER_ADAPTERS.md).
+
 ## 1. Projekt bauen
 
 Android Studio: Projektordner öffnen. Unter Settings > Build, Execution,

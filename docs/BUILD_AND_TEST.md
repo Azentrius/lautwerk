@@ -1,66 +1,66 @@
-# Build- und Testbericht 0.1.2 – 11.10.2026
+# Build- und Testbericht 0.1.3
 
 ## Ergebnis
 
-Gemeinsame Anbieter-/Modellauswahl auf dem bestehenden Projekt umgesetzt.
-Alle drei Debug-APKs wurden gebaut; zwei JVM-Tests und sieben Gerätetests bestehen.
-Die DHU-Test-APK 0.1.2 ist auf dem Pixel 10 Pro über 0.1.1 installiert.
-Die neue Smartphone-Darstellung wurde per Screenshot geprüft. Der Nutzer hat
-anschließend für 0.1.2 im echten DHU bestätigt: **„Ja, Auswahl und Starten funktionieren“**
-(Claude / Anthropic, Claude Haiku 4.5 und „Gestartet · Test 1“).
+**28 automatisierte Tests bestanden:** 19 auf der JVM, 9 auf dem Pixel 10 Pro / Android 17.
+Alle drei Debug-Varianten gebaut. Die Assistenten-App 0.1.3-dev und die DHU-Test-App
+0.1.2-prototype wurden mit `adb install -r` installiert. Vorhandene Auswahlwerte
+werden von den DHU-Gerätetests gesichert und danach wiederhergestellt.
 
-| Prüfung | Ergebnis / Aussagegrenze |
+| Prüfung | Ergebnis |
 |---|---|
-| `:prototype-app:assembleDhuDebug` | Erfolgreich |
-| `:prototype-app:assemblePhoneDebug` | Erfolgreich |
-| `:app:assembleDebug` | Erfolgreich; bestehende App mit gemeinsamen Typen |
-| `:core:test` | 2 Tests bestanden: stabile IDs/Defaults, ungültige Anbieter-/Modellpaare |
-| `:prototype-app:assembleDhuDebugAndroidTest` | Erfolgreich |
+| `:providers:test` | 17 Tests bestanden: Serialisierung/Routing, Schlüsseltrennung, keine gespeicherte Provider-Historie, sichere HTTP-/Netzwerkfehler, Antwortstatus, UTF-8, Timeouts, Weiterleitungen, Größenlimit, Ressourcenfreigabe |
+| `:core:test` | 2 bestehende Modell-/Provider-Tests bestanden |
+| `:app:assembleDebug` | Erfolgreich, Version 0.1.3-dev / Code 4 |
+| `:prototype-app:assembleDhuDebug` | Erfolgreich, weiterhin 0.1.2-prototype / Code 3 |
+| `:prototype-app:assemblePhoneDebug` | Erfolgreich, weiterhin 0.1.2-prototype / Code 3 |
+| Beide Android-Test-APKs | Erfolgreich gebaut und installiert |
+| `ProviderAndroidSmokeTest` | `OK (2 tests)`, 0,022 s: beide Adapter mit Android-JSON und bestehendem Turn-Format; falsche Modell-/Provider-Paare abgefangen |
+| Phone-, SelectionStore- und CarTemplate-Test | `OK (7 tests)`, 2,644 s: unveränderte Auswahl-/DHU-Regression erfolgreich |
+| `:app:lintDebug` | 0 Fehler, 12 Warnungen |
 | `:prototype-app:lintDhuDebug` | 0 Fehler, 6 Warnungen |
-| ADB-Installation DHU-App und Testpaket | Jeweils `Success` |
-| Instrumentierung auf Pixel 10 Pro / Android 17 | `OK (7 tests)`, Laufzeit 2,983 s |
-| PhoneSmokeTest (2) | Starten/Neuerstellung; Modellwahl, Anbieterwechsel, Wiederherstellung bei Activity-Neuerstellung und erneutem Öffnen |
-| ModelSelectionStoreTest (3) | Modelle je Anbieter, neuer Store; ungültige gespeicherte Werte; atomare/abmeldbare Beobachter |
-| CarTemplateTest (2) | Titel, eine Starten-Aktion, echter ClickDelegate, Auswahltext; automatisches Aktualisieren und Rückkehr nach gestopptem Screen |
-| Car-Service-Auflösung | `dev.openautoai.car.OpenAutoCarService` vorhanden |
-| Smartphone-Darstellung | Auf dem Pixel geöffnet und sichtbar geprüft |
-| Manueller Auswahl-/Starten-Test im echten DHU | Nutzer bestätigt: „Ja, Auswahl und Starten funktionieren“ |
-| API-/Voice-End-to-End | Nicht ausgeführt; keine Schlüssel verwendet, keine API-Anfragen |
+| Echte Anbieter-/Voice-End-to-End-Aufrufe | Nicht ausgeführt; nur Dummy-Schlüssel und simulierte Antworten |
 
-Die Tests isolieren ihre Preference-Daten bzw. stellen die vorherige Smartphone-
-Auswahl wieder her. Das bereits bestehende Paket `dev.openautoai.app` wurde gebaut,
-aber für diesen Schritt nicht installiert oder mit Daten/Sprachzugriff verwendet.
+Die API-Tests injizieren einen Fake-Transport; die Transporttests verwenden künstliche
+Verbindungsobjekte. Sie prüfen Fehlerfälle und HTTP-Konfiguration ohne Netzwerkverkehr.
+Die Gerätetests starten keine Aufnahme und verwenden keine gespeicherten API-Schlüssel.
+Live-TLS, Kontozugriff, tatsächlich verfügbare Modelle und der Voice-Ablauf sind damit
+nicht bestätigt. Grenzen und manueller Test: [PROVIDER_ADAPTERS.md](PROVIDER_ADAPTERS.md).
 
-## Erhaltener DHU-Stand
+## DHU bleibt beim bestätigten Stand
 
-Der Nutzer hat für **0.1.1** Launcher-Sichtbarkeit, Titel und „Gestartet · Test 1“
-nach Starten im echten DHU bestätigt. Der vollständige ursprüngliche Bericht liegt
-in [history/BUILD_AND_TEST-0.1.1.md](history/BUILD_AND_TEST-0.1.1.md).
-In 0.1.2 bleiben Manifest-Registrierung, Paketname, Host-Signaturprüfung,
-Car-App-Library-Version und deaktivierter DHU-Release-Build erhalten.
-Die bestehenden Template-/Starten-Tests wurden um die Auswahl ergänzt.
+Die Smartphone-/Car-Oberflächen und ihre Manifest-Registrierung wurden gegenüber
+0.1.2 nicht geändert. `providers` ist nur eine Abhängigkeit von `app`, nicht von
+`prototype-app` oder `car-ui`. Das DHU-Paket bleibt ohne INTERNET/RECORD_AUDIO.
+Titel, Auswahl und Starten wurden im vorherigen Schritt vom Nutzer im echten DHU
+bestätigt. In diesem Schritt wurden diese Funktionen automatisiert erneut geprüft;
+es wird kein weiterer manueller Test behauptet.
 
-Das DHU-Paket enthält weiterhin keine INTERNET- oder RECORD_AUDIO-Berechtigung.
-Der POI-Testplatzhalter ist unverändert und keine Produkttyp-Zulassung.
+Historische Bestätigungen: [0.1.2](history/BUILD_AND_TEST-0.1.2.md),
+[0.1.1](history/BUILD_AND_TEST-0.1.1.md).
+POI-Testplatzhalter, aktive Hostprüfung und deaktivierter DHU-Release bleiben erhalten.
 
-## Umgebung und Warnungen
+## Lint / bekannte Grenzen
 
-Windows; Pixel 10 Pro, Android 17; Android Auto `17.7.663654-release`.
-JDK Temurin 17.0.19; Gradle 8.13; AGP 8.13.2; Kotlin 2.2.20;
-compile/target SDK 36, Build Tools 35.0.0; Car App Library 1.8.0-rc01.
-Lint meldet dieselben sechs Warnungen zu Testbibliotheksversionen, exportiertem
-Car-Service, Backup-Regeln und doppelter Hintergrundfarbe. Im Assistant-Modul
-bleiben bestehende Warnungen zu Permission-/TTS-Callbacks. Keine Buildfehler.
-Ein Typfehler im neuen Testcode wurde vor dem erfolgreichen Lauf korrigiert.
+Assistant-Warnungen: neuere Gradle-/Bibliotheksversionen, Backup-Regeln, überflüssige
+SDK-Abfrage, bislang ungenutzter app_name-Eintrag, fehlendes Launcher-Icon sowie
+drei KTX-Hinweise. DHU: unverändert sechs Hinweise zu Testbibliotheken, exportiertem
+Car-Service, Backup und Hintergrundfarbe. Die bestehenden Permission-/TTS-Callbacks
+erzeugen weiterhin Compilerwarnungen. Kein SDK-/Bibliotheksupgrade in diesem Schritt.
+
+Die Android-Varianten verwenden JDK 17, Gradle 8.13, AGP 8.13.2, Kotlin 2.2.20
+und compile/target SDK 36. `providers` benötigt beim ersten Build zusätzlich
+`org.json:json:20240303` zur JVM-Kompilierung und für Tests; Android liefert seine
+eigene JSON-Laufzeit. Keine API-Schlüssel oder lokalen SDK-Dateien gehören ins ZIP.
 
 ## Wiederholen
 
-Projektordner öffnen; JDK 17 / Android SDK setzen wie in [START_WINDOWS.md](START_WINDOWS.md).
+JDK/SDK setzen wie in [START_WINDOWS.md](START_WINDOWS.md), dann:
 
 ```powershell
-.\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:assemblePhoneDebug :app:assembleDebug
-.\gradlew.bat :core:test :prototype-app:lintDhuDebug :prototype-app:connectedDhuDebugAndroidTest
+.\gradlew.bat :core:test :providers:test :app:assembleDebug :app:lintDebug
+.\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:assemblePhoneDebug :prototype-app:lintDhuDebug
+.\gradlew.bat :app:connectedDebugAndroidTest :prototype-app:connectedDhuDebugAndroidTest
 ```
 
-Während UI-Tests das Pixel entsperrt lassen und keine andere App öffnen.
-Der manuelle Auswahltest ist in [MODEL_SELECTION.md](MODEL_SELECTION.md) beschrieben.
+Pixel entsperrt lassen und während der UI-Tests keine andere App öffnen.

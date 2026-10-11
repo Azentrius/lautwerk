@@ -173,6 +173,7 @@ private fun MainContent(
         if (saveStatus.isNotBlank()) Text(saveStatus)
         Text("Gespräch", style = MaterialTheme.typography.titleMedium)
         Text(AppState.status)
+        AppState.notice?.let { Text(it, color = MaterialTheme.colorScheme.error) }
         Button(
             enabled = !AppState.active,
             onClick = {
