@@ -1,4 +1,4 @@
-# OpenAuto AI 0.1.10 – Sprachfunktion für OpenAI und Claude
+# OpenAuto AI 0.1.11 – Sprachfunktion für OpenAI und Claude
 
 Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
 die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
@@ -7,19 +7,19 @@ Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
 von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Neu in 0.1.10:** Einzelne Chats lassen sich nach einem Hinweis und eigener
-Speicherortwahl als unverschlüsselte Textdatei exportieren. Der Export enthält alle
-Nachrichten, liest keine gespeicherten API-Zugangsdaten und verändert das Archiv nicht.
-Die drei Bereiche und die feste Gesprächssteuerung aus 0.1.9 bleiben erhalten.
+**Neu in 0.1.11:** Der Verlauf lässt sich nach Titel, Anbieter, Modell und allen
+Nachrichten durchsuchen sowie nach OpenAI/Claude filtern. Treffer in älteren Nachrichten
+öffnen sich direkt an der passenden Stelle. Die Suche läuft im Hintergrund und erzeugt
+keinen zusätzlichen Klartextindex. Sprachablauf, Textexport und Speicherformate bleiben erhalten.
 
-59 automatisierte Prüfungen bestehen: 11 Core-JVM, 41 Assistant-Gerätetests und
-7 DHU-/Auswahltests. Assistant 0.1.10-dev ist installiert. Lint: 0 Fehler,
-10 Warnungen und 1 Hinweis. Der Nutzer bestätigt den lokalen Export und die
-vollständige, lesbare Datei. Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt.
-Details: [Textexport](docs/CHAT_EXPORT.md), [Bedienung](docs/PHONE_UI.md),
-[Sprachanleitung](docs/VOICE.md), [Testbericht](docs/BUILD_AND_TEST.md).
+78 automatisierte Prüfungen bestehen: 18 Core-JVM, 53 Assistant-Gerätetests und
+7 DHU-/Auswahltests. Assistant 0.1.11-dev ist installiert. Lint: 0 Fehler,
+10 bestehende Warnungen und 1 Hinweis. Der Nutzer bestätigt Suche, Filter und Treffer.
+Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt.
+Details: [Verlaufssuche](docs/HISTORY_SEARCH.md), [Textexport](docs/CHAT_EXPORT.md),
+[Bedienung](docs/PHONE_UI.md), [Testbericht](docs/BUILD_AND_TEST.md).
 
-Die **Assistenten-APK ist 0.1.10-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
+Die **Assistenten-APK ist 0.1.11-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
 dem bestätigten **0.1.2-prototype**-Stand mit Auswahl, Titel und Starten.
 Die neuen Sprachbausteine sind nur in der Assistenten-App eingebunden.
 
