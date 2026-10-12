@@ -22,7 +22,7 @@ android {
 }
 kotlin { jvmToolchain(17) }
 dependencies {
-    androidTestImplementation(platform("androidx.compose:compose-bom:2025.08.01"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2026.09.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     // Android 17 requires the public InputManager/TestLooperManager paths in Espresso 3.7.
     androidTestImplementation("androidx.test.espresso:espresso-core:3.7.0")
@@ -33,7 +33,7 @@ dependencies {
     implementation(project(":providers"))
     implementation(project(":storage"))
     implementation(project(":voice"))
-    implementation(platform("androidx.compose:compose-bom:2025.08.01"))
+    implementation(platform("androidx.compose:compose-bom:2026.09.00"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.foundation:foundation")
     implementation("androidx.compose.material3:material3")
