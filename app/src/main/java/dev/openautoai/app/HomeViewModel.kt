@@ -1,5 +1,6 @@
 package dev.openautoai.app
 
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import androidx.compose.runtime.getValue
@@ -15,7 +16,9 @@ import java.util.concurrent.Executors
 
 internal enum class HomeOperation(val label: String) {
     START("Gespräch wird geöffnet …"), SAVE_KEY("Schlüssel wird gespeichert …"),
-    CLEAR_KEY("Schlüssel wird entfernt …"), DELETE_CHAT("Gespräch wird gelöscht …")
+    CLEAR_KEY("Schlüssel wird entfernt …"), DELETE_CHAT("Gespräch wird gelöscht …"),
+    PREPARE_EXPORT("Export wird vorbereitet …"), PICK_EXPORT("Speicherort auswählen …"),
+    WRITE_EXPORT("Textdatei wird gespeichert …")
 }
 
 internal data class HomeState(
@@ -26,7 +29,8 @@ internal data class HomeState(
     val archiveError: String? = null,
     val operation: HomeOperation? = null,
     val message: String? = null,
-    val readyStart: Conversation? = null
+    val readyStart: Conversation? = null,
+    val exportPickerPending: Boolean = false
 ) {
     val selected: Conversation? get() = sessions.find { it.id == selectedId }
 }
@@ -35,7 +39,8 @@ internal data class HomeState(
 internal class HomeViewModel(
     private val selections: ModelSelectionStore,
     private val credentials: CredentialStore,
-    private val conversations: ConversationRepository
+    private val conversations: ConversationRepository,
+    private val exporter: ConversationExportWriter
 ) : ViewModel() {
     var state by mutableStateOf(HomeState(selections.load()))
         private set
@@ -49,6 +54,7 @@ internal class HomeViewModel(
     private var operationVersion = 0L
     private var reloadWanted = false
     private var closed = false
+    private var exportSnapshot: Conversation? = null
     private val selectionObserver = selections.observe {
         if (state.selection != it) state = state.copy(selection = it, selectedId = null, message = null)
     }
@@ -123,6 +129,8 @@ internal class HomeViewModel(
                     HomeOperation.SAVE_KEY -> "Schlüssel konnte nicht gespeichert werden."
                     HomeOperation.CLEAR_KEY -> "Schlüssel konnte nicht entfernt werden."
                     HomeOperation.DELETE_CHAT -> "Gespräch konnte nicht gelöscht werden."
+                    HomeOperation.PREPARE_EXPORT -> "Export konnte nicht vorbereitet werden."
+                    HomeOperation.PICK_EXPORT, HomeOperation.WRITE_EXPORT -> EXPORT_FAILED
                 }))
             }
             refresh()
@@ -189,8 +197,81 @@ internal class HomeViewModel(
         }
     }
 
+    /** Confirmation is tied to the displayed chat, including retired model IDs. Read only. */
+    fun prepareExport(expectedId: String?): Boolean {
+        val selected = state.selected ?: return false
+        if (selected.id != expectedId || state.loading || state.archiveError != null) return false
+        return operate(HomeOperation.PREPARE_EXPORT, { cancel ->
+            cancel.check()
+            val chat = conversations.get(selected.id) ?: throw StorageFailure(StorageError.CONVERSATION_MISSING)
+            if (chat.id != selected.id || chat.provider != selected.provider || chat.modelId != selected.modelId)
+                throw ChatFailure(ChatError.INVALID_REQUEST)
+            cancel.check()
+            chat.copy(turns = chat.turns.toList())
+        }) { chat ->
+            exportSnapshot = chat
+            state = state.copy(operation = HomeOperation.PICK_EXPORT, exportPickerPending = true)
+        }
+    }
+
+    /** Consumed once, so recomposition/rotation never launches a second picker. */
+    fun takeExportFileName(): String? {
+        if (closed || state.operation != HomeOperation.PICK_EXPORT || !state.exportPickerPending) return null
+        state = state.copy(exportPickerPending = false)
+        return ConversationTextExport.FILE_NAME
+    }
+
+    fun cancelExportPreparation() {
+        if (state.operation != HomeOperation.PREPARE_EXPORT) return
+        operationVersion++
+        mutation?.cancel(); mutation = null
+        exportSnapshot = null
+        state = state.copy(operation = null, exportPickerPending = false, message = "Export abgebrochen")
+        refresh()
+    }
+
+    fun exportPickerFailed() {
+        if (closed || state.operation != HomeOperation.PICK_EXPORT) return
+        exportSnapshot = null
+        state = state.copy(operation = null, exportPickerPending = false,
+            message = "Speicherauswahl konnte nicht geöffnet werden. Bitte erneut versuchen.")
+        refresh()
+    }
+
+    fun finishExportSelection(destination: Uri?) {
+        if (closed) return
+        val chat = exportSnapshot
+        if (state.operation != HomeOperation.PICK_EXPORT || chat == null) {
+            // E.g. process death while the picker was open. Never guess which chat to disclose.
+            if (destination != null && state.operation == null) state = state.copy(message = EXPORT_INTERRUPTED)
+            return
+        }
+        exportSnapshot = null
+        state = state.copy(exportPickerPending = false)
+        if (destination == null) {
+            state = state.copy(operation = null, message = "Export abgebrochen")
+            refresh()
+            return
+        }
+        val token = ++operationVersion
+        state = state.copy(operation = HomeOperation.WRITE_EXPORT, message = null)
+        mutation = tasks.run({ cancel -> exporter.write(destination, chat, cancel) }) { result ->
+            mutation = null
+            if (closed || token != operationVersion) return@run
+            state = state.copy(operation = null, message = if (result.isSuccess)
+                "Textdatei gespeichert. Die exportierte Kopie ist unverschlüsselt." else EXPORT_FAILED)
+            refresh()
+        }
+    }
+
+    companion object {
+        const val EXPORT_FAILED = "Export fehlgeschlagen. Am gewählten Speicherort kann eine leere oder unvollständige Datei liegen. Bitte dort prüfen oder löschen."
+        const val EXPORT_INTERRUPTED = "Export wurde unterbrochen. Bitte erneut exportieren und eine eventuell leere Datei am gewählten Speicherort prüfen oder löschen."
+    }
+
     override fun onCleared() {
         closed = true
+        exportSnapshot = null
         operationVersion++
         readVersion++
         selectionObserver.close()

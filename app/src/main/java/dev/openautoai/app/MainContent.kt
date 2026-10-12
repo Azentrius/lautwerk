@@ -19,7 +19,8 @@ import dev.openautoai.core.ai.*
 
 @Composable
 internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
-                         onStop: () -> Unit, onSpeechSettings: () -> Unit = {}) {
+                         onStop: () -> Unit, onSpeechSettings: () -> Unit = {},
+                         onExportDocument: (String) -> Unit = {}) {
     val state = home.state
     val active = AppState.active
     val pending = state.operation == HomeOperation.START || state.readyStart != null
@@ -28,6 +29,7 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
     // Never save a typed secret in saved-instance state or the ViewModel.
     var keyText by remember(state.selection.provider) { mutableStateOf("") }
     var deleteId by remember { mutableStateOf<String?>(null) }
+    var exportId by remember { mutableStateOf<String?>(null) }
     val keyboard = LocalSoftwareKeyboardController.current
     val list = rememberLazyListState()
     val shown = if (active) state.sessions.find { it.id == AppState.sessionId } else state.selected
@@ -41,6 +43,10 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
     }
     LaunchedEffect(state.readyStart) {
         home.takeReadyStart()?.let { keyboard?.hide(); page = "Gespräch"; onStart(it) }
+    }
+
+    LaunchedEffect(state.exportPickerPending) {
+        home.takeExportFileName()?.let { keyboard?.hide(); onExportDocument(it) }
     }
 
     Scaffold(
@@ -66,6 +72,10 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
                     if (active) {
                         Button(onClick = onStop, modifier = Modifier.fillMaxWidth().testTag("conversation-stop")) {
                             Text("Gespräch beenden")
+                        }
+                    } else if (state.operation == HomeOperation.PREPARE_EXPORT) {
+                        OutlinedButton(onClick = home::cancelExportPreparation, modifier = Modifier.fillMaxWidth()) {
+                            Text("Export abbrechen")
                         }
                     } else if (pending) {
                         OutlinedButton(onClick = home::cancelStart, modifier = Modifier.fillMaxWidth().testTag("start-cancel")) {
@@ -116,6 +126,11 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
                         Text("Starte ein neues Gespräch oder öffne einen Chat unter Verlauf.")
                     } else {
                         item("chat-title") { Text("Geöffnet: ${shown.title}", style = MaterialTheme.typography.titleMedium) }
+                        item("export-chat") {
+                            OutlinedButton(onClick = { exportId = shown.id },
+                                enabled = editable && !state.loading && state.archiveError == null,
+                                modifier = Modifier.testTag("export-chat")) { Text("Als Textdatei exportieren") }
+                        }
                         if (shown.turns.size > visibleTurns) item("older-turns") {
                             OutlinedButton(onClick = { visibleTurns += 50 }) { Text("Ältere Nachrichten anzeigen") }
                         }
@@ -171,7 +186,7 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
                         }
                     }
                     item("privacy") {
-                        Text("Gespeicherte Schlüssel werden hier nicht angezeigt. Chats und Schlüssel bleiben verschlüsselt auf diesem Gerät. Android-Sprachdienste können Audio online verarbeiten; der gewählte Anbieter erhält den erkannten Text.")
+                        Text("Gespeicherte Schlüssel werden hier nicht angezeigt. Chats und Schlüssel werden auf diesem Gerät verschlüsselt gespeichert. Ein von dir gewählter Textexport ist unverschlüsselt. Android-Sprachdienste können Audio online verarbeiten; der gewählte Anbieter erhält den erkannten Text.")
                         Text("Android-Auto-Audio ist noch nicht angebunden. Die DHU-Test-App bleibt separat.", style = MaterialTheme.typography.bodySmall)
                     }
                 }
@@ -194,6 +209,12 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
             }
         }
     }
+
+    if (exportId != null) AlertDialog(onDismissRequest = { exportId = null },
+        title = { Text("Chat als Textdatei exportieren?") },
+        text = { Text("Die Datei enthält den Titel, Anbieter, Modell und alle Nachrichten dieses Chats als unverschlüsselten Text. Gespeicherte API-Zugangsdaten werden nicht übernommen. Persönliche Angaben in deinen Nachrichten bleiben enthalten. Du wählst gleich den Speicherort; bei einem Cloud-Dienst wird die Datei dorthin übertragen.") },
+        confirmButton = { TextButton(onClick = { home.prepareExport(exportId); exportId = null }, enabled = editable) { Text("Speicherort wählen") } },
+        dismissButton = { TextButton(onClick = { exportId = null }) { Text("Abbrechen") } })
 
     if (deleteId != null) AlertDialog(onDismissRequest = { deleteId = null },
         title = { Text("Gespräch löschen?") }, text = { Text("Dieses lokale Gespräch wird dauerhaft gelöscht.") },

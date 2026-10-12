@@ -30,6 +30,10 @@ class MainActivity : ComponentActivity() {
         startQueuedConversation()
     }
 
+    private val exportDocument = registerForActivityResult(
+        CreateChatDocument()
+    ) { uri -> home.finishExportSelection(uri) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         queuedSessionId = savedInstanceState?.getString("queuedVoiceSession")
@@ -37,7 +41,7 @@ class MainActivity : ComponentActivity() {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T = HomeViewModel(
                 ModelSelectionStore(applicationContext), SecretStore(applicationContext),
-                ConversationStore(applicationContext)) as T
+                ConversationStore(applicationContext), DocumentConversationExporter(applicationContext.contentResolver)) as T
         })[HomeViewModel::class.java]
         setContent {
             MaterialTheme {
@@ -48,7 +52,13 @@ class MainActivity : ComponentActivity() {
                             if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) requestStart(conversation)
                         },
                         onStop = ::stopConversation,
-                        onSpeechSettings = { startActivity(Intent(this, SpeechSettingsActivity::class.java)) }
+                        onSpeechSettings = { startActivity(Intent(this, SpeechSettingsActivity::class.java)) },
+                        onExportDocument = { filename ->
+                            if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+                                try { exportDocument.launch(filename) }
+                                catch (_: Exception) { home.exportPickerFailed() }
+                            } else home.exportPickerFailed()
+                        }
                     )
                 }
             }
@@ -57,6 +67,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onStop() {
         home.cancelStart() // A backgrounded screen must not start recording after a slow disk read.
+        home.cancelExportPreparation()
         super.onStop()
     }
 
