@@ -10,8 +10,8 @@ android {
         applicationId = "dev.openautoai.prototype"
         minSdk = 28
         targetSdk = 36
-        versionCode = 4
-        versionName = "0.1.12-prototype"
+        versionCode = 5
+        versionName = "0.1.15-prototype"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     flavorDimensions += "surface"
@@ -24,8 +24,8 @@ android {
         create("dhu") {
             dimension = "surface"
             applicationIdSuffix = ".dhu"
-            versionCode = 5
-            versionName = "0.1.14-prototype"
+            versionCode = 6
+            versionName = "0.1.15-prototype"
             buildConfigField("boolean", "DHU_EXPERIMENT", "true")
         }
     }

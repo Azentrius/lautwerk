@@ -1,0 +1,9 @@
+
+dev.openautoai.app.DesignUiTest:.........
+dev.openautoai.app.DesignScreenshotsTest:...
+dev.openautoai.app.LocalizationLifecycleTest:....
+dev.openautoai.app.voice.SpeechSettingsScreenTest:.
+
+Time: 27,255
+
+OK (17 tests)

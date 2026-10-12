@@ -21,11 +21,11 @@ unter [upstream-9ed4032/](upstream-9ed4032/README.md). Herkunft und Dateiprüfsu
 
 ## Verhältnis zur App und zur Historie
 
-Dieses Update übernimmt ausschließlich die Referenz und die gelieferten Dateien.
-Die geprüfte App-Version 0.1.14 bleibt unverändert; ihr bisheriges App-Symbol bleibt
-installiert. Die Einbindung des neuen Symbols einschließlich Startbild und
-Benachrichtigung ist eine spätere, gesonderte App-Änderung. Die Präzisierungen zu
-Host-Farben erfordern keine Nacharbeit an 0.1.14.
+Der Import auf `9ed4032` war zunächst ein reines Referenz-Update. Die gesonderte
+App-Version 0.1.15 bindet das neue Symbol einschließlich Startbild und kleinem
+Benachrichtigungssymbol ein; siehe [APP_IDENTITY.md](../../docs/APP_IDENTITY.md).
+Die Referenzdateien bleiben unverändert. Die Präzisierungen zu Host-Farben
+erfordern keine Nacharbeit an 0.1.14; B2/B3 bleiben auch in 0.1.15 unverändert.
 
 Die älteren Dateien bleiben als historische Quellen erhalten:
 
@@ -35,5 +35,5 @@ Die älteren Dateien bleiben als historische Quellen erhalten:
 - `upstream-eb827c8/`: freigegebene Grundlage der Umsetzung und Abnahme 0.1.14.
 
 Für neue Designabgleiche gilt `upstream-9ed4032/`; die älteren Kopien beschreiben
-die damaligen Umsetzungsstände. Der [Testbericht 0.1.14](../../docs/BUILD_AND_TEST.md)
+die damaligen Umsetzungsstände. Der [Testbericht 0.1.14](../../docs/history/BUILD_AND_TEST-0.1.14.md)
 bleibt ein historischer Nachweis der tatsächlich geprüften App.

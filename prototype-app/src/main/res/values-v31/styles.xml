@@ -1,0 +1,6 @@
+<resources>
+    <style name="Theme.OpenAutoAI" parent="Theme.OpenAutoAI.Base">
+        <item name="android:windowSplashScreenBackground">@color/ic_launcher_background</item>
+        <!-- The platform uses the static adaptive launcher icon. No custom branding or animation. -->
+    </style>
+</resources>

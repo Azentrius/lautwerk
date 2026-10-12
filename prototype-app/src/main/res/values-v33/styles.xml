@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.OpenAutoAI" parent="Theme.OpenAutoAI.Base">
+        <item name="android:windowSplashScreenBackground">@color/ic_launcher_background</item>
+        <!-- Request the same static launcher icon even for launches outside the home screen. -->
+        <item name="android:windowSplashScreenBehavior">icon_preferred</item>
+    </style>
+</resources>

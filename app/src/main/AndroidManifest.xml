@@ -15,7 +15,9 @@
         android:fullBackupContent="false"
         android:usesCleartextTraffic="false"
         android:label="OpenAuto AI"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.OpenAutoAI">
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
