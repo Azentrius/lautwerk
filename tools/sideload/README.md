@@ -1,25 +1,23 @@
-# Begrenzte Android-Auto-Diagnose
+# Bounded Android Auto diagnostics
 
-`capture-car-logs.sh` zeichnet nur Meldungen mit dem Paketnamen
-`dev.openautoai.prototype.dhu`, unsere Car-Lebenszyklusereignisse und die allgemeine
-Meldung zur nicht verbundenen Play-Herkunftsprüfung auf. Es verändert weder
-Installationsherkunft noch Android-Auto-Einstellungen und benötigt kein Root.
-Es ist keine Sideload-Freischaltung.
+`capture-car-logs.sh` records only messages containing the package name
+`dev.openautoai.prototype.dhu`, our car lifecycle events, or the generic warning
+about the disconnected Play-origin check. It changes neither install origin nor
+Android Auto settings and requires no root. It does not enable sideloaded apps.
 
-Die Aufnahme bleibt beim Abziehen des USB-Kabels auf dem Telefon aktiv. Jeder
-Logabruf wird beendet und auf die Datei geschrieben; der Selbsttest auf Pixel 10
-Pro / Android 17 hat Aufnahme und automatisches Ende bestätigt. Laufzeit maximal
-30 Minuten, Standard 20 Minuten. Drei rotierende Logdateien von jeweils ungefähr
-128 KiB begrenzen den Speicherverbrauch. Ein Telefonneustart beendet die Aufnahme.
-Die Fünf-Sekunden-Abstände können bei sehr hoher Loglast Einträge verpassen.
+The recording continues on the phone after USB is unplugged. Each snapshot exits
+and flushes its file; a Pixel 10 Pro / Android 17 self-test confirmed capture and
+automatic completion. Maximum duration is 30 minutes, default 20 minutes. Three
+rotating log files of roughly 128 KiB each bound storage use. A phone reboot ends
+the capture. Five-second polling can miss events under very high system log load.
 
-## Start in PowerShell im Projektordner
+## Start from PowerShell in the project directory
 
-Telefon entsperrt am PC, ADB autorisiert; keine gleichzeitige DHU-Sitzung.
+Unlock the phone, connect it to the PC, and authorize ADB. No concurrent DHU session.
 
 ```powershell
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
-$serial = 'SERIENNUMMER_AUS_ADB_DEVICES'
+$serial = 'SERIAL_FROM_ADB_DEVICES'
 $session = 'id7-' + [Guid]::NewGuid().ToString('N')
 $remoteBase = '/data/local/tmp/openauto-car-' + $session
 & $adb -s $serial push tools/sideload/capture-car-logs.sh /data/local/tmp/openauto-capture-car-logs.sh
@@ -28,20 +26,20 @@ Start-Sleep -Seconds 1
 & $adb -s $serial shell cat "$remoteBase.status"
 ```
 
-Die letzte Zeile muss `running start=… deadline=…` zeigen. Bei einem Fehler nicht
-ins Fahrzeug gehen, sondern zuerst die Datei `$remoteBase.err` lesen. Die
-Bezeichner enthalten keine Seriennummer. Jede Aufnahme braucht eine neue ID.
+The final command must show `running start=… deadline=…`. If startup fails, read
+`$remoteBase.err` before going to the car. IDs contain no device serial. Use a new
+ID for every recording; the script rejects reuse.
 
-Danach Telefon vom PC trennen und im stehenden ID.7 nativ drahtlos verbinden.
-Uhrzeit des Verbindens und Trennens notieren. Launcher, Öffnen und Starten getrennt
-beurteilen. Es werden keine Gespräche, Mikrofon- oder Unterbrechungstests benötigt.
+Disconnect from the PC and connect natively and wirelessly to the parked ID.7.
+Record connection and disconnection times. Assess launcher visibility, Open and
+Start separately. No conversation, microphone or interruption tests are needed.
 
-## Nach Rückkehr sichern
+## Collect after returning
 
-In derselben PowerShell-Sitzung und am wieder verbundenen Telefon:
+Use the same PowerShell session with the phone reconnected:
 
 ```powershell
-# Nur den zu dieser Aufnahme gehörenden Shell-Prozess beenden.
+# Stop only the shell process belonging to this exact recording.
 $expected = '^\s*(\d+)\s+sh /data/local/tmp/openauto-capture-car-logs\.sh ' + [regex]::Escape($session) + ' 1200\s*$'
 $rows = & $adb -s $serial shell ps -A -o PID,ARGS
 foreach ($row in $rows) {
@@ -54,22 +52,21 @@ New-Item -ItemType Directory -Path $destination -Force | Out-Null
 & $adb -s $serial pull "$remoteBase.log" $destination
 & $adb -s $serial pull "$remoteBase.status" $destination
 & $adb -s $serial pull "$remoteBase.err" $destination
-# Nur falls Rotation stattgefunden hat; fehlende Dateien sind hier normal.
+# Only present after rotation; missing files are normal here.
 & $adb -s $serial pull "$remoteBase.log.1" $destination
 & $adb -s $serial pull "$remoteBase.log.2" $destination
 ```
 
-Der laufende `sleep` kann das Reagieren auf das Stoppsignal um bis zu fünf Sekunden
-verzögern. Bei Bedarf den Status anschließend erneut lesen. Keine anderen
-Logcat-/ADB-Prozesse beenden. Die Aufnahme stoppt auch ohne manuellen Abbruch
-von selbst. Rohdateien unter `diagnostics/` sind von Git ausgeschlossen.
+A running `sleep` may delay the stop signal by up to five seconds. Re-read status
+if necessary. Do not stop unrelated logcat or ADB processes. Capture also ends on
+its own without manual stopping. Raw files in `diagnostics/` are ignored by Git.
 
-Beim Auswerten doppelte Zeilen entfernen: Die Ein-Sekunden-Überlappung zwischen
-Abrufen ist beabsichtigt. Nur Meldungen innerhalb des tatsächlichen Fahrzeuglaufs
-als Fahrzeugbeleg verwenden. Zeilen von `OpenAutoCaptureSelfTest` oder mit
-`SELFTEST_ONLY_` sind Prüfmarkierungen des Diagnosewerkzeugs, keine Car-Ereignisse.
+Deduplicate lines when analyzing: the one-second overlap between snapshots is
+intentional. Attribute only events within an actual vehicle session to that
+vehicle. `OpenAutoCaptureSelfTest` and `SELFTEST_ONLY_` mark diagnostic-tool tests,
+not car events.
 
-Auch gefilterte Logs vor einer Veröffentlichung prüfen. Gerätekennungen, Konten,
-Dateipfade und sonstige private Inhalte nicht auf GitHub hochladen. Ein fehlender
-Logeintrag beweist keine bestimmte Ablehnungsursache. `car.onCreateScreen api=…`
-belegt die Car-API nur für die zugehörige Sitzung.
+Review even these filtered logs before publishing. Do not upload device identifiers,
+accounts, file paths or other private information to GitHub. A missing log event
+does not establish a rejection cause. `car.onCreateScreen api=…` identifies the
+Car API only for its associated session.

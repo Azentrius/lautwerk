@@ -139,22 +139,21 @@ Interpretation der App-Logs:
 | `car.onGetTemplate` | Host hat die Vorlage angefordert |
 | `car.start` | Auto-Button wurde ausgelöst |
 
-Ohne passende Host-Fehlermeldung bleibt die Ursache eines fehlenden Icons offen:
-Kategorie, Installationsquelle, Host-Version und Verbindung sind getrennte Faktoren.
-Die POI-Deklaration ist nur der erklärte Debug-Testplatzhalter; der Assistent erfüllt
-keine POI-Produktfunktion. „Unbekannte Quellen“ ist für diese Bibliotheksart keine
-allgemeine Freigabe. Für diesen normalen DHU-Ablauf ist keine geänderte
-Installer-Angabe nötig; Root-Tools und Patches werden nicht verwendet.
+Without a matching host error, category, installation origin, host version and
+connection remain separate possible causes. POI is only the disclosed debug
+placeholder; the assistant does not implement a POI product. Unknown sources is
+not a general unlock for this library. This ordinary DHU procedure needs no
+changed installer declaration, root tools or patches.
 
-Falls der Host blockiert, ist das ein gültiges negatives Testergebnis. Ein interner
-Play-Test allein macht eine unzulässige Kategorie nicht zulässig. Der gesondert
-freigegebene [Herkunftsversuch vom 13.10.2026](SIDELOAD_INSTALL_EXPERIMENT.md)
-ist separat dokumentiert: Launcher-Auswahl auf dem Pixel und DHU funktionieren,
-der Nachweis im ID.7 steht noch aus. Das ist keine offizielle Produktzulassung.
+A host rejection is a valid negative test result. An internal Play test alone
+does not make an unsupported category eligible. The separately authorized
+[origin experiment of 2026-10-13](SIDELOAD_INSTALL_EXPERIMENT.md) is documented
+elsewhere: the phone-side launcher entry and DHU work; the ID.7 result remains
+pending. This is not an official product approval.
 
-**Herkunftsversuch aktiv:** Eine normale Installation oder die nachfolgenden
-Gerätetests können die Installationsherkunft wieder ändern. Sie daher nicht
-zwischendurch ausführen, solange der Vergleich im Fahrzeug vorbereitet ist.
+**While the origin experiment is active:** ordinary installation or the device
+tests below can change the origin again. Do not run them between the prepared
+baseline and the vehicle comparison.
 
 ## 6. Automatisierte UI-/Template-Prüfungen
 

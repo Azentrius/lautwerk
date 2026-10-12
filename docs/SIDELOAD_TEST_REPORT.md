@@ -1,182 +1,146 @@
-# Sideload und Fahrzeugtests für OpenAuto AI
+# Sideload and vehicle test report
 
-Stand 13.10.2026. App-Code und APK bleiben auf dem bestätigten Stand 0.1.15,
-Quellcode-Commit `5600446fbe08a8bbdf460f31a9e3b9fbbeaedead`. Die
-[Testanleitung](SIDELOADING.md) beschreibt den Vergleich. Der Nutzer berichtet,
-dass OpenAuto AI am 12.10.2026 gegen 17 Uhr im ID.7 nicht sichtbar war.
-Ein funktionierender Fahrzeugweg ist damit weiterhin nicht bestätigt. Der ID.7
-bleibt das Testfahrzeug; alle Kia-Versuche sind zurückgestellt.
+As of 2026-10-13. The tested APK is unchanged **0.1.15-prototype / 6**, built from
+source commit `5600446fbe08a8bbdf460f31a9e3b9fbbeaedead`. A specifically authorized
+installation-origin experiment now makes OpenAuto AI appear in Android Auto's
+phone-side launcher settings; the DHU control passes. **The native wireless ID.7
+test after that change is still pending.** Kia/AAWireless tests remain deferred.
 
-## Am angeschlossenen Pixel gemessen
+[Distribution investigation](SIDELOADING.md) · [Exact installation experiment](SIDELOAD_INSTALL_EXPERIMENT.md)
 
-| Merkmal | Ergebnis |
+## Measured environment
+
+| Item | Measurement |
 | --- | --- |
-| Telefon | Pixel 10 Pro |
-| Android | 17, API 37 |
-| Sicherheitspatch | 2026-09-05 |
-| Aktives Android Auto | 17.7.663654-release, Code 177663654 |
-| Aktive Google Play-Dienste | 26.39.63 (260400-995553646), Code 263963035 |
-| AAWireless-Handy-App | 8.5.2819, Code 8052819; keine Adapter-Firmware |
-| Test-App | dev.openautoai.prototype.dhu, 0.1.15-prototype, Code 6 |
-| Assistent separat | dev.openautoai.app, 0.1.15-dev, Code 15 |
-| Installationsherkunft Test-App | installerPackageName=null; initiatingPackageName=com.android.shell |
-| Registrierter Car-Dienst | dev.openautoai.car.OpenAutoCarService, genau ein Treffer |
-| Lokale Test-APK SHA-256 | F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70 |
+| Phone | Pixel 10 Pro |
+| Android | 17, API 37; security patch 2026-09-05 |
+| Active Android Auto | 17.7.663654-release, code 177663654 |
+| Active Google Play services | 26.39.63 (260400-995553646), code 263963035 |
+| AAWireless phone app | 8.5.2819, code 8052819; not adapter firmware |
+| Test app | dev.openautoai.prototype.dhu, 0.1.15-prototype, code 6 |
+| Separate assistant | dev.openautoai.app, 0.1.15-dev, code 15 |
+| Car service | dev.openautoai.car.OpenAutoCarService; exactly one registration |
+| Local and installed APK SHA-256 | F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70 |
+| APK certificate SHA-256 | 687cf415a6b6d4f45a8a92a55a9fcd91c463bc0d0d9d8a77ce95c9afbe63e696 |
 
-Die SHA-256 wurde zunächst an der lokalen Build-Ausgabe
-`prototype-app/build/outputs/apk/dhu/debug/prototype-app-dhu-debug.apk` bestimmt.
-Bei der anschließenden Diagnose am 12.10.2026 wurde die installierte APK aus dem
-Telefon ausgelesen: **Beide Dateien haben dieselbe SHA-256**. Der ausgelesene
-Signierzertifikat-Fingerabdruck (SHA-256) lautet
-`687cf415a6b6d4f45a8a92a55a9fcd91c463bc0d0d9d8a77ce95c9afbe63e696`.
-Die Paketdaten in der Tabelle beschreiben den Ausgangszustand vor dem weiter
-unten beschriebenen, separat freigegebenen Installationsversuch.
+The installed APK was pulled from the phone both before and after the experiment.
+Both hashes match the local build at
+`prototype-app/build/outputs/apk/dhu/debug/prototype-app-dhu-debug.apk` exactly.
+Android Auto and Play services stub/system versions were not mistaken for the
+active versions. The user describes the first-generation AAWireless adapter as
+running firmware “7.xxx”; its exact firmware and hardware ID remain unverified.
 
-Die von Android ebenfalls gelisteten System-/Stub-Versionen sind nicht als aktive
-Android-Auto- oder Play-Dienste-Version übernommen. Der Nutzer bezeichnet den
-Adapter als erstes AAWireless-Modell mit Firmware „7.xxx“; genaue Firmware und
-Hardwarekennung sind am verbundenen Adapter noch zu bestätigen.
+## Results by connection
 
-## Ergebnisse je Verbindung
+| Run | Visibility / Open / Start / Reconnect | Car API | Evidence |
+| --- | --- | --- | --- |
+| Historical DHU acceptance 0.1.15 | Passed; see previous report | 8 in that report | Historical control, not a vehicle test |
+| ID.7, approximately 17:00 CEST on 2026-10-12 | Not visible / not tested / not tested / not tested | Not measured | User observation; no contemporaneous logs or verified app version |
+| Phone launcher settings before origin experiment | Not offered in the complete list | Not applicable | UI inspection and package rejection logs |
+| Phone launcher settings after origin experiment | Present and checked | Not applicable | UI inspection; no simultaneous DHU session |
+| DHU after origin experiment, 2026-10-13 | Visible / passed / Test 1 / not repeated | 8 | New screenshot and app-log control |
+| ID.7 native wireless after origin experiment | Pending | Not measured | Two parked connections requested |
+| Kia/AAWireless baseline, developer-mode and restoration comparisons | Deferred | Not measured | User preference |
 
-| Lauf | Einstellungen | Launcher / Öffnen / Starten / Wiederverbinden | Car-API | Status |
-| --- | --- | --- | --- | --- |
-| DHU aus Abnahme 0.1.15 | damalige PC-Konfiguration | bestanden, siehe damaligen Bericht | siehe damaligen Bericht | Historischer Kontrollbefund, kein neuer Fahrzeugtest |
-| Kia mit AAWireless, Ausgangszustand | noch zu erfassen | offen / offen / offen / offen | nicht gemessen | Auf Nutzerwunsch zurückgestellt |
-| Kia mit Adapter-Entwicklermodus | erst nach Ausgangsmessung | offen / offen / offen / offen | nicht gemessen | Auf Nutzerwunsch zurückgestellt |
-| Kia nach Wiederherstellung | ursprüngliche Werte | offen / offen / offen / offen | nicht gemessen | Auf Nutzerwunsch zurückgestellt |
-| ID.7 gegen 17 Uhr am 12.10.2026 | laut Kontext native Funkverbindung; damalige Versionen und Detailkonfiguration nicht ausgelesen | App nicht sichtbar / nicht geprüft / nicht geprüft / nicht geprüft | nicht gemessen | Nutzerbeobachtung, keine zeitgleichen Logs |
-| ID.7 mit aktuell vorbereiteter 0.1.15 | ohne AAWireless, bisherige Einstellungen | offen / offen / offen / offen | nicht gemessen | Kein erneuter unveränderter Versuch erforderlich; zunächst konkrete technische Änderung oder Diagnose vorbereiten |
+For actual vehicle runs record timestamps/timezone, infotainment version, connection
+type, number of successful reconnects and exact errors. User observations and
+retrieved logs are different evidence. The adapter's firmware and its phone-app
+version must also remain separate.
 
-Für jeden tatsächlichen Lauf ergänzen: Zeitpunkt mit Zeitzone, Infotainment-Version,
-beim Kia genaue Adapter-Firmware und beide Einstellungswerte, Anzahl erfolgreicher
-Neu-Verbindungen und gegebenenfalls genauen Fehler. Nutzerbeobachtung und
-ausgelesene Logs sind als unterschiedliche Belege zu kennzeichnen.
+## What was known before this diagnosis
 
-## Vorbereitung des ID.7 Versuchs
+The user reported no icon during an ID.7 drive around 17:00 CEST on October 12.
+That observation predates the preparation marker `1791839347` (23:09:07 CEST).
+The marker was not a vehicle connection. The installed version at 17:00 is not
+proven, so this is not retroactively called a 0.1.15 test.
 
-Vor dem Fahrzeugversuch wurden die installierte Test-App 0.1.15-prototype/6
-und Android Auto 17.7.663654-release/177663654 erneut per ADB bestätigt.
-Kein laufender DHU-Prozess wurde am PC gefunden. Die Geräteuhr lieferte
-als Startmarke für die spätere Logauswertung Unix-Zeit `1791839347`.
-Das ist eine vorbereitende Zeitgrenze, kein Nachweis einer Fahrzeugverbindung.
-Ein neuer Fahrzeuglauf mit dieser Zeitgrenze ist nicht bestätigt. Nach der
-Rückmeldung zur Fahrt gegen 17 Uhr wird kein unveränderter Wiederholungstest
-mehr angefordert. Die Beobachtung von 17 Uhr liegt vor dieser Startmarke.
+Changes after 17:00 covered design-reference files, the app icon/splash screen and
+documentation. Car registration, category, HostValidator, session and template logic
+were unchanged, and installation still used ordinary ADB. Those changes did not
+fix discovery. An unchanged blind retest was therefore not requested.
 
-Der Git-Vergleich nach 17 Uhr zeigt Design-Referenzdateien, das App-Symbol/
-Startbild in 0.1.15 und anschließend reine Dokumentationsänderungen.
-Car-Service-Registrierung, Kategorie, HostValidator, Session und Car-Template-
-Logik blieben dabei unverändert. Der Installationsweg blieb ADB. Es wurde kein
-Sichtbarkeitsproblem im Fahrzeug behoben; aus diesen Änderungen ist kein anderer
-Launcher-Befund zu erwarten. Die gegen 17 Uhr tatsächlich installierte App-Version
-ist nicht belegt, daher wird der Befund nicht als durchgeführter 0.1.15-Test geführt.
+## Phone diagnosis: 2026-10-12, 23:52 CEST
 
-## Aussagegrenzen
+With no car connection, the complete Android Auto Customize launcher page
+(“Launcher anpassen”) did not contain OpenAuto AI. Unknown sources and wireless
+Android Auto were enabled. The App mode dialog had no selected entry. None of
+these settings was changed. The head-unit server was initially running; no DHU
+process was running on the PC.
 
-Die Vorbereitung bestätigt, dass der bekannte UI-Prototyp auf dem Pixel installiert
-und sein Auto-Service registriert ist. Sie belegt keine Launcher-Freigabe im Fahrzeug.
-Die Auto-App besitzt weiterhin nur den UI-Testzähler. API-Anfragen, Sprache im Auto,
-Anruf-, Headset- und Bluetooth-Audio-Unterbrechungen wurden nicht getestet.
+In the active Android user the test package was installed, enabled, not hidden,
+not stopped and not suspended. Querying the CarAppService action plus POI category
+returned exactly our service. POI remains the disclosed debug placeholder, not
+an approved product category.
 
-App-Code, Design, Manifest und Host-Prüfung wurden für diese Vorbereitung nicht
-geändert. Ein erneuter App-Build ist für die Dokumentationsänderung nicht erforderlich.
-Die [Abnahme 0.1.15](BUILD_AND_TEST.md) bleibt der bisherige App-/DHU-Teststand.
-
-## Diagnose auf dem Pixel: 12.10.2026, 23:52 Uhr MESZ
-
-Ohne Fahrzeugverbindung wurde die vollständige Android-Auto-Seite „Launcher
-anpassen“ geprüft. OpenAuto AI fehlt auch am Ende der Liste. „Unbekannte Quellen“
-ist in den Entwicklereinstellungen eingeschaltet; kabelloses Android Auto ebenso.
-Der App-Modus-Dialog zeigte keinen ausgewählten Eintrag. Keine dieser Einstellungen
-wurde geändert. Der Head-Unit-Server war im Menü als gestartet erkennbar; auf dem
-PC lief kein DHU.
-
-Im aktiven Android-Benutzer ist das Testpaket installiert, aktiviert, nicht
-versteckt, nicht angehalten und nicht suspendiert. Die Service-Abfrage mit
-CarAppService-Aktion und POI-Kategorie liefert genau unseren Dienst. Die
-POI-Deklaration bleibt der bekannte Debug-Platzhalter, keine Produktzulassung.
-
-Nach einem Neustart nur des Android-Auto-Prozesses (keine Datenlöschung) wurden
-beim Öffnen der Launcher-Auswahl sechs Ablehnungen unseres Pakets aufgezeichnet.
-Auszug aus dem ausgelesenen Logpuffer; Unix-Zeit und Logtext unverändert:
+After restarting only the Android Auto process, without clearing data, opening
+Customize launcher produced six denials of our package. Excerpt from the retrieved
+log buffer; timestamp and message are unchanged, process/thread IDs omitted:
 
 ```text
 1791841976.418 W CAR.VALIDATOR: isPackageInstalledByPlayCheck service not connected
 1791841976.418 W CAR.VALIDATOR: Package DENIED; failed all other checks [dev.openautoai.prototype.dhu]
 ```
 
-`1791841976.418` entspricht 12.10.2026, 23:52:56.418 MESZ. Prozess-/Threadnummern
-wurden im veröffentlichten Auszug weggelassen. Die beiden Zeilen stammen aus
-demselben Prüflauf/Thread. Die kurzzeitig auf VERBOSE gesetzten Log-Tags
-`CAR.VALIDATOR` und `PlayGearheadService` wurden danach auf ihre vorherigen leeren
-Werte zurückgesetzt. Eine zusätzlich gestartete, gefilterte Hintergrundaufnahme
-blieb leer und wurde beendet; der Nachweis stammt ausdrücklich aus `logcat -d`,
-nicht aus dieser Aufnahme. Private Rohdaten bleiben unter dem ignorierten
-Verzeichnis `diagnostics/`.
+This is 2026-10-12 23:52:56.418 CEST. The two lines came from the same check/thread.
+The temporarily verbose `CAR.VALIDATOR` and `PlayGearheadService` log tags were
+restored to their original empty values. An additional continuous background
+capture stayed empty and was stopped; the evidence above came from `logcat -d`,
+not that file. Private raw data remains in ignored `diagnostics/`.
 
-**Belegt:** Android Auto lehnt unser installiertes Paket bereits bei seiner
-App-Auswahl ab. Es fehlen in diesem Prüflauf Aufrufe von `car.createHostValidator`,
-`car.onCreateSession` und `car.onCreateScreen`. Ein Fehler in der Darstellung des
-Car-Templates erklärt diesen Vorfilter nicht.
+**Established:** Android Auto rejected the package while selecting apps. That
+check did not call `car.createHostValidator`, `car.onCreateSession` or
+`car.onCreateScreen`. A rendering failure in our template does not explain this gate.
 
-**Noch nicht belegt:** Welche einzelne Zulassungsregel im echten ID.7 entscheidend
-ist. Die Meldung zur nicht verbundenen Play-Prüfung stammt aus der Smartphone-
-Einstellungsseite nach Prozessneustart. Sie beweist weder einen dauerhaften
-Play-Dienste-Fehler noch einen fehlenden Play-Besitznachweis im Fahrzeug. Der Befund
-von 17 Uhr besitzt weiterhin keine zeitgleichen Logs. Die Car-API des ID.7 ist
-weiterhin nicht gemessen.
+**Not established by those lines:** the particular eligibility rule decisive in
+the ID.7. The disconnected Play-check warning came from phone settings after a
+process restart. It proves neither a permanent Play-services fault nor an empty
+Play ownership record in the car. No contemporaneous logs remain from 17:00.
 
-## Freigegebener Herkunftsversuch
+## Authorized origin experiment
 
-Der Nutzer hat nach Erklärung ausdrücklich einen begrenzten Versuch erlaubt:
-dieselbe Test-APK durch den vorhandenen Android-Systeminstaller installieren und
-Google Play als Installationsherkunft angeben. Das ist eine vorgetäuschte Herkunft,
-keine normale APK-Installation und keine von Google zugesicherte Zulassung. Root,
-Änderungen an Android Auto und Änderungen am Car-App-Code gehören nicht dazu.
+The user explicitly authorized one bounded exception to the earlier no-spoofing
+constraint: update the identical test APK through the existing Android system
+installer while claiming Google Play as its origin. No root, host patches or
+app-code changes were authorized or used for this experiment.
 
-Der Systeminstaller `com.google.android.packageinstaller` ist auf dem Pixel
-vorhanden. Er hat die identische APK als **Update** angenommen. Nach gesonderter
-Nutzerfreigabe wurde die APK durch Google Play Protect geprüft. Dessen Dialog
-meldete „Diese App ist anscheinend sicher“ und erlaubte die Installation. Das
-Update wurde am **13.10.2026 um 00:03:32 MESZ** abgeschlossen. Keine Deinstallation,
-keine Datenlöschung und keine Deaktivierung von Play Protect.
+The system installer accepted the APK as an **update**. With separate user approval,
+Google Play Protect scanned the APK. Its result read “Diese App ist anscheinend
+sicher” and allowed installation. The update completed at **2026-10-13 00:03:32 CEST**.
+There was no uninstall, data deletion, disabling of Play Protect, KingInstaller
+installation or Shizuku installation.
 
-| Prüfung | Vorher | Nach dem Versuch |
+| Check | Before | After |
 | --- | --- | --- |
-| Version / Code | 0.1.15-prototype / 6 | unverändert |
-| APK SHA-256, jeweils vom Pixel ausgelesen | F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70 | identisch |
+| Version / code | 0.1.15-prototype / 6 | Unchanged |
+| Installed APK SHA-256 | F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70 | Identical |
 | installerPackageName | null | com.android.vending |
 | initiatingPackageName | com.android.shell | com.google.android.packageinstaller |
 | originatingPackageName | null | null |
 | packageSource | 1 | 3 |
-| „Launcher anpassen“, ohne laufenden DHU | OpenAuto AI fehlt in der vollständigen Liste | OpenAuto AI vorhanden; Kontrollkästchen checked=true, enabled=true |
-| DHU-Kontrolle nach dem Update | historische Abnahme 0.1.15 | Öffnen und Starten erneut bestanden |
-| ID.7 nativ drahtlos nach dem Update | noch nicht getestet | Fahrzeugtest angefordert; Ergebnis offen |
+| Customize launcher, without DHU | Missing from complete list | Present; checked=true, enabled=true |
+| DHU control | Historical acceptance | Open and Start pass again |
+| ID.7 native wireless after update | Not tested | Pending |
 
-Die Oberfläche wurde nach einem erneuten Start nur des Android-Auto-Prozesses
-gelesen. Ein Screenshot/Log eines DHU-Launchers wurde nicht als Nachweis für die
-Smartphone-Launcher-Auswahl verwendet. [Sanitierte Messdaten](evidence/sideload/origin-experiment-2026-10-13.json).
+Android Auto alone was restarted again before reading the phone launcher page.
+DHU launcher images were not substituted for this phone-side observation.
+[Sanitized measurements](evidence/sideload/origin-experiment-2026-10-13.json).
 
-**Ergebnis:** Das geänderte Installationsverfahren hat bei unveränderter APK und
-unveränderten Android-Auto-Entwicklereinstellungen einen zuvor fehlenden
-Launcher-Eintrag hergestellt. Damit ist eine wirksame Abhängigkeit vom
-Installationsverfahren belegt. Da Installer, Initiator und Installationsablauf
-zusammen geändert wurden, ist damit nicht isoliert, welches einzelne Feld nötig
-oder hinreichend ist. Insbesondere ist `adb install -i com.android.vending` nicht
-der getestete Weg. Eine konkrete Play-Besitzabfrage im ID.7 bleibt noch zu messen.
+**Result:** A changed installation procedure made a previously missing entry appear,
+with byte-identical APK and unchanged Android Auto developer settings. This establishes
+an effective dependency on the installation procedure. Installer, initiator and
+installation flow changed together, so neither field was isolated as necessary or
+sufficient. In particular, `adb install -i com.android.vending` is **not** the tested
+procedure. The ID.7's actual eligibility check is still to be measured.
 
-Die [reproduzierbaren Installationsschritte](SIDELOAD_INSTALL_EXPERIMENT.md)
-benötigen einen PC mit ADB und sind ein freigegebener Entwicklungsversuch. Sie sind
-noch keine bestätigte Verteilungsanleitung für normale Nutzer.
+The [reproduction guide](SIDELOAD_INSTALL_EXPERIMENT.md) requires a PC with ADB.
+It is an authorized development experiment, not yet a validated user distribution guide.
 
-### DHU-Kontrolle nach dem Herkunftsversuch
+## DHU control after the origin experiment
 
-Offizieller DHU 2.0-windows, Build 2022-03-30-438482292, mit vorhandenem
-800×480-Touch-Profil, diesmal über seine Headless-/Konsolensteuerung. Öffnen im
-Launcher zeigte „OpenAuto AI“, „Bereit für den UI-Test“ und die unveränderte
-Auswahl „Claude / Anthropic · Claude Haiku 4.5“. „Starten“ führte sichtbar zu
-„Gestartet · Test 1“. Passende App-Logs:
+Official DHU 2.0-windows, build 2022-03-30-438482292, existing 800x480 touch profile,
+using its headless/console controls. Opening from the launcher showed OpenAuto AI,
+“Bereit für den UI-Test” and the retained “Claude / Anthropic · Claude Haiku 4.5”
+selection. Start visibly changed the status to “Gestartet · Test 1”. Matching logs:
 
 ```text
 1791842847.712 I OpenAutoAI: car.createHostValidator (signature allowlist enabled)
@@ -187,22 +151,28 @@ Auswahl „Claude / Anthropic · Claude Haiku 4.5“. „Starten“ führte sich
 1791842866.974 I OpenAutoAI: car.onGetTemplate count=1
 ```
 
-Das entspricht 13.10.2026, 00:07:27 bis 00:07:46 MESZ. Android Auto weiterhin
-17.7.663654-release / 177663654. **Car-API 8 gilt für diesen DHU-Lauf**, nicht für
-den ID.7. Der DHU wurde mit `quit` beendet, die ADB-Portweiterleitung entfernt und
-der Head-Unit-Server für den anschließenden Fahrzeugtest regulär gestoppt.
+These events span 00:07:27–00:07:46 CEST on October 13. Android Auto remained
+17.7.663654-release / 177663654. **Car API 8 belongs to this DHU session**, not the
+ID.7. The DHU was closed with `quit`, ADB port forwarding removed and the head-unit
+server stopped normally for the following vehicle test.
 
-### Aufzeichnung für den Fahrzeuglauf
+## Vehicle log capture
 
-Die [Diagnosehilfe](../tools/sideload/README.md) wurde auf dem Pixel geprüft:
-eindeutig markierte Selbsttestzeile erfasst, Ende nach zehn Sekunden bestätigt,
-ungültige Sitzungs-ID, Laufzeit über 30 Minuten und vorhandene Sitzungs-ID jeweils
-mit Exitcode 2 abgelehnt. Sie ruft gefilterte Log-Snapshots alle fünf Sekunden ab
-und schreibt sie in begrenzte rotierende Dateien. Keine Änderungen an Apps oder
-Systemeinstellungen durch das Skript. Selbsttestzeilen sind keine Fahrzeugbelege.
+The [diagnostic helper](../tools/sideload/README.md) was tested on the Pixel:
+an explicit self-test marker was captured; automatic completion after ten seconds
+was confirmed. Invalid session ID, duration over 30 minutes and a reused session
+ID each failed with exit code 2. It takes package-filtered snapshots every five
+seconds into bounded rotating files. It changes no app or system settings.
+Self-test markers are not vehicle evidence.
 
-Für den Nutzerlauf startete sie am 13.10.2026 um 00:08:50 MESZ (Unix 1791842930),
-mit Ende nach rund 20 Minuten. Diese Zeitgrenze ist nur die gestartete Aufnahme;
-eine tatsächliche Fahrzeugverbindung oder ein Erfolg im ID.7 ist damit noch nicht
-behauptet. Der Nutzer wurde um zwei Verbindungen im Stand und Rückkehr zum PC
-gebeten; eine Verschiebung ist ausdrücklich möglich.
+The user-run capture started at 2026-10-13 00:08:50 CEST (Unix 1791842930), ending
+after approximately 20 minutes. This is a recording start, not proof of an actual
+vehicle connection or success. The user was asked for two parked native wireless
+connections and a return to the PC, with an explicit option to defer the car test.
+
+## Remaining limits
+
+The car app still contains only the UI test counter. API requests, conversations
+in the car, calls, headsets and Bluetooth-audio interruptions were not tested.
+No new APK build was necessary for these documentation/diagnostic changes. The
+[0.1.15 acceptance](BUILD_AND_TEST.md) remains the broader app test baseline.

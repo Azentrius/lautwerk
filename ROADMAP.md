@@ -59,15 +59,13 @@ bleiben erhalten. Details: `docs/APP_IDENTITY.md` und `docs/BUILD_AND_TEST.md`.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
-2. Vorrangig einen reproduzierbaren Verteilungsweg außerhalb von Google Play prüfen:
-   unveränderte APK nach freigegebenem Herkunftsversuch im ID.7 nativ drahtlos,
-   zunächst im Stand. Launcher-Auswahl auf dem Pixel und DHU-Kontrolle bestehen;
-   der Fahrzeugnachweis steht noch aus. Kia/AAWireless
-   ist auf Nutzerwunsch zurückgestellt.
-   Anleitung und Messstand: [Sideload](docs/SIDELOADING.md) und
-   [Fahrzeugtests](docs/SIDELOAD_TEST_REPORT.md). Noch keine Kompatibilitätszusage.
-   Keine allgemeine KI-Kategorie behaupten; der POI-Eintrag bleibt ein
-   offengelegter Debug-Testplatzhalter, kein Produktrelease.
+2. Prioritize a reproducible distribution path outside Google Play. After the
+   authorized origin experiment, the unchanged APK appears in Android Auto's
+   phone-side launcher settings and passes the DHU control. The parked native
+   wireless ID.7 test remains pending. Kia/AAWireless is deferred at the user's request.
+   [Procedure](docs/SIDELOADING.md) and [measurements](docs/SIDELOAD_TEST_REPORT.md).
+   No compatibility promise or AI category is asserted; POI remains a disclosed
+   debug placeholder, not a product release.
 3. Die vorhandenen OpenAI-/Claude-Adapter mit eigenen API-Konten kontrolliert live testen.
    Fehlerfälle und Android-JSON sind offline geprüft; Modellzugriff und Voice-End-to-End
    sind nur nach einem bestätigten praktischen Test belegt; siehe `docs/VOICE.md`.

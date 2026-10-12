@@ -28,18 +28,18 @@ Details: [App-Symbol und Installation](docs/APP_IDENTITY.md),
 [Smartphone-Design](docs/DESIGN_SYSTEM.md),
 [Design-Referenz](design/azentrius/README.md).
 
-## Sideload und reale Fahrzeuge
+## Sideload and real vehicles
 
-Seit 12.10.2026 prüfen wir auf Nutzerwunsch eine Verteilung außerhalb von Google Play.
-Auf Nutzerwunsch testen wir zuerst die native drahtlose Verbindung im ID.7 mit der
-bereits installierten APK. Die Versuche im Kia mit AAWireless sind zurückgestellt.
-Seit dem gesondert freigegebenen Herkunftsversuch am 13.10.2026 erscheint OpenAuto AI
-in der Android-Auto-Launcher-Auswahl auf dem Pixel; die DHU-Kontrolle besteht.
-Die APK blieb bytegleich. Ein Erfolg im ID.7 ist noch zu bestätigen;
-[Versuchsweg](docs/SIDELOAD_INSTALL_EXPERIMENT.md) und [Messdaten](docs/SIDELOAD_TEST_REPORT.md).
-Die [Sideload-Anleitung](docs/SIDELOADING.md) und der
-[Fahrzeugtestbericht](docs/SIDELOAD_TEST_REPORT.md) unterscheiden Vorbereitung,
-Beobachtungen und offene Versuche. App und DHU bleiben auf 0.1.15.
+We are investigating distribution outside Google Play, starting with native
+wireless Android Auto in the ID.7. Kia/AAWireless tests are deferred at the user's
+request. After the specifically authorized installation-origin experiment on
+2026-10-13, OpenAuto AI appears in Android Auto's phone-side launcher settings;
+the DHU control passes. The APK is byte-identical. The ID.7 result is still pending.
+
+The [experiment](docs/SIDELOAD_INSTALL_EXPERIMENT.md),
+[distribution investigation](docs/SIDELOADING.md) and
+[test report](docs/SIDELOAD_TEST_REPORT.md) distinguish measured results from
+untested combinations. App and DHU remain on 0.1.15.
 
 ## Schnellstart unter Windows
 

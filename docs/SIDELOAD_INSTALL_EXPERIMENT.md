@@ -1,45 +1,44 @@
-# Herkunftsversuch mit dem Android-Systeminstaller
+# Native-installer origin experiment
 
-Stand 13.10.2026. **Experiment, kein freigegebener Verteilungsweg.** Auf dem
-Pixel 10 Pro mit Android 17 und Android Auto 17.7.663654-release erscheint
-OpenAuto AI nach diesem Verfahren in „Launcher anpassen“; Öffnen und Starten im
-DHU funktionieren. Das Ergebnis im nativ drahtlos verbundenen ID.7 ist noch offen.
-[Messbericht und Grenzen](SIDELOAD_TEST_REPORT.md).
+As of 2026-10-13. **An experiment, not an approved distribution method.** On the
+Pixel 10 Pro with Android 17 and Android Auto 17.7.663654-release, this procedure
+made OpenAuto AI appear in Android Auto's phone-side launcher settings. Opening
+and Start in the DHU also pass. The native wireless ID.7 result is still pending.
+See the [measurements and limitations](SIDELOAD_TEST_REPORT.md).
 
-Dieses Verfahren gibt Google Play als Installationsherkunft an, obwohl die APK
-vom PC kommt. Es wurde nach ausdrücklicher Nutzerfreigabe getestet. Es ist kein
-normaler Sideload und keine offizielle Android-Auto-Zulassung. Es installiert
-weder KingInstaller noch Shizuku, benötigt kein Root und verändert weder Android
-Auto noch die APK. Die POI-Kategorie bleibt der offengelegte Testplatzhalter.
+This procedure claims Google Play as the installer although the APK comes from
+the PC. The user explicitly authorized that limited experiment. It is installer
+origin spoofing, not an ordinary sideload or an official Android Auto approval.
+It installs neither KingInstaller nor Shizuku, requires no root, and changes
+neither Android Auto nor the APK. The POI category remains a disclosed test placeholder.
 
-## Genau getestete Ausgangslage
+## Exact tested baseline
 
-- Paket: `dev.openautoai.prototype.dhu`, 0.1.15-prototype, Versionscode 6.
-- Vorhandene Installation wird aktualisiert, nicht deinstalliert.
+- Package: `dev.openautoai.prototype.dhu`, 0.1.15-prototype, version code 6.
+- Update the existing installation; do not uninstall it.
 - APK SHA-256: `F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70`.
-- Zertifikat SHA-256: `687cf415a6b6d4f45a8a92a55a9fcd91c463bc0d0d9d8a77ce95c9afbe63e696`.
-- Systeminstaller: `com.google.android.packageinstaller/com.android.packageinstaller.InstallStart`.
-- Android-Auto-Entwicklermodus und „Unbekannte Quellen“ waren schon an und bleiben unverändert.
+- Certificate SHA-256: `687cf415a6b6d4f45a8a92a55a9fcd91c463bc0d0d9d8a77ce95c9afbe63e696`.
+- System installer: `com.google.android.packageinstaller/com.android.packageinstaller.InstallStart`.
+- Android Auto developer mode and Unknown sources were already on and remained unchanged.
 
-Das unbekannte-Quellen-Häkchen allein hatte die App vorher nicht sichtbar gemacht.
-Ein anderer Build, eine frische Installation, ein anderes Telefon oder eine
-Installation allein über den Browser ist noch nicht mit diesem Verfahren geprüft.
-Die folgende Hashprüfung stoppt bewusst bei anderen APKs. Ein eigener Neubau kann
-wegen Signierung oder Build-Unterschieden einen anderen Hash besitzen und fällt
-nicht unter diesen exakt reproduzierten Versuch.
+Unknown sources alone had not made the app visible. Other APKs, a fresh installation,
+another phone, and browser-only installation have not been tested with this method.
+The checksum below deliberately stops on a different APK. A local rebuild can
+produce a different hash because of signing or build differences; it would require
+a separate experiment rather than silently dropping this check.
 
-## Installation am verbundenen Pixel
+## Install on the connected Pixel
 
-PowerShell im bestehenden Projektordner. Pixel entsperren, USB-Debugging
-bestätigen und einen laufenden DHU regulär beenden.
+Run PowerShell in the existing project directory. Unlock the Pixel, authorize USB
+debugging, and close any DHU session normally.
 
 ```powershell
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
-$serial = 'SERIENNUMMER_AUS_ADB_DEVICES'
+$serial = 'SERIAL_FROM_ADB_DEVICES'
 $apk = Join-Path (Get-Location) 'prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk'
 $expectedHash = 'F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70'
 if ((Get-FileHash -Algorithm SHA256 -LiteralPath $apk).Hash -ne $expectedHash) {
-    throw 'Andere APK als im dokumentierten Versuch; nicht installieren.'
+    throw 'Not the APK used in the documented experiment; do not install.'
 }
 & $adb -s $serial shell dumpsys package dev.openautoai.prototype.dhu |
     Select-String 'versionCode=|versionName=|installerPackageName=|initiatingPackageName='
@@ -48,17 +47,17 @@ $uri = 'content://com.android.externalstorage.documents/document/primary%3ADownl
 & $adb -s $serial shell am start -a android.intent.action.INSTALL_PACKAGE -n com.google.android.packageinstaller/com.android.packageinstaller.InstallStart -d $uri -t application/vnd.android.package-archive -f 0x10000001 --es android.intent.extra.INSTALLER_PACKAGE_NAME com.android.vending --ez android.intent.extra.NOT_UNKNOWN_SOURCE true --es android.intent.extra.REFERRER_NAME android-app://com.android.vending --ei android.content.pm.extra.INSTALL_REASON 1
 ```
 
-Der tatsächlich geprüfte Dialog hieß „Diese App aktualisieren?“ und nannte
-„OpenAuto AI“. Dort „Aktualisieren“ wählen. Bei abweichendem Paketnamen oder
-Signaturfehler abbrechen; nicht als Ersatz deinstallieren oder Daten löschen.
+The observed German dialog read “Diese App aktualisieren?” and named OpenAuto AI.
+Choose “Aktualisieren”. If the package differs or the signature is incompatible,
+stop; do not substitute an uninstall or data reset.
 
-Auf diesem Pixel verlangte Google Play Protect anschließend eine App-Prüfung.
-„App scannen“ kann die APK an Google übertragen und wurde dafür gesondert erlaubt.
-Wer diese Übermittlung nicht möchte, bricht den Vorgang ab. Im Versuch meldete
-Google danach „Diese App ist anscheinend sicher“; erst dann wurde „Installieren“
-bestätigt. Play Protect wurde nicht deaktiviert und keine Warnung übersprungen.
+Google Play Protect then requested a scan on this Pixel. “App scannen” can send the
+APK to Google and was separately authorized by the user. Decline the installation
+if that transfer is unwanted. In this run Google reported “Diese App ist anscheinend
+sicher”; only then was “Installieren” confirmed. Play Protect was not disabled and
+no warning was skipped.
 
-## Ergebnis getrennt prüfen
+## Verify each outcome separately
 
 ```powershell
 & $adb -s $serial shell dumpsys package dev.openautoai.prototype.dhu |
@@ -66,7 +65,7 @@ bestätigt. Play Protect wurde nicht deaktiviert und keine Warnung übersprungen
 & $adb -s $serial shell cmd package query-services --brief -a androidx.car.app.CarAppService -p dev.openautoai.prototype.dhu
 ```
 
-Im erfolgreichen Metadatenvergleich standen:
+The successful metadata comparison returned:
 
 ```text
 versionCode=6
@@ -75,31 +74,30 @@ installerPackageName=com.android.vending
 initiatingPackageName=com.google.android.packageinstaller
 ```
 
-Das allein genügt noch nicht. Wenn keine Fahrzeug- oder DHU-Verbindung läuft:
+Those values alone do not prove compatibility. With no car or DHU session running:
 
 ```powershell
 & $adb -s $serial shell am force-stop com.google.android.projection.gearhead
 & $adb -s $serial shell am start -a com.google.android.projection.gearhead.SETTINGS -p com.google.android.projection.gearhead
 ```
 
-Unter „Launcher anpassen“ war OpenAuto AI danach vorhanden und bereits angehakt.
-Der Prozessneustart löscht keine Android-Auto-Daten, beendet aber laufende
-Sitzungen; daher nur getrennt vom Auto ausführen. Nicht zusätzlich Google Play-
-Dienste zurücksetzen oder Cache/Daten löschen.
+In Customize launcher (“Launcher anpassen”), OpenAuto AI was now present and
+already checked. Restarting the process does not clear Android Auto data, but does
+interrupt sessions; run it only while disconnected. Do not additionally reset
+Google Play services, clear caches, or delete app data.
 
-Der zugehörige DHU-Kontrolllauf ist bestanden. Für den ID.7 folgen zwei normale
-Funkverbindungen im Stand mit Öffnen und Starten sowie die
-[begrenzte Log-Aufzeichnung](../tools/sideload/README.md). Erst das bestätigt den
-Fahrzeugweg; anschließend wären Neustart-, Update- und weitere Telefon-Tests nötig.
+The corresponding DHU control passed. The ID.7 requires two parked wireless
+connections with Open and Start, plus the [bounded log capture](../tools/sideload/README.md).
+Only that will establish the vehicle result. Reboot, update and additional-phone
+tests would follow before claiming a repeatable user distribution method.
 
-## Aktualisierungen und Rückkehr zum normalen Installationsweg
+## Updates and returning to ordinary installation
 
-Ein späteres normales ADB-/App-Update kann die Herkunft wieder ändern. Deshalb
-bei jedem Update die beiden Herkunftsfelder und die Launcher-Sichtbarkeit neu
-prüfen. Nicht stillschweigend annehmen, dass diese Freigabe dauerhaft gilt.
+A subsequent ADB or in-app update may change the origin again. Recheck both origin
+fields and launcher visibility after each update; do not assume permanent eligibility.
 
-Wer den Versuch beenden möchte, kann die unveränderte, gleich signierte APK wieder
-über den gewöhnlichen ADB-Weg aktualisieren und anschließend die Herkunft auslesen:
+To end the experiment, the same unchanged, equally signed APK can be updated through
+the ordinary ADB path, followed by another origin inspection:
 
 ```powershell
 & $adb -s $serial install -r $apk
@@ -107,13 +105,12 @@ Wer den Versuch beenden möchte, kann die unveränderte, gleich signierte APK wi
     Select-String 'installerPackageName=|initiatingPackageName='
 ```
 
-Diese Rückkehr wurde in diesem Lauf noch nicht ausgeführt, um die positive
-Ausgangslage für den Fahrzeugtest zu erhalten. Eine bytegenaue Rücksetzung aller
-Installationsmetadaten wird damit nicht zugesichert. Unabhängig davon gibt es keine
-Änderungen am App-Code, die für den DHU zurückgenommen werden müssten.
+This return path has not been executed in this run, to preserve the positive
+baseline for the vehicle test. It does not promise an exact reset of every piece
+of installation metadata. There are no app-code changes to revert for the DHU.
 
-## Herkunft des Versuchs
+## Basis for the experiment
 
-- [Google: reale Fahrzeuge und Grenzen von „Unbekannte Quellen“](https://developer.android.com/training/cars/testing#test-in-real-vehicles).
-- [KingInstaller](https://github.com/fcaronte/KingInstaller): dessen offener Quellcode nutzt den Systeminstaller mit einer geänderten Installer-Angabe. Die hier verwendeten Intent-Extras wurden dort nachvollzogen; das Tool selbst wurde nicht installiert.
-- [Vela #179](https://github.com/PimpinPumpkin/Vela/issues/179): spätere Entwicklerberichte nennen unter anderem einen Erfolg auf einem Stock-Pixel 9. Das motivierte den Versuch, ersetzt aber keinen Test unserer App.
+- [Google: real vehicles and the limits of Unknown sources](https://developer.android.com/training/cars/testing#test-in-real-vehicles).
+- [KingInstaller](https://github.com/fcaronte/KingInstaller): its public source uses the system installer with a changed installer declaration. The intent extras above were inspected there; the tool itself was not installed.
+- [Vela #179](https://github.com/PimpinPumpkin/Vela/issues/179): later developer reports include success on a stock Pixel 9. This motivated the experiment; it is not evidence for our app or vehicle.
