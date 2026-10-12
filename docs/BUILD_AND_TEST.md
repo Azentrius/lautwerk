@@ -1,69 +1,71 @@
-# Build- und Testbericht 0.1.10
+# Build- und Testbericht 0.1.11
 
-Stand: 12.10.2026. **59 automatisierte Prüfungen bestanden: 11 Core-JVM,
-41 Assistant-Gerätetests und 7 DHU-/Auswahltests.** Assistant **0.1.10-dev / Code 11**
-als Update auf Pixel 10 Pro / Android 17 installiert. Keine Datenlöschung.
+Stand: 12.10.2026. **78 automatisierte Prüfungen bestanden: 18 Core-JVM,
+53 Assistant-Gerätetests und 7 DHU-/Auswahltests.** Assistant **0.1.11-dev / Code 12**
+als Update auf Pixel 10 Pro / Android 17 installiert und geöffnet. Keine Datenlöschung.
 DHU-/Phone-Oberfläche bleibt **0.1.2-prototype / Code 3**.
 
-## Änderung
+## Änderung und praktische Bestätigung
 
-Einzelne Chats können nach einem Klartexthinweis über Androids Dateidialog als
-UTF-8-Text exportiert werden. Alle Nachrichten werden übernommen; keine UI-Begrenzung
-auf 50 Nachrichten im Export. Die Bestätigung gilt nur für den gewählten Chat.
-Vorbereitung und Schreiben laufen im Hintergrund, weitere Mutationen sind gesperrt.
-Eine feste Kopie wird bis zur Zielauswahl nur im ViewModel gehalten; Schlüsselstore,
-Sprachdienst und API-Adapter sind am Export nicht beteiligt. Keine neuen Berechtigungen.
+Der Verlauf kann nach Titel, Anbietername, Modell und allen Nachrichten durchsucht
+und nach Anbieter gefiltert werden. Die Suche läuft auf dem bestehenden Worker;
+veraltete Ergebnisse nach Texteingabe oder Archivaktualisierung werden verworfen.
+Treffer in Nachrichten führen direkt zur ersten passenden Stelle, auch außerhalb
+der zunächst angezeigten letzten 50 Nachrichten. Keine neue Datei, Berechtigung,
+API-Anfrage oder Änderung des Speicherformats. Keine gespeicherte Suchhistorie.
+
+Der Nutzer bestätigt am 12.10.2026 nach dem Testauftrag für Suche in einer älteren
+Nachricht, Anbieterfilter, Öffnen eines Treffers und Zurücksetzen:
+**„Suche, Filter und Treffer funktionieren.“** Der lokale Textexport wurde bereits
+unter 0.1.10 bestätigt; diese Rückmeldung wird nicht als neuer Exporttest ausgegeben.
 
 ## Ausgeführte Prüfungen
 
 | Prüfung | Ergebnis |
 |---|---|
-| Assistant-Debug-App und Test-APK | erfolgreich gebaut und installiert |
-| DHU-Debug-App und Test-APK | neu gebaut und als Update installiert; Quellen der DHU-Oberfläche unverändert |
+| Assistant- und DHU-Debug-App samt Test-APKs | erfolgreich gebaut und als Updates installiert |
 | `:app:lintDebug` | 0 Fehler, 10 bestehende Warnungen und 1 KTX-Hinweis |
-| Core-JVM | 11 bestanden: 5 bestehende und 6 Exportprüfungen für beide Anbieter, Unicode, Vollständigkeit, große Texte, Abbruch und Schreibfehler |
-| `ChatExportTest` | 8 bestanden: Hintergrundarbeit, beide Anbieter/alte Modelle, keine Schlüsselzugriffe, unverändertes Archiv, Abbruch, Doppelrückmeldungen, fester Schnappschuss, fehlende/geänderte Auswahl, Speicherfehler und fehlender Zustand nach Prozessverlust |
-| `DocumentConversationExporterTest` | 4 bestanden: tatsächlicher App-Intentvertrag, UTF-8-Ausgabe in temporäre Datei, Ressourcenfreigabe, Zugriffs-/Schreib-/Flush-/Schließfehler, Abbruch und URI-Prüfung |
-| `StorageUiTest` | 11 bestanden, darunter 2 neue Exportprüfungen für Offenlegung/Abbruch/einmalige Auswahl und Sperre während Voice |
-| Bestehende übrige Assistant-Tests | 18 bestanden: Home-Zustand/Worker, Anbieter/Android, Unterbrechungsbeobachter, Stimmwahl und Einstellungen |
-| DHU-/Auswahltests | 7 bestanden: echtes Car-Template mit TestCarContext, Starten, Auswahl und Smartphone-Oberfläche |
-| Visuelle Prüfung | Gesprächsseite und Klartexthinweis mit ausschließlich erfundenen Chats auf dem Pixel geprüft |
+| Core-JVM | 18 bestanden: 11 bisherige Prüfungen und 7 neue Suchtests |
+| `ConversationSearchTest` | Beide Anbieter, leere Suche, Reihenfolge, Unicode, wörtliche Sonderzeichen, 1.000 künstliche Chats, alte Nachrichten, Textabschnittsgrenzen und Abbruch in langer Einzelnachricht |
+| `HistorySearchTest` | 7 bestanden: Suche ohne Archiv-/Schlüsseländerung, ältere Ergebnisse, Entwertung bei Archivaktualisierung, Lesefehler/Wiederholen, aktive Voice-Sitzung, sichere Suchfehler und Ende der ViewModel-Lebensdauer |
+| `HistorySearchUiTest` | 5 bestanden: Filter/Zähler/Zurücksetzen, direkter Sprung zu Nachricht 4 von 140 und 96 von 100, alte Modelle, sichtbares Beenden während Suche und Vorschau |
+| Bisherige Assistant-Tests | 41 bestanden, einschließlich Export, Speicher-UI, Home-Zustand, Anbieter/Android, Worker, Unterbrechungsbeobachter, Stimme und Einstellungen |
+| DHU-/Auswahltests | 7 bestanden: Car-Template, Starten, Auswahl und Smartphone-Oberfläche |
+| Visuelle Prüfung | Suchansicht mit ausschließlich erfundenen Chats auf dem Pixel geprüft; Filter, Treffer und feste Steuerung sichtbar |
 
-Die erste Geräteserie zeigte eine fehlende `CATEGORY_OPENABLE`-Kategorie im
-Standard-CreateDocument-Vertrag. Die App setzt diese jetzt ausdrücklich; der
-Test prüft den tatsächlich verwendeten App-Vertrag. Die abschließende Serie besteht.
-
-Die Tests verwenden ausschließlich erfundene Chats, Attrappen, isolierte Einstellungen
-und eigene temporäre Dateien. Persönliche Chats und Schlüssel werden nicht ausgelesen,
-keine echten Exporte in Nutzerordner vorgenommen, keine Mikrofonaufnahme, hörbare TTS
-oder echte API-Anfrage gestartet. Die Dateischreibprüfung verwendet einen eingespeisten
-Stream in eine eigene Testdatei; sie ist kein End-to-End-Test eines DocumentsProvider.
+Die Tests verwenden ausschließlich erfundene Inhalte, Speicherattrappen, eigene
+Testdateien und isolierte Einstellungen. Keine persönlichen Chats oder Schlüssel
+ausgelesen, keine Mikrofonaufnahme, hörbare TTS oder echte API-Anfrage gestartet.
+Die Nutzerbestätigung erfolgte getrennt davon auf dem eigenen Gerät; Chatinhalte
+wurden dazu nicht angefordert oder ausgelesen.
 
 ## Erhaltener Stand und offene Grenzen
 
 `providers`, `voice`, `storage`, `settings`, `prototype-app` und `car-ui` bleiben
-quellseitig unverändert. `core` erhält nur den unabhängigen Textformatter und dessen
-Tests. Keine Migration, Änderung am Modellkatalog, neue Car-Kategorie oder geänderte
-Hostprüfung. Schlüssel, Chats und gewählte Stimme bleiben erhalten.
+quellseitig unverändert. `core` erhält eine unabhängige Suchfunktion und Tests;
+`app` erhält die UI-/Worker-Anbindung. Kein geänderter Modellkatalog, keine Migration,
+keine neue Car-Kategorie und keine geänderte Hostprüfung. API-Schlüssel, Archiv und
+gewählte Stimme bleiben erhalten. Export liest weiterhin den vollständigen gewählten Chat.
 
 Die 64 JVM-Prüfungen der unveränderten Anbieter-/Sprachmodule bestanden zuletzt unter
 0.1.8 und wurden nicht wiederholt. Das unveränderte Speichermodul wurde nicht erneut
 separat getestet. DHU-Template-Tests belegen keine neue reale Launcher-Verbindung;
 die bisherige Launcher-/Starten-Bestätigung des Nutzers gilt für 0.1.2-prototype.
 
-Der Nutzer bestätigt am 12.10.2026 nach dem Testauftrag für einen unkritischen Chat
-und das lokale Ziel Downloads: **„Export und Datei funktionieren.“** Der lokale
-Export, das Öffnen und die vollständige Datei dieses Chats sind damit praktisch
-bestätigt. Cloud-Dateidienste und Rotation mit geöffnetem Dialog bleiben ungeprüft. Der Test für Prozessverlust
-simuliert ein Ergebnis ohne zurückbehaltenen Auftrag; er beendet nicht den echten Prozess.
-Ein Ausgabefehler oder Prozessende kann eine leere/teilweise Textdatei zurücklassen.
-Cloud-Synchronisation wird nicht bestätigt, nur das erfolgreiche Schreiben/Schließen
-des angebotenen Streams. Der Textexport ist kein verschlüsseltes Backup oder Importformat.
-Große Archive werden weiterhin vollständig gelesen; Ausgabe erfolgt stückweise.
+Die Suche arbeitet auf dem vollständig eingelesenen Archiv. Sie ist keine Datenbank-
+Seitennachladung und keine Garantie für beliebig große Archive bei begrenztem RAM.
+Sie sucht wörtliche Teiltexte ohne Beachtung der Groß-/Kleinschreibung; keine unscharfe
+Suche oder Akzentnormalisierung. Jeder Chat erscheint einmal, mit der ersten passenden
+Nachricht als Sprungziel, sofern nicht bereits die Metadaten passen.
 
-Die neue Smartphone-Bedienung seit 0.1.9 ist noch nicht manuell mit realen Gesprächen
-bestätigt. Anruf- und Headset-/Bluetooth-Tests bleiben ausdrücklich zurückgestellt;
-Auto-Audio und reale Fahrzeugnutzung sind weiterhin nicht bestätigt.
+Rotation/Prozessneustart wurden für die neue Suche nicht separat als End-to-End-
+Gerätetests ausgeführt. Suchtext/Filter verbleiben im ViewModel und werden nicht
+in Dateien, Einstellungen oder den gespeicherten Activity-Zustand geschrieben.
+Cloud-Dateidienste und Rotation beim Export bleiben ebenfalls ungeprüft.
+
+Der erneute Sprachtest der Smartphone-Bedienung seit 0.1.9 steht aus. **Anruf- und
+Headset-/Bluetooth-Tests bleiben ausdrücklich zurückgestellt.** Auto-Audio und
+reale Fahrzeugnutzung sind weiterhin nicht bestätigt.
 
 ## Wiederholen
 
@@ -77,7 +79,7 @@ entsperrt und unbedient lassen, eine aktive DHU-Sitzung zuvor regulär beenden.
 ```
 
 In diesem Lauf gebaut/installiert und über `adb shell am instrument -w` ausgeführt:
-Assistant `OK (41 tests)`, DHU `OK (7 tests)`.
+Assistant `OK (53 tests)`, DHU `OK (7 tests)`; Core-XML-Berichte: 18 Tests, 0 Fehler.
 
-[Export-Anleitung](CHAT_EXPORT.md) · [Bedienung](PHONE_UI.md) · [Installation](VOICE.md)
-Vorheriger Bericht: [0.1.9](history/BUILD_AND_TEST-0.1.9.md).
+[Suchanleitung](HISTORY_SEARCH.md) · [Bedienung](PHONE_UI.md) · [Installation](VOICE.md)
+Vorheriger Bericht: [0.1.10](history/BUILD_AND_TEST-0.1.10.md).

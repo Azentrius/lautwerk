@@ -31,7 +31,7 @@ class StorageUiTest {
             stops++
             AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, "Gespräch beendet")
         }, onExportDocument = { exportPicks++ }) } }
-        compose.waitUntil(5000) { !f.home.state.loading }
+        compose.waitUntil(5000) { !f.home.state.loading && !f.home.state.historySearching }
     }
     private fun page(name: String) { compose.onNodeWithTag("page-$name").performClick() }
     private fun scroll(text: String) { compose.onNodeWithTag("home-list").performScrollToNode(hasText(text)) }

@@ -1,4 +1,4 @@
-# Roadmap ab 0.1.10
+# Roadmap ab 0.1.11
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
@@ -24,6 +24,9 @@ gezeichnet; ältere Nachrichten bleiben erreichbar. 34 Gerätetests bestehen.
 des verschlüsselten Archivs. 59 automatisierte Prüfungen bestehen. Der Nutzer
 bestätigt am 12.10.2026 den lokalen Export sowie die vollständige, lesbare Datei.
 Cloud-Dateidienste und Rotation während der Auswahl bleiben ungeprüft.
+0.1.11 ergänzt die lokale Verlaufssuche mit Anbieterfilter und direktem Sprung zur
+ersten passenden Nachricht. 78 automatisierte Prüfungen bestehen. Der Nutzer
+bestätigt am 12.10.2026 Suche, Filter und Treffer-Navigation.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
@@ -33,7 +36,7 @@ Cloud-Dateidienste und Rotation während der Auswahl bleiben ungeprüft.
    Fehlerfälle und Android-JSON sind offline geprüft; Modellzugriff und Voice-End-to-End
    sind nur nach einem bestätigten praktischen Test belegt; siehe `docs/VOICE.md`.
    Der DHU-Prototyp löst weiterhin keine API-Anfrage aus.
-4. Der lokale Textexport 0.1.10 ist bestätigt; Cloud-Ziele und Rotation während der
+4. Verlaufssuche 0.1.11 und lokaler Textexport 0.1.10 sind bestätigt; Cloud-Ziele und Rotation während der
    Auswahl später prüfen. Die Smartphone-Bedienung seit 0.1.9 erneut mit realen
    Sprachgesprächen abnehmen. Die vollständige
    Archivdatei wird weiterhin im Hintergrund gelesen; echte Seitennachladung und

@@ -24,6 +24,9 @@ internal class HomeTestFixture {
     val archive = Archive { checkThread() }
     val keys = Keys { checkThread() }
     val exports = Exports { checkThread() }
+    var findHistory: (List<Conversation>, String, Provider?, RequestCancellation) -> List<ConversationMatch> = { chats, query, provider, cancel ->
+        checkThread(); ConversationSearch.find(chats, query, provider, cancel)
+    }
     val selections = ModelSelectionStore(context.getSharedPreferences(name, Context.MODE_PRIVATE))
     lateinit var home: HomeViewModel
     private fun checkThread() { if (Looper.myLooper() == Looper.getMainLooper()) onMain.set(true) }
@@ -31,7 +34,7 @@ internal class HomeTestFixture {
     fun create() = main {
         AppState.update(false, Provider.OPENAI, ModelCatalog.default(Provider.OPENAI), null, "Bereit")
         AppState.reportIssue(null)
-        home = HomeViewModel(selections, keys, archive, exports)
+        home = HomeViewModel(selections, keys, archive, exports, findHistory)
         owner.put("home", home)
     }
     fun close() {

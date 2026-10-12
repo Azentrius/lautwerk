@@ -2,6 +2,7 @@ package dev.openautoai.app
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -10,9 +11,11 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import dev.openautoai.core.ai.*
@@ -31,15 +34,32 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
     var deleteId by remember { mutableStateOf<String?>(null) }
     var exportId by remember { mutableStateOf<String?>(null) }
     val keyboard = LocalSoftwareKeyboardController.current
+    val focusManager = LocalFocusManager.current
     val list = rememberLazyListState()
     val shown = if (active) state.sessions.find { it.id == AppState.sessionId } else state.selected
     var visibleTurns by rememberSaveable(shown?.id) { mutableIntStateOf(50) }
     val revision = AppState.revision
+    var lastNavigation by remember { mutableStateOf<Pair<String, String?>?>(null) }
 
     LaunchedEffect(revision) { home.refresh() }
-    LaunchedEffect(page, shown?.id) { list.scrollToItem(0) }
+    LaunchedEffect(page, shown?.id, state.historyFocus) {
+        val navigation = page to shown?.id
+        val changed = lastNavigation != navigation
+        lastNavigation = navigation
+        val focus = state.historyFocus
+        if (page == "Gespräch" && shown != null && focus?.chatId == shown.id && focus.turnIndex in shown.turns.indices) {
+            visibleTurns = maxOf(visibleTurns, shown.turns.size - focus.turnIndex)
+            withFrameNanos { } // Let the expanded LazyColumn receive its older messages first.
+            val first = (shown.turns.size - visibleTurns).coerceAtLeast(0)
+            val notices = listOf(state.message, AppState.notice, state.archiveError).count { it != null } + if (state.loading) 1 else 0
+            // Provider, settings, explanation, title, export; optionally the older-messages button.
+            val index = notices + 5 + (if (first > 0) 1 else 0) + focus.turnIndex - first
+            list.scrollToItem(index)
+            home.finishHistoryFocus(focus)
+        } else if (changed) list.scrollToItem(0)
+    }
     LaunchedEffect(state.message, AppState.notice) {
-        if (state.message != null || AppState.notice != null) list.scrollToItem(0)
+        if (state.historyFocus == null && (state.message != null || AppState.notice != null)) list.scrollToItem(0)
     }
     LaunchedEffect(state.readyStart) {
         home.takeReadyStart()?.let { keyboard?.hide(); page = "Gespräch"; onStart(it) }
@@ -191,17 +211,51 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
                     }
                 }
                 "Verlauf" -> {
+                    item("history-search") {
+                        OutlinedTextField(value = state.historyQuery, onValueChange = home::setHistoryQuery,
+                            singleLine = true, modifier = Modifier.fillMaxWidth().testTag("history-search"),
+                            label = { Text("Chats durchsuchen") },
+                            supportingText = { Text("Titel, Anbieter, Modell und alle Nachrichten · bis 200 Zeichen") },
+                            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+                            keyboardActions = KeyboardActions(onSearch = { keyboard?.hide(); focusManager.clearFocus() }))
+                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                            listOf<Provider?>(null, Provider.OPENAI, Provider.CLAUDE).forEach { provider ->
+                                FilterChip(selected = state.historyProvider == provider,
+                                    onClick = { keyboard?.hide(); focusManager.clearFocus(); home.setHistoryProvider(provider) },
+                                    modifier = Modifier.testTag("history-filter-${provider?.name ?: "ALL"}"),
+                                    label = { Text(when (provider) { null -> "Alle"; Provider.OPENAI -> "OpenAI"; Provider.CLAUDE -> "Claude" }) })
+                            }
+                        }
+                        if (state.historyQuery.isNotEmpty() || state.historyProvider != null) {
+                            TextButton(onClick = { home.setHistoryQuery(""); home.setHistoryProvider(null); keyboard?.hide(); focusManager.clearFocus() }) {
+                                Text("Suche zurücksetzen")
+                            }
+                        }
+                    }
+                    if (state.historySearching && !state.loading) item("history-searching") { Text("Verlauf wird durchsucht …") }
+                    if (state.historyError != null) item("history-search-error") {
+                        Column {
+                            Text(state.historyError, color = MaterialTheme.colorScheme.error)
+                            OutlinedButton(onClick = home::retryHistorySearch) { Text("Suche erneut versuchen") }
+                        }
+                    }
+                    if (!state.loading && !state.historySearching && state.archiveError == null && state.historyError == null) item("history-count") {
+                        Text("${state.historyMatches.size} von ${state.sessions.size} Gesprächen", Modifier.testTag("history-count"))
+                        if (state.sessions.isNotEmpty() && state.historyMatches.isEmpty()) Text("Keine passenden Gespräche. Suche ändern oder zurücksetzen.")
+                    }
                     item("new-chat") {
                         OutlinedButton(onClick = { home.newChat(); page = "Gespräch" }, enabled = editable) { Text("Neues Gespräch auswählen") }
                     }
                     if (state.sessions.isEmpty() && !state.loading && state.archiveError == null) item("empty-history") { Text("Noch keine gespeicherten Gespräche.") }
-                    items(state.sessions, key = { "chat-${it.id}" }) { chat ->
-                        OutlinedButton(onClick = { home.openChat(chat.id); page = "Gespräch" },
-                            enabled = editable && !state.loading && state.archiveError == null,
+                    items(state.historyMatches, key = { "chat-${it.conversation.id}" }) { match ->
+                        val chat = match.conversation
+                        OutlinedButton(onClick = { if (home.openHistoryMatch(chat.id)) { keyboard?.hide(); focusManager.clearFocus(); page = "Gespräch" } },
+                            enabled = editable && !state.loading && state.archiveError == null && !state.historySearching,
                             modifier = Modifier.fillMaxWidth().testTag("history-${chat.id}")) {
                             Column(Modifier.fillMaxWidth()) {
                                 Text(chat.title, maxLines = 2, overflow = TextOverflow.Ellipsis)
                                 Text("${chat.provider.displayName} · ${chat.modelId} · ${chat.turns.size} Nachrichten", style = MaterialTheme.typography.bodySmall)
+                                match.firstMatchingTurn?.let { Text("Treffer in Nachricht ${it + 1}", style = MaterialTheme.typography.bodySmall) }
                             }
                         }
                     }

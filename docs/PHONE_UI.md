@@ -1,4 +1,4 @@
-# Smartphone-Bedienung – 0.1.10
+# Smartphone-Bedienung – 0.1.11
 
 Die Hauptseite hat drei Bereiche. Der Gesprächsknopf und der aktuelle Status
 bleiben am unteren Rand erreichbar, auch wenn die Liste gescrollt wird.
@@ -7,7 +7,7 @@ bleiben am unteren Rand erreichbar, auch wenn die Liste gescrollt wird.
 |---|---|
 | Gespräch | Aktueller Anbieter/Modell, Stimme und Tempo, geöffnetes Gespräch und Nachrichten |
 | Einstellungen | Anbieter-/Modellauswahl sowie Eingabe und Verwaltung des API-Schlüssels |
-| Verlauf | Vorhandene Chats öffnen oder ein neues Gespräch auswählen |
+| Verlauf | Chats durchsuchen, nach Anbieter filtern, öffnen oder ein neues Gespräch auswählen |
 
 Ein Chat wird durch Öffnen nur angezeigt. Erst „Gespräch fortsetzen“ startet die
 Sprachfunktion mit dem ursprünglichen Anbieter und Modell. Alte, nicht mehr
@@ -23,11 +23,24 @@ Nachrichten anzeigen“ erweitert um jeweils 50. Alle gespeicherten Nachrichten
 bleiben erhalten. Das Löschen eines Chats benötigt eine Bestätigung; Abbrechen
 belässt ihn unverändert. Die Bestätigung gilt nur für die ursprünglich gewählte Chat-ID.
 
+## Verlauf durchsuchen
+
+Unter **Verlauf** im Feld **Chats durchsuchen** einen Text eingeben und bei Bedarf
+**Alle**, **OpenAI** oder **Claude** wählen. Titel, Anbieter, Modell und alle Nachrichten
+werden durchsucht; die Groß-/Kleinschreibung ist egal. Einträge mit **Treffer in
+Nachricht …** öffnen direkt an dieser Stelle, auch außerhalb der ersten 50 angezeigten
+Nachrichten. Suchtext und Filter ändern weder Inhalte noch die aktive Anbieterauswahl.
+**Suche zurücksetzen** zeigt wieder alle Chats. Während Voice bleibt Beenden erreichbar;
+ein anderer Chat kann erst nach Ende der Sitzung geöffnet werden.
+
+Der Nutzer bestätigt Suche, Filter und Treffer am 12.10.2026.
+Details und Grenzen: [HISTORY_SEARCH.md](HISTORY_SEARCH.md).
+
 ## Chat als Textdatei exportieren
 
 Unter dem Titel des geöffneten Chats **Als Textdatei exportieren** wählen. Nach dem
 Hinweis auf die unverschlüsselte Kopie führt **Speicherort wählen** in Androids
-Dateidialog. Die Datei enthält alle Nachrichten, auch ältere ausgeblendete, und
+Dateidialog. Die Datei enthält unabhängig von der Suche alle Nachrichten, auch ältere ausgeblendete, und
 keine gespeicherten API-Zugangsdaten. Eingetippte persönliche Angaben im Chattext
 bleiben enthalten. Für eine lokale Kopie einen lokalen Ordner wählen; Cloud-Ziele
 übertragen die Datei an den gewählten Dienst. Export ist während Voice gesperrt.
