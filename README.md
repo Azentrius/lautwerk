@@ -12,12 +12,15 @@ Azentrius-Farben für „Starten“ an. MessageTemplate, Titel, App-Symbol, Text
 Testzähler bleiben erhalten. Das Design-System ist auf Commit `eb827c8` festgelegt.
 Der Android-Auto-Host entscheidet über die tatsächliche Darstellung.
 
-DHU-Debug und Test-APK bauen erfolgreich; DHU-Lint meldet 0 Fehler und 6 Warnungen.
-Installation und visueller Vergleich im DHU stehen noch aus, weil das Pixel beim
-Testaufbau für ein Telefonat verwendet wurde. **Noch keine DHU-Abnahme für 0.1.14.**
-Ausgangsfarbe/Kontrast und sechs Starts werden vor dem Update als Vergleich erfasst.
-Ein bereits vorhandener A7-Fehler blockiert 0.1.14 nach Nutzerfreigabe nicht;
-ein neuer Fehler ist eine Regression.
+DHU-Debug und Test-APK bauen erfolgreich; GitHub-CI für den Implementierungsstand
+ist erfolgreich, DHU-Lint meldet 0 Fehler und 6 Warnungen.
+**0.1.14 ist auf dem Pixel installiert; alle 11 Prototype-Gerätetests bestehen.**
+64 DHU-Kombinationen aus vier Formaten, Deutsch/Englisch, Tag/Nacht, beiden
+Anbietern und Touch/Rotary sind geprüft; englischer Fallback bei Französisch ebenfalls.
+Ausgangsversion und Update bestehen sechs Starts ohne Reset. Der Host zeigt die
+Startaktion hellblau statt Gold/Bronze; Kontrast 8,47–8,98:1 gegenüber 8,25:1 vorher.
+Live-Auswahl und vollständige Texte bleiben erhalten. Host-Car-API 8 und alle
+Umgebungsdaten sind im Testbericht erfasst. Anruf-/Headset-Tests bleiben zurückgestellt.
 
 Die **DHU-APK ist 0.1.14-prototype / Code 5**. Die Assistenten-App bleibt
 **0.1.13-dev / Code 14**, die Phone-Vergleichsvariante **0.1.12-prototype / Code 4**.

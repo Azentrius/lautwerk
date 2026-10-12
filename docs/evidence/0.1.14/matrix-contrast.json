@@ -1,0 +1,1794 @@
+[
+  {
+    "file": "1280x720-de-day-claude-rotary.png",
+    "config": "1280x720",
+    "language": "de",
+    "mode": "day",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      9,
+      54,
+      84
+    ],
+    "textSample": [
+      428,
+      449
+    ],
+    "contrast": 8.647880383742354,
+    "passed": true
+  },
+  {
+    "file": "1280x720-de-day-claude-touch.png",
+    "config": "1280x720",
+    "language": "de",
+    "mode": "day",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      8,
+      55,
+      84
+    ],
+    "textSample": [
+      428,
+      448
+    ],
+    "contrast": 8.557963365561767,
+    "passed": true
+  },
+  {
+    "file": "1280x720-de-day-openai-rotary.png",
+    "config": "1280x720",
+    "language": "de",
+    "mode": "day",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      12,
+      53,
+      84
+    ],
+    "textSample": [
+      467,
+      453
+    ],
+    "contrast": 8.723264423324807,
+    "passed": true
+  },
+  {
+    "file": "1280x720-de-day-openai-touch.png",
+    "config": "1280x720",
+    "language": "de",
+    "mode": "day",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      12,
+      53,
+      84
+    ],
+    "textSample": [
+      430,
+      448
+    ],
+    "contrast": 8.723264423324807,
+    "passed": true
+  },
+  {
+    "file": "1280x720-de-night-claude-rotary.png",
+    "config": "1280x720",
+    "language": "de",
+    "mode": "night",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      12,
+      53,
+      84
+    ],
+    "textSample": [
+      432,
+      449
+    ],
+    "contrast": 8.723264423324807,
+    "passed": true
+  },
+  {
+    "file": "1280x720-de-night-claude-touch.png",
+    "config": "1280x720",
+    "language": "de",
+    "mode": "night",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      470,
+      453
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1280x720-de-night-openai-rotary.png",
+    "config": "1280x720",
+    "language": "de",
+    "mode": "night",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      7,
+      52,
+      82
+    ],
+    "textSample": [
+      429,
+      448
+    ],
+    "contrast": 8.889022742661012,
+    "passed": true
+  },
+  {
+    "file": "1280x720-de-night-openai-touch.png",
+    "config": "1280x720",
+    "language": "de",
+    "mode": "night",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      11,
+      53,
+      84
+    ],
+    "textSample": [
+      430,
+      448
+    ],
+    "contrast": 8.730675358718564,
+    "passed": true
+  },
+  {
+    "file": "1280x720-en-day-claude-rotary.png",
+    "config": "1280x720",
+    "language": "en",
+    "mode": "day",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      9,
+      54,
+      84
+    ],
+    "textSample": [
+      455,
+      450
+    ],
+    "contrast": 8.647880383742354,
+    "passed": true
+  },
+  {
+    "file": "1280x720-en-day-claude-touch.png",
+    "config": "1280x720",
+    "language": "en",
+    "mode": "day",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      14,
+      52,
+      84
+    ],
+    "textSample": [
+      447,
+      449
+    ],
+    "contrast": 8.803178355179929,
+    "passed": true
+  },
+  {
+    "file": "1280x720-en-day-openai-rotary.png",
+    "config": "1280x720",
+    "language": "en",
+    "mode": "day",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      11,
+      53,
+      84
+    ],
+    "textSample": [
+      446,
+      448
+    ],
+    "contrast": 8.730675358718564,
+    "passed": true
+  },
+  {
+    "file": "1280x720-en-day-openai-touch.png",
+    "config": "1280x720",
+    "language": "en",
+    "mode": "day",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      15,
+      53,
+      85
+    ],
+    "textSample": [
+      464,
+      453
+    ],
+    "contrast": 8.682105196180387,
+    "passed": true
+  },
+  {
+    "file": "1280x720-en-night-claude-rotary.png",
+    "config": "1280x720",
+    "language": "en",
+    "mode": "night",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      464,
+      453
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "1280x720-en-night-claude-touch.png",
+    "config": "1280x720",
+    "language": "en",
+    "mode": "night",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      13,
+      51,
+      83
+    ],
+    "textSample": [
+      447,
+      449
+    ],
+    "contrast": 8.924895080658505,
+    "passed": true
+  },
+  {
+    "file": "1280x720-en-night-openai-rotary.png",
+    "config": "1280x720",
+    "language": "en",
+    "mode": "night",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      6,
+      54,
+      83
+    ],
+    "textSample": [
+      440,
+      450
+    ],
+    "contrast": 8.684255954914454,
+    "passed": true
+  },
+  {
+    "file": "1280x720-en-night-openai-touch.png",
+    "config": "1280x720",
+    "language": "en",
+    "mode": "night",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      486,
+      450
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-de-day-claude-rotary.png",
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "day",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      9,
+      54,
+      84
+    ],
+    "textSample": [
+      472,
+      450
+    ],
+    "contrast": 8.647880383742354,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-de-day-claude-touch.png",
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "day",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      473,
+      451
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-de-day-openai-rotary.png",
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "day",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      6,
+      54,
+      83
+    ],
+    "textSample": [
+      429,
+      448
+    ],
+    "contrast": 8.684255954914454,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-de-day-openai-touch.png",
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "day",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      8,
+      55,
+      84
+    ],
+    "textSample": [
+      428,
+      449
+    ],
+    "contrast": 8.557963365561767,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-de-night-claude-rotary.png",
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "night",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      444,
+      453
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-de-night-claude-touch.png",
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "night",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      427,
+      449
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-de-night-openai-rotary.png",
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "night",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      440,
+      450
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-de-night-openai-touch.png",
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "night",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      13,
+      51,
+      83
+    ],
+    "textSample": [
+      434,
+      450
+    ],
+    "contrast": 8.924895080658505,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-en-day-claude-rotary.png",
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "day",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      6,
+      56,
+      84
+    ],
+    "textSample": [
+      486,
+      452
+    ],
+    "contrast": 8.474403177255184,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-en-day-claude-touch.png",
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "day",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      16,
+      51,
+      84
+    ],
+    "textSample": [
+      447,
+      449
+    ],
+    "contrast": 8.880749912298429,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-en-day-openai-rotary.png",
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "day",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      4,
+      54,
+      82
+    ],
+    "textSample": [
+      445,
+      448
+    ],
+    "contrast": 8.713901766243168,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-en-day-openai-touch.png",
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "day",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      15,
+      53,
+      85
+    ],
+    "textSample": [
+      446,
+      449
+    ],
+    "contrast": 8.682105196180387,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-en-night-claude-rotary.png",
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "night",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      5,
+      55,
+      83
+    ],
+    "textSample": [
+      486,
+      452
+    ],
+    "contrast": 8.59358487562663,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-en-night-claude-touch.png",
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "night",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      440,
+      452
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-en-night-openai-rotary.png",
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "night",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      5,
+      55,
+      83
+    ],
+    "textSample": [
+      455,
+      452
+    ],
+    "contrast": 8.59358487562663,
+    "passed": true
+  },
+  {
+    "file": "1280x720-wide-en-night-openai-touch.png",
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "night",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      316,
+      457
+    ],
+    "text": [
+      13,
+      51,
+      83
+    ],
+    "textSample": [
+      440,
+      451
+    ],
+    "contrast": 8.924895080658505,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-de-day-claude-rotary.png",
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "day",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      651,
+      629
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-de-day-claude-touch.png",
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "day",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      663,
+      632
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-de-day-openai-rotary.png",
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "day",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      655,
+      628
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-de-day-openai-touch.png",
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "day",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      650,
+      630
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-de-night-claude-rotary.png",
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "night",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      650,
+      630
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-de-night-claude-touch.png",
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "night",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      650,
+      631
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-de-night-openai-rotary.png",
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "night",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      696,
+      633
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-de-night-openai-touch.png",
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "night",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      650,
+      632
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-en-day-claude-rotary.png",
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "day",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      9,
+      54,
+      84
+    ],
+    "textSample": [
+      669,
+      629
+    ],
+    "contrast": 8.647880383742354,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-en-day-claude-touch.png",
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "day",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      13,
+      51,
+      83
+    ],
+    "textSample": [
+      678,
+      631
+    ],
+    "contrast": 8.924895080658505,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-en-day-openai-rotary.png",
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "day",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      666,
+      628
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-en-day-openai-touch.png",
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "day",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      666,
+      628
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-en-night-claude-rotary.png",
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "night",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      9,
+      54,
+      84
+    ],
+    "textSample": [
+      668,
+      628
+    ],
+    "contrast": 8.647880383742354,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-en-night-claude-touch.png",
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "night",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      664,
+      632
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-en-night-openai-rotary.png",
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "night",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      8,
+      53,
+      83
+    ],
+    "textSample": [
+      665,
+      628
+    ],
+    "contrast": 8.767927721360142,
+    "passed": true
+  },
+  {
+    "file": "1920x1080-en-night-openai-touch.png",
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "night",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      538,
+      637
+    ],
+    "text": [
+      9,
+      54,
+      84
+    ],
+    "textSample": [
+      664,
+      631
+    ],
+    "contrast": 8.647880383742354,
+    "passed": true
+  },
+  {
+    "file": "800x480-de-day-claude-rotary.png",
+    "config": "800x480",
+    "language": "de",
+    "mode": "day",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      362,
+      292
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "800x480-de-day-claude-touch.png",
+    "config": "800x480",
+    "language": "de",
+    "mode": "day",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      366,
+      288
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "800x480-de-day-openai-rotary.png",
+    "config": "800x480",
+    "language": "de",
+    "mode": "day",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      386,
+      293
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "800x480-de-day-openai-touch.png",
+    "config": "800x480",
+    "language": "de",
+    "mode": "day",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      362,
+      290
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "800x480-de-night-claude-rotary.png",
+    "config": "800x480",
+    "language": "de",
+    "mode": "night",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      362,
+      293
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "800x480-de-night-claude-touch.png",
+    "config": "800x480",
+    "language": "de",
+    "mode": "night",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      366,
+      288
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "800x480-de-night-openai-rotary.png",
+    "config": "800x480",
+    "language": "de",
+    "mode": "night",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      53,
+      84
+    ],
+    "textSample": [
+      367,
+      289
+    ],
+    "contrast": 8.730675358718564,
+    "passed": true
+  },
+  {
+    "file": "800x480-de-night-openai-touch.png",
+    "config": "800x480",
+    "language": "de",
+    "mode": "night",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      407,
+      292
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "800x480-en-day-claude-rotary.png",
+    "config": "800x480",
+    "language": "en",
+    "mode": "day",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      8,
+      51,
+      82
+    ],
+    "textSample": [
+      421,
+      294
+    ],
+    "contrast": 8.979676015070982,
+    "passed": true
+  },
+  {
+    "file": "800x480-en-day-claude-touch.png",
+    "config": "800x480",
+    "language": "en",
+    "mode": "day",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      13,
+      51,
+      83
+    ],
+    "textSample": [
+      377,
+      289
+    ],
+    "contrast": 8.924895080658505,
+    "passed": true
+  },
+  {
+    "file": "800x480-en-day-openai-rotary.png",
+    "config": "800x480",
+    "language": "en",
+    "mode": "day",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      52,
+      83
+    ],
+    "textSample": [
+      421,
+      290
+    ],
+    "contrast": 8.843972170297848,
+    "passed": true
+  },
+  {
+    "file": "800x480-en-day-openai-touch.png",
+    "config": "800x480",
+    "language": "en",
+    "mode": "day",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      12,
+      53,
+      84
+    ],
+    "textSample": [
+      376,
+      289
+    ],
+    "contrast": 8.723264423324807,
+    "passed": true
+  },
+  {
+    "file": "800x480-en-night-claude-rotary.png",
+    "config": "800x480",
+    "language": "en",
+    "mode": "night",
+    "model": "claude",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      251,
+      297
+    ],
+    "text": [
+      10,
+      52,
+      83
+    ],
+    "textSample": [
+      420,
+      293
+    ],
+    "contrast": 8.851157532459508,
+    "passed": true
+  },
+  {
+    "file": "800x480-en-night-claude-touch.png",
+    "config": "800x480",
+    "language": "en",
+    "mode": "night",
+    "model": "claude",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      53,
+      84
+    ],
+    "textSample": [
+      388,
+      293
+    ],
+    "contrast": 8.730675358718564,
+    "passed": true
+  },
+  {
+    "file": "800x480-en-night-openai-rotary.png",
+    "config": "800x480",
+    "language": "en",
+    "mode": "night",
+    "model": "openai",
+    "input": "rotary",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      53,
+      84
+    ],
+    "textSample": [
+      381,
+      288
+    ],
+    "contrast": 8.730675358718564,
+    "passed": true
+  },
+  {
+    "file": "800x480-en-night-openai-touch.png",
+    "config": "800x480",
+    "language": "en",
+    "mode": "night",
+    "model": "openai",
+    "input": "touch",
+    "background": [
+      186,
+      217,
+      252
+    ],
+    "backgroundSample": [
+      250,
+      297
+    ],
+    "text": [
+      11,
+      53,
+      84
+    ],
+    "textSample": [
+      379,
+      288
+    ],
+    "contrast": 8.730675358718564,
+    "passed": true
+  }
+]

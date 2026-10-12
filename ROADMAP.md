@@ -43,9 +43,12 @@ erhalten ihre bisherige Funktion. Herkunft und Regeln stehen in `docs/DESIGN_SYS
 
 0.1.14 setzt B1–B5 aus dem Android-Auto-Design `eb827c8` um: ausschließlich
 das freigegebene Car-Farbpaar und der Primärfarbwunsch für „Starten“.
-Build und Lint sind erfolgreich; die reale DHU-Abnahme mit Ausgangsmessung A3/A4,
-Host-API und A7-Regressionsvergleich steht noch aus. Vorhandenes A7-Scheitern
-ist nach Nutzerfreigabe nicht blockierend. Keine Änderung am Zählerverhalten.
+Build, Lint und GitHub-CI des Implementierungsstands sind erfolgreich. 0.1.14 ist
+installiert; elf Prototype-Gerätetests und 64 DHU-Kombinationen bestehen.
+A3/A4 und A7 sind gegen den Ausgangsstand geprüft, Host-API 8 ist erfasst.
+Beide Sechs-Start-Tests bestehen; der Host ersetzt den Farbwert durch gut lesbares
+Hellblau. Vollständige Texte, Live-Auswahl, Rotary-Fokus und englischer Fallback
+bei französischer Gerätesprache sind geprüft. Keine Änderung am Zählerverhalten.
 Siehe `docs/ANDROID_AUTO_DESIGN.md` und `docs/BUILD_AND_TEST.md`.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2

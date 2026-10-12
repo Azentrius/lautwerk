@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-12",
+  "device": "Pixel 10 Pro",
+  "android": "17",
+  "androidAuto": "17.7.663654-release",
+  "androidAutoVersionCode": 177663654,
+  "dhu": "2.0-windows",
+  "dhuBuild": "2022-03-30-438482292",
+  "carAppLibrary": "1.8.0-rc01",
+  "minCarApiLevel": 1,
+  "hostCarApiLevel": 8,
+  "baselineVersion": "0.1.12-prototype (code 4)",
+  "candidateVersion": "0.1.14-prototype (code 5)",
+  "note": "Host API must be read from car.onCreateScreen api=... during a real session; it is not minCarApiLevel.",
+  "hostCarApiEvidence": "candidate/openauto-log.txt: 10-12 11:04:37.254 car.onCreateScreen api=8; baseline observed at 10:59:01.026",
+  "candidateInstalled": true,
+  "deviceTests": "OK (11 tests)",
+  "matrixScenarios": 64,
+  "fallback": {
+    "systemLocale": "fr-FR",
+    "appLanguage": "en",
+    "readyAndStart": "passed",
+    "scope": "800x480 touch, Claude Sonnet 4.6"
+  },
+  "restored": {
+    "systemLocales": "de-DE,en-US",
+    "primaryLocale": "de-DE",
+    "prototypeSelection": "Claude / Anthropic · Claude Haiku 4.5",
+    "dhu": "closed normally"
+  },
+  "interruptions": "USB disconnect before app launch and unrelated host notification during rotary input; affected series ended normally and repeated successfully. No messages sent.",
+  "a7": {
+    "baseline": "passed 1–6",
+    "candidate": "passed 1–6",
+    "scope": "800x480, German, touch, Claude Haiku 4.5; same session, no reset"
+  },
+  "implementationCommit": "7ba155ff745975ab895c2433fa43e1047ae3b7d7"
+}
