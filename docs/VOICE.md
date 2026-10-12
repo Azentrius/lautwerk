@@ -1,4 +1,4 @@
-# Smartphone-Sprachfunktion – 0.1.8
+# Smartphone-Sprachfunktion – 0.1.9
 
 OpenAI und Claude verwenden jetzt denselben getesteten Gesprächsablauf:
 Android erkennt die Sprache, der gewählte Anbieter verarbeitet den erkannten
@@ -12,7 +12,7 @@ Mikrofonzugriff noch Netzwerkanbindung oder eine behauptete neue Auto-Kategorie.
 
 ## Stimme auswählen und vergleichen
 
-1. Auf der Smartphone-Hauptseite **„Stimme und Tempo“** öffnen. Während eines
+1. Unter **„Gespräch“ → „Stimme und Tempo“** öffnen. Während eines
    laufenden Gesprächs ist diese Schaltfläche deaktiviert.
 2. Die Stimmwahl öffnen und eine Variante wählen. Das Pixel meldet aktuell
    **fünf Stimmen auf dem Gerät und vier Online-Stimmen für Deutsch (de-DE)**.
@@ -55,10 +55,10 @@ und [Voice-Metadaten](https://developer.android.com/reference/android/speech/tts
 
 1. Die Assistenten-App `dev.openautoai.app` öffnen. Sie ist getrennt von der
    DHU-Test-App `dev.openautoai.prototype.dhu`; beide heißen derzeit OpenAuto AI.
-2. Anbieter und Modell auswählen. Den eigenen API-Schlüssel ausschließlich
+2. Unter **„Einstellungen“** Anbieter und Modell auswählen. Den eigenen API-Schlüssel ausschließlich
    auf dem Smartphone eintragen und speichern, nicht in Git oder einen Chat.
    Ein vorhandener Schlüssel bleibt gespeichert, obwohl das Eingabefeld leer ist.
-3. „Sprachgespräch starten“ antippen. Mikrofon freigeben; Android fragt auf
+3. Unten auf „Sprachgespräch starten“ tippen. Der Knopf bleibt beim Scrollen sichtbar. Mikrofon freigeben; Android fragt auf
    neueren Versionen auch nach Benachrichtigungen. Eine abgelehnte Mikrofonfreigabe
    verhindert die Aufnahme. Ohne Benachrichtigungsfreigabe bleibt Beenden in der App möglich.
 4. Auf **„Ich höre zu“** warten und eine kurze Frage stellen, etwa „Sag mir in
@@ -205,10 +205,11 @@ Mikrofonberechtigung und Androids Einschränkungen für Vordergrunddienste bleib
 aktiv. Die App fordert kein Umgehen dieser Einschränkungen an.
 [Mikrofon-Vordergrunddienste](https://developer.android.com/develop/background-work/services/fgs/service-types#microphone)
 
-Speicherzugriffe des Sprachablaufs laufen im Hintergrund. Die übrige bestehende
-Verlaufs-/Schlüsseloberfläche arbeitet noch synchron. Die zwei Worker bleiben
-erhalten; Netzwerkabbruch erfolgt jetzt pro Aufruf. Anbieter-seitige Verarbeitung
-und Abrechnung werden dadurch nicht garantiert gestoppt.
+Speicherzugriffe des Sprachablaufs und seit 0.1.9 auch der Smartphone-Oberfläche
+laufen im Hintergrund. Ein eigener serieller UI-Worker trennt Datei-/Keystore-Arbeit
+von der Bedienung; die zwei Worker des Sprachdienstes bleiben erhalten.
+Netzwerkabbruch erfolgt pro Aufruf. Anbieter-seitige Verarbeitung und Abrechnung
+werden dadurch nicht garantiert gestoppt. Siehe [PHONE_UI.md](PHONE_UI.md).
 
 ## Bauen und gezielt öffnen
 
@@ -223,7 +224,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
 ```
 
-Für die Download-APK den Pfad auf `OpenAutoAI-0.1.8-assistant-debug.apk` ändern.
+Für die Download-APK den Pfad auf `OpenAutoAI-0.1.9-assistant-debug.apk` ändern.
 Bei anderen Geräten die Seriennummer ersetzen. Bei abweichender Signatur nicht
 deinstallieren oder Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 Die bestehenden [DHU-Schritte](START_WINDOWS.md) bleiben gültig.
@@ -248,10 +249,11 @@ Wiedergabe anzufordern und danach abzugeben:
 
 ## Teststand und Grenzen
 
-**90 automatisierte Prüfungen bestehen:** 69 JVM-Tests, 14 Assistant-Gerätetests
-und 7 DHU-/Auswahltests. 0.1.8-dev / Code 9 ist als Update auf dem Pixel installiert.
-Die Tests prüfen Socket-Abbruch, Abbruch-/Neustart-Rennen, alle Gesprächsphasen,
-Unterbrechungsregeln und die Registrierung/Freigabe echter Android-Beobachter.
+**34 Gerätetests wurden für 0.1.9 ausgeführt und bestanden:** 27 Assistant,
+7 DHU/Auswahl. 0.1.9-dev / Code 10 ist als Update auf dem Pixel installiert.
+Die neuen Prüfungen betreffen Smartphone-Bedienung und Speicherarbeit. Die 69
+JVM-Prüfungen der unveränderten Core-/Anbieter-/Sprachmodule bestanden zuletzt
+unter 0.1.8 und wurden für diese Oberflächenänderung nicht wiederholt.
 Keine hörbare Ausgabe, Mikrofonaufnahme oder echte KI-Anfrage wird automatisiert
 gestartet; persönliche Daten und gewählte Stimme werden nicht verändert.
 
@@ -261,5 +263,6 @@ bestätigt er für 0.1.8 Stoppen und Neustarten per Schaltfläche sowie Beenden 
 Display-aus für OpenAI und Claude. Anruf- und Headset-/Bluetooth-Tests sind
 auf Wunsch des Nutzers zurückgestellt und bleiben ungeprüft;
 die Rückmeldung bestätigt nicht jede mögliche zeitliche Überschneidung separat.
-Android-Auto-Audio und reale Fahrzeugnutzung sind nicht bestätigt.
+Die Bedienung mit realen Gesprächen in der neuen 0.1.9-Oberfläche ist noch nicht
+manuell bestätigt. Android-Auto-Audio und reale Fahrzeugnutzung sind nicht bestätigt.
 Die DHU-Oberfläche bleibt bei 0.1.2-prototype. Details: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).

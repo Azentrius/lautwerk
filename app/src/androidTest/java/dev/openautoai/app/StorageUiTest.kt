@@ -1,106 +1,162 @@
 package dev.openautoai.app
 
-import android.content.Context
+import android.graphics.Bitmap
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.core.ai.ModelCatalog
-import dev.openautoai.core.ai.Provider
+import dev.openautoai.core.ai.*
 import dev.openautoai.core.storage.*
-import dev.openautoai.settings.ModelSelectionStore
 import org.junit.After
-import org.junit.Assert.assertEquals
-import org.junit.Before
+import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.UUID
+import java.io.File
+import java.util.concurrent.TimeUnit
 
-/** Injected stores only: no real chat, API key, recording or service is touched. */
+/** Isolated preferences and invented chats/keys only. Never starts the microphone/service/API. */
 @RunWith(AndroidJUnit4::class)
 class StorageUiTest {
     @get:Rule val compose = createComposeRule()
-    private val context = InstrumentationRegistry.getInstrumentation().targetContext
-    private val name = "storage-ui-test-${UUID.randomUUID()}"
-    private lateinit var selections: ModelSelectionStore
+    private val f = HomeTestFixture()
     private var starts = 0
-
-    @Before fun setUp() {
-        selections = ModelSelectionStore(context.getSharedPreferences(name, Context.MODE_PRIVATE))
-        compose.runOnIdle {
-            AppState.update(false, Provider.OPENAI, ModelCatalog.default(Provider.OPENAI), null, "Bereit")
-            AppState.reportIssue(null)
-        }
+    private var stops = 0
+    @After fun tearDown() { f.close() }
+    private fun render() {
+        f.create()
+        compose.setContent { MaterialTheme { MainContent(f.home, { starts++ }, {
+            stops++
+            AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, "Gespräch beendet")
+        }) } }
+        compose.waitUntil(5000) { !f.home.state.loading }
     }
-    @After fun tearDown() { context.deleteSharedPreferences(name) }
-
-    private class FakeArchive : ConversationRepository {
-        var failRead = false
-        var items = emptyList<Conversation>()
-        var creates = 0
-        override fun all(): List<Conversation> {
-            if (failRead) throw StorageFailure(StorageError.ARCHIVE_READ)
-            return items
-        }
-        override fun get(id: String) = items.find { it.id == id }
-        override fun create(provider: Provider, modelId: String): Conversation {
-            creates++
-            return Conversation("test", "Test", provider, modelId, 0, emptyList())
-        }
-        override fun append(id: String, turn: Turn) = Unit
-        override fun delete(id: String) = Unit
-    }
-    private class FakeCredentials : CredentialStore {
-        var failRead = false
-        override fun read(provider: Provider): String? {
-            if (failRead) throw StorageFailure(StorageError.CREDENTIAL_READ)
-            return "dummy-key"
-        }
-        override fun save(provider: Provider, secret: String) = Unit
-        override fun clear(provider: Provider) { throw StorageFailure(StorageError.CREDENTIAL_WRITE) }
-    }
-    private fun render(archive: FakeArchive, keys: FakeCredentials = FakeCredentials()) {
-        compose.setContent { MaterialTheme {
-            MainContent(selections, keys, archive, { starts++ }, {})
-        } }
-    }
+    private fun page(name: String) { compose.onNodeWithTag("page-$name").performClick() }
+    private fun scroll(text: String) { compose.onNodeWithTag("home-list").performScrollToNode(hasText(text)) }
+    private fun chat(id: String, turns: List<Turn> = emptyList()) =
+        Conversation(id, "Testgespräch $id", Provider.CLAUDE, ModelCatalog.default(Provider.CLAUDE), 0, turns)
 
     @Test fun unreadableArchiveShowsRetryAndDisablesStartUntilRecovery() {
-        val archive = FakeArchive().apply { failRead = true }
-        render(archive)
-        compose.onNodeWithText("Sprachgespräch starten").assertIsNotEnabled()
+        f.archive.failRead = true; render()
+        compose.onNodeWithTag("conversation-start").assertIsNotEnabled()
         compose.onNodeWithText(StorageError.ARCHIVE_READ.userMessage).assertExists()
-        compose.runOnIdle { archive.failRead = false }
-        compose.onNodeWithText("Verlauf erneut laden").performScrollTo().performClick()
-        compose.onNodeWithText(StorageError.ARCHIVE_READ.userMessage).assertDoesNotExist()
-        compose.onNodeWithText("Sprachgespräch starten").assertIsEnabled()
-        assertEquals(0, starts)
-        assertEquals(0, archive.creates)
+        f.archive.failRead = false
+        compose.onNodeWithText("Verlauf erneut laden").performClick()
+        compose.waitUntil(5000) { !f.home.state.loading && f.home.state.archiveError == null }
+        compose.onNodeWithTag("conversation-start").assertIsEnabled()
+        assertEquals(0, starts); assertEquals(0, f.archive.creates.get())
     }
 
     @Test fun keyReadAndClearErrorsStayInUiAndDoNotStartVoice() {
-        val archive = FakeArchive()
-        val keys = FakeCredentials().apply { failRead = true }
-        render(archive, keys)
-        compose.onNodeWithText("Sprachgespräch starten").performScrollTo().performClick()
+        f.keys.failRead = true; f.keys.failClear = true; render()
+        compose.onNodeWithTag("conversation-start").performClick()
+        compose.waitUntil(5000) { f.home.state.message == StorageError.CREDENTIAL_READ.userMessage }
         compose.onNodeWithText(StorageError.CREDENTIAL_READ.userMessage).assertExists()
-        compose.onNodeWithText("Entfernen").performScrollTo().performClick()
+        page("Einstellungen"); scroll("Entfernen")
+        compose.onNodeWithText("Entfernen").performClick()
+        compose.waitUntil(5000) { f.home.state.message == StorageError.CREDENTIAL_WRITE.userMessage }
         compose.onNodeWithText(StorageError.CREDENTIAL_WRITE.userMessage).assertExists()
-        assertEquals(0, starts)
-        assertEquals(0, archive.creates)
+        assertEquals(0, starts); assertEquals(0, f.archive.creates.get())
     }
 
     @Test fun retiredModelHistoryRemainsReadableButCannotBeStarted() {
-        val archive = FakeArchive().apply {
-            items = listOf(Conversation("old", "Älterer Chat", Provider.CLAUDE, "retired-model", 0,
-                listOf(Turn("user", "Erhaltene Nachricht"))))
-        }
-        render(archive)
-        compose.onNodeWithText("Älterer Chat · retired-model (1 Nachrichten)").performScrollTo().performClick()
+        f.archive.items = listOf(chat("old", listOf(Turn("user", "Erhaltene Nachricht"))).copy(modelId = "retired-model"))
+        render(); page("Verlauf")
+        compose.onNodeWithTag("history-old").performClick()
+        scroll("Du: Erhaltene Nachricht")
         compose.onNodeWithText("Du: Erhaltene Nachricht").assertExists()
         compose.onNodeWithText("Gespräch fortsetzen").assertIsNotEnabled()
         assertEquals(0, starts)
+    }
+
+    @Test fun longHistoryAndOlderMessagesRemainReachableWithStartAlwaysVisible() {
+        val turns = (0..119).map { Turn("user", "Testnachricht $it") }
+        f.archive.items = (0..199).map { chat(it.toString(), if (it == 199) turns else emptyList()) }
+        render(); page("Verlauf")
+        compose.onNodeWithTag("home-list").performScrollToNode(hasTestTag("history-199"))
+        compose.onNodeWithTag("conversation-start").assertIsDisplayed()
+        compose.onNodeWithTag("history-199").performClick()
+        assertEquals(Provider.CLAUDE, f.home.state.selection.provider)
+        assertEquals("199", f.home.state.selectedId)
+        scroll("Du: Testnachricht 119")
+        compose.onNodeWithText("Du: Testnachricht 119").assertIsDisplayed()
+        compose.onNodeWithTag("conversation-start").assertIsDisplayed()
+        scroll("Ältere Nachrichten anzeigen"); compose.onNodeWithText("Ältere Nachrichten anzeigen").performClick()
+        scroll("Ältere Nachrichten anzeigen"); compose.onNodeWithText("Ältere Nachrichten anzeigen").performClick()
+        scroll("Du: Testnachricht 0"); compose.onNodeWithText("Du: Testnachricht 0").assertIsDisplayed()
+        assertEquals(120, f.archive.items.last().turns.size)
+    }
+
+    @Test fun stopRemainsVisibleWhileScrollingAndSettingsCannotMutateActiveSession() {
+        f.archive.items = (0..99).map { chat(it.toString()) }; render()
+        compose.runOnIdle { AppState.update(true, Provider.CLAUDE, ModelCatalog.default(Provider.CLAUDE), "0", "Ich höre zu") }
+        page("Verlauf")
+        compose.onNodeWithTag("home-list").performScrollToNode(hasTestTag("history-99"))
+        compose.onNodeWithTag("conversation-stop").assertIsDisplayed()
+        page("Einstellungen"); scroll("Entfernen")
+        compose.onNodeWithText("Entfernen").assertIsNotEnabled()
+        compose.onNodeWithTag("conversation-stop").assertIsDisplayed().performClick()
+        assertEquals(1, stops)
+        compose.onNodeWithTag("conversation-start").assertIsDisplayed()
+        assertEquals(0, f.keys.clears.get())
+    }
+
+    @Test fun slowKeyWriteDoesNotBlockNavigationAndCannotBeSubmittedTwice() {
+        val gate = HomeTestFixture.Gate(); f.keys.beforeSave = gate::block
+        try {
+            render(); page("Einstellungen"); compose.onNodeWithTag("home-list").performScrollToNode(hasTestTag("api-key-input"))
+            compose.onNodeWithTag("api-key-input").performTextInput("dummy-new-key")
+            scroll("Schlüssel speichern"); compose.onNodeWithText("Schlüssel speichern").performClick()
+            assertTrue(gate.entered.await(3, TimeUnit.SECONDS))
+            compose.onNodeWithText("Schlüssel speichern").assertIsNotEnabled()
+            page("Verlauf"); compose.onNodeWithText("Noch keine gespeicherten Gespräche.").assertExists()
+            compose.onNodeWithTag("conversation-start").assertIsNotEnabled()
+            gate.open()
+            compose.waitUntil(5000) { f.home.state.operation == null && !f.home.state.loading }
+            assertEquals(1, f.keys.saves.get())
+            assertEquals(Provider.OPENAI, f.keys.savedProvider)
+        } finally { gate.open() }
+    }
+
+    @Test fun pendingStartCanBeCancelledBeforeSlowCredentialReadReturns() {
+        val gate = HomeTestFixture.Gate(); f.keys.beforeRead = gate::block
+        try {
+            render(); compose.onNodeWithTag("conversation-start").performClick()
+            assertTrue(gate.entered.await(3, TimeUnit.SECONDS))
+            compose.onNodeWithTag("start-cancel").assertIsDisplayed().performClick()
+            gate.open()
+            compose.waitUntil(5000) { !f.home.state.loading && f.home.state.operation == null }
+            compose.onNodeWithTag("conversation-start").assertIsDisplayed().assertIsEnabled()
+            assertEquals(0, starts); assertEquals(0, f.archive.creates.get())
+        } finally { gate.open() }
+    }
+
+    @Test fun deleteRequiresConfirmationAndCancellingKeepsTheChat() {
+        f.archive.items = listOf(chat("keep")); render(); page("Verlauf")
+        compose.onNodeWithTag("history-keep").performClick(); scroll("Diesen Chat löschen")
+        compose.onNodeWithText("Diesen Chat löschen").performClick()
+        compose.onNodeWithText("Abbrechen").performClick()
+        assertEquals(0, f.archive.deletes.get())
+        compose.onNodeWithText("Diesen Chat löschen").performClick()
+        compose.onNodeWithText("Löschen", useUnmergedTree = true).performClick()
+        compose.waitUntil(5000) { !f.home.state.loading && f.home.state.selectedId == null }
+        assertEquals(1, f.archive.deletes.get())
+        assertTrue(f.archive.items.isEmpty()); assertEquals(0, starts)
+    }
+
+    @Test fun conversationScreenShowsControlsAndCanBeReviewedWithInventedDataOnly() {
+        f.archive.items = listOf(chat("preview", listOf(Turn("user", "Was testen wir heute?"),
+            Turn("assistant", "Wir prüfen die neue Gesprächsansicht und ihre Bedienung."))))
+        render(); page("Verlauf"); compose.onNodeWithTag("history-preview").performClick()
+        compose.onNodeWithTag("conversation-start").assertIsDisplayed()
+        compose.onNodeWithText("Stimme und Tempo").assertIsDisplayed()
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        instrumentation.uiAutomation.takeScreenshot()?.let { bitmap ->
+            File(instrumentation.targetContext.cacheDir, "home-screen-test.png").outputStream().use {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
+            }
+            bitmap.recycle()
+        }
     }
 }
