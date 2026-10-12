@@ -14,8 +14,8 @@ Die drei Bereiche und die feste Gesprächssteuerung aus 0.1.9 bleiben erhalten.
 
 59 automatisierte Prüfungen bestehen: 11 Core-JVM, 41 Assistant-Gerätetests und
 7 DHU-/Auswahltests. Assistant 0.1.10-dev ist installiert. Lint: 0 Fehler,
-10 Warnungen und 1 Hinweis. Der manuelle Export über einen gewählten Dateidienst
-steht noch aus; Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt.
+10 Warnungen und 1 Hinweis. Der Nutzer bestätigt den lokalen Export und die
+vollständige, lesbare Datei. Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt.
 Details: [Textexport](docs/CHAT_EXPORT.md), [Bedienung](docs/PHONE_UI.md),
 [Sprachanleitung](docs/VOICE.md), [Testbericht](docs/BUILD_AND_TEST.md).
 

@@ -21,8 +21,9 @@ auf Nutzerwunsch vom 12.10.2026 zurückgestellt und bleiben ungeprüft.
 Speicherarbeit der Oberfläche im Hintergrund aus. Lange Verläufe werden bedarfsgerecht
 gezeichnet; ältere Nachrichten bleiben erreichbar. 34 Gerätetests bestehen.
 0.1.10 ergänzt den ausdrücklich gewählten Textexport einzelner Chats ohne Änderung
-des verschlüsselten Archivs. 59 automatisierte Prüfungen bestehen. Der praktische
-Test des Android-Speicherdialogs mit einem Dateidienst bleibt offen.
+des verschlüsselten Archivs. 59 automatisierte Prüfungen bestehen. Der Nutzer
+bestätigt am 12.10.2026 den lokalen Export sowie die vollständige, lesbare Datei.
+Cloud-Dateidienste und Rotation während der Auswahl bleiben ungeprüft.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
@@ -32,7 +33,9 @@ Test des Android-Speicherdialogs mit einem Dateidienst bleibt offen.
    Fehlerfälle und Android-JSON sind offline geprüft; Modellzugriff und Voice-End-to-End
    sind nur nach einem bestätigten praktischen Test belegt; siehe `docs/VOICE.md`.
    Der DHU-Prototyp löst weiterhin keine API-Anfrage aus.
-4. Smartphone-Bedienung und Textexport 0.1.10 praktisch abnehmen. Die vollständige
+4. Der lokale Textexport 0.1.10 ist bestätigt; Cloud-Ziele und Rotation während der
+   Auswahl später prüfen. Die Smartphone-Bedienung seit 0.1.9 erneut mit realen
+   Sprachgesprächen abnehmen. Die vollständige
    Archivdatei wird weiterhin im Hintergrund gelesen; echte Seitennachladung und
    Größenregeln für sehr große Archive planen. Verschlüsseltes Backup/Import,
    Gerätewechsel und explizite Wiederherstellung folgen später. Der neue Textexport

@@ -76,7 +76,8 @@ Grundlagen: [Lazy Lists](https://developer.android.com/develop/ui/compose/lists)
 Anruf- und Headset-/Bluetooth-Tests bleiben auf Nutzerwunsch zurückgestellt.
 Die neue Oberfläche wurde automatisiert und mit einem Screenshot ausschließlich
 erfundener Daten geprüft; der erneute manuelle Sprachtest seit 0.1.9 und der vollständige
-Systemdialog-/Dateidienst-Test des Exports stehen noch aus.
+Test von Cloud-Dateidiensten/Rotation stehen noch aus. Der Nutzer bestätigt am
+12.10.2026 den lokalen Textexport und die vollständige, lesbare Datei.
 Keine Änderung an der bestätigten DHU-Oberfläche 0.1.2-prototype.
 
 Bauen/Installieren: [VOICE.md](VOICE.md). DHU: [START_WINDOWS.md](START_WINDOWS.md).

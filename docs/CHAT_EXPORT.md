@@ -63,9 +63,11 @@ wird weiterhin komplett gelesen; dies ist keine Datenbankmigration oder Seitenna
 Automatisiert geprüft: beide Anbieter, alte Modelle, Unicode, 121 Nachrichten,
 große Einzeltexte, Abbruch, doppelte Dialogrückmeldungen, fehlende Chats, Speicherfehler,
 UTF-8-Ausgabe in eine echte temporäre Testdatei und die Bestätigung in der Oberfläche.
-Die Tests verwenden ausschließlich erfundene Inhalte. Der echte Android-Dateidialog
-mit einem vom Nutzer gewählten lokalen oder Cloud-Dateidienst wurde noch nicht
-vollständig durchgespielt. Bitte bei Gelegenheit mit einem unkritischen Chat prüfen.
+Die Tests verwenden ausschließlich erfundene Inhalte. Am 12.10.2026 bestätigt der
+Nutzer nach dem Testauftrag für einen unkritischen Chat und das lokale Ziel Downloads:
+**„Export und Datei funktionieren.“** Damit sind der lokale Export, das Öffnen und
+der vollständige Inhalt dieses getesteten Chats praktisch bestätigt. Cloud-Ziele
+und Rotation während der Auswahl sind dadurch nicht bestätigt.
 
 Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt. Die DHU-Oberfläche
 0.1.2-prototype bleibt erhalten und bietet keinen Export.

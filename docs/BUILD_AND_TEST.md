@@ -51,8 +51,10 @@ Die 64 JVM-Prüfungen der unveränderten Anbieter-/Sprachmodule bestanden zuletz
 separat getestet. DHU-Template-Tests belegen keine neue reale Launcher-Verbindung;
 die bisherige Launcher-/Starten-Bestätigung des Nutzers gilt für 0.1.2-prototype.
 
-Der echte Android-Dateidialog mit einem lokalen/Cloud-Dateidienst sowie Rotation mit
-geöffnetem Dialog müssen noch praktisch geprüft werden. Der Test für Prozessverlust
+Der Nutzer bestätigt am 12.10.2026 nach dem Testauftrag für einen unkritischen Chat
+und das lokale Ziel Downloads: **„Export und Datei funktionieren.“** Der lokale
+Export, das Öffnen und die vollständige Datei dieses Chats sind damit praktisch
+bestätigt. Cloud-Dateidienste und Rotation mit geöffnetem Dialog bleiben ungeprüft. Der Test für Prozessverlust
 simuliert ein Ergebnis ohne zurückbehaltenen Auftrag; er beendet nicht den echten Prozess.
 Ein Ausgabefehler oder Prozessende kann eine leere/teilweise Textdatei zurücklassen.
 Cloud-Synchronisation wird nicht bestätigt, nur das erfolgreiche Schreiben/Schließen
