@@ -22,7 +22,7 @@ class HistorySearchUiTest {
     @After fun cleanup() { f.close() }
     private fun render(chats: List<Conversation>) {
         f.archive.items = chats; f.create()
-        compose.setContent { MaterialTheme { MainContent(f.home, { starts++ }, {
+        compose.setContent { dev.openautoai.app.design.AzentriusTheme { MainContent(f.home, { starts++ }, {
             AppState.update(false,AppState.provider,AppState.modelId,AppState.sessionId,"Bereit")
         }) } }
         ready(); compose.onNodeWithTag("page-history").performClick()

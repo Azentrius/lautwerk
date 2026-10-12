@@ -1,4 +1,4 @@
-# OpenAuto AI 0.1.12 – Sprachfunktion für OpenAI und Claude
+# OpenAuto AI 0.1.13 – Sprachfunktion für OpenAI und Claude
 
 Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
 die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
@@ -7,26 +7,25 @@ Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
 von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Neu in 0.1.12:** Deutsch und Englisch passend zur Gerätesprache, mit
-„Gespräch starten“ statt „Sprachgespräch starten“. Dialoge, Meldungen,
-Stimmeinstellungen, Erkennung, feste Hörprobe und Anbieteranweisungen folgen
-der Sprache. Die deutsche Stimmwahl bleibt beim Wechsel zu Englisch erhalten.
-Startabbruch, Berechtigungsrückmeldungen und Wiederherstellung der Oberfläche
-sind zusätzlich abgesichert. Die lokale Suche und der Textexport bleiben erhalten.
+**Neu in 0.1.13:** Die Smartphone-Oberfläche verwendet das freigegebene
+Azentrius-Design mit heller/dunkler Darstellung, DM Sans, gelieferten Icons,
+Nachrichtenblasen, Optionsfeldern für Stimmen und getrennten Gesprächs-/Exportlabels.
+Reiter passen ihre Anordnung an den gemessenen Platz und die Systemschrift an.
+Deutsch/Englisch, Chat-/Schlüsselspeicherung, Anbieter und Sprachablauf bleiben erhalten.
 
-157 verschiedene automatisierte Prüfungen bestehen: 88 JVM-Prüfungen,
-61 Assistant-Gerätetests und 8 DHU-/Auswahltests. Beide Apps sind als Updates
-installiert. Lint: 0 Fehler, 11 Warnungen und 1 Hinweis. Der Nutzer bestätigt
-den Gesprächsablauf mit beiden Anbietern und den Wechsel Deutsch/Englisch.
+169 verschiedene automatisierte Prüfungen bestehen: 88 JVM-Prüfungen,
+73 Assistant-Gerätetests und 8 DHU-/Auswahltests. Lint: 0 Fehler, 30 Warnungen,
+1 Hinweis. Helles/dunkles Thema und große Schrift wurden mit Testdaten geprüft.
+Der Nutzer bestätigt: „Darstellung und Bedienung passen“.
 Anruf- und Headset-/Bluetooth-Praxistests bleiben zurückgestellt.
 
-Die **Assistenten-APK ist 0.1.12-dev / Code 13**, die **DHU-/Phone-Testvariante
-0.1.12-prototype / Code 4**. Die DHU-Aktionen und das Layout bleiben erhalten,
-zusätzlich sind ihre Texte übersetzt. Voice bleibt ausschließlich in der Assistenten-App.
+Die **Assistenten-APK ist 0.1.13-dev / Code 14**. Die **DHU-/Phone-Testvariante
+bleibt 0.1.12-prototype / Code 4**; ihr Quellcode und Template wurden nicht geändert.
+Voice bleibt ausschließlich in der Assistenten-App.
 
-Details: [Sprache und Wiederaufnahme](docs/LOCALIZATION.md),
-[Verlaufssuche](docs/HISTORY_SEARCH.md), [Textexport](docs/CHAT_EXPORT.md),
-[Bedienung](docs/PHONE_UI.md), [Testbericht](docs/BUILD_AND_TEST.md).
+Details: [Design-System und Update](docs/DESIGN_SYSTEM.md),
+[Sprache und Wiederaufnahme](docs/LOCALIZATION.md), [Verlaufssuche](docs/HISTORY_SEARCH.md),
+[Textexport](docs/CHAT_EXPORT.md), [Testbericht](docs/BUILD_AND_TEST.md).
 
 ## Schnellstart unter Windows
 

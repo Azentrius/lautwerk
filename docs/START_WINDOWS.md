@@ -1,8 +1,9 @@
 # Windows: Bauen, Installieren und DHU prüfen
 
-Projektstand 0.1.12: DHU-/Phone-Oberfläche 0.1.12-prototype, gleicher Ablauf mit Deutsch/Englisch.
-Die neue Assistenten-App 0.1.12-dev ist separat; ihre Installation und der
-praktische API-/Sprachtest stehen in [VOICE.md](VOICE.md).
+Projektstand 0.1.13: DHU-/Phone-Oberfläche 0.1.12-prototype, gleicher Ablauf mit Deutsch/Englisch.
+Die Assistenten-App 0.1.13-dev ist separat; ihre Installation und der
+praktische API-/Sprachtest stehen in [VOICE.md](VOICE.md). Das aktuelle Design-Update
+mit Installationsschritten steht in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md).
 
 ## 1. Projekt bauen
 

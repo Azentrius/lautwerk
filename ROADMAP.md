@@ -1,4 +1,4 @@
-# Roadmap ab 0.1.12
+# Roadmap ab 0.1.13
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
@@ -34,6 +34,12 @@ Tests bestanden; Neuerstellung und Sprachwechsel der Oberfläche mit erfundenen
 Chats geprüft. GitHub-CI konfiguriert. Der Nutzer bestätigt den Gesprächsablauf
 mit beiden Anbietern und den tatsächlichen Gerätesprachwechsel Deutsch/Englisch. Die DHU-Variante steigt
 auf 0.1.12-prototype wegen der Übersetzung; Layout und Aktionen bleiben erhalten.
+
+0.1.13 überträgt das freigegebene Azentrius-Design auf die Smartphone-App,
+einschließlich gemessener, dreistufiger Reiter für große Schrift. 169 verschiedene
+automatisierte Tests bestehen. Die DHU-Variante bleibt unverändert auf 0.1.12.
+Der Nutzer bestätigt „Darstellung und Bedienung passen“; Audio- und Speicherabläufe
+erhalten ihre bisherige Funktion. Herkunft und Regeln stehen in `docs/DESIGN_SYSTEM.md`.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.

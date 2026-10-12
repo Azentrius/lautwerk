@@ -11,6 +11,8 @@ import androidx.compose.runtime.setValue
 
 /** Single-process observable state. Mutations are dispatched on the main thread. */
 object AppState {
+    var phase by mutableStateOf<dev.openautoai.voice.VoicePhase?>(null)
+        private set
     var active by mutableStateOf(false)
         private set
     var provider by mutableStateOf(Provider.OPENAI)
@@ -26,7 +28,8 @@ object AppState {
     var revision by mutableIntStateOf(0)
         private set
 
-    fun update(active: Boolean, provider: Provider, modelId: String, sessionId: String?, status: String) {
+    fun update(active: Boolean, provider: Provider, modelId: String, sessionId: String?, status: String, phase: dev.openautoai.voice.VoicePhase? = if(active) dev.openautoai.voice.VoicePhase.PREPARING else null) {
+        this.phase = phase
         this.active = active
         this.provider = provider
         this.modelId = modelId
