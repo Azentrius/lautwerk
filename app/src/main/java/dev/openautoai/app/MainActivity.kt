@@ -1,5 +1,8 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.storage.ConversationRepository
+import dev.openautoai.core.storage.CredentialStore
+import dev.openautoai.core.storage.StorageFailure
 import dev.openautoai.core.ai.ModelSelection
 import dev.openautoai.settings.ModelSelectionStore
 import androidx.compose.runtime.DisposableEffect
@@ -93,10 +96,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun MainContent(
+internal fun MainContent(
     selections: ModelSelectionStore,
-    store: SecretStore,
-    conversations: ConversationStore,
+    store: CredentialStore,
+    conversations: ConversationRepository,
     onStart: (Conversation) -> Unit,
     onStop: () -> Unit
 ) {
@@ -113,7 +116,9 @@ private fun MainContent(
 
     // React to on-device voice service writes while activity is visible.
     val refresh = AppState.revision
-    val sessions = remember(refresh) { conversations.all() }
+    val archive = remember(conversations, refresh) { runCatching { conversations.all() } }
+    val sessions = archive.getOrDefault(emptyList())
+    val archiveError = archive.exceptionOrNull()?.storageMessage("Der lokale Chatverlauf konnte nicht gelesen werden.")
     val activeSession = sessions.find { it.id == selectedSessionId }
     val shownSession = if (AppState.active && AppState.sessionId != null)
         sessions.find { it.id == AppState.sessionId } ?: activeSession else activeSession
@@ -162,12 +167,12 @@ private fun MainContent(
             Button(onClick = {
                 runCatching { store.save(selectedProvider, keyText) }
                     .onSuccess { keyText = ""; saveStatus = "Schlüssel verschlüsselt gespeichert" }
-                    .onFailure { saveStatus = "Speichern fehlgeschlagen" }
+                    .onFailure { saveStatus = it.storageMessage("Speichern fehlgeschlagen") }
             }, enabled = keyText.isNotBlank()) { Text("Schlüssel speichern") }
             OutlinedButton(onClick = {
-                store.clear(selectedProvider)
-                keyText = ""
-                saveStatus = "Schlüssel entfernt"
+                runCatching { store.clear(selectedProvider) }
+                    .onSuccess { keyText = ""; saveStatus = "Schlüssel entfernt" }
+                    .onFailure { saveStatus = it.storageMessage("Entfernen fehlgeschlagen") }
             }) { Text("Entfernen") }
         }
         if (saveStatus.isNotBlank()) Text(saveStatus)
@@ -175,12 +180,13 @@ private fun MainContent(
         Text(AppState.status)
         AppState.notice?.let { Text(it, color = MaterialTheme.colorScheme.error) }
         Button(
-            enabled = !AppState.active,
+            enabled = !AppState.active && archiveError == null &&
+                (activeSession == null || ModelCatalog.valid(activeSession.provider, activeSession.modelId)),
             onClick = {
-                if (store.read(selectedProvider).isNullOrBlank()) {
-                    saveStatus = "Bitte zuerst einen API-Schlüssel hinterlegen"
-                } else {
-                    runCatching {
+                runCatching {
+                    if (store.read(selectedProvider).isNullOrBlank()) {
+                        saveStatus = "Bitte zuerst einen API-Schlüssel hinterlegen"
+                    } else {
                         // Continuing is only allowed for an unchanged provider/model.
                         val resume = activeSession?.takeIf {
                             it.provider == selectedProvider && it.modelId == selectedModel
@@ -189,14 +195,18 @@ private fun MainContent(
                         selectedSessionId = session.id
                         AppState.changed()
                         onStart(session)
-                    }.onFailure { saveStatus = it.message ?: "Gespräch konnte nicht geöffnet werden" }
-                }
+                    }
+                }.onFailure { saveStatus = it.storageMessage("Gespräch konnte nicht geöffnet werden") }
             }, modifier = Modifier.fillMaxWidth()
         ) { Text(if (activeSession != null) "Gespräch fortsetzen" else "Sprachgespräch starten") }
         OutlinedButton(onClick = onStop, enabled = AppState.active, modifier = Modifier.fillMaxWidth()) {
             Text("Gespräch beenden")
         }
         Text("Chatverlauf (nur auf diesem Gerät)", style = MaterialTheme.typography.titleMedium)
+        if (archiveError != null) {
+            Text(archiveError, color = MaterialTheme.colorScheme.error)
+            OutlinedButton(onClick = { AppState.changed() }) { Text("Verlauf erneut laden") }
+        }
         OutlinedButton(onClick = { selectedSessionId = null }, enabled = !AppState.active) {
             Text("Neues Gespräch auswählen")
         }
@@ -204,9 +214,9 @@ private fun MainContent(
             OutlinedButton(
                 onClick = {
                     // Do not fall back to a different model when reopening an archived chat.
+                    selectedSessionId = c.id
                     if (ModelCatalog.valid(c.provider, c.modelId)) {
                         selection = selections.select(ModelSelection(c.provider, c.modelId))
-                        selectedSessionId = c.id
                     } else {
                         saveStatus = "Das Modell dieses Chats ist nicht mehr im Katalog. Der Verlauf bleibt erhalten."
                     }
@@ -222,7 +232,7 @@ private fun MainContent(
                 onClick = {
                     runCatching { conversations.delete(shownSession.id) }
                         .onSuccess { selectedSessionId = null; AppState.changed() }
-                        .onFailure { saveStatus = it.message ?: "Löschen fehlgeschlagen" }
+                        .onFailure { saveStatus = it.storageMessage("Löschen fehlgeschlagen") }
                 }, enabled = !AppState.active
             ) { Text("Diesen Chat löschen") }
         }
@@ -232,3 +242,6 @@ private fun MainContent(
             style = MaterialTheme.typography.bodySmall)
     }
 }
+
+
+private fun Throwable.storageMessage(fallback: String): String = (this as? StorageFailure)?.message ?: fallback
