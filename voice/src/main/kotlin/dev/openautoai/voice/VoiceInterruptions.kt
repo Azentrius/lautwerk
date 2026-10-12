@@ -1,5 +1,7 @@
 package dev.openautoai.voice
 
+import dev.openautoai.core.i18n.Messages
+
 data class AudioEnvironment(val screenAvailable: Boolean, val communicationBusy: Boolean,
                             val externalOutputs: Set<Int>)
 
@@ -9,10 +11,11 @@ interface VoiceEnvironment {
     fun observe(changed: (AudioEnvironment) -> Unit): Cancel
 }
 
-enum class VoiceInterruption(val message: String) {
-    SCREEN_OFF("Display aus oder Gerät gesperrt. Das Gespräch wurde beendet. Bitte entsperren und erneut starten."),
-    COMMUNICATION("Ein Anruf oder eine andere Sprachverbindung hat Vorrang. Bitte danach erneut starten."),
-    AUDIO_DEVICE("Die angeschlossenen Audiogeräte haben sich geändert. Das Gespräch wurde beendet. Bitte erneut starten.")
+enum class VoiceInterruption(private val text: Messages) {
+    SCREEN_OFF(Messages.INTERRUPTION_SCREEN_OFF),
+    COMMUNICATION(Messages.INTERRUPTION_COMMUNICATION),
+    AUDIO_DEVICE(Messages.INTERRUPTION_AUDIO_DEVICE);
+    val message: String get() = text.text()
 }
 
 /** Observe only one explicit session; never resume automatically after an interruption. */

@@ -1,5 +1,6 @@
 package dev.openautoai.core.storage
 
+import dev.openautoai.core.i18n.Messages
 import dev.openautoai.core.ai.CredentialSource
 import dev.openautoai.core.ai.Provider
 
@@ -30,12 +31,13 @@ interface CredentialStore : CredentialSource {
     override fun keyFor(provider: Provider): String? = read(provider)
 }
 
-enum class StorageError(val userMessage: String) {
-    ARCHIVE_READ("Der lokale Chatverlauf konnte nicht gelesen werden. Vorhandene Daten bleiben erhalten."),
-    ARCHIVE_WRITE("Der Chatverlauf konnte nicht gespeichert werden. Bitte den Gerätespeicher prüfen."),
-    CONVERSATION_MISSING("Dieses Gespräch ist nicht mehr vorhanden. Bitte ein neues Gespräch auswählen."),
-    CREDENTIAL_READ("Der gespeicherte API-Schlüssel konnte nicht gelesen werden. Bitte die Zugangsdaten auf dem Smartphone prüfen."),
-    CREDENTIAL_WRITE("Die Zugangsdaten konnten nicht gespeichert werden. Bitte den Gerätespeicher und den Geräteschlüssel prüfen.")
+enum class StorageError(private val text: Messages) {
+    ARCHIVE_READ(Messages.STORAGE_ARCHIVE_READ),
+    ARCHIVE_WRITE(Messages.STORAGE_ARCHIVE_WRITE),
+    CONVERSATION_MISSING(Messages.STORAGE_CONVERSATION_MISSING),
+    CREDENTIAL_READ(Messages.STORAGE_CREDENTIAL_READ),
+    CREDENTIAL_WRITE(Messages.STORAGE_CREDENTIAL_WRITE);
+    val userMessage: String get() = text.text()
 }
 
 /** Safe, fixed messages only: no plaintext, ciphertext or underlying exception is exposed to the UI. */

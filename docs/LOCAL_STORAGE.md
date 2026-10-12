@@ -1,9 +1,9 @@
-# Lokale Chats und API-Schlüssel – Projektstand 0.1.8
+# Lokale Chats und API-Schlüssel – Projektstand 0.1.12
 
 Die vorhandene Speicherung aus 0.1.0–0.1.3 ist jetzt ein eigener Baustein.
 Die Smartphone-Oberfläche, die Anbieter-Brücke und der Sprachdienst verwenden
 gemeinsame Schnittstellen. Es gibt keine Datenmigration und keinen neuen Cloud-Speicher.
-Die DHU-Oberfläche bleibt beim bestätigten Stand 0.1.2-prototype.
+Die DHU-Oberfläche erhält in 0.1.12-prototype englische Texte; ihre Aktionen bleiben erhalten.
 
 ## Aufbau und Kompatibilität
 
@@ -63,7 +63,7 @@ Die Verschlüsselung nutzt weiterhin den Android Keystore.
 
 ## Auf dem Pixel prüfen
 
-0.1.8-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
+0.1.12-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
 ist ein anderes Paket mit eigenem Speicher. Bei einem Signaturkonflikt nicht
 deinstallieren oder App-Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 
@@ -76,38 +76,61 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für die Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.8-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
+`OpenAutoAI-0.1.12-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
 Seriennummer aus `adb devices -l` verwenden.
 
 Vorhandene Chats lassen sich ohne API-Aufruf öffnen und lesen. Zum späteren
 echten API-/Sprachtest siehe [PROVIDER_ADAPTERS.md](PROVIDER_ADAPTERS.md).
 Ein API-Schlüssel gehört ausschließlich in das Eingabefeld der Smartphone-App,
-nicht in Git, Diagnoseausgaben oder diesen Chat. Die Eingabe wird nach erfolgreichem
-Speichern geleert. Anbieterwechsel beginnen weiterhin einen separaten Chat.
+nicht in Git, Diagnoseausgaben oder diesen Chat. Unter „Einstellungen“ speichern;
+das Eingabefeld wird nach Annahme des Speicherauftrags sofort geleert. Erst der
+Erfolgshinweis bestätigt das Speichern; bei einem Fehler den Schlüssel erneut
+eingeben. Während einer laufenden Sitzung sind Schlüsseländerungen gesperrt.
+Anbieterwechsel beginnen weiterhin einen separaten Chat.
 
 Die automatisierten Speichertests verwenden eine eigene Test-App, zufällige
 Testdateien und eigene Keystore-Aliase. Sie löschen ausschließlich ihre eigenen
-Testdaten. Die drei neuen Oberflächentests verwenden injizierte Speicherattrappen:
-keine echten Schlüssel, Chatdaten, Sprachaufnahme oder Anbieteranfrage.
+Testdaten. In 0.1.9 prüfen neun Oberflächentests und sieben Zustands-/Worker-Tests
+zusätzlich langsame Zugriffe, Abbruch, lange Listen und Löschbestätigung mit
+Speicherattrappen. Keine echten Schlüssel, Chatdaten, Sprachaufnahme oder Anbieteranfrage.
 
 ## Grenzen und nächster Schritt
 
 Die Sperren gelten innerhalb eines Prozesses. Mehrprozesszugriffe werden nicht
-unterstützt. Die Schnittstellen arbeiten synchron. Seit 0.1.5 führt der Sprachablauf diese
-Arbeit auf einem Worker aus; die übrige Speicheroberfläche greift noch auf dem
-Hauptthread darauf zu.
-Das gesamte Archiv wird eingelesen und bei Änderungen neu verschlüsselt. Sehr
-große Verläufe können deshalb verzögern; Hintergrundzugriff und eine begrenzte
-Verlaufsansicht sind spätere Arbeiten.
+unterstützt. Die Schnittstellen arbeiten synchron, werden aber seit 0.1.9 auch von
+der Smartphone-Oberfläche im Hintergrund aufgerufen. Der Sprachdienst behält seine
+getrennten Worker; gemeinsame Speichersperren bleiben wirksam. Die Oberfläche
+bündelt Aktualisierungswünsche und verwirft veraltete Leseergebnisse. Startvorbereitung
+kann abgebrochen werden; eine schon begonnene atomare Speicherung kann abschließen.
+
+Chats erscheinen unter „Verlauf“, Nachrichten unter „Gespräch“. Die Liste zeichnet
+nur den sichtbaren Bereich; zunächst werden die letzten 50 Nachrichten angeboten.
+„Ältere Nachrichten anzeigen“ erweitert um je 50. Dabei wird keine Nachricht gelöscht.
+Löschen erfordert eine Bestätigung, die an die ursprüngliche Chat-ID gebunden ist.
+
+Seit 0.1.11 durchsucht die [Verlaufssuche](HISTORY_SEARCH.md) den im Speicher
+vorhandenen Archivstand auf dem Hintergrund-Worker. Suchtext/Anbieterfilter und
+Suchergebnisse bleiben flüchtig; kein zusätzlicher Klartextindex und kein neues
+Dateiformat. Geänderte Archivstände entwerten laufende Suchen und veraltete Treffer.
+
+Das gesamte Archiv wird weiterhin eingelesen und bei Änderungen neu verschlüsselt.
+Die Anzeige ist begrenzt, nicht das Dateiformat oder die gesamte Speicherbelegung.
+Sehr große Archive können Hintergrundaufträge weiter verzögern. Eine spätere
+indexierte Ablage/Seitennachladung und explizite Größenregeln bleiben offene Arbeit.
 
 Der Verlust eines Keystore-Schlüssels macht die damit verschlüsselten Daten
-unlesbar. Es gibt hier noch keinen Export, Import oder Wiederherstellungsassistenten.
+unlesbar. Seit 0.1.10 gibt es einen ausdrücklich gewählten [Textexport](CHAT_EXPORT.md)
+einzelner Chats. Dieser ist unverschlüsselt und kein Backup-/Importformat; er liest
+keine gespeicherten Zugangsdaten und verändert das Archiv nicht. Verschlüsseltes
+Backup, Import und ein Wiederherstellungsassistent sind weiterhin offene Arbeit.
 Kein automatisches Löschen als Fehlerbehebung. Backup-/Gerätetransfer-Regeln
 bleiben ein offener Punkt des Prototyps. Die vorhandene `allowBackup=false`-Angabe
 ersetzt keinen geprüften Ablauf für Gerätewechsel.
 
-Ein kompletter Sprachdialog mit echtem API-Konto sowie Mikrofon-/TTS-Lebenszyklus
-und sofortiger Netzwerkabbruch sind weiterhin nicht getestet. Die geprüfte lokale
-Speicherung wird seit 0.1.5 vom neuen [Sprachablauf](VOICE.md) verwendet. Dort steht
-auch der aktuelle Stand des praktischen Sprachtests.
+Der Nutzer bestätigte den grundlegenden Sprachdialog mit beiden Anbietern unter
+0.1.6 sowie Stoppen/Neustarten und Display-aus unter 0.1.8. Der erneute praktische
+Test der Oberfläche seit 0.1.9 steht noch aus. Anruf- und Headset-/Bluetooth-Tests
+bleiben zurückgestellt. Den genauen Stand beschreibt [VOICE.md](VOICE.md).
 Alle Ergebnisse: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+
+Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).

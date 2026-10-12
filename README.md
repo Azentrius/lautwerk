@@ -1,4 +1,4 @@
-# OpenAuto AI 0.1.8 – Sprachfunktion für OpenAI und Claude
+# OpenAuto AI 0.1.12 – Sprachfunktion für OpenAI und Claude
 
 Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
 die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
@@ -7,21 +7,26 @@ Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
 von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Neu in 0.1.8:** Beenden bricht den einzelnen laufenden Netzwerkaufruf aktiv ab.
-Verspätete Ergebnisse und alte Abbruchsignale beeinflussen keine neue Sitzung.
-Bei ausgeschaltetem/gesperrtem Display, gemeldetem Anruf-/Kommunikationsmodus oder
-geänderten angeschlossenen Audio-Ausgabegeräten endet das Gespräch ohne automatischen Neustart.
-Die gemeinsame Stimmwahl mit Tempo und Hörprobe bleibt erhalten.
+**Neu in 0.1.12:** Deutsch und Englisch passend zur Gerätesprache, mit
+„Gespräch starten“ statt „Sprachgespräch starten“. Dialoge, Meldungen,
+Stimmeinstellungen, Erkennung, feste Hörprobe und Anbieteranweisungen folgen
+der Sprache. Die deutsche Stimmwahl bleibt beim Wechsel zu Englisch erhalten.
+Startabbruch, Berechtigungsrückmeldungen und Wiederherstellung der Oberfläche
+sind zusätzlich abgesichert. Die lokale Suche und der Textexport bleiben erhalten.
 
-90 automatisierte Prüfungen bestehen; Assistant 0.1.8-dev ist auf dem Pixel installiert.
-Lint: 0 Fehler, 9 bestehende Warnungen. Der Nutzer bestätigt Stoppen/Neustarten
-per Schaltfläche und Beenden bei Display-aus für beide Anbieter. Die manuellen
-Anruf- und Bluetooth-/Headset-Tests sind auf Nutzerwunsch zurückgestellt und bleiben ungeprüft.
-Details: [Sprachanleitung](docs/VOICE.md) und [Testbericht](docs/BUILD_AND_TEST.md).
+157 verschiedene automatisierte Prüfungen bestehen: 88 JVM-Prüfungen,
+61 Assistant-Gerätetests und 8 DHU-/Auswahltests. Beide Apps sind als Updates
+installiert. Lint: 0 Fehler, 11 Warnungen und 1 Hinweis. Der Nutzer bestätigt
+den Gesprächsablauf mit beiden Anbietern und den Wechsel Deutsch/Englisch.
+Anruf- und Headset-/Bluetooth-Praxistests bleiben zurückgestellt.
 
-Die **Assistenten-APK ist 0.1.8-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
-dem bestätigten **0.1.2-prototype**-Stand mit Auswahl, Titel und Starten.
-Die neuen Sprachbausteine sind nur in der Assistenten-App eingebunden.
+Die **Assistenten-APK ist 0.1.12-dev / Code 13**, die **DHU-/Phone-Testvariante
+0.1.12-prototype / Code 4**. Die DHU-Aktionen und das Layout bleiben erhalten,
+zusätzlich sind ihre Texte übersetzt. Voice bleibt ausschließlich in der Assistenten-App.
+
+Details: [Sprache und Wiederaufnahme](docs/LOCALIZATION.md),
+[Verlaufssuche](docs/HISTORY_SEARCH.md), [Textexport](docs/CHAT_EXPORT.md),
+[Bedienung](docs/PHONE_UI.md), [Testbericht](docs/BUILD_AND_TEST.md).
 
 ## Schnellstart unter Windows
 
@@ -87,8 +92,8 @@ offizieller Verteilungsweg, aber keine Zusage der Kategoriezulässigkeit.
   Starten-Aktion und aktueller Auswahl als Text.
 - `prototype-app`: Smartphone-Auswahl und zwei Testvarianten; keine API-/Audio-Aufrufe.
 
-Weitere Arbeit: Sprachablauf mit echten Konten praktisch prüfen, Audio-Routing testen,
-sofortigen Netzwerkabbruch und Hintergrundzugriff auch in der übrigen Speicher-UI ergänzen.
+Weitere Arbeit: Cloud-Ziele des Textexports prüfen, verschlüsseltes Backup/Import und
+Größenregeln für sehr große Archive planen. Anruf- und Headset-Tests bleiben zurückgestellt.
 Ein Anbieterwechsel im bisherigen VoiceService verwendet jetzt das pro Anbieter
 gemerkte Modell und beginnt weiterhin einen neuen Chat ohne fremden Verlauf.
 Den jeweils bestätigten Sprachteststand beschreibt [VOICE.md](docs/VOICE.md). Weitere Planung: [ROADMAP.md](ROADMAP.md).
@@ -108,6 +113,9 @@ Die ursprünglichen README-/Roadmap-Dateien liegen als historische, nicht aktuel
 Beschreibungen unter `docs/history/`.
 
 ## GitHub
+
+[Automatische Prüfungen](.github/workflows/android.yml) bauen die Debug-Varianten,
+führen JVM-Tests und Lint aus. Keine API-Schlüssel oder Live-Anfragen in CI.
 
 Quellen, Wrapper, Lizenz, Dokumentation und Tests gehören ins Repository.
 `local.properties`, `.gradle`, Build-Verzeichnisse, Schlüssel und Diagnoseausgaben

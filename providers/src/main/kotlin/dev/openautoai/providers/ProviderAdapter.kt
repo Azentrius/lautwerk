@@ -1,5 +1,6 @@
 package dev.openautoai.providers
 
+import dev.openautoai.core.i18n.AppLanguage
 import dev.openautoai.core.ai.ChatRequest
 import dev.openautoai.core.ai.ChatReply
 import org.json.JSONArray
@@ -16,9 +17,14 @@ internal fun ChatRequest.messagesJson() = JSONArray().also { array ->
 
 internal fun JSONObject.stringOrNull(key: String): String? = opt(key) as? String
 
-internal const val VOICE_INSTRUCTIONS =
-    "Du bist ein hilfreicher deutschsprachiger Sprachassistent für die Nutzung im Auto. " +
-        "Antworte kurz, natürlich und ohne Markdown, Tabellen oder Links. " +
-        "Unterstütze sicheres Fahren und verlange keine Bedienung am Bildschirm."
+internal val VOICE_INSTRUCTIONS: String get() =
+    if (AppLanguage.locale().language == "de")
+        "Du bist ein hilfreicher deutschsprachiger Sprachassistent für die Nutzung im Auto. " +
+            "Antworte kurz, natürlich und ohne Markdown, Tabellen oder Links. " +
+            "Unterstütze sicheres Fahren und verlange keine Bedienung am Bildschirm."
+    else
+        "You are a helpful English-speaking voice assistant for use in the car. " +
+            "Reply briefly and naturally, without Markdown, tables or links. " +
+            "Support safe driving and do not require interaction with the screen."
 // Retain the previous prototype's output budget. No automatic retries or higher-budget continuation.
 internal const val OUTPUT_TOKENS = 350

@@ -1,4 +1,4 @@
-# OpenAI-/Claude-Adapter – Projektstand 0.1.8
+# OpenAI-/Claude-Adapter – Projektstand 0.1.12
 
 ## Verhalten und Grenzen
 
@@ -97,8 +97,8 @@ keinen Modellzugriff und keinen erfolgreichen Voice-End-to-End-Ablauf.
 1. `app:debug` installieren. Das Paket heißt `dev.openautoai.app`, während der
    DHU-Test weiterhin `dev.openautoai.prototype.dhu` heißt. Beide tragen derzeit
    den Anzeigenamen OpenAuto AI; im Zweifel per ADB gezielt öffnen (siehe unten).
-2. Auf dem Smartphone Anbieter und Modell wählen. Einen eigenen API-Schlüssel
-   ausschließlich dort eingeben. Beim Start eines Sprachgesprächs werden Mikrofon
+2. Auf dem Smartphone unter „Einstellungen“ Anbieter und Modell wählen. Einen eigenen API-Schlüssel
+   ausschließlich dort eingeben. Beim Start eines Gesprächs werden Mikrofon
    und echte API-Nutzung aktiv; dabei können die normalen API-Kosten entstehen.
 3. Eine kurze Frage stellen. Antwort, Verlauf, Stoppen und eventuelle Hinweise prüfen.
 4. Gespräch beenden. Den anderen Anbieter separat wählen und testen. Vorhandene
@@ -118,8 +118,10 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für das Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.8-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
+`OpenAutoAI-0.1.9-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
 `adb devices -l` ermitteln. Bei Signaturkonflikten nicht automatisch deinstallieren,
 da das gespeicherte Daten löschen würde; denselben Debug-Schlüssel verwenden.
 
 Die bestehenden [DHU-Schritte](START_WINDOWS.md) bleiben gültig.
+
+Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).

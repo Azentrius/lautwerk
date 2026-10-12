@@ -41,6 +41,24 @@ class SpeechSettingsTest {
         } finally { context.deleteSharedPreferences(name) }
     }
 
+    @Test fun languageSpecificChoicesKeepLegacyGermanVoiceWhenUsingEnglish() {
+        val name="speech-languages-${UUID.randomUUID()}"
+        val prefs=context.getSharedPreferences(name,Context.MODE_PRIVATE)
+        try {
+            prefs.edit().putString("engine","engine").putString("voice","de-choice").commit()
+            val store=SpeechSettingsStore(prefs)
+            val legacy=Voice("de-choice",Locale.GERMAN,Voice.QUALITY_NORMAL,Voice.LATENCY_NORMAL,false,emptySet())
+            store.migrateLegacy(setOf(legacy),"engine")
+            assertEquals("de-choice",store.load(Locale.GERMAN).voice)
+            assertNull(store.load(Locale.ENGLISH).voice)
+            store.choose("engine","en-choice",Locale.ENGLISH)
+            assertEquals("en-choice",store.load(Locale.ENGLISH).voice)
+            assertEquals("de-choice",store.load(Locale.GERMAN).voice)
+            store.choose(null,null,Locale.ENGLISH)
+            assertNull(store.load(Locale.ENGLISH).voice);assertEquals("de-choice",store.load(Locale.GERMAN).voice)
+        } finally { context.deleteSharedPreferences(name) }
+    }
+
     @Test fun catalogExcludesMissingDataAndOtherLanguagesWithStableLocalFirstOrder() {
         fun voice(name: String, locale: Locale = Locale.GERMANY, online: Boolean = false, missing: Boolean = false) =
             Voice(name, locale, Voice.QUALITY_NORMAL, Voice.LATENCY_NORMAL, online,

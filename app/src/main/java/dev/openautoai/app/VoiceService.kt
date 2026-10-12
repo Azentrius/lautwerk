@@ -1,6 +1,9 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.i18n.Messages
 import android.app.*
+import android.content.res.Configuration
+import dev.openautoai.core.i18n.AppLanguage
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.os.*
@@ -17,12 +20,13 @@ class VoiceService : Service() {
     private lateinit var controller: VoiceController
     private lateinit var interruptions: VoiceInterruptions
     private var destroying = false
+    private var sessionLanguage = AppLanguage.locale().language
 
     override fun onBind(intent: Intent?): IBinder? = null
     override fun onCreate() {
         super.onCreate()
         getSystemService(NotificationManager::class.java).createNotificationChannel(
-            NotificationChannel(CHANNEL, "Aktives KI-Gespräch", NotificationManager.IMPORTANCE_LOW)
+            NotificationChannel(CHANNEL, Messages.ACTIVE_CHANNEL.text(), NotificationManager.IMPORTANCE_LOW)
         )
         val credentials = SecretStore(applicationContext)
         val selection = ModelSelectionStore(applicationContext)
@@ -42,15 +46,15 @@ class VoiceService : Service() {
             ACTION_START -> {
                 if (controller.state.active) return START_NOT_STICKY
                 val id = intent.getStringExtra(EXTRA_SESSION_ID)
-                if (id.isNullOrBlank()) { controller.stop("Gespräch nicht gefunden"); return START_NOT_STICKY }
+                if (id.isNullOrBlank()) { controller.stop(Messages.NOT_FOUND.text()); return START_NOT_STICKY }
                 try {
                     // Promote before async storage/TTS initialization to satisfy the foreground deadline.
-                    if (Build.VERSION.SDK_INT >= 34) startForeground(NOTIFICATION_ID, notification("Gespräch wird vorbereitet"), ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE)
-                    else startForeground(NOTIFICATION_ID, notification("Gespräch wird vorbereitet"))
+                    if (Build.VERSION.SDK_INT >= 34) startForeground(NOTIFICATION_ID, notification(Messages.PREPARING.text()), ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE)
+                    else startForeground(NOTIFICATION_ID, notification(Messages.PREPARING.text()))
                     val blocked = interruptions.start()
                     if (blocked == null) controller.start(id) else controller.stop(blocked.message)
                 } catch (_: Exception) {
-                    controller.stop("Sprachdienst konnte nicht starten. Bitte Mikrofonberechtigung prüfen und die App auf dem Smartphone öffnen.")
+                    controller.stop(Messages.SERVICE_FAILED.text())
                 }
             }
             else -> controller.stop()
@@ -81,7 +85,16 @@ class VoiceService : Service() {
         return Notification.Builder(this, CHANNEL).setSmallIcon(android.R.drawable.ic_btn_speak_now)
             .setContentTitle("OpenAuto AI").setContentText(status).setContentIntent(open)
             .setOngoing(true).setOnlyAlertOnce(true).setCategory(Notification.CATEGORY_SERVICE)
-            .addAction(Notification.Action.Builder(null, "Beenden", stop).build()).build()
+            .addAction(Notification.Action.Builder(null, Messages.STOP_ACTION.text(), stop).build()).build()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        val current = AppLanguage.locale().language
+        if (sessionLanguage != current) {
+            sessionLanguage = current
+            controller.stop(Messages.LANGUAGE_CHANGED.text())
+        }
     }
 
     override fun onDestroy() {

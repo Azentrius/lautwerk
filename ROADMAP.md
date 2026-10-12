@@ -1,4 +1,4 @@
-# Roadmap ab 0.1.8
+# Roadmap ab 0.1.12
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
@@ -17,6 +17,23 @@ Der Nutzer bestätigt einen deutlich besseren Klang; lokale und Online-Varianten
 90 automatisierte Prüfungen bestehen. Stoppen/Neustarten per Schaltfläche und Display-aus
 sind für beide Anbieter vom Nutzer bestätigt. Anruf- und Headset-/Bluetooth-Tests sind
 auf Nutzerwunsch vom 12.10.2026 zurückgestellt und bleiben ungeprüft.
+0.1.9 trennt Gespräch/Einstellungen/Verlauf, hält Starten/Beenden sichtbar und führt
+Speicherarbeit der Oberfläche im Hintergrund aus. Lange Verläufe werden bedarfsgerecht
+gezeichnet; ältere Nachrichten bleiben erreichbar. 34 Gerätetests bestehen.
+0.1.10 ergänzt den ausdrücklich gewählten Textexport einzelner Chats ohne Änderung
+des verschlüsselten Archivs. 59 automatisierte Prüfungen bestehen. Der Nutzer
+bestätigt am 12.10.2026 den lokalen Export sowie die vollständige, lesbare Datei.
+Cloud-Dateidienste und Rotation während der Auswahl bleiben ungeprüft.
+0.1.11 ergänzt die lokale Verlaufssuche mit Anbieterfilter und direktem Sprung zur
+ersten passenden Nachricht. 78 automatisierte Prüfungen bestehen. Der Nutzer
+bestätigt am 12.10.2026 Suche, Filter und Treffer-Navigation.
+
+0.1.12 ergänzt Deutsch/Englisch, „Gespräch“-Bezeichnungen, sprachabhängige
+Stimmwahl und zusätzliche Absicherung des Gesprächsstarts. 157 verschiedene
+Tests bestanden; Neuerstellung und Sprachwechsel der Oberfläche mit erfundenen
+Chats geprüft. GitHub-CI konfiguriert. Der Nutzer bestätigt den Gesprächsablauf
+mit beiden Anbietern und den tatsächlichen Gerätesprachwechsel Deutsch/Englisch. Die DHU-Variante steigt
+auf 0.1.12-prototype wegen der Übersetzung; Layout und Aktionen bleiben erhalten.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
@@ -26,9 +43,13 @@ auf Nutzerwunsch vom 12.10.2026 zurückgestellt und bleiben ungeprüft.
    Fehlerfälle und Android-JSON sind offline geprüft; Modellzugriff und Voice-End-to-End
    sind nur nach einem bestätigten praktischen Test belegt; siehe `docs/VOICE.md`.
    Der DHU-Prototyp löst weiterhin keine API-Anfrage aus.
-4. Auch die übrige Speicheroberfläche im Hintergrund ausführen und große Verläufe
-   begrenzen. Export/Import, Gerätewechsel und explizite Wiederherstellung planen.
-   Vorhandene Daten nicht stillschweigend migrieren oder löschen.
+4. Verlaufssuche 0.1.11 und lokaler Textexport 0.1.10 sind bestätigt; Cloud-Ziele und Rotation während der
+   Auswahl später prüfen. Die Smartphone-Bedienung wurde mit realen Gesprächen
+   beider Anbieter unter 0.1.12 vom Nutzer bestätigt. Die vollständige
+   Archivdatei wird weiterhin im Hintergrund gelesen; echte Seitennachladung und
+   Größenregeln für sehr große Archive planen. Verschlüsseltes Backup/Import,
+   Gerätewechsel und explizite Wiederherstellung folgen später. Der neue Textexport
+   ist kein Wiederherstellungsformat; keine stillschweigende Migration oder Löschung.
 5. Die implementierten Voice-Schnittstellen praktisch prüfen: Mikrofonfreigaben,
    Audiofokus, hörbares TTS, Wiederaufnahme und Abbruch mit beiden API-Konten.
    Zurückgestellt auf Nutzerwunsch: Anruf- und Headset-/Bluetooth-Unterbrechungen
@@ -38,4 +59,4 @@ auf Nutzerwunsch vom 12.10.2026 zurückgestellt und bleiben ungeprüft.
 6. Modellkatalog gezielt pflegen und mögliche Modellmigrationen explizit anbieten;
    bisherige Auswahl/Chat-Zuordnung nicht unbemerkt verändern.
 7. Quellcode in [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai) pflegen
-   und CI einrichten. Reale Testergebnisse vor weiteren Auto-Funktionen bewerten.
+   und die eingerichtete CI nutzen. Entwurfs-PRs vor einer geordneten Zusammenführung prüfen. Reale Testergebnisse vor weiteren Auto-Funktionen bewerten.
