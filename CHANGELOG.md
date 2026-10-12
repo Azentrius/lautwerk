@@ -315,22 +315,32 @@ Phone and car template of the DHU test app share one provider and model selectio
 
 The 0.1.0 source becomes a buildable project with a minimal Android Auto prototype for the DHU.
 
-- Complete Gradle wrapper with a pinned distribution checksum; Gradle 8.13, AGP 8.13.2, Kotlin 2.2.20,
-  JDK 17 and compile/target SDK 36 instead of 37, with Compose BOM 2025.08.01 instead of 2026.09.00.
-- Assistant app kept as `app` (`dev.openautoai.app`, 0.1.1-dev) with two compile fixes in `MainActivity`;
-  the other 0.1.0 Kotlin files are unchanged.
+- Complete Gradle wrapper (jar, shell and `.bat` scripts) with a pinned distribution checksum; Gradle 8.13,
+  AGP 8.13.2, Kotlin 2.2.20, JDK 17 and compile/target SDK 36 instead of 37: the build machine had API 36,
+  and the code needs no API 37 feature. Compose BOM 2026.09.00 needs SDK 37 and AGP 9.1, so 2025.08.01
+  replaces it; Activity Compose stays 1.12.0.
+- Assistant app kept as `app` (`dev.openautoai.app`, 0.1.1-dev, code 2, same application ID). Compared by
+  hash with the 0.1.0 archive, `AppState`, `ChatApi`, `ConversationStore`, `Provider`, `SecretStore` and
+  `VoiceService` are byte-identical. `MainActivity` gets two compile fixes: a broken quotation mark in the
+  text with the voice command "Stopp", and `permissions: Array<out String>` becomes `Array<String>` to
+  match AndroidX `ComponentActivity`. Keystore aliases, archive format, API endpoints, provider logic and
+  voice flow are unchanged; this keeps the code, it does not validate the provider APIs or review the
+  old code's security.
 - New modules `core`, `car-ui` and `prototype-app` with the flavors `phone` and `dhu`; the car service
   keeps host validation on and shows a `MessageTemplate` with a Start action (Car App Library 1.8.0-rc01).
 - The `dhu` flavor declares the POI category only as a debug-only test placeholder; `dhuRelease` is
   disabled.
 - Device tests for the phone Start button and the car template's click callback.
 - Launcher visibility, title and Start confirmed by the user in a real DHU.
-- The original 0.1.0 README and roadmap are kept in `docs/history/`.
+- The original 0.1.0 README and roadmap were kept as history; the 0.1.0 section below sums them up.
 
 ## 0.1.0
 
 First source prototype for voice conversations with OpenAI and Claude on Android, not yet built.
 
+- Received as `OpenAutoAI_0.1.0_Quellcode.zip` on 2026-10-11, SHA-256
+  `01ac3818fe2d174461c8a5303e4b1a5afe15e6f9a7c97bf61737b1deca0010b8`. Source only: not built or tested on
+  a device, no APK, no Android Auto display app and no `CarAudioRecord`.
 - Jetpack Compose phone app; API keys for OpenAI and Claude encrypted with AES-GCM under an Android
   Keystore key; app auto-backup disabled.
 - Selectable provider with a small fixed model list; OpenAI Responses API and Anthropic Messages API with
@@ -338,3 +348,9 @@ First source prototype for voice conversations with OpenAI and Claude on Android
 - Speech input through Android's `SpeechRecognizer`, local text-to-speech, foreground service.
 - Locally encrypted chat archive with reopening, continuing and deleting chats.
 - Voice commands to switch provider; a switch deliberately starts a new chat.
+- Known limits: own API keys only; no realtime streaming, no interrupting the read-out (barge-in), no wake
+  word; the model list is static; the local history does not appear in the providers' own apps.
+- The roadmap went from a phone MVP to experimental car integration (USB and AAWireless in a Kia, a Car
+  App Library prototype if a valid category can be tested) to an open-source repository with CI and
+  signed, traceable releases. A free general AI chat app is not an approved Android Auto category, and a
+  sideloaded APK does not guarantee projection to the car display.

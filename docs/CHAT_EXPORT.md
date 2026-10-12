@@ -1,79 +1,76 @@
-# Einzelne Chats als Textdatei speichern – 0.1.12
+# Saving individual chats as text files – 0.1.12
 
-Der Textexport speichert einen ausgewählten Chat als lesbare UTF-8-Datei. Er enthält
-Titel, Anbieter, Modell, letzten Änderungszeitpunkt in UTC und **alle Nachrichten**
-in ihrer gespeicherten Reihenfolge. Auch ältere, in der Ansicht zunächst ausgeblendete
-Nachrichten werden exportiert. Auch nach dem Öffnen über die Verlaufssuche wird
-der gesamte Chat exportiert, nicht nur passende Nachrichten. Ein alter Modellname
-verhindert den Export nicht.
+The text export saves a selected chat as a readable UTF-8 file. It contains the title, provider,
+model, last modification time in UTC and **all messages** in their stored order. Older messages
+that are initially hidden in the view are exported as well. Even after opening the chat via the
+history search, the entire chat is exported, not only the matching messages. An old model name
+does not prevent the export.
 
-## Bedienung
+## Usage
 
-1. Unter **Verlauf** einen Chat öffnen und das Gespräch gegebenenfalls beenden.
-2. Unter dem Chattitel auf **Als Textdatei exportieren** tippen.
-3. Den Hinweis zur unverschlüsselten Kopie lesen. **Abbrechen** belässt alles unverändert.
-4. **Speicherort wählen** öffnet Androids Speicherdialog. Vorgeschlagen wird
-   `OpenAutoAI-Chat.txt`, ohne einen Teil deines Chattexts im Dateinamen.
-5. Für eine lokale Kopie einen lokalen Ordner, z. B. **Downloads**, wählen und speichern.
-   Bei einem Cloud-Dienst wird die Datei durch diesen Dienst dorthin übertragen.
-6. Erst **Textdatei gespeichert** bestätigt den abgeschlossenen Schreibvorgang.
-   Die Textdatei anschließend im Dateimanager öffnen und prüfen.
+1. Under **History**, open a chat and end the conversation if necessary.
+2. Below the chat title, tap **Export as text file**.
+3. Read the notice about the unencrypted copy. **Cancel** leaves everything unchanged.
+4. **Choose location** opens Android's save dialog. The suggested name is
+   `OpenAutoAI-Chat.txt`, without any part of your chat text in the file name.
+5. For a local copy, choose a local folder, e.g. **Downloads**, and save.
+   With a cloud service, the file is transferred there by that service.
+6. Only **Text file saved** confirms that the write has completed.
+   Then open and check the text file in the file manager.
 
-Das Öffnen und Exportieren benötigt keine KI-Anfrage, keinen API-Schlüssel und kein
-Mikrofon. Es wird keine Nachricht versendet. Gespeicherte API-Zugangsdaten werden
-nicht gelesen oder exportiert. **Persönliche Angaben oder versehentlich in eine
-Nachricht geschriebene Geheimnisse bleiben Teil des Chattexts.** Es gibt keine
-automatische Redaktion. Die gewählte Datei ist unverschlüsselt und unabhängig vom
-verschlüsselten App-Archiv. Sie bleibt auch nach dem Löschen des Chats bestehen.
+Opening and exporting need no AI request, no API key and no microphone. No message is sent.
+Saved API credentials are not read or exported. **Personal information or secrets accidentally
+written into a message remain part of the chat text.** There is no automatic redaction. The
+chosen file is unencrypted and independent of the encrypted app archive. It remains even after
+the chat is deleted.
 
-Der Export ist eine Textkopie, kein verschlüsseltes Backup und kein Importformat.
-Er sichert keine Schlüssel, Einstellungen oder Sprachnachrichten und kann nicht
-automatisch in OpenAuto AI zurückgespielt werden. Das App-Archiv wird nicht geändert.
+The export is a text copy, not an encrypted backup and not an import format.
+It does not back up keys, settings or voice messages and cannot be restored into OpenAuto AI
+automatically. The app archive is not changed.
 
-## Abbruch und Fehler
+## Cancellation and errors
 
-- Während der Vorbereitung ist **Export abbrechen** verfügbar. Auch das Verlassen
-  des Bildschirms bricht eine noch laufende Vorbereitung ab.
-- Im Android-Speicherdialog mit Zurück/Abbrechen beenden: keine Chatdaten werden geschrieben.
-- Während Vorbereitung, Auswahl und Schreiben sind weitere Starts, Exporte,
-  Schlüsseländerungen und Löschvorgänge gesperrt. Die übrigen Bereiche bleiben erreichbar.
-- Schreib-, Zugriffs-, Flush- und Schließfehler führen zu einem festen Fehlerhinweis,
-  nicht zu einer Erfolgsmeldung. Am Ziel kann eine leere oder unvollständige Datei
-  zurückbleiben; dort prüfen oder löschen und den Export neu beginnen.
-- Bei Prozessende während der Auswahl wird kein Chat aus der aktuellen Auswahl
-  erraten. Ein verspätetes Ergebnis schreibt nichts; eine vom Dateidienst bereits
-  angelegte leere Datei kann bestehen bleiben. Während des Schreibens ist die Ausgabe
-  nicht atomar, besonders bei Cloud-Dateidiensten. Ein unterbrochener Export muss geprüft werden.
+- During preparation, **Cancel export** is available. Leaving the screen also cancels a
+  preparation that is still running.
+- Exit the Android save dialog with Back/Cancel: no chat data is written.
+- During preparation, selection and writing, further starts, exports, key changes and deletions
+  are locked. The other sections stay reachable.
+- Write, access, flush and close errors lead to a persistent error notice, not to a success
+  message. An empty or incomplete file can remain at the destination; check or delete it there
+  and start the export again.
+- If the process ends during selection, no chat is guessed from the current selection. A late
+  result writes nothing; an empty file already created by the file service can remain. While
+  writing, the output is not atomic, especially with cloud file services. An interrupted export
+  must be checked.
 
-Eine Aktivitätsneuerstellung behält den vorbereiteten Schnappschuss im ViewModel.
-Der Dialogauftrag wird nur einmal entnommen. Chattexte und Zieladressen werden nicht
-in den gespeicherten Activity-Zustand, Protokolle oder dauerhafte URI-Freigaben geschrieben.
-Ein echter Rotationstest mit geöffnetem Systemdialog steht noch aus.
+An activity recreation keeps the prepared snapshot in the ViewModel.
+The dialog request is taken only once. Chat texts and destination addresses are not written to
+the saved Activity state, logs or persistent URI grants.
+A real rotation test with the system dialog open is still pending.
 
-## Technischer Umfang und Prüfung
+## Technical scope and testing
 
-Die App verwendet Androids `ACTION_CREATE_DOCUMENT` mit `text/plain` und
-`CATEGORY_OPENABLE`; nur die zurückgegebene `content:`-Adresse wird beschrieben.
-Dateiauswahl und Berechtigung vergibt Android. Es gibt keine neue Speicherberechtigung,
-keinen Zugriff auf beliebige Ordner und keinen automatischen Upload.
-Grundlage: [Storage Access Framework](https://developer.android.com/training/data-storage/shared/documents-files).
+The app uses Android's `ACTION_CREATE_DOCUMENT` with `text/plain` and `CATEGORY_OPENABLE`; only
+the returned `content:` address is written. Android handles file selection and permission. There
+is no new storage permission, no access to arbitrary folders and no automatic upload.
+Reference: [Storage Access Framework](https://developer.android.com/training/data-storage/shared/documents-files).
 
-Ein separater Formatter schreibt den vollständigen Chat abschnittsweise, ohne einen
-zweiten vollständigen Ausgabetext im Speicher zu bauen. Die vorhandene Archivdatei
-wird weiterhin komplett gelesen; dies ist keine Datenbankmigration oder Seitennachladung.
+A separate formatter writes the full chat in chunks, without building a second full output text
+in memory. The existing archive file is still read completely; this is not a database migration
+or paged loading.
 
-Automatisiert geprüft: beide Anbieter, alte Modelle, Unicode, 121 Nachrichten,
-große Einzeltexte, Abbruch, doppelte Dialogrückmeldungen, fehlende Chats, Speicherfehler,
-UTF-8-Ausgabe in eine echte temporäre Testdatei und die Bestätigung in der Oberfläche.
-Die Tests verwenden ausschließlich erfundene Inhalte. Am 12.10.2026 bestätigt der
-Nutzer nach dem Testauftrag für einen unkritischen Chat und das lokale Ziel Downloads:
-**„Export und Datei funktionieren.“** Damit sind der lokale Export, das Öffnen und
-der vollständige Inhalt dieses getesteten Chats praktisch bestätigt. Cloud-Ziele
-und Rotation während der Auswahl sind dadurch nicht bestätigt.
+Automated tests cover both providers, old models, Unicode, 121 messages, large single texts,
+cancellation, duplicate dialog callbacks, missing chats, storage errors, UTF-8 output to a real
+temporary test file and the confirmation in the UI.
+The tests use only fictional content. On 2026-10-12, after the test assignment for a
+non-sensitive chat and the local destination Downloads, the user confirmed:
+**"Export and file work."** This confirms in practice the local export, opening the file and the
+complete content of this tested chat. Cloud destinations and rotation during selection are not
+confirmed by this.
 
-Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt. Die DHU-Oberfläche
-0.1.12-prototype bietet weiterhin keinen Export; Layout und Aktionen bleiben erhalten.
+Call and headset/Bluetooth tests remain deferred. The DHU UI 0.1.12-prototype still offers no
+export; layout and actions are unchanged.
 
-[Bedienung](PHONE_UI.md) · [Installation](VOICE.md) · [Testbericht](BUILD_AND_TEST.md)
+[Phone UI](PHONE_UI.md) · [Installation](VOICE.md) · [Test report](BUILD_AND_TEST.md)
 
-Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).
+Since 0.1.12: [German/English and resumption](LOCALIZATION.md).

@@ -1,43 +1,40 @@
 # Android Auto: Azentrius 0.1.14
 
-Der DHU-Prototyp fordert jetzt das freigegebene Azentrius-Farbpaar für die
-Start-Schaltfläche an. Schrift, Form, Abstände und tatsächliche Farbwahl zeichnet
-weiterhin der Android-Auto-Host. Der Stand ist ein lokales Debug-Experiment;
-„Starten“ erhöht ausschließlich den UI-Testzähler.
+The DHU prototype now requests the approved Azentrius color pair for the start button. Font,
+shape, spacing and the actual color choice are still drawn by the Android Auto host. This state
+is a local debug experiment; "Start" only increments the UI test counter.
 
-## Quelle und Umfang
+## Source and scope
 
-Grundlage der freigegebenen Umsetzung und Abnahme 0.1.14 ist [Azentrius/design-system, Commit 7fe60bf](https://github.com/Azentrius/design-system/blob/7fe60bfb1b244d9e36464c6e5c590dfa228ee4dc/android-auto.md) (privates Repository).
+The approved implementation and the 0.1.14 acceptance test are based on [Azentrius/design-system, commit 7fe60bf](https://github.com/Azentrius/design-system/blob/7fe60bfb1b244d9e36464c6e5c590dfa228ee4dc/android-auto.md) (private repository).
 
-Die aktuelle Design-Referenz ist inzwischen [Commit 170dd38](https://github.com/Azentrius/design-system/blob/170dd38be84a9f107440a730eb29361087fc63ea/android-auto.md).
-Sie präzisiert Host-Farben/Hintergrund anhand dieser Abnahme und enthält die
-O1-Entscheidung zum neuen App-Symbol aus `6a7a951`. B2/B3 bleiben unverändert;
-an 0.1.14 ist nichts nachzuziehen. Die Symbol-Dateien wurden anschließend in
-0.1.15 eingebunden; siehe [App-Symbol und aktuelle Installation](APP_IDENTITY.md).
-Die folgenden Angaben beschreiben weiterhin den historischen Stand 0.1.14.
+The current design reference is now [commit 170dd38](https://github.com/Azentrius/design-system/blob/170dd38be84a9f107440a730eb29361087fc63ea/android-auto.md).
+It refines host colors/background based on this acceptance test and contains the O1 decision on
+the new app icon from `6a7a951`. B2/B3 are unchanged; nothing needs to be caught up in 0.1.14.
+The icon files were then integrated in 0.1.15; see
+[App icon and current installation](APP_IDENTITY.md).
+The following details still describe the historical state of 0.1.14.
 
-| Vorgabe | Umsetzung |
+| Requirement | Implementation |
 |---|---|
-| B1 | Vorhandenes MessageTemplate, Titel, APP_ICON, eine Nachricht und genau eine Aktion bleiben erhalten. |
-| B2 | Nur im DHU-Flavor: Metadatum `androidx.car.app.theme`, CarAppTheme mit Primary `#C8A96E` und PrimaryDark `#7D5F22`. Kein Sekundärpaar und keine Tag-/Nacht-Overrides. |
-| B3 | Start-Aktion mit `CarColor.PRIMARY`; keine Textfarbe, kein Icon und kein FLAG_PRIMARY. |
-| B4 | Alle vorhandenen deutschen/englischen Texte, Reihenfolge und vollständigen Modellnamen bleiben erhalten. |
-| B5 | Keine weiteren Smartphone-Tokens, Schriften oder Icons werden an den Host übergeben. |
+| B1 | The existing MessageTemplate, title, APP_ICON, one message and exactly one action are kept. |
+| B2 | DHU flavor only: metadata `androidx.car.app.theme`, CarAppTheme with Primary `#C8A96E` and PrimaryDark `#7D5F22`. No secondary pair and no day/night overrides. |
+| B3 | Start action with `CarColor.PRIMARY`; no text color, no icon and no FLAG_PRIMARY. |
+| B4 | All existing German/English texts, their order and the full model names are kept. |
+| B5 | No further phone tokens, fonts or icons are passed to the host. |
 
-Das bestehende türkis-blaue App-Symbol bleibt. Es gibt keine neue Aufnahmefunktion,
-keinen Gesprächszustand im Auto und keine Änderung an Kategorie oder HostValidator.
-`dhuRelease` bleibt deaktiviert. Eine Zulassung oder offiziell unterstützte
-Kategorie für allgemeine KI-Gespräche wird nicht behauptet.
+The existing turquoise-blue app icon stays. There is no new recording feature, no conversation
+state in the car and no change to the category or HostValidator. `dhuRelease` stays disabled. No
+approval or officially supported category for general AI conversations is claimed.
 
-Nur die DHU-Variante steigt auf **0.1.14-prototype / Code 5**. Die separate
-Assistenten-App bleibt **0.1.13-dev / Code 14**, die Phone-Vergleichsvariante
-**0.1.12-prototype / Code 4**.
+Only the DHU variant moves to **0.1.14-prototype / Code 5**. The separate assistant app stays at
+**0.1.13-dev / Code 14**, the phone comparison variant at **0.1.12-prototype / Code 4**.
 
-## Build und Installation nach der Ausgangsmessung
+## Build and installation after the baseline measurement
 
-Vor der Installation die bisherige DHU-Version nach dem Testbericht messen:
-A3/A4 bei Tag und Nacht und A7 mit sechs Starts. Andernfalls fehlt der Vergleich.
-Die hier gesicherte Ausgangs-APK ist 0.1.12-prototype / Code 4.
+Before installing, measure the previous DHU version as described in the test report: A3/A4 by day
+and night, and A7 with six starts. Otherwise the comparison is missing. The baseline APK saved
+here is 0.1.12-prototype / Code 4.
 
 ```powershell
 Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI'
@@ -48,16 +45,16 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.prototype.dhu/dev.openautoai.prototype.MainActivity'
 ```
 
-Für den Download den APK-Pfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.14-dhu-debug.apk` ersetzen. Erwartet: `Success` und Version
-0.1.14-prototype / Code 5. Nicht deinstallieren oder App-Daten löschen.
+For the download, replace the APK path with the full path to
+`OpenAutoAI-0.1.14-dhu-debug.apk`. Expected: `Success` and version
+0.1.14-prototype / Code 5. Do not uninstall or clear app data.
 
-## DHU-Prüfung
+## DHU check
 
-Die bereits eingerichtete Verbindung und den Head-Unit-Server verwenden.
-Die vollständige Einrichtung steht in [START_WINDOWS.md](START_WINDOWS.md).
-Unter `tools/dhu/` liegen acht Profile: vier Formate, jeweils Touch und Rotary.
-Die DHU-Konsole bleibt für Befehle offen.
+Use the connection and head unit server that are already set up.
+The full setup is described in [START_WINDOWS.md](START_WINDOWS.md).
+`tools/dhu/` contains eight profiles: four formats, each for touch and rotary.
+The DHU console stays open for commands.
 
 ```powershell
 $dhu = "$env:LOCALAPPDATA\Android\Sdk\extras\google\auto\desktop-head-unit.exe"
@@ -65,14 +62,14 @@ $dhu = "$env:LOCALAPPDATA\Android\Sdk\extras\google\auto\desktop-head-unit.exe"
 & $dhu -c '.\tools\dhu\800x480-touch.ini' -i touch
 ```
 
-In der DHU-Konsole `day`, `night` und `screenshot DATEINAME.png` verwenden.
-Eine Sitzung regulär mit `quit` schließen. Für Rotary das entsprechende Profil
-mit `-i rotary` starten; mit Pfeiltasten bzw. `dpad click` bedienen.
-Keine Vorlage zurücksetzen oder Restriktion abschalten, um den Sechs-Start-Test
-zu bestehen. Screenshots erst innerhalb von OpenAuto AI aufnehmen, ohne fremde
-Apps, Anrufdaten oder Kartenpositionen in veröffentlichte Belege zu übernehmen.
+In the DHU console, use `day`, `night` and `screenshot FILENAME.png`.
+Close a session normally with `quit`. For rotary, start the corresponding profile with
+`-i rotary`; operate it with the arrow keys or `dpad click`.
+Do not reset a template or disable a restriction to pass the six-start test. Take screenshots
+only inside OpenAuto AI, without including other apps, call data or map positions in published
+evidence.
 
-Versionen und App-Log erfassen:
+Capture versions and the app log:
 
 ```powershell
 & $dhu --version
@@ -80,29 +77,29 @@ Versionen und App-Log erfassen:
 & $adb -s 56161FDCH000H8 logcat -d -s OpenAutoAI:I '*:S'
 ```
 
-`car.onCreateScreen api=…` ist die ausgehandelte **Car-API-Stufe des Hosts**;
-`minCarApiLevel=1`, Android API und Bibliotheksversion ersetzen diese Messung nicht.
-`car.start count=n` muss zum sichtbaren Zähler passen.
+`car.onCreateScreen api=…` is the negotiated **Car API level of the host**;
+`minCarApiLevel=1`, the Android API and the library version do not replace this measurement.
+`car.start count=n` must match the visible counter.
 
-## Abnahme und Entscheidungen
+## Acceptance test and decisions
 
-Die Matrix umfasst 800×480, 1280×720, 1920×1080 und 1280×720 mit 220 Pixeln
-Höhenrand, jeweils Deutsch/Englisch, Tag/Nacht, OpenAI/GPT-5.4 und
-Claude/Sonnet 4.6 sowie Touch/Rotary: 64 Kombinationen.
-Die Kriterien A1–A11 und ihr tatsächlicher Status stehen im [Testbericht](BUILD_AND_TEST.md).
-Englischer Fallback wird zusätzlich mit einer nicht unterstützten Sprache geprüft.
+The matrix covers 800×480, 1280×720, 1920×1080 and 1280×720 with a 220-pixel vertical margin,
+each in German/English, day/night, OpenAI/GPT-5.4 and Claude/Sonnet 4.6, and touch/rotary:
+64 combinations.
+Criteria A1–A11 and their actual status are listed in the [test report](BUILD_AND_TEST.md).
+The English fallback is additionally checked with an unsupported language.
 
-- **A3/A4:** Auch die bisherige Host-Standardfarbe messen. Für beide Versionen
-  tatsächliche Flächen-/Textpixel, Koordinaten, Screenshot und Kontrast notieren.
-  Volle Schriftstriche statt geglätteter Randpixel verwenden; mindestens 4,5:1.
-  Tag und Nacht getrennt erfassen. Der gesetzte Farbwert beweist keine Host-Darstellung.
-- **A7:** In derselben 800×480-Sitzung sechs Starts, ohne Reset. Scheitert bereits
-  die Ausgangsversion, ist das nach Nutzerfreigabe ein bekannter, für 0.1.14
-  nicht blockierender Fehler. Ein neu auftretendes Scheitern ist eine Regression.
-  Ein noch nicht ausgeführter Vergleich ist weder bestanden noch ein bekannter Fehler.
-- **O2:** Bei unzureichendem Kontrast ist der freigegebene Rückfall
-  `CarColor.DEFAULT` mit erneuter Abnahme vorgesehen. Nicht vorsorglich anwenden.
-- **O3:** Kürzt der Host Anbieter/Modell, Abweichung melden und eine Entscheidung
-  zu Anzeigenamen einholen. Keine selbst erfundenen Kürzungen oder Designwerte.
+- **A3/A4:** Also measure the previous host default color. For both versions, record the actual
+  fill/text pixels, coordinates, screenshot and contrast. Use solid glyph strokes instead of
+  anti-aliased edge pixels; at least 4.5:1. Record day and night separately. The configured
+  color value does not prove how the host renders it.
+- **A7:** Six starts in the same 800×480 session, without a reset. If the baseline version already
+  fails, this is, with the user's approval, a known bug that does not block 0.1.14. A newly
+  occurring failure is a regression. A comparison that has not been run yet is neither passed
+  nor a known bug.
+- **O2:** If the contrast is insufficient, the approved fallback is `CarColor.DEFAULT` with a new
+  acceptance test. Do not apply it pre-emptively.
+- **O3:** If the host truncates provider/model, report the deviation and get a decision on
+  display names. Do not invent truncations or design values.
 
-Anruf- und Headset-/Bluetooth-Tests bleiben auf Wunsch zurückgestellt.
+Call and headset/Bluetooth tests remain deferred as requested.

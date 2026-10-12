@@ -1,71 +1,67 @@
-# Lokale Chats und API-Schlüssel – Projektstand 0.1.12
+# Local chats and API keys – project status 0.1.12
 
-Die vorhandene Speicherung aus 0.1.0–0.1.3 ist jetzt ein eigener Baustein.
-Die Smartphone-Oberfläche, die Anbieter-Brücke und der Sprachdienst verwenden
-gemeinsame Schnittstellen. Es gibt keine Datenmigration und keinen neuen Cloud-Speicher.
-Die DHU-Oberfläche erhält in 0.1.12-prototype englische Texte; ihre Aktionen bleiben erhalten.
+The existing storage from 0.1.0–0.1.3 is now a separate module. The phone UI, the provider bridge
+and the voice service use shared interfaces. There is no data migration and no new cloud storage.
+The DHU UI gets English texts in 0.1.12-prototype; its actions remain unchanged.
 
-## Aufbau und Kompatibilität
+## Structure and compatibility
 
-| Baustein | Aufgabe |
+| Module | Responsibility |
 |---|---|
-| `core/storage` | `Conversation`, `Turn`, `ConversationRepository`, `CredentialStore` und feste Speicherfehler |
-| `storage` | Android Keystore, AES/GCM, atomare Archivdatei, verschlüsselte Zugangsdaten und gemeinsame Sperren |
-| `app` | Smartphone-/Voice-Anbindung; die bisherigen Namen `ConversationStore` und `SecretStore` bleiben als Typalias erhalten |
-| `prototype-app`, `car-ui` | Keine Abhängigkeit von `storage` oder `providers`; weiterhin nur Auswahl-/UI-Test |
+| `core/storage` | `Conversation`, `Turn`, `ConversationRepository`, `CredentialStore` and fixed storage errors |
+| `storage` | Android Keystore, AES/GCM, atomic archive file, encrypted credentials and shared locks |
+| `app` | Phone/voice integration; the previous names `ConversationStore` and `SecretStore` remain as type aliases |
+| `prototype-app`, `car-ui` | No dependency on `storage` or `providers`; still only a selection/UI test |
 
-Die folgenden Kennungen und Daten bleiben identisch:
+The following identifiers and data stay identical:
 
-| Daten | Bestehendes Format |
+| Data | Existing format |
 |---|---|
-| Chatdatei | `files/conversation_archive.dat` |
-| Archivschlüssel | Android-Keystore-Alias `openautoai-chat-archive-v1` |
-| Zugangsdaten | SharedPreferences `api_credentials`, Einträge `openai` und `anthropic` |
-| Zugangsschlüssel | Android-Keystore-Alias `openautoai-key-v1` |
-| Verschlüsselter Inhalt | 12 Byte IV, danach AES/GCM-Chiffrat einschließlich 128-Bit-Tag; Zugangsdaten zusätzlich Base64 |
-| JSON-Archiv | `id`, `title`, `provider`, `model`, `updated`, `turns`; Nachrichten mit `role` und `content` |
+| Chat file | `files/conversation_archive.dat` |
+| Archive key | Android Keystore alias `openautoai-chat-archive-v1` |
+| Credentials | SharedPreferences `api_credentials`, entries `openai` and `anthropic` |
+| Credentials key | Android Keystore alias `openautoai-key-v1` |
+| Encrypted content | 12-byte IV, followed by AES/GCM ciphertext including 128-bit tag; credentials additionally Base64 |
+| JSON archive | `id`, `title`, `provider`, `model`, `updated`, `turns`; messages with `role` and `content` |
 
-`OPENAI` und `CLAUDE` sowie die Modell-ID jedes Chats bleiben erhalten. Der
-Kompatibilitätstest erzeugt Daten mit einer unabhängigen Nachbildung des alten
-Codecs, liest und ergänzt sie mit dem neuen Modul und liest das Ergebnis wieder
-mit dem alten Codec. Das testet Formatkompatibilität mit künstlichen Daten;
-persönliche Chats und Schlüssel des Nutzers wurden dafür nicht ausgelesen.
+`OPENAI` and `CLAUDE` as well as the model ID of each chat are preserved. The compatibility test
+creates data with an independent re-implementation of the old codec, reads and extends it with the
+new module and reads the result again with the old codec. This tests format compatibility with
+synthetic data; the user's personal chats and keys were not read for this.
 
-## Verbessertes Verhalten
+## Improved behavior
 
-- Mehrere Speicherinstanzen verwenden dieselbe Sperre pro Datei bzw. Zugangsdatenablage.
-  Gleichzeitiges Lesen, Ändern und Schreiben innerhalb des App-Prozesses verliert
-  dadurch keine Änderung einer anderen Instanz.
-- Eine beschädigte oder unlesbare Chatdatei wird nicht als leer interpretiert.
-  Die Oberfläche zeigt einen Hinweis und „Verlauf erneut laden“; Starten bleibt
-  bis zum erfolgreichen Lesen gesperrt. Mutationen überschreiben keine unlesbare Datei.
-- Ein alter `.bak`-Stand wird über `AtomicFile.openRead()` wiederhergestellt,
-  auch wenn die Hauptdatei fehlt. Abgebrochene Schreibvorgänge werden zurückgerollt.
-- Das Lesen erzeugt niemals einen neuen Keystore-Schlüssel. Fehlt der Schlüssel
-  zu vorhandenen Daten, erscheint ein Fehler. Ein fehlender API-Schlüssel und
-  ein unlesbarer gespeicherter Schlüssel werden unterschiedlich behandelt.
-- Zugangsdaten werden mit geprüftem `commit()` gespeichert. Ein Fehlschlag wird
-  angezeigt; ein bereits veränderter Eintrag wird nach einem negativen Rückgabewert
-  nach Möglichkeit wiederhergestellt. Ein voller oder defekter Datenträger kann
-  auch diese Wiederherstellung verhindern; Erfolg wird dann nicht zugesichert.
-- Bei alten Modell-IDs außerhalb des heutigen Katalogs bleibt der Chat lesbar.
-  Fortsetzen ist gesperrt; es wird nicht unbemerkt ein anderes Modell verwendet.
-- Schlägt das Archivieren einer neuen Nutzernachricht fehl, wird sie nicht in
-  den laufenden Anfragekontext aufgenommen und nicht an den Anbieter gesendet.
+- Multiple storage instances use the same lock per file or credential store. Concurrent reading,
+  modifying and writing within the app process therefore does not lose a change made by another
+  instance.
+- A corrupted or unreadable chat file is not interpreted as empty. The UI shows a notice and
+  "Reload history"; starting stays blocked until reading succeeds. Mutations do not overwrite an
+  unreadable file.
+- An old `.bak` state is restored via `AtomicFile.openRead()`, even if the main file is missing.
+  Aborted writes are rolled back.
+- Reading never creates a new Keystore key. If the key for existing data is missing, an error
+  appears. A missing API key and an unreadable saved key are handled differently.
+- Credentials are saved with a checked `commit()`. A failure is shown; an entry that was already
+  changed is restored where possible after a negative return value. A full or faulty storage medium
+  can also prevent this restoration; success is not guaranteed in that case.
+- For old model IDs outside today's catalog, the chat stays readable. Continuing is blocked; a
+  different model is never used silently.
+- If archiving a new user message fails, the message is not added to the running request context
+  and not sent to the provider.
 
-Die Synchronisierung ist erforderlich, weil Androids `AtomicFile` selbst keine
-Sperren für gleichzeitige Zugriffe bereitstellt.
-[AtomicFile-Dokumentation](https://developer.android.com/reference/android/util/AtomicFile)
-Die synchrone Rückmeldung von `commit()` wird bewusst benötigt.
+The synchronization is necessary because Android's `AtomicFile` itself does not provide locks for
+concurrent access.
+[AtomicFile documentation](https://developer.android.com/reference/android/util/AtomicFile)
+The synchronous result of `commit()` is needed on purpose.
 [SharedPreferences.Editor](https://developer.android.com/reference/android/content/SharedPreferences.Editor)
-Die Verschlüsselung nutzt weiterhin den Android Keystore.
+Encryption still uses the Android Keystore.
 [KeyGenParameterSpec](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec)
 
-## Auf dem Pixel prüfen
+## Checking on the Pixel
 
-0.1.12-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
-ist ein anderes Paket mit eigenem Speicher. Bei einem Signaturkonflikt nicht
-deinstallieren oder App-Daten löschen, sondern denselben Debug-Schlüssel verwenden.
+0.1.12-dev is installed as an update of `dev.openautoai.app`. The DHU test app is a different
+package with its own storage. In case of a signature conflict, do not uninstall or clear app data;
+use the same debug key instead.
 
 ```powershell
 Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI'
@@ -75,62 +71,54 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
 ```
 
-Für die Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.12-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
-Seriennummer aus `adb devices -l` verwenden.
+For the download APK, replace the install path with the full path to
+`OpenAutoAI-0.1.12-assistant-debug.apk`. On another device, use its serial number from
+`adb devices -l`.
 
-Vorhandene Chats lassen sich ohne API-Aufruf öffnen und lesen. Zum späteren
-echten API-/Sprachtest siehe [PROVIDER_ADAPTERS.md](PROVIDER_ADAPTERS.md).
-Ein API-Schlüssel gehört ausschließlich in das Eingabefeld der Smartphone-App,
-nicht in Git, Diagnoseausgaben oder diesen Chat. Unter „Einstellungen“ speichern;
-das Eingabefeld wird nach Annahme des Speicherauftrags sofort geleert. Erst der
-Erfolgshinweis bestätigt das Speichern; bei einem Fehler den Schlüssel erneut
-eingeben. Während einer laufenden Sitzung sind Schlüsseländerungen gesperrt.
-Anbieterwechsel beginnen weiterhin einen separaten Chat.
+Existing chats can be opened and read without an API call. For the later real API/voice test, see
+[PROVIDER_ADAPTERS.md](PROVIDER_ADAPTERS.md). An API key belongs only in the input field of the
+phone app, not in Git, diagnostic output or a chat. Save it under "Settings"; the input field is
+cleared as soon as the save request is accepted. Only the success message confirms that the key was
+saved; on an error, enter the key again. Key changes are blocked while a session is running.
+Provider switches still start a separate chat.
 
-Die automatisierten Speichertests verwenden eine eigene Test-App, zufällige
-Testdateien und eigene Keystore-Aliase. Sie löschen ausschließlich ihre eigenen
-Testdaten. In 0.1.9 prüfen neun Oberflächentests und sieben Zustands-/Worker-Tests
-zusätzlich langsame Zugriffe, Abbruch, lange Listen und Löschbestätigung mit
-Speicherattrappen. Keine echten Schlüssel, Chatdaten, Sprachaufnahme oder Anbieteranfrage.
+The automated storage tests use their own test app, random test files and their own Keystore
+aliases. They delete only their own test data. In 0.1.9, nine UI tests and seven state/worker tests
+additionally check slow access, cancellation, long lists and delete confirmation with storage
+fakes. No real keys, chat data, voice recording or provider request.
 
-## Grenzen und nächster Schritt
+## Limits and next step
 
-Die Sperren gelten innerhalb eines Prozesses. Mehrprozesszugriffe werden nicht
-unterstützt. Die Schnittstellen arbeiten synchron, werden aber seit 0.1.9 auch von
-der Smartphone-Oberfläche im Hintergrund aufgerufen. Der Sprachdienst behält seine
-getrennten Worker; gemeinsame Speichersperren bleiben wirksam. Die Oberfläche
-bündelt Aktualisierungswünsche und verwirft veraltete Leseergebnisse. Startvorbereitung
-kann abgebrochen werden; eine schon begonnene atomare Speicherung kann abschließen.
+The locks apply within one process. Multi-process access is not supported. The interfaces work
+synchronously, but since 0.1.9 they are also called in the background from the phone UI. The voice
+service keeps its separate workers; the shared storage locks remain in effect. The UI bundles
+refresh requests and discards stale read results. Start preparation can be cancelled; an atomic
+save that has already started can complete.
 
-Chats erscheinen unter „Verlauf“, Nachrichten unter „Gespräch“. Die Liste zeichnet
-nur den sichtbaren Bereich; zunächst werden die letzten 50 Nachrichten angeboten.
-„Ältere Nachrichten anzeigen“ erweitert um je 50. Dabei wird keine Nachricht gelöscht.
-Löschen erfordert eine Bestätigung, die an die ursprüngliche Chat-ID gebunden ist.
+Chats appear under "History", messages under "Conversation". The list only draws the visible area;
+initially the last 50 messages are offered. "Show older messages" extends the list by 50 each time.
+No message is deleted in the process. Deleting requires a confirmation that is bound to the original
+chat ID.
 
-Seit 0.1.11 durchsucht die [Verlaufssuche](HISTORY_SEARCH.md) den im Speicher
-vorhandenen Archivstand auf dem Hintergrund-Worker. Suchtext/Anbieterfilter und
-Suchergebnisse bleiben flüchtig; kein zusätzlicher Klartextindex und kein neues
-Dateiformat. Geänderte Archivstände entwerten laufende Suchen und veraltete Treffer.
+Since 0.1.11, the [history search](HISTORY_SEARCH.md) searches the archive state held in memory on
+the background worker. Search text/provider filter and search results remain transient; no
+additional plaintext index and no new file format. Changed archive states invalidate running
+searches and stale matches.
 
-Das gesamte Archiv wird weiterhin eingelesen und bei Änderungen neu verschlüsselt.
-Die Anzeige ist begrenzt, nicht das Dateiformat oder die gesamte Speicherbelegung.
-Sehr große Archive können Hintergrundaufträge weiter verzögern. Eine spätere
-indexierte Ablage/Seitennachladung und explizite Größenregeln bleiben offene Arbeit.
+The entire archive is still read in and re-encrypted on changes. The display is limited, not
+the file format or the total storage usage. Very large archives can further delay background jobs.
+Later indexed storage/paged loading and explicit size rules remain open work.
 
-Der Verlust eines Keystore-Schlüssels macht die damit verschlüsselten Daten
-unlesbar. Seit 0.1.10 gibt es einen ausdrücklich gewählten [Textexport](CHAT_EXPORT.md)
-einzelner Chats. Dieser ist unverschlüsselt und kein Backup-/Importformat; er liest
-keine gespeicherten Zugangsdaten und verändert das Archiv nicht. Verschlüsseltes
-Backup, Import und ein Wiederherstellungsassistent sind weiterhin offene Arbeit.
-Kein automatisches Löschen als Fehlerbehebung. Backup-/Gerätetransfer-Regeln
-bleiben ein offener Punkt des Prototyps. Die vorhandene `allowBackup=false`-Angabe
-ersetzt keinen geprüften Ablauf für Gerätewechsel.
+Losing a Keystore key makes the data encrypted with it unreadable. Since 0.1.10 there is an
+explicitly chosen [text export](CHAT_EXPORT.md) of individual chats. It is unencrypted and not a
+backup/import format; it does not read any saved credentials and does not change the archive.
+Encrypted backup, import and a recovery wizard are still open work. No automatic deletion as error
+recovery. Backup/device transfer rules remain an open point of the prototype. The existing
+`allowBackup=false` setting does not replace a tested flow for changing devices.
 
-Der Nutzer bestätigte den grundlegenden Sprachdialog mit beiden Anbietern unter
-0.1.6 sowie Stoppen/Neustarten und Display-aus unter 0.1.8. Der erneute praktische
-Test der Oberfläche seit 0.1.9 steht noch aus. Anruf- und Headset-/Bluetooth-Tests
-bleiben zurückgestellt. Den genauen Stand beschreibt [VOICE.md](VOICE.md).
-Alle Ergebnisse: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+The user confirmed the basic voice dialog with both providers under 0.1.6, as well as
+stopping/restarting and screen-off under 0.1.8. The renewed practical test of the UI since 0.1.9 is
+still pending. Call and headset/Bluetooth tests remain deferred. The exact status is described in
+[VOICE.md](VOICE.md). All results: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
 
-Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).
+Since 0.1.12: [German/English and resumption](LOCALIZATION.md).

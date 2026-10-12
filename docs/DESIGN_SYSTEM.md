@@ -1,67 +1,63 @@
 # Azentrius in OpenAuto AI 0.1.13
 
-Die bestehende Smartphone-App verwendet das freigegebene Azentrius-Design:
-systemabhängig hell/dunkel, DM Sans, die gelieferten PatternFly-Icons, feste
-Farb-Tokens und Bausteine ohne Ripple. Dynamische Material-Farben sind aus.
-Die DHU-Oberfläche bleibt in ihren bisherigen Android-Auto-Vorlagen.
+The existing phone app uses the approved Azentrius design: light/dark following the system,
+DM Sans, the supplied PatternFly icons, fixed color tokens and components without ripple.
+Dynamic Material colors are off.
+The DHU UI keeps its existing Android Auto templates.
 
-## Aktuelle Referenz und Quellen der Umsetzung
+## Current reference and implementation sources
 
-Aktuelle Design-Referenz: [170dd38](https://github.com/Azentrius/design-system/tree/170dd38be84a9f107440a730eb29361087fc63ea)
-im privaten Repository Azentrius/design-system.
-Sie enthält die DHU-Präzisierungen und das neue App-Symbol aus `6a7a951`.
-Der ursprüngliche Import war ein reines Quellen-Update. In 0.1.15 wurden Symbol,
-Startbild und Dienstsymbol eingebunden; siehe [APP_IDENTITY.md](APP_IDENTITY.md).
-Das bestätigte Seiten-Design bleibt erhalten.
+Current design reference: [170dd38](https://github.com/Azentrius/design-system/tree/170dd38be84a9f107440a730eb29361087fc63ea)
+in the private repository Azentrius/design-system.
+It contains the DHU refinements and the new app icon from `6a7a951`.
+The original import was a pure source update. In 0.1.15 the app icon, splash screen and service
+icon were integrated; see [APP_IDENTITY.md](APP_IDENTITY.md).
+The confirmed page design is kept.
 
-Die folgenden historischen Quellen dokumentieren die Umsetzung von 0.1.13:
+The following historical sources document the implementation of 0.1.13:
 
-- Ursprüngliches Paket (ZIP), unverändert importiert; die Kopie ist inzwischen aus
-  diesem Repository entfernt. ZIP-SHA256: `fdf2805c9690584e6ea12b36032972bb021285070758245c666ac42b873d984f`.
-- Ergänzung: [Design-System 7601a14](https://github.com/Azentrius/design-system/tree/7601a14763258e8d0b7929efd4a3689e10d31cab).
-  Die dortige Android-Regel hat Vorrang vor dem Android-Abschnitt des ZIP.
-- Farbwerte und Android-Assets stimmen mit beiden Quellen überein. Vier TTFs,
-  die XML-Schriftfamilie und 30 Vector-Drawables sind original übernommen.
-  DM Serif Display ist mitgeliefert, aber auf diesen Seiten nicht eingesetzt.
-- OFL- und MIT-Lizenzen liegen in der App und sind unter Einstellungen →
-  Lizenzen ohne Netzwerkzugriff lesbar.
+- Original package (ZIP), imported unchanged; the copy has since been removed from this
+  repository. ZIP SHA256: `fdf2805c9690584e6ea12b36032972bb021285070758245c666ac42b873d984f`.
+- Addition: [Design system 7601a14](https://github.com/Azentrius/design-system/tree/7601a14763258e8d0b7929efd4a3689e10d31cab).
+  Its Android rule takes precedence over the Android section of the ZIP.
+- Color values and Android assets match both sources. Four TTFs, the XML font family and
+  30 vector drawables were taken over unchanged.
+  DM Serif Display is included but not used on these pages.
+- The OFL and MIT licenses are included in the app and can be read under Settings →
+  Licenses without network access.
 
-Es wurden keine neuen Farben, Icons oder Größen für das Design erfunden.
-Die zunächst fehlende Regel für schmale Reiter wurde vom Nutzer im Design-System
-ergänzt und erst danach umgesetzt. Es sind keine weiteren Vorgaben offen.
+No new colors, icons or sizes were invented for the design.
+The rule for narrow tabs, which was missing at first, was added to the design system by the user
+and only implemented afterwards. No further requirements are open.
 
-## Darstellung und bestehendes Verhalten
+## Rendering and existing behavior
 
-`design/AzentriusTheme.kt`, `AzPalette.kt`, `AzComponents.kt` und `AzScreens.kt`
-kapseln die Darstellung. Schriftgrößen bleiben in sp, Abstände in dp.
-Die drei Reiter messen ihre längste Beschriftung bei aktueller Schriftgröße:
-nebeneinander, darunter oder waagerecht verschiebbar. Alle wechseln gemeinsam;
-bei verschiebbaren Reitern wird die Auswahl ohne Animation ganz sichtbar gerückt.
-Beschriftungen bleiben einzeilig, ungetrennt und vollständig. Die allgemeine
-Typografie deaktiviert Silbentrennung. Aktionen stapeln sich nach Platzbedarf.
+`design/AzentriusTheme.kt`, `AzPalette.kt`, `AzComponents.kt` and `AzScreens.kt`
+encapsulate the rendering. Font sizes stay in sp, spacing in dp.
+The three tabs measure their longest label at the current font size: side by side, stacked, or
+horizontally scrollable. All tabs switch together; with scrollable tabs, the selected tab is
+moved fully into view without animation. Labels stay single-line, unhyphenated and complete.
+The general typography disables hyphenation. Actions stack as space requires.
 
-Gespräch, Einstellungen, Verlauf und die eigenständige Seite Stimme und Tempo
-behalten ihre Funktionen. Nutzertexte erscheinen als rechte Blase, Antworten
-in voller Breite. Verlaufseinträge zeigen die letzte Änderung, Anbieter und
-Modell; vorhandene Nachrichtentreffer bleiben unverändert. Es gibt keine neuen
-Ausschnitte, Markierungen, Dauerangaben oder vorläufige Spracherkennung.
+Conversation, Settings, History and the separate Voice and speed page keep their functions.
+User texts appear as a right-aligned bubble, answers at full width. History entries show the
+last change, provider and model; existing message matches are unchanged. There are no new
+snippets, highlights, durations or interim speech recognition results.
 
-Die untere Leiste zeigt Gesprächsphase und Export getrennt. Ihre Darstellung
-verwendet typisierte Zustände aus der vorhandenen Steuerung. Starten, Fortsetzen,
-Beenden sowie Start-/Exportabbruch behalten ihre bisherigen Voraussetzungen.
-Export-Ergebnisse bleiben bis zur nächsten Vorbereitung bzw. zum nächsten
-Gesprächsstart sichtbar. Es gibt keinen zusätzlichen Speicherbutton und keinen
-Abbruch während des Dateischreibens.
+The bottom bar shows the conversation phase and the export separately. Its rendering uses typed
+states from the existing controller. Start, Continue, End and start/export cancellation keep
+their existing preconditions. Export results stay visible until the next preparation or the next
+conversation start. There is no additional save button and no cancellation while the file is
+being written.
 
-Die Stimmenliste verwendet Optionsfelder. Jede ausdrückliche Online-Auswahl
-öffnet die bestehende Bestätigung; Abbrechen ändert die Auswahl nicht. Es gibt
-keinen gespeicherten Zustimmungsstatus. Android-Standard bleibt ungekennzeichnet.
-Die beiden Hörprobe-Buttons bleiben sichtbar und spielen nur die gewählte Stimme.
-Anbieter, Modellkatalog, Speicherung, API-Aufrufe und Audioablauf bleiben erhalten.
+The voice list uses radio buttons. Each explicit online selection opens the existing
+confirmation; cancelling does not change the selection. There is no saved consent status. The
+Android default stays unmarked. The two preview buttons stay visible and play only the selected
+voice. Providers, model catalog, storage, API calls and audio flow are kept.
 
-## Update auf diesem Windows-PC
+## Update on this Windows PC
 
-Projekt: `C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI`.
+Project: `C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI`.
 
 ```powershell
 Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI'
@@ -73,23 +69,23 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/.MainActivity'
 ```
 
-Für den Download denselben Installationsbefehl mit dem vollständigen Pfad zu
-`OpenAutoAI-0.1.13-assistant-debug.apk` verwenden. Erwartet: `Success`;
-Version `0.1.13-dev`, Code 14. Das Update verwendet dieselbe Debug-Signatur und
-erhält die App-Daten. Nicht deinstallieren, wenn Android eine andere Signatur meldet.
+For the download, use the same install command with the full path to
+`OpenAutoAI-0.1.13-assistant-debug.apk`. Expected: `Success`;
+version `0.1.13-dev`, code 14. The update uses the same debug signature and
+keeps the app data. Do not uninstall if Android reports a different signature.
 
-Die DHU-/Phone-Variante bleibt `0.1.12-prototype`, Code 4. Ihre exakten Installations-
-und DHU-Verbindungsschritte stehen weiter in [START_WINDOWS.md](START_WINDOWS.md).
-Der Smartphone-Assistent wird durch dieses Update nicht zu einer zugelassenen
-Android-Auto-Kategorie. Die experimentelle Registrierung und Hostprüfung ändern sich nicht.
+The DHU/phone variant stays at `0.1.12-prototype`, code 4. Its exact installation
+and DHU connection steps are still in [START_WINDOWS.md](START_WINDOWS.md).
+This update does not turn the phone assistant into a permitted Android Auto category.
+The experimental registration and host validation do not change.
 
-## Sichtprüfung durch den Nutzer
+## Visual check by the user
 
-Gespräch, Einstellungen, Verlauf und Stimme und Tempo in hell/dunkel ansehen.
-Bei großer Systemschrift bleiben die Reiter vollständig und lassen sich verschieben.
-Ein bestehender Chat lässt sich öffnen; Export- und Online-Stimmen-Dialog können
-abgebrochen werden. Die bisherigen Deutsch-/Englisch-Einstellungen bleiben erhalten.
-Für eine reine Designprüfung sind keine API-Anfragen oder Hörproben nötig.
+View Conversation, Settings, History and Voice and speed in light and dark mode.
+With a large system font, the tabs stay complete and can be scrolled.
+An existing chat can be opened; the export and online voice dialogs can be cancelled.
+The existing German/English settings are kept.
+A pure design check needs no API requests or previews.
 
-Automatisierte und visuelle Ergebnisse: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
-Anruf- und Headset-/Bluetooth-Praxistests bleiben ausdrücklich zurückgestellt.
+Automated and visual results: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+Call and headset/Bluetooth field tests remain explicitly deferred.
