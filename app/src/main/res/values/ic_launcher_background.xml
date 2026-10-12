@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Azentrius Designsystem · OpenAuto AI · erzeugt von scripts/app-icon-openauto.py, nicht von Hand ändern -->
+<resources>
+    <!-- brand-ink: Grund des App-Symbols und des Startbilds -->
+    <color name="ic_launcher_background">#FF0A0A0F</color>
+</resources>

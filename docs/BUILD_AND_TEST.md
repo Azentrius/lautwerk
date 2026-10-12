@@ -1,161 +1,135 @@
-# Build- und Testbericht 0.1.14
+# Build- und Testbericht 0.1.15
 
-Stand: 12.10.2026. Umsetzung nach Design-System `eb827c8` und Nutzerfreigabe
-einschließlich Ausgangsmessung A3/A4, Versionsnachweisen und A7-Regressionsregel.
-Details: [ANDROID_AUTO_DESIGN.md](ANDROID_AUTO_DESIGN.md).
+Stand: 12.10.2026. **Assistent und DHU-Test sind als Update auf dem Pixel installiert.**
+Die neue Sprechblase mit Punkt, das native Startbild und das kleine Dienstsymbol
+folgen unverändert dem Design-System `9ed4032` / O1 `007f587`.
+[Umsetzung und Installation](APP_IDENTITY.md).
 
-**Status: 0.1.14 ist auf dem Pixel installiert; die DHU-Abnahme ist abgeschlossen.**
-64 Ansichten aus vier Formaten, zwei Sprachen, Tag/Nacht, zwei Auswahlen und
-Touch/Rotary wurden geprüft. Alle elf Prototype-Gerätetests bestehen.
-Ausgangsversion und Update bestehen den Sechs-Start-Vergleich A7 ohne Reset.
-Der Host ersetzt die angeforderte Farbe durch gut lesbares Hellblau.
-Ein französischer Gerätesprachtest bestätigt zusätzlich den englischen Fallback.
-Anruf- und Headset-Tests bleiben zurückgestellt.
+## Umgebung
 
-## Umgebung und Versionen
-
-| Angabe | Tatsächlich erfasster Wert |
+| Angabe | Nachweis |
 |---|---|
-| Telefon | Pixel 10 Pro, Android 17 |
-| Android Auto, aktive Version | 17.7.663654-release / Code 177663654 |
-| Zusätzlich gelistetes System-Stub-Paket | 1.2.562600-stub / Code 12562600; nicht die aktive Testversion |
-| DHU | 2.0-windows, Build 2022-03-30-438482292 (`--version`) |
-| Car App Library | 1.8.0-rc01 |
-| Host-Car-API | **8**, Ausgangsversion: `10:59:01.026 car.onCreateScreen api=8`; 0.1.14: `11:04:37.254 car.onCreateScreen api=8` |
-| Deklarierte Mindest-Car-API | 1, unverändert; kein Nachweis der Host-API |
-| Ausgangsversion, vor Update getestet | DHU 0.1.12-prototype / Code 4 |
-| Neuer Build, per `install -r` installiert | DHU 0.1.14-prototype / Code 5 |
-| Separate Smartphone-App | 0.1.13-dev / Code 14, unverändert |
+| Gerät | Pixel 10 Pro, Android 17 / API 37 |
+| Assistent installiert | 0.1.15-dev / Code 15 |
+| DHU installiert | 0.1.15-prototype / Code 6 |
+| Phone-Vergleich nur gebaut | 0.1.15-prototype / Code 5 |
+| Android Auto aktiv | 17.7.663654-release / 177663654 |
+| DHU | 2.0-windows, Build 2022-03-30-438482292 |
+| Host-Car-API | 8; `10-12 22:20:37.863 I/OpenAutoAI(25368): car.onCreateScreen api=8` |
+| Gerätesprachen und Nachtmodus | `de-DE,en-US`, Nachtmodus `yes`; wiederhergestellt bzw. unverändert |
 
-## Automatisierte und statische Prüfungen
+Die zusätzlich gelistete Android-Auto-System-Stub-Version 1.2.562600-stub ist nicht
+die aktive Testversion. Rohdaten, APK-Hashes und installierte Versionen:
+[verification.json](evidence/0.1.15/verification.json).
+
+## Build und Gerätetests
 
 | Prüfung | Ergebnis |
 |---|---|
-| DHU-Debug-APK | Build und Update-Installation erfolgreich; Paketversion mit aapt2 und am Pixel bestätigt |
-| DHU-Test-APK | **Alle 11 Tests auf dem Pixel bestanden**, siehe [Geräteprotokoll](evidence/0.1.14/device-tests.txt) |
-| Phone-Debug-Vergleichsvariante | Build erfolgreich, unverändert/up-to-date |
+| Assistent, Phone-Vergleich, DHU, beide Test-APKs | Abschließender lokaler Build erfolgreich |
+| App-Lint | 0 Fehler, 29 Warnungen, 1 Hinweis |
 | DHU-Lint | 0 Fehler, 6 Warnungen |
-| Core-JVM | 22 bestanden aus unverändertem, lokal up-to-date-Teststand |
-| Gepacktes CarAppTheme | Genau zwei Einträge: #C8A96E und #7D5F22; kein Sekundärpaar |
-| Smartphone/Voice/Anbieter-Code | Keine Änderungen; kein neuer End-to-End-Test behauptet |
-| GitHub-CI | [Build für 7ba155f](https://github.com/Azentrius/openauto-ai/actions/runs/38218928425) erfolgreich: JVM-Prüfungen, Lint und Debug-/Test-Builds |
+| Assistent auf Pixel | 17 ausgewählte Tests bestanden |
+| DHU-Prototyp auf Pixel | alle 11 Tests bestanden |
+| Quelltreue | 128 Referenzdateien per SHA-256 und 11 eingebundene XML-Kopien bytegleich geprüft |
+| Gepackte Ressourcen | adaptive und runde Symbole, API-31/33-Starttheme, weißes Dienstsymbol und Versionsnummern geprüft |
 
-Die drei zusätzlichen Gerätetests prüfen das tatsächlich gepackte Theme in
-beiden Nachtmodus-Konfigurationen, unveränderte Template-Struktur mit genau einer
-einfachen Primärfarb-Aktion und den englischen Fallback für Französisch.
-Die acht vorhandenen Tests zu Auswahl, Starten, Lebenszyklus und englischen Texten
-bleiben enthalten. Modelltests beweisen weder Host-Farbe noch Zeilenkürzung oder
-das Vorlagenlimit eines echten Hosts.
+Die 17 Assistententests umfassen DesignUiTest (9), DesignScreenshotsTest (3),
+LocalizationLifecycleTest (4) und SpeechSettingsScreenTest (1). Sie verwenden
+erfundene Verläufe und ersetzen Audio/Anbieter durch Testobjekte. Die elf
+Prototyptests prüfen Car-Farbvertrag, Template, Auswahl und Smartphone-Testseite.
+Die finale APK mit API-33-Startregel wurde installiert, bevor diese 28 Tests
+erneut liefen. [App-Protokoll](evidence/0.1.15/app-tests.txt),
+[DHU-Protokoll](evidence/0.1.15/dhu-tests.txt).
 
-Die sechs Lint-Warnungen betreffen drei neuere Testbibliotheksversionen,
-den absichtlich exportierten Car-App-Service (HostValidator bleibt aktiv),
-die bestehende Backup-Deklaration und Overdraw im unveränderten Phone-Layout.
+Die 28 Tests sind eine gezielte Design-Regression, keine Behauptung eines neuen
+vollständigen Audio-/API-End-to-End-Tests. Die bisherigen Lint-Warnungen sind nicht
+als behoben ausgewiesen. Der GitHub-CI-Status wird am zugehörigen Pull Request angezeigt.
 
-## A3/A4: verpflichtender Vorher-/Nachher-Vergleich
+## Darstellung am Pixel und im DHU
 
-| Build | Modus | Fläche | Text | Kontrast | Screenshot | Ergebnis |
-|---|---|---|---|---|---|---|
-| Ausgangsversion, Host-Standard | Tag | #3B3E46 | #DFE2EA | **8,25:1** | baseline/a3-a4-day.png | bestanden |
-| Ausgangsversion, Host-Standard | Nacht | #3B3E46 | #DFE2EA | **8,25:1** | baseline/a3-a4-night.png | bestanden |
-| 0.1.14, Host ersetzt durch Hellblau | Tag | #BAD9FC | #0B3453 | **8,84:1** | candidate/a3-a4-day.png | bestanden |
-| 0.1.14, Host ersetzt durch Hellblau | Nacht | #BAD9FC | #0D3353 | **8,92:1** | candidate/a3-a4-night.png | bestanden |
+- Assistent und Prototyp jeweils in hellem und dunklem Gerätemodus gestartet.
+  Das gelieferte goldene Zeichen erscheint auf Tinte. Der kurze native Übergang
+  des Prototyps enthält die systemeigene Fensteranimation; keine eigene Animation
+  und keine künstliche Startverzögerung wurden ergänzt.
+- Helles deutsches und dunkles englisches Gespräch mit erfundenen Nachrichten
+  visuell geprüft; große Schrift durch den bestehenden Screenshot-/Bedientest erfasst.
+- Neues Zeichen im DHU-Launcher und im `APP_ICON`-Kopf vollständig sichtbar.
+  Die ausgesparten Balken und der Punkt bleiben erkennbar.
+- 800×480 / Touch: Bereitschaft, sechs Starts 1–6 in derselben Sitzung ohne Reset,
+  danach Nachtansicht. Alle sichtbaren Zähler passen zu den Car-Logeinträgen.
+- 1280×720 mit breitem Profil / Rotary: Öffnen über Launcher, sichtbarer Fokus,
+  Start bei Tag und Nacht. Wechsel Claude Haiku → OpenAI GPT-5.4 aktualisiert die
+  Auswahl live; Test 1 bleibt erhalten. Ein erneuter Nachtstart in einer frischen
+  Sitzung besteht ebenfalls. Nach Bedienung der Smartphone-Auswahl verliert der
+  Host jedoch den nutzbaren Rotary-Fokus; Drehen allein erreicht die Taste dann
+  nicht. Die Prüfung dieses Sonderfalls ist separat unten beschrieben.
+- Die ursprüngliche DHU-Auswahl Claude / Anthropic · Claude Haiku 4.5 wurde am Ende
+  wiederhergestellt. Der DHU wurde regulär beendet und die Assistenten-App geöffnet.
 
-Gemessen in den unskalierten 800×480-DHU-Screenshots. Flächenprobe (300,298),
-Textprobe vorher (362,289), nachher Tag (367,288), nachher Nacht (408,290).
-RGB aus dem dekodierten DHU-Videobild, sRGB-Linearisierung, relative Helligkeit
-und `(Lhell + 0,05) / (Ldunkel + 0,05)`. Repräsentative volle Schriftstriche,
-keine geglätteten Randpixel. Kleine RGB-Unterschiede können durch die
-Videoübertragung entstehen; sie beweisen keinen eigenen Nachtfarbwert.
-Rohmessungen und Koordinaten: [evidence/0.1.14/contrast.json](evidence/0.1.14/contrast.json).
+Die Template-Fläche bleibt dunkelgrau, die Starttaste Host-Hellblau. Car-App-Code
+und B2/B3-Farbressourcen sind gegenüber 0.1.14 unverändert. Stichproben aus den
+unskalierten 800×480-Bildern:
 
-**Beobachtung für das Design-System:** Dieser Host zeigt trotz des korrekt
-gepackten Farbpaares Hellblau statt Gold/Bronze. A3 erlaubt diese Host-Ersetzung.
-Die Template-Fläche ist in beiden Builds und Modi dunkelgrau (Probe (100,100):
-#25262A), nicht rein schwarz. Deshalb gilt der gemessene Kontrast, nicht die
-theoretische Tabelle auf schwarzem Grund. Titel/Nachricht bleiben sichtbar
-unverändert. O2 wird nicht benötigt; es wurden keine Ersatzwerte erfunden.
+| Modus | Hintergrund | Starttaste | Text | Kontrast |
+|---|---|---|---|---|
+| day | #25262A | #BAD9FC | #0E3253 | 9.01:1 |
+| night | #25262A | #BAD9FC | #0E3454 | 8.80:1 |
 
-## DHU-Abnahme A1–A11
+Messmethode: sRGB-Linearisierung, relative Luminanz und WCAG-Kontrast; dunkle
+Glypheninnenfarbe im dokumentierten Textbereich. Koordinaten und RGB-Werte:
+[contrast.json](evidence/0.1.15/contrast.json). [Sechs Starts](evidence/0.1.15/six-starts.json),
+[Car-Ereignisse](evidence/0.1.15/car-events.txt).
 
-Die vollständige Matrix umfasst vier Formate × zwei Sprachen × Tag/Nacht ×
-zwei Auswahlen × Touch/Rotary = **64 geprüfte Kombinationen**. Profile liegen unter
-`tools/dhu/`; Einzelbelege, Messwerte und passende Start-Logzeilen stehen unter
-[matrix.json](evidence/0.1.14/matrix.json) und
-[matrix-contrast.json](evidence/0.1.14/matrix-contrast.json).
+Die vollständige 64-Ansichten-Abnahme von 0.1.14 wird nicht als neu ausgeführt
+behauptet; sie bleibt im [historischen Testbericht](history/BUILD_AND_TEST-0.1.14.md).
 
-| Kriterium | Ergebnis |
-|---|---|
-| A1 Kopf und App-Symbol | In allen 64 Ansichten vollständig sichtbar. |
-| A2 Start-Schaltfläche vollständig | „Starten“/„Start“ in allen Ansichten sichtbar. |
-| A3 tatsächliche Akzentfarbe | Ausgangsversion grau, 0.1.14 Host-Hellblau; bei Tag und Nacht. |
-| A4 gemessener Kontrast mindestens 4,5:1 | Vorher 8,25:1; neue 64 Ansichten **8,47–8,98:1**. Titel/Nachricht unverändert lesbar. |
-| A5 vollständiger Status/Anbieter/Modell | Alle 64 Ansichten bestanden, einschließlich längster Kombination auf 800×480. Keine textliche Kürzung beobachtet. |
-| A6 Start und passender Log-Zähler | Touch und Rotary bestanden, sichtbare Zähler stimmen mit `car.start count=n` überein; Ablauf und Belegumfang siehe unten. |
-| A7 sechs Starts auf 800×480 | **Beide Versionen bestanden**, jeweils 1–6 in derselben Sitzung ohne Reset; kein Ausgangsfehler und keine Regression beobachtet. |
-| A8 erreichbarer, sichtbarer Rotary-Fokus | In allen 32 Rotary-Kombinationen erreichbar; Host-Fokusrahmen bei Tag/Nacht aufgenommen. |
-| A9 Deutsch/Englisch/Fallback | Deutsch und Englisch in der gesamten Matrix; Französisch am Gerät ergibt englisches „Ready…“, „Start“, „Started · Test 1“ im DHU (800×480/Touch). |
-| A10 Auswahl live, Status bleibt | Modell/Anbieter am Smartphone geändert, während dieselbe DHU-Sitzung läuft. Status bleibt; separat Haiku → Sonnet → OpenAI bei Test 6, nächster Start 7. |
-| A11 keine falschen Gesprächs-/Zulassungsaussagen | Quellvergleich und alle geprüften App-Ansichten bestanden; weiterhin UI-Test, keine neue Gesprächsfunktion. |
+### Offene Host-Beobachtung: Rotary-Fokus
 
-**Ablauf und Grenzen:** Pro Format/Sprache/Eingabe wurde eine Sitzung verwendet,
-in der die zwei Modelle und Tag/Nacht gewechselt wurden. 60 Kombinationen haben
-je eine dokumentierte Betätigung mit Zählerabgleich. Die vier deutschen
-800×480-Touch-Ansichten stammen aus der manuellen Vergleichssitzung: Sonnet bei
-Test 6, danach OpenAI bei Test 7/8. Sie sind keine vier separaten Erststarttests.
-„Bereit → Test 1“ wurde beim Sitzungsstart geprüft; A7 ist ein separater Test mit
-sechs Starts auf 800×480, Deutsch/Touch, Claude Haiku 4.5. Nicht sechs Starts pro
-Matrixfeld und kein allgemeiner Nachweis für andere Android-Auto-Hosts.
+Im breiten 1280×720-Profil verschwand bei 0.1.15 nach der Smartphone-Auswahl der
+nutzbare Fokus. Die Anzeige aktualisierte sich und behielt Test 1, weitere
+Dreh-/Klickbefehle lösten aber keinen Start aus. Eine neue Sitzung erlaubte wieder
+den ersten Start bei Nacht. Zur Einordnung wurde die unveränderte 0.1.14-DHU-APK
+kurz mit `install -r -d` eingesetzt: Auch dort war ein Fokusrahmen zunächst
+sichtbar, doch schon der erste spätere Klick erhöhte den Zähler nicht; nach der
+Smartphone-Auswahl blieb der Fokus ebenfalls aus. Der genaue Auslöser wurde
+nicht isoliert. Dies belegt ein auch mit dem alten Build auftretendes Problem,
+keinen bestandenen Rotary-Test nach Live-Auswahl und keine nachgewiesene Ursache.
+Die frühere 0.1.14-Abnahme wird durch diesen zusätzlichen Befund nicht umgeschrieben.
 
-Bei Rotary legt der Host den Fokus nach einer Textänderung wieder auf die
-Nachricht. Vor dem nächsten Klick wurde der Start-Button erneut fokussiert.
-Der Rahmen um die Nachricht berührt die äußeren Zeichen; beim Fokus auf dem
-Start-Button sind die vollständigen Zeichen ohne diesen Rahmen sichtbar.
-Es wurden keine Anzeigenamen gekürzt, Zähler zurückgesetzt oder Host-Limits deaktiviert.
+Belege: [0.1.14 vor Klick](evidence/0.1.15/baseline-focus-night.png),
+[0.1.14 nach Klick](evidence/0.1.15/baseline-start-1-night.png),
+[0.1.14 nach Auswahl](evidence/0.1.15/baseline-after-selection.png),
+[0.1.15 neuer Nachtstart](evidence/0.1.15/identity-wide-recheck-start-1-night.png).
+Anschließend wurde dieselbe geprüfte 0.1.15-APK erneut installiert und ihre
+Versionsnummer bestätigt. Es gab weder Datenlöschung noch eine Änderung am
+Car-App-Verhalten zur Umgehung dieses Befunds.
 
-Die Ausgangsserie `baseline/a7-1.png` bis `a7-6.png` zeigt jeden Zwischenstand.
-Der zuletzt gesicherte Baseline-Logpuffer enthält 2–6; API 8 wurde vorher direkt
-ausgelesen. Das kontinuierliche neue Log enthält Sitzung, API 8 und alle Starts 1–8.
-Die genaue Umgebung steht in [environment.json](evidence/0.1.14/environment.json).
+## Belege und Grenzen
 
-Eine USB-Unterbrechung vor App-Start und eine fremde Host-Benachrichtigung während
-einer Rotary-Serie unterbrachen den Testaufbau. Die betroffenen Serien wurden
-regulär beendet und erfolgreich wiederholt. Keine Nachricht wurde versendet.
-Diese Unterbrechungen sind keine A7-Ergebnisse und keine bestandenen Einzeltests.
+- [Startbild hell](evidence/0.1.15/assistant-light-splash.png),
+  [Startbild dunkel](evidence/0.1.15/assistant-dark-splash.png)
+- [Gespräch hell/deutsch](evidence/0.1.15/az-light-conversation.png),
+  [Gespräch dunkel/englisch](evidence/0.1.15/az-dark-conversation.png),
+  [große Schrift](evidence/0.1.15/az-large-settings.png)
+- [Launcher-Symbol](evidence/0.1.15/dhu-launcher-icon.png),
+  [DHU bereit](evidence/0.1.15/identity-800-ready-day.png),
+  [sechster Start](evidence/0.1.15/identity-800-start-6-night.png),
+  [Rotary-Fokus](evidence/0.1.15/identity-wide-focus-day.png),
+  [OpenAI nach Live-Wechsel](evidence/0.1.15/identity-wide-openai-live-night.png)
 
-**A7-Regressionsregel:** Scheitert es schon im Ausgangszustand, gilt es als bekannter
-Fehler und blockiert 0.1.14 nicht. Nur neues Scheitern ist eine Regression.
-Hier haben beide Vergleichsläufe bestanden; O4 wird auf diesem Host nicht ausgelöst.
-Auch O2/O3 sind nach den Messungen nicht erforderlich. Das bestehende Symbol (O1)
-bleibt bis zu einer gesonderten Designentscheidung erhalten.
+DHU-Belege sind auf die App zugeschnitten. Karten, andere Benachrichtigungen und
+private Chatinhalte gehören nicht zu den veröffentlichten Belegen.
 
-## Belege und Reproduzierbarkeit
+**Nicht neu praktisch geprüft:** Live-Gespräch und tatsächliche laufende
+Gesprächsdienst-Benachrichtigung, Launcher-Themensymbole und ältere Android-Versionen.
+Für das Dienstsymbol sind die gelieferte Ressource, Paketierung und `setSmallIcon`
+geprüft; der Dienst wurde dafür nicht mit echtem Mikrofon gestartet. Ein lokaler
+Shell-Benachrichtigungsversuch lieferte keinen sichtbaren Beleg und zählt nicht
+als bestandener visueller Test. Die Monochrom-Ebene ist unverändert enthalten;
+die persönliche Launcher-Konfiguration wurde nicht umgestellt.
 
-Das Download-Paket `OpenAutoAI-0.1.14-DHU-Testbelege.zip` enthält die 64 App-Ansichten,
-32 zusätzliche Fokusansichten, Vorher-/Nachher-Kontrast, beide A7-Serien,
-Sprachfallback und gezielte App-Logs. Größere DHU-Ansichten sind auf das vollständige
-OpenAuto-Panel zugeschnitten, ohne Skalierung oder Änderung seiner Pixel.
-Karten, Launcher und fremde Benachrichtigungen sind nicht enthalten.
-Zu jedem Ausschnitt sind ursprüngliche Bildgröße und Ausschnittkoordinaten gespeichert.
-Die Mess-JSONs beziehen sich auf die ursprünglichen Koordinaten; für Ausschnitte
-deren linken/oberen Ursprung abziehen.
-
-Mit Python und Pillow kann eine Pixelmessung nachvollzogen werden:
-
-```powershell
-python tools/dhu/contrast.py candidate/a3-a4-day.png 367 288 300 298
-```
-
-Die dokumentierte Fläche und volle Textstriche verwenden, keine geglätteten Kanten.
-Das Video wird vom DHU dekodiert; geringfügige RGB-Abweichungen zwischen Bildern
-sind möglich. Die Farbwerte sind Messungen dieses Hosts, keine neuen Design-Tokens.
-
-Nach den Tests wurden die ursprüngliche Sprachliste `de-DE,en-US` mit Deutsch an
-erster Stelle und die aktuelle Prototype-Auswahl Claude / Anthropic · Claude Haiku 4.5
-wiederhergestellt und geprüft. DHU und Teststeuerung sind regulär beendet.
-
-## Zurückgestellt und Historie
-
-Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt. OpenAuto AI hat bei
-diesen Tests keine KI-Anfrage, Mikrofonaufnahme oder Hörprobe gestartet. Die
-separate Assistenten-App und ihre Nutzerdaten wurden nicht verändert.
-Die frühere Smartphone-Abnahme bleibt im [Bericht 0.1.13](history/BUILD_AND_TEST-0.1.13.md) erhalten.
+Anruf-, Headset- und Bluetooth-Tests bleiben auf Nutzerwunsch zurückgestellt.
+Keine KI-Anfrage, keine Änderung von Schlüsseln, Verläufen oder Sprachlogik und
+keine Deinstallation/Löschung von App-Daten. Neue fehlende Designwerte wurden
+für diesen Umfang nicht festgestellt.

@@ -1,4 +1,4 @@
-# Roadmap ab 0.1.14
+# Roadmap ab 0.1.15
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
@@ -50,6 +50,12 @@ Beide Sechs-Start-Tests bestehen; der Host ersetzt den Farbwert durch gut lesbar
 Hellblau. Vollständige Texte, Live-Auswahl, Rotary-Fokus und englischer Fallback
 bei französischer Gerätesprache sind geprüft. Keine Änderung am Zählerverhalten.
 Siehe `docs/ANDROID_AUTO_DESIGN.md` und `docs/BUILD_AND_TEST.md`.
+
+0.1.15 bindet das freigegebene App-Symbol einschließlich Monochrom-Ebene,
+nativem Startbild und kleinem Dienstsymbol ein. Assistent und DHU sind auf dem
+Pixel aktualisiert; 28 ausgewählte Gerätetests und Touch-/Rotary-Prüfungen
+einschließlich sechs Starts ohne Reset bestehen. B2/B3 und Gesprächsverhalten
+bleiben erhalten. Details: `docs/APP_IDENTITY.md` und `docs/BUILD_AND_TEST.md`.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.

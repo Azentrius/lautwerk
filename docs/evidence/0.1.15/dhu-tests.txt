@@ -1,0 +1,9 @@
+
+dev.openautoai.prototype.CarDesignContractTest:...
+dev.openautoai.prototype.CarTemplateTest:...
+dev.openautoai.prototype.ModelSelectionStoreTest:...
+dev.openautoai.prototype.PhoneSmokeTest:..
+
+Time: 2,43
+
+OK (11 tests)
