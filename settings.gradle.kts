@@ -44,7 +44,6 @@ fun ResolutionStrategy.liftBuildTooling() {
         val patched = patchedToolingVersion(requested.group, requested.name, requested.version)
             ?: return@eachDependency
         useVersion(patched)
-        logger.lifecycle("LIFT ${requested.group}:${requested.name}:${requested.version} -> $patched")
         because("patched version of a build-tooling library, see settings.gradle.kts")
     }
 }
