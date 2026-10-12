@@ -1,6 +1,8 @@
 # Windows: Bauen, Installieren und DHU prüfen
 
-Projektstand 0.1.13: DHU-/Phone-Oberfläche 0.1.12-prototype, gleicher Ablauf mit Deutsch/Englisch.
+Projektstand 0.1.14: DHU-Oberfläche 0.1.14-prototype mit Azentrius-Farbwunsch;
+Phone-Vergleichsvariante weiterhin 0.1.12-prototype. Ablauf mit Deutsch/Englisch unverändert.
+Auto-Design, Ausgangsmessung und Abnahme: [ANDROID_AUTO_DESIGN.md](ANDROID_AUTO_DESIGN.md).
 Die Assistenten-App 0.1.13-dev ist separat; ihre Installation und der
 praktische API-/Sprachtest stehen in [VOICE.md](VOICE.md). Das aktuelle Design-Update
 mit Installationsschritten steht in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md).
@@ -28,7 +30,7 @@ werden benötigt. Der erste Build lädt öffentliche Maven-Abhängigkeiten.
 
 Das wichtigste APK liegt anschließend hier:
 `prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk`.
-Die separat gelieferte Datei `OpenAutoAI-0.1.12-dhu-debug.apk` ist dieselbe Testvariante.
+Die separat gelieferte Datei `OpenAutoAI-0.1.14-dhu-debug.apk` ist dieselbe Testvariante.
 Die Smartphone-Vergleichsvariante `phoneDebug` registriert absichtlich KEINE Auto-App.
 
 ## 2. Nur den DHU-Prototypen installieren

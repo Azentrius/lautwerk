@@ -1,0 +1,1318 @@
+[
+  {
+    "config": "800x480",
+    "language": "de",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-de-day-openai-touch.png"
+    ],
+    "contrast": 8.843972170297848,
+    "startNote": "Manual comparison session: Claude Sonnet view at count 6; OpenAI day/night views at 7/8. See A7/A10 and continuous app log; not four independent initial-start tests."
+  },
+  {
+    "config": "800x480",
+    "language": "de",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-de-day-openai-rotary.png",
+      "candidate/views/800x480-de-day-openai-rotary-focus.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "800x480-de-day-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "rotary",
+      "count": 2,
+      "log": "10-12 11:25:20.971 19332 19332 I OpenAutoAI: car.start count=2"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "800x480",
+    "language": "de",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-de-day-claude-touch.png"
+    ],
+    "contrast": 8.851157532459508,
+    "startNote": "Manual comparison session: Claude Sonnet view at count 6; OpenAI day/night views at 7/8. See A7/A10 and continuous app log; not four independent initial-start tests."
+  },
+  {
+    "config": "800x480",
+    "language": "de",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-de-day-claude-rotary.png",
+      "candidate/views/800x480-de-day-claude-rotary-focus.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "800x480-de-day-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "rotary",
+      "count": 4,
+      "log": "10-12 11:25:53.217 19332 19332 I OpenAutoAI: car.start count=4"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "800x480",
+    "language": "de",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-de-night-openai-touch.png"
+    ],
+    "contrast": 8.843972170297848,
+    "startNote": "Manual comparison session: Claude Sonnet view at count 6; OpenAI day/night views at 7/8. See A7/A10 and continuous app log; not four independent initial-start tests."
+  },
+  {
+    "config": "800x480",
+    "language": "de",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-de-night-openai-rotary.png",
+      "candidate/views/800x480-de-night-openai-rotary-focus.png"
+    ],
+    "contrast": 8.730675358718564,
+    "start": {
+      "file": "800x480-de-night-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "rotary",
+      "count": 3,
+      "log": "10-12 11:25:29.516 19332 19332 I OpenAutoAI: car.start count=3"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "800x480",
+    "language": "de",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-de-night-claude-touch.png"
+    ],
+    "contrast": 8.851157532459508,
+    "startNote": "Manual comparison session: Claude Sonnet view at count 6; OpenAI day/night views at 7/8. See A7/A10 and continuous app log; not four independent initial-start tests."
+  },
+  {
+    "config": "800x480",
+    "language": "de",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-de-night-claude-rotary.png",
+      "candidate/views/800x480-de-night-claude-rotary-focus.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "800x480-de-night-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "rotary",
+      "count": 5,
+      "log": "10-12 11:26:01.781 19332 19332 I OpenAutoAI: car.start count=5"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "800x480",
+    "language": "en",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-en-day-openai-touch.png"
+    ],
+    "contrast": 8.723264423324807,
+    "start": {
+      "file": "800x480-en-day-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "touch",
+      "count": 1,
+      "log": "10-12 11:41:48.995 19332 19332 I OpenAutoAI: car.start count=1"
+    }
+  },
+  {
+    "config": "800x480",
+    "language": "en",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-en-day-openai-rotary.png",
+      "candidate/views/800x480-en-day-openai-rotary-focus.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "800x480-en-day-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "rotary",
+      "count": 1,
+      "log": "10-12 11:43:01.929 19332 19332 I OpenAutoAI: car.start count=1"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "800x480",
+    "language": "en",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-en-day-claude-touch.png"
+    ],
+    "contrast": 8.924895080658505,
+    "start": {
+      "file": "800x480-en-day-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "touch",
+      "count": 3,
+      "log": "10-12 11:42:14.713 19332 19332 I OpenAutoAI: car.start count=3"
+    }
+  },
+  {
+    "config": "800x480",
+    "language": "en",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-en-day-claude-rotary.png",
+      "candidate/views/800x480-en-day-claude-rotary-focus.png"
+    ],
+    "contrast": 8.979676015070982,
+    "start": {
+      "file": "800x480-en-day-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "rotary",
+      "count": 3,
+      "log": "10-12 11:43:34.325 19332 19332 I OpenAutoAI: car.start count=3"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "800x480",
+    "language": "en",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-en-night-openai-touch.png"
+    ],
+    "contrast": 8.730675358718564,
+    "start": {
+      "file": "800x480-en-night-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "touch",
+      "count": 2,
+      "log": "10-12 11:41:54.351 19332 19332 I OpenAutoAI: car.start count=2"
+    }
+  },
+  {
+    "config": "800x480",
+    "language": "en",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-en-night-openai-rotary.png",
+      "candidate/views/800x480-en-night-openai-rotary-focus.png"
+    ],
+    "contrast": 8.730675358718564,
+    "start": {
+      "file": "800x480-en-night-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "rotary",
+      "count": 2,
+      "log": "10-12 11:43:10.445 19332 19332 I OpenAutoAI: car.start count=2"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "800x480",
+    "language": "en",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-en-night-claude-touch.png"
+    ],
+    "contrast": 8.730675358718564,
+    "start": {
+      "file": "800x480-en-night-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "touch",
+      "count": 4,
+      "log": "10-12 11:42:20.062 19332 19332 I OpenAutoAI: car.start count=4"
+    }
+  },
+  {
+    "config": "800x480",
+    "language": "en",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/800x480-en-night-claude-rotary.png",
+      "candidate/views/800x480-en-night-claude-rotary-focus.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "800x480-en-night-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "rotary",
+      "count": 4,
+      "log": "10-12 11:43:42.940 19332 19332 I OpenAutoAI: car.start count=4"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720",
+    "language": "de",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-de-day-openai-touch.png"
+    ],
+    "contrast": 8.723264423324807,
+    "start": {
+      "file": "1280x720-de-day-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "touch",
+      "count": 1,
+      "log": "10-12 11:27:20.264 19332 19332 I OpenAutoAI: car.start count=1"
+    }
+  },
+  {
+    "config": "1280x720",
+    "language": "de",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-de-day-openai-rotary.png",
+      "candidate/views/1280x720-de-day-openai-rotary-focus.png"
+    ],
+    "contrast": 8.723264423324807,
+    "start": {
+      "file": "1280x720-de-day-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "rotary",
+      "count": 1,
+      "log": "10-12 11:30:20.694 19332 19332 I OpenAutoAI: car.start count=1"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720",
+    "language": "de",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-de-day-claude-touch.png"
+    ],
+    "contrast": 8.557963365561767,
+    "start": {
+      "file": "1280x720-de-day-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "touch",
+      "count": 3,
+      "log": "10-12 11:27:46.221 19332 19332 I OpenAutoAI: car.start count=3"
+    }
+  },
+  {
+    "config": "1280x720",
+    "language": "de",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-de-day-claude-rotary.png",
+      "candidate/views/1280x720-de-day-claude-rotary-focus.png"
+    ],
+    "contrast": 8.647880383742354,
+    "start": {
+      "file": "1280x720-de-day-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "rotary",
+      "count": 3,
+      "log": "10-12 11:30:53.139 19332 19332 I OpenAutoAI: car.start count=3"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720",
+    "language": "de",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-de-night-openai-touch.png"
+    ],
+    "contrast": 8.730675358718564,
+    "start": {
+      "file": "1280x720-de-night-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "touch",
+      "count": 2,
+      "log": "10-12 11:27:25.532 19332 19332 I OpenAutoAI: car.start count=2"
+    }
+  },
+  {
+    "config": "1280x720",
+    "language": "de",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-de-night-openai-rotary.png",
+      "candidate/views/1280x720-de-night-openai-rotary-focus.png"
+    ],
+    "contrast": 8.889022742661012,
+    "start": {
+      "file": "1280x720-de-night-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "rotary",
+      "count": 2,
+      "log": "10-12 11:30:29.296 19332 19332 I OpenAutoAI: car.start count=2"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720",
+    "language": "de",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-de-night-claude-touch.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1280x720-de-night-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "touch",
+      "count": 4,
+      "log": "10-12 11:27:51.690 19332 19332 I OpenAutoAI: car.start count=4"
+    }
+  },
+  {
+    "config": "1280x720",
+    "language": "de",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-de-night-claude-rotary.png",
+      "candidate/views/1280x720-de-night-claude-rotary-focus.png"
+    ],
+    "contrast": 8.723264423324807,
+    "start": {
+      "file": "1280x720-de-night-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "rotary",
+      "count": 4,
+      "log": "10-12 11:31:01.843 19332 19332 I OpenAutoAI: car.start count=4"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720",
+    "language": "en",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-en-day-openai-touch.png"
+    ],
+    "contrast": 8.682105196180387,
+    "start": {
+      "file": "1280x720-en-day-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "touch",
+      "count": 1,
+      "log": "10-12 11:44:14.667 19332 19332 I OpenAutoAI: car.start count=1"
+    }
+  },
+  {
+    "config": "1280x720",
+    "language": "en",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-en-day-openai-rotary.png",
+      "candidate/views/1280x720-en-day-openai-rotary-focus.png"
+    ],
+    "contrast": 8.730675358718564,
+    "start": {
+      "file": "1280x720-en-day-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "rotary",
+      "count": 1,
+      "log": "10-12 11:47:55.052 19332 19332 I OpenAutoAI: car.start count=1"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720",
+    "language": "en",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-en-day-claude-touch.png"
+    ],
+    "contrast": 8.803178355179929,
+    "start": {
+      "file": "1280x720-en-day-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "touch",
+      "count": 3,
+      "log": "10-12 11:44:40.487 19332 19332 I OpenAutoAI: car.start count=3"
+    }
+  },
+  {
+    "config": "1280x720",
+    "language": "en",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-en-day-claude-rotary.png",
+      "candidate/views/1280x720-en-day-claude-rotary-focus.png"
+    ],
+    "contrast": 8.647880383742354,
+    "start": {
+      "file": "1280x720-en-day-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "rotary",
+      "count": 3,
+      "log": "10-12 11:48:26.647 19332 19332 I OpenAutoAI: car.start count=3"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720",
+    "language": "en",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-en-night-openai-touch.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1280x720-en-night-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "touch",
+      "count": 2,
+      "log": "10-12 11:44:20.041 19332 19332 I OpenAutoAI: car.start count=2"
+    }
+  },
+  {
+    "config": "1280x720",
+    "language": "en",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-en-night-openai-rotary.png",
+      "candidate/views/1280x720-en-night-openai-rotary-focus.png"
+    ],
+    "contrast": 8.684255954914454,
+    "start": {
+      "file": "1280x720-en-night-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "rotary",
+      "count": 2,
+      "log": "10-12 11:48:03.922 19332 19332 I OpenAutoAI: car.start count=2"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720",
+    "language": "en",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-en-night-claude-touch.png"
+    ],
+    "contrast": 8.924895080658505,
+    "start": {
+      "file": "1280x720-en-night-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "touch",
+      "count": 4,
+      "log": "10-12 11:44:45.768 19332 19332 I OpenAutoAI: car.start count=4"
+    }
+  },
+  {
+    "config": "1280x720",
+    "language": "en",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-en-night-claude-rotary.png",
+      "candidate/views/1280x720-en-night-claude-rotary-focus.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "1280x720-en-night-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "rotary",
+      "count": 4,
+      "log": "10-12 11:48:35.515 19332 19332 I OpenAutoAI: car.start count=4"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-de-day-openai-touch.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "1920x1080-de-day-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "touch",
+      "count": 1,
+      "log": "10-12 11:33:37.668 19332 19332 I OpenAutoAI: car.start count=1"
+    }
+  },
+  {
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-de-day-openai-rotary.png",
+      "candidate/views/1920x1080-de-day-openai-rotary-focus.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1920x1080-de-day-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "rotary",
+      "count": 1,
+      "log": "10-12 11:35:00.148 19332 19332 I OpenAutoAI: car.start count=1"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-de-day-claude-touch.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1920x1080-de-day-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "touch",
+      "count": 3,
+      "log": "10-12 11:34:03.108 19332 19332 I OpenAutoAI: car.start count=3"
+    }
+  },
+  {
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-de-day-claude-rotary.png",
+      "candidate/views/1920x1080-de-day-claude-rotary-focus.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1920x1080-de-day-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "rotary",
+      "count": 3,
+      "log": "10-12 11:35:32.324 19332 19332 I OpenAutoAI: car.start count=3"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-de-night-openai-touch.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1920x1080-de-night-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "touch",
+      "count": 2,
+      "log": "10-12 11:33:42.927 19332 19332 I OpenAutoAI: car.start count=2"
+    }
+  },
+  {
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-de-night-openai-rotary.png",
+      "candidate/views/1920x1080-de-night-openai-rotary-focus.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "1920x1080-de-night-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "rotary",
+      "count": 2,
+      "log": "10-12 11:35:09.024 19332 19332 I OpenAutoAI: car.start count=2"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-de-night-claude-touch.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "1920x1080-de-night-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "touch",
+      "count": 4,
+      "log": "10-12 11:34:08.494 19332 19332 I OpenAutoAI: car.start count=4"
+    }
+  },
+  {
+    "config": "1920x1080",
+    "language": "de",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-de-night-claude-rotary.png",
+      "candidate/views/1920x1080-de-night-claude-rotary-focus.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1920x1080-de-night-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "rotary",
+      "count": 4,
+      "log": "10-12 11:35:40.964 19332 19332 I OpenAutoAI: car.start count=4"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-en-day-openai-touch.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1920x1080-en-day-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "touch",
+      "count": 1,
+      "log": "10-12 11:49:34.176 19332 19332 I OpenAutoAI: car.start count=1"
+    }
+  },
+  {
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-en-day-openai-rotary.png",
+      "candidate/views/1920x1080-en-day-openai-rotary-focus.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1920x1080-en-day-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "rotary",
+      "count": 1,
+      "log": "10-12 11:50:43.047 19332 19332 I OpenAutoAI: car.start count=1"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-en-day-claude-touch.png"
+    ],
+    "contrast": 8.924895080658505,
+    "start": {
+      "file": "1920x1080-en-day-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "touch",
+      "count": 3,
+      "log": "10-12 11:49:59.076 19332 19332 I OpenAutoAI: car.start count=3"
+    }
+  },
+  {
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-en-day-claude-rotary.png",
+      "candidate/views/1920x1080-en-day-claude-rotary-focus.png"
+    ],
+    "contrast": 8.647880383742354,
+    "start": {
+      "file": "1920x1080-en-day-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "rotary",
+      "count": 3,
+      "log": "10-12 11:51:15.324 19332 19332 I OpenAutoAI: car.start count=3"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-en-night-openai-touch.png"
+    ],
+    "contrast": 8.647880383742354,
+    "start": {
+      "file": "1920x1080-en-night-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "touch",
+      "count": 2,
+      "log": "10-12 11:49:39.489 19332 19332 I OpenAutoAI: car.start count=2"
+    }
+  },
+  {
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-en-night-openai-rotary.png",
+      "candidate/views/1920x1080-en-night-openai-rotary-focus.png"
+    ],
+    "contrast": 8.767927721360142,
+    "start": {
+      "file": "1920x1080-en-night-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "rotary",
+      "count": 2,
+      "log": "10-12 11:50:52.083 19332 19332 I OpenAutoAI: car.start count=2"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-en-night-claude-touch.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1920x1080-en-night-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "touch",
+      "count": 4,
+      "log": "10-12 11:50:04.500 19332 19332 I OpenAutoAI: car.start count=4"
+    }
+  },
+  {
+    "config": "1920x1080",
+    "language": "en",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1920x1080-en-night-claude-rotary.png",
+      "candidate/views/1920x1080-en-night-claude-rotary-focus.png"
+    ],
+    "contrast": 8.647880383742354,
+    "start": {
+      "file": "1920x1080-en-night-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "rotary",
+      "count": 4,
+      "log": "10-12 11:51:24.033 19332 19332 I OpenAutoAI: car.start count=4"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-de-day-openai-touch.png"
+    ],
+    "contrast": 8.557963365561767,
+    "start": {
+      "file": "1280x720-wide-de-day-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "touch",
+      "count": 1,
+      "log": "10-12 11:37:21.483 19332 19332 I OpenAutoAI: car.start count=1"
+    }
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-de-day-openai-rotary.png",
+      "candidate/views/1280x720-wide-de-day-openai-rotary-focus.png"
+    ],
+    "contrast": 8.684255954914454,
+    "start": {
+      "file": "1280x720-wide-de-day-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "rotary",
+      "count": 1,
+      "log": "10-12 11:39:54.157 19332 19332 I OpenAutoAI: car.start count=1"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-de-day-claude-touch.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "1280x720-wide-de-day-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "touch",
+      "count": 3,
+      "log": "10-12 11:37:47.144 19332 19332 I OpenAutoAI: car.start count=3"
+    }
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-de-day-claude-rotary.png",
+      "candidate/views/1280x720-wide-de-day-claude-rotary-focus.png"
+    ],
+    "contrast": 8.647880383742354,
+    "start": {
+      "file": "1280x720-wide-de-day-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "rotary",
+      "count": 3,
+      "log": "10-12 11:40:26.271 19332 19332 I OpenAutoAI: car.start count=3"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-de-night-openai-touch.png"
+    ],
+    "contrast": 8.924895080658505,
+    "start": {
+      "file": "1280x720-wide-de-night-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "touch",
+      "count": 2,
+      "log": "10-12 11:37:26.685 19332 19332 I OpenAutoAI: car.start count=2"
+    }
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-de-night-openai-rotary.png",
+      "candidate/views/1280x720-wide-de-night-openai-rotary-focus.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "1280x720-wide-de-night-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "rotary",
+      "count": 2,
+      "log": "10-12 11:40:02.738 19332 19332 I OpenAutoAI: car.start count=2"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-de-night-claude-touch.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "1280x720-wide-de-night-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "touch",
+      "count": 4,
+      "log": "10-12 11:37:52.353 19332 19332 I OpenAutoAI: car.start count=4"
+    }
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "de",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-de-night-claude-rotary.png",
+      "candidate/views/1280x720-wide-de-night-claude-rotary-focus.png"
+    ],
+    "contrast": 8.843972170297848,
+    "start": {
+      "file": "1280x720-wide-de-night-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "rotary",
+      "count": 4,
+      "log": "10-12 11:40:34.964 19332 19332 I OpenAutoAI: car.start count=4"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-en-day-openai-touch.png"
+    ],
+    "contrast": 8.682105196180387,
+    "start": {
+      "file": "1280x720-wide-en-day-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "touch",
+      "count": 1,
+      "log": "10-12 11:54:21.709 19332 19332 I OpenAutoAI: car.start count=1"
+    }
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "day",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-en-day-openai-rotary.png",
+      "candidate/views/1280x720-wide-en-day-openai-rotary-focus.png"
+    ],
+    "contrast": 8.713901766243168,
+    "start": {
+      "file": "1280x720-wide-en-day-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "day",
+      "input": "rotary",
+      "count": 1,
+      "log": "10-12 11:56:38.337 19332 19332 I OpenAutoAI: car.start count=1"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-en-day-claude-touch.png"
+    ],
+    "contrast": 8.880749912298429,
+    "start": {
+      "file": "1280x720-wide-en-day-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "touch",
+      "count": 3,
+      "log": "10-12 11:54:48.327 19332 19332 I OpenAutoAI: car.start count=3"
+    }
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "day",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-en-day-claude-rotary.png",
+      "candidate/views/1280x720-wide-en-day-claude-rotary-focus.png"
+    ],
+    "contrast": 8.474403177255184,
+    "start": {
+      "file": "1280x720-wide-en-day-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "day",
+      "input": "rotary",
+      "count": 3,
+      "log": "10-12 11:57:11.459 19332 19332 I OpenAutoAI: car.start count=3"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-en-night-openai-touch.png"
+    ],
+    "contrast": 8.924895080658505,
+    "start": {
+      "file": "1280x720-wide-en-night-openai-touch.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "touch",
+      "count": 2,
+      "log": "10-12 11:54:27.428 19332 19332 I OpenAutoAI: car.start count=2"
+    }
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "night",
+    "model": "gpt-5.4",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-en-night-openai-rotary.png",
+      "candidate/views/1280x720-wide-en-night-openai-rotary-focus.png"
+    ],
+    "contrast": 8.59358487562663,
+    "start": {
+      "file": "1280x720-wide-en-night-openai-rotary.png",
+      "model": "GPT-5.4",
+      "mode": "night",
+      "input": "rotary",
+      "count": 2,
+      "log": "10-12 11:56:47.695 19332 19332 I OpenAutoAI: car.start count=2"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "touch",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-en-night-claude-touch.png"
+    ],
+    "contrast": 8.851157532459508,
+    "start": {
+      "file": "1280x720-wide-en-night-claude-touch.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "touch",
+      "count": 4,
+      "log": "10-12 11:54:54.038 19332 19332 I OpenAutoAI: car.start count=4"
+    }
+  },
+  {
+    "config": "1280x720-wide",
+    "language": "en",
+    "mode": "night",
+    "model": "claude-sonnet-4-6",
+    "input": "rotary",
+    "result": "passed: A1-A5/A11 visual review; contrast measured",
+    "evidence": [
+      "candidate/views/1280x720-wide-en-night-claude-rotary.png",
+      "candidate/views/1280x720-wide-en-night-claude-rotary-focus.png"
+    ],
+    "contrast": 8.59358487562663,
+    "start": {
+      "file": "1280x720-wide-en-night-claude-rotary.png",
+      "model": "Claude Sonnet 4.6",
+      "mode": "night",
+      "input": "rotary",
+      "count": 4,
+      "log": "10-12 11:57:20.693 19332 19332 I OpenAutoAI: car.start count=4"
+    },
+    "focus": "passed: Start reached using dpad rotation, visible host ring, dpad click increments counter"
+  }
+]

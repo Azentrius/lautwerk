@@ -1,4 +1,4 @@
-# Roadmap ab 0.1.13
+# Roadmap ab 0.1.14
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
@@ -40,6 +40,16 @@ einschließlich gemessener, dreistufiger Reiter für große Schrift. 169 verschi
 automatisierte Tests bestehen. Die DHU-Variante bleibt unverändert auf 0.1.12.
 Der Nutzer bestätigt „Darstellung und Bedienung passen“; Audio- und Speicherabläufe
 erhalten ihre bisherige Funktion. Herkunft und Regeln stehen in `docs/DESIGN_SYSTEM.md`.
+
+0.1.14 setzt B1–B5 aus dem Android-Auto-Design `eb827c8` um: ausschließlich
+das freigegebene Car-Farbpaar und der Primärfarbwunsch für „Starten“.
+Build, Lint und GitHub-CI des Implementierungsstands sind erfolgreich. 0.1.14 ist
+installiert; elf Prototype-Gerätetests und 64 DHU-Kombinationen bestehen.
+A3/A4 und A7 sind gegen den Ausgangsstand geprüft, Host-API 8 ist erfasst.
+Beide Sechs-Start-Tests bestehen; der Host ersetzt den Farbwert durch gut lesbares
+Hellblau. Vollständige Texte, Live-Auswahl, Rotary-Fokus und englischer Fallback
+bei französischer Gerätesprache sind geprüft. Keine Änderung am Zählerverhalten.
+Siehe `docs/ANDROID_AUTO_DESIGN.md` und `docs/BUILD_AND_TEST.md`.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
