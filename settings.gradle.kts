@@ -32,6 +32,7 @@ fun patchedToolingVersion(group: String, name: String, version: String?): String
         group == "org.jdom" && name == "jdom2" -> "2.0.6.1"
         group == "org.bitbucket.b_c" && name == "jose4j" -> "0.9.6"
         group == "org.apache.commons" && name == "commons-compress" -> "1.26.0"
+        group == "org.apache.commons" && name == "commons-lang3" -> "3.18.0" // comes with commons-compress 1.26
         group == "io.opentelemetry" && name in setOf("opentelemetry-api", "opentelemetry-context") -> "1.62.0"
         else -> return null
     }
