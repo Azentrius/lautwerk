@@ -14,6 +14,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -41,11 +42,20 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
-    private val microphoneRequestCode = 101
-    private var queuedSession: Conversation? = null
+    private var queuedSessionId: String? = null
+    private val microphonePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (queuedSessionId != null) {
+            if (granted) requestNotificationPermission() else failStart("Mikrofon-Berechtigung fehlt. Es wurde keine Aufnahme gestartet.")
+        }
+    }
+    private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        // Notification permission is optional; Android still requires the foreground-service notification.
+        startQueuedConversation()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        queuedSessionId = savedInstanceState?.getString("queuedVoiceSession")
         setContent {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
@@ -54,44 +64,59 @@ class MainActivity : ComponentActivity() {
                         store = remember { SecretStore(applicationContext) },
                         conversations = remember { ConversationStore(applicationContext) },
                         onStart = ::requestStart,
-                        onStop = ::stopConversation
+                        onStop = ::stopConversation,
+                        onSpeechSettings = { startActivity(Intent(this, SpeechSettingsActivity::class.java)) }
                     )
                 }
             }
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("queuedVoiceSession", queuedSessionId)
+        super.onSaveInstanceState(outState)
+    }
+
     private fun requestStart(conversation: Conversation) {
-        if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            queuedSession = conversation
-            requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), microphoneRequestCode)
-            return
-        }
-        val intent = Intent(this, VoiceService::class.java).apply {
-            action = VoiceService.ACTION_START
-            putExtra(VoiceService.EXTRA_SESSION_ID, conversation.id)
-        }
-        if (Build.VERSION.SDK_INT >= 26) startForegroundService(intent) else startService(intent)
+        if (queuedSessionId != null || AppState.active) return
+        queuedSessionId = conversation.id
+        AppState.reportIssue(null)
+        AppState.update(true, conversation.provider, conversation.modelId, conversation.id, "Sprachstart wird vorbereitet")
+        if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
+            microphonePermission.launch(Manifest.permission.RECORD_AUDIO)
+        else requestNotificationPermission()
+    }
+
+    private fun requestNotificationPermission() {
+        if (queuedSessionId == null) return
+        if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
+            notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+        else startQueuedConversation()
+    }
+
+    private fun startQueuedConversation() {
+        val id = queuedSessionId ?: return
+        queuedSessionId = null
+        try {
+            startForegroundService(Intent(this, VoiceService::class.java).apply {
+                action = VoiceService.ACTION_START
+                putExtra(VoiceService.EXTRA_SESSION_ID, id)
+            })
+        } catch (_: Exception) { failStart("Sprachdienst konnte nicht starten. Bitte die App auf dem Smartphone öffnen und erneut versuchen.") }
+    }
+
+    private fun failStart(message: String) {
+        queuedSessionId = null
+        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, "Gespräch beendet")
+        AppState.reportIssue(message)
     }
 
     private fun stopConversation() {
-        startService(Intent(this, VoiceService::class.java).apply { action = VoiceService.ACTION_STOP })
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<String>, grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == microphoneRequestCode) {
-            val session = queuedSession
-            queuedSession = null
-            if (grantResults.firstOrNull() == PackageManager.PERMISSION_GRANTED && session != null) {
-                requestStart(session)
-            } else {
-                AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId,
-                    "Mikrofon-Berechtigung fehlt")
-            }
-        }
+        queuedSessionId = null
+        // Do not create an idle microphone service merely to stop it.
+        stopService(Intent(this, VoiceService::class.java))
+        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, "Gespräch beendet")
+        AppState.reportIssue(null)
     }
 }
 
@@ -101,7 +126,8 @@ internal fun MainContent(
     store: CredentialStore,
     conversations: ConversationRepository,
     onStart: (Conversation) -> Unit,
-    onStop: () -> Unit
+    onStop: () -> Unit,
+    onSpeechSettings: () -> Unit = {}
 ) {
     var selection by remember { mutableStateOf(selections.load()) }
     val selectedProvider = selection.provider
@@ -176,7 +202,12 @@ internal fun MainContent(
             }) { Text("Entfernen") }
         }
         if (saveStatus.isNotBlank()) Text(saveStatus)
+        OutlinedButton(onClick = onSpeechSettings, enabled = !AppState.active, modifier = Modifier.fillMaxWidth()) {
+            Text("Stimme und Tempo")
+        }
         Text("Gespräch", style = MaterialTheme.typography.titleMedium)
+        Text("Spracheingabe und Vorlesen nutzen die Android-Sprachdienste. Diese können Audio online verarbeiten. Erkannter Text wird an den ausgewählten KI-Anbieter gesendet.")
+        Text("Während der Antwort ist das Mikrofon pausiert. Beenden ist jederzeit hier oder über die Benachrichtigung möglich.")
         Text(AppState.status)
         AppState.notice?.let { Text(it, color = MaterialTheme.colorScheme.error) }
         Button(
@@ -238,7 +269,7 @@ internal fun MainContent(
         }
         Text("Sprachbefehle: „Wechsle zu Claude“, „Wechsle zu ChatGPT“, „Stopp“.",
             style = MaterialTheme.typography.bodySmall)
-        Text("Experimentell: Noch keine Android-Auto-Display-Integration. Auto-Audio und dauerhafte Erkennung bei gesperrtem Gerät müssen praktisch getestet werden.",
+        Text("Smartphone-Sprachtest: Nach zweimaliger Stille oder zehn Minuten endet die Sitzung. Bei ausgeschaltetem Display, erkanntem Anruf oder geänderten Audiogeräten endet das Gespräch. Danach bitte erneut starten. Android-Auto-Audio ist weiterhin experimentell und nicht angebunden.",
             style = MaterialTheme.typography.bodySmall)
     }
 }

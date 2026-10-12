@@ -37,4 +37,13 @@ class ProviderAndroidSmokeTest {
         assertEquals(ChatError.INVALID_REQUEST, error.kind)
         assertEquals(0, calls)
     }
+
+    @Test fun productionTransportInitializesOnAndroidAndPreCancelledWorkNeverReadsCredentials() {
+        val client = ProviderChatClient(CredentialSource { error("must not read a key") })
+        for (provider in Provider.entries) {
+            val cancellation = CancellationSource().apply { cancel() }
+            val request = ChatRequest(ModelSelection.default(provider), listOf(ChatMessage("user", "Test")), cancellation)
+            assertEquals(ChatError.CANCELLED, assertThrows(ChatFailure::class.java) { client.reply(request) }.kind)
+        }
+    }
 }
