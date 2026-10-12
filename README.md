@@ -87,7 +87,7 @@ offizieller Verteilungsweg, aber keine Zusage der Kategoriezulässigkeit.
   Starten-Aktion und aktueller Auswahl als Text.
 - `prototype-app`: Smartphone-Auswahl und zwei Testvarianten; keine API-/Audio-Aufrufe.
 
-Weitere Arbeit: Textexport praktisch prüfen, verschlüsseltes Backup/Import und
+Weitere Arbeit: Cloud-Ziele des Textexports prüfen, verschlüsseltes Backup/Import und
 Größenregeln für sehr große Archive planen. Anruf- und Headset-Tests bleiben zurückgestellt.
 Ein Anbieterwechsel im bisherigen VoiceService verwendet jetzt das pro Anbieter
 gemerkte Modell und beginnt weiterhin einen neuen Chat ohne fremden Verlauf.
