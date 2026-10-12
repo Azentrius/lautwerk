@@ -14,8 +14,9 @@ geänderten angeschlossenen Audio-Ausgabegeräten endet das Gespräch ohne autom
 Die gemeinsame Stimmwahl mit Tempo und Hörprobe bleibt erhalten.
 
 90 automatisierte Prüfungen bestehen; Assistant 0.1.8-dev ist auf dem Pixel installiert.
-Lint: 0 Fehler, 9 bestehende Warnungen. Der neue Ablauf für physische Anrufe,
-Bluetooth und Displaysperre benötigt noch den manuellen Abnahmetest.
+Lint: 0 Fehler, 9 bestehende Warnungen. Der Nutzer bestätigt Stoppen/Neustarten
+per Schaltfläche und Beenden bei Display-aus für beide Anbieter. Physische Anrufe
+und Bluetooth-/Headset-Wechsel benötigen noch den manuellen Abnahmetest.
 Details: [Sprachanleitung](docs/VOICE.md) und [Testbericht](docs/BUILD_AND_TEST.md).
 
 Die **Assistenten-APK ist 0.1.8-dev**. Die DHU-/Phone-Testoberflächen bleiben auf

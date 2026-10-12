@@ -45,10 +45,13 @@ Unveränderte Speichermodul-Tests wurden nicht wiederholt.
 ## Grenzen und manueller Stand
 
 Der Nutzer hat den Sprachablauf für OpenAI und Claude in 0.1.6 bestätigt; die
-Stimmwahl von 0.1.7 klingt laut Rückmeldung deutlich besser. Ein erneuter echter
-Anbieteraufruf sowie physische Anruf-, Headset- und Displaysperrtests unter 0.1.8
-sind noch **nicht bestätigt**. Simulierte Unterbrechungen und der getestete
-Beobachter-Lebenszyklus ersetzen diese Abnahme nicht.
+Stimmwahl von 0.1.7 klingt laut Rückmeldung deutlich besser. Für 0.1.8 bestätigt
+der Nutzer am 12.10.2026 auf dem Pixel für **beide Anbieter**: „Gespräch stoppen
+und neu starten per Button und Display aus klappt bei beiden Anbietern.“
+Damit sind Stoppen/Neustarten über die Schaltfläche und Beenden bei ausgeschaltetem
+Display praktisch bestätigt. Die Rückmeldung enthält keine separate Bestätigung
+für Anrufe oder Headset-Wechsel; diese bleiben offen. Ebenso ist damit nicht jede
+denkbare zeitliche Überschneidung oder Gesprächsphase manuell nachgewiesen.
 
 Anrufe werden über den gemeldeten Android-Audiomodus erkannt; fremde VoIP-Apps
 ohne passendes Signal sind nicht garantiert abgedeckt. Überwacht werden Anschluss

@@ -168,9 +168,10 @@ Grenzen: Die App beobachtet angeschlossene Ausgabegeräte, nicht jeden internen
 Routingwechsel zwischen bereits verbundenen Geräten. Eine Telefonie-/VoIP-App,
 die keinen passenden Audiomodus meldet, ist darüber nicht garantiert erkennbar.
 Audiofokusverlust während des Vorlesens und die Fehler der Erkennung bleiben
-zusätzliche Stoppsignale. Physische Anrufe, Bluetooth-Wechsel und Displaysperre
-müssen auf dem Zielgerät noch manuell geprüft werden; sie sind nicht durch
-simulierte Signale als praktisch bestätigt zu behandeln.
+zusätzliche Stoppsignale. Stoppen/Neustarten per Schaltfläche und Beenden bei
+Display-aus hat der Nutzer für beide Anbieter praktisch bestätigt. Physische
+Anrufe und Bluetooth-/Headset-Wechsel bleiben manuell zu prüfen; simulierte
+Signale allein bestätigen diese Fälle nicht.
 
 ### Gezielter manueller Abnahmetest
 
@@ -254,7 +255,9 @@ Keine hörbare Ausgabe, Mikrofonaufnahme oder echte KI-Anfrage wird automatisier
 gestartet; persönliche Daten und gewählte Stimme werden nicht verändert.
 
 Der Nutzer bestätigte Erkennung, Vorlesen und Beenden für beide Anbieter unter
-0.1.6 und einen deutlich besseren Klang mit der Stimmwahl in 0.1.7. Die neuen
-physischen Unterbrechungstests und ein erneuter echter Anbieteraufruf unter 0.1.8
-sind noch offen. Android-Auto-Audio und reale Fahrzeugnutzung sind nicht bestätigt.
+0.1.6 und einen deutlich besseren Klang mit der Stimmwahl in 0.1.7. Am 12.10.2026
+bestätigt er für 0.1.8 Stoppen und Neustarten per Schaltfläche sowie Beenden bei
+Display-aus für OpenAI und Claude. Anrufe und Headset-Wechsel sind noch offen;
+die Rückmeldung bestätigt nicht jede mögliche zeitliche Überschneidung separat.
+Android-Auto-Audio und reale Fahrzeugnutzung sind nicht bestätigt.
 Die DHU-Oberfläche bleibt bei 0.1.2-prototype. Details: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
