@@ -1,4 +1,4 @@
-# OpenAI-/Claude-Adapter – Projektstand 0.1.3
+# OpenAI-/Claude-Adapter – Projektstand 0.1.4
 
 ## Verhalten und Grenzen
 
@@ -29,7 +29,7 @@ die genaue Ursache kann ohne echten Kontotest nicht zugesichert werden.
 |---|---|
 | `core` | `ChatClient`, `ChatRequest`, `ChatMessage`, `ChatReply`, `Completion`, `CredentialSource`, `ChatFailure` |
 | `providers` | `OpenAiAdapter`, `ClaudeAdapter`, `ProviderChatClient`, `HttpTransport`, `UrlConnectionTransport` |
-| `app/ChatApi` | Kleine Brücke vom bestehenden `Turn`-Format und `SecretStore` zur gemeinsamen Schnittstelle |
+| `app/ChatApi` | Kleine Brücke vom bestehenden `Turn`-Format und `CredentialStore` zur gemeinsamen Schnittstelle |
 | `app/VoiceService` | Verwendet strukturierte Antworten; speichert nur Antworttext, spricht sichere Fehler und zeigt Hinweise |
 | `settings`, `prototype-app`, `car-ui` | Keine neue API-Abhängigkeit; DHU bleibt Auswahl-/UI-Test |
 
@@ -76,7 +76,8 @@ Der Client speichert selbst keinen Verlauf. Er liest ausschließlich den Schlüs
 für den ausdrücklich gewählten Anbieter und sendet ausschließlich den übergebenen
 Gesprächskontext. Der bestehende Voice-Anbieterwechsel beginnt weiterhin einen
 neuen Chat. Archivformat, Keystore-Aliase, Dateinamen und Schlüsselkennungen ändern
-sich nicht; es findet keine Datenmigration statt.
+sich nicht; es findet keine Datenmigration statt. Die Implementierung liegt seit
+0.1.4 im eigenen [Speichermodul](LOCAL_STORAGE.md).
 
 Alle Adaptertests nutzen erfundene Schlüssel und simulierte Antworten. Es wurden
 keine echten Zugangsdaten gelesen, keine Anbieter-Endpunkte aufgerufen und keine
@@ -109,7 +110,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für das Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.3-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
+`OpenAutoAI-0.1.4-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
 `adb devices -l` ermitteln. Bei Signaturkonflikten nicht automatisch deinstallieren,
 da das gespeicherte Daten löschen würde; denselben Debug-Schlüssel verwenden.
 

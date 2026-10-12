@@ -1,11 +1,13 @@
-# Roadmap ab 0.1.3
+# Roadmap ab 0.1.4
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
 lokal gespeicherte Auswahl für Smartphone und Car-Template derselben Test-App.
 Das bestehende Assistant-Modul verwendet dieselben Typen und Speicherlogik.
 0.1.3 ergänzt getrennte Anbieter-Adapter und einen offline getesteten Transport;
-die bestehenden DHU-Regressionstests bestehen weiterhin.
+die bestehenden DHU-Regressionstests bestehen weiterhin. 0.1.4 kapselt die vorhandene
+Chat-/Schlüsselspeicherung mit kompatiblem Format, gemeinsamen Sperren und
+geprüften Fehlerfällen; 45 automatisierte Tests sind bestanden.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
@@ -14,9 +16,9 @@ die bestehenden DHU-Regressionstests bestehen weiterhin.
 3. Die vorhandenen OpenAI-/Claude-Adapter mit eigenen API-Konten kontrolliert live testen.
    Fehlerfälle und Android-JSON sind offline geprüft; Modellzugriff und Voice-End-to-End
    bleiben offen. Der DHU-Prototyp löst weiterhin keine API-Anfrage aus.
-4. `ConversationStore` und `SecretStore` als Repository/Credential-Komponenten kapseln.
-   Bestehende Archivformate und Schlüssel erhalten; keine stillschweigende Übertragung
-   von Chatverläufen bei Anbieterwechsel. Fehlerfälle und gleichzeitige Zugriffe prüfen.
+4. Die jetzt gekapselte Speicherung im Hintergrund ausführen und große Verläufe
+   begrenzen. Export/Import, Gerätewechsel und explizite Wiederherstellung planen.
+   Vorhandene Daten nicht stillschweigend migrieren oder löschen.
 5. VoiceService hinter einer Voice-Schnittstelle anbinden; Wiederaufnahme, Abbruch,
    Mikrofonberechtigungen und TTS-/Recognizer-Fehler prüfen. CarAudioRecord/Audio-Routing
    erst nach geklärter Plattformberechtigung; keine Voice-Funktion im DHU-Prototyp.
