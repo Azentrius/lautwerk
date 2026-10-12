@@ -33,7 +33,9 @@ jobs:
           bash ./gradlew --no-daemon :core:test :providers:test :voice:test
           :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest
           :prototype-app:assemblePhoneDebug :prototype-app:assembleDhuDebug
-          :prototype-app:assembleDhuDebugAndroidTest
+          :prototype-app:assembleDhuDebugAndroidTest buildEnvironment
+          :app:dependencies :prototype-app:dependencies :car-ui:dependencies :settings:dependencies
+          :storage:dependencies :core:dependencies :providers:dependencies :voice:dependencies
       - name: Preserve test and lint reports
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
