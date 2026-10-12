@@ -13,9 +13,10 @@ Eine unveränderte Kopie liegt in `design/azentrius/upstream-eb827c8/`.
 Die aktuelle Design-Referenz ist inzwischen [Commit 9ed4032](../design/azentrius/upstream-9ed4032/android-auto.md).
 Sie präzisiert Host-Farben/Hintergrund anhand dieser Abnahme und enthält die
 O1-Entscheidung zum neuen App-Symbol aus `007f587`. B2/B3 bleiben unverändert;
-an 0.1.14 ist nichts nachzuziehen. Die neuen Symbol-Dateien sind als Referenz
-vorhanden, aber noch nicht in die App eingebunden. Herkunft und historische
-Kopien: [design/azentrius/README.md](../design/azentrius/README.md).
+an 0.1.14 ist nichts nachzuziehen. Die Symbol-Dateien wurden anschließend in
+0.1.15 eingebunden; siehe [App-Symbol und aktuelle Installation](APP_IDENTITY.md).
+Die folgenden Angaben beschreiben weiterhin den historischen Stand 0.1.14.
+Herkunft und historische Kopien: [design/azentrius/README.md](../design/azentrius/README.md).
 
 | Vorgabe | Umsetzung |
 |---|---|

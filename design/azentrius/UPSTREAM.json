@@ -7,5 +7,5 @@
   "content": "Complete, unmodified Git tree; no .git directory; scripts copied, not executed.",
   "appIconCommit": "007f587384ffe53e21c61ff1accfbe053dcf1309",
   "checksums": "UPSTREAM.sha256",
-  "applicationStatus": "Reference update only. OpenAuto AI 0.1.14 app resources, behavior and B2/B3 are unchanged; the new O1 icon is not yet integrated."
+  "applicationStatus": "Imported as an unchanged reference for 0.1.14. O1 launcher/startup/notification identity integrated in OpenAuto AI 0.1.15; B2/B3 and app behavior unchanged."
 }

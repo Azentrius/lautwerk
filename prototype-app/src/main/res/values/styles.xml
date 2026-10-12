@@ -1,8 +1,12 @@
 <resources>
-    <style name="Theme.OpenAutoAI" parent="android:style/Theme.Material.NoActionBar">
+    <style name="Theme.OpenAutoAI.Base" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:fontFamily">sans</item>
         <item name="android:colorAccent">#63DDC1</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowBackground">#101C24</item>
+        <item name="android:windowBackground">@color/ic_launcher_background</item>
+        <item name="android:statusBarColor">@color/ic_launcher_background</item>
+        <item name="android:navigationBarColor">@color/ic_launcher_background</item>
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
+    <style name="Theme.OpenAutoAI" parent="Theme.OpenAutoAI.Base" />
 </resources>

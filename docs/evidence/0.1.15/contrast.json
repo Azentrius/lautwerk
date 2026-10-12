@@ -1,0 +1,72 @@
+[
+  {
+    "file": "identity-800-ready-day.png",
+    "mode": "day",
+    "panelRGB": [
+      37,
+      38,
+      42
+    ],
+    "buttonRGB": [
+      186,
+      217,
+      252
+    ],
+    "textRGB": [
+      14,
+      50,
+      83
+    ],
+    "contrast": 9.01,
+    "buttonSample": [
+      300,
+      298
+    ],
+    "panelSample": [
+      100,
+      100
+    ],
+    "textRegion": [
+      359,
+      286,
+      441,
+      305
+    ],
+    "textSelection": "Most frequent dark glyph interior, max channel <130"
+  },
+  {
+    "file": "identity-800-start-6-night.png",
+    "mode": "night",
+    "panelRGB": [
+      37,
+      38,
+      42
+    ],
+    "buttonRGB": [
+      186,
+      217,
+      252
+    ],
+    "textRGB": [
+      14,
+      52,
+      84
+    ],
+    "contrast": 8.8,
+    "buttonSample": [
+      300,
+      298
+    ],
+    "panelSample": [
+      100,
+      100
+    ],
+    "textRegion": [
+      359,
+      286,
+      441,
+      305
+    ],
+    "textSelection": "Most frequent dark glyph interior, max channel <130"
+  }
+]

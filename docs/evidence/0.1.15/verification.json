@@ -1,0 +1,90 @@
+{
+  "designCommit": "9ed403273e10662d21a6af1cd1fd08e965c846e0",
+  "upstreamFilesVerified": 128,
+  "copiedAssets": [
+    {
+      "path": "app/src/main/res/drawable/ic_launcher_foreground.xml",
+      "sha256": "4bd398de2c75f6e7f159ea9af03d140d182b138800c63adb9c69f1d88956686c"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_launcher_monochrome.xml",
+      "sha256": "2f6cc887be45f62eea98bc9d11a0d69b77778a57e84a562b34298dfaf79fadc9"
+    },
+    {
+      "path": "app/src/main/res/drawable/ic_stat_openauto.xml",
+      "sha256": "faa7ca77f1cd229c32ceafccddf1afc87d1ecf208483d267d34659bcfa81fc0e"
+    },
+    {
+      "path": "app/src/main/res/mipmap-anydpi/ic_launcher.xml",
+      "sha256": "abeb59d4f8d3f7b392754de1df964b828ba2970c5df62490bcb4aee026b4b62a"
+    },
+    {
+      "path": "app/src/main/res/mipmap-anydpi/ic_launcher_round.xml",
+      "sha256": "abeb59d4f8d3f7b392754de1df964b828ba2970c5df62490bcb4aee026b4b62a"
+    },
+    {
+      "path": "app/src/main/res/values/ic_launcher_background.xml",
+      "sha256": "a712ff429c8d1cdf1848243e9b852ce711f367c8d091d54aeea665180b683c43"
+    },
+    {
+      "path": "prototype-app/src/main/res/drawable/ic_launcher_foreground.xml",
+      "sha256": "4bd398de2c75f6e7f159ea9af03d140d182b138800c63adb9c69f1d88956686c"
+    },
+    {
+      "path": "prototype-app/src/main/res/drawable/ic_launcher_monochrome.xml",
+      "sha256": "2f6cc887be45f62eea98bc9d11a0d69b77778a57e84a562b34298dfaf79fadc9"
+    },
+    {
+      "path": "prototype-app/src/main/res/mipmap-anydpi/ic_launcher.xml",
+      "sha256": "abeb59d4f8d3f7b392754de1df964b828ba2970c5df62490bcb4aee026b4b62a"
+    },
+    {
+      "path": "prototype-app/src/main/res/mipmap-anydpi/ic_launcher_round.xml",
+      "sha256": "abeb59d4f8d3f7b392754de1df964b828ba2970c5df62490bcb4aee026b4b62a"
+    },
+    {
+      "path": "prototype-app/src/main/res/values/ic_launcher_background.xml",
+      "sha256": "a712ff429c8d1cdf1848243e9b852ce711f367c8d091d54aeea665180b683c43"
+    }
+  ],
+  "apks": [
+    {
+      "name": "assistant",
+      "path": "app/build/outputs/apk/debug/app-debug.apk",
+      "package": "package: name='dev.openautoai.app' versionCode='15' versionName='0.1.15-dev' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+      "installed": [
+        "versionCode=15 minSdk=29 targetSdk=36",
+        "versionName=0.1.15-dev"
+      ],
+      "sha256": "96dcbd3aa4e76620b421cb3f9b20a6cd2cde2e17c62607082cffdd03b7926722"
+    },
+    {
+      "name": "dhu",
+      "path": "prototype-app/build/outputs/apk/dhu/debug/prototype-app-dhu-debug.apk",
+      "package": "package: name='dev.openautoai.prototype.dhu' versionCode='6' versionName='0.1.15-prototype' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+      "installed": [
+        "versionCode=6 minSdk=28 targetSdk=36",
+        "versionName=0.1.15-prototype"
+      ],
+      "sha256": "f580e27acec2395ae0097e0a8e7ace4f7b62288b1cead6b6698042a6505f5d70"
+    },
+    {
+      "name": "phone",
+      "path": "prototype-app/build/outputs/apk/phone/debug/prototype-app-phone-debug.apk",
+      "package": "package: name='dev.openautoai.prototype.phone' versionCode='5' versionName='0.1.15-prototype' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+      "installed": [],
+      "sha256": "24ab8fed33e621c81e817613a9583664e9d2b3dbee67fcc973f88d1819952875"
+    }
+  ],
+  "androidVersion": "17",
+  "androidSdk": "37",
+  "androidAuto": [
+    "versionCode=177663654 minSdk=32 targetSdk=37",
+    "versionName=17.7.663654-release",
+    "versionCode=12562600 minSdk=28 targetSdk=37",
+    "versionName=1.2.562600-stub"
+  ],
+  "dhu": "Android Auto - Desktop Head Unit\n  Build: 2022-03-30-438482292\n  Version: 2.0-windows",
+  "locale": "de-DE,en-US",
+  "nightMode": "Night mode: yes"
+}

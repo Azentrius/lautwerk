@@ -1,0 +1,9 @@
+10-12 22:11:59.246 25368 25368 I OpenAutoAI: car.start count=1
+10-12 22:12:01.685 25368 25368 I OpenAutoAI: car.start count=2
+10-12 22:12:04.111 25368 25368 I OpenAutoAI: car.start count=3
+10-12 22:12:06.537 25368 25368 I OpenAutoAI: car.start count=4
+10-12 22:12:08.866 25368 25368 I OpenAutoAI: car.start count=5
+10-12 22:12:11.284 25368 25368 I OpenAutoAI: car.start count=6
+10-12 22:20:37.863 I/OpenAutoAI(25368): car.onCreateScreen api=8
+10-12 22:21:11.877 I/OpenAutoAI(25368): car.start count=1
+10-12 22:24:09.557 I/OpenAutoAI(29809): car.onCreateScreen api=8
