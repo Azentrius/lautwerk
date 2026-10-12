@@ -1,4 +1,4 @@
-# Roadmap ab 0.1.11
+# Roadmap ab 0.1.12
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
@@ -28,6 +28,13 @@ Cloud-Dateidienste und Rotation während der Auswahl bleiben ungeprüft.
 ersten passenden Nachricht. 78 automatisierte Prüfungen bestehen. Der Nutzer
 bestätigt am 12.10.2026 Suche, Filter und Treffer-Navigation.
 
+0.1.12 ergänzt Deutsch/Englisch, „Gespräch“-Bezeichnungen, sprachabhängige
+Stimmwahl und zusätzliche Absicherung des Gesprächsstarts. 157 verschiedene
+Tests bestanden; Neuerstellung und Sprachwechsel der Oberfläche mit erfundenen
+Chats geprüft. GitHub-CI konfiguriert. Der Nutzer bestätigt den Gesprächsablauf
+mit beiden Anbietern und den tatsächlichen Gerätesprachwechsel Deutsch/Englisch. Die DHU-Variante steigt
+auf 0.1.12-prototype wegen der Übersetzung; Layout und Aktionen bleiben erhalten.
+
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
 2. Zulässigen Produktumfang für Android Auto klären; keine allgemeine KI-Kategorie
@@ -37,8 +44,8 @@ bestätigt am 12.10.2026 Suche, Filter und Treffer-Navigation.
    sind nur nach einem bestätigten praktischen Test belegt; siehe `docs/VOICE.md`.
    Der DHU-Prototyp löst weiterhin keine API-Anfrage aus.
 4. Verlaufssuche 0.1.11 und lokaler Textexport 0.1.10 sind bestätigt; Cloud-Ziele und Rotation während der
-   Auswahl später prüfen. Die Smartphone-Bedienung seit 0.1.9 erneut mit realen
-   Sprachgesprächen abnehmen. Die vollständige
+   Auswahl später prüfen. Die Smartphone-Bedienung wurde mit realen Gesprächen
+   beider Anbieter unter 0.1.12 vom Nutzer bestätigt. Die vollständige
    Archivdatei wird weiterhin im Hintergrund gelesen; echte Seitennachladung und
    Größenregeln für sehr große Archive planen. Verschlüsseltes Backup/Import,
    Gerätewechsel und explizite Wiederherstellung folgen später. Der neue Textexport
@@ -52,4 +59,4 @@ bestätigt am 12.10.2026 Suche, Filter und Treffer-Navigation.
 6. Modellkatalog gezielt pflegen und mögliche Modellmigrationen explizit anbieten;
    bisherige Auswahl/Chat-Zuordnung nicht unbemerkt verändern.
 7. Quellcode in [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai) pflegen
-   und CI einrichten. Reale Testergebnisse vor weiteren Auto-Funktionen bewerten.
+   und die eingerichtete CI nutzen. Entwurfs-PRs vor einer geordneten Zusammenführung prüfen. Reale Testergebnisse vor weiteren Auto-Funktionen bewerten.

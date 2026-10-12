@@ -1,85 +1,93 @@
-# Build- und Testbericht 0.1.11
+# Build- und Testbericht 0.1.12
 
-Stand: 12.10.2026. **78 automatisierte Prüfungen bestanden: 18 Core-JVM,
-53 Assistant-Gerätetests und 7 DHU-/Auswahltests.** Assistant **0.1.11-dev / Code 12**
-als Update auf Pixel 10 Pro / Android 17 installiert und geöffnet. Keine Datenlöschung.
-DHU-/Phone-Oberfläche bleibt **0.1.2-prototype / Code 3**.
+Stand: 12.10.2026. **157 verschiedene automatisierte Prüfungen bestanden:**
+22 Core-JVM, 21 Anbieter-JVM, 45 Gesprächs-JVM, 61 Assistant-Gerätetests und
+8 DHU-/Auswahltests. Assistant **0.1.12-dev / Code 13** und DHU-Test-App
+**0.1.12-prototype / Code 4** als Updates auf Pixel 10 Pro / Android 17 installiert.
+Assistant geöffnet, installierte Version und aktive MainActivity geprüft.
 
-## Änderung und praktische Bestätigung
+## Änderungen
 
-Der Verlauf kann nach Titel, Anbietername, Modell und allen Nachrichten durchsucht
-und nach Anbieter gefiltert werden. Die Suche läuft auf dem bestehenden Worker;
-veraltete Ergebnisse nach Texteingabe oder Archivaktualisierung werden verworfen.
-Treffer in Nachrichten führen direkt zur ersten passenden Stelle, auch außerhalb
-der zunächst angezeigten letzten 50 Nachrichten. Keine neue Datei, Berechtigung,
-API-Anfrage oder Änderung des Speicherformats. Keine gespeicherte Suchhistorie.
+Deutsch/Englisch entsprechend Androids Sprachpräferenzen, Englisch als Rückfall.
+„Gespräch starten“ ersetzt „Sprachgespräch starten“. Oberflächen, feste Meldungen,
+Hörprobe, Anweisungen an beide Anbieter und Exportbeschriftungen folgen der Sprache.
+Stimmwahl wird je Sprache bewahrt; vorhandene Auswahl wird über Android-Metadaten
+zugeordnet. Bestehende Chats und Schlüssel bleiben im gleichen verschlüsselten Format.
 
-Der Nutzer bestätigt am 12.10.2026 nach dem Testauftrag für Suche in einer älteren
-Nachricht, Anbieterfilter, Öffnen eines Treffers und Zurücksetzen:
-**„Suche, Filter und Treffer funktionieren.“** Der lokale Textexport wurde bereits
-unter 0.1.10 bestätigt; diese Rückmeldung wird nicht als neuer Exporttest ausgegeben.
+Startaufträge werden nur in einer fortgesetzten Oberfläche verbraucht. Abbruch und
+verspätete Berechtigungsrückmeldung können kein neues Gespräch autorisieren.
+Ein Prozessneustart stellt keinen Startauftrag aus einem Bundle wieder her.
+Navigation und Nachrichtenposition überstehen die Neuerstellung der Oberfläche.
 
-## Ausgeführte Prüfungen
+## Ergebnisse
 
 | Prüfung | Ergebnis |
 |---|---|
-| Assistant- und DHU-Debug-App samt Test-APKs | erfolgreich gebaut und als Updates installiert |
-| `:app:lintDebug` | 0 Fehler, 10 bestehende Warnungen und 1 KTX-Hinweis |
-| Core-JVM | 18 bestanden: 11 bisherige Prüfungen und 7 neue Suchtests |
-| `ConversationSearchTest` | Beide Anbieter, leere Suche, Reihenfolge, Unicode, wörtliche Sonderzeichen, 1.000 künstliche Chats, alte Nachrichten, Textabschnittsgrenzen und Abbruch in langer Einzelnachricht |
-| `HistorySearchTest` | 7 bestanden: Suche ohne Archiv-/Schlüsseländerung, ältere Ergebnisse, Entwertung bei Archivaktualisierung, Lesefehler/Wiederholen, aktive Voice-Sitzung, sichere Suchfehler und Ende der ViewModel-Lebensdauer |
-| `HistorySearchUiTest` | 5 bestanden: Filter/Zähler/Zurücksetzen, direkter Sprung zu Nachricht 4 von 140 und 96 von 100, alte Modelle, sichtbares Beenden während Suche und Vorschau |
-| Bisherige Assistant-Tests | 41 bestanden, einschließlich Export, Speicher-UI, Home-Zustand, Anbieter/Android, Worker, Unterbrechungsbeobachter, Stimme und Einstellungen |
-| DHU-/Auswahltests | 7 bestanden: Car-Template, Starten, Auswahl und Smartphone-Oberfläche |
-| Visuelle Prüfung | Suchansicht mit ausschließlich erfundenen Chats auf dem Pixel geprüft; Filter, Treffer und feste Steuerung sichtbar |
+| Core-JVM | 22 bestanden, einschließlich Sprachreihenfolge, Rückfall, dynamischer Fehlermeldungen und Exportlabels ohne Änderung der Inhalte |
+| Anbieter-JVM | 21 bestanden; beide Sprachvarianten in Requests beider Anbieter, gleiches Modell und Antwortbudget, keine echte API-Anfrage |
+| Gesprächs-JVM | 45 bestanden; bestehende Abbruch-/Unterbrechungsprüfungen und englischer Anbieterwechsel/Ende ohne Weiterleitung als Benutzerfrage |
+| Assistant-Gerätetests | 61 verschiedene Tests bestanden, siehe Wiederholung unten |
+| DHU-/Auswahltests | 8 bestanden; bisherige deutsche Prüfungen plus englisches Template mit Titel, Auswahl und funktionierender Start-Aktion |
+| Android-Lint | 0 Fehler, 11 Warnungen und 1 KTX-Hinweis; eine zusätzliche Empfehlung zum Preferences-KTX-Stil gegenüber 0.1.11 |
+| Visuelle Prüfung | Deutsch und Englisch mit ausschließlich erfundenen Chats; Beschriftungen und feste Startsteuerung sichtbar |
 
-Die Tests verwenden ausschließlich erfundene Inhalte, Speicherattrappen, eigene
-Testdateien und isolierte Einstellungen. Keine persönlichen Chats oder Schlüssel
-ausgelesen, keine Mikrofonaufnahme, hörbare TTS oder echte API-Anfrage gestartet.
-Die Nutzerbestätigung erfolgte getrennt davon auf dem eigenen Gerät; Chatinhalte
-wurden dazu nicht angefordert oder ausgelesen.
+Der erste Assistant-Lauf bestand 52 von 61 Tests. Neun bisherige UI-Tests suchten
+noch die alten deutschen internen Seitenkennungen. Nach Umstellung der betroffenen
+Testaufrufe bestand die gesamte betroffene Klasse `StorageUiTest` mit 11 Tests.
+Die Produktions-App wurde zwischen diesen Läufen nicht verändert. Es handelt sich
+um 61 verschiedene bestandene Tests, nicht um 72 verschiedene Prüfungen.
 
-## Erhaltener Stand und offene Grenzen
+Die neuen vier `LocalizationLifecycleTest`-Prüfungen bestehen: reale Activity-
+Neuerstellung mit behaltenem ViewModel, Sprachwechsel mit Suchtext/Filter,
+erhaltener älterer Nachricht und Scrollposition, Hintergrundwechsel während eines
+langsamen Starts und einmaliger anschließender Start. Ein separater Debug-Testhost
+verwendet die echte MainContent/HomeViewModel-Anbindung, ausschließlich Speicherattrappen
+und einen Startzähler; er kann keinen Sprachdienst oder Anbieteraufruf starten.
+Er ist nicht exportiert und nicht in Release-Builds enthalten.
 
-`providers`, `voice`, `storage`, `settings`, `prototype-app` und `car-ui` bleiben
-quellseitig unverändert. `core` erhält eine unabhängige Suchfunktion und Tests;
-`app` erhält die UI-/Worker-Anbindung. Kein geänderter Modellkatalog, keine Migration,
-keine neue Car-Kategorie und keine geänderte Hostprüfung. API-Schlüssel, Archiv und
-gewählte Stimme bleiben erhalten. Export liest weiterhin den vollständigen gewählten Chat.
+Die drei Start-Gate-Tests prüfen Abbruch/verspätete Freigaben, Vordergrund-/Mikrofon-
+Voraussetzungen, optionale Benachrichtigungsfreigabe sowie einen frischen Prozesszustand.
+Der Stimmtest prüft die Übernahme einer alten deutschen Auswahl und eine davon
+unabhängige englische Auswahl. Keine persönlichen Chats oder Schlüssel ausgelesen,
+keine Aufnahme oder hörbare TTS gestartet. Die Gerätesprache blieb unangetastet.
 
-Die 64 JVM-Prüfungen der unveränderten Anbieter-/Sprachmodule bestanden zuletzt unter
-0.1.8 und wurden nicht wiederholt. Das unveränderte Speichermodul wurde nicht erneut
-separat getestet. DHU-Template-Tests belegen keine neue reale Launcher-Verbindung;
-die bisherige Launcher-/Starten-Bestätigung des Nutzers gilt für 0.1.2-prototype.
+## Grenzen und Praxistest
 
-Die Suche arbeitet auf dem vollständig eingelesenen Archiv. Sie ist keine Datenbank-
-Seitennachladung und keine Garantie für beliebig große Archive bei begrenztem RAM.
-Sie sucht wörtliche Teiltexte ohne Beachtung der Groß-/Kleinschreibung; keine unscharfe
-Suche oder Akzentnormalisierung. Jeder Chat erscheint einmal, mit der ersten passenden
-Nachricht als Sprungziel, sofern nicht bereits die Metadaten passen.
+Der Nutzer bestätigt am 12.10.2026 für 0.1.12 nach dem Testauftrag mit Starten,
+Antwort anhören und Beenden: **„Funktioniert bei beiden einwandfrei.“** Für den
+Gerätesprachwechsel Englisch/Deutsch einschließlich Rückkehr zur deutschen
+Stimmwahl lautet die Rückmeldung: **„Deutsch und Englisch funktionieren.“**
+Ein vollständiges englischsprachiges Gespräch wurde nicht gesondert bestätigt.
 
-Rotation/Prozessneustart wurden für die neue Suche nicht separat als End-to-End-
-Gerätetests ausgeführt. Suchtext/Filter verbleiben im ViewModel und werden nicht
-in Dateien, Einstellungen oder den gespeicherten Activity-Zustand geschrieben.
-Cloud-Dateidienste und Rotation beim Export bleiben ebenfalls ungeprüft.
+Activity-Neuerstellung im Test ersetzt keinen vollständigen Prozessabbruch mit
+offenem Systemdialog. Echtes englisches Vorlesen, Cloud-Ziele und Rotation im
+externen Export-Dateidialog sind nicht automatisiert abgenommen. Die Sprachauswahl
+des Modells ist nur anhand ausgehender Test-Requests geprüft.
 
-Der erneute Sprachtest der Smartphone-Bedienung seit 0.1.9 steht aus. **Anruf- und
-Headset-/Bluetooth-Tests bleiben ausdrücklich zurückgestellt.** Auto-Audio und
-reale Fahrzeugnutzung sind weiterhin nicht bestätigt.
+**Anruf- und Headset-/Bluetooth-Praxistests bleiben zurückgestellt.** Eine neue
+reale DHU-Verbindung und Auto-Audio wurden nicht geprüft. DHU-Layout/Aktionen,
+Kategorie-Platzhalter und Hostprüfung bleiben erhalten; keine Zulassungsbehauptung.
+Die DHU-Versionsnummer steigt wegen der zusätzlichen Übersetzung, nicht wegen
+einer neuen Auto-Funktion. Der Debug-Release-Schutz bleibt aktiv.
+
+GitHub-CI ist konfiguriert; der erste Online-Lauf wird getrennt dokumentiert.
+Das Speichermodul erhält nur den lokalisierten Titel neuer leerer Chats; seine
+separaten Verschlüsselungs-Gerätetests wurden nicht wiederholt.
 
 ## Wiederholen
 
-JDK 17/SDK gemäß [START_WINDOWS.md](START_WINDOWS.md) setzen. Für UI-Tests das Pixel
-entsperrt und unbedient lassen, eine aktive DHU-Sitzung zuvor regulär beenden.
+JDK 17 und SDK gemäß [START_WINDOWS.md](START_WINDOWS.md) setzen.
 
 ```powershell
-.\gradlew.bat :core:test :app:assembleDebug :app:assembleDebugAndroidTest :app:lintDebug
-.\gradlew.bat :app:connectedDebugAndroidTest
-.\gradlew.bat :prototype-app:connectedDhuDebugAndroidTest
+.\gradlew.bat :core:test :providers:test :voice:test :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest
+.\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:assembleDhuDebugAndroidTest
+.\gradlew.bat :app:connectedDebugAndroidTest :prototype-app:connectedDhuDebugAndroidTest
 ```
 
-In diesem Lauf gebaut/installiert und über `adb shell am instrument -w` ausgeführt:
-Assistant `OK (53 tests)`, DHU `OK (7 tests)`; Core-XML-Berichte: 18 Tests, 0 Fehler.
+Die bisherigen Gerätefixtures erwarten Deutsch. Neue Englisch-/Rückfalltests
+verwenden isolierte Konfigurationskontexte. JVM-Tests setzen die deutsche
+Baseline unabhängig von der Sprache des Build-Rechners; neue Sprachtests prüfen
+Englisch zusätzlich explizit.
 
-[Suchanleitung](HISTORY_SEARCH.md) · [Bedienung](PHONE_UI.md) · [Installation](VOICE.md)
-Vorheriger Bericht: [0.1.10](history/BUILD_AND_TEST-0.1.10.md).
+[Sprache und Wiederaufnahme](LOCALIZATION.md) · [Bedienung](PHONE_UI.md)
+Vorheriger Bericht: [0.1.11](history/BUILD_AND_TEST-0.1.11.md).

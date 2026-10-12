@@ -54,7 +54,7 @@ class StorageUiTest {
         compose.onNodeWithTag("conversation-start").performClick()
         compose.waitUntil(5000) { f.home.state.message == StorageError.CREDENTIAL_READ.userMessage }
         compose.onNodeWithText(StorageError.CREDENTIAL_READ.userMessage).assertExists()
-        page("Einstellungen"); scroll("Entfernen")
+        page("settings"); scroll("Entfernen")
         compose.onNodeWithText("Entfernen").performClick()
         compose.waitUntil(5000) { f.home.state.message == StorageError.CREDENTIAL_WRITE.userMessage }
         compose.onNodeWithText(StorageError.CREDENTIAL_WRITE.userMessage).assertExists()
@@ -63,7 +63,7 @@ class StorageUiTest {
 
     @Test fun retiredModelHistoryRemainsReadableButCannotBeStarted() {
         f.archive.items = listOf(chat("old", listOf(Turn("user", "Erhaltene Nachricht"))).copy(modelId = "retired-model"))
-        render(); page("Verlauf")
+        render(); page("history")
         compose.onNodeWithTag("history-old").performClick()
         scroll("Du: Erhaltene Nachricht")
         compose.onNodeWithText("Du: Erhaltene Nachricht").assertExists()
@@ -74,7 +74,7 @@ class StorageUiTest {
     @Test fun longHistoryAndOlderMessagesRemainReachableWithStartAlwaysVisible() {
         val turns = (0..119).map { Turn("user", "Testnachricht $it") }
         f.archive.items = (0..199).map { chat(it.toString(), if (it == 199) turns else emptyList()) }
-        render(); page("Verlauf")
+        render(); page("history")
         compose.onNodeWithTag("home-list").performScrollToNode(hasTestTag("history-199"))
         compose.onNodeWithTag("conversation-start").assertIsDisplayed()
         compose.onNodeWithTag("history-199").performClick()
@@ -92,10 +92,10 @@ class StorageUiTest {
     @Test fun stopRemainsVisibleWhileScrollingAndSettingsCannotMutateActiveSession() {
         f.archive.items = (0..99).map { chat(it.toString()) }; render()
         compose.runOnIdle { AppState.update(true, Provider.CLAUDE, ModelCatalog.default(Provider.CLAUDE), "0", "Ich höre zu") }
-        page("Verlauf")
+        page("history")
         compose.onNodeWithTag("home-list").performScrollToNode(hasTestTag("history-99"))
         compose.onNodeWithTag("conversation-stop").assertIsDisplayed()
-        page("Einstellungen"); scroll("Entfernen")
+        page("settings"); scroll("Entfernen")
         compose.onNodeWithText("Entfernen").assertIsNotEnabled()
         compose.onNodeWithTag("conversation-stop").assertIsDisplayed().performClick()
         assertEquals(1, stops)
@@ -106,12 +106,12 @@ class StorageUiTest {
     @Test fun slowKeyWriteDoesNotBlockNavigationAndCannotBeSubmittedTwice() {
         val gate = HomeTestFixture.Gate(); f.keys.beforeSave = gate::block
         try {
-            render(); page("Einstellungen"); compose.onNodeWithTag("home-list").performScrollToNode(hasTestTag("api-key-input"))
+            render(); page("settings"); compose.onNodeWithTag("home-list").performScrollToNode(hasTestTag("api-key-input"))
             compose.onNodeWithTag("api-key-input").performTextInput("dummy-new-key")
             scroll("Schlüssel speichern"); compose.onNodeWithText("Schlüssel speichern").performClick()
             assertTrue(gate.entered.await(3, TimeUnit.SECONDS))
             compose.onNodeWithText("Schlüssel speichern").assertIsNotEnabled()
-            page("Verlauf"); compose.onNodeWithText("Noch keine gespeicherten Gespräche.").assertExists()
+            page("history"); compose.onNodeWithText("Noch keine gespeicherten Gespräche.").assertExists()
             compose.onNodeWithTag("conversation-start").assertIsNotEnabled()
             gate.open()
             compose.waitUntil(5000) { f.home.state.operation == null && !f.home.state.loading }
@@ -134,7 +134,7 @@ class StorageUiTest {
     }
 
     @Test fun deleteRequiresConfirmationAndCancellingKeepsTheChat() {
-        f.archive.items = listOf(chat("keep")); render(); page("Verlauf")
+        f.archive.items = listOf(chat("keep")); render(); page("history")
         compose.onNodeWithTag("history-keep").performClick(); scroll("Diesen Chat löschen")
         compose.onNodeWithText("Diesen Chat löschen").performClick()
         compose.onNodeWithText("Abbrechen").performClick()
@@ -147,7 +147,7 @@ class StorageUiTest {
     }
 
     @Test fun exportDisclosureCanCancelAndConfirmedExportRequestsOnePickerOnly() {
-        f.archive.items = listOf(chat("export")); render(); page("Verlauf")
+        f.archive.items = listOf(chat("export")); render(); page("history")
         compose.onNodeWithTag("history-export").performClick(); scroll("Als Textdatei exportieren")
         compose.onNodeWithTag("export-chat").performClick()
         compose.onNodeWithText("Chat als Textdatei exportieren?").assertIsDisplayed()
@@ -166,7 +166,7 @@ class StorageUiTest {
         compose.onNodeWithTag("export-chat").performClick()
         compose.onNodeWithText("Speicherort wählen").performClick()
         compose.waitUntil(5000) { exportPicks == 1 }
-        page("Einstellungen"); page("Gespräch")
+        page("settings"); page("conversation")
         assertEquals(1, exportPicks); assertEquals(0, f.keys.reads.get())
         compose.runOnIdle { f.home.finishExportSelection(null) }
         compose.waitUntil(5000) { !f.home.state.loading }
@@ -176,7 +176,7 @@ class StorageUiTest {
 
     @Test fun exportButtonIsDisabledDuringVoiceAndRetiredChatsCanStillExport() {
         val old = chat("old").copy(modelId = "retired")
-        f.archive.items = listOf(old); render(); page("Verlauf")
+        f.archive.items = listOf(old); render(); page("history")
         compose.onNodeWithTag("history-old").performClick(); scroll("Als Textdatei exportieren")
         compose.onNodeWithTag("conversation-start").assertIsNotEnabled()
         compose.onNodeWithTag("export-chat").assertIsEnabled()
@@ -190,7 +190,7 @@ class StorageUiTest {
     @Test fun conversationScreenShowsControlsAndCanBeReviewedWithInventedDataOnly() {
         f.archive.items = listOf(chat("preview", listOf(Turn("user", "Was testen wir heute?"),
             Turn("assistant", "Wir prüfen die neue Gesprächsansicht und ihre Bedienung."))))
-        render(); page("Verlauf"); compose.onNodeWithTag("history-preview").performClick()
+        render(); page("history"); compose.onNodeWithTag("history-preview").performClick()
         compose.onNodeWithTag("conversation-start").assertIsDisplayed()
         compose.onNodeWithText("Stimme und Tempo").assertIsDisplayed()
         val instrumentation = InstrumentationRegistry.getInstrumentation()

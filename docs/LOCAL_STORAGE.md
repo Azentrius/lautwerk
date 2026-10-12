@@ -1,9 +1,9 @@
-# Lokale Chats und API-Schlüssel – Projektstand 0.1.11
+# Lokale Chats und API-Schlüssel – Projektstand 0.1.12
 
 Die vorhandene Speicherung aus 0.1.0–0.1.3 ist jetzt ein eigener Baustein.
 Die Smartphone-Oberfläche, die Anbieter-Brücke und der Sprachdienst verwenden
 gemeinsame Schnittstellen. Es gibt keine Datenmigration und keinen neuen Cloud-Speicher.
-Die DHU-Oberfläche bleibt beim bestätigten Stand 0.1.2-prototype.
+Die DHU-Oberfläche erhält in 0.1.12-prototype englische Texte; ihre Aktionen bleiben erhalten.
 
 ## Aufbau und Kompatibilität
 
@@ -63,7 +63,7 @@ Die Verschlüsselung nutzt weiterhin den Android Keystore.
 
 ## Auf dem Pixel prüfen
 
-0.1.11-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
+0.1.12-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
 ist ein anderes Paket mit eigenem Speicher. Bei einem Signaturkonflikt nicht
 deinstallieren oder App-Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 
@@ -76,7 +76,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für die Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.11-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
+`OpenAutoAI-0.1.12-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
 Seriennummer aus `adb devices -l` verwenden.
 
 Vorhandene Chats lassen sich ohne API-Aufruf öffnen und lesen. Zum späteren
@@ -132,3 +132,5 @@ Der Nutzer bestätigte den grundlegenden Sprachdialog mit beiden Anbietern unter
 Test der Oberfläche seit 0.1.9 steht noch aus. Anruf- und Headset-/Bluetooth-Tests
 bleiben zurückgestellt. Den genauen Stand beschreibt [VOICE.md](VOICE.md).
 Alle Ergebnisse: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+
+Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).

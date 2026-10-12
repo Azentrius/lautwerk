@@ -10,8 +10,8 @@ android {
         applicationId = "dev.openautoai.prototype"
         minSdk = 28
         targetSdk = 36
-        versionCode = 3
-        versionName = "0.1.2-prototype"
+        versionCode = 4
+        versionName = "0.1.12-prototype"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     flavorDimensions += "surface"

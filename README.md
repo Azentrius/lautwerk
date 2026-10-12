@@ -1,4 +1,4 @@
-# OpenAuto AI 0.1.11 – Sprachfunktion für OpenAI und Claude
+# OpenAuto AI 0.1.12 – Sprachfunktion für OpenAI und Claude
 
 Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
 die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
@@ -7,21 +7,26 @@ Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
 von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Neu in 0.1.11:** Der Verlauf lässt sich nach Titel, Anbieter, Modell und allen
-Nachrichten durchsuchen sowie nach OpenAI/Claude filtern. Treffer in älteren Nachrichten
-öffnen sich direkt an der passenden Stelle. Die Suche läuft im Hintergrund und erzeugt
-keinen zusätzlichen Klartextindex. Sprachablauf, Textexport und Speicherformate bleiben erhalten.
+**Neu in 0.1.12:** Deutsch und Englisch passend zur Gerätesprache, mit
+„Gespräch starten“ statt „Sprachgespräch starten“. Dialoge, Meldungen,
+Stimmeinstellungen, Erkennung, feste Hörprobe und Anbieteranweisungen folgen
+der Sprache. Die deutsche Stimmwahl bleibt beim Wechsel zu Englisch erhalten.
+Startabbruch, Berechtigungsrückmeldungen und Wiederherstellung der Oberfläche
+sind zusätzlich abgesichert. Die lokale Suche und der Textexport bleiben erhalten.
 
-78 automatisierte Prüfungen bestehen: 18 Core-JVM, 53 Assistant-Gerätetests und
-7 DHU-/Auswahltests. Assistant 0.1.11-dev ist installiert. Lint: 0 Fehler,
-10 bestehende Warnungen und 1 Hinweis. Der Nutzer bestätigt Suche, Filter und Treffer.
-Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt.
-Details: [Verlaufssuche](docs/HISTORY_SEARCH.md), [Textexport](docs/CHAT_EXPORT.md),
+157 verschiedene automatisierte Prüfungen bestehen: 88 JVM-Prüfungen,
+61 Assistant-Gerätetests und 8 DHU-/Auswahltests. Beide Apps sind als Updates
+installiert. Lint: 0 Fehler, 11 Warnungen und 1 Hinweis. Der Nutzer bestätigt
+den Gesprächsablauf mit beiden Anbietern und den Wechsel Deutsch/Englisch.
+Anruf- und Headset-/Bluetooth-Praxistests bleiben zurückgestellt.
+
+Die **Assistenten-APK ist 0.1.12-dev / Code 13**, die **DHU-/Phone-Testvariante
+0.1.12-prototype / Code 4**. Die DHU-Aktionen und das Layout bleiben erhalten,
+zusätzlich sind ihre Texte übersetzt. Voice bleibt ausschließlich in der Assistenten-App.
+
+Details: [Sprache und Wiederaufnahme](docs/LOCALIZATION.md),
+[Verlaufssuche](docs/HISTORY_SEARCH.md), [Textexport](docs/CHAT_EXPORT.md),
 [Bedienung](docs/PHONE_UI.md), [Testbericht](docs/BUILD_AND_TEST.md).
-
-Die **Assistenten-APK ist 0.1.11-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
-dem bestätigten **0.1.2-prototype**-Stand mit Auswahl, Titel und Starten.
-Die neuen Sprachbausteine sind nur in der Assistenten-App eingebunden.
 
 ## Schnellstart unter Windows
 
@@ -108,6 +113,9 @@ Die ursprünglichen README-/Roadmap-Dateien liegen als historische, nicht aktuel
 Beschreibungen unter `docs/history/`.
 
 ## GitHub
+
+[Automatische Prüfungen](.github/workflows/android.yml) bauen die Debug-Varianten,
+führen JVM-Tests und Lint aus. Keine API-Schlüssel oder Live-Anfragen in CI.
 
 Quellen, Wrapper, Lizenz, Dokumentation und Tests gehören ins Repository.
 `local.properties`, `.gradle`, Build-Verzeichnisse, Schlüssel und Diagnoseausgaben
