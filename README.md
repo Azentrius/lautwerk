@@ -9,7 +9,10 @@ bleiben im bestehenden verschlüsselten Format erhalten.
 
 **Neu in 0.1.14:** Die experimentelle DHU-Oberfläche fordert die freigegebenen
 Azentrius-Farben für „Starten“ an. MessageTemplate, Titel, App-Symbol, Texte und
-Testzähler bleiben erhalten. Das Design-System ist auf Commit `eb827c8` festgelegt.
+Testzähler bleiben erhalten. Die Umsetzung 0.1.14 basiert auf Design-Commit `eb827c8`.
+Die aktuelle [Design-Referenz](design/azentrius/README.md) ist auf `9ed4032` aktualisiert,
+einschließlich Host-Präzisierungen und neuem App-Symbol. Dies ändert die geprüfte
+App-Version 0.1.14 nicht; das neue Symbol ist noch nicht in die App eingebunden.
 Der Android-Auto-Host entscheidet über die tatsächliche Darstellung.
 
 DHU-Debug und Test-APK bauen erfolgreich; GitHub-CI für den Implementierungsstand

@@ -5,7 +5,16 @@ systemabhängig hell/dunkel, DM Sans, die gelieferten PatternFly-Icons, feste
 Farb-Tokens und Bausteine ohne Ripple. Dynamische Material-Farben sind aus.
 Die DHU-Oberfläche bleibt in ihren bisherigen Android-Auto-Vorlagen.
 
-## Verbindliche Quellen
+## Aktuelle Referenz und Quellen der Umsetzung
+
+Aktuelle Design-Referenz: [9ed4032](../design/azentrius/upstream-9ed4032/README.md),
+vollständig und unverändert unter `design/azentrius/upstream-9ed4032/` kopiert.
+Sie enthält die DHU-Präzisierungen und das neue App-Symbol aus `007f587`.
+Dies ist ein Quellen-Update; Smartphone- und DHU-App wurden dabei nicht verändert.
+Das neue Symbol ist noch nicht eingebunden. Details und Prüfsummen stehen in
+[design/azentrius/README.md](../design/azentrius/README.md).
+
+Die folgenden historischen Quellen dokumentieren die Umsetzung von 0.1.13:
 
 - Ursprüngliches Paket: `design/azentrius/`, unverändert importiert.
   ZIP-SHA256: `fdf2805c9690584e6ea12b36032972bb021285070758245c666ac42b873d984f`.
