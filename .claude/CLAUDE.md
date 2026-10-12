@@ -33,9 +33,6 @@ The same in every Azentrius repository.
 - **Authorship.** Commits on `main` are authored by the maintainer (the squash merge takes care of
   that). Commits, pull requests and files carry no co-author trailers and no “generated with” lines.
 
-README.md, ROADMAP.md and docs/ are still German until their translation is merged; new and changed
-docs are written in English.
-
 ## Repository baseline
 
 The same in every Azentrius repository; keep it when changing the repository or its settings.
@@ -82,7 +79,7 @@ app/            the assistant `dev.openautoai.app`: Compose UI (package `design`
 prototype-app/  DHU test app, flavors `phone` (no car service) and `dhu` (adds car-ui); device tests in
                 src/androidTest and src/androidTestDhu
 tools/          release-notes.sh, check-version.sh; dhu/ = DHU profiles and contrast.py
-docs/           build and test report, topic docs, evidence/ of device and DHU tests; history/ = old states
+docs/           build and test report, topic docs, evidence/ of device and DHU tests
 .github/        workflows android.yml (job test) and release.yml; dependabot.yml (Gradle, GitHub Actions)
 ```
 

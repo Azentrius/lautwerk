@@ -1,99 +1,91 @@
-# Smartphone-Bedienung – 0.1.12
+# Phone UI – 0.1.12
 
-Die Hauptseite hat drei Bereiche. Der Gesprächsknopf und der aktuelle Status
-bleiben am unteren Rand erreichbar, auch wenn die Liste gescrollt wird.
+The main page has three sections. The conversation button and the current status stay reachable
+at the bottom edge, even when the list is scrolled.
 
-| Bereich | Inhalt |
+| Section | Content |
 |---|---|
-| Gespräch | Aktueller Anbieter/Modell, Stimme und Tempo, geöffnetes Gespräch und Nachrichten |
-| Einstellungen | Anbieter-/Modellauswahl sowie Eingabe und Verwaltung des API-Schlüssels |
-| Verlauf | Chats durchsuchen, nach Anbieter filtern, öffnen oder ein neues Gespräch auswählen |
+| Conversation | Current provider/model, voice and speed, opened conversation and messages |
+| Settings | Provider/model selection and entry and management of the API key |
+| History | Search chats, filter by provider, open a chat or select a new conversation |
 
-Ein Chat wird durch Öffnen nur angezeigt. Erst „Gespräch fortsetzen“ startet die
-Sprachfunktion mit dem ursprünglichen Anbieter und Modell. Alte, nicht mehr
-gelistete Modelle bleiben lesbar, dürfen aber nicht unbemerkt unter einem anderen
-Modell fortgesetzt werden. „Neues Gespräch auswählen“ legt erst beim Start einen
-neuen Chat an. Startvorbereitung zeigt „Start abbrechen“; eine laufende Sitzung
-zeigt immer „Gespräch beenden“. Während einer Sitzung sind Anbieter-/Modellwechsel
-per Einstellungen, Schlüsseländerungen und Löschen gesperrt; die bestehenden
-ausdrücklichen Sprachbefehle zum Anbieterwechsel bleiben verfügbar.
+Opening a chat only displays it. Only "Continue conversation" starts the voice feature with the
+original provider and model. Old models that are no longer listed stay readable, but must not be
+continued unnoticed under a different model. "Select new conversation" creates a new chat only
+when it is started. Start preparation shows "Cancel start"; a running session always shows "End
+conversation". During a session, provider/model changes via Settings, key changes and deletion
+are locked; the existing explicit voice commands for switching provider stay available.
 
-Bei langen Chats werden zunächst die letzten 50 Nachrichten angeboten. „Ältere
-Nachrichten anzeigen“ erweitert um jeweils 50. Alle gespeicherten Nachrichten
-bleiben erhalten. Das Löschen eines Chats benötigt eine Bestätigung; Abbrechen
-belässt ihn unverändert. Die Bestätigung gilt nur für die ursprünglich gewählte Chat-ID.
+For long chats, the last 50 messages are offered first. "Show older messages" extends the view
+by 50 each time. All saved messages are kept. Deleting a chat requires confirmation; cancelling
+leaves it unchanged. The confirmation applies only to the originally selected chat ID.
 
-## Verlauf durchsuchen
+## Searching history
 
-Unter **Verlauf** im Feld **Chats durchsuchen** einen Text eingeben und bei Bedarf
-**Alle**, **OpenAI** oder **Claude** wählen. Titel, Anbieter, Modell und alle Nachrichten
-werden durchsucht; die Groß-/Kleinschreibung ist egal. Einträge mit **Treffer in
-Nachricht …** öffnen direkt an dieser Stelle, auch außerhalb der ersten 50 angezeigten
-Nachrichten. Suchtext und Filter ändern weder Inhalte noch die aktive Anbieterauswahl.
-**Suche zurücksetzen** zeigt wieder alle Chats. Während Voice bleibt Beenden erreichbar;
-ein anderer Chat kann erst nach Ende der Sitzung geöffnet werden.
+Under **History**, enter text in the **Search chats** field and, if needed, select **All**,
+**OpenAI** or **Claude**. Title, provider, model and all messages are searched; case does not
+matter. Entries with **Match in message …** open directly at that point, also outside the first
+50 displayed messages. Search text and filter change neither content nor the active provider
+selection. **Reset search** shows all chats again. During a voice session, ending stays reachable;
+another chat can only be opened after the session has ended.
 
-Der Nutzer bestätigt Suche, Filter und Treffer am 12.10.2026.
-Details und Grenzen: [HISTORY_SEARCH.md](HISTORY_SEARCH.md).
+The user confirmed search, filter and matches on 2026-10-12.
+Details and limits: [HISTORY_SEARCH.md](HISTORY_SEARCH.md).
 
-## Chat als Textdatei exportieren
+## Exporting a chat as a text file
 
-Unter dem Titel des geöffneten Chats **Als Textdatei exportieren** wählen. Nach dem
-Hinweis auf die unverschlüsselte Kopie führt **Speicherort wählen** in Androids
-Dateidialog. Die Datei enthält unabhängig von der Suche alle Nachrichten, auch ältere ausgeblendete, und
-keine gespeicherten API-Zugangsdaten. Eingetippte persönliche Angaben im Chattext
-bleiben enthalten. Für eine lokale Kopie einen lokalen Ordner wählen; Cloud-Ziele
-übertragen die Datei an den gewählten Dienst. Export ist während Voice gesperrt.
+Below the title of the opened chat, select **Export as text file**. After the notice about the
+unencrypted copy, **Choose location** leads to Android's file dialog. Regardless of the search,
+the file contains all messages, including older hidden ones, and no saved API credentials.
+Personal information typed into the chat text remains included. For a local copy, choose a local
+folder; cloud destinations transfer the file to the chosen service. Export is locked during a
+voice session.
 
-Erst die Meldung **Textdatei gespeichert** bestätigt den Abschluss. Bei Fehlern
-kann eine unvollständige Datei zurückbleiben. Der Export verändert den Chat nicht
-und ist kein Backup-/Importformat. Details: [CHAT_EXPORT.md](CHAT_EXPORT.md).
+Only the message **Text file saved** confirms completion. On errors, an incomplete file can be
+left behind. The export does not change the chat and is not a backup/import format. Details:
+[CHAT_EXPORT.md](CHAT_EXPORT.md).
 
-## Reaktion bei langsamem Speicher
+## Responsiveness with slow storage
 
-Archiv lesen, Schlüssel prüfen/speichern/entfernen und Chats erstellen/löschen
-laufen außerhalb des Hauptthreads. Ein Ladevorgang zeigt seinen Zustand, doppelte
-Aufträge sind gesperrt. Ein fehlgeschlagener Zugriff erscheint als fester Hinweis;
-das Archiv wird bei Lesefehlern nicht als leer behandelt. Wiederholte Änderungsmeldungen
-werden gebündelt, überholte Ergebnisse nicht als neuer Stand angezeigt.
+Reading the archive, checking/saving/removing keys and creating/deleting chats run outside the
+main thread. A loading operation shows its state; duplicate jobs are blocked. A failed access
+appears as a persistent notice; on read errors the archive is not treated as empty. Repeated
+change notifications are batched; outdated results are not shown as the new state.
 
-Der Zustand bleibt in einem ViewModel über eine Bildschirm-Neuerstellung erhalten.
-Ein noch vorbereiteter Sprachstart wird beim Verlassen des sichtbaren Bildschirms
-abgebrochen. Es wird kein Activity-Objekt als Hintergrund-Rückruf festgehalten.
-Ein bereits begonnener atomarer Schreibvorgang kann trotzdem abschließen; z. B.
-kann ein leerer neuer Chat erhalten bleiben, ohne dass die Aufnahme gestartet wird.
+The state is kept in a ViewModel across a screen recreation. A voice start that is still being
+prepared is cancelled when the visible screen is left. No Activity object is held as a background
+callback. An atomic write that has already begun can still complete; for example, an empty new
+chat can remain without recording being started.
 
-Das Schlüsselfeld ist ein Passwortfeld. Es speichert die Eingabe weder im ViewModel
-noch im gespeicherten Activity-Zustand und wird nach Annahme des Speicherauftrags
-geleert. Ein Erfolgshinweis bestätigt das Speichern; bei Fehlern neu eingeben.
-Gespeicherte Schlüssel werden nie wieder als Klartext ins Feld geladen.
+The key field is a password field. It stores the input neither in the ViewModel nor in the saved
+Activity state, and it is cleared once the save request has been accepted. A success notice
+confirms saving; on errors, enter the key again. Saved keys are never loaded back into the field
+as plain text.
 
-Die Ansicht nutzt eine bedarfsgerecht gezeichnete Liste; das vorhandene verschlüsselte
-Archiv wird weiterhin vollständig im Hintergrund gelesen. Das ist keine Migration
-zu einer Datenbank und kein garantiert begrenzter Speicherbedarf für beliebig große
-Archive. Format, Dateinamen und Keystore-Aliase bleiben erhalten.
-Grundlagen: [Lazy Lists](https://developer.android.com/develop/ui/compose/lists),
+The view uses a lazily drawn list; the existing encrypted archive is still read completely in the
+background. This is not a migration to a database and not a guaranteed bounded memory use for
+arbitrarily large archives. Format, file names and Keystore aliases are kept.
+References: [Lazy Lists](https://developer.android.com/develop/ui/compose/lists),
 [Scaffold](https://developer.android.com/develop/ui/compose/components/scaffold),
 [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel).
 
-## Praktisch prüfen
+## Hands-on check
 
-1. Einen vorhandenen Chat unter „Verlauf“ öffnen. Anbieter/Modell und alte Nachrichten
-   prüfen, ohne einen neuen Schlüssel einzugeben. Öffnen allein löst keinen API-Aufruf aus.
-2. Zwischen den drei Bereichen wechseln und scrollen. Starten/Beenden muss erreichbar bleiben.
-3. Bei Gelegenheit den Chat fortsetzen, eine kurze Frage stellen und per Knopf beenden.
-   Erneutes Starten ebenfalls prüfen. Echte Anbieteraufrufe können Kosten verursachen.
-4. Für den zweiten Anbieter bei Gelegenheit wiederholen. Nur entbehrliche Testchats
-   zum Prüfen der Löschbestätigung verwenden.
+1. Open an existing chat under "History". Check provider/model and old messages without entering
+   a new key. Opening alone does not trigger an API call.
+2. Switch between the three sections and scroll. Start/End must stay reachable.
+3. When convenient, continue the chat, ask a short question and end it with the button.
+   Also check starting again. Real provider calls can incur costs.
+4. When convenient, repeat for the second provider. Use only disposable test chats to check the
+   delete confirmation.
 
-Anruf- und Headset-/Bluetooth-Tests bleiben auf Nutzerwunsch zurückgestellt.
-Die neue Oberfläche wurde automatisiert und mit einem Screenshot ausschließlich
-erfundener Daten geprüft; der erneute manuelle Sprachtest seit 0.1.9 und der vollständige
-Test von Cloud-Dateidiensten/Rotation stehen noch aus. Der Nutzer bestätigt am
-12.10.2026 den lokalen Textexport und die vollständige, lesbare Datei.
-DHU-Layout und Aktionen bleiben erhalten; 0.1.12-prototype ergänzt englische Texte.
+Call and headset/Bluetooth tests remain deferred at the user's request.
+The new UI was checked by automated tests and with a screenshot of fictional data only; the
+repeated manual voice test since 0.1.9 and the full test of cloud file services/rotation are
+still pending. On 2026-10-12 the user confirmed the local text export and the complete, readable
+file. The DHU layout and actions are unchanged; 0.1.12-prototype adds English texts.
 
-Bauen/Installieren: [VOICE.md](VOICE.md). DHU: [START_WINDOWS.md](START_WINDOWS.md).
-Ergebnisse: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+Build/install: [VOICE.md](VOICE.md). DHU: [START_WINDOWS.md](START_WINDOWS.md).
+Results: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
 
-Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).
+Since 0.1.12: [German/English and resumption](LOCALIZATION.md).

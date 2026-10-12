@@ -1,118 +1,107 @@
-# OpenAuto AI per Sideload auf dem Fahrzeugdisplay
+# OpenAuto AI via sideload on the car display
 
-Stand 12.10.2026. Ziel ist eine über GitHub verteilbare APK, die Nutzer auf dem
-Telefon installieren und im Auto öffnen können. Dafür prüfen wir zuerst den
-unveränderten UI-Prototyp 0.1.15 im stehenden Fahrzeug. Ein bestätigter Weg für
-OpenAuto AI auf realen Head Units liegt noch nicht vor.
+As of 2026-10-12. The goal is an APK distributed through GitHub that users can install on their phone
+and open in the car. To get there, we first check the unchanged UI prototype 0.1.15 in a stationary
+car. A confirmed path for OpenAuto AI on real head units does not exist yet.
 
-**Aktiver Versuch: ID.7 mit nativer drahtloser Verbindung, ohne AAWireless.**
-Die Kia-/Adapter-Versuche sind auf Nutzerwunsch zurückgestellt. Zuerst wird der
-unveränderte Zustand im ID.7 gemessen; die Adapterhinweise bleiben als spätere
-Option dokumentiert und sind keine Anleitung für dessen native Verbindung.
+**Active attempt: ID.7 with native wireless connection, without AAWireless.**
+The Kia/adapter attempts are deferred at the user's request. First, the unchanged state is measured in
+the ID.7; the adapter notes stay documented as a later option and are not instructions for the ID.7's
+native connection.
 
-Die Test-App `dev.openautoai.prototype.dhu` zeigt Titel, Anbieter, Modell und
-einen Starten-Testzähler. Die eigentlichen KI-Gespräche laufen derzeit nur in
-`dev.openautoai.app`. Ein erfolgreicher Sichtbarkeitstest wäre deshalb der erste
-Schritt zur Auto-App, noch kein funktionierendes KI-Gespräch im Auto.
+The test app `dev.openautoai.prototype.dhu` shows the title, provider, model and a Start test counter.
+The actual AI conversations currently run only in `dev.openautoai.app`. A successful visibility test
+would therefore be the first step towards the car app, not yet a working AI conversation in the car.
 
-## Welche Wege wir prüfen
+## Paths we check
 
-| Weg | Einordnung für OpenAuto AI |
+| Path | Assessment for OpenAuto AI |
 | --- | --- |
-| Normale APK-Installation und native Android-Auto-Verbindung | Ausgangstest im ID.7. Installation allein beweist keine Launcher-Sichtbarkeit. |
-| Normale APK-Installation und AAWireless | Ausgangstest im Kia mit protokollierten bisherigen Einstellungen. |
-| AAWireless mit eingebautem Entwicklermodus | Konkreter experimenteller Kandidat. Andere Projekte nennen diesen Weg; Übertragbarkeit auf unsere Car App Library und Android 17 ist offen. |
-| AAAD | Der Hersteller des Tools nennt die Kompatibilität ab Android 14 selbst unsicher. Kein Nachweis für unser APK; derzeit nicht Bestandteil des Tests. |
-| KingInstaller | Verändert die angegebene Installationsherkunft. Kein normaler APK-Installationsweg und kein Beleg für aktuelle Car-App-Library-Kompatibilität; derzeit nicht eingesetzt. |
-| Interne Play-Verteilung | Vergleichsoption, aber kein von Google Play unabhängiger Sideload-Weg. |
+| Normal APK installation and native Android Auto connection | Baseline test in the ID.7. Installation alone does not prove launcher visibility. |
+| Normal APK installation and AAWireless | Baseline test in the Kia with the previous settings recorded. |
+| AAWireless with its built-in developer mode | Concrete experimental candidate. Other projects mention this path; whether it carries over to our Car App Library and Android 17 is open. |
+| AAAD | The tool's maker itself calls compatibility from Android 14 on uncertain. No evidence for our APK; currently not part of the test. |
+| KingInstaller | Changes the reported installation source. Not a normal APK installation path and no evidence of current Car App Library compatibility; currently not used. |
+| Internal Play distribution | Option for comparison, but not a sideload path independent of Google Play. |
 
-Googles Option „Unbekannte Quellen“ in Android Auto gilt ausdrücklich nicht als
-Freischaltung für Car-App-Library-Apps. Der Entwicklermodus des AAWireless-Adapters
-ist eine andere Einstellung. Ein entsprechender Versuch ist ein inoffizieller
-Kompatibilitätstest, keine von Google zugesicherte Funktion. Ein positives
-Kia-Ergebnis lässt sich nicht auf den nativ drahtlos verbundenen ID.7 übertragen.
+Google's "Unknown sources" option in Android Auto explicitly does not unlock Car App Library apps. The
+developer mode of the AAWireless adapter is a different setting. A corresponding attempt is an
+unofficial compatibility test, not a function guaranteed by Google. A positive Kia result does not
+carry over to the ID.7 with its native wireless connection.
 
-Die POI-Deklaration bleibt ein offengelegter Debug-Testplatzhalter. Sie ist keine
-behauptete KI-Kategorie. App, HostValidator, Templates und Freigaben werden für
-diesen Vergleich nicht verändert. Root, Installer-Spoofing, fremde Patches und
-Fahrfreigaben sind nicht Teil dieser Testreihe. Anruf-, Headset- und
-Bluetooth-Audio-Unterbrechungstests bleiben zurückgestellt.
+The POI declaration remains a disclosed debug test placeholder. It is not a claimed AI category. App,
+HostValidator, templates and permissions are not changed for this comparison. Root, installer spoofing,
+third-party patches and approvals for use while driving are not part of this test series. Call,
+headset and Bluetooth audio interruption tests remain deferred.
 
-## Testpaket und Installation
+## Test package and installation
 
-Für die ersten Fahrzeugtests verwenden wir exakt den bereits bestätigten
-`prototype-app:dhuDebug`-Build aus 0.1.15. Wer selbst baut, folgt
-[Bauen und DHU einrichten](START_WINDOWS.md). Versionsstand, SHA-256 und Ergebnisse
-stehen im [Fahrzeugtestbericht](SIDELOAD_TEST_REPORT.md).
+For the first car tests we use exactly the already confirmed `prototype-app:dhuDebug` build from
+0.1.15. If you build it yourself, follow [Build and set up the DHU](START_WINDOWS.md). Version, SHA-256
+and results are in the [car test report](SIDELOAD_TEST_REPORT.md).
 
-PowerShell im Projektordner, Android SDK installiert und Telefon per USB verbunden:
+PowerShell in the project folder, Android SDK installed and phone connected via USB:
 
 ```powershell
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb devices -l
-$serial = 'SERIENNUMMER_AUS_ADB_DEVICES'
+$serial = 'SERIAL_FROM_ADB_DEVICES'
 $apk = Join-Path (Get-Location) 'prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk'
 Get-FileHash -Algorithm SHA256 -LiteralPath $apk
 & $adb -s $serial install -r $apk
 & $adb -s $serial shell cmd package query-services --brief -a androidx.car.app.CarAppService -p dev.openautoai.prototype.dhu
 ```
 
-Erwartet werden `Success` und `dev.openautoai.car.OpenAutoCarService`. Ist dieselbe
-Testversion bereits installiert, entfällt die Neuinstallation. Bei abweichender
-Signatur nicht deinstallieren oder Paketdaten löschen: Das wäre kein Update und
-könnte Daten verlieren. Für den Vergleich wird keine Play-Installer-ID angegeben.
+Expected are `Success` and `dev.openautoai.car.OpenAutoCarService`. If the same test version is
+already installed, skip the reinstall. If the signature differs, do not uninstall or clear package
+data: that would not be an update and could lose data. No Play installer ID is set for the comparison.
 
-## Fahrzeugvergleich im Stand
+## Car comparison while parked
 
-Vor jedem Lauf Uhrzeit und Zeitzone, APK-Version, Android-/Android-Auto-Version,
-Head-Unit-Version und Verbindungsart notieren. Beim Kia zusätzlich Adaptermodell,
-genaue Firmware, Version der AAWireless-Handy-App und die aktuellen Werte von
-Entwicklermodus und Passthrough festhalten. Firmware und Handy-App-Version sind
-verschiedene Angaben. Kein Firmware-Update während eines Vergleichspaares.
+Before each run, note the time and time zone, APK version, Android and Android Auto versions, head
+unit version and connection type. For the Kia, also record the adapter model, exact firmware, version
+of the AAWireless phone app and the current values of developer mode and passthrough. Firmware and
+phone app version are separate values. No firmware update during a comparison pair.
 
-1. Einen laufenden DHU regulär beenden. Telefon normal mit genau einem Auto verbinden.
-2. Im Android-Auto-Launcher nach „OpenAuto AI“ suchen. Falls die App nur unter
-   „Launcher anpassen“ angeboten, aber abgewählt ist, dies notieren und sie auswählen.
-3. Falls sichtbar: App öffnen, Titel und Anbieter/Modell prüfen. Dreimal „Starten“
-   antippen. Erwartet ist ein ansteigender Testzähler. Kein Mikrofon und keine KI-Anfrage.
-4. Android Auto regulär trennen und erneut verbinden. Öffnen und Starten wiederholen.
-   Der nicht persistierte Testzähler darf nach einer neuen Car-Session neu beginnen.
-5. Ergebnis getrennt erfassen: Launcher vorhanden, Oberfläche geöffnet, Starten
-   reagiert, erneute Verbindung funktioniert. Fehlermeldungen wörtlich notieren.
+1. Close a running DHU normally. Connect the phone normally to exactly one car.
+2. Look for "OpenAuto AI" in the Android Auto launcher. If the app is only offered under
+   "Customize launcher" but is deselected, note this and select it.
+3. If visible: open the app, check the title and provider/model. Tap "Start" three times. A rising
+   test counter is expected. No microphone and no AI request.
+4. Disconnect Android Auto normally and reconnect. Repeat opening and Start. The test counter is not
+   persisted and may start over after a new car session.
+5. Record the results separately: launcher entry present, UI opened, Start responds, reconnect works.
+   Note error messages verbatim.
 
-### Kia und AAWireless als zurückgestellte Option
+### Kia and AAWireless as a deferred option
 
-Zuerst mit unveränderten Einstellungen testen und deren Werte erfassen. Das ist
-nur dann ein Vergleich ohne Entwicklermodus, wenn dieser tatsächlich aus war.
+First test with unchanged settings and record their values. This only counts as a comparison without
+developer mode if developer mode was actually off.
 
-Für den zweiten Lauf in der verbundenen AAWireless-App nach der vorhandenen Option
-„Developer mode/Entwicklermodus“ sehen. Originalwerte vorher aufschreiben. Wenn die
-App für diese Option verlangt, Passthrough auszuschalten, diese Abhängigkeit ebenfalls
-protokollieren. Es wird ausschließlich die vorhandene Adapteroption verwendet;
-keine Firmware ersetzt und keine Host-Identität manuell bearbeitet. Fehlt die Option,
-den Lauf als nicht durchführbar erfassen. Die Menüposition hängt von App/Firmware ab.
+For the second run, look for the existing "Developer mode" option in the connected AAWireless app.
+Write down the original values first. If the app requires passthrough to be turned off for this
+option, record this dependency as well. Only the existing adapter option is used; no firmware is
+replaced and no host identity is edited manually. If the option is missing, record the run as not
+feasible. The menu position depends on the app and firmware.
 
-Nach der Änderung regulär neu verbinden und dieselben fünf Schritte wiederholen.
-Anschließend ursprüngliche Werte wiederherstellen und den Ausgangstest wiederholen.
-Erst dieses Vergleichspaar kann einen Zusammenhang mit der Einstellung belegen.
-Auch ein Erfolg belegt nur diese Geräte-/Versionskombination.
+After the change, reconnect normally and repeat the same five steps. Then restore the original values
+and repeat the baseline test. Only this comparison pair can show a link to the setting. Even a success
+only proves this combination of devices and versions.
 
-### ID.7 mit nativer drahtloser Verbindung
+### ID.7 with native wireless connection
 
-Ohne AAWireless direkt mit dem ID.7 verbinden und dieselben Schritte durchführen.
-Es gibt dabei keine Adapteroption, die aus dem Kia übernommen werden könnte.
-Bleibt die App unsichtbar, wird das als negatives Ergebnis dieser Kombination
-erfasst, nicht als Anlass für Datenlöschung oder wiederholte Neuinstallation.
+Connect directly to the ID.7 without AAWireless and run the same steps. There is no adapter option
+here that could be carried over from the Kia. If the app stays invisible, this is recorded as a
+negative result for this combination, not as a reason to clear data or reinstall repeatedly.
 
-Ein zusätzlicher Adapter wäre ein eigener Testweg und setzt einen geeigneten
-USB-Anschluss mit kabelgebundenem Android Auto voraus. Das muss am konkreten
-Fahrzeug geprüft werden; native Funkunterstützung belegt es nicht.
+An additional adapter would be a separate test path and requires a suitable USB port with wired
+Android Auto. This has to be checked on the specific car; native wireless support does not prove it.
 
-## Technische Belege
+## Technical evidence
 
-Am PC können vor und nach einem Lauf Paketversionen und Service-Registrierung
-wie oben ausgelesen werden. Für Car-Logs Start und Ende des Laufs notieren;
-vorhandene DHU-Zeilen dürfen nicht als Fahrzeugbeleg zählen.
+On the PC, package versions and the service registration can be read before and after a run as shown
+above. For car logs, note the start and end of the run; existing DHU lines must not count as car
+evidence.
 
 ```powershell
 & $adb -s $serial shell dumpsys package com.google.android.projection.gearhead |
@@ -121,40 +110,35 @@ vorhandene DHU-Zeilen dürfen nicht als Fahrzeugbeleg zählen.
     Select-String 'car\.(createHostValidator|onCreateSession|onCreateScreen|onGetTemplate|start)'
 ```
 
-`car.onCreateScreen api=…` liefert die ausgehandelte Car-API-Stufe. Fehlt die Zeile
-für den tatsächlichen Fahrzeuglauf, lautet der Wert „nicht gemessen“. Version 8
-aus dem früheren DHU-Test ist kein Ersatz. Alte, bereits aus dem Ringpuffer entfernte
-Logs lassen sich nicht nachträglich wiederherstellen.
+`car.onCreateScreen api=…` gives the negotiated Car API level. If the line is missing for the actual
+car run, the value is "not measured". Version 8 from the earlier DHU test is no substitute. Old logs
+already dropped from the ring buffer cannot be recovered afterwards.
 
-Ein fehlender Dienstaufruf beweist allein keine bestimmte Ablehnungsursache.
-Keine vollständigen Bugreports, privaten App-Daten, Seriennummern oder
-Benachrichtigungsinhalte auf GitHub hochladen. Für den Bericht genügen Versionen,
-Beobachtungen und zum Lauf gehörende technische Car-Ereignisse.
+A missing service call alone does not prove a specific cause of rejection. Do not upload full bug
+reports, private app data, serial numbers or notification contents to GitHub. For the report,
+versions, observations and the technical car events that belong to the run are enough.
 
-## Wann daraus eine Anleitung für Nutzer wird
+## When this becomes a guide for users
 
-Ein funktionierender Weg muss mit derselben APK in mehreren frischen Verbindungen
-und nach Telefonneustart bestätigt werden. Anschließend Installation auf einem
-weiteren Telefon ohne alte DHU-Sitzung prüfen. Erst danach gilt die entsprechende
-Kombination in der Kompatibilitätstabelle als unterstützt; andere bleiben offen.
+A working path must be confirmed with the same APK in several fresh connections and after a phone
+restart. Then check the installation on another phone without an old DHU session. Only then does the
+combination count as supported in the compatibility table; other combinations stay open.
 
-Für eine Verteilung an Nutzer folgen ein eigener dauerhaft gesicherter
-Release-Signierschlüssel, signierte APKs in GitHub Releases mit SHA-256 und
-Zertifikatsfingerabdruck sowie ein getestetes Update ohne Datenverlust. Die
-Installation über den Browser muss getrennt von ADB geprüft werden. Noch ist
-weder eine solche Release-APK noch deren Funktion im Auto freigegeben.
+Distribution to users then needs a dedicated, permanently backed-up release signing key, signed APKs
+in GitHub Releases with SHA-256 and certificate fingerprint, and a tested update without data loss.
+Installation through the browser must be checked separately from ADB. Neither such a release APK nor
+its function in the car is approved yet.
 
-Erst nach bestätigtem Zugriff auf die Auto-Oberfläche wird die vorhandene
-Gesprächssteuerung angebunden. Die daraus entstehenden Audio- und
-Lebenszyklusfragen sind ein eigener Entwicklungsschritt.
+Only after access to the car UI is confirmed will the existing conversation control be connected. The
+resulting audio and lifecycle questions are a separate development step.
 
-## Quellen
+## Sources
 
-- [Google: reale Fahrzeuge und Grenze unbekannter Quellen](https://developer.android.com/training/cars/testing#test-in-real-vehicles)
-- [Google: APK-Verteilung außerhalb von Google Play](https://developer.android.com/distribute/marketing-tools/alternative-distribution)
-- [Fermata-Entwickler: AAWireless-Entwicklermodus unter Android 16](https://github.com/AndreyPavlenko/Fermata/discussions/756) – Aussage zu Fermata, kein Test von OpenAuto AI oder Android 17.
-- [AAAD: bekannte Einschränkungen ab Android 14](https://github.com/shmykelsa/AAAD)
-- [KingInstaller: beschriebene Installationsherkunft](https://github.com/fcaronte/KingInstaller)
+- [Google: real vehicles and the limit of unknown sources](https://developer.android.com/training/cars/testing#test-in-real-vehicles)
+- [Google: APK distribution outside Google Play](https://developer.android.com/distribute/marketing-tools/alternative-distribution)
+- [Fermata developer: AAWireless developer mode on Android 16](https://github.com/AndreyPavlenko/Fermata/discussions/756) – statement about Fermata, not a test of OpenAuto AI or Android 17.
+- [AAAD: known limitations from Android 14 on](https://github.com/shmykelsa/AAAD)
+- [KingInstaller: described installation source](https://github.com/fcaronte/KingInstaller)
 
-Die Quellen beschreiben mögliche Wege und Grenzen. Maßgeblich für unsere
-Kompatibilitätsaussagen sind die getrennt protokollierten Ergebnisse im Testbericht.
+The sources describe possible paths and limits. Our compatibility statements are based on the
+separately recorded results in the test report.

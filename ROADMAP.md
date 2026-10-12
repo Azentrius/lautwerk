@@ -1,89 +1,59 @@
-# Roadmap ab 0.1.15
+# Roadmap
 
-Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
-Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
-lokal gespeicherte Auswahl für Smartphone und Car-Template derselben Test-App.
-Das bestehende Assistant-Modul verwendet dieselben Typen und Speicherlogik.
-0.1.3 ergänzt getrennte Anbieter-Adapter und einen offline getesteten Transport;
-die bestehenden DHU-Regressionstests bestehen weiterhin. 0.1.4 kapselt die vorhandene
-Chat-/Schlüsselspeicherung mit kompatiblem Format, gemeinsamen Sperren und
-geprüften Fehlerfällen. 0.1.5 ergänzt eine gemeinsame Sprachsteuerung, Android-Audio-
-Adapter und Hintergrundzugriff für den Sprachablauf; 72 automatisierte Tests bestehen.
-0.1.6 korrigiert die beim manuellen Test entdeckte Kollision mit dem Fokus der
-Spracherkennung. Der Nutzer bestätigt den Sprachablauf für beide Anbieter.
-0.1.7 ergänzt gemeinsame Stimmwahl, Tempo und Hörprobe; 75 automatisierte Prüfungen bestehen.
-Der Nutzer bestätigt einen deutlich besseren Klang; lokale und Online-Varianten können ähnlich klingen.
-0.1.8 ergänzt aktiven Netzwerkabbruch und Stoppen bei Display-/Anruf-/Geräteunterbrechungen;
-90 automatisierte Prüfungen bestehen. Stoppen/Neustarten per Schaltfläche und Display-aus
-sind für beide Anbieter vom Nutzer bestätigt. Anruf- und Headset-/Bluetooth-Tests sind
-auf Nutzerwunsch vom 12.10.2026 zurückgestellt und bleiben ungeprüft.
-0.1.9 trennt Gespräch/Einstellungen/Verlauf, hält Starten/Beenden sichtbar und führt
-Speicherarbeit der Oberfläche im Hintergrund aus. Lange Verläufe werden bedarfsgerecht
-gezeichnet; ältere Nachrichten bleiben erreichbar. 34 Gerätetests bestehen.
-0.1.10 ergänzt den ausdrücklich gewählten Textexport einzelner Chats ohne Änderung
-des verschlüsselten Archivs. 59 automatisierte Prüfungen bestehen. Der Nutzer
-bestätigt am 12.10.2026 den lokalen Export sowie die vollständige, lesbare Datei.
-Cloud-Dateidienste und Rotation während der Auswahl bleiben ungeprüft.
-0.1.11 ergänzt die lokale Verlaufssuche mit Anbieterfilter und direktem Sprung zur
-ersten passenden Nachricht. 78 automatisierte Prüfungen bestehen. Der Nutzer
-bestätigt am 12.10.2026 Suche, Filter und Treffer-Navigation.
+As of 0.1.16 (2026-10-13). What each version changed, with its tests and the checks the user
+confirmed, is in [CHANGELOG.md](CHANGELOG.md).
 
-0.1.12 ergänzt Deutsch/Englisch, „Gespräch“-Bezeichnungen, sprachabhängige
-Stimmwahl und zusätzliche Absicherung des Gesprächsstarts. 157 verschiedene
-Tests bestanden; Neuerstellung und Sprachwechsel der Oberfläche mit erfundenen
-Chats geprüft. GitHub-CI konfiguriert. Der Nutzer bestätigt den Gesprächsablauf
-mit beiden Anbietern und den tatsächlichen Gerätesprachwechsel Deutsch/Englisch. Die DHU-Variante steigt
-auf 0.1.12-prototype wegen der Übersetzung; Layout und Aktionen bleiben erhalten.
+## Where things stand
 
-0.1.13 überträgt das freigegebene Azentrius-Design auf die Smartphone-App,
-einschließlich gemessener, dreistufiger Reiter für große Schrift. 169 verschiedene
-automatisierte Tests bestehen. Die DHU-Variante bleibt unverändert auf 0.1.12.
-Der Nutzer bestätigt „Darstellung und Bedienung passen“; Audio- und Speicherabläufe
-erhalten ihre bisherige Funktion. Herkunft und Regeln stehen in `docs/DESIGN_SYSTEM.md`.
+- The minimal DHU prototype (0.1.1) and the shared provider and model selection for the phone and the
+  car template of the same test app (0.1.2) are confirmed by the user in a real DHU.
+- 0.1.14 applies rules B1–B5 of the Android Auto design `7fe60bf`: only the approved car color pair and
+  the primary color request for "Start". 64 DHU combinations and both six-start tests pass; the host
+  replaces the color value with a readable light blue.
+- The assistant app has separate provider adapters (0.1.3), encapsulated encrypted storage (0.1.4), one
+  voice flow for both providers with voice choice and reliable cancellation (0.1.5–0.1.8), the split
+  phone UI with background storage work (0.1.9), text export of single chats (0.1.10), history search
+  (0.1.11), German and English (0.1.12) and the approved Azentrius design (0.1.13).
+- 0.1.15 adds the approved app icon with its monochrome layer, the native splash screen and the small
+  notification icon; 28 selected device tests and the touch and rotary checks, including six starts
+  without reset, pass. Details: `docs/APP_IDENTITY.md` and `docs/BUILD_AND_TEST.md`.
+- Confirmed by the user: the voice flow with both providers, a clearly better sound with the chosen voice
+  (local and online variants can sound alike), stop and restart by button and on screen-off, the local
+  text export with a complete, readable file, history search with filters and jumps to hits, the real
+  switch of the device language between German and English, and "look and handling fit" for the design.
+- Deferred at the user's request on 2026-10-12 and untested: call and headset/Bluetooth interruptions.
+  Untested: cloud file providers and rotation during the export picker.
+- 0.1.16 moves the build to AGP 9.4.1, Kotlin 2.4.21 and Compose BOM 2026.09.00; the device tests with
+  this toolchain are still open.
 
-0.1.14 setzt B1–B5 aus dem Android-Auto-Design `7fe60bf` um: ausschließlich
-das freigegebene Car-Farbpaar und der Primärfarbwunsch für „Starten“.
-Build, Lint und GitHub-CI des Implementierungsstands sind erfolgreich. 0.1.14 ist
-installiert; elf Prototype-Gerätetests und 64 DHU-Kombinationen bestehen.
-A3/A4 und A7 sind gegen den Ausgangsstand geprüft, Host-API 8 ist erfasst.
-Beide Sechs-Start-Tests bestehen; der Host ersetzt den Farbwert durch gut lesbares
-Hellblau. Vollständige Texte, Live-Auswahl, Rotary-Fokus und englischer Fallback
-bei französischer Gerätesprache sind geprüft. Keine Änderung am Zählerverhalten.
-Siehe `docs/ANDROID_AUTO_DESIGN.md` und `docs/BUILD_AND_TEST.md`.
+## Next
 
-0.1.15 bindet das freigegebene App-Symbol einschließlich Monochrom-Ebene,
-nativem Startbild und kleinem Dienstsymbol ein. Assistent und DHU sind auf dem
-Pixel aktualisiert; 28 ausgewählte Gerätetests und Touch-/Rotary-Prüfungen
-einschließlich sechs Starts ohne Reset bestehen. B2/B3 und Gesprächsverhalten
-bleiben erhalten. Details: `docs/APP_IDENTITY.md` und `docs/BUILD_AND_TEST.md`.
-
-1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
-   vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
-2. Vorrangig einen reproduzierbaren Verteilungsweg außerhalb von Google Play prüfen:
-   unveränderte APK im ID.7 nativ drahtlos, zunächst im Stand. Kia/AAWireless
-   ist auf Nutzerwunsch zurückgestellt.
-   Anleitung und Messstand: [Sideload](docs/SIDELOADING.md) und
-   [Fahrzeugtests](docs/SIDELOAD_TEST_REPORT.md). Noch keine Kompatibilitätszusage.
-   Keine allgemeine KI-Kategorie behaupten; der POI-Eintrag bleibt ein
-   offengelegter Debug-Testplatzhalter, kein Produktrelease.
-3. Die vorhandenen OpenAI-/Claude-Adapter mit eigenen API-Konten kontrolliert live testen.
-   Fehlerfälle und Android-JSON sind offline geprüft; Modellzugriff und Voice-End-to-End
-   sind nur nach einem bestätigten praktischen Test belegt; siehe `docs/VOICE.md`.
-   Der DHU-Prototyp löst weiterhin keine API-Anfrage aus.
-4. Verlaufssuche 0.1.11 und lokaler Textexport 0.1.10 sind bestätigt; Cloud-Ziele und Rotation während der
-   Auswahl später prüfen. Die Smartphone-Bedienung wurde mit realen Gesprächen
-   beider Anbieter unter 0.1.12 vom Nutzer bestätigt. Die vollständige
-   Archivdatei wird weiterhin im Hintergrund gelesen; echte Seitennachladung und
-   Größenregeln für sehr große Archive planen. Verschlüsseltes Backup/Import,
-   Gerätewechsel und explizite Wiederherstellung folgen später. Der neue Textexport
-   ist kein Wiederherstellungsformat; keine stillschweigende Migration oder Löschung.
-5. Die implementierten Voice-Schnittstellen praktisch prüfen: Mikrofonfreigaben,
-   Audiofokus, hörbares TTS, Wiederaufnahme und Abbruch mit beiden API-Konten.
-   Zurückgestellt auf Nutzerwunsch: Anruf- und Headset-/Bluetooth-Unterbrechungen
-   aus 0.1.8 später praktisch prüfen; derzeit kein bestätigtes Testergebnis.
-   CarAudioRecord/Auto-Routing erst nach
-   geklärter Plattformberechtigung; keine Voice-Funktion im DHU-Prototyp.
-6. Modellkatalog gezielt pflegen und mögliche Modellmigrationen explizit anbieten;
-   bisherige Auswahl/Chat-Zuordnung nicht unbemerkt verändern.
-7. Quellcode in [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai) pflegen
-   und die eingerichtete CI nutzen. Entwurfs-PRs vor einer geordneten Zusammenführung prüfen. Reale Testergebnisse vor weiteren Auto-Funktionen bewerten.
+1. **Keep the confirmed DHU state.** Selection and Start are confirmed in a real DHU since 0.1.2.
+   Regression-test every extension separately.
+2. **A distribution path outside Google Play, first.** Check the unchanged APK in the ID.7 over native
+   wireless Android Auto, parked at first. Kia/AAWireless is deferred at the user's request. Guide and
+   current results: [Sideloading](docs/SIDELOADING.md) and [car tests](docs/SIDELOAD_TEST_REPORT.md).
+   No compatibility promise yet. Claim no general AI category; the POI entry stays a disclosed debug
+   test placeholder, not a product release.
+3. **Live tests of the provider adapters.** Test the existing OpenAI and Claude adapters with own API
+   accounts, under control. Error cases and Android's JSON are tested offline; model access and voice end
+   to end count as shown only after a confirmed practical test, see `docs/VOICE.md`. The DHU prototype
+   still sends no API request.
+4. **History and archive.** History search (0.1.11) and local text export (0.1.10) are confirmed; check
+   cloud destinations and rotation during the picker later. The user confirmed phone handling with real
+   conversations with both providers under 0.1.12. The whole archive file is still read in the
+   background; plan real paging and size rules for very large archives. Encrypted backup and import,
+   moving to another device and explicit restore come later. The text export is not a restore format;
+   no silent migration or deletion.
+5. **Voice in practice.** Check the implemented voice interfaces: microphone permissions, audio focus,
+   audible text-to-speech, resuming and cancelling with both API accounts. Deferred at the user's
+   request: the call and headset/Bluetooth interruptions from 0.1.8; there is no confirmed result yet.
+   `CarAudioRecord` and car audio routing only once the platform permission is clear; no voice function
+   in the DHU prototype.
+6. **Model catalog.** Maintain it deliberately and offer model migrations explicitly; never change an
+   existing selection or a chat's model unnoticed.
+7. **Toolchain on the device.** Run the device tests with the 0.1.16 toolchain
+   (`:app:connectedDebugAndroidTest`, `:prototype-app:connectedDhuDebugAndroidTest`) and a DHU session;
+   raise the target SDK to 37 only after testing the Android 17 behavior changes on the device.
+8. **Repository.** Maintain the source in [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai)
+   with its CI and release workflow. Weigh real test results before adding more car functions.

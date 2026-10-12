@@ -1,217 +1,198 @@
-# Smartphone-Sprachfunktion – 0.1.12
+# Phone voice feature – 0.1.12
 
-OpenAI und Claude verwenden jetzt denselben getesteten Gesprächsablauf:
-Android erkennt die Sprache, der gewählte Anbieter verarbeitet den erkannten
-Text und Android liest die Antwort vor. Das ist eine verkettete Sprachfunktion
-mit den vorhandenen Textmodellen, keine native OpenAI-Realtime- oder Claude-Audio-API.
-Das Prinzip getrennter Erkennung, Textverarbeitung und Sprachausgabe beschreibt
-auch [OpenAI Voice agents](https://developers.openai.com/api/docs/guides/voice-agents).
+OpenAI and Claude now use the same tested conversation flow: Android recognizes the speech, the
+selected provider processes the recognized text and Android reads the answer out. This is a chained
+voice feature built on the existing text models, not a native OpenAI Realtime or Claude audio API.
+The principle of separate recognition, text processing and speech output is also described in
+[OpenAI Voice agents](https://developers.openai.com/api/docs/guides/voice-agents).
 
-Die DHU-Test-App bleibt bei Titel, Auswahl und Starten. Sie bekommt weder
-Mikrofonzugriff noch Netzwerkanbindung oder eine behauptete neue Auto-Kategorie.
+The DHU test app stays limited to title, selection and start. It gets no microphone access, no
+network connection and no claimed new car category.
 
-## Stimme auswählen und vergleichen
+## Choosing and comparing voices
 
-1. Unter **„Gespräch“ → „Stimme und Tempo“** öffnen. Während eines
-   laufenden Gesprächs ist diese Schaltfläche deaktiviert.
-2. Die Stimmwahl öffnen und eine Variante wählen. Das Pixel meldet aktuell
-   **fünf Stimmen auf dem Gerät und vier Online-Stimmen für Deutsch (de-DE)**.
-   Die Nummern dienen der Orientierung; gespeichert wird die tatsächliche
-   Stimmenkennung zusammen mit dem Sprachdienst, nicht die Nummer.
-3. **„Hörprobe abspielen“** liest einen festen Beispielsatz ohne Mikrofon,
-   Chatdaten oder KI-Anfrage vor. Mit **„Hörprobe stoppen“** jederzeit beenden.
-4. Bei Bedarf „Etwas langsamer“, „Normal“ oder „Etwas schneller“ wählen.
-   Stimme und Tempo werden sofort nur für OpenAuto AI gespeichert. Die
-   systemweiten Android-Einstellungen bleiben unverändert.
-5. **„Zurück zum Gespräch“** wählen und ein Gespräch starten. Beide Anbieter
-   verwenden dieselbe Auswahl. Beim Verlassen der Einstellungsseite wird die
-   Hörprobe gestoppt und ihr Audiofokus freigegeben.
+1. Open **"Conversation" → "Voice and speed"**. This button is disabled while a conversation is
+   running.
+2. Open the voice picker and choose a variant. The Pixel currently reports **five on-device voices
+   and four online voices for German (de-DE)**. The numbers are for orientation only; what is saved
+   is the actual voice identifier together with the speech service, not the number.
+3. **"Play sample"** reads out a fixed sample sentence without microphone, chat data or AI request.
+   **"Stop sample"** ends it at any time.
+4. If needed, choose "A little slower", "Normal" or "A little faster". Voice and speech rate are
+   saved immediately and only for OpenAuto AI. The system-wide Android settings stay unchanged.
+5. Choose **"Back to conversation"** and start a conversation. Both providers use the same
+   selection. Leaving the settings page stops the preview and releases its audio focus.
 
-Online-Stimmen benötigen laut Sprachdienst eine Verbindung; beim Auswählen
-erscheint ein Hinweis zur Übertragung des vorzulesenden Textes. Die Auswahl
-erfolgt ausdrücklich. Auch „Android-Standard“ folgt dem installierten Dienst
-und ist keine Offline-Zusage. Es gibt keine zusätzliche OpenAI- oder Claude-
-Sprach-API und keine eigene Speicherung von Audio. Androids Sprachdienst kann
-seine eigenen Datenverarbeitungsregeln haben.
+According to the speech service, online voices need a connection; selecting one shows a notice about
+the transfer of the text that will be read out. The selection is explicit. "Android default" also
+follows the installed service and is no promise of offline use. There is no additional OpenAI or
+Claude speech API, and the app does not store audio itself. Android's speech service may have its
+own data processing rules.
 
-Auf dem getesteten Pixel sind **2/6, 3/7, 4/8 und 5/9** jeweils lokale/Online-
-Varianten mit derselben Basiskennung (`dea`, `deb`, `deg`, `nfh`). Sie können
-sehr ähnlich klingen. Ein weiterer Eintrag heißt `de-DE-language`; auch Android-
-Standard kann eine der gelisteten Stimmen verwenden. Die Nummern gelten für den
-hier geprüften Katalog und können sich nach einem Sprachdienst-Update ändern.
-Diese Varianten sind verschiedene vom Dienst gemeldete Konfigurationen, keine
-neun garantierten unterschiedlichen Sprecheridentitäten.
+On the tested Pixel, **2/6, 3/7, 4/8 and 5/9** are each local/online variants with the same base
+identifier (`dea`, `deb`, `deg`, `nfh`). They can sound very similar. Another entry is called
+`de-DE-language`; "Android default" can also use one of the listed voices. The numbers apply to the
+catalog checked here and may change after a speech service update. These variants are different
+configurations reported by the service, not nine guaranteed distinct speaker identities.
 
-Die App verspricht keine bestimmte Klangqualität. Stimmenangebot und Klang
-bestimmt der installierte Dienst. Fehlt eine gespeicherte Stimme oder wurde der
-Sprachdienst gewechselt, wird vor der Aufnahme ein verständlicher Fehler gezeigt;
-bitte eine neue Stimme oder „Android-Standard“ wählen. Es gibt keinen stillen
-Wechsel auf eine andere Online-Stimme.
+The app does not promise any particular sound quality. The installed service determines which voices
+are offered and how they sound. If a saved voice is missing or the speech service was changed, a
+clear error is shown before recording; please choose a new voice or "Android default". There is no
+silent switch to a different online voice.
 
-Technische Grundlage: [Android TextToSpeech](https://developer.android.com/reference/android/speech/tts/TextToSpeech)
-und [Voice-Metadaten](https://developer.android.com/reference/android/speech/tts/Voice).
+Technical basis: [Android TextToSpeech](https://developer.android.com/reference/android/speech/tts/TextToSpeech)
+and [Voice metadata](https://developer.android.com/reference/android/speech/tts/Voice).
 
-## Auf dem Pixel ausprobieren
+## Trying it on the Pixel
 
-1. Die Assistenten-App `dev.openautoai.app` öffnen. Sie ist getrennt von der
-   DHU-Test-App `dev.openautoai.prototype.dhu`; beide heißen derzeit OpenAuto AI.
-2. Unter **„Einstellungen“** Anbieter und Modell auswählen. Den eigenen API-Schlüssel ausschließlich
-   auf dem Smartphone eintragen und speichern, nicht in Git oder einen Chat.
-   Ein vorhandener Schlüssel bleibt gespeichert, obwohl das Eingabefeld leer ist.
-3. Unten auf „Gespräch starten“ tippen. Der Knopf bleibt beim Scrollen sichtbar. Mikrofon freigeben; Android fragt auf
-   neueren Versionen auch nach Benachrichtigungen. Eine abgelehnte Mikrofonfreigabe
-   verhindert die Aufnahme. Ohne Benachrichtigungsfreigabe bleibt Beenden in der App möglich.
-4. Auf **„Ich höre zu“** warten und eine kurze Frage stellen, etwa „Sag mir in
-   einem Satz, was du tun kannst.“ Sobald die Erkennung fertig ist, wird das
-   Mikrofon freigegeben und die Anfrage an den ausgewählten Anbieter geschickt.
-5. Während der Antwort hört die App nicht zu. Nach dem Vorlesen beginnt der
-   nächste kurze Erkennungsdurchlauf. Die Gerätesprache bestimmt Erkennung und TTS.
-6. **„Gespräch beenden“** in der App oder **„Beenden“** in der Benachrichtigung
-   funktioniert auch während einer Anfrage oder während des Vorlesens.
-7. Den zweiten Anbieter separat testen; dabei ein neues Gespräch verwenden.
+1. Open the assistant app `dev.openautoai.app`. It is separate from the DHU test app
+   `dev.openautoai.prototype.dhu`; both are currently called OpenAuto AI.
+2. Under **"Settings"**, choose provider and model. Enter and save your own API key only on the
+   phone, never in Git or a chat. An existing key stays saved even though the input field is empty.
+3. Tap "Start conversation" at the bottom. The button stays visible while scrolling. Allow the
+   microphone; on newer versions Android also asks for notifications. A denied microphone permission
+   prevents recording. Without notification permission, ending the conversation in the app is still
+   possible.
+4. Wait for **"Listening"** and ask a short question, such as "Tell me in one sentence what you can
+   do." As soon as recognition is finished, the microphone is released and the request is sent to
+   the selected provider.
+5. The app does not listen while the answer is being given. After reading out, the next short
+   recognition pass begins. The device language determines recognition and TTS.
+6. **"End conversation"** in the app or **"End"** in the notification also works during a request or
+   while reading out.
+7. Test the second provider separately, using a new conversation.
 
-Androids installierte Sprachdienste können Audio online verarbeiten. Die App
-speichert keine Rohaufnahmen; sie speichert den erkannten Text und die Modellantwort
-im verschlüsselten lokalen Verlauf. Der gewählte KI-Anbieter erhält den Textkontext.
-Dabei können API-Kosten entstehen. Das Stoppen des lokalen Ablaufs ist keine Zusage,
-dass ein bereits beim Anbieter eingetroffener Auftrag nicht mehr berechnet wird.
-Siehe auch [SpeechRecognizer](https://developer.android.com/reference/android/speech/SpeechRecognizer).
+Android's installed speech services may process audio online. The app does not store raw
+recordings; it stores the recognized text and the model answer in the encrypted local history. The
+selected AI provider receives the text context. This can incur API costs. Stopping the local flow is
+no promise that a request that has already reached the provider will not be billed.
+See also [SpeechRecognizer](https://developer.android.com/reference/android/speech/SpeechRecognizer).
 
-Für bestehende Chats: Chat öffnen, dann „Gespräch fortsetzen“. Der ursprüngliche
-Anbieter und das Modell bleiben zugeordnet. Nicht mehr gelistete Modell-IDs bleiben
-lesbar, lassen sich aber nicht unbemerkt unter einem anderen Modell fortsetzen.
+For existing chats: open the chat, then "Continue conversation". The original provider and model
+remain assigned. Model IDs that are no longer listed stay readable, but cannot be silently continued
+under a different model.
 
-## Sprachbefehle
+## Voice commands
 
-| Während „Ich höre zu“ sagen | Ergebnis |
+| Say while "Listening" is shown | Result |
 |---|---|
-| „Stopp“, „Stop“, „Beenden“, „Gespräch beenden“ | Sitzung beenden, keine Anbieteranfrage |
-| „Wechsle zu Claude“ / „Wechsel zu Claude“ | Neues Claude-Gespräch mit dem zuletzt gewählten Claude-Modell |
-| „Wechsle zu OpenAI“ / „Wechsel zu OpenAI“ | Neues OpenAI-Gespräch mit dem zuletzt gewählten OpenAI-Modell |
-| „Wechsle zu ChatGPT“ / „Wechsel zu ChatGPT“ | Gleichbedeutend mit OpenAI |
+| "Stopp", "Stop", "Beenden" ("End"), "Gespräch beenden" ("End conversation") | End the session, no provider request |
+| "Wechsle zu Claude" / "Wechsel zu Claude" ("Switch to Claude") | New Claude conversation with the most recently selected Claude model |
+| "Wechsle zu OpenAI" / "Wechsel zu OpenAI" ("Switch to OpenAI") | New OpenAI conversation with the most recently selected OpenAI model |
+| "Wechsle zu ChatGPT" / "Wechsel zu ChatGPT" ("Switch to ChatGPT") | Same as OpenAI |
 
-Befehle müssen die vollständige Äußerung sein. Großschreibung, mehrfache Leerzeichen
-und abschließende Satzzeichen sind unkritisch. Eine längere Frage mit demselben
-Anfang wird als Frage behandelt. Beim Wechsel wird der alte Verlauf nicht kopiert;
-ohne Schlüssel für den neuen Anbieter wird kein neuer Chat angelegt. Ein Befehl
-zum bereits aktiven Anbieter legt ebenfalls keinen neuen Chat an.
+Commands must be the complete utterance. Capitalization, multiple spaces and trailing punctuation do
+not matter. A longer question with the same beginning is treated as a question. Switching does not
+copy the old history; without a key for the new provider, no new chat is created. A command for the
+provider that is already active does not create a new chat either.
 
-Sprachbefehle unterbrechen kein laufendes Vorlesen, weil das Mikrofon dabei pausiert.
-Zum sofortigen lokalen Stoppen die Schaltfläche oder Benachrichtigung verwenden.
+Voice commands do not interrupt reading out in progress, because the microphone is paused during it.
+To stop locally right away, use the button or the notification.
 
-## Ablauf und Abbrüche
+## Flow and cancellation
 
-| Zustand | Verhalten |
+| State | Behavior |
 |---|---|
-| Vorbereiten | Chat und Zugangsdaten prüfen; Vordergrunddienst und TTS vorbereiten; keinen Wiedergabefokus anfordern |
-| Zuhören | Genau ein kurzer Android-Erkennungsdurchlauf; keine parallele Anbieteranfrage |
-| Anbieter antwortet | Nutzernachricht archivieren, gewählten Adapter einmal aufrufen; Mikrofon aus |
-| Vorlesen | Antwort archivieren, Wiedergabefokus anfordern und vorlesen; Fokus danach freigeben; lange Texte aufteilen |
-| Beendet | Aufnahme, TTS, Zeitgeber und ausstehende lokale Verarbeitung abbrechen; Audiofokus freigeben |
+| Preparing | Check chat and credentials; prepare foreground service and TTS; do not request playback focus |
+| Listening | Exactly one short Android recognition pass; no parallel provider request |
+| Provider responding | Archive the user message, call the selected adapter once; microphone off |
+| Speaking | Archive the answer, request playback focus and read out; release focus afterwards; split long texts |
+| Ended | Cancel recording, TTS, timers and pending local processing; release audio focus |
 
-Jeder Schritt hat eine eigene Kennung. Doppelte oder verspätete Rückmeldungen
-aus älteren Schritten oder Sitzungen lösen keine neue Aufnahme oder Ausgabe aus.
-Jeder Worker-Auftrag erhält eine eigene Abbruchquelle. Sie wird durch Chat-Anfrage
-und Anbieteradapter bis zum konkreten OkHttp-Aufruf weitergereicht. Beenden ruft
-`Call.cancel()` auf, unterbricht den Worker und unterdrückt seine spätere Rückmeldung.
-Der Abbruch eines alten Auftrags betrifft keine neue Anfrage. Vor einer anschließenden
-Archivierung wird erneut geprüft. Ein bereits begonnener atomarer Schreibvorgang
-kann noch abschließen; beim Anbieter bereits eingetroffene Verarbeitung und Kosten
-lassen sich lokal nicht zurücknehmen. System-DNS kann ebenfalls weiter blockieren.
-Netzwerkzeitlimits: Verbindung 15 s, Lesen/Schreiben je 50 s, gesamter Aufruf 60 s.
+Each step has its own identifier. Duplicate or late callbacks from older steps or sessions do not
+trigger a new recording or output. Each worker job gets its own cancellation source. It is passed
+through the chat request and the provider adapter down to the concrete OkHttp call. Ending calls
+`Call.cancel()`, interrupts the worker and suppresses its later callback. Cancelling an old job does
+not affect a new request. Another check is made before any subsequent archiving. An atomic write
+that has already started may still complete; processing and costs that have already reached the
+provider cannot be undone locally. System DNS can also keep blocking.
+Network timeouts: connect 15 s, read/write 50 s each, entire call 60 s.
 
-Es gibt keine automatische Wiederholung kostenpflichtiger KI-Anfragen und keinen
-automatischen Anbieterwechsel. Fehler erscheinen als feste Hinweise. Bei fehlendem
-TTS, Mikrofon-/Audiofokusproblemen oder API-/Speicherfehlern endet die Sitzung.
-Nach zwei erfolglosen Erkennungsdurchläufen mit Stille/leerem Ergebnis endet sie
-ebenfalls; für einen hängenden Durchlauf gilt zusätzlich ein Zeitlimit. Es gibt
-keinen endlosen Hintergrund-Erkennungszyklus. Eine Sitzung endet spätestens nach
-zehn Minuten und kann ausdrücklich erneut gestartet werden.
+There is no automatic retry of paid AI requests and no automatic provider switch. Errors appear as
+fixed messages. The session ends on missing TTS, microphone/audio focus problems or API/storage
+errors. It also ends after two unsuccessful recognition passes with silence/an empty result; a
+hanging pass is additionally subject to a timeout. There is no endless background recognition loop.
+A session ends after ten minutes at the latest and can be started again explicitly.
 
-Zeitlimits: Chat laden/Anbieter wechseln 15 s, TTS vorbereiten 12 s, einzelner
-Erkennungsdurchlauf 45 s, Anfrage einschließlich Speicherung 70 s, Vorlesen 120 s.
-Beim Entfernen der App aus der Übersicht beendet Android auch den Sprachdienst.
-Während des Vorlesens beendet ein verlorener oder verweigerter Audiofokus das Gespräch.
-Bei Vorbereitung, Zuhören und API-Wartezeit beansprucht die App keinen eigenen
-Wiedergabefokus. Der installierte Erkennungsdienst verwaltet seinen Fokus selbst.
+Timeouts: load chat/switch provider 15 s, prepare TTS 12 s, single recognition pass 45 s, request
+including saving 70 s, reading out 120 s. When the app is removed from the recent apps overview,
+Android also ends the voice service. While reading out, a lost or denied audio focus ends the
+conversation. During preparing, listening and waiting for the API, the app does not claim its own
+playback focus. The installed recognition service manages its focus itself.
 
-Android verlangt Erkennungsaufrufe auf dem Hauptthread und Freigabe per `destroy()`.
-Die Implementierung erstellt für jeden Erkennungsdurchlauf eine eigene Instanz und
-gibt sie danach frei. [SpeechRecognizer](https://developer.android.com/reference/android/speech/SpeechRecognizer)
-TTS wird erst nach erfolgreicher Initialisierung und Sprachprüfung verwendet;
-einzigartige Äußerungskennungen schützen vor veralteten Fertig-Rückmeldungen.
+Android requires recognition calls on the main thread and release via `destroy()`. The
+implementation creates a separate instance for each recognition pass and releases it afterwards.
+[SpeechRecognizer](https://developer.android.com/reference/android/speech/SpeechRecognizer)
+TTS is only used after successful initialization and language check; unique utterance IDs protect
+against stale done callbacks.
 [TextToSpeech](https://developer.android.com/reference/android/speech/tts/TextToSpeech)
 
-## Unterbrechungen in 0.1.8
+## Interruptions in 0.1.8
 
-Eine laufende Sitzung endet in jeder Phase (Vorbereiten, Zuhören, Anfrage, Vorlesen), wenn:
+A running session ends in every phase (preparing, listening, request, reading out) when:
 
-- das Display ausgeschaltet wird oder die App ein gesperrtes Gerät erkennt;
-- Android einen Ruf-/Telefonie-/Kommunikationsmodus meldet;
-- ein externes Audio-Ausgabegerät angeschlossen oder getrennt wird, etwa ein
-  Bluetooth-, USB- oder Kabel-Headset.
+- the display is turned off or the app detects a locked device;
+- Android reports a ringing/telephony/communication mode;
+- an external audio output device is connected or disconnected, such as a Bluetooth, USB or wired
+  headset.
 
-Danach erscheinen ein fester Hinweis und „Gespräch beendet“. Es gibt keine automatische
-Wiederaufnahme beim Entsperren, Auflegen oder erneuten Verbinden. Zum Fortsetzen
-entsperren und das Gespräch ausdrücklich erneut starten. Ein bereits gesperrtes
-Gerät oder gemeldeter Anruf blockiert auch den Start.
+Afterwards a fixed message and "Conversation ended" appear. There is no automatic resumption on
+unlocking, hanging up or reconnecting. To continue, unlock the device and explicitly start the
+conversation again. An already locked device or a reported call also blocks the start.
 
-Die Beobachtung läuft nur während einer Sitzung und wird beim Beenden entfernt.
-Android 12+ meldet Audio-Moduswechsel direkt; zusätzlich wird alle 500 ms der Zustand
-geprüft, auch für Android 10/11 und Gerätesperre. Initiale Geräteauflistungen und
-veraltete Rückmeldungen gelten nicht als neue Unterbrechung. Die App fordert weder
-Telefonstatus-/Anrufdaten noch Bluetooth-Steuerrechte an und ändert kein Audio-Routing.
-Grundlagen: [AudioManager](https://developer.android.com/reference/android/media/AudioManager),
-[Display-aus-Signal](https://developer.android.com/reference/android/content/Intent#ACTION_SCREEN_OFF).
+Monitoring only runs during a session and is removed when it ends. Android 12+ reports audio mode
+changes directly; in addition, the state is checked every 500 ms, also for Android 10/11 and the
+device lock. Initial device listings and stale callbacks do not count as a new interruption. The app
+requests neither phone state/call data nor Bluetooth control permissions and does not change audio
+routing.
+Basis: [AudioManager](https://developer.android.com/reference/android/media/AudioManager),
+[screen-off signal](https://developer.android.com/reference/android/content/Intent#ACTION_SCREEN_OFF).
 
-Grenzen: Die App beobachtet angeschlossene Ausgabegeräte, nicht jeden internen
-Routingwechsel zwischen bereits verbundenen Geräten. Eine Telefonie-/VoIP-App,
-die keinen passenden Audiomodus meldet, ist darüber nicht garantiert erkennbar.
-Audiofokusverlust während des Vorlesens und die Fehler der Erkennung bleiben
-zusätzliche Stoppsignale. Stoppen/Neustarten per Schaltfläche und Beenden bei
-Display-aus hat der Nutzer für beide Anbieter praktisch bestätigt. Physische
-Anrufe und Bluetooth-/Headset-Wechsel sind auf Wunsch des Nutzers zurückgestellt
-und weiterhin ungeprüft; simulierte Signale allein bestätigen diese Fälle nicht.
+Limits: the app monitors connected output devices, not every internal routing change between
+devices that are already connected. A telephony/VoIP app that does not report a matching audio mode
+is not guaranteed to be detected this way. Audio focus loss while reading out and recognition errors
+remain additional stop signals. The user has confirmed in practice stopping/restarting via the
+button and ending on screen-off for both providers. Physical calls and Bluetooth/headset changes are
+deferred at the user's request and still untested; simulated signals alone do not confirm these
+cases.
 
-### Gezielter manueller Abnahmetest
+### Targeted manual acceptance test
 
-Für OpenAI und Claude jeweils mit eigenem Schlüssel in der App testen (API-Kosten
-möglich; keine Schlüssel in Logs oder Chat kopieren):
+Test OpenAI and Claude, each with its own key in the app (API costs possible; do not copy keys into
+logs or chat):
 
-1. Eine kurze Frage stellen und während „Anbieter antwortet“ beenden. Es darf
-   keine verspätete Antwort vorgelesen werden. Danach neu starten; die neue
-   Sitzung muss normal reagieren. Auch Beenden während Zuhören und Vorlesen prüfen.
-2. Während einer Sitzung das Display ausschalten, danach entsperren. Das Gespräch
-   muss beendet bleiben und darf erst nach erneutem Start weiterlaufen.
-3. **Zurückgestellt auf Nutzerwunsch (12.10.2026), für einen späteren Test:**
-   Mit einem Headset eine Sitzung beginnen und das Headset trennen/verbinden.
-   Es muss beendet bleiben. Einen gewöhnlichen eingehenden Anruf separat prüfen;
-   keine Testanrufe oder Anrufannahme durch die App selbst.
+1. Ask a short question and end the conversation while "Provider responding" is shown. No late
+   answer may be read out. Then start again; the new session must respond normally. Also check
+   ending during listening and reading out.
+2. Turn the display off during a session, then unlock. The conversation must stay ended and may only
+   continue after a new start.
+3. **Deferred at the user's request (2026-10-12), for a later test:**
+   Start a session with a headset and disconnect/connect the headset. It must stay ended. Check an
+   ordinary incoming call separately; no test calls and no call answering by the app itself.
 
-## Architektur
+## Architecture
 
-- `voice`: plattformunabhängige Gesprächssteuerung, Sprach-/Worker-Schnittstellen,
-  Archiv-/Anbieteranbindung, Fokus-Lebensdauer beim Vorlesen und TTS-Textaufteilung.
-- `app/voice`: Android SpeechRecognizer, TTS, Audiofokus, Hauptthread-Zeitgeber und
-  abbrechbare Hintergrundaufgaben.
-- `VoiceService`: Mikrofon-Vordergrunddienst und Beenden-Benachrichtigung. Er wird
-  vor asynchroner Initialisierung als Vordergrunddienst angemeldet und nicht
-  automatisch nach Prozessende neu gestartet.
-- `providers`, `storage`, `settings`: vorhandene Adapter und Speicherbausteine.
-  Modellkatalog, API-Protokolle, Ausgabe-Limit und Archiv-/Schlüsselkennungen bleiben gleich.
+- `voice`: platform-independent conversation control, speech/worker interfaces, archive/provider
+  integration, focus lifetime while reading out and TTS text splitting.
+- `app/voice`: Android SpeechRecognizer, TTS, audio focus, main-thread timers and cancellable
+  background tasks.
+- `VoiceService`: microphone foreground service and end notification. It is registered as a
+  foreground service before asynchronous initialization and is not restarted automatically after
+  the process ends.
+- `providers`, `storage`, `settings`: existing adapters and storage components. Model catalog, API
+  protocols, output limit and archive/key identifiers stay the same.
 
-Der Dienst beginnt nur nach dem sichtbaren Start auf dem Smartphone. Die
-Mikrofonberechtigung und Androids Einschränkungen für Vordergrunddienste bleiben
-aktiv. Die App fordert kein Umgehen dieser Einschränkungen an.
-[Mikrofon-Vordergrunddienste](https://developer.android.com/develop/background-work/services/fgs/service-types#microphone)
+The service only starts after the visible start on the phone. The microphone permission and
+Android's restrictions for foreground services remain in effect. The app does not request any way
+around these restrictions.
+[Microphone foreground services](https://developer.android.com/develop/background-work/services/fgs/service-types#microphone)
 
-Speicherzugriffe des Sprachablaufs und seit 0.1.9 auch der Smartphone-Oberfläche
-laufen im Hintergrund. Ein eigener serieller UI-Worker trennt Datei-/Keystore-Arbeit
-von der Bedienung; die zwei Worker des Sprachdienstes bleiben erhalten.
-Netzwerkabbruch erfolgt pro Aufruf. Anbieter-seitige Verarbeitung und Abrechnung
-werden dadurch nicht garantiert gestoppt. Siehe [PHONE_UI.md](PHONE_UI.md).
+Storage access of the voice flow and, since 0.1.9, of the phone UI as well runs in the background.
+A separate serial UI worker keeps file/Keystore work apart from the UI; the two workers of the voice
+service remain. Network cancellation happens per call. This does not guarantee that provider-side
+processing and billing stop. See [PHONE_UI.md](PHONE_UI.md).
 
-## Bauen und gezielt öffnen
+## Building and opening directly
 
 ```powershell
 Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI'
@@ -224,45 +205,42 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
 ```
 
-Für die Download-APK den Pfad auf `OpenAutoAI-0.1.12-assistant-debug.apk` ändern.
-Bei anderen Geräten die Seriennummer ersetzen. Bei abweichender Signatur nicht
-deinstallieren oder Daten löschen, sondern denselben Debug-Schlüssel verwenden.
-Die bestehenden [DHU-Schritte](START_WINDOWS.md) bleiben gültig.
+For the download APK, change the path to `OpenAutoAI-0.1.12-assistant-debug.apk`. For other
+devices, replace the serial number. If the signature differs, do not uninstall or clear data; use
+the same debug key instead. The existing [DHU steps](START_WINDOWS.md) remain valid.
 
-## Korrektur des sofortigen Abbruchs in 0.1.6
+## Fix for the immediate cancellation in 0.1.6
 
-Auf dem Pixel forderte `dev.openautoai.app` am 12.10.2026 um 00:58:52.043
-Wiedergabefokus an. Um 00:58:52.627 forderte der gestartete Google-Sprachdienst
-(`com.google.android.tts`) eigenen exklusiven Fokus an. OpenAuto AI erhielt dabei
-`AUDIOFOCUS_LOSS_TRANSIENT` und beendete die gerade gestartete Erkennung.
-Dieses Muster wiederholte sich bei weiteren Versuchen. Der Paketname des
-Google-Dienstes ist hier kein Nachweis für bereits laufendes Vorlesen; der
-Aufnahmeverlauf meldete `VOICE_RECOGNITION`.
+On the Pixel, `dev.openautoai.app` requested playback focus on 2026-10-12 at 00:58:52.043. At
+00:58:52.627 the Google speech service that had been started (`com.google.android.tts`) requested
+its own exclusive focus. OpenAuto AI received `AUDIOFOCUS_LOSS_TRANSIENT` and ended the recognition
+that had just started. This pattern repeated on further attempts. The package name of the Google
+service is not proof here that reading out was already in progress; the recording history reported
+`VOICE_RECOGNITION`.
 
-Die App fordert deshalb erst unmittelbar zum Vorlesen eigenen Fokus an und gibt
-ihn vor dem nächsten Erkennungsdurchlauf frei. Bei Fokusverweigerung wird nichts
-abgespielt. Echter Fokusverlust während der Ausgabe stoppt sie weiterhin; es gibt
-kein automatisches Wiederanlaufen. Veraltete Fokus-Rückmeldungen wirken nicht auf
-einen späteren Durchlauf. Das folgt Androids Empfehlung, Fokus direkt vor der
-Wiedergabe anzufordern und danach abzugeben:
-[Audiofokus](https://developer.android.com/media/optimize/audio-focus).
+The app therefore only requests its own focus immediately before reading out and releases it before
+the next recognition pass. If focus is denied, nothing is played. Real focus loss during output
+still stops it; there is no automatic restart. Stale focus callbacks do not affect a later pass.
+This follows Android's recommendation to request focus directly before playback and to release it
+afterwards:
+[Audio focus](https://developer.android.com/media/optimize/audio-focus).
 
-## Teststand und Grenzen
+## Test status and limits
 
-**157 verschiedene automatisierte Prüfungen bestehen für 0.1.12:**
-22 Core-JVM, 21 Anbieter-JVM, 45 Gesprächs-JVM, 61 Assistant-Gerätetests und
-8 DHU-/Auswahltests. Assistant 0.1.12-dev / Code 13 ist installiert. Deutsch/Englisch,
-Startabbruch und Neuerstellung sind geprüft. Der Nutzer bestätigt am 12.10.2026
-für 0.1.12: „Funktioniert bei beiden einwandfrei.“ Deutsch/Englisch sind ebenfalls bestätigt.
+**157 distinct automated checks pass for 0.1.12:**
+22 core JVM, 21 provider JVM, 45 conversation JVM, 61 assistant device tests and 8 DHU/selection
+tests. Assistant 0.1.12-dev / code 13 is installed. German/English, start cancellation and
+recreation are checked. On 2026-10-12 the user confirmed for 0.1.12: "Works flawlessly with both."
+German/English are confirmed as well.
 
-Der Nutzer bestätigte Erkennung, Vorlesen und Beenden für beide Anbieter unter
-0.1.6 und einen deutlich besseren Klang mit der Stimmwahl in 0.1.7. Am 12.10.2026
-bestätigt er für 0.1.8 Stoppen und Neustarten per Schaltfläche sowie Beenden bei
-Display-aus für OpenAI und Claude. Anruf- und Headset-/Bluetooth-Tests sind
-auf Wunsch des Nutzers zurückgestellt und bleiben ungeprüft;
-die Rückmeldung bestätigt nicht jede mögliche zeitliche Überschneidung separat.
-Die aktuelle Smartphone-Bedienung wurde unter 0.1.12 mit realen Gesprächen
-für beide Anbieter bestätigt. Android-Auto-Audio und reale Fahrzeugnutzung sind nicht bestätigt.
-Die DHU-Oberfläche bleibt funktional erhalten und erhält englische Texte in 0.1.12-prototype. Details: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+The user confirmed recognition, reading out and ending for both providers under 0.1.6, and a
+clearly better sound with the voice selection in 0.1.7. On 2026-10-12 the user confirmed for 0.1.8
+stopping and restarting via the button as well as ending on screen-off for OpenAI and Claude. Call
+and headset/Bluetooth tests are deferred at the user's request and remain untested;
+the feedback does not separately confirm every possible timing overlap.
+The current phone UI was confirmed under 0.1.12 with real conversations for both providers. Android
+Auto audio and real use in a car are not confirmed.
+The DHU UI remains functionally intact and gets English texts in 0.1.12-prototype. Details:
+[BUILD_AND_TEST.md](BUILD_AND_TEST.md).
 
-Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).
+Since 0.1.12: [German/English and resumption](LOCALIZATION.md).

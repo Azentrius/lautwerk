@@ -1,96 +1,91 @@
-# Sprache und Wiederaufnahme – 0.1.12
+# Language and resumption – 0.1.12
 
-Die App nennt den Vorgang jetzt **Gespräch**: **Gespräch starten**, **Gespräch
-fortsetzen** und **Gespräch beenden**. Auf Englisch heißen diese Schaltflächen
-**Start conversation**, **Continue conversation** und **End conversation**.
+The app now calls the process a conversation (German **Gespräch**). The German buttons are
+**Gespräch starten**, **Gespräch fortsetzen** and **Gespräch beenden**. In English these buttons
+are **Start conversation**, **Continue conversation** and **End conversation**.
 
-## Automatische Sprache
+## Automatic language
 
-Android wählt Deutsch oder Englisch anhand der Sprachpräferenzen des Geräts.
-Die erste unterstützte Sprache der Liste wird verwendet; fehlt beides, gilt Englisch.
-Es gibt keinen zusätzlichen Sprachschalter in der App und keine Änderung der
-systemweiten Gerätesprache durch OpenAuto AI.
+Android selects German or English based on the device's language preferences.
+The first supported language in the list is used; if neither is present, English applies.
+There is no additional language switch in the app, and OpenAuto AI does not change the
+system-wide device language.
 
-Übersetzt sind die Smartphone-Oberfläche, Dialoge, fest vorgegebene Status- und
-Fehlermeldungen, Benachrichtigung, Stimmeinstellungen, Hörprobe und Beschriftungen
-des Textexports. Die DHU-/Phone-Test-App erhält dieselben zwei Sprachen. Marken-
-und Modellnamen bleiben unverändert. Bestehende Titel und Chatinhalte werden weder
-übersetzt noch umgeschrieben; neue leere Gespräche bekommen einen passenden Titel.
+The phone UI, dialogs, fixed status and error messages, the notification, voice settings,
+preview and the labels of the text export are translated. The DHU/phone test app gets the same
+two languages. Brand and model names stay unchanged. Existing titles and chat content are neither
+translated nor rewritten; new empty conversations get a matching title.
 
-Auch Spracherkennung, Android-Sprachausgabe und die vorhandene Anweisung an OpenAI
-und Claude folgen der unterstützten Sprache. Eine tatsächliche Modellantwort ist
-dadurch nicht garantiert. Die Anweisungen sind offline geprüft; der Nutzer bestätigt
-unter 0.1.12 den Gesprächsablauf für beide Anbieter und die deutsche/englische Oberfläche. Endpunkte, Modelle und Antwortbudget bleiben gleich.
+Speech recognition, Android text-to-speech and the existing instruction to OpenAI and Claude also
+follow the supported language. An actual model answer in that language is not guaranteed by this.
+The instructions were checked offline; under 0.1.12 the user confirmed the conversation flow for
+both providers and the German/English UI. Endpoints, models and answer budget stay the same.
 
-Beim Zuhören werden die bisherigen deutschen Befehle sowie **Stop**, **End
-conversation**, **Switch to Claude**, **Switch to OpenAI** und **Switch to ChatGPT**
-erkannt. Diese exakten Befehle schalten lokal um bzw. beenden das Gespräch.
+While listening, the existing German commands as well as **Stop**, **End conversation**,
+**Switch to Claude**, **Switch to OpenAI** and **Switch to ChatGPT** are recognized. These exact
+commands switch locally or end the conversation.
 
-## Stimmen
+## Voices
 
-Die explizite Stimmwahl wird für Deutsch und Englisch getrennt gespeichert.
-Ohne eigene Auswahl gilt Android-Standard für die jeweilige Sprache. Das Tempo
-gilt weiterhin gemeinsam. Ein Sprachwechsel überschreibt keine bekannte Stimmwahl.
+The explicit voice choice is saved separately for German and English.
+Without the user's own choice, the Android default for the respective language applies. The speech
+rate is still shared. A language change does not overwrite a known voice choice.
 
-Eine bisher gespeicherte Stimme wird anhand ihrer vom Android-Sprachdienst
-gemeldeten Sprache zugeordnet. Alte Werte werden nicht gelöscht. Ist die alte
-Stimme oder der zugehörige Dienst nicht verfügbar, bleibt der konkrete Fehler
-sichtbar, bis eine neue Auswahl erfolgt. Es wird keine beliebige Ersatzstimme
-ausgesucht. Online-Stimmen benötigen weiterhin die vorhandene ausdrückliche Auswahl.
+A previously saved voice is assigned based on its language as reported by the Android speech
+service. Old values are not deleted. If the old voice or its service is not available, the
+specific error stays visible until a new choice is made. No arbitrary replacement voice is
+picked. Online voices still require the existing explicit selection.
 
-Verfügbare Stimmen und Erkennungssprachen hängen vom installierten Android-
-Sprachdienst ab. Eine fehlende Sprache wird als Fehler gemeldet; die App lädt
-keine Sprachpakete ungefragt nach.
+Available voices and recognition languages depend on the installed Android speech service.
+A missing language is reported as an error; the app does not download language packs without
+asking.
 
-## Drehen, Wechseln und erneutes Öffnen
+## Rotating, switching and reopening
 
-- Bei Neuerstellung der Oberfläche bleiben im selben Prozess geöffneter Chat,
-  Suchtext, Anbieterfilter und die angezeigte Nachrichtenposition erhalten.
-- Ein fertig vorbereiteter Start oder Dateidialog wird nur an eine aktive,
-  fortgesetzte Oberfläche übergeben und nur einmal verbraucht.
-- Verlässt die Oberfläche den Vordergrund, wird ein noch vorbereiteter
-  Gesprächsstart abgebrochen. Ein verspätetes Ergebnis startet keine Aufnahme.
-- Ein offener Berechtigungsauftrag bleibt nur für eine Konfigurationsänderung
-  im ViewModel erhalten, niemals als Startauftrag in einem gespeicherten Bundle.
-  Nach Abbruch werden seine späteren Rückmeldungen verworfen; sie erlauben keinen
-  neu begonnenen Auftrag. Benachrichtigungsfreigabe bleibt optional.
-- Ein neuer Prozess startet kein Gespräch automatisch. Archiv und Einstellungen
-  bleiben gespeichert; Suchtext/Filter werden nicht auf Datenträger gesichert.
-- Ein Sprachwechsel beendet ein aktives Gespräch. Es muss ausdrücklich neu
-  gestartet werden, damit Mikrofon und Stimme dieselbe Sprache verwenden.
+- When the UI is recreated within the same process, the opened chat, search text, provider filter
+  and the displayed message position are kept.
+- A fully prepared start or file dialog is handed over only to an active, resumed UI and is
+  consumed only once.
+- If the UI leaves the foreground, a conversation start that is still being prepared is
+  cancelled. A late result does not start recording.
+- An open permission request is kept in the ViewModel only for a configuration change, never as
+  a start request in a saved Bundle. After cancellation, its later callbacks are discarded; they
+  do not allow a newly started request. Notification permission stays optional.
+- A new process does not start a conversation automatically. Archive and settings stay saved;
+  search text/filter are not persisted to storage.
+- A language change ends an active conversation. It must be started again explicitly so that
+  microphone and voice use the same language.
 
-Anruf- und Headset-/Bluetooth-Praxistests bleiben ausdrücklich zurückgestellt.
-Die bisherige Behandlung von Display aus und anderen Unterbrechungen bleibt erhalten.
+Call and headset/Bluetooth field tests remain explicitly deferred.
+The existing handling of screen off and other interruptions is unchanged.
 
-## Prüfen auf dem Pixel
+## Checking on the Pixel
 
-1. In Deutsch die drei Bereiche **Gespräch / Einstellungen / Verlauf** und die
-   Schaltfläche **Gespräch starten** prüfen.
-2. Optional in Android die Gerätesprache auf Englisch stellen, die App erneut
-   öffnen und **Conversation / Settings / History** prüfen. Vorher ein Gespräch beenden.
-3. Nach dem Zurückwechseln die deutsche Stimmwahl unter **Stimme und Tempo** prüfen.
-4. Einen erfundenen oder unkritischen Treffer im Verlauf öffnen und das Gerät
-   drehen. Es darf keine zusätzliche Anfrage oder Aufnahme starten.
-5. Je ein kurzes Gespräch mit OpenAI und Claude starten, Antwort anhören und
-   beenden. Echte API-Aufrufe können Kosten verursachen; Schlüssel nur in der App.
+1. In German, check the three sections **Gespräch / Einstellungen / Verlauf** ("Conversation /
+   Settings / History") and the **Gespräch starten** ("Start conversation") button.
+2. Optionally set the device language to English in Android, reopen the app and check
+   **Conversation / Settings / History**. End any conversation first.
+3. After switching back, check the German voice choice under **Stimme und Tempo** ("Voice and
+   speed").
+4. Open a fictional or non-sensitive match in the history and rotate the device. No additional
+   request or recording may start.
+5. Start one short conversation each with OpenAI and Claude, listen to the answer and end it.
+   Real API calls can incur costs; enter API keys only in the app.
 
-Die automatisierten Sprach- und Oberflächenprüfungen verwenden ausschließlich
-erfundene Inhalte. Die eigene Gerätesprache wurde dafür nicht geändert.
-Ein vollständiger Prozessabbruch mit echtem Betriebssystem-Berechtigungsdialog
-und hörbares englisches Vorlesen wurden nicht automatisiert ausgeführt.
+The automated language and UI checks use only fictional content. The user's own device language
+was not changed for them. A full process kill with a real operating-system permission dialog and
+audible English reading out were not run as automated tests.
 
-## GitHub-Prüfungen
+## GitHub checks
 
-Der neue [Workflow](../.github/workflows/android.yml) prüft JVM-Tests, Android-Lint
-und die Debug-Builds auf Pull Requests und nach Änderungen an `main`.
-JDK 17, SDK Platform 37 und Build Tools 36.0.0 sind festgelegt. Die verwendeten offiziellen
-Actions sind auf vollständige Git-Revisionen fixiert. Der Workflow verwendet keine
-API-Schlüssel, führt keine Live-Gespräche aus und veröffentlicht keine Anwendung.
-Testberichte werden 14 Tage aufbewahrt. Gerätetests laufen separat auf dem Pixel.
+The new [workflow](../.github/workflows/android.yml) runs JVM tests, Android Lint and the debug
+builds on pull requests and after changes to `main`.
+JDK 17, SDK Platform 37 and Build Tools 36.0.0 are pinned. The official actions used are pinned
+to full Git revisions. The workflow uses no API keys, runs no live conversations and publishes no
+application. Test reports are kept for 14 days. Device tests run separately on the Pixel.
 
-Grundlagen: [Android-Lokalisierung](https://developer.android.com/guide/topics/resources/localization),
-[Activity-Lebenszyklus](https://developer.android.com/guide/components/activities/activity-lifecycle),
-[OpenAI-Anweisungen](https://developers.openai.com/api/docs/guides/prompt-engineering).
-Für die eng begrenzte Anpassung der Antwortsprache wurde OpenAI Docs verwendet.
+References: [Android localization](https://developer.android.com/guide/topics/resources/localization),
+[Activity lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle),
+[OpenAI instructions](https://developers.openai.com/api/docs/guides/prompt-engineering).
 
-[Bedienung](PHONE_UI.md) · [Testbericht](BUILD_AND_TEST.md) · [Installation](VOICE.md)
+[Phone UI](PHONE_UI.md) · [Test report](BUILD_AND_TEST.md) · [Installation](VOICE.md)

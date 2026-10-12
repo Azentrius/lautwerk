@@ -1,87 +1,85 @@
-# Chats durchsuchen und filtern – 0.1.12
+# Searching and filtering chats – 0.1.12
 
-Unter **Verlauf** lassen sich gespeicherte Chats nach Text durchsuchen und auf einen
-Anbieter eingrenzen. Der Nutzer bestätigt am 12.10.2026 nach dem Testauftrag für
-Suche in älteren Nachrichten, Anbieterfilter, Öffnen eines Treffers und Zurücksetzen:
-**„Suche, Filter und Treffer funktionieren.“**
+Under **History**, saved chats can be searched by text and narrowed down to one provider. On
+2026-10-12, after the test assignment for search in older messages, provider filter, opening a
+match and reset, the user confirmed:
+**"Search, filter and matches work."**
 
-## Bedienung
+## Usage
 
-1. **Verlauf** öffnen und im Feld **Chats durchsuchen** ein Wort oder eine Textfolge
-   eingeben. Titel, Anbietername, Modell-ID und alle Nachrichten werden durchsucht.
-2. Optional **OpenAI** oder **Claude** wählen. **Alle** entfernt nur den Anbieterfilter.
-   Suchtext und Anbieterfilter gelten gemeinsam; die Gesprächs-/Modellauswahl ändert
-   sich dadurch nicht.
-3. Die Anzeige **x von y Gesprächen** zählt passende Chats, nicht einzelne Textstellen.
-   Jeder Chat erscheint einmal in der bisherigen Archiv-Reihenfolge.
-4. Einen Treffer öffnen. Wird der Text nur in Nachrichten gefunden, steht am Eintrag
-   **Treffer in Nachricht …**; die App springt zur ersten passenden Nachricht.
-   Ältere Nachrichten werden dafür automatisch in der Ansicht verfügbar gemacht.
-   Bei einem Treffer schon im Titel/Anbieter/Modell öffnet sich der Chat am Anfang
-   der Gesprächsansicht. Es startet kein Gespräch und keine KI-Anfrage.
-5. Über **Verlauf** zurückkehren: Suchtext und Filter bleiben für diese Sitzung erhalten.
-   **Suche zurücksetzen** leert beides und zeigt wieder alle vorhandenen Chats.
+1. Open **History** and enter a word or a text sequence in the **Search chats** field. Title,
+   provider name, model ID and all messages are searched.
+2. Optionally select **OpenAI** or **Claude**. **All** removes only the provider filter.
+   Search text and provider filter apply together; the conversation/model selection does not
+   change as a result.
+3. The display **x of y conversations** counts matching chats, not individual text positions.
+   Each chat appears once, in the existing archive order.
+4. Open a match. If the text is found only in messages, the entry shows
+   **Match in message …**; the app jumps to the first matching message.
+   Older messages are made available in the view automatically for this.
+   If the match is already in the title/provider/model, the chat opens at the start of the
+   conversation view. No conversation and no AI request is started.
+5. Return via **History**: search text and filter are kept for this session.
+   **Reset search** clears both and shows all existing chats again.
 
-Die Suche arbeitet als wörtliche Teilstringsuche ohne Beachtung der Groß-/Kleinschreibung.
-Leerzeichen am Anfang und Ende des Suchtexts werden ignoriert. Die Eingabe ist auf
-200 Zeichen begrenzt. Es gibt keine regulären Ausdrücke, Wortstammerkennung, unscharfe
-Suche oder automatische Umwandlung von `ä` in `ae`. Ein leerer Suchtext zeigt alle
-Chats des gewählten Anbieters. Das Archiv und Nachrichtentexte bleiben unverändert.
+The search is a literal, case-insensitive substring search.
+Leading and trailing spaces in the search text are ignored. The input is limited to
+200 characters. There are no regular expressions, no stemming, no fuzzy search and no automatic
+conversion of `ä` to `ae`. An empty search text shows all chats of the selected provider. The
+archive and message texts stay unchanged.
 
-## Vorhandene Funktionen bleiben erhalten
+## Existing features are kept
 
-- Starten/Beenden bleibt in der festen unteren Leiste erreichbar. Während Voice darf
-  die Liste durchsucht werden; das Öffnen eines anderen Chats bleibt gesperrt.
-- Chats mit nicht mehr gelisteten Modellen bleiben lesbar und exportierbar. Die Suche
-  wechselt ihren Anbieter oder ihr Modell nicht. Fortsetzen bleibt für alte Modelle gesperrt.
-- Der [Textexport](CHAT_EXPORT.md) enthält weiterhin **alle Nachrichten des geöffneten
-  Chats**, unabhängig von Suchtext, Filter und angezeigtem Ausschnitt.
-- Löschen verwendet weiterhin die Bestätigung für die konkrete Chat-ID. Nach einer
-  Archivaktualisierung wird die Suche erneut auf dem aktuellen Stand ausgeführt.
-- Die DHU-Oberfläche erhält englische Texte in 0.1.12-prototype; sie bekommt
-  keine Suchoberfläche, keine neue Berechtigung und keine Sprachfunktion.
+- Start/End stays reachable in the fixed bottom bar. During a voice session the list may be
+  searched; opening another chat stays blocked.
+- Chats with models that are no longer listed stay readable and exportable. The search does not
+  change their provider or model. Continuing stays blocked for old models.
+- The [text export](CHAT_EXPORT.md) still contains **all messages of the opened chat**,
+  regardless of search text, filter and the displayed section.
+- Deleting still uses the confirmation for the specific chat ID. After an archive update, the
+  search runs again on the current state.
+- The DHU UI gets English texts in 0.1.12-prototype; it gets no search UI, no new permission and
+  no voice feature.
 
-## Reaktion und Datenhaltung
+## Responsiveness and data storage
 
-Textsuche und Filter laufen auf dem bestehenden Hintergrund-Worker. Bei Texteingabe
-wartet die App kurz (200 ms), um nicht für jeden Tastendruck eine komplette Suche
-zu starten. Überholte Aufträge werden abgebrochen und ihre Ergebnisse verworfen.
-Das gilt auch nach Änderung oder erneutem Laden des Archivs. Währenddessen werden
-keine veralteten Treffer zum Öffnen angeboten.
+Text search and filter run on the existing background worker. During text input, the app waits
+briefly (200 ms) so that it does not start a full search for every keystroke. Outdated jobs are
+cancelled and their results discarded. This also applies after the archive has changed or been
+reloaded. In the meantime, no stale matches are offered for opening.
 
-Bei Lesefehlern wird das Archiv nicht als leer behandelt. Vorherige Suchergebnisse
-verschwinden; ein vorhandener Speicherfehler bleibt sichtbar. Ein eigener Suchfehler
-bietet **Suche erneut versuchen** und zeigt keine internen Daten oder Suchtexte als
-Fehlermeldung. Kein automatisches Löschen oder Überschreiben.
+On read errors, the archive is not treated as empty. Previous search results disappear; an
+existing storage error stays visible. A search-specific error offers **Retry search** and does
+not show internal data or search texts as the error message. No automatic deletion or
+overwriting.
 
-Suche und Filter bleiben ausschließlich im ViewModel-Speicher. Es gibt keinen
-zusätzlichen Klartextindex, keine Suchhistorie in Dateien/Einstellungen und keinen
-Suchtext im gespeicherten Activity-Zustand. Nach einem Prozessneustart beginnt die
-Suche leer. Die Suche verwendet keinen API-Schlüssel und sendet nichts an KI-Anbieter.
-Die Tastatur unterliegt weiterhin den Einstellungen des gewählten Android-Tastaturdiensts.
+Search and filter stay exclusively in ViewModel memory. There is no additional plain-text index,
+no search history in files/settings and no search text in the saved Activity state. After a
+process restart, the search starts empty. The search uses no API key and sends nothing to AI
+providers. The keyboard is still subject to the settings of the selected Android keyboard
+service.
 
-Das vorhandene verschlüsselte Archiv wird weiterhin vollständig eingelesen. Die neue
-Suche ist kein Datenbankindex und keine Seitennachladung von Dateien. Sehr große
-Archive benötigen weiterhin Speicher und Zeit. Lange Einzeltexte werden abschnittsweise
-durchsucht, sodass auch darin ein Abbruch geprüft wird.
+The existing encrypted archive is still read in full. The new search is not a database index
+and does not page in files. Very large archives still need memory and time. Long single texts
+are searched in chunks, so that cancellation is checked within them as well.
 
-## Prüfung
+## Testing
 
-Automatisiert geprüft sind unter anderem beide Anbieter, alte Modelle, Umlaute/Emoji,
-wörtliche Sonderzeichen, 1.000 künstliche Chats, Suche über eine Textabschnittsgrenze,
-Abbruch in einer langen Nachricht, verspätete Ergebnisse und Archivfehler.
-Die Oberflächentests öffnen Treffer in Nachricht 4 von 140 und Nachricht 96 von 100
-direkt, ohne vorheriges manuelles Einblenden oder Scrollen. Suchansicht mit erfundenen
-Chats visuell geprüft. Der Praxistest des Nutzers bestätigt die Kernbedienung.
+Automated tests cover, among other things, both providers, old models, umlauts/emoji, literal
+special characters, 1,000 synthetic chats, search across a text chunk boundary, cancellation in
+a long message, late results and archive errors.
+The UI tests open matches in message 4 of 140 and message 96 of 100 directly, without manually
+expanding or scrolling first. The search view was checked visually with fictional chats. The
+user's hands-on test confirms the core operation.
 
-Activity-Neuerstellung und Sprachwechsel sind seit 0.1.12 mit behaltenem Suchtext,
-Filter und älterem Treffer geprüft. Ein vollständiger Prozessabbruch wurde nicht
-als End-to-End-Gerätetest ausgeführt. Die Lebensdauer bleibt an das ViewModel gebunden. Anruf- und
-Headset-/Bluetooth-Tests bleiben auf Nutzerwunsch ausdrücklich zurückgestellt.
+Since 0.1.12, Activity recreation and language changes have been tested with a retained search
+text, filter and an older match. A full process kill was not run as an end-to-end device test.
+The lifetime remains bound to the ViewModel. Call and headset/Bluetooth tests remain explicitly
+deferred at the user's request.
 
-Grundlagen: [Compose-Listen und Scrollposition](https://developer.android.com/develop/ui/compose/lists#controlling-scroll-position)
-und [LaunchedEffect](https://developer.android.com/develop/ui/compose/side-effects#launchedeffect).
+References: [Compose lists and scroll position](https://developer.android.com/develop/ui/compose/lists#controlling-scroll-position)
+and [LaunchedEffect](https://developer.android.com/develop/ui/compose/side-effects#launchedeffect).
 
-[Bedienung](PHONE_UI.md) · [Installation](VOICE.md) · [Testbericht](BUILD_AND_TEST.md)
+[Phone UI](PHONE_UI.md) · [Installation](VOICE.md) · [Test report](BUILD_AND_TEST.md)
 
-Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).
+Since 0.1.12: [German/English and resumption](LOCALIZATION.md).

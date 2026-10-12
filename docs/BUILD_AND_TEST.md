@@ -1,135 +1,124 @@
-# Build- und Testbericht 0.1.15
+# Build and test report 0.1.15
 
-Stand: 12.10.2026. **Assistent und DHU-Test sind als Update auf dem Pixel installiert.**
-Die neue Sprechblase mit Punkt, das native Startbild und das kleine Dienstsymbol
-folgen unverändert dem Design-System `170dd38` / O1 `6a7a951`.
-[Umsetzung und Installation](APP_IDENTITY.md).
+As of 2026-10-12. **The assistant and the DHU test app are installed on the Pixel as updates.**
+The new speech bubble with a dot, the native splash screen and the small service icon follow the
+design system `170dd38` / O1 `6a7a951` without changes.
+[Implementation and installation](APP_IDENTITY.md).
 
-## Umgebung
+## Environment
 
-| Angabe | Nachweis |
+| Item | Evidence |
 |---|---|
-| Gerät | Pixel 10 Pro, Android 17 / API 37 |
-| Assistent installiert | 0.1.15-dev / Code 15 |
-| DHU installiert | 0.1.15-prototype / Code 6 |
-| Phone-Vergleich nur gebaut | 0.1.15-prototype / Code 5 |
-| Android Auto aktiv | 17.7.663654-release / 177663654 |
-| DHU | 2.0-windows, Build 2022-03-30-438482292 |
-| Host-Car-API | 8; `10-12 22:20:37.863 I/OpenAutoAI(25368): car.onCreateScreen api=8` |
-| Gerätesprachen und Nachtmodus | `de-DE,en-US`, Nachtmodus `yes`; wiederhergestellt bzw. unverändert |
+| Device | Pixel 10 Pro, Android 17 / API 37 |
+| Assistant installed | 0.1.15-dev / code 15 |
+| DHU installed | 0.1.15-prototype / code 6 |
+| Phone comparison, only built | 0.1.15-prototype / code 5 |
+| Android Auto active | 17.7.663654-release / 177663654 |
+| DHU | 2.0-windows, build 2022-03-30-438482292 |
+| Host Car API | 8; `10-12 22:20:37.863 I/OpenAutoAI(25368): car.onCreateScreen api=8` |
+| Device languages and night mode | `de-DE,en-US`, night mode `yes`; restored and unchanged respectively |
 
-Die zusätzlich gelistete Android-Auto-System-Stub-Version 1.2.562600-stub ist nicht
-die aktive Testversion. Rohdaten, APK-Hashes und installierte Versionen:
+The Android Auto system stub version 1.2.562600-stub, which is also listed, is not the active test
+version. Raw data, APK hashes and installed versions:
 [verification.json](evidence/0.1.15/verification.json).
 
-## Build und Gerätetests
+## Build and device tests
 
-| Prüfung | Ergebnis |
+| Check | Result |
 |---|---|
-| Assistent, Phone-Vergleich, DHU, beide Test-APKs | Abschließender lokaler Build erfolgreich |
-| App-Lint | 0 Fehler, 29 Warnungen, 1 Hinweis |
-| DHU-Lint | 0 Fehler, 6 Warnungen |
-| Assistent auf Pixel | 17 ausgewählte Tests bestanden |
-| DHU-Prototyp auf Pixel | alle 11 Tests bestanden |
-| Quelltreue | 128 Referenzdateien per SHA-256 und 11 eingebundene XML-Kopien bytegleich geprüft |
-| Gepackte Ressourcen | adaptive und runde Symbole, API-31/33-Starttheme, weißes Dienstsymbol und Versionsnummern geprüft |
+| Assistant, phone comparison, DHU, both test APKs | Final local build successful |
+| App lint | 0 errors, 29 warnings, 1 hint |
+| DHU lint | 0 errors, 6 warnings |
+| Assistant on Pixel | 17 selected tests passed |
+| DHU prototype on Pixel | all 11 tests passed |
+| Source fidelity | 128 reference files checked by SHA-256 and 11 included XML copies checked byte-identical |
+| Packaged resources | adaptive and round icons, API 31/33 splash theme, white service icon and version numbers checked |
 
-Die 17 Assistententests umfassen DesignUiTest (9), DesignScreenshotsTest (3),
-LocalizationLifecycleTest (4) und SpeechSettingsScreenTest (1). Sie verwenden
-erfundene Verläufe und ersetzen Audio/Anbieter durch Testobjekte. Die elf
-Prototyptests prüfen Car-Farbvertrag, Template, Auswahl und Smartphone-Testseite.
-Die finale APK mit API-33-Startregel wurde installiert, bevor diese 28 Tests
-erneut liefen. [App-Protokoll](evidence/0.1.15/app-tests.txt),
-[DHU-Protokoll](evidence/0.1.15/dhu-tests.txt).
+The 17 assistant tests are DesignUiTest (9), DesignScreenshotsTest (3), LocalizationLifecycleTest (4)
+and SpeechSettingsScreenTest (1). They use made-up histories and replace audio and providers with test
+doubles. The eleven prototype tests check the car color contract, template, selection and phone test
+page. The final APK with the API 33 splash rule was installed before these 28 tests ran again.
+[App log](evidence/0.1.15/app-tests.txt), [DHU log](evidence/0.1.15/dhu-tests.txt).
 
-Die 28 Tests sind eine gezielte Design-Regression, keine Behauptung eines neuen
-vollständigen Audio-/API-End-to-End-Tests. Die bisherigen Lint-Warnungen sind nicht
-als behoben ausgewiesen. Der GitHub-CI-Status wird am zugehörigen Pull Request angezeigt.
+The 28 tests are a targeted design regression, not a claim of a new full audio/API end-to-end test.
+The existing lint warnings are not reported as fixed. The GitHub CI status is shown on the related
+pull request.
 
-## Darstellung am Pixel und im DHU
+## Appearance on the Pixel and in the DHU
 
-- Assistent und Prototyp jeweils in hellem und dunklem Gerätemodus gestartet.
-  Das gelieferte goldene Zeichen erscheint auf Tinte. Der kurze native Übergang
-  des Prototyps enthält die systemeigene Fensteranimation; keine eigene Animation
-  und keine künstliche Startverzögerung wurden ergänzt.
-- Helles deutsches und dunkles englisches Gespräch mit erfundenen Nachrichten
-  visuell geprüft; große Schrift durch den bestehenden Screenshot-/Bedientest erfasst.
-- Neues Zeichen im DHU-Launcher und im `APP_ICON`-Kopf vollständig sichtbar.
-  Die ausgesparten Balken und der Punkt bleiben erkennbar.
-- 800×480 / Touch: Bereitschaft, sechs Starts 1–6 in derselben Sitzung ohne Reset,
-  danach Nachtansicht. Alle sichtbaren Zähler passen zu den Car-Logeinträgen.
-- 1280×720 mit breitem Profil / Rotary: Öffnen über Launcher, sichtbarer Fokus,
-  Start bei Tag und Nacht. Wechsel Claude Haiku → OpenAI GPT-5.4 aktualisiert die
-  Auswahl live; Test 1 bleibt erhalten. Ein erneuter Nachtstart in einer frischen
-  Sitzung besteht ebenfalls. Nach Bedienung der Smartphone-Auswahl verliert der
-  Host jedoch den nutzbaren Rotary-Fokus; Drehen allein erreicht die Taste dann
-  nicht. Die Prüfung dieses Sonderfalls ist separat unten beschrieben.
-- Die ursprüngliche DHU-Auswahl Claude / Anthropic · Claude Haiku 4.5 wurde am Ende
-  wiederhergestellt. Der DHU wurde regulär beendet und die Assistenten-App geöffnet.
+- Assistant and prototype each started in light and dark device mode. The supplied gold mark appears
+  on ink. The prototype's short native transition contains the system's own window animation; no
+  custom animation and no artificial start delay were added.
+- Light German and dark English conversation with made-up messages checked visually; large font
+  covered by the existing screenshot and interaction test.
+- New mark fully visible in the DHU launcher and in the `APP_ICON` header. The cut-out bars and the
+  dot remain recognizable.
+- 800×480 / touch: ready state, six starts 1–6 in the same session without reset, then night view. All
+  visible counters match the car log entries.
+- 1280×720 with wide profile / rotary: opening from the launcher, visible focus, start in day and
+  night. Switching Claude Haiku → OpenAI GPT-5.4 updates the selection live; Test 1 is kept. Another
+  night start in a fresh session also passes. After using the phone selection, however, the host loses
+  the usable rotary focus; rotating alone then does not reach the button. The check of this special
+  case is described separately below.
+- The original DHU selection Claude / Anthropic · Claude Haiku 4.5 was restored at the end. The DHU
+  was closed normally and the assistant app opened.
 
-Die Template-Fläche bleibt dunkelgrau, die Starttaste Host-Hellblau. Car-App-Code
-und B2/B3-Farbressourcen sind gegenüber 0.1.14 unverändert. Stichproben aus den
-unskalierten 800×480-Bildern:
+The template area stays dark gray, the Start button host light blue. Car app code and B2/B3 color
+resources are unchanged from 0.1.14. Samples from the unscaled 800×480 images:
 
-| Modus | Hintergrund | Starttaste | Text | Kontrast |
+| Mode | Background | Start button | Text | Contrast |
 |---|---|---|---|---|
 | day | #25262A | #BAD9FC | #0E3253 | 9.01:1 |
 | night | #25262A | #BAD9FC | #0E3454 | 8.80:1 |
 
-Messmethode: sRGB-Linearisierung, relative Luminanz und WCAG-Kontrast; dunkle
-Glypheninnenfarbe im dokumentierten Textbereich. Koordinaten und RGB-Werte:
-[contrast.json](evidence/0.1.15/contrast.json). [Sechs Starts](evidence/0.1.15/six-starts.json),
-[Car-Ereignisse](evidence/0.1.15/car-events.txt).
+Method: sRGB linearization, relative luminance and WCAG contrast; dark inner glyph color in the
+documented text area. Coordinates and RGB values: [contrast.json](evidence/0.1.15/contrast.json).
+[Six starts](evidence/0.1.15/six-starts.json), [car events](evidence/0.1.15/car-events.txt).
 
-Die vollständige 64-Ansichten-Abnahme von 0.1.14 wird nicht als neu ausgeführt
-behauptet; sie bleibt im [historischen Testbericht](history/BUILD_AND_TEST-0.1.14.md).
+The full 64-view acceptance test of 0.1.14 is not claimed as run again; it remains in the
+[archived (German) 0.1.14 test report](https://github.com/Azentrius/openauto-ai/blob/24732451155dd8cde52f7437872dd9c6fceff0cc/docs/history/BUILD_AND_TEST-0.1.14.md).
 
-### Offene Host-Beobachtung: Rotary-Fokus
+### Open host observation: rotary focus
 
-Im breiten 1280×720-Profil verschwand bei 0.1.15 nach der Smartphone-Auswahl der
-nutzbare Fokus. Die Anzeige aktualisierte sich und behielt Test 1, weitere
-Dreh-/Klickbefehle lösten aber keinen Start aus. Eine neue Sitzung erlaubte wieder
-den ersten Start bei Nacht. Zur Einordnung wurde die unveränderte 0.1.14-DHU-APK
-kurz mit `install -r -d` eingesetzt: Auch dort war ein Fokusrahmen zunächst
-sichtbar, doch schon der erste spätere Klick erhöhte den Zähler nicht; nach der
-Smartphone-Auswahl blieb der Fokus ebenfalls aus. Der genaue Auslöser wurde
-nicht isoliert. Dies belegt ein auch mit dem alten Build auftretendes Problem,
-keinen bestandenen Rotary-Test nach Live-Auswahl und keine nachgewiesene Ursache.
-Die frühere 0.1.14-Abnahme wird durch diesen zusätzlichen Befund nicht umgeschrieben.
+In the wide 1280×720 profile, the usable focus disappeared in 0.1.15 after the phone selection. The
+display updated and kept Test 1, but further rotate and click commands did not trigger a start. A new
+session allowed the first start at night again. For comparison, the unchanged 0.1.14 DHU APK was
+briefly installed with `install -r -d`: there, too, a focus frame was visible at first, but already the
+first later click did not increase the counter; after the phone selection, the focus was missing as
+well. The exact trigger was not isolated. This shows a problem that also occurs with the old build,
+not a passed rotary test after live selection and not a proven cause. The earlier 0.1.14 acceptance is
+not rewritten by this additional finding.
 
-Belege: [0.1.14 vor Klick](evidence/0.1.15/baseline-focus-night.png),
-[0.1.14 nach Klick](evidence/0.1.15/baseline-start-1-night.png),
-[0.1.14 nach Auswahl](evidence/0.1.15/baseline-after-selection.png),
-[0.1.15 neuer Nachtstart](evidence/0.1.15/identity-wide-recheck-start-1-night.png).
-Anschließend wurde dieselbe geprüfte 0.1.15-APK erneut installiert und ihre
-Versionsnummer bestätigt. Es gab weder Datenlöschung noch eine Änderung am
-Car-App-Verhalten zur Umgehung dieses Befunds.
+Evidence: [0.1.14 before click](evidence/0.1.15/baseline-focus-night.png),
+[0.1.14 after click](evidence/0.1.15/baseline-start-1-night.png),
+[0.1.14 after selection](evidence/0.1.15/baseline-after-selection.png),
+[0.1.15 new night start](evidence/0.1.15/identity-wide-recheck-start-1-night.png).
+Afterwards the same checked 0.1.15 APK was installed again and its version number confirmed. There was
+no data deletion and no change to the car app's behavior to work around this finding.
 
-## Belege und Grenzen
+## Evidence and limits
 
-- [Startbild hell](evidence/0.1.15/assistant-light-splash.png),
-  [Startbild dunkel](evidence/0.1.15/assistant-dark-splash.png)
-- [Gespräch hell/deutsch](evidence/0.1.15/az-light-conversation.png),
-  [Gespräch dunkel/englisch](evidence/0.1.15/az-dark-conversation.png),
-  [große Schrift](evidence/0.1.15/az-large-settings.png)
-- [Launcher-Symbol](evidence/0.1.15/dhu-launcher-icon.png),
-  [DHU bereit](evidence/0.1.15/identity-800-ready-day.png),
-  [sechster Start](evidence/0.1.15/identity-800-start-6-night.png),
-  [Rotary-Fokus](evidence/0.1.15/identity-wide-focus-day.png),
-  [OpenAI nach Live-Wechsel](evidence/0.1.15/identity-wide-openai-live-night.png)
+- [Splash screen light](evidence/0.1.15/assistant-light-splash.png),
+  [splash screen dark](evidence/0.1.15/assistant-dark-splash.png)
+- [Conversation light/German](evidence/0.1.15/az-light-conversation.png),
+  [conversation dark/English](evidence/0.1.15/az-dark-conversation.png),
+  [large font](evidence/0.1.15/az-large-settings.png)
+- [Launcher icon](evidence/0.1.15/dhu-launcher-icon.png),
+  [DHU ready](evidence/0.1.15/identity-800-ready-day.png),
+  [sixth start](evidence/0.1.15/identity-800-start-6-night.png),
+  [rotary focus](evidence/0.1.15/identity-wide-focus-day.png),
+  [OpenAI after live switch](evidence/0.1.15/identity-wide-openai-live-night.png)
 
-DHU-Belege sind auf die App zugeschnitten. Karten, andere Benachrichtigungen und
-private Chatinhalte gehören nicht zu den veröffentlichten Belegen.
+DHU evidence is cropped to the app. Maps, other notifications and private chat content are not part of
+the published evidence.
 
-**Nicht neu praktisch geprüft:** Live-Gespräch und tatsächliche laufende
-Gesprächsdienst-Benachrichtigung, Launcher-Themensymbole und ältere Android-Versionen.
-Für das Dienstsymbol sind die gelieferte Ressource, Paketierung und `setSmallIcon`
-geprüft; der Dienst wurde dafür nicht mit echtem Mikrofon gestartet. Ein lokaler
-Shell-Benachrichtigungsversuch lieferte keinen sichtbaren Beleg und zählt nicht
-als bestandener visueller Test. Die Monochrom-Ebene ist unverändert enthalten;
-die persönliche Launcher-Konfiguration wurde nicht umgestellt.
+**Not checked again in practice:** a live conversation and the actual running conversation service
+notification, launcher themed icons and older Android versions. For the service icon, the supplied
+resource, packaging and `setSmallIcon` were checked; the service was not started with a real
+microphone for this. A local shell notification attempt gave no visible evidence and does not count as
+a passed visual test. The monochrome layer is included unchanged; the personal launcher configuration
+was not switched.
 
-Anruf-, Headset- und Bluetooth-Tests bleiben auf Nutzerwunsch zurückgestellt.
-Keine KI-Anfrage, keine Änderung von Schlüsseln, Verläufen oder Sprachlogik und
-keine Deinstallation/Löschung von App-Daten. Neue fehlende Designwerte wurden
-für diesen Umfang nicht festgestellt.
+Call, headset and Bluetooth tests remain deferred at the user's request.
+No AI request, no change to API keys, histories or voice logic, and no uninstall or deletion of app
+data. No new missing design values were found for this scope.

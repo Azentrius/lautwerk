@@ -1,21 +1,21 @@
-# Windows: Bauen, Installieren und DHU prüfen
+# Windows: build, install and check in the DHU
 
-Projektstand 0.1.14: DHU-Oberfläche 0.1.14-prototype mit Azentrius-Farbwunsch;
-Phone-Vergleichsvariante weiterhin 0.1.12-prototype. Ablauf mit Deutsch/Englisch unverändert.
-Auto-Design, Ausgangsmessung und Abnahme: [ANDROID_AUTO_DESIGN.md](ANDROID_AUTO_DESIGN.md).
-Die Assistenten-App 0.1.13-dev ist separat; ihre Installation und der
-praktische API-/Sprachtest stehen in [VOICE.md](VOICE.md). Das aktuelle Design-Update
-mit Installationsschritten steht in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md).
+Project state 0.1.14: DHU UI 0.1.14-prototype with the requested Azentrius colors; the phone comparison
+variant stays at 0.1.12-prototype. The German/English flow is unchanged.
+Car design, baseline measurement and acceptance: [ANDROID_AUTO_DESIGN.md](ANDROID_AUTO_DESIGN.md).
+The assistant app 0.1.13-dev is separate; its installation and the hands-on API and voice test are in
+[VOICE.md](VOICE.md). The current design update with installation steps is in
+[DESIGN_SYSTEM.md](DESIGN_SYSTEM.md).
 
-## 1. Projekt bauen
+## 1. Build the project
 
-Android Studio: Projektordner öffnen. Unter Settings > Build, Execution,
-Deployment > Build Tools > Gradle ein installiertes **JDK 17** wählen.
-Dieses Projekt nutzt Gradle 9.8.1 und AGP 9.4.1 und wird mit JDK 17 gebaut und geprüft;
-das auf diesem PC ebenfalls vorhandene JDK 25 ist dafür nicht erprobt. Der vorgefundene JAVA_HOME-Wert
-zeigte auf ein nicht vorhandenes JDK-Verzeichnis und wurde nicht global geändert.
+Android Studio: open the project folder. Under Settings > Build, Execution, Deployment > Build Tools >
+Gradle, choose an installed **JDK 17**.
+This project uses Gradle 9.8.1 and AGP 9.4.1 and is built and checked with JDK 17; JDK 25, which is
+also installed on this PC, has not been tried for it. The JAVA_HOME value found on this PC pointed to a
+JDK folder that does not exist and was not changed globally.
 
-PowerShell auf diesem PC:
+PowerShell on this PC:
 
 ```powershell
 Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI'
@@ -24,51 +24,50 @@ $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 .\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:assemblePhoneDebug :app:assembleDebug
 ```
 
-Andere Rechner: JAVA_HOME auf das dort installierte JDK 17 und ANDROID_HOME
-auf den dortigen Android-SDK-Ordner setzen. SDK Platform 37 (Android 17) und
-Build Tools 36.0.0 werden benötigt. Der erste Build lädt öffentliche Maven-Abhängigkeiten.
+Other computers: set JAVA_HOME to the JDK 17 installed there and ANDROID_HOME to the Android SDK folder
+there. SDK Platform 37 (Android 17) and Build Tools 36.0.0 are required. The first build downloads
+public Maven dependencies.
 
-Das wichtigste APK liegt anschließend hier:
+The most important APK is then here:
 `prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk`.
-Die separat gelieferte Datei `OpenAutoAI-0.1.14-dhu-debug.apk` ist dieselbe Testvariante.
-Die Smartphone-Vergleichsvariante `phoneDebug` registriert absichtlich KEINE Auto-App.
+The separately supplied file `OpenAutoAI-0.1.14-dhu-debug.apk` is the same test variant.
+The phone comparison variant `phoneDebug` deliberately registers NO car app.
 
-## 2. Nur den DHU-Prototypen installieren
+## 2. Install only the DHU prototype
 
-Pixel entsperren, USB-Debugging aktivieren, RSA-Abfrage bei Bedarf bestätigen.
+Unlock the Pixel, enable USB debugging, confirm the RSA prompt if asked.
 
 ```powershell
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb devices -l
 ```
 
-Es muss `device` hinter dem Pixel stehen. `unauthorized`: am Pixel bestätigen.
-`offline`: USB/ADB-Verbindung prüfen. Bei mehreren Geräten im folgenden Block
-`SERIENNUMMER_AUS_ADB_DEVICES` durch die Seriennummer des Pixel ersetzen.
+The Pixel must be listed as `device`. `unauthorized`: confirm on the Pixel. `offline`: check the
+USB/ADB connection. With several devices, replace `SERIAL_FROM_ADB_DEVICES` in the following block
+with the Pixel's serial number.
 
 ```powershell
-$serial = 'SERIENNUMMER_AUS_ADB_DEVICES'
+$serial = 'SERIAL_FROM_ADB_DEVICES'
 $apk = Join-Path (Get-Location) 'prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk'
 & $adb -s $serial install -r $apk
 & $adb -s $serial shell am start -n 'dev.openautoai.prototype.dhu/dev.openautoai.prototype.MainActivity'
 ```
 
-Für das heruntergeladene APK stattdessen `$apk` auf dessen vollständigen Pfad setzen.
-Bei nur einem verbundenen Gerät darf `-s $serial` überall entfallen.
-Erwartet: `Success`; auf dem Handy „OpenAuto AI“ und „Starten“.
-Ein Tippen muss „Gestartet · Test 1“ anzeigen. Das beweist noch keine Auto-Sichtbarkeit.
-Zusätzlich Anbieter und Modell wählen; die Auswahl bleibt gespeichert.
-Für 0.1.2 den [Auswahltest](MODEL_SELECTION.md#prüfung-im-echten-dhu) durchführen:
-Claude / Haiku wählen, App neu öffnen, Auswahl im DHU prüfen und anschließend
-auf OpenAI / GPT-5.4 wechseln. Das Template zeigt die Auswahl unter dem Teststatus.
+For the downloaded APK, set `$apk` to its full path instead. With only one connected device,
+`-s $serial` can be left out everywhere.
+Expected: `Success`; on the phone "OpenAuto AI" and "Start".
+One tap must show "Started · Test 1". This does not yet prove visibility in the car.
+Also choose a provider and model; the selection is saved.
+For 0.1.2, run the [selection test](MODEL_SELECTION.md#checking-in-the-real-dhu): choose
+Claude / Haiku, reopen the app, check the selection in the DHU and then switch to OpenAI / GPT-5.4.
+The template shows the selection below the test status.
 
-Bei `INSTALL_FAILED_UPDATE_INCOMPATIBLE` wurde das Paket mit einem anderen
-Debug-Zertifikat gebaut. Nicht automatisch deinstallieren: das würde Paketdaten
-löschen. Entweder denselben Signierschlüssel verwenden oder den Weg bewusst entscheiden.
-Bei einem frischen lokalen Build wird dein lokaler Android-Debug-Schlüssel verwendet.
-Das bestehende Paket `dev.openautoai.app` bleibt von diesen Befehlen unberührt.
+`INSTALL_FAILED_UPDATE_INCOMPATIBLE` means the package was built with a different debug certificate.
+Do not uninstall automatically: that would delete package data. Either use the same signing key or
+decide on the path deliberately. A fresh local build uses your local Android debug key.
+The existing package `dev.openautoai.app` is not affected by these commands.
 
-## 3. Service-Registrierung prüfen
+## 3. Check the service registration
 
 ```powershell
 & $adb -s $serial shell pm path dev.openautoai.prototype.dhu
@@ -76,19 +75,19 @@ Das bestehende Paket `dev.openautoai.app` bleibt von diesen Befehlen unberührt.
 & $adb -s $serial shell dumpsys package dev.openautoai.prototype.dhu
 ```
 
-Erwarteter Dienst: `dev.openautoai.car.OpenAutoCarService`.
-Wenn der Dienst fehlt, zuerst Paket/Build-Variante prüfen. Eine vorhandene
-Service-Registrierung beweist nur, dass Android den Dienst kennt; nicht, dass
-Android Auto ihn zulässt oder im Launcher anzeigt.
+Expected service: `dev.openautoai.car.OpenAutoCarService`.
+If the service is missing, check the package and build variant first. An existing service
+registration only proves that Android knows the service, not that Android Auto allows it or shows it
+in the launcher.
 
-## 4. Bestehende DHU-Einrichtung weiterverwenden
+## 4. Reuse the existing DHU setup
 
-1. Eine bereits laufende DHU-Sitzung nach Installation regulär schließen.
-2. Auf dem Pixel Android-Auto-Einstellungen öffnen. Der Android-Auto-eigene
-   Entwicklermodus muss aktiv sein (zusätzlich zum Android-USB-Debugging).
-3. Im Android-Auto-Menü „Head-Unit-Server starten“ auswählen, falls er noch nicht läuft.
-4. Unter zuvor verbundenen Autos muss das Hinzufügen neuer Autos erlaubt sein.
-5. Pixel entsperrt am USB-Anschluss lassen.
+1. After installing, close an already running DHU session normally.
+2. On the Pixel, open the Android Auto settings. Android Auto's own developer mode must be active (in
+   addition to Android USB debugging).
+3. In the Android Auto menu, choose "Start head unit server" if it is not running yet.
+4. Under previously connected cars, adding new cars must be allowed.
+5. Leave the Pixel unlocked and connected to USB.
 
 PowerShell:
 
@@ -98,81 +97,77 @@ Push-Location "$env:LOCALAPPDATA\Android\Sdk\extras\google\auto"
 try { .\desktop-head-unit.exe } finally { Pop-Location }
 ```
 
-`libusb-1.0.dll` muss beim DHU-Programm bleiben. Eventuelle Ersteinrichtungsdialoge
-am Pixel selbst bestätigen. Keine vorhandenen AA-Daten löschen.
+`libusb-1.0.dll` must stay next to the DHU program. Confirm any first-time setup dialogs on the Pixel
+itself. Do not delete existing AA data.
 
-6. Im DHU den App-Launcher öffnen und nach **OpenAuto AI** suchen.
-7. Falls vorhanden: öffnen, Titel „OpenAuto AI“ prüfen, einmal „Starten“ tippen.
-8. Erwartet: „Gestartet · Test 1“. Erneutes Tippen erhöht den lokalen Testzähler.
-9. DHU regulär beenden. Portfreigabe optional entfernen:
+6. In the DHU, open the app launcher and look for **OpenAuto AI**.
+7. If present: open it, check the title "OpenAuto AI", tap "Start" once.
+8. Expected: "Started · Test 1". Tapping again increases the local test counter.
+9. Close the DHU normally. Optionally remove the port forwarding:
 
 ```powershell
 & $adb -s $serial forward --remove tcp:5277
 ```
 
-Die Bildschirmaufteilung und Buttonposition bestimmt Android Auto; die App
-liefert ein `MessageTemplate`, keine beliebig gezeichnete Auto-Activity.
+Android Auto decides the screen layout and button position; the app supplies a `MessageTemplate`, not
+a freely drawn car activity.
 
-## 5. Wenn OpenAuto AI fehlt
+## 5. If OpenAuto AI is missing
 
-- Telefon-APK erfolgreich installiert, aber nur Handy-Icon sichtbar:
-  zunächst Schritt 3 und `dhuDebug` prüfen.
-- In Android Auto „Launcher anpassen“ nachsehen und den Eintrag einschalten,
-  **falls Android Auto ihn bereits anbietet**. Ein dort fehlender Eintrag kann
-  damit nicht erzwungen werden.
-- Eine frische DHU-Verbindung testen. Keine dauernden Neuinstallationen oder Datenresets.
-- Aktuelle Version und App-eigene Logs sichern:
+- Phone APK installed successfully, but only the phone icon visible:
+  check step 3 and `dhuDebug` first.
+- Look under "Customize launcher" in Android Auto and turn the entry on
+  **if Android Auto already offers it**. An entry that is missing there cannot be forced this way.
+- Test a fresh DHU connection. No repeated reinstalls or data resets.
+- Save the current version and the app's own logs:
 
 ```powershell
 & $adb -s $serial shell dumpsys package com.google.android.projection.gearhead | Select-String 'versionName='
 & $adb -s $serial logcat -d -v time 'OpenAutoAI:V' 'AndroidRuntime:E' '*:S'
 ```
 
-Interpretation der App-Logs:
+Reading the app logs:
 
-| Beobachtung | Was sie belegt |
+| Observation | What it shows |
 |---|---|
-| `phone.onCreate` | Smartphone-Activity gestartet |
-| registrierter Dienst, aber kein Car-Log | Android Auto hat den Dienst möglicherweise noch nicht gebunden; kein Beweis einer bestimmten Ablehnungsursache |
-| `car.createHostValidator` | Host-Verbindungsversuch; Hostprüfung folgt |
-| `car.onCreateSession` / `car.onCreateScreen` | Car-Session wurde aufgebaut |
-| `car.onGetTemplate` | Host hat die Vorlage angefordert |
-| `car.start` | Auto-Button wurde ausgelöst |
+| `phone.onCreate` | Phone activity started |
+| registered service, but no car log | Android Auto may not have bound the service yet; no proof of a specific cause of rejection |
+| `car.createHostValidator` | Host connection attempt; host check follows |
+| `car.onCreateSession` / `car.onCreateScreen` | Car session was set up |
+| `car.onGetTemplate` | Host requested the template |
+| `car.start` | Car button was triggered |
 
-Ohne passende Host-Fehlermeldung bleibt die Ursache eines fehlenden Icons offen:
-Kategorie, Installationsquelle, Host-Version und Verbindung sind getrennte Faktoren.
-Die POI-Deklaration ist nur der erklärte Debug-Testplatzhalter; der Assistent erfüllt
-keine POI-Produktfunktion. „Unbekannte Quellen“ ist für diese Bibliotheksart keine
-allgemeine Freigabe. Keine fingierte Play-Installer-ID, Root-Tools oder Patches verwenden.
+Without a matching host error message, the cause of a missing icon stays open: category, installation
+source, host version and connection are separate factors. The POI declaration is only the declared
+debug test placeholder; the assistant provides no POI product function. "Unknown sources" is not a
+general approval for this kind of library. Do not use a faked Play installer ID, root tools or patches.
 
-Falls der Host blockiert, ist das ein gültiges negatives Testergebnis. Die nächsten
-Schritte sind Prüfung eines tatsächlich zulässigen Produktumfangs und gegebenenfalls
-offizielle Testverteilung, keine Umgehung der Ablehnung. Ein interner Play-Test allein
-macht eine unzulässige Kategorie nicht zulässig.
+If the host blocks the app, that is a valid negative test result. The next steps are checking a
+product scope that is actually permitted and, if needed, official test distribution, not bypassing
+the rejection. An internal Play test alone does not make a non-permitted category permitted.
 
-## 6. Automatisierte UI-/Template-Prüfungen
+## 6. Automated UI and template checks
 
 ```powershell
 .\gradlew.bat :prototype-app:lintDhuDebug :prototype-app:connectedDhuDebugAndroidTest
 ```
 
-Vor UI-Tests den DHU regulär beenden und das Pixel entsperrt lassen. Eine aktive
-Android-Auto/Maps-Sitzung kann die Test-Activity verdrängen.
+Before UI tests, close the DHU normally and leave the Pixel unlocked. An active Android Auto/Maps
+session can push the test activity aside.
 
-Das installiert Test-App und Testpaket auf dem angeschlossenen Android-Gerät.
-Die Tests prüfen die Smartphone-Schaltfläche samt Zustandswiederherstellung sowie
-das echte Car-Template und seinen Klick-Callback. Diese Tests laufen mit einem
-TestCarContext und **beweisen weder Launcher-Sichtbarkeit noch eine DHU-Verbindung**.
-Bei mehreren angeschlossenen Geräten vorher das gewünschte Gerät per `ANDROID_SERIAL`
-wählen oder übrige Testgeräte trennen.
+This installs the test app and the test package on the connected Android device.
+The tests check the phone button including state restoration, and the real car template and its click
+callback. These tests run with a TestCarContext and **prove neither launcher visibility nor a DHU
+connection**. With several connected devices, first choose the device with `ANDROID_SERIAL` or
+disconnect the other test devices.
 
-## 7. Bisherige Assistant-App
+## 7. Existing assistant app
 
-`:app:assembleDebug` erzeugt `app\build\outputs\apk\debug\app-debug.apk`.
-Dieses Modul trägt weiterhin das ursprüngliche Paket `dev.openautoai.app`.
-Es wurde für den DHU-Sichtbarkeitstest nicht mit dem Car-Service verbunden.
-Lokale Speicherung, Keystore und Fehlerfälle sind mit isolierten Testdaten geprüft;
-Details in [LOCAL_STORAGE.md](LOCAL_STORAGE.md). Anleitung und bestätigter Stand
-der neuen Sprachfunktion stehen in [VOICE.md](VOICE.md).
+`:app:assembleDebug` produces `app\build\outputs\apk\debug\app-debug.apk`.
+This module still has the original package `dev.openautoai.app`.
+It was not connected to the car service for the DHU visibility test.
+Local storage, Keystore and error cases are checked with isolated test data; details in
+[LOCAL_STORAGE.md](LOCAL_STORAGE.md). Instructions and the confirmed state of the new voice feature
+are in [VOICE.md](VOICE.md).
 
-[Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).
+[German/English and resuming](LOCALIZATION.md).
