@@ -24,6 +24,7 @@ class ChatExportTest {
     private fun prepare(id: String = "a") {
         f.main { assertTrue(f.home.prepareExport(id)) }
         f.await { f.home.state.exportPickerPending }
+        assertEquals(ExportPresentation.PREPARING,f.home.state.exportPresentation)
     }
     @After fun cleanup() { f.close() }
 
@@ -44,6 +45,7 @@ class ChatExportTest {
             f.await { f.home.state.operation == null && !f.home.state.loading }
             assertEquals(c, f.exports.chat); assertEquals(listOf(c), f.archive.items)
             assertTrue(f.home.state.message!!.startsWith("Textdatei gespeichert"))
+            assertEquals(ExportPresentation.DONE,f.home.state.exportPresentation)
         }
         assertEquals(2, f.exports.writes.get()); assertEquals(0, f.keys.reads.get())
         assertEquals(0, f.archive.creates.get()); assertEquals(0, f.archive.deletes.get())
@@ -54,6 +56,7 @@ class ChatExportTest {
         f.main { f.home.takeExportFileName(); f.home.finishExportSelection(null) }
         f.await { !f.home.state.loading }
         assertEquals("Export abgebrochen", f.home.state.message)
+        assertEquals(ExportPresentation.CANCELLED,f.home.state.exportPresentation)
         prepare(); f.main { f.home.exportPickerFailed() }; f.await { !f.home.state.loading }
         assertNull(f.home.state.operation); assertFalse(f.home.state.exportPickerPending)
         assertEquals(0, f.exports.writes.get()); assertEquals(0, f.keys.reads.get())
@@ -68,6 +71,7 @@ class ChatExportTest {
             f.archive.items = listOf(original.copy(title = "Later"))
             f.main { assertNull(f.home.state.message); f.home.newChat(); assertFalse(f.home.clearKey()) }
             assertEquals(HomeOperation.WRITE_EXPORT, f.home.state.operation)
+            assertEquals(ExportPresentation.WRITING,f.home.state.exportPresentation)
             gate.open(); f.await { f.home.state.operation == null && !f.home.state.loading }
             assertEquals(original, f.exports.chat)
         } finally { gate.open() }
@@ -78,9 +82,11 @@ class ChatExportTest {
         prepare(); f.main { f.home.finishExportSelection(uri) }
         f.await { f.home.state.operation == null && !f.home.state.loading }
         assertEquals(HomeViewModel.EXPORT_FAILED, f.home.state.message)
+        assertEquals(ExportPresentation.FAILED,f.home.state.exportPresentation)
         f.exports.failure = null; prepare(); f.main { f.home.finishExportSelection(uri) }
         f.await { f.home.state.operation == null && !f.home.state.loading }
         assertTrue(f.home.state.message!!.startsWith("Textdatei gespeichert"))
+            assertEquals(ExportPresentation.DONE,f.home.state.exportPresentation)
     }
 
     @Test fun staleConfirmationAndMissingChatCannotExportAnotherChat() {

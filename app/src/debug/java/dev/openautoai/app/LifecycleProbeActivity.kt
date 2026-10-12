@@ -15,7 +15,7 @@ class LifecycleProbeActivity : ComponentActivity() {
     internal lateinit var home: HomeViewModel
     @android.annotation.SuppressLint("AppBundleLocaleChanges") // Debug test host; no language-split bundle.
     override fun attachBaseContext(base: Context) {
-        val config=Configuration(base.resources.configuration).apply { setLocale(LifecycleProbeActivity.locale) }
+        val config=Configuration(base.resources.configuration).apply { setLocale(LifecycleProbeActivity.locale); fontScale=LifecycleProbeActivity.fontScale; uiMode=(uiMode and Configuration.UI_MODE_NIGHT_MASK.inv()) or if(LifecycleProbeActivity.dark)Configuration.UI_MODE_NIGHT_YES else Configuration.UI_MODE_NIGHT_NO }
         super.attachBaseContext(base.createConfigurationContext(config))
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class LifecycleProbeActivity : ComponentActivity() {
             override fun <T:ViewModel> create(modelClass:Class<T>):T = create() as T
         })[HomeViewModel::class.java]
         home.languageChanged()
-        setContent { MaterialTheme { MainContent(home,{ starts++ },{
+        setContent { dev.openautoai.app.design.AzentriusTheme(dark=dark) { MainContent(home,{ starts++ },{
             AppState.update(false,AppState.provider,AppState.modelId,AppState.sessionId,"Test")
         }) } }
     }
@@ -40,5 +40,7 @@ class LifecycleProbeActivity : ComponentActivity() {
         internal var factory:(()->HomeViewModel)?=null
         internal var locale:Locale=Locale.GERMAN
         internal var starts=0
+        internal var dark=false
+        internal var fontScale=1f
     }
 }

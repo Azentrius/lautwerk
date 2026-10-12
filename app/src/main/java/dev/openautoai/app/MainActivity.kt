@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import dev.openautoai.app.design.AzentriusTheme
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
         })[HomeViewModel::class.java]
         home.languageChanged()
         setContent {
-            MaterialTheme {
+            AzentriusTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
                     MainContent(
                         home = home,
@@ -110,7 +111,7 @@ class MainActivity : ComponentActivity() {
 
     private fun failStart(message: String) {
         startGate.cancel()
-        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text())
+        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text(), dev.openautoai.voice.VoicePhase.STOPPED)
         AppState.reportIssue(message)
     }
 
@@ -119,7 +120,7 @@ class MainActivity : ComponentActivity() {
         startGate.cancel()
         // Do not create an idle microphone service merely to stop it.
         stopService(Intent(this, VoiceService::class.java))
-        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text())
+        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text(), dev.openautoai.voice.VoicePhase.STOPPED)
         AppState.reportIssue(null)
     }
 }

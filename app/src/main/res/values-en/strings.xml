@@ -75,4 +75,22 @@
     <string name="online_voice_title">Use an online voice?</string>
     <string name="online_voice_warning">The text being read may be sent to your Android speech service, including answers from OpenAI and Claude. This does not make an additional OpenAI or Claude API request.</string>
     <string name="online_voice_choose">Choose online voice</string>
+    <string name="az_ready">Ready</string>
+    <string name="az_preparing">Preparing</string>
+    <string name="az_listening">Listening</string>
+    <string name="az_thinking">Provider responding</string>
+    <string name="az_speaking">Speaking</string>
+    <string name="az_ended">Ended</string>
+    <string name="az_export_preparing">Preparing export</string>
+    <string name="az_export_writing">Exporting</string>
+    <string name="az_export_done">Exported</string>
+    <string name="az_export_failed">Export failed</string>
+    <string name="az_export_cancelled">Export cancelled</string>
+    <string name="az_assistant_role">Assistant</string>
+    <string name="az_licenses">Licenses</string>
+    <string name="az_close">Close</string>
+    <string name="az_empty_history">No conversations yet</string>
+    <string name="az_voice_section">Voice</string>
+    <string name="az_tempo_section">Speed</string>
+    <string name="az_voice_name">Voice %1$d · %2$s</string>
 </resources>
