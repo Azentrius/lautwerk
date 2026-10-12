@@ -7,16 +7,14 @@ weiterhin der Android-Auto-Host. Der Stand ist ein lokales Debug-Experiment;
 
 ## Quelle und Umfang
 
-Grundlage der freigegebenen Umsetzung und Abnahme 0.1.14 ist [Azentrius/design-system, Commit eb827c8](https://github.com/Azentrius/design-system/blob/eb827c82f5a19f91fb673cac68215e5d8c2824e4/android-auto.md).
-Eine unveränderte Kopie liegt in `design/azentrius/upstream-eb827c8/`.
+Grundlage der freigegebenen Umsetzung und Abnahme 0.1.14 ist [Azentrius/design-system, Commit 7fe60bf](https://github.com/Azentrius/design-system/blob/7fe60bfb1b244d9e36464c6e5c590dfa228ee4dc/android-auto.md) (privates Repository).
 
-Die aktuelle Design-Referenz ist inzwischen [Commit 9ed4032](../design/azentrius/upstream-9ed4032/android-auto.md).
+Die aktuelle Design-Referenz ist inzwischen [Commit 170dd38](https://github.com/Azentrius/design-system/blob/170dd38be84a9f107440a730eb29361087fc63ea/android-auto.md).
 Sie präzisiert Host-Farben/Hintergrund anhand dieser Abnahme und enthält die
-O1-Entscheidung zum neuen App-Symbol aus `007f587`. B2/B3 bleiben unverändert;
+O1-Entscheidung zum neuen App-Symbol aus `6a7a951`. B2/B3 bleiben unverändert;
 an 0.1.14 ist nichts nachzuziehen. Die Symbol-Dateien wurden anschließend in
 0.1.15 eingebunden; siehe [App-Symbol und aktuelle Installation](APP_IDENTITY.md).
 Die folgenden Angaben beschreiben weiterhin den historischen Stand 0.1.14.
-Herkunft und historische Kopien: [design/azentrius/README.md](../design/azentrius/README.md).
 
 | Vorgabe | Umsetzung |
 |---|---|

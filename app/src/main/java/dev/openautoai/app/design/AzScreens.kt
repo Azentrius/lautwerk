@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 @file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 package dev.openautoai.app.design
 

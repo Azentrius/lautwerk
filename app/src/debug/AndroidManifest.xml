@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application><activity android:name=".LifecycleProbeActivity" android:exported="false" /></application>
 </manifest>

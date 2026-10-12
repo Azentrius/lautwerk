@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 package dev.openautoai.core.ai
 
 /** Per-operation cancellation, shared from the worker down to its single HTTP call. */

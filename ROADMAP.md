@@ -41,7 +41,7 @@ automatisierte Tests bestehen. Die DHU-Variante bleibt unverändert auf 0.1.12.
 Der Nutzer bestätigt „Darstellung und Bedienung passen“; Audio- und Speicherabläufe
 erhalten ihre bisherige Funktion. Herkunft und Regeln stehen in `docs/DESIGN_SYSTEM.md`.
 
-0.1.14 setzt B1–B5 aus dem Android-Auto-Design `eb827c8` um: ausschließlich
+0.1.14 setzt B1–B5 aus dem Android-Auto-Design `7fe60bf` um: ausschließlich
 das freigegebene Car-Farbpaar und der Primärfarbwunsch für „Starten“.
 Build, Lint und GitHub-CI des Implementierungsstands sind erfolgreich. 0.1.14 ist
 installiert; elf Prototype-Gerätetests und 64 DHU-Kombinationen bestehen.

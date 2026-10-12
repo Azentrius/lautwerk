@@ -1,2 +1,0 @@
-# Preserve the exact upstream snapshot bytes, including on Windows.
-/upstream-9ed4032/** -text

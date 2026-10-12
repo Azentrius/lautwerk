@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 package dev.openautoai.core.ai
 
 /** A provider/model pair is valid as a unit; never silently route it to another provider. */

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Apache-2.0
 """Reproduce a screenshot contrast measurement: image fg_x fg_y bg_x bg_y.
 
 Requires Pillow. Coordinates refer to the original PNG, before any report crop.

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <!-- Azentrius android-auto.md B2, commit eb827c8. These are usage variants,
+    <!-- Azentrius android-auto.md B2, commit 7fe60bf. These are usage variants,
          not day/night overrides. The host can replace them for contrast. -->
     <style name="CarAppTheme">
         <item name="carColorPrimary">#C8A96E</item>

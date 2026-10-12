@@ -1,0 +1,7 @@
+Font Awesome Free 5
+
+Icons by Fonticons, Inc. (https://fontawesome.com), taken from @patternfly/react-icons 6.4.0
+and converted to Android vector drawables.
+
+Licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/

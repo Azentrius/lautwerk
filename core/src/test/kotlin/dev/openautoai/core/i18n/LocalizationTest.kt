@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 package dev.openautoai.core.i18n
 
 import dev.openautoai.core.ai.*

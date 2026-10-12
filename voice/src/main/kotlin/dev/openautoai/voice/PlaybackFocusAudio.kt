@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 package dev.openautoai.voice
 
 /** Returns a release handle only when playback is authorized. All callbacks use the caller's thread. */

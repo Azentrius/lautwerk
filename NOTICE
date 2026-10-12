@@ -1,0 +1,31 @@
+OpenAuto AI
+Copyright 2026 Azentrius
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+This project includes third-party material under its own license. The app shows
+these licenses under "Licenses" (app/src/main/assets/licenses/).
+
+DM Sans (app/src/main/res/font/dm_sans_*.ttf)
+  Copyright 2014 The DM Sans Project Authors (https://github.com/googlefonts/dm-fonts)
+  SIL Open Font License 1.1, see app/src/main/assets/licenses/OFL-DM-Sans.txt
+
+DM Serif Display (app/src/main/res/font/dm_serif_display_regular.ttf)
+  Copyright 2014 - 2017 Adobe Systems Incorporated (http://www.adobe.com/), with
+  Reserved Font Name 'Source'. Copyright 2019 Google LLC.
+  SIL Open Font License 1.1, see app/src/main/assets/licenses/OFL-DM-Serif-Display.txt
+
+Icons (app/src/main/res/drawable/ic_az_*.xml), taken from @patternfly/react-icons 6.4.0
+by Red Hat, Inc. (MIT License, see app/src/main/assets/licenses/MIT-PatternFly-Icons.txt)
+and converted to Android vector drawables:
+  ic_az_pending.xml: a PatternFly icon, Copyright (c) 2019 Red Hat, Inc., MIT License.
+  All other ic_az_*.xml: Font Awesome Free 5 by Fonticons, Inc. (https://fontawesome.com),
+  Creative Commons Attribution 4.0 International, https://creativecommons.org/licenses/by/4.0/
+  (see app/src/main/assets/licenses/CC-BY-4.0-Font-Awesome.txt)
+
+Not covered by the Apache License: the OpenAuto AI app icon from the Azentrius
+design system and the Azentrius name and word mark. The app icon files, in app/
+and in prototype-app/, are src/main/res/drawable/ic_launcher_*.xml,
+src/main/res/drawable/ic_stat_openauto.xml (app only),
+src/main/res/mipmap-anydpi/ic_launcher*.xml and
+src/main/res/values/ic_launcher_background.xml.
+  Copyright (c) 2026 Stefan Popp. All rights reserved.

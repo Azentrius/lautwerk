@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- PatternFly icon "stop-circle" from @patternfly/react-icons 6.4.0, MIT License, Copyright (c) 2019 Red Hat, Inc. -->
+<!-- Font Awesome Free 5 icon "stop-circle" by Fonticons, Inc. (https://fontawesome.com), from @patternfly/react-icons 6.4.0 -->
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"

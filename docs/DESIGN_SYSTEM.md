@@ -7,21 +7,19 @@ Die DHU-Oberfläche bleibt in ihren bisherigen Android-Auto-Vorlagen.
 
 ## Aktuelle Referenz und Quellen der Umsetzung
 
-Aktuelle Design-Referenz: [9ed4032](../design/azentrius/upstream-9ed4032/README.md),
-vollständig und unverändert unter `design/azentrius/upstream-9ed4032/` kopiert.
-Sie enthält die DHU-Präzisierungen und das neue App-Symbol aus `007f587`.
+Aktuelle Design-Referenz: [170dd38](https://github.com/Azentrius/design-system/tree/170dd38be84a9f107440a730eb29361087fc63ea)
+im privaten Repository Azentrius/design-system.
+Sie enthält die DHU-Präzisierungen und das neue App-Symbol aus `6a7a951`.
 Der ursprüngliche Import war ein reines Quellen-Update. In 0.1.15 wurden Symbol,
 Startbild und Dienstsymbol eingebunden; siehe [APP_IDENTITY.md](APP_IDENTITY.md).
-Das bestätigte Seiten-Design bleibt erhalten. Details und Prüfsummen stehen in
-[design/azentrius/README.md](../design/azentrius/README.md).
+Das bestätigte Seiten-Design bleibt erhalten.
 
 Die folgenden historischen Quellen dokumentieren die Umsetzung von 0.1.13:
 
-- Ursprüngliches Paket: `design/azentrius/`, unverändert importiert.
-  ZIP-SHA256: `fdf2805c9690584e6ea12b36032972bb021285070758245c666ac42b873d984f`.
-- Ergänzung: [Design-System ab59a45](https://github.com/Azentrius/design-system/tree/ab59a45c19946ec5e4596da5cd06c082ab647f57).
-  Die dortige Android-Regel ist als `design/azentrius/upstream-ab59a45/android.md`
-  festgehalten und hat Vorrang vor dem Android-Abschnitt des ZIP.
+- Ursprüngliches Paket (ZIP), unverändert importiert; die Kopie ist inzwischen aus
+  diesem Repository entfernt. ZIP-SHA256: `fdf2805c9690584e6ea12b36032972bb021285070758245c666ac42b873d984f`.
+- Ergänzung: [Design-System 7601a14](https://github.com/Azentrius/design-system/tree/7601a14763258e8d0b7929efd4a3689e10d31cab).
+  Die dortige Android-Regel hat Vorrang vor dem Android-Abschnitt des ZIP.
 - Farbwerte und Android-Assets stimmen mit beiden Quellen überein. Vier TTFs,
   die XML-Schriftfamilie und 30 Vector-Drawables sind original übernommen.
   DM Serif Display ist mitgeliefert, aber auf diesen Seiten nicht eingesetzt.

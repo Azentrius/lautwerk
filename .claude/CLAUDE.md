@@ -33,31 +33,71 @@ The same in every Azentrius repository.
 - **Authorship.** Commits on `main` are authored by the maintainer (the squash merge takes care of
   that). Commits, pull requests and files carry no co-author trailers and no “generated with” lines.
 
-Existing German docs (README.md, ROADMAP.md, docs/) are translated once the open feature stack is merged; new and changed docs are written in English from now on.
+README.md, ROADMAP.md and docs/ are still German until their translation is merged; new and changed
+docs are written in English.
+
+## Repository baseline
+
+The same in every Azentrius repository; keep it when changing the repository or its settings.
+
+- **Security.** `SECURITY.md` with private vulnerability reporting; secret scanning with push
+  protection; Dependabot alerts and security updates; Dependabot version updates for every
+  ecosystem in use and for GitHub Actions; CodeQL default setup.
+- **Branches and tags.** Ruleset `main`: pull request, squash only, linear history, no deletion or
+  force push, required check `test`. Ruleset `release tags`: `v*` cannot be deleted or moved.
+- **CI.** The job `test` runs every test and every lint on each push and pull request. Actions are
+  pinned by commit SHA with the version as a comment; checkouts use `persist-credentials: false`;
+  the token is read-only unless a job needs more. Check tools are pinned as well, so Dependabot keeps
+  them current.
+- **Releases.** Only the `release` workflow makes releases, on request, from `main`: it checks the
+  version against the code and the existing tags, runs all tests, builds the artifact with
+  `SHA256SUMS`, signs a build provenance (`gh attestation verify`) and takes the notes from
+  `CHANGELOG.md`. Releases are immutable. Files that are not for users stay out of the artifact.
+- **Licensing.** Apache-2.0: `LICENSE` in the root, an SPDX header in every source file, `NOTICE`
+  for third-party material.
+
+Here: the check tools are Gradle, AGP and Android lint, pinned in the build files and kept current by
+Dependabot (Gradle); lint is Android lint of every module, run by the job `test`. The artifact is the
+source archive `openauto-ai-VERSION.tar.gz` (`git archive`; `.gitattributes` keeps `.claude/`,
+`.github/` and the Git files out), no APKs. SPDX headers: `//` on top of Kotlin and Gradle files,
+`<!-- -->` after the XML declaration. Exceptions: the `ic_az_*` icons carry `CC-BY-4.0` (Font Awesome)
+or `MIT` (`pending`, PatternFly); the app icon files from the design system stay exactly as generated,
+without a header (`NOTICE` lists them); DHU profiles (`tools/dhu/*.ini`), license texts and test evidence
+are data. New third-party material goes into `NOTICE`, `app/src/main/assets/licenses/` and the list in
+`LicenseDialog`.
 
 ## Layout
 
 ```
-core/           Kotlin/JVM: Provider, ModelCatalog, ModelSelection, ChatClient contract, ChatError texts
-providers/      Kotlin/JVM: OpenAI and Claude adapters, ProviderChatClient, HttpTransport; used by app only
+core/           Kotlin/JVM: Provider, ModelCatalog, ModelSelection, ChatClient contract, ChatError texts,
+                i18n, chat search and text export
+providers/      Kotlin/JVM: OpenAI and Claude adapters, ProviderChatClient, OkHttpTransport; used by app only
+voice/          Kotlin/JVM: VoiceController (the conversation flow), worker and audio interfaces,
+                PlaybackFocusAudio; used by app only
+storage/        Android library: EncryptedConversationRepository, EncryptedCredentialStore
 settings/       Android library: ModelSelectionStore (app-private SharedPreferences `model_selection_v1`)
 car-ui/         Android library: OpenAutoCarService (HostValidator), MessageTemplate screen with Start
-app/            the assistant `dev.openautoai.app`: Compose UI, VoiceService, SecretStore, ConversationStore
+app/            the assistant `dev.openautoai.app`: Compose UI (package `design`), VoiceService, Android
+                speech adapters; bundled license texts in src/main/assets/licenses/
 prototype-app/  DHU test app, flavors `phone` (no car service) and `dhu` (adds car-ui); device tests in
                 src/androidTest and src/androidTestDhu
-docs/           build and test report, adapters, model selection, Windows/DHU guide; history/ = old states
-.github/        dependabot.yml (Gradle and GitHub Actions)
+tools/          release-notes.sh, check-version.sh; dhu/ = DHU profiles and contrast.py
+docs/           build and test report, topic docs, evidence/ of device and DHU tests; history/ = old states
+.github/        workflows android.yml (job test) and release.yml; dependabot.yml (Gradle, GitHub Actions)
 ```
 
 ## Commands
 
 ```sh
-./gradlew :core:test :providers:test                  # JVM unit tests (only these two modules have them)
+./gradlew :core:test :providers:test :voice:test      # JVM unit tests (the only modules that have them)
 ./gradlew :app:assembleDebug :app:lintDebug
 ./gradlew :prototype-app:assembleDhuDebug :prototype-app:assemblePhoneDebug :prototype-app:lintDhuDebug
-./gradlew :app:connectedDebugAndroidTest              # device: adapters on Android's JSON, fake HTTP
+./gradlew :app:connectedDebugAndroidTest              # device: assistant UI, storage, voice adapters
 ./gradlew :prototype-app:connectedDhuDebugAndroidTest # device: phone UI, selection store, car template
+sh tools/check-version.sh                             # version in gradle.properties + CHANGELOG section
 ```
+
+CI runs the full list of tasks in `.github/workflows/android.yml` (lint of every Android module).
 
 On Windows `.\gradlew.bat`, with `JAVA_HOME` on a JDK 17 and `ANDROID_HOME` on the Android SDK. Device
 tests need an unlocked phone left alone during the run (`ANDROID_SERIAL` with several devices). Android
@@ -86,14 +126,17 @@ the DHU session (`adb forward tcp:5277 tcp:5277`, `desktop-head-unit.exe`): `doc
 
 ## Releases and the repository
 
-- The version lives in `versionName` (and `versionCode`) in `app/build.gradle.kts`: `0.1.15-dev` / 15.
-  The DHU test app has its own `versionName` in `prototype-app/build.gradle.kts` (`0.1.15-prototype`,
-  `versionCode` 5 for `phone` and 6 for `dhu`), raised only when that app changes.
-- Raise version and `versionCode` and add the `CHANGELOG.md` section in the same pull request. Tags are
-  `vX.Y.Z`; there is no release workflow yet, so releases are tagged by the maintainer until one exists.
-- CI: `.github/workflows/android.yml`, job `test` (JVM tests of `core`, `providers` and `voice`, lint,
-  all debug builds) on every pull request and push to `main`; `test` is the required check. It installs
-  exactly the SDK platform and Build Tools named under “Toolchain”; keep both in step.
+- The version lives only in `gradle.properties` (`version=`). Both apps use it as `versionName` (the
+  prototype adds `-prototype`) and derive `versionCode` from it in the root `build.gradle.kts`
+  (`appVersionCode`): major × 10000 + minor × 100 + patch, so minor and patch stay below 100.
+- Raise the version and add the `CHANGELOG.md` section in the same pull request; `tools/check-version.sh`
+  fails CI when the section is missing.
+- Releases: Actions › release › Run workflow on `main` (or `gh workflow run release.yml --ref main`). Tag
+  `vX.Y.Z`, source archive, `SHA256SUMS`, provenance and notes as under “Repository baseline”.
+- CI: `.github/workflows/android.yml`, job `test` (version check, JVM tests of `core`, `providers` and
+  `voice`, lint of every Android module, all debug and device-test builds) on every pull request and push
+  to `main`; `test` is the required check. It installs exactly the SDK platform and Build Tools named
+  under “Toolchain”; keep both in step. `release.yml` repeats the same steps: change both together.
 - Never in Git: APKs/AABs, `local.properties`, keystores, `diagnostics/`. Security reports: `SECURITY.md`.
 
 ## Useful knowledge
@@ -122,4 +165,7 @@ the DHU session (`adb forward tcp:5277 tcp:5277`, `desktop-head-unit.exe`): `doc
   next to `desktop-head-unit.exe`. A registered car service does not mean Android Auto shows the app;
   `CarTemplateTest` (TestCarContext) proves neither launcher visibility nor a DHU connection.
 - **`INSTALL_FAILED_UPDATE_INCOMPATIBLE`:** another debug key; do not uninstall, that deletes app data.
-- **German only on `main`:** user-facing texts (resources, `ChatError` in `core`) are German so far.
+- **Two languages:** user-facing texts exist in English and German (Android resources, `i18n` in `core`
+  for the JVM modules); the first supported device language wins, otherwise English.
+- **The design system is private:** `Azentrius/design-system` is not public and not copied into this
+  repository; docs link to it by commit. Its app icon files are taken over unchanged.

@@ -1,7 +1,9 @@
+// SPDX-License-Identifier: Apache-2.0
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.plugin.compose")
 }
+val appVersionCode: Int by rootProject.extra
 android {
     namespace = "dev.openautoai.app"
     compileSdk = 37
@@ -9,8 +11,8 @@ android {
         applicationId = "dev.openautoai.app"
         minSdk = 29
         targetSdk = 36
-        versionCode = 15
-        versionName = "0.1.15-dev"
+        versionCode = appVersionCode
+        versionName = project.version.toString()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true }

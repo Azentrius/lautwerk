@@ -1,3 +1,0 @@
-https://github.com/Azentrius/design-system
-ab59a45c19946ec5e4596da5cd06c082ab647f57
-Android rules supersede the original ZIP Android section.
