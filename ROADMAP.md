@@ -60,7 +60,9 @@ bleiben erhalten. Details: `docs/APP_IDENTITY.md` und `docs/BUILD_AND_TEST.md`.
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
 2. Vorrangig einen reproduzierbaren Verteilungsweg außerhalb von Google Play prüfen:
-   unveränderte APK im ID.7 nativ drahtlos, zunächst im Stand. Kia/AAWireless
+   unveränderte APK nach freigegebenem Herkunftsversuch im ID.7 nativ drahtlos,
+   zunächst im Stand. Launcher-Auswahl auf dem Pixel und DHU-Kontrolle bestehen;
+   der Fahrzeugnachweis steht noch aus. Kia/AAWireless
    ist auf Nutzerwunsch zurückgestellt.
    Anleitung und Messstand: [Sideload](docs/SIDELOADING.md) und
    [Fahrzeugtests](docs/SIDELOAD_TEST_REPORT.md). Noch keine Kompatibilitätszusage.

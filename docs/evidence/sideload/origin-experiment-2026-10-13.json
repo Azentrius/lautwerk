@@ -1,0 +1,51 @@
+{
+  "device": "Pixel 10 Pro",
+  "androidApi": 37,
+  "androidVersion": "17",
+  "androidAutoVersion": "17.7.663654-release",
+  "androidAutoVersionCode": 177663654,
+  "package": "dev.openautoai.prototype.dhu",
+  "appVersion": "0.1.15-prototype",
+  "appVersionCode": 6,
+  "installedApkSha256Before": "F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70",
+  "installedApkSha256After": "F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70",
+  "before": {
+    "installer": null,
+    "initiator": "com.android.shell",
+    "packageSource": 1,
+    "launcherEntryPresent": false,
+    "denialAt": "2026-10-12T23:52:56.418+02:00",
+    "denial": "CAR.VALIDATOR: Package DENIED; failed all other checks [dev.openautoai.prototype.dhu]"
+  },
+  "after": {
+    "installer": "com.android.vending",
+    "initiator": "com.google.android.packageinstaller",
+    "packageSource": 3,
+    "updatedAt": "2026-10-13T00:03:32+02:00",
+    "launcherObservation": {
+      "observedAt": "2026-10-13T00:05:55.6910506+02:00",
+      "surface": "Android Auto / Launcher anpassen",
+      "label": "OpenAuto AI",
+      "checked": true,
+      "enabled": true,
+      "apkSha256": "F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70",
+      "installerPackageName": "com.android.vending",
+      "initiatingPackageName": "com.google.android.packageinstaller",
+      "vehicleConnection": false
+    }
+  },
+  "dhu": {
+    "version": "2.0-windows",
+    "build": "2022-03-30-438482292",
+    "profile": "800x480-touch",
+    "carApi": 8,
+    "opened": true,
+    "startCount": 1,
+    "regularlyClosed": true
+  },
+  "id7": {
+    "testedAfterOriginChange": false,
+    "carApi": null,
+    "status": "awaiting vehicle test"
+  }
+}

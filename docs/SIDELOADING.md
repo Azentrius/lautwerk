@@ -1,14 +1,15 @@
 # OpenAuto AI per Sideload auf dem Fahrzeugdisplay
 
-Stand 12.10.2026. Ziel ist eine über GitHub verteilbare APK, die Nutzer auf dem
+Stand 13.10.2026. Ziel ist eine über GitHub verteilbare APK, die Nutzer auf dem
 Telefon installieren und im Auto öffnen können. Dafür prüfen wir zuerst den
 unveränderten UI-Prototyp 0.1.15 im stehenden Fahrzeug. Ein bestätigter Weg für
 OpenAuto AI auf realen Head Units liegt noch nicht vor.
 
 **Aktiver Versuch: ID.7 mit nativer drahtloser Verbindung, ohne AAWireless.**
-Die Kia-/Adapter-Versuche sind auf Nutzerwunsch zurückgestellt. Zuerst wird der
-unveränderte Zustand im ID.7 gemessen; die Adapterhinweise bleiben als spätere
-Option dokumentiert und sind keine Anleitung für dessen native Verbindung.
+Die Kia-/Adapter-Versuche sind auf Nutzerwunsch zurückgestellt. Nach dem negativen
+Ausgangsbefund folgt jetzt die unveränderte APK mit geänderter Installationsherkunft.
+Die Adapterhinweise bleiben als spätere Option dokumentiert und sind keine
+Anleitung für die native ID.7-Verbindung.
 
 Die Test-App `dev.openautoai.prototype.dhu` zeigt Titel, Anbieter, Modell und
 einen Starten-Testzähler. Die eigentlichen KI-Gespräche laufen derzeit nur in
@@ -23,7 +24,7 @@ Schritt zur Auto-App, noch kein funktionierendes KI-Gespräch im Auto.
 | Normale APK-Installation und AAWireless | Ausgangstest im Kia mit protokollierten bisherigen Einstellungen. |
 | AAWireless mit eingebautem Entwicklermodus | Konkreter experimenteller Kandidat. Andere Projekte nennen diesen Weg; Übertragbarkeit auf unsere Car App Library und Android 17 ist offen. |
 | AAAD | Der Hersteller des Tools nennt die Kompatibilität ab Android 14 selbst unsicher. Kein Nachweis für unser APK; derzeit nicht Bestandteil des Tests. |
-| KingInstaller | Verändert die angegebene Installationsherkunft. Kein normaler APK-Installationsweg und kein Beleg für aktuelle Car-App-Library-Kompatibilität; derzeit nicht eingesetzt. |
+| Systeminstaller mit geänderter Herkunft (Prinzip von KingInstaller) | Auf unserem Pixel 10 Pro / Android 17 ist OpenAuto AI danach im Smartphone-Launcher auswählbar; DHU erneut bestanden. APK bytegleich. ID.7 noch offen; [genauer Versuch](SIDELOAD_INSTALL_EXPERIMENT.md). |
 | Interne Play-Verteilung | Vergleichsoption, aber kein von Google Play unabhängiger Sideload-Weg. |
 
 Googles Option „Unbekannte Quellen“ in Android Auto gilt ausdrücklich nicht als
@@ -33,12 +34,24 @@ Kompatibilitätstest, keine von Google zugesicherte Funktion. Ein positives
 Kia-Ergebnis lässt sich nicht auf den nativ drahtlos verbundenen ID.7 übertragen.
 
 Die POI-Deklaration bleibt ein offengelegter Debug-Testplatzhalter. Sie ist keine
-behauptete KI-Kategorie. App, HostValidator, Templates und Freigaben werden für
-diesen Vergleich nicht verändert. Root, Installer-Spoofing, fremde Patches und
+behauptete KI-Kategorie. App, HostValidator, Templates und App-Berechtigungen werden für
+diesen Vergleich nicht verändert. Root, fremde Patches und
 Fahrfreigaben sind nicht Teil dieser Testreihe. Anruf-, Headset- und
 Bluetooth-Audio-Unterbrechungstests bleiben zurückgestellt.
 
+Nach der gemessenen Ablehnung in der Launcher-Auswahl wurde ein eng begrenzter
+Herkunftsversuch separat freigegeben: Die identische APK wird über den vorhandenen
+Android-Systeminstaller mit Google Play als behaupteter Installationsherkunft
+aktualisiert. Das ist ausdrücklich Installer-Spoofing. Der aktuelle Messstand
+steht im [Testbericht](SIDELOAD_TEST_REPORT.md); daraus folgt noch keine Empfehlung
+für Nutzer. Der Versuch installiert weder KingInstaller noch Shizuku und ändert
+weder Android Auto noch den Car-App-Code.
+
 ## Testpaket und Installation
+
+**Aktueller Herkunftsversuch:** Die folgende normale ADB-Installation beschreibt
+den Ausgangsweg. Sie nicht erneut ausführen, wenn die geänderte Herkunft für den
+ID.7-Test erhalten bleiben soll. Dafür gilt der [gesonderte Versuchsablauf](SIDELOAD_INSTALL_EXPERIMENT.md).
 
 Für die ersten Fahrzeugtests verwenden wir exakt den bereits bestätigten
 `prototype-app:dhuDebug`-Build aus 0.1.15. Wer selbst baut, folgt
@@ -126,6 +139,9 @@ für den tatsächlichen Fahrzeuglauf, lautet der Wert „nicht gemessen“. Vers
 aus dem früheren DHU-Test ist kein Ersatz. Alte, bereits aus dem Ringpuffer entfernte
 Logs lassen sich nicht nachträglich wiederherstellen.
 
+Für eine während der USB-Trennung weiterlaufende, begrenzte Aufnahme gibt es die
+[auf dem Pixel geprüfte Diagnosehilfe](../tools/sideload/README.md).
+
 Ein fehlender Dienstaufruf beweist allein keine bestimmte Ablehnungsursache.
 Keine vollständigen Bugreports, privaten App-Daten, Seriennummern oder
 Benachrichtigungsinhalte auf GitHub hochladen. Für den Bericht genügen Versionen,
@@ -155,6 +171,7 @@ Lebenszyklusfragen sind ein eigener Entwicklungsschritt.
 - [Fermata-Entwickler: AAWireless-Entwicklermodus unter Android 16](https://github.com/AndreyPavlenko/Fermata/discussions/756) – Aussage zu Fermata, kein Test von OpenAuto AI oder Android 17.
 - [AAAD: bekannte Einschränkungen ab Android 14](https://github.com/shmykelsa/AAAD)
 - [KingInstaller: beschriebene Installationsherkunft](https://github.com/fcaronte/KingInstaller)
+- [Vela: aktuelle Installationsberichte, insbesondere das Update vom 21.09.2026](https://github.com/PimpinPumpkin/Vela/issues/179) – Entwicklerbericht eines Erfolgs auf einem Stock-Pixel 9; kein Test unserer App oder unseres Fahrzeugs. Die ältere Schlussfolgerung desselben Issues, es könne grundsätzlich nie funktionieren, wurde durch die späteren Berichte überholt.
 
 Die Quellen beschreiben mögliche Wege und Grenzen. Maßgeblich für unsere
 Kompatibilitätsaussagen sind die getrennt protokollierten Ergebnisse im Testbericht.

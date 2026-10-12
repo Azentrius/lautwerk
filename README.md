@@ -33,7 +33,10 @@ Details: [App-Symbol und Installation](docs/APP_IDENTITY.md),
 Seit 12.10.2026 prüfen wir auf Nutzerwunsch eine Verteilung außerhalb von Google Play.
 Auf Nutzerwunsch testen wir zuerst die native drahtlose Verbindung im ID.7 mit der
 bereits installierten APK. Die Versuche im Kia mit AAWireless sind zurückgestellt.
-Ein funktionierender Weg für OpenAuto AI ist noch nicht bestätigt.
+Seit dem gesondert freigegebenen Herkunftsversuch am 13.10.2026 erscheint OpenAuto AI
+in der Android-Auto-Launcher-Auswahl auf dem Pixel; die DHU-Kontrolle besteht.
+Die APK blieb bytegleich. Ein Erfolg im ID.7 ist noch zu bestätigen;
+[Versuchsweg](docs/SIDELOAD_INSTALL_EXPERIMENT.md) und [Messdaten](docs/SIDELOAD_TEST_REPORT.md).
 Die [Sideload-Anleitung](docs/SIDELOADING.md) und der
 [Fahrzeugtestbericht](docs/SIDELOAD_TEST_REPORT.md) unterscheiden Vorbereitung,
 Beobachtungen und offene Versuche. App und DHU bleiben auf 0.1.15.

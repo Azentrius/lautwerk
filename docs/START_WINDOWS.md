@@ -143,12 +143,18 @@ Ohne passende Host-Fehlermeldung bleibt die Ursache eines fehlenden Icons offen:
 Kategorie, Installationsquelle, Host-Version und Verbindung sind getrennte Faktoren.
 Die POI-Deklaration ist nur der erklärte Debug-Testplatzhalter; der Assistent erfüllt
 keine POI-Produktfunktion. „Unbekannte Quellen“ ist für diese Bibliotheksart keine
-allgemeine Freigabe. Keine fingierte Play-Installer-ID, Root-Tools oder Patches verwenden.
+allgemeine Freigabe. Für diesen normalen DHU-Ablauf ist keine geänderte
+Installer-Angabe nötig; Root-Tools und Patches werden nicht verwendet.
 
-Falls der Host blockiert, ist das ein gültiges negatives Testergebnis. Die nächsten
-Schritte sind Prüfung eines tatsächlich zulässigen Produktumfangs und gegebenenfalls
-offizielle Testverteilung, keine Umgehung der Ablehnung. Ein interner Play-Test allein
-macht eine unzulässige Kategorie nicht zulässig.
+Falls der Host blockiert, ist das ein gültiges negatives Testergebnis. Ein interner
+Play-Test allein macht eine unzulässige Kategorie nicht zulässig. Der gesondert
+freigegebene [Herkunftsversuch vom 13.10.2026](SIDELOAD_INSTALL_EXPERIMENT.md)
+ist separat dokumentiert: Launcher-Auswahl auf dem Pixel und DHU funktionieren,
+der Nachweis im ID.7 steht noch aus. Das ist keine offizielle Produktzulassung.
+
+**Herkunftsversuch aktiv:** Eine normale Installation oder die nachfolgenden
+Gerätetests können die Installationsherkunft wieder ändern. Sie daher nicht
+zwischendurch ausführen, solange der Vergleich im Fahrzeug vorbereitet ist.
 
 ## 6. Automatisierte UI-/Template-Prüfungen
 
