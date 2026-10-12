@@ -31,8 +31,8 @@ Details: [App-Symbol und Installation](docs/APP_IDENTITY.md),
 ## Sideload und reale Fahrzeuge
 
 Seit 12.10.2026 prüfen wir auf Nutzerwunsch eine Verteilung außerhalb von Google Play.
-Erster Kandidat ist die normale APK-Installation mit dem eingebauten Entwicklermodus
-des vorhandenen AAWireless-Adapters; die native Verbindung im ID.7 wird getrennt geprüft.
+Auf Nutzerwunsch testen wir zuerst die native drahtlose Verbindung im ID.7 mit der
+bereits installierten APK. Die Versuche im Kia mit AAWireless sind zurückgestellt.
 Ein funktionierender Weg für OpenAuto AI ist noch nicht bestätigt.
 Die [Sideload-Anleitung](docs/SIDELOADING.md) und der
 [Fahrzeugtestbericht](docs/SIDELOAD_TEST_REPORT.md) unterscheiden Vorbereitung,

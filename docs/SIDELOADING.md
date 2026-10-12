@@ -5,6 +5,11 @@ Telefon installieren und im Auto öffnen können. Dafür prüfen wir zuerst den
 unveränderten UI-Prototyp 0.1.15 im stehenden Fahrzeug. Ein bestätigter Weg für
 OpenAuto AI auf realen Head Units liegt noch nicht vor.
 
+**Aktiver Versuch: ID.7 mit nativer drahtloser Verbindung, ohne AAWireless.**
+Die Kia-/Adapter-Versuche sind auf Nutzerwunsch zurückgestellt. Zuerst wird der
+unveränderte Zustand im ID.7 gemessen; die Adapterhinweise bleiben als spätere
+Option dokumentiert und sind keine Anleitung für dessen native Verbindung.
+
 Die Test-App `dev.openautoai.prototype.dhu` zeigt Titel, Anbieter, Modell und
 einen Starten-Testzähler. Die eigentlichen KI-Gespräche laufen derzeit nur in
 `dev.openautoai.app`. Ein erfolgreicher Sichtbarkeitstest wäre deshalb der erste
@@ -75,7 +80,7 @@ verschiedene Angaben. Kein Firmware-Update während eines Vergleichspaares.
 5. Ergebnis getrennt erfassen: Launcher vorhanden, Oberfläche geöffnet, Starten
    reagiert, erneute Verbindung funktioniert. Fehlermeldungen wörtlich notieren.
 
-### Kia und AAWireless
+### Kia und AAWireless als zurückgestellte Option
 
 Zuerst mit unveränderten Einstellungen testen und deren Werte erfassen. Das ist
 nur dann ein Vergleich ohne Entwicklermodus, wenn dieser tatsächlich aus war.
