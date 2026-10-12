@@ -1,8 +1,8 @@
 # App-Symbol und Startbild 0.1.15
 
 OpenAuto AI verwendet die freigegebene Sprechblase mit Punkt aus dem
-[Design-System 9ed4032](../design/azentrius/upstream-9ed4032/android.md), O1 aus
-`007f587`. Die sechs gelieferten Android-Dateien sind im Assistenten bytegleich
+[Design-System 170dd38](https://github.com/Azentrius/design-system/blob/170dd38be84a9f107440a730eb29361087fc63ea/android.md), O1 aus
+`6a7a951`. Die sechs gelieferten Android-Dateien sind im Assistenten bytegleich
 übernommen; der Prototyp enthält dieselben fünf Launcher-Dateien, ohne das dort
 nicht benötigte Dienstsymbol. Der Generator wurde nicht ausgeführt. Es gibt
 keine eigenen Zeichen-, Größen- oder Farbwerte.

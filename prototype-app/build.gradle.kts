@@ -1,6 +1,8 @@
+// SPDX-License-Identifier: Apache-2.0
 plugins {
     id("com.android.application")
 }
+val appVersionCode: Int by rootProject.extra
 
 android {
     namespace = "dev.openautoai.prototype"
@@ -9,8 +11,8 @@ android {
         applicationId = "dev.openautoai.prototype"
         minSdk = 28
         targetSdk = 36
-        versionCode = 5
-        versionName = "0.1.15-prototype"
+        versionCode = appVersionCode
+        versionName = "${project.version}-prototype"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     flavorDimensions += "surface"
@@ -23,8 +25,6 @@ android {
         create("dhu") {
             dimension = "surface"
             applicationIdSuffix = ".dhu"
-            versionCode = 6
-            versionName = "0.1.15-prototype"
             buildConfigField("boolean", "DHU_EXPERIMENT", "true")
         }
     }

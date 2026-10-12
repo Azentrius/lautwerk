@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 plugins {
     id("org.jetbrains.kotlin.jvm")
     `java-library`

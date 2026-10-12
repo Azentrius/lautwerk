@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
     <style name="Theme.OpenAutoAI" parent="Theme.OpenAutoAI.Base">
         <item name="android:windowSplashScreenBackground">@color/ic_launcher_background</item>

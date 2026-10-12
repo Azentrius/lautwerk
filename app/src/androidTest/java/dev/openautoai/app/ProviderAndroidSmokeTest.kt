@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: Apache-2.0
 package dev.openautoai.app
 
 import androidx.test.ext.junit.runners.AndroidJUnit4

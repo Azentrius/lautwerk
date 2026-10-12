@@ -8,7 +8,7 @@ von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
 **Neu in 0.1.15:** Das freigegebene App-Symbol „Sprechblase mit Punkt“ aus
-Design-Commit `9ed4032` ist jetzt in Assistent und Prototyp eingebunden,
+Design-Commit `170dd38` ist jetzt in Assistent und Prototyp eingebunden,
 einschließlich Monochrom-Ebene, nativem Startbild auf Tinte und kleinem
 Benachrichtigungssymbol. Die 11 Android-Dateikopien entsprechen der Quelle bytegenau.
 
@@ -26,7 +26,7 @@ Details: [App-Symbol und Installation](docs/APP_IDENTITY.md),
 [aktueller Testbericht](docs/BUILD_AND_TEST.md),
 [DHU-Abnahme 0.1.14](docs/history/BUILD_AND_TEST-0.1.14.md),
 [Smartphone-Design](docs/DESIGN_SYSTEM.md),
-[Design-Referenz](design/azentrius/README.md).
+[Design-Referenz](https://github.com/Azentrius/design-system/tree/170dd38be84a9f107440a730eb29361087fc63ea) (privates Repository).
 
 ## Sideload und reale Fahrzeuge
 
@@ -127,13 +127,18 @@ Beschreibungen unter `docs/history/`.
 ## GitHub
 
 [Automatische Prüfungen](.github/workflows/android.yml) bauen die Debug-Varianten,
-führen JVM-Tests und Lint aus. Keine API-Schlüssel oder Live-Anfragen in CI.
+führen JVM-Tests und Lint aller Module aus. Keine API-Schlüssel oder Live-Anfragen in CI.
+Die Version steht nur in `gradle.properties`; beide Apps leiten `versionName` und
+`versionCode` daraus ab. Releases erstellt nur der Workflow
+[release](.github/workflows/release.yml): Quellarchiv mit `SHA256SUMS` und signierter
+Build-Provenienz (`gh attestation verify`), Notizen aus [CHANGELOG.md](CHANGELOG.md).
 
 Quellen, Wrapper, Lizenz, Dokumentation und Tests gehören ins Repository.
 `local.properties`, `.gradle`, Build-Verzeichnisse, Schlüssel und Diagnoseausgaben
 sind ausgeschlossen. Zielrepository: [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai).
 Der Standardbranch ist `main`; APKs sind nicht Bestandteil der Git-Historie.
-Die bereits gelieferte Apache-2.0-Lizenz bleibt erhalten; siehe [LICENSE](LICENSE).
+Lizenz: Apache-2.0, siehe [LICENSE](LICENSE). Schriften, Icons und App-Symbol stehen
+unter eigenen Bedingungen, siehe [NOTICE](NOTICE).
 
 ## Offizielle Referenzen (geprüft am 11.10.2026)
 

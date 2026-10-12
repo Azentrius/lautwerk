@@ -2,7 +2,7 @@
 
 Stand: 12.10.2026. **Assistent und DHU-Test sind als Update auf dem Pixel installiert.**
 Die neue Sprechblase mit Punkt, das native Startbild und das kleine Dienstsymbol
-folgen unverändert dem Design-System `9ed4032` / O1 `007f587`.
+folgen unverändert dem Design-System `170dd38` / O1 `6a7a951`.
 [Umsetzung und Installation](APP_IDENTITY.md).
 
 ## Umgebung

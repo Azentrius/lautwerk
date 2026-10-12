@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- PatternFly icon "pending" from @patternfly/react-icons 6.4.0, MIT License, Copyright (c) 2019 Red Hat, Inc. -->
+<!-- PatternFly icon "pending" from @patternfly/react-icons 6.4.0, Copyright (c) 2019 Red Hat, Inc. -->
+<!-- SPDX-License-Identifier: MIT -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
