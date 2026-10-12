@@ -11,7 +11,8 @@ workflow and complete license information. The apps behave as in 0.1.15.
   variants had their own codes; 116 is higher than all of them, so updates install over the old apps.
 - Toolchain: Gradle 9.8.1, AGP 9.4.1 with built-in Kotlin, Kotlin 2.4.21, Compose BOM 2026.09.00,
   compile SDK 37 and Build Tools 36.0.0; target SDK stays 36 until the Android 17 behavior changes are
-  tested on a device. The voice settings read their strings through `LocalResources`.
+  tested on a device. The voice settings read their strings through `LocalResources`. The build tooling
+  gets Apache HttpClient 4.5.14 instead of a vulnerable 4.5 version; it is not in any APK.
 - CI job `test` checks the version against `CHANGELOG.md` and runs Android lint for every module (`app`,
   both `prototype-app` variants, `car-ui`, `settings`, `storage`) next to the JVM tests and debug builds.
 - New `release` workflow, run on request from `main`: it checks the version against `gradle.properties` and

@@ -146,7 +146,7 @@ the DHU session (`adb forward tcp:5277 tcp:5277`, `desktop-head-unit.exe`): `doc
   `platforms;android-37.0`), Build Tools 36.0.0 (the AGP 9.4 default); minSdk 29 in `app`, else 28.
   Target SDK stays 36 until the Android 17 behavior changes are tested on the device.
 - **Patched build tooling:** `settings.gradle.kts` lifts vulnerable libraries of the build tooling
-  (Bouncy Castle, protobuf, jdom2, jose4j, commons-lang3) in the plugin classpath and every project
+  (Bouncy Castle, protobuf, jdom2, jose4j, commons-lang3, httpclient) in the plugin classpath and every project
   configuration. None of them is in an APK. After an AGP or Kotlin upgrade, drop the entries the
   tooling now brings in a patched version by itself. To check, run CI once with a `logger.lifecycle`
   line in `liftBuildTooling` plus `buildEnvironment` and `:<module>:dependencies` for every module;

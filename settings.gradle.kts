@@ -32,6 +32,7 @@ fun patchedToolingVersion(group: String, name: String, version: String?): String
         group == "org.jdom" && name == "jdom2" -> "2.0.6.1"
         group == "org.bitbucket.b_c" && name == "jose4j" -> "0.9.6"
         group == "org.apache.commons" && name == "commons-lang3" -> "3.18.0" // comes with commons-compress
+        group == "org.apache.httpcomponents" && name == "httpclient" && version.startsWith("4.") -> "4.5.14"
         else -> return null
     }
     return if (isOlder(version, patched)) patched else null
