@@ -16,6 +16,7 @@ Deutsch/Englisch, Chat-/Schlüsselspeicherung, Anbieter und Sprachablauf bleiben
 169 verschiedene automatisierte Prüfungen bestehen: 88 JVM-Prüfungen,
 73 Assistant-Gerätetests und 8 DHU-/Auswahltests. Lint: 0 Fehler, 30 Warnungen,
 1 Hinweis. Helles/dunkles Thema und große Schrift wurden mit Testdaten geprüft.
+Der Nutzer bestätigt: „Darstellung und Bedienung passen“.
 Anruf- und Headset-/Bluetooth-Praxistests bleiben zurückgestellt.
 
 Die **Assistenten-APK ist 0.1.13-dev / Code 14**. Die **DHU-/Phone-Testvariante

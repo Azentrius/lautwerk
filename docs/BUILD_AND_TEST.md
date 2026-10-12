@@ -32,6 +32,13 @@ Bestehende Exporttests prüfen zusätzlich die neuen Anzeigen. Die 19 zusätzlic
 Lint-Warnungen betreffen importierte, noch ungenutzte Design-Ressourcen und zwei
 Compose-Modifier-Konventionen. Bestehende Warnungen bleiben dokumentiert; keine Lint-Fehler.
 
+## Nutzerbestätigung
+
+Der Nutzer bestätigt am 12.10.2026 nach Sichtprüfung von Gespräch, Einstellungen,
+Verlauf sowie Stimme und Tempo: **„Darstellung und Bedienung passen“.**
+Das bestätigt die Oberfläche; es ist keine neue Abnahme des Audioablaufs,
+von Anrufen oder Headset-Unterbrechungen.
+
 ## Isolation und Grenzen
 
 Tests verwenden erfundene Chats/Schlüssel und getrennte Speicherattrappen.

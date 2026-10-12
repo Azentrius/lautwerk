@@ -38,7 +38,7 @@ auf 0.1.12-prototype wegen der Übersetzung; Layout und Aktionen bleiben erhalte
 0.1.13 überträgt das freigegebene Azentrius-Design auf die Smartphone-App,
 einschließlich gemessener, dreistufiger Reiter für große Schrift. 169 verschiedene
 automatisierte Tests bestehen. Die DHU-Variante bleibt unverändert auf 0.1.12.
-Die praktische Sichtprüfung durch den Nutzer folgt; Audio- und Speicherabläufe
+Der Nutzer bestätigt „Darstellung und Bedienung passen“; Audio- und Speicherabläufe
 erhalten ihre bisherige Funktion. Herkunft und Regeln stehen in `docs/DESIGN_SYSTEM.md`.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
