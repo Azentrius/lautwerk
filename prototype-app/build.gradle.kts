@@ -46,10 +46,10 @@ dependencies {
     implementation(project(":settings"))
     implementation(project(":core"))
     "dhuImplementation"(project(":car-ui"))
-    androidTestImplementation("androidx.test:core:1.6.1")
-    androidTestImplementation("androidx.test:runner:1.6.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    "androidTestDhuImplementation"("androidx.car.app:app-testing:1.8.0-rc01") {
+    androidTestImplementation("androidx.test:core:1.7.0")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    "androidTestDhuImplementation"("androidx.car.app:app-testing:1.9.0-alpha03") {
         // Device tests must not load Robolectric service providers.
         exclude(group = "org.robolectric")
     }

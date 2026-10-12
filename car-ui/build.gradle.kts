@@ -15,6 +15,6 @@ kotlin { jvmToolchain(17) }
 dependencies {
     implementation(project(":settings"))
     implementation(project(":core"))
-    api("androidx.car.app:app:1.8.0-rc01")
-    implementation("androidx.car.app:app-projected:1.8.0-rc01")
+    api("androidx.car.app:app:1.9.0-alpha03")
+    implementation("androidx.car.app:app-projected:1.9.0-alpha03")
 }
