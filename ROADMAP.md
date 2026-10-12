@@ -59,8 +59,12 @@ bleiben erhalten. Details: `docs/APP_IDENTITY.md` und `docs/BUILD_AND_TEST.md`.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
-2. Zulässigen Produktumfang für Android Auto klären; keine allgemeine KI-Kategorie
-   behaupten und den Debug-POI-Platzhalter nicht veröffentlichen.
+2. Vorrangig einen reproduzierbaren Verteilungsweg außerhalb von Google Play prüfen:
+   unveränderte APK, Kia/AAWireless und ID.7 nativ getrennt, zunächst im Stand.
+   Anleitung und Messstand: [Sideload](docs/SIDELOADING.md) und
+   [Fahrzeugtests](docs/SIDELOAD_TEST_REPORT.md). Noch keine Kompatibilitätszusage.
+   Keine allgemeine KI-Kategorie behaupten; der POI-Eintrag bleibt ein
+   offengelegter Debug-Testplatzhalter, kein Produktrelease.
 3. Die vorhandenen OpenAI-/Claude-Adapter mit eigenen API-Konten kontrolliert live testen.
    Fehlerfälle und Android-JSON sind offline geprüft; Modellzugriff und Voice-End-to-End
    sind nur nach einem bestätigten praktischen Test belegt; siehe `docs/VOICE.md`.

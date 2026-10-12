@@ -28,6 +28,16 @@ Details: [App-Symbol und Installation](docs/APP_IDENTITY.md),
 [Smartphone-Design](docs/DESIGN_SYSTEM.md),
 [Design-Referenz](design/azentrius/README.md).
 
+## Sideload und reale Fahrzeuge
+
+Seit 12.10.2026 prüfen wir auf Nutzerwunsch eine Verteilung außerhalb von Google Play.
+Erster Kandidat ist die normale APK-Installation mit dem eingebauten Entwicklermodus
+des vorhandenen AAWireless-Adapters; die native Verbindung im ID.7 wird getrennt geprüft.
+Ein funktionierender Weg für OpenAuto AI ist noch nicht bestätigt.
+Die [Sideload-Anleitung](docs/SIDELOADING.md) und der
+[Fahrzeugtestbericht](docs/SIDELOAD_TEST_REPORT.md) unterscheiden Vorbereitung,
+Beobachtungen und offene Versuche. App und DHU bleiben auf 0.1.15.
+
 ## Schnellstart unter Windows
 
 1. Dieses Projekt in Android Studio öffnen, Gradle-JDK auf **JDK 17** stellen.
@@ -74,9 +84,10 @@ umgekehrt keine Zulassung durch Android Auto. Es gibt weder Installer-Spoofing,
 Root-Patches noch Abschaltung von Host-Prüfungen.
 
 Googles Option „Unbekannte Quellen“ gilt laut Testdokumentation ausdrücklich
-nicht als Freischaltung für Car-App-Library-Apps. Ein zulässiger zukünftiger
-Produktumfang muss zuerst geklärt werden. Interne Play-Tests wären danach ein
-offizieller Verteilungsweg, aber keine Zusage der Kategoriezulässigkeit.
+nicht als Freischaltung für Car-App-Library-Apps. Die technische Verfügbarkeit
+außerhalb von Google Play wird nun im dokumentierten Fahrzeugvergleich geprüft.
+Das begründet keine Play-Zulässigkeit; interne Play-Tests wären ebenfalls keine
+Zusage der Kategoriezulässigkeit.
 
 ## Bausteine und spätere Arbeit
 
