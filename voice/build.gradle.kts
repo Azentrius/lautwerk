@@ -7,5 +7,5 @@ dependencies {
     api(project(":core"))
     testImplementation("junit:junit:4.13.2")
     testImplementation(project(":providers"))
-    testImplementation("org.json:json:20240303")
+    testImplementation("org.json:json:20260814")
 }
