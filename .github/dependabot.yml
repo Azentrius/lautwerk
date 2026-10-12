@@ -1,0 +1,29 @@
+# Dependabot version updates, checked weekly on Monday.
+# Gradle: one grouped pull request for minor and patch updates;
+# major updates arrive as separate pull requests.
+# GitHub Actions: all updates in one grouped pull request.
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    groups:
+      gradle-minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        patterns:
+          - "*"
