@@ -170,8 +170,8 @@ die keinen passenden Audiomodus meldet, ist darüber nicht garantiert erkennbar.
 Audiofokusverlust während des Vorlesens und die Fehler der Erkennung bleiben
 zusätzliche Stoppsignale. Stoppen/Neustarten per Schaltfläche und Beenden bei
 Display-aus hat der Nutzer für beide Anbieter praktisch bestätigt. Physische
-Anrufe und Bluetooth-/Headset-Wechsel bleiben manuell zu prüfen; simulierte
-Signale allein bestätigen diese Fälle nicht.
+Anrufe und Bluetooth-/Headset-Wechsel sind auf Wunsch des Nutzers zurückgestellt
+und weiterhin ungeprüft; simulierte Signale allein bestätigen diese Fälle nicht.
 
 ### Gezielter manueller Abnahmetest
 
@@ -183,7 +183,8 @@ möglich; keine Schlüssel in Logs oder Chat kopieren):
    Sitzung muss normal reagieren. Auch Beenden während Zuhören und Vorlesen prüfen.
 2. Während einer Sitzung das Display ausschalten, danach entsperren. Das Gespräch
    muss beendet bleiben und darf erst nach erneutem Start weiterlaufen.
-3. Mit einem Headset eine Sitzung beginnen und das Headset trennen/verbinden.
+3. **Zurückgestellt auf Nutzerwunsch (12.10.2026), für einen späteren Test:**
+   Mit einem Headset eine Sitzung beginnen und das Headset trennen/verbinden.
    Es muss beendet bleiben. Einen gewöhnlichen eingehenden Anruf separat prüfen;
    keine Testanrufe oder Anrufannahme durch die App selbst.
 
@@ -257,7 +258,8 @@ gestartet; persönliche Daten und gewählte Stimme werden nicht verändert.
 Der Nutzer bestätigte Erkennung, Vorlesen und Beenden für beide Anbieter unter
 0.1.6 und einen deutlich besseren Klang mit der Stimmwahl in 0.1.7. Am 12.10.2026
 bestätigt er für 0.1.8 Stoppen und Neustarten per Schaltfläche sowie Beenden bei
-Display-aus für OpenAI und Claude. Anrufe und Headset-Wechsel sind noch offen;
+Display-aus für OpenAI und Claude. Anruf- und Headset-/Bluetooth-Tests sind
+auf Wunsch des Nutzers zurückgestellt und bleiben ungeprüft;
 die Rückmeldung bestätigt nicht jede mögliche zeitliche Überschneidung separat.
 Android-Auto-Audio und reale Fahrzeugnutzung sind nicht bestätigt.
 Die DHU-Oberfläche bleibt bei 0.1.2-prototype. Details: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).

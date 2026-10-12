@@ -15,7 +15,8 @@ Spracherkennung. Der Nutzer bestätigt den Sprachablauf für beide Anbieter.
 Der Nutzer bestätigt einen deutlich besseren Klang; lokale und Online-Varianten können ähnlich klingen.
 0.1.8 ergänzt aktiven Netzwerkabbruch und Stoppen bei Display-/Anruf-/Geräteunterbrechungen;
 90 automatisierte Prüfungen bestehen. Stoppen/Neustarten per Schaltfläche und Display-aus
-sind für beide Anbieter vom Nutzer bestätigt; Anrufe und Headset-Wechsel stehen noch aus.
+sind für beide Anbieter vom Nutzer bestätigt. Anruf- und Headset-/Bluetooth-Tests sind
+auf Nutzerwunsch vom 12.10.2026 zurückgestellt und bleiben ungeprüft.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
@@ -30,7 +31,8 @@ sind für beide Anbieter vom Nutzer bestätigt; Anrufe und Headset-Wechsel stehe
    Vorhandene Daten nicht stillschweigend migrieren oder löschen.
 5. Die implementierten Voice-Schnittstellen praktisch prüfen: Mikrofonfreigaben,
    Audiofokus, hörbares TTS, Wiederaufnahme und Abbruch mit beiden API-Konten.
-   Die noch offenen Anruf- und Headset-Unterbrechungen aus 0.1.8 praktisch abnehmen.
+   Zurückgestellt auf Nutzerwunsch: Anruf- und Headset-/Bluetooth-Unterbrechungen
+   aus 0.1.8 später praktisch prüfen; derzeit kein bestätigtes Testergebnis.
    CarAudioRecord/Auto-Routing erst nach
    geklärter Plattformberechtigung; keine Voice-Funktion im DHU-Prototyp.
 6. Modellkatalog gezielt pflegen und mögliche Modellmigrationen explizit anbieten;

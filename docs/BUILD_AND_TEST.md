@@ -50,7 +50,8 @@ der Nutzer am 12.10.2026 auf dem Pixel für **beide Anbieter**: „Gespräch sto
 und neu starten per Button und Display aus klappt bei beiden Anbietern.“
 Damit sind Stoppen/Neustarten über die Schaltfläche und Beenden bei ausgeschaltetem
 Display praktisch bestätigt. Die Rückmeldung enthält keine separate Bestätigung
-für Anrufe oder Headset-Wechsel; diese bleiben offen. Ebenso ist damit nicht jede
+für Anrufe oder Headset-/Bluetooth-Wechsel. Diese Tests sind auf Wunsch des Nutzers
+am 12.10.2026 **zurückgestellt und weiterhin ungeprüft**. Ebenso ist damit nicht jede
 denkbare zeitliche Überschneidung oder Gesprächsphase manuell nachgewiesen.
 
 Anrufe werden über den gemeldeten Android-Audiomodus erkannt; fremde VoIP-Apps
