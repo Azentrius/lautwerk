@@ -1,4 +1,4 @@
-# Roadmap ab 0.1.7
+# Roadmap ab 0.1.8
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
@@ -13,6 +13,8 @@ Adapter und Hintergrundzugriff für den Sprachablauf; 72 automatisierte Tests be
 Spracherkennung. Der Nutzer bestätigt den Sprachablauf für beide Anbieter.
 0.1.7 ergänzt gemeinsame Stimmwahl, Tempo und Hörprobe; 75 automatisierte Prüfungen bestehen.
 Der Nutzer bestätigt einen deutlich besseren Klang; lokale und Online-Varianten können ähnlich klingen.
+0.1.8 ergänzt aktiven Netzwerkabbruch und Stoppen bei Display-/Anruf-/Geräteunterbrechungen;
+90 automatisierte Prüfungen bestehen. Physische Unterbrechungstests stehen noch aus.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
@@ -27,7 +29,8 @@ Der Nutzer bestätigt einen deutlich besseren Klang; lokale und Online-Varianten
    Vorhandene Daten nicht stillschweigend migrieren oder löschen.
 5. Die implementierten Voice-Schnittstellen praktisch prüfen: Mikrofonfreigaben,
    Audiofokus, hörbares TTS, Wiederaufnahme und Abbruch mit beiden API-Konten.
-   Sofortigen Transportabbruch ergänzen. CarAudioRecord/Auto-Routing erst nach
+   Den neuen Transportabbruch und physische Unterbrechungen aus 0.1.8 praktisch abnehmen.
+   CarAudioRecord/Auto-Routing erst nach
    geklärter Plattformberechtigung; keine Voice-Funktion im DHU-Prototyp.
 6. Modellkatalog gezielt pflegen und mögliche Modellmigrationen explizit anbieten;
    bisherige Auswahl/Chat-Zuordnung nicht unbemerkt verändern.

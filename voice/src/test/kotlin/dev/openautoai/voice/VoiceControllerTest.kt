@@ -274,4 +274,42 @@ class VoiceControllerTest {
             assertTrue(f.audio.spoken.isEmpty())
         }
     }
+
+    @Test fun systemInterruptionsStopBothProvidersInEveryPhaseAndIgnoreOldCallbacksAfterRestart() {
+        for (provider in Provider.entries) for (phase in VoicePhase.entries.filter { it != VoicePhase.STOPPED }) {
+            val f = Fixture()
+            if (phase == VoicePhase.PREPARING) f.controller.start(provider.name) else f.ready(provider)
+            if (phase == VoicePhase.THINKING || phase == VoicePhase.SPEAKING) f.phrase("Hallo")
+            if (phase == VoicePhase.SPEAKING) f.backend.replied(Result.success(ChatReply("Antwort")))
+            val late = when (phase) {
+                VoicePhase.PREPARING -> { val callback = f.backend.opened; { callback(Result.success(f.conversation(provider))) } }
+                VoicePhase.LISTENING -> { val callback = f.audio.heard; { callback(Recognition.Text("zu spät")) } }
+                VoicePhase.THINKING -> { val callback = f.backend.replied; { callback(Result.success(ChatReply("zu spät"))) } }
+                VoicePhase.SPEAKING -> { val callback = f.audio.finished; { callback(null) } }
+                else -> error("unexpected phase")
+            }
+            var environment = AudioEnvironment(true, false, emptySet())
+            lateinit var signal: (AudioEnvironment) -> Unit
+            val guard = VoiceInterruptions(object : VoiceEnvironment {
+                override fun current() = environment
+                override fun observe(changed: (AudioEnvironment) -> Unit): Cancel { signal = changed; return Cancel {} }
+            }) { f.controller.stop(it.message) }
+            guard.start()
+            environment = environment.copy(communicationBusy = true)
+            signal(environment)
+            assertFalse(f.controller.state.active)
+            assertFalse(f.focusHeld)
+            assertEquals(VoiceInterruption.COMMUNICATION.message, f.controller.state.notice)
+            val requests = f.backend.phrases.size
+            val spoken = f.audio.spoken.size
+            late(); f.clock.advance(1000)
+            assertFalse(f.controller.state.active)
+            f.ready(provider)
+            late(); f.clock.advance(1000)
+            assertEquals(VoicePhase.LISTENING, f.controller.state.phase)
+            assertEquals(requests, f.backend.phrases.size)
+            assertEquals(spoken, f.audio.spoken.size)
+        }
+    }
+
 }

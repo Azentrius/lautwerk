@@ -3,7 +3,8 @@ package dev.openautoai.core.ai
 data class ChatMessage(val role: String, val content: String)
 
 /** A snapshot of this conversation only; callers must not mix provider histories. */
-class ChatRequest(val selection: ModelSelection, messages: List<ChatMessage>) {
+class ChatRequest(val selection: ModelSelection, messages: List<ChatMessage>,
+                  val cancellation: RequestCancellation = RequestCancellation.NONE) {
     val messages: List<ChatMessage> = messages.toList()
 
     init {

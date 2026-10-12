@@ -11,7 +11,8 @@ internal class OpenAiAdapter : ProviderAdapter {
             .put("instructions", VOICE_INSTRUCTIONS)
             .put("input", request.messagesJson())
             .put("store", false)
-            .put("max_output_tokens", OUTPUT_TOKENS).toString()
+            .put("max_output_tokens", OUTPUT_TOKENS).toString(),
+        request.cancellation
     )
 
     override fun parse(response: JSONObject): ChatReply {

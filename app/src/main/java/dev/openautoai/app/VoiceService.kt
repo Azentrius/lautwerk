@@ -15,6 +15,7 @@ class VoiceService : Service() {
     private val main = Handler(Looper.getMainLooper())
     private val worker = Executors.newFixedThreadPool(2)
     private lateinit var controller: VoiceController
+    private lateinit var interruptions: VoiceInterruptions
     private var destroying = false
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -30,6 +31,9 @@ class VoiceService : Service() {
             { selection.select(it) }, { main.post { if (!destroying) AppState.changed() } })
         val audio = PlaybackFocusAudio(AndroidVoiceAudio(this, main), AndroidPlaybackFocus(this, main))
         controller = VoiceController(audio, backend, AndroidVoiceScheduler(main), ::publish)
+        interruptions = VoiceInterruptions(AndroidVoiceEnvironment(this, main)) { reason ->
+            controller.stop(reason.message)
+        }
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -43,7 +47,8 @@ class VoiceService : Service() {
                     // Promote before async storage/TTS initialization to satisfy the foreground deadline.
                     if (Build.VERSION.SDK_INT >= 34) startForeground(NOTIFICATION_ID, notification("Gespräch wird vorbereitet"), ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE)
                     else startForeground(NOTIFICATION_ID, notification("Gespräch wird vorbereitet"))
-                    controller.start(id)
+                    val blocked = interruptions.start()
+                    if (blocked == null) controller.start(id) else controller.stop(blocked.message)
                 } catch (_: Exception) {
                     controller.stop("Sprachdienst konnte nicht starten. Bitte Mikrofonberechtigung prüfen und die App auf dem Smartphone öffnen.")
                 }
@@ -62,6 +67,7 @@ class VoiceService : Service() {
         if (state.active) {
             getSystemService(NotificationManager::class.java).notify(NOTIFICATION_ID, notification(state.status))
         } else {
+            interruptions.close()
             stopForeground(STOP_FOREGROUND_REMOVE)
             stopSelf()
         }
@@ -80,6 +86,7 @@ class VoiceService : Service() {
 
     override fun onDestroy() {
         destroying = true
+        interruptions.close()
         controller.stop(controller.state.notice)
         worker.shutdownNow()
         main.removeCallbacksAndMessages(null)

@@ -52,7 +52,7 @@ class ConversationVoiceBackend(
         changed()
         cancel.check()
         val messages = (current.turns + user).takeLast(12).map { ChatMessage(it.role, it.content) }
-        val response = client.reply(ChatRequest(ModelSelection(current.provider, current.modelId), messages))
+        val response = client.reply(ChatRequest(ModelSelection(current.provider, current.modelId), messages, cancel))
         cancel.check() // Late responses after Stop are neither spoken nor newly archived.
         if (response.text.isBlank()) throw ChatFailure(ChatError.EMPTY_RESPONSE)
         conversations.append(current.id, Turn("assistant", response.text))

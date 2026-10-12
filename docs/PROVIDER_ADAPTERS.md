@@ -1,4 +1,4 @@
-# OpenAI-/Claude-Adapter – Projektstand 0.1.7
+# OpenAI-/Claude-Adapter – Projektstand 0.1.8
 
 ## Verhalten und Grenzen
 
@@ -29,7 +29,7 @@ die genaue Ursache kann ohne echten Kontotest nicht zugesichert werden.
 | Baustein | Aufgabe |
 |---|---|
 | `core` | `ChatClient`, `ChatRequest`, `ChatMessage`, `ChatReply`, `Completion`, `CredentialSource`, `ChatFailure` |
-| `providers` | `OpenAiAdapter`, `ClaudeAdapter`, `ProviderChatClient`, `HttpTransport`, `UrlConnectionTransport` |
+| `providers` | `OpenAiAdapter`, `ClaudeAdapter`, `ProviderChatClient`, `HttpTransport`, `OkHttpTransport` |
 | `app/ChatApi` | Weiterhin vorhandene Kompatibilitätsbrücke vom bestehenden `Turn`-Format und `CredentialStore` zur gemeinsamen Schnittstelle |
 | `voice` / `app/VoiceService` | Gemeinsamer Ablauf; speichert Antworttext, liest Modellantworten vor und zeigt feste Fehlerhinweise |
 | `settings`, `prototype-app`, `car-ui` | Keine neue API-Abhängigkeit; DHU bleibt Auswahl-/UI-Test |
@@ -56,13 +56,19 @@ Android-JSON-Implementierung und die Brücke vom alten Turn-Format.
   [Messages-Referenz](https://platform.claude.com/docs/en/api/messages/create),
   [Stop-Gründe](https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons)
 
-Der Transport akzeptiert nur die beiden festen HTTPS-Endpunkte. Weiterleitungen
-werden nicht verfolgt. Verbindungs- und Lese-Timeout bleiben bei 15 bzw. 50 Sekunden;
-Antworten werden auf 1 MiB begrenzt. Streams und Verbindungen werden geschlossen.
-Ein laufender blockierender HTTP-Aufruf lässt sich noch nicht garantiert sofort
-abbrechen.
-Die neue Sprachsteuerung verwirft veraltete Rückmeldungen; sofortiger Transportabbruch
-bleibt ein weiterer Schritt. Siehe [VOICE.md](VOICE.md).
+Der Transport nutzt OkHttp 5.3.2 und akzeptiert weiterhin nur die beiden festen
+HTTPS-Endpunkte. Weiterleitungen und automatische Verbindungswiederholungen sind
+deaktiviert. Der Request-Body ist außerdem `isOneShot`, damit z. B. `503` mit
+`Retry-After: 0` keine zweite kostenpflichtige Anfrage auslöst. Keine HTTP-Caches.
+Verbindungs-/Lese-/Schreib-/Gesamtzeitlimit: 15/50/50/60 Sekunden; Antworten maximal
+1 MiB. Der pro Auftrag durchgereichte Abbruch ruft `Call.cancel()` auf und löst
+blockierte Socket-Zugriffe; Streams und Abbruchregistrierung werden freigegeben.
+Abbruch wird als CANCELLED statt als Verbindungsfehler behandelt. Die Tests nutzen
+auch echte lokale Sockets für ausbleibende Header und teilweise gelieferte Antworten.
+Bereits begonnene Serververarbeitung oder Abrechnung wird damit nicht zurückgenommen.
+System-DNS und andere Betriebssystemoperationen sind nicht garantiert sofort
+unterbrechbar. Siehe [VOICE.md](VOICE.md) und den
+[Call-Vertrag](https://github.com/square/okhttp/blob/parent-5.3.2/okhttp/src/commonJvmAndroid/kotlin/okhttp3/Call.kt).
 
 Die Fehlerklassifikation nutzt HTTP-Status und bekannte maschinenlesbare Codes,
 keine Interpretation beliebiger Servertexte. OpenAI-Guthaben-/Kontolimits werden
@@ -112,7 +118,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für das Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.7-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
+`OpenAutoAI-0.1.8-assistant-debug.apk` ersetzen. Andere Geräte: Seriennummer mit
 `adb devices -l` ermitteln. Bei Signaturkonflikten nicht automatisch deinstallieren,
 da das gespeicherte Daten löschen würde; denselben Debug-Schlüssel verwenden.
 

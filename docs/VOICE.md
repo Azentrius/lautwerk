@@ -1,4 +1,4 @@
-# Smartphone-Sprachfunktion – 0.1.7
+# Smartphone-Sprachfunktion – 0.1.8
 
 OpenAI und Claude verwenden jetzt denselben getesteten Gesprächsablauf:
 Android erkennt die Sprache, der gewählte Anbieter verarbeitet den erkannten
@@ -111,11 +111,14 @@ Zum sofortigen lokalen Stoppen die Schaltfläche oder Benachrichtigung verwenden
 
 Jeder Schritt hat eine eigene Kennung. Doppelte oder verspätete Rückmeldungen
 aus älteren Schritten oder Sitzungen lösen keine neue Aufnahme oder Ausgabe aus.
-Worker-Aufgaben werden unterbrochen; späte Ergebnisse werden verworfen und vor
-einer anschließenden Archivierung erneut auf Abbruch geprüft. Ein bereits
-begonnener atomarer Schreibvorgang kann noch abschließen. Ein blockierender
-HTTP-Aufruf lässt sich mit dem vorhandenen Transport nicht garantiert sofort
-beenden; Verbindungs-/Lese-Timeouts bleiben 15/50 Sekunden.
+Jeder Worker-Auftrag erhält eine eigene Abbruchquelle. Sie wird durch Chat-Anfrage
+und Anbieteradapter bis zum konkreten OkHttp-Aufruf weitergereicht. Beenden ruft
+`Call.cancel()` auf, unterbricht den Worker und unterdrückt seine spätere Rückmeldung.
+Der Abbruch eines alten Auftrags betrifft keine neue Anfrage. Vor einer anschließenden
+Archivierung wird erneut geprüft. Ein bereits begonnener atomarer Schreibvorgang
+kann noch abschließen; beim Anbieter bereits eingetroffene Verarbeitung und Kosten
+lassen sich lokal nicht zurücknehmen. System-DNS kann ebenfalls weiter blockieren.
+Netzwerkzeitlimits: Verbindung 15 s, Lesen/Schreiben je 50 s, gesamter Aufruf 60 s.
 
 Es gibt keine automatische Wiederholung kostenpflichtiger KI-Anfragen und keinen
 automatischen Anbieterwechsel. Fehler erscheinen als feste Hinweise. Bei fehlendem
@@ -139,6 +142,50 @@ TTS wird erst nach erfolgreicher Initialisierung und Sprachprüfung verwendet;
 einzigartige Äußerungskennungen schützen vor veralteten Fertig-Rückmeldungen.
 [TextToSpeech](https://developer.android.com/reference/android/speech/tts/TextToSpeech)
 
+## Unterbrechungen in 0.1.8
+
+Eine laufende Sitzung endet in jeder Phase (Vorbereiten, Zuhören, Anfrage, Vorlesen), wenn:
+
+- das Display ausgeschaltet wird oder die App ein gesperrtes Gerät erkennt;
+- Android einen Ruf-/Telefonie-/Kommunikationsmodus meldet;
+- ein externes Audio-Ausgabegerät angeschlossen oder getrennt wird, etwa ein
+  Bluetooth-, USB- oder Kabel-Headset.
+
+Danach erscheinen ein fester Hinweis und „Gespräch beendet“. Es gibt keine automatische
+Wiederaufnahme beim Entsperren, Auflegen oder erneuten Verbinden. Zum Fortsetzen
+entsperren und das Gespräch ausdrücklich erneut starten. Ein bereits gesperrtes
+Gerät oder gemeldeter Anruf blockiert auch den Start.
+
+Die Beobachtung läuft nur während einer Sitzung und wird beim Beenden entfernt.
+Android 12+ meldet Audio-Moduswechsel direkt; zusätzlich wird alle 500 ms der Zustand
+geprüft, auch für Android 10/11 und Gerätesperre. Initiale Geräteauflistungen und
+veraltete Rückmeldungen gelten nicht als neue Unterbrechung. Die App fordert weder
+Telefonstatus-/Anrufdaten noch Bluetooth-Steuerrechte an und ändert kein Audio-Routing.
+Grundlagen: [AudioManager](https://developer.android.com/reference/android/media/AudioManager),
+[Display-aus-Signal](https://developer.android.com/reference/android/content/Intent#ACTION_SCREEN_OFF).
+
+Grenzen: Die App beobachtet angeschlossene Ausgabegeräte, nicht jeden internen
+Routingwechsel zwischen bereits verbundenen Geräten. Eine Telefonie-/VoIP-App,
+die keinen passenden Audiomodus meldet, ist darüber nicht garantiert erkennbar.
+Audiofokusverlust während des Vorlesens und die Fehler der Erkennung bleiben
+zusätzliche Stoppsignale. Physische Anrufe, Bluetooth-Wechsel und Displaysperre
+müssen auf dem Zielgerät noch manuell geprüft werden; sie sind nicht durch
+simulierte Signale als praktisch bestätigt zu behandeln.
+
+### Gezielter manueller Abnahmetest
+
+Für OpenAI und Claude jeweils mit eigenem Schlüssel in der App testen (API-Kosten
+möglich; keine Schlüssel in Logs oder Chat kopieren):
+
+1. Eine kurze Frage stellen und während „Anbieter antwortet“ beenden. Es darf
+   keine verspätete Antwort vorgelesen werden. Danach neu starten; die neue
+   Sitzung muss normal reagieren. Auch Beenden während Zuhören und Vorlesen prüfen.
+2. Während einer Sitzung das Display ausschalten, danach entsperren. Das Gespräch
+   muss beendet bleiben und darf erst nach erneutem Start weiterlaufen.
+3. Mit einem Headset eine Sitzung beginnen und das Headset trennen/verbinden.
+   Es muss beendet bleiben. Einen gewöhnlichen eingehenden Anruf separat prüfen;
+   keine Testanrufe oder Anrufannahme durch die App selbst.
+
 ## Architektur
 
 - `voice`: plattformunabhängige Gesprächssteuerung, Sprach-/Worker-Schnittstellen,
@@ -157,9 +204,9 @@ aktiv. Die App fordert kein Umgehen dieser Einschränkungen an.
 [Mikrofon-Vordergrunddienste](https://developer.android.com/develop/background-work/services/fgs/service-types#microphone)
 
 Speicherzugriffe des Sprachablaufs laufen im Hintergrund. Die übrige bestehende
-Verlaufs-/Schlüsseloberfläche arbeitet noch synchron. Die beiden Worker verhindern,
-dass ein abbrechender alter Auftrag direkt jeden neuen Schritt blockiert; daraus
-folgt keine Garantie für sofortigen Abbruch auf Transport- oder Anbieterseite.
+Verlaufs-/Schlüsseloberfläche arbeitet noch synchron. Die zwei Worker bleiben
+erhalten; Netzwerkabbruch erfolgt jetzt pro Aufruf. Anbieter-seitige Verarbeitung
+und Abrechnung werden dadurch nicht garantiert gestoppt.
 
 ## Bauen und gezielt öffnen
 
@@ -174,7 +221,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
 ```
 
-Für die Download-APK den Pfad auf `OpenAutoAI-0.1.7-assistant-debug.apk` ändern.
+Für die Download-APK den Pfad auf `OpenAutoAI-0.1.8-assistant-debug.apk` ändern.
 Bei anderen Geräten die Seriennummer ersetzen. Bei abweichender Signatur nicht
 deinstallieren oder Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 Die bestehenden [DHU-Schritte](START_WINDOWS.md) bleiben gültig.
@@ -199,15 +246,15 @@ Wiedergabe anzufordern und danach abzugeben:
 
 ## Teststand und Grenzen
 
-**75 automatisierte Prüfungen bestehen:** 57 JVM-Tests, 11 Assistant-Gerätetests
-und 7 DHU-/Auswahltests. 0.1.7-dev / Code 8 ist als Update auf dem Pixel installiert.
-Vier neue Android-Tests prüfen Speicherung, Katalogfilter, echte TTS-Konfiguration
-und die Einstellungsseite. Sie starten keine hörbare Ausgabe, Mikrofonaufnahme
-oder echte KI-Anfrage; vorhandene Auswahl und persönliche Daten werden nicht verändert.
+**90 automatisierte Prüfungen bestehen:** 69 JVM-Tests, 14 Assistant-Gerätetests
+und 7 DHU-/Auswahltests. 0.1.8-dev / Code 9 ist als Update auf dem Pixel installiert.
+Die Tests prüfen Socket-Abbruch, Abbruch-/Neustart-Rennen, alle Gesprächsphasen,
+Unterbrechungsregeln und die Registrierung/Freigabe echter Android-Beobachter.
+Keine hörbare Ausgabe, Mikrofonaufnahme oder echte KI-Anfrage wird automatisiert
+gestartet; persönliche Daten und gewählte Stimme werden nicht verändert.
 
-**Manueller Sprachtest:**
-Der Nutzer hat Erkennung, Vorlesen und Beenden für OpenAI und Claude unter 0.1.6 bestätigt: „Es funktioniert alles, die Stimme ist allerdings furchtbar.“ Für die Stimmwahl unter 0.1.7 meldet der Nutzer: „Klingt definitiv besser.“ Er fragt nach ähnlich klingenden Einträgen; die Stimmenkennungen zeigen vier lokale/Online-Variantenpaare. Eine gesonderte Bestätigung aller Vorschau-Abbruchfälle liegt noch nicht vor.
-
-Android-Auto-Audio, Bluetooth-Routing, gesperrtes Gerät und reale Fahrzeugnutzung
-sind nicht bestätigt. Die DHU-Oberfläche bleibt unverändert bei 0.1.2-prototype.
-Details: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+Der Nutzer bestätigte Erkennung, Vorlesen und Beenden für beide Anbieter unter
+0.1.6 und einen deutlich besseren Klang mit der Stimmwahl in 0.1.7. Die neuen
+physischen Unterbrechungstests und ein erneuter echter Anbieteraufruf unter 0.1.8
+sind noch offen. Android-Auto-Audio und reale Fahrzeugnutzung sind nicht bestätigt.
+Die DHU-Oberfläche bleibt bei 0.1.2-prototype. Details: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).

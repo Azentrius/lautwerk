@@ -61,4 +61,37 @@ class AndroidVoiceTasksTest {
             assertFalse(called.get())
         } finally { release.countDown(); worker.shutdownNow() }
     }
+
+    @Test fun cancellationReleasesBlockedWorkAndAllowsImmediateFreshTask() {
+        val worker = Executors.newSingleThreadExecutor()
+        val registered = CountDownLatch(1)
+        val released = CountDownLatch(1)
+        val freshDone = CountDownLatch(1)
+        val oldCallback = AtomicBoolean(false)
+        var cancellation: Cancel? = null
+        try {
+            val tasks = AndroidVoiceTasks(worker, Handler(Looper.getMainLooper()))
+            InstrumentationRegistry.getInstrumentation().runOnMainSync {
+                cancellation = tasks.run({ token ->
+                    val registration = token.onCancel { released.countDown() }
+                    try {
+                        registered.countDown()
+                        while (released.count > 0) { try { released.await() } catch (_: InterruptedException) {} }
+                        token.check()
+                    } finally { registration.close() }
+                }) { oldCallback.set(true) }
+            }
+            assertTrue(registered.await(5, TimeUnit.SECONDS))
+            InstrumentationRegistry.getInstrumentation().runOnMainSync {
+                cancellation!!.cancel()
+                tasks.run({ it.check(); "fresh" }) {
+                    if (it.getOrNull() == "fresh") freshDone.countDown()
+                }
+                cancellation!!.cancel() // Stale/double Stop must not cancel the new task.
+            }
+            assertTrue(freshDone.await(5, TimeUnit.SECONDS))
+            assertFalse(oldCallback.get())
+        } finally { released.countDown(); worker.shutdownNow() }
+    }
+
 }

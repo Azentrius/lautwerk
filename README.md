@@ -1,4 +1,4 @@
-# OpenAuto AI 0.1.7 – Sprachfunktion für OpenAI und Claude
+# OpenAuto AI 0.1.8 – Sprachfunktion für OpenAI und Claude
 
 Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
 die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
@@ -7,16 +7,18 @@ Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
 von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Neu in 0.1.7:** „Stimme und Tempo“ bietet eine gemeinsame Stimmwahl für beide
-Anbieter, drei Sprechgeschwindigkeiten und eine abbrechbare Hörprobe. Das Pixel
-meldet fünf lokale und vier Online-Stimmen. Die Auswahl bleibt app-intern gespeichert.
-Der Nutzer hat den Sprachablauf unter 0.1.6 bestätigt; die neue Stimmwahl soll den
-als unangenehm empfundenen Klang durch Vergleich mehrerer Varianten verbessern.
-75 automatisierte Prüfungen bestehen. Assistant 0.1.7-dev ist auf dem Pixel installiert;
-Lint meldet 0 Fehler und 9 Warnungen. Der Nutzer bestätigt einen deutlich besseren Klang mit der Stimmwahl.
+**Neu in 0.1.8:** Beenden bricht den einzelnen laufenden Netzwerkaufruf aktiv ab.
+Verspätete Ergebnisse und alte Abbruchsignale beeinflussen keine neue Sitzung.
+Bei ausgeschaltetem/gesperrtem Display, gemeldetem Anruf-/Kommunikationsmodus oder
+geänderten angeschlossenen Audio-Ausgabegeräten endet das Gespräch ohne automatischen Neustart.
+Die gemeinsame Stimmwahl mit Tempo und Hörprobe bleibt erhalten.
+
+90 automatisierte Prüfungen bestehen; Assistant 0.1.8-dev ist auf dem Pixel installiert.
+Lint: 0 Fehler, 9 bestehende Warnungen. Der neue Ablauf für physische Anrufe,
+Bluetooth und Displaysperre benötigt noch den manuellen Abnahmetest.
 Details: [Sprachanleitung](docs/VOICE.md) und [Testbericht](docs/BUILD_AND_TEST.md).
 
-Die **Assistenten-APK ist 0.1.7-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
+Die **Assistenten-APK ist 0.1.8-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
 dem bestätigten **0.1.2-prototype**-Stand mit Auswahl, Titel und Starten.
 Die neuen Sprachbausteine sind nur in der Assistenten-App eingebunden.
 

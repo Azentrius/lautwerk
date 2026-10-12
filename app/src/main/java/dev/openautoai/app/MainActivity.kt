@@ -269,7 +269,7 @@ internal fun MainContent(
         }
         Text("Sprachbefehle: „Wechsle zu Claude“, „Wechsle zu ChatGPT“, „Stopp“.",
             style = MaterialTheme.typography.bodySmall)
-        Text("Smartphone-Sprachtest: Nach zweimaliger Stille oder zehn Minuten endet die Sitzung. Android-Auto-Audio und Nutzung bei gesperrtem Gerät sind noch nicht bestätigt.",
+        Text("Smartphone-Sprachtest: Nach zweimaliger Stille oder zehn Minuten endet die Sitzung. Bei ausgeschaltetem Display, erkanntem Anruf oder geänderten Audiogeräten endet das Gespräch. Danach bitte erneut starten. Android-Auto-Audio ist weiterhin experimentell und nicht angebunden.",
             style = MaterialTheme.typography.bodySmall)
     }
 }

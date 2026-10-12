@@ -5,7 +5,7 @@ import dev.openautoai.core.ai.Provider
 import dev.openautoai.core.storage.Conversation
 
 fun interface Cancel { fun cancel() }
-fun interface CancellationCheck { fun check() }
+typealias CancellationCheck = dev.openautoai.core.ai.RequestCancellation
 
 /** Work runs off the UI thread; completion is delivered on the controller's thread. */
 interface VoiceTasks {

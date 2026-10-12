@@ -1,4 +1,4 @@
-# Lokale Chats und API-Schlüssel – Projektstand 0.1.7
+# Lokale Chats und API-Schlüssel – Projektstand 0.1.8
 
 Die vorhandene Speicherung aus 0.1.0–0.1.3 ist jetzt ein eigener Baustein.
 Die Smartphone-Oberfläche, die Anbieter-Brücke und der Sprachdienst verwenden
@@ -63,7 +63,7 @@ Die Verschlüsselung nutzt weiterhin den Android Keystore.
 
 ## Auf dem Pixel prüfen
 
-0.1.7-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
+0.1.8-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
 ist ein anderes Paket mit eigenem Speicher. Bei einem Signaturkonflikt nicht
 deinstallieren oder App-Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 
@@ -76,7 +76,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für die Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.7-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
+`OpenAutoAI-0.1.8-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
 Seriennummer aus `adb devices -l` verwenden.
 
 Vorhandene Chats lassen sich ohne API-Aufruf öffnen und lesen. Zum späteren
