@@ -1,5 +1,6 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.i18n.Messages
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -19,15 +20,15 @@ import dev.openautoai.settings.ModelSelectionStore
 
 class MainActivity : ComponentActivity() {
     private lateinit var home: HomeViewModel
-    private var queuedSessionId: String? = null
+    private lateinit var startGate: ConversationStartGate
     private val microphonePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        if (queuedSessionId != null) {
-            if (granted) requestNotificationPermission() else failStart("Mikrofon-Berechtigung fehlt. Es wurde keine Aufnahme gestartet.")
+        if (startGate.microphoneResult(granted)) {
+            if (granted) advanceStart() else failStart(Messages.MIC_PERMISSION.text())
         }
     }
     private val notificationPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-        // Notification permission is optional; Android still requires the foreground-service notification.
-        startQueuedConversation()
+        startGate.notificationResult() // Optional; denial still allows the foreground service.
+        advanceStart()
     }
 
     private val exportDocument = registerForActivityResult(
@@ -36,13 +37,14 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        queuedSessionId = savedInstanceState?.getString("queuedVoiceSession")
+        startGate = ViewModelProvider(this)[ConversationStartGate::class.java]
         home = ViewModelProvider(this, object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T = HomeViewModel(
                 ModelSelectionStore(applicationContext), SecretStore(applicationContext),
                 ConversationStore(applicationContext), DocumentConversationExporter(applicationContext.contentResolver)) as T
         })[HomeViewModel::class.java]
+        home.languageChanged()
         setContent {
             MaterialTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
@@ -65,57 +67,59 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onResume() { super.onResume(); window.decorView.post { advanceStart() } }
+
     override fun onStop() {
-        home.cancelStart() // A backgrounded screen must not start recording after a slow disk read.
-        home.cancelExportPreparation()
+        if (!isChangingConfigurations) {
+            home.cancelStart()
+            home.cancelExportPreparation()
+            if (startGate.sessionId != null) failStart(Messages.START_CANCELLED.text())
+        }
         super.onStop()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        outState.putString("queuedVoiceSession", queuedSessionId)
-        super.onSaveInstanceState(outState)
-    }
-
     private fun requestStart(conversation: Conversation) {
-        if (queuedSessionId != null || AppState.active) return
-        queuedSessionId = conversation.id
+        if (AppState.active || !startGate.begin(conversation.id)) return
         AppState.reportIssue(null)
-        AppState.update(true, conversation.provider, conversation.modelId, conversation.id, "Sprachstart wird vorbereitet")
-        if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
-            microphonePermission.launch(Manifest.permission.RECORD_AUDIO)
-        else requestNotificationPermission()
+        AppState.update(true, conversation.provider, conversation.modelId, conversation.id, Messages.START_PREPARING.text())
+        advanceStart()
     }
 
-    private fun requestNotificationPermission() {
-        if (queuedSessionId == null) return
-        if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
-            notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
-        else startQueuedConversation()
-    }
-
-    private fun startQueuedConversation() {
-        val id = queuedSessionId ?: return
-        queuedSessionId = null
+    private fun advanceStart() {
+        if (!::startGate.isInitialized || startGate.sessionId == null || startGate.waiting != null ||
+            !lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) return
+        val microphone = checkSelfPermission(Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
+        val notifications = Build.VERSION.SDK_INT >= 33 &&
+            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
         try {
-            startForegroundService(Intent(this, VoiceService::class.java).apply {
-                action = VoiceService.ACTION_START
-                putExtra(VoiceService.EXTRA_SESSION_ID, id)
-            })
-        } catch (_: Exception) { failStart("Sprachdienst konnte nicht starten. Bitte die App auf dem Smartphone öffnen und erneut versuchen.") }
+            if (!microphone) {
+                startGate.launched(ConversationStartGate.Permission.MICROPHONE)
+                microphonePermission.launch(Manifest.permission.RECORD_AUDIO)
+            } else if (notifications && !startGate.notificationAnswered) {
+                startGate.launched(ConversationStartGate.Permission.NOTIFICATIONS)
+                notificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                val id = startGate.take(true, microphone, notifications) ?: return
+                startForegroundService(Intent(this, VoiceService::class.java).apply {
+                    action = VoiceService.ACTION_START
+                    putExtra(VoiceService.EXTRA_SESSION_ID, id)
+                })
+            }
+        } catch (_: Exception) { startGate.launchFailed(); failStart(Messages.START_FAILED.text()) }
     }
 
     private fun failStart(message: String) {
-        queuedSessionId = null
-        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, "Gespräch beendet")
+        startGate.cancel()
+        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text())
         AppState.reportIssue(message)
     }
 
     private fun stopConversation() {
         home.cancelStart()
-        queuedSessionId = null
+        startGate.cancel()
         // Do not create an idle microphone service merely to stop it.
         stopService(Intent(this, VoiceService::class.java))
-        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, "Gespräch beendet")
+        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text())
         AppState.reportIssue(null)
     }
 }

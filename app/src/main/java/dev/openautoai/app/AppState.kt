@@ -1,5 +1,6 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.i18n.Messages
 import dev.openautoai.core.ai.Provider
 import dev.openautoai.core.ai.ModelCatalog
 
@@ -18,7 +19,7 @@ object AppState {
         private set
     var sessionId by mutableStateOf<String?>(null)
         private set
-    var status by mutableStateOf("Bereit")
+    var status by mutableStateOf(Messages.READY.text())
         private set
     var notice by mutableStateOf<String?>(null)
         private set

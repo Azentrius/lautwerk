@@ -1,5 +1,6 @@
 package dev.openautoai.app.voice
 
+import dev.openautoai.core.i18n.Messages
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import dev.openautoai.voice.Cancel
 import dev.openautoai.voice.VoiceProblem
+import dev.openautoai.core.i18n.AppLanguage
 import java.util.Locale
 
 /** Fixed-text preview only: no microphone, provider, credentials or chat access. Main thread only. */
@@ -35,7 +37,7 @@ internal class SpeechPreview(private val context: Context, private val store: Sp
         settings = store.load()
         notice = null
         val token = generation
-        timeout = Runnable { if (token == generation && !ready) { close(); notice = "Sprachausgabe antwortet nicht. Bitte erneut öffnen." } }
+        timeout = Runnable { if (token == generation && !ready) { close(); notice = Messages.PREVIEW_TIMEOUT_INIT.text() } }
             .also { main.postDelayed(it, 12_000) }
         try {
             engine = TextToSpeech(context) { status -> main.post {
@@ -43,17 +45,19 @@ internal class SpeechPreview(private val context: Context, private val store: Sp
                 timeout?.let(main::removeCallbacks); timeout = null
                 val current = engine
                 try {
-                    if (status != TextToSpeech.SUCCESS || current == null || current.setLanguage(Locale.getDefault()) < TextToSpeech.LANG_AVAILABLE) {
+                    if (status != TextToSpeech.SUCCESS || current == null || current.setLanguage(AppLanguage.locale()) < TextToSpeech.LANG_AVAILABLE) {
                         close(); notice = VoiceProblem.TTS_UNAVAILABLE.message
                     } else {
                         current.setAudioAttributes(AndroidPlaybackFocus.attributes)
+                        store.migrateLegacy(current.voices, current.defaultEngine)
+                        settings = store.load()
                         voices = AndroidSpeechSettings.available(current.voices)
                         current.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
                             override fun onStart(utteranceId: String?) = Unit
                             override fun onDone(utteranceId: String?) = finished(token, utteranceId, null)
                             @Deprecated("Required by Android's base listener")
-                            override fun onError(utteranceId: String?) = finished(token, utteranceId, "Hörprobe fehlgeschlagen. Bitte eine andere Stimme versuchen.")
-                            override fun onError(utteranceId: String?, errorCode: Int) = finished(token, utteranceId, "Hörprobe fehlgeschlagen. Bitte eine andere Stimme versuchen.")
+                            override fun onError(utteranceId: String?) = finished(token, utteranceId, Messages.PREVIEW_FAILED.text())
+                            override fun onError(utteranceId: String?, errorCode: Int) = finished(token, utteranceId, Messages.PREVIEW_FAILED.text())
                             override fun onStop(utteranceId: String?, interrupted: Boolean) = finished(token, utteranceId, null)
                         })
                         ready = true
@@ -68,10 +72,10 @@ internal class SpeechPreview(private val context: Context, private val store: Sp
         if (!ready || (voice != null && voice !in voices)) return
         store.choose(if (voice == null) null else engine?.defaultEngine, voice?.name)
         settings = store.load()
-        notice = "Stimme gespeichert – gilt für das nächste Gespräch mit OpenAI und Claude."
+        notice = Messages.VOICE_SAVED.text()
     }
 
-    fun rate(value: Float) { stop(); store.rate(value); settings = store.load(); notice = "Sprechtempo gespeichert." }
+    fun rate(value: Float) { stop(); store.rate(value); settings = store.load(); notice = Messages.RATE_SAVED.text() }
 
     fun play() {
         stop()
@@ -86,13 +90,13 @@ internal class SpeechPreview(private val context: Context, private val store: Sp
             val id = "preview-${generation}-${++sequence}"
             utterance = id
             playing = true
-            timeout = Runnable { if (utterance == id) { stop(); notice = "Die Hörprobe hat zu lange gedauert." } }
+            timeout = Runnable { if (utterance == id) { stop(); notice = Messages.PREVIEW_TIMEOUT.text() } }
                 .also { main.postDelayed(it, 20_000) }
-            if (current.speak("Hallo, ich bin OpenAuto AI. Mit dieser Stimme begleite ich dein nächstes Gespräch. Wie klingt das für dich?",
+            if (current.speak(Messages.PREVIEW_SENTENCE.text(),
                     TextToSpeech.QUEUE_FLUSH, Bundle(), id) != TextToSpeech.SUCCESS) {
-                stop(); notice = "Hörprobe konnte nicht starten."
+                stop(); notice = Messages.PREVIEW_START_FAILED.text()
             }
-        } catch (_: Exception) { stop(); notice = "Hörprobe konnte nicht starten." }
+        } catch (_: Exception) { stop(); notice = Messages.PREVIEW_START_FAILED.text() }
     }
 
     private fun finished(token: Long, id: String?, message: String?) { main.post {

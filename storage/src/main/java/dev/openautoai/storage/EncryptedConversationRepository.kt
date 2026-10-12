@@ -1,5 +1,6 @@
 package dev.openautoai.storage
 
+import dev.openautoai.core.i18n.Messages
 import android.content.Context
 import dev.openautoai.core.ai.ModelCatalog
 import dev.openautoai.core.ai.Provider
@@ -61,7 +62,7 @@ class EncryptedConversationRepository internal constructor(
     override fun create(provider: Provider, modelId: String): Conversation = synchronized(lock) {
         require(ModelCatalog.valid(provider, modelId)) { "Modell gehört nicht zum gewählten Anbieter" }
         val list = load()
-        val conversation = Conversation(UUID.randomUUID().toString(), "Neues Gespräch", provider, modelId,
+        val conversation = Conversation(UUID.randomUUID().toString(), Messages.NEW_CONVERSATION.text(), provider, modelId,
             System.currentTimeMillis(), emptyList())
         list.add(conversation)
         save(list)
