@@ -99,7 +99,7 @@ the DHU session (`adb forward tcp:5277 tcp:5277`, `desktop-head-unit.exe`): `doc
 - **Toolchain:** Gradle 8.13 (pinned wrapper checksum), AGP 8.13.2, Kotlin 2.2.20, JDK 17 (JDK 25 does
   not work with Gradle 8.13), compile/target SDK 36, Build Tools 35.0.0; minSdk 29 in `app`, else 28.
 - **Patched build tooling:** `settings.gradle.kts` lifts vulnerable libraries of the build tooling
-  (netty, Bouncy Castle, protobuf, jdom2, jose4j, commons-compress, OpenTelemetry) in the plugin
+  (netty, Bouncy Castle, protobuf, jdom2, jose4j, commons-compress, commons-lang3, OpenTelemetry) in the plugin
   classpath and every project configuration. None of them is in an APK. After an AGP or Kotlin
   upgrade, drop the entries the tooling now brings in a patched version by itself.
 - **Car App Library 1.8.0-rc01** is a deliberately pinned pre-release (Google names a security fix for
