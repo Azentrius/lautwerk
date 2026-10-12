@@ -1,9 +1,11 @@
-# Einzelne Chats als Textdatei speichern – 0.1.10
+# Einzelne Chats als Textdatei speichern – 0.1.11
 
 Der Textexport speichert einen ausgewählten Chat als lesbare UTF-8-Datei. Er enthält
 Titel, Anbieter, Modell, letzten Änderungszeitpunkt in UTC und **alle Nachrichten**
 in ihrer gespeicherten Reihenfolge. Auch ältere, in der Ansicht zunächst ausgeblendete
-Nachrichten werden exportiert. Ein alter Modellname verhindert den Export nicht.
+Nachrichten werden exportiert. Auch nach dem Öffnen über die Verlaufssuche wird
+der gesamte Chat exportiert, nicht nur passende Nachrichten. Ein alter Modellname
+verhindert den Export nicht.
 
 ## Bedienung
 

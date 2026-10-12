@@ -10,8 +10,8 @@ android {
         applicationId = "dev.openautoai.app"
         minSdk = 29
         targetSdk = 36
-        versionCode = 11
-        versionName = "0.1.10-dev"
+        versionCode = 12
+        versionName = "0.1.11-dev"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true }

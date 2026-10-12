@@ -1,4 +1,4 @@
-# OpenAI-/Claude-Adapter – Projektstand 0.1.10
+# OpenAI-/Claude-Adapter – Projektstand 0.1.11
 
 ## Verhalten und Grenzen
 

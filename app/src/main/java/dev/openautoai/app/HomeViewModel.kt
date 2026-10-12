@@ -21,6 +21,8 @@ internal enum class HomeOperation(val label: String) {
     WRITE_EXPORT("Textdatei wird gespeichert …")
 }
 
+internal data class HistoryFocus(val chatId: String, val turnIndex: Int)
+
 internal data class HomeState(
     val selection: ModelSelection,
     val sessions: List<Conversation> = emptyList(),
@@ -30,7 +32,13 @@ internal data class HomeState(
     val operation: HomeOperation? = null,
     val message: String? = null,
     val readyStart: Conversation? = null,
-    val exportPickerPending: Boolean = false
+    val exportPickerPending: Boolean = false,
+    val historyQuery: String = "",
+    val historyProvider: Provider? = null,
+    val historyMatches: List<ConversationMatch> = emptyList(),
+    val historySearching: Boolean = true,
+    val historyError: String? = null,
+    val historyFocus: HistoryFocus? = null
 ) {
     val selected: Conversation? get() = sessions.find { it.id == selectedId }
 }
@@ -40,7 +48,8 @@ internal class HomeViewModel(
     private val selections: ModelSelectionStore,
     private val credentials: CredentialStore,
     private val conversations: ConversationRepository,
-    private val exporter: ConversationExportWriter
+    private val exporter: ConversationExportWriter,
+    private val findHistory: (List<Conversation>, String, Provider?, RequestCancellation) -> List<ConversationMatch> = ConversationSearch::find
 ) : ViewModel() {
     var state by mutableStateOf(HomeState(selections.load()))
         private set
@@ -55,8 +64,11 @@ internal class HomeViewModel(
     private var reloadWanted = false
     private var closed = false
     private var exportSnapshot: Conversation? = null
+    private var historyWork: Cancel? = null
+    private var historyLaunch: Runnable? = null
+    private var historyVersion = 0L
     private val selectionObserver = selections.observe {
-        if (state.selection != it) state = state.copy(selection = it, selectedId = null, message = null)
+        if (state.selection != it) state = state.copy(selection = it, selectedId = null, historyFocus = null, message = null)
     }
 
     init { refresh() }
@@ -66,13 +78,13 @@ internal class HomeViewModel(
     fun selectProvider(provider: Provider) {
         if (!editable()) return
         selections.selectProvider(provider)
-        state = state.copy(selectedId = null, message = null)
+        state = state.copy(selectedId = null, historyFocus = null, message = null)
     }
 
     fun selectModel(selection: ModelSelection) {
         if (!editable()) return
         selections.select(selection)
-        state = state.copy(selectedId = null, message = null)
+        state = state.copy(selectedId = null, historyFocus = null, message = null)
     }
 
     fun openChat(id: String) {
@@ -80,17 +92,18 @@ internal class HomeViewModel(
         val chat = state.sessions.find { it.id == id } ?: return
         val valid = ModelCatalog.valid(chat.provider, chat.modelId)
         if (valid) selections.select(ModelSelection(chat.provider, chat.modelId))
-        state = state.copy(selectedId = id, message = if (valid) null else
+        state = state.copy(selectedId = id, historyFocus = null, message = if (valid) null else
             "Das Modell dieses Chats ist nicht mehr im Katalog. Der Verlauf bleibt erhalten.")
     }
 
-    fun newChat() { if (editable()) state = state.copy(selectedId = null, message = null) }
+    fun newChat() { if (editable()) state = state.copy(selectedId = null, historyFocus = null, message = null) }
 
     /** Coalesce refresh bursts, and discard a snapshot invalidated by a newer write/revision. */
     fun refresh() {
         if (closed) return
         readVersion++
         reloadWanted = true
+        invalidateHistory()
         loadIfNeeded()
     }
 
@@ -109,8 +122,69 @@ internal class HomeViewModel(
                 }, { error -> state.copy(loading = false,
                     archiveError = error.storageMessage("Der lokale Chatverlauf konnte nicht gelesen werden.")) })
             }
+            if (!state.loading) searchHistory()
             loadIfNeeded()
         }
+    }
+
+    fun setHistoryQuery(query: String) {
+        if (closed) return
+        val bounded = query.take(ConversationSearch.MAX_QUERY_LENGTH)
+        if (bounded == state.historyQuery) return
+        state = state.copy(historyQuery = bounded)
+        searchHistory(debounce = true)
+    }
+
+    fun setHistoryProvider(provider: Provider?) {
+        if (closed || provider == state.historyProvider) return
+        state = state.copy(historyProvider = provider)
+        searchHistory()
+    }
+
+    fun retryHistorySearch() { if (!closed) searchHistory() }
+
+    private fun invalidateHistory() {
+        historyVersion++
+        historyWork?.cancel(); historyWork = null
+        historyLaunch?.let(main::removeCallbacks); historyLaunch = null
+        state = state.copy(historyMatches = emptyList(), historySearching = true, historyError = null)
+    }
+
+    private fun searchHistory(debounce: Boolean = false) {
+        invalidateHistory()
+        if (closed || state.loading || state.archiveError != null) {
+            state = state.copy(historySearching = !closed && state.loading)
+            return
+        }
+        val token = historyVersion
+        val snapshot = state.sessions
+        val query = state.historyQuery
+        val provider = state.historyProvider
+        val launch = Runnable {
+            historyLaunch = null
+            if (closed || token != historyVersion) return@Runnable
+            historyWork = tasks.run({ cancel -> findHistory(snapshot, query, provider, cancel) }) { result ->
+                if (closed || token != historyVersion) return@run
+                historyWork = null
+                state = state.copy(historySearching = false, historyMatches = result.getOrDefault(emptyList()),
+                    historyError = if (result.isFailure) "Der Verlauf konnte nicht durchsucht werden. Bitte erneut versuchen." else null)
+            }
+        }
+        historyLaunch = launch
+        main.postDelayed(launch, if (debounce) 200L else 0L)
+    }
+
+    fun openHistoryMatch(id: String): Boolean {
+        if (!editable() || state.loading || state.archiveError != null || state.historySearching || state.historyError != null) return false
+        val match = state.historyMatches.find { it.conversation.id == id } ?: return false
+        openChat(id)
+        if (state.selectedId != id) return false
+        state = state.copy(historyFocus = match.firstMatchingTurn?.let { HistoryFocus(id, it) })
+        return true
+    }
+
+    fun finishHistoryFocus(expected: HistoryFocus) {
+        if (state.historyFocus == expected) state = state.copy(historyFocus = null)
     }
 
     private fun <T> operate(kind: HomeOperation, work: (RequestCancellation) -> T, success: (T) -> Unit): Boolean {
@@ -193,7 +267,7 @@ internal class HomeViewModel(
         if (id != state.selectedId) return false
         if (state.loading || state.archiveError != null) return false
         return operate(HomeOperation.DELETE_CHAT, { it.check(); conversations.delete(id) }) {
-            state = state.copy(selectedId = null, message = "Gespräch gelöscht")
+            state = state.copy(selectedId = null, historyFocus = null, message = "Gespräch gelöscht")
         }
     }
 
@@ -275,7 +349,9 @@ internal class HomeViewModel(
         operationVersion++
         readVersion++
         selectionObserver.close()
-        load?.cancel(); mutation?.cancel()
+        load?.cancel(); mutation?.cancel(); historyWork?.cancel()
+        historyVersion++
+        historyLaunch?.let(main::removeCallbacks)
         worker.shutdownNow()
         main.removeCallbacksAndMessages(null)
     }
