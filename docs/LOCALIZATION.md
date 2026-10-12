@@ -83,7 +83,7 @@ und hörbares englisches Vorlesen wurden nicht automatisiert ausgeführt.
 
 Der neue [Workflow](../.github/workflows/android.yml) prüft JVM-Tests, Android-Lint
 und die Debug-Builds auf Pull Requests und nach Änderungen an `main`.
-JDK 17, SDK 36 und Build Tools 35.0.0 bleiben festgelegt. Die verwendeten offiziellen
+JDK 17, SDK Platform 37 und Build Tools 36.0.0 sind festgelegt. Die verwendeten offiziellen
 Actions sind auf vollständige Git-Revisionen fixiert. Der Workflow verwendet keine
 API-Schlüssel, führt keine Live-Gespräche aus und veröffentlicht keine Anwendung.
 Testberichte werden 14 Tage aufbewahrt. Gerätetests laufen separat auf dem Pixel.

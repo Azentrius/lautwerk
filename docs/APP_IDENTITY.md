@@ -35,7 +35,7 @@ Phone-Test des Prototyps bleibt funktional und strukturell unverändert.
 
 ## Bauen und installieren
 
-Im Projektordner mit JDK 17, SDK Platform 36 und Build Tools 35.0.0:
+Im Projektordner mit JDK 17, SDK Platform 37 und Build Tools 36.0.0:
 
 ```powershell
 .\gradlew.bat :app:assembleDebug :prototype-app:assemblePhoneDebug :prototype-app:assembleDhuDebug

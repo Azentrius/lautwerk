@@ -41,7 +41,7 @@ Beobachtungen und offene Versuche. App und DHU bleiben auf 0.1.15.
 ## Schnellstart unter Windows
 
 1. Dieses Projekt in Android Studio öffnen, Gradle-JDK auf **JDK 17** stellen.
-2. SDK Platform **Android 16 / API 36** und Build Tools **35.0.0** installieren, falls sie fehlen.
+2. SDK Platform **Android 17 / API 37** und Build Tools **36.0.0** installieren, falls sie fehlen.
 3. Build-Variante `prototype-app: dhuDebug` wählen; diese APK enthält Smartphone-UI UND Auto-Service.
 4. Die Schritte in [docs/START_WINDOWS.md](docs/START_WINDOWS.md) ausführen.
 
@@ -111,12 +111,13 @@ Den jeweils bestätigten Sprachteststand beschreibt [VOICE.md](docs/VOICE.md). W
 
 ## Build-Werkzeuge
 
-Gradle 8.13 mit vollständigem Wrapper und geprüfter Distribution; AGP 8.13.2;
-Kotlin 2.2.20; JDK 17; compile/target SDK 36. Android 17 wird als Laufzeitsystem
-getestet; dafür muss dieser Prototyp keine API-37-Funktion verwenden.
+Gradle 9.8.1 mit vollständigem Wrapper und geprüfter Distribution; AGP 9.4.1 mit
+eingebauter Kotlin-Unterstützung; Kotlin 2.4.21; JDK 17; compile SDK 37, target SDK 36;
+Build Tools 36.0.0. Android 17 wird als Laufzeitsystem getestet; target SDK 37 folgt
+erst nach einem Gerätetest der Android-17-Verhaltensänderungen.
 Car App Library **1.8.0-rc01**, bewusst als Vorabversion fest angeheftet:
 Google nennt dafür einen Sicherheitsfix vom 26.08.2026. Nicht als Stable bezeichnet.
-Für den vorhandenen SDK-36-Build wird Compose-BOM 2025.08.01 verwendet; Activity 1.12.0 bleibt erhalten. Die ursprüngliche BOM 2026.09.00 verlangt SDK 37/AGP 9.1 oder neuer.
+Compose-BOM 2026.09.00 (verlangt compile SDK 37 und AGP 9.1 oder neuer); Activity 1.12.0 bleibt erhalten.
 
 Siehe [docs/BUILD_AND_TEST.md](docs/BUILD_AND_TEST.md) für tatsächlich ausgeführte
 Prüfungen und offene Grenzen, sowie [docs/CHANGES_FROM_0.1.0.md](docs/CHANGES_FROM_0.1.0.md).
@@ -140,4 +141,4 @@ Die bereits gelieferte Apache-2.0-Lizenz bleibt erhalten; siehe [LICENSE](LICENS
 - [DHU: ADB-Tunnel und Testbetrieb](https://developer.android.com/training/cars/testing/dhu)
 - [Testverteilung und Grenze von „Unbekannte Quellen“](https://developer.android.com/training/cars/testing)
 - [AndroidX Car App Release Notes](https://developer.android.com/jetpack/androidx/releases/car-app)
-- [AGP 8.13-Kompatibilität](https://developer.android.com/build/releases/agp-8-13-0-release-notes)
+- [AGP 9.4-Kompatibilität](https://developer.android.com/build/releases/agp-9-4-0-release-notes)
