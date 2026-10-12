@@ -12,6 +12,7 @@ import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import dev.openautoai.voice.*
+import dev.openautoai.core.i18n.AppLanguage
 import java.util.Locale
 
 /** Android speech services may process audio online. No raw audio is recorded or archived by this app. */
@@ -44,7 +45,11 @@ internal class AndroidVoiceAudio(
             val engine = tts
             try {
                 val problem = if (status != TextToSpeech.SUCCESS || engine == null) VoiceProblem.TTS_UNAVAILABLE
-                    else AndroidSpeechSettings.apply(engine, SpeechSettingsStore(context).load())
+                    else {
+                        val store = SpeechSettingsStore(context)
+                        store.migrateLegacy(engine.voices, engine.defaultEngine)
+                        AndroidSpeechSettings.apply(engine, store.load())
+                    }
                 if (problem != null || engine == null) {
                     complete(problem ?: VoiceProblem.TTS_UNAVAILABLE)
                 } else {
@@ -106,7 +111,7 @@ internal class AndroidVoiceAudio(
                     })
                     speech.startListening(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                         putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                        putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault().toLanguageTag())
+                        putExtra(RecognizerIntent.EXTRA_LANGUAGE, AppLanguage.locale().toLanguageTag())
                         putExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS, false)
                         putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
                     })

@@ -25,7 +25,7 @@ class HistorySearchUiTest {
         compose.setContent { MaterialTheme { MainContent(f.home, { starts++ }, {
             AppState.update(false,AppState.provider,AppState.modelId,AppState.sessionId,"Bereit")
         }) } }
-        ready(); compose.onNodeWithTag("page-Verlauf").performClick()
+        ready(); compose.onNodeWithTag("page-history").performClick()
     }
     private fun ready() { compose.waitUntil(5000) { !f.home.state.loading && !f.home.state.historySearching } }
     private fun chat(id: String, provider: Provider = Provider.OPENAI, count: Int = 0, hit: Int = -1) =
@@ -62,7 +62,7 @@ class HistorySearchUiTest {
         compose.onNodeWithTag("chat-turn-3").assertIsDisplayed()
         compose.onNodeWithTag("conversation-start").assertIsDisplayed()
         assertEquals(140,f.archive.items.single().turns.size); assertEquals(0,starts)
-        compose.onNodeWithTag("page-Verlauf").performClick(); ready()
+        compose.onNodeWithTag("page-history").performClick(); ready()
         compose.onNodeWithTag("history-search").assertTextContains("Suchfund")
     }
 

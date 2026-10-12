@@ -1,5 +1,7 @@
 package dev.openautoai.app
 
+import dev.openautoai.core.i18n.Messages
+import dev.openautoai.core.i18n.AppLanguage
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -14,11 +16,12 @@ import dev.openautoai.settings.ModelSelectionStore
 import dev.openautoai.voice.Cancel
 import java.util.concurrent.Executors
 
-internal enum class HomeOperation(val label: String) {
-    START("Gespräch wird geöffnet …"), SAVE_KEY("Schlüssel wird gespeichert …"),
-    CLEAR_KEY("Schlüssel wird entfernt …"), DELETE_CHAT("Gespräch wird gelöscht …"),
-    PREPARE_EXPORT("Export wird vorbereitet …"), PICK_EXPORT("Speicherort auswählen …"),
-    WRITE_EXPORT("Textdatei wird gespeichert …")
+internal enum class HomeOperation(private val text: Messages) {
+    START(Messages.OPENING), SAVE_KEY(Messages.KEY_SAVING),
+    CLEAR_KEY(Messages.KEY_CLEARING), DELETE_CHAT(Messages.CHAT_DELETING),
+    PREPARE_EXPORT(Messages.EXPORT_PREPARING), PICK_EXPORT(Messages.EXPORT_PICKING),
+    WRITE_EXPORT(Messages.EXPORT_WRITING);
+    val label: String get() = text.text()
 }
 
 internal data class HistoryFocus(val chatId: String, val turnIndex: Int)
@@ -71,7 +74,20 @@ internal class HomeViewModel(
         if (state.selection != it) state = state.copy(selection = it, selectedId = null, historyFocus = null, message = null)
     }
 
+    private var language = AppLanguage.locale().language
     init { refresh() }
+
+    fun languageChanged() {
+        val current = AppLanguage.locale().language
+        if (language == current) return
+        language = current
+        state = state.copy(message = null, archiveError = null, historyError = null)
+        if (!AppState.active) {
+            AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.READY.text())
+            AppState.reportIssue(null)
+        }
+        refresh()
+    }
 
     private fun editable() = !closed && !AppState.active && state.operation == null && state.readyStart == null
 
@@ -93,7 +109,7 @@ internal class HomeViewModel(
         val valid = ModelCatalog.valid(chat.provider, chat.modelId)
         if (valid) selections.select(ModelSelection(chat.provider, chat.modelId))
         state = state.copy(selectedId = id, historyFocus = null, message = if (valid) null else
-            "Das Modell dieses Chats ist nicht mehr im Katalog. Der Verlauf bleibt erhalten.")
+            Messages.RETIRED_MODEL.text())
     }
 
     fun newChat() { if (editable()) state = state.copy(selectedId = null, historyFocus = null, message = null) }
@@ -120,7 +136,7 @@ internal class HomeViewModel(
                     state.copy(sessions = chats, loading = false, archiveError = null,
                         selectedId = state.selectedId?.takeIf { id -> chats.any { it.id == id } })
                 }, { error -> state.copy(loading = false,
-                    archiveError = error.storageMessage("Der lokale Chatverlauf konnte nicht gelesen werden.")) })
+                    archiveError = error.storageMessage(Messages.ARCHIVE_FAILED.text())) })
             }
             if (!state.loading) searchHistory()
             loadIfNeeded()
@@ -167,7 +183,7 @@ internal class HomeViewModel(
                 if (closed || token != historyVersion) return@run
                 historyWork = null
                 state = state.copy(historySearching = false, historyMatches = result.getOrDefault(emptyList()),
-                    historyError = if (result.isFailure) "Der Verlauf konnte nicht durchsucht werden. Bitte erneut versuchen." else null)
+                    historyError = if (result.isFailure) Messages.SEARCH_FAILED.text() else null)
             }
         }
         historyLaunch = launch
@@ -199,11 +215,11 @@ internal class HomeViewModel(
             state = state.copy(operation = null)
             result.fold(success) { error ->
                 state = state.copy(message = error.storageMessage(when (kind) {
-                    HomeOperation.START -> "Gespräch konnte nicht geöffnet werden."
-                    HomeOperation.SAVE_KEY -> "Schlüssel konnte nicht gespeichert werden."
-                    HomeOperation.CLEAR_KEY -> "Schlüssel konnte nicht entfernt werden."
-                    HomeOperation.DELETE_CHAT -> "Gespräch konnte nicht gelöscht werden."
-                    HomeOperation.PREPARE_EXPORT -> "Export konnte nicht vorbereitet werden."
+                    HomeOperation.START -> Messages.OPEN_FAILED.text()
+                    HomeOperation.SAVE_KEY -> Messages.KEY_SAVE_FAILED.text()
+                    HomeOperation.CLEAR_KEY -> Messages.KEY_CLEAR_FAILED.text()
+                    HomeOperation.DELETE_CHAT -> Messages.DELETE_FAILED.text()
+                    HomeOperation.PREPARE_EXPORT -> Messages.EXPORT_PREPARE_FAILED.text()
                     HomeOperation.PICK_EXPORT, HomeOperation.WRITE_EXPORT -> EXPORT_FAILED
                 }))
             }
@@ -216,14 +232,14 @@ internal class HomeViewModel(
         if (secret.isBlank()) return false
         val provider = state.selection.provider
         return operate(HomeOperation.SAVE_KEY, { it.check(); credentials.save(provider, secret) }) {
-            state = state.copy(message = "Schlüssel für ${provider.displayName} verschlüsselt gespeichert")
+            state = state.copy(message = Messages.KEY_SAVED.text(provider.displayName))
         }
     }
 
     fun clearKey(): Boolean {
         val provider = state.selection.provider
         return operate(HomeOperation.CLEAR_KEY, { it.check(); credentials.clear(provider) }) {
-            state = state.copy(message = "Schlüssel für ${provider.displayName} entfernt")
+            state = state.copy(message = Messages.KEY_CLEARED.text(provider.displayName))
         }
     }
 
@@ -258,7 +274,7 @@ internal class HomeViewModel(
         if (state.operation != HomeOperation.START && state.readyStart == null) return
         operationVersion++
         mutation?.cancel(); mutation = null
-        state = state.copy(operation = null, readyStart = null, message = "Start abgebrochen")
+        state = state.copy(operation = null, readyStart = null, message = Messages.START_CANCELLED.text())
         refresh()
     }
 
@@ -267,7 +283,7 @@ internal class HomeViewModel(
         if (id != state.selectedId) return false
         if (state.loading || state.archiveError != null) return false
         return operate(HomeOperation.DELETE_CHAT, { it.check(); conversations.delete(id) }) {
-            state = state.copy(selectedId = null, historyFocus = null, message = "Gespräch gelöscht")
+            state = state.copy(selectedId = null, historyFocus = null, message = Messages.DELETED.text())
         }
     }
 
@@ -300,7 +316,7 @@ internal class HomeViewModel(
         operationVersion++
         mutation?.cancel(); mutation = null
         exportSnapshot = null
-        state = state.copy(operation = null, exportPickerPending = false, message = "Export abgebrochen")
+        state = state.copy(operation = null, exportPickerPending = false, message = Messages.EXPORT_CANCELLED.text())
         refresh()
     }
 
@@ -308,7 +324,7 @@ internal class HomeViewModel(
         if (closed || state.operation != HomeOperation.PICK_EXPORT) return
         exportSnapshot = null
         state = state.copy(operation = null, exportPickerPending = false,
-            message = "Speicherauswahl konnte nicht geöffnet werden. Bitte erneut versuchen.")
+            message = Messages.EXPORT_PICK_FAILED.text())
         refresh()
     }
 
@@ -323,7 +339,7 @@ internal class HomeViewModel(
         exportSnapshot = null
         state = state.copy(exportPickerPending = false)
         if (destination == null) {
-            state = state.copy(operation = null, message = "Export abgebrochen")
+            state = state.copy(operation = null, message = Messages.EXPORT_CANCELLED.text())
             refresh()
             return
         }
@@ -333,14 +349,14 @@ internal class HomeViewModel(
             mutation = null
             if (closed || token != operationVersion) return@run
             state = state.copy(operation = null, message = if (result.isSuccess)
-                "Textdatei gespeichert. Die exportierte Kopie ist unverschlüsselt." else EXPORT_FAILED)
+                Messages.EXPORTED.text() else EXPORT_FAILED)
             refresh()
         }
     }
 
     companion object {
-        const val EXPORT_FAILED = "Export fehlgeschlagen. Am gewählten Speicherort kann eine leere oder unvollständige Datei liegen. Bitte dort prüfen oder löschen."
-        const val EXPORT_INTERRUPTED = "Export wurde unterbrochen. Bitte erneut exportieren und eine eventuell leere Datei am gewählten Speicherort prüfen oder löschen."
+        val EXPORT_FAILED get() = Messages.EXPORT_FAILED.text()
+        val EXPORT_INTERRUPTED get() = Messages.EXPORT_INTERRUPTED.text()
     }
 
     override fun onCleared() {

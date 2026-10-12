@@ -1,5 +1,6 @@
 package dev.openautoai.voice
 
+import dev.openautoai.core.i18n.Messages
 import dev.openautoai.core.ai.*
 import dev.openautoai.core.storage.StorageFailure
 import java.util.Locale
@@ -23,13 +24,13 @@ class VoiceController(
     fun start(id: String) {
         reset()
         misses = 0
-        state = VoiceState(phase = VoicePhase.PREPARING, status = "Gespräch wird vorbereitet")
+        state = VoiceState(phase = VoicePhase.PREPARING, status = Messages.PREPARING.text())
         val token = begin(VoicePhase.PREPARING, state.status, 15_000)
         // This is a short, explicitly started session, not an always-on recognition service.
         val sessionToken = sessionGeneration
         sessionDeadline = scheduler.after(10 * 60_000L) {
             if (state.active && sessionToken == sessionGeneration)
-                stop("Die Sprachsitzung ist nach zehn Minuten beendet. Du kannst sie erneut starten.")
+                stop(Messages.SESSION_LIMIT.text())
         }
         launch(token) { backend.open(id) { result ->
             if (accept(token)) result.fold({ conversation ->
@@ -40,7 +41,7 @@ class VoiceController(
     }
 
     private fun prepare() {
-        val token = begin(VoicePhase.PREPARING, "Sprachdienste werden vorbereitet", 12_000)
+        val token = begin(VoicePhase.PREPARING, Messages.SERVICES_PREPARING.text(), 12_000)
         launch(token) { audio.prepare { problem ->
             if (accept(token)) {
                 if (problem != null) stop(problem.message) else listenAfter(250)
@@ -49,13 +50,13 @@ class VoiceController(
     }
 
     private fun listenAfter(delay: Long) {
-        val token = begin(VoicePhase.PREPARING, "Mikrofon wird vorbereitet", 5_000)
+        val token = begin(VoicePhase.PREPARING, Messages.MIC_PREPARING.text(), 5_000)
         launch(token) { scheduler.after(delay) { if (accept(token)) listen() } }
     }
 
     private fun listen() {
-        val conversation = state.conversation ?: return stop("Gespräch nicht gefunden")
-        val token = begin(VoicePhase.LISTENING, "Ich höre zu – ${conversation.provider.displayName}", 45_000)
+        val conversation = state.conversation ?: return stop(Messages.NOT_FOUND.text())
+        val token = begin(VoicePhase.LISTENING, Messages.LISTENING.text(conversation.provider.displayName), 45_000)
         launch(token) { audio.listen { result ->
             if (accept(token)) when (result) {
                 is Recognition.Text -> recognized(result.text)
@@ -75,32 +76,32 @@ class VoiceController(
         misses = 0
         val command = phrase.lowercase(Locale.ROOT).trimEnd('.', '!', '?').replace(Regex("\\s+"), " ")
         when (command) {
-            "stop", "stopp", "beenden", "gespräch beenden" -> stop()
-            "wechsle zu claude", "wechsel zu claude" -> switchProvider(Provider.CLAUDE)
-            "wechsle zu chatgpt", "wechsel zu chatgpt", "wechsle zu openai", "wechsel zu openai" -> switchProvider(Provider.OPENAI)
+            "stop", "stopp", "beenden", "gespräch beenden", "end conversation" -> stop()
+            "wechsle zu claude", "wechsel zu claude", "switch to claude" -> switchProvider(Provider.CLAUDE)
+            "wechsle zu chatgpt", "wechsel zu chatgpt", "wechsle zu openai", "wechsel zu openai", "switch to openai", "switch to chatgpt" -> switchProvider(Provider.OPENAI)
             else -> reply(phrase)
         }
     }
 
     private fun switchProvider(provider: Provider) {
-        if (state.conversation?.provider == provider) return speak("Wir sprechen bereits mit ${provider.displayName}.")
-        val token = begin(VoicePhase.PREPARING, "Anbieterwechsel wird vorbereitet", 15_000)
+        if (state.conversation?.provider == provider) return speak(Messages.ALREADY_PROVIDER.text(provider.displayName))
+        val token = begin(VoicePhase.PREPARING, Messages.SWITCH_PREPARING.text(), 15_000)
         launch(token) { backend.switchProvider(provider) { result ->
             if (accept(token)) result.fold({ conversation ->
                 state = state.copy(conversation = conversation, notice = null)
-                speak("Wir sprechen jetzt mit ${provider.displayName}. Das ist ein neues Gespräch.")
+                speak(Messages.SWITCHED_PROVIDER.text(provider.displayName))
             }, ::fail)
         } }
     }
 
     private fun reply(phrase: String) {
-        val conversation = state.conversation ?: return stop("Gespräch nicht gefunden")
-        val token = begin(VoicePhase.THINKING, "${conversation.provider.displayName} antwortet", 70_000)
+        val conversation = state.conversation ?: return stop(Messages.NOT_FOUND.text())
+        val token = begin(VoicePhase.THINKING, Messages.THINKING.text(conversation.provider.displayName), 70_000)
         launch(token) { backend.reply(conversation, phrase) { result ->
             if (accept(token)) result.fold({ response ->
                 val notice = when (response.completion) {
-                    Completion.TRUNCATED -> "Die Antwort wurde am Limit gekürzt."
-                    Completion.REFUSED -> "Der Anbieter hat diese Anfrage abgelehnt."
+                    Completion.TRUNCATED -> Messages.TRUNCATED.text()
+                    Completion.REFUSED -> Messages.REFUSED.text()
                     else -> null
                 }
                 state = state.copy(notice = notice)
@@ -110,7 +111,7 @@ class VoiceController(
     }
 
     private fun speak(text: String) {
-        val token = begin(VoicePhase.SPEAKING, "Antwort wird vorgelesen", 120_000)
+        val token = begin(VoicePhase.SPEAKING, Messages.SPEAKING.text(), 120_000)
         launch(token) { audio.speak(text) { problem ->
             if (accept(token)) {
                 if (problem != null) stop(problem.message) else listenAfter(350)
@@ -121,7 +122,7 @@ class VoiceController(
     private fun fail(error: Throwable) = stop(when (error) {
         is ChatFailure -> error.message
         is StorageFailure -> error.message
-        else -> "Das Sprachgespräch ist fehlgeschlagen. Bitte erneut starten."
+        else -> Messages.CONVERSATION_FAILED.text()
     })
 
     private fun begin(phase: VoicePhase, status: String, timeout: Long): Long {
@@ -161,7 +162,7 @@ class VoiceController(
 
     fun stop(notice: String? = null) {
         reset()
-        state = state.copy(phase = VoicePhase.STOPPED, status = "Gespräch beendet", notice = notice)
+        state = state.copy(phase = VoicePhase.STOPPED, status = Messages.ENDED.text(), notice = notice)
         changed(state)
     }
 }

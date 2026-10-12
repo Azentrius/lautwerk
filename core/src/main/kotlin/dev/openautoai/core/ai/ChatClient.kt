@@ -1,5 +1,7 @@
 package dev.openautoai.core.ai
 
+import dev.openautoai.core.i18n.Messages
+
 data class ChatMessage(val role: String, val content: String)
 
 /** A snapshot of this conversation only; callers must not mix provider histories. */
@@ -28,28 +30,29 @@ fun interface CredentialSource {
 }
 
 /** Fixed messages only. Never put provider response bodies, keys or raw causes in an exception. */
-enum class ChatError(val userMessage: String) {
-    MISSING_KEY("Bitte zuerst einen API-Schlüssel für diesen Anbieter hinterlegen."),
-    CREDENTIALS_UNAVAILABLE("Der API-Schlüssel konnte nicht gelesen werden. Bitte auf dem Smartphone prüfen."),
-    INVALID_KEY("Der API-Schlüssel enthält ungültige Zeichen. Bitte auf dem Smartphone prüfen."),
-    AUTHENTICATION("Die API-Anmeldung wurde abgelehnt. Bitte API-Schlüssel und Kontozugang prüfen."),
-    ACCESS_DENIED("Der Anbieter erlaubt diesen Zugriff nicht. Bitte Modell- und Kontoberechtigungen prüfen."),
-    NOT_FOUND("Modell oder API-Endpunkt nicht gefunden. Bitte Modellzugriff prüfen."),
-    QUOTA("API-Guthaben oder Nutzungslimit erreicht. Bitte Abrechnung und Kontolimits prüfen."),
-    RATE_LIMIT("Zu viele API-Anfragen. Bitte warten und später erneut versuchen."),
-    INVALID_REQUEST("Die Anfrage ist für diesen Anbieter nicht gültig."),
-    REQUEST_TOO_LARGE("Der Gesprächskontext ist zu groß. Bitte ein neues Gespräch beginnen."),
-    TIMEOUT("Der Anbieter hat nicht rechtzeitig geantwortet. Bitte später erneut versuchen."),
-    NETWORK("Keine Verbindung zum Anbieter. Bitte die Internetverbindung prüfen."),
-    UNAVAILABLE("Der Anbieter ist vorübergehend nicht verfügbar. Bitte später erneut versuchen."),
-    REDIRECT("Eine unerwartete API-Weiterleitung wurde nicht ausgeführt."),
-    INVALID_RESPONSE("Die Antwort des Anbieters konnte nicht verarbeitet werden."),
-    EMPTY_RESPONSE("Der Anbieter hat keine Textantwort geliefert."),
-    OUTPUT_LIMIT("Das Antwortlimit wurde erreicht, bevor eine Textantwort vorlag."),
-    INCOMPLETE_RESPONSE("Der Anbieter hat die Antwort nicht abgeschlossen."),
-    REFUSED("Der Anbieter hat diese Anfrage abgelehnt."),
-    CANCELLED("Die Anfrage wurde abgebrochen."),
-    API_ERROR("Die Anfrage beim Anbieter ist fehlgeschlagen.")
+enum class ChatError(private val text: Messages) {
+    MISSING_KEY(Messages.CHAT_MISSING_KEY),
+    CREDENTIALS_UNAVAILABLE(Messages.CHAT_CREDENTIALS_UNAVAILABLE),
+    INVALID_KEY(Messages.CHAT_INVALID_KEY),
+    AUTHENTICATION(Messages.CHAT_AUTHENTICATION),
+    ACCESS_DENIED(Messages.CHAT_ACCESS_DENIED),
+    NOT_FOUND(Messages.CHAT_NOT_FOUND),
+    QUOTA(Messages.CHAT_QUOTA),
+    RATE_LIMIT(Messages.CHAT_RATE_LIMIT),
+    INVALID_REQUEST(Messages.CHAT_INVALID_REQUEST),
+    REQUEST_TOO_LARGE(Messages.CHAT_REQUEST_TOO_LARGE),
+    TIMEOUT(Messages.CHAT_TIMEOUT),
+    NETWORK(Messages.CHAT_NETWORK),
+    UNAVAILABLE(Messages.CHAT_UNAVAILABLE),
+    REDIRECT(Messages.CHAT_REDIRECT),
+    INVALID_RESPONSE(Messages.CHAT_INVALID_RESPONSE),
+    EMPTY_RESPONSE(Messages.CHAT_EMPTY_RESPONSE),
+    OUTPUT_LIMIT(Messages.CHAT_OUTPUT_LIMIT),
+    INCOMPLETE_RESPONSE(Messages.CHAT_INCOMPLETE_RESPONSE),
+    REFUSED(Messages.CHAT_REFUSED),
+    CANCELLED(Messages.CHAT_CANCELLED),
+    API_ERROR(Messages.CHAT_API_ERROR);
+    val userMessage: String get() = text.text()
 }
 
 class ChatFailure(val kind: ChatError, val httpStatus: Int? = null) : RuntimeException(kind.userMessage)

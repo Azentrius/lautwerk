@@ -21,6 +21,30 @@ import org.junit.runner.RunWith
 /** Exercises the real template action delegate; does not prove DHU discovery. */
 @RunWith(AndroidJUnit4::class)
 class CarTemplateTest {
+    @Test fun englishTemplateKeepsTitleAndWorkingStartAction() {
+        val instrumentation=InstrumentationRegistry.getInstrumentation()
+        instrumentation.runOnMainSync {
+            val config=android.content.res.Configuration(instrumentation.targetContext.resources.configuration).apply { setLocale(java.util.Locale.ENGLISH) }
+            val localized=instrumentation.targetContext.createConfigurationContext(config)
+            val context=TestCarContext.createCarContext(localized)
+            val prefs=localized.getSharedPreferences("car_english_test",Context.MODE_PRIVATE)
+            prefs.edit().clear().commit()
+            try {
+                val screen=OpenAutoScreen(context,ModelSelectionStore(prefs))
+                val template=screen.onGetTemplate() as MessageTemplate
+                @Suppress("DEPRECATION")
+                assertEquals("OpenAuto AI",template.title.toString())
+                assertEquals("Start",template.actions.single().title.toString())
+                assertEquals("Ready for the UI test.\nChatGPT / OpenAI · GPT-5.4 mini",template.message.toString())
+                template.actions.single().onClickDelegate!!.sendClick(object:OnDoneCallback {
+                    override fun onSuccess(response:Bundleable?)=Unit
+                    override fun onFailure(response:Bundleable) { throw AssertionError("Start failed") }
+                })
+                assertEquals("Started · Test 1\nChatGPT / OpenAI · GPT-5.4 mini",(screen.onGetTemplate() as MessageTemplate).message.toString())
+            } finally { prefs.edit().clear().commit() }
+        }
+    }
+
     @Test fun observesPhoneSelectionWhileStartedAndRefreshesOnReturn() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         instrumentation.runOnMainSync {

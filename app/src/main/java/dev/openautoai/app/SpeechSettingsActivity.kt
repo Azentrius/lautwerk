@@ -10,6 +10,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.platform.LocalContext
+import dev.openautoai.core.i18n.AppLanguage
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import dev.openautoai.app.voice.SpeechPreview
@@ -36,24 +39,25 @@ private fun SpeechSettingsContent(preview: SpeechPreview, conversationActive: Bo
     LaunchedEffect(conversationActive) { if (conversationActive) preview.close() }
     val voices = preview.voices
     val selected = voices.find { it.name == preview.settings.voice }
+    val context = LocalContext.current
     fun label(voice: Voice): String {
         val number = voices.indexOf(voice) + 1
-        return "Stimme $number · ${voice.locale.getDisplayCountry(voice.locale)} · ${if (voice.isNetworkConnectionRequired) "Online" else "Auf dem Gerät"}"
+        return context.getString(R.string.voice_label, number, voice.locale.getDisplayCountry(AppLanguage.locale()), context.getString(if (voice.isNetworkConnectionRequired) R.string.online else R.string.on_device))
     }
     Column(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing)
         .verticalScroll(rememberScrollState()).padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("Stimme und Tempo", style = MaterialTheme.typography.headlineMedium)
-        Text("Für OpenAI und Claude. Änderungen gelten ab dem nächsten Gespräch.")
-        if (conversationActive) Text("Bitte zuerst das laufende Gespräch beenden.")
+        Text(stringResource(R.string.voice_settings), style = MaterialTheme.typography.headlineMedium)
+        Text(stringResource(R.string.voice_hint))
+        if (conversationActive) Text(stringResource(R.string.stop_first))
 
-        Text("Online-Stimmen können den vorgelesenen Text an den Android-Sprachdienst übertragen.", style = MaterialTheme.typography.bodySmall)
+        Text(stringResource(R.string.online_voice_hint), style = MaterialTheme.typography.bodySmall)
         Box {
             OutlinedButton(onClick = { menu = true }, enabled = preview.ready && !conversationActive, modifier = Modifier.testTag("speech-voice-picker")) {
-                Text(selected?.let(::label) ?: if (preview.settings.voice == null) "Android-Standard" else "Gespeicherte Stimme nicht verfügbar")
+                Text(selected?.let(::label) ?: if (preview.settings.voice == null) stringResource(R.string.android_default) else stringResource(R.string.voice_missing))
             }
             DropdownMenu(expanded = menu && preview.ready && !conversationActive, onDismissRequest = { menu = false },
                 modifier = Modifier.heightIn(max = 350.dp)) {
-                DropdownMenuItem(text = { Text("Android-Standard") }, onClick = { menu = false; preview.choose(null) })
+                DropdownMenuItem(text = { Text(stringResource(R.string.android_default)) }, onClick = { menu = false; preview.choose(null) })
                 voices.forEach { voice ->
                     DropdownMenuItem(text = { Text(label(voice)) }, onClick = {
                         menu = false
@@ -62,25 +66,25 @@ private fun SpeechSettingsContent(preview: SpeechPreview, conversationActive: Bo
                 }
             }
         }
-        if (preview.ready && voices.isEmpty()) Text("Keine zusätzlichen Stimmen für deine Gerätesprache gemeldet. Android-Standard bleibt auswählbar.")
-        if (!preview.ready && preview.notice == null && !conversationActive) Text("Stimmen werden geladen …")
-        Text("Sprechtempo", style = MaterialTheme.typography.titleMedium)
-        listOf(0.9f to "Etwas langsamer", 1f to "Normal", 1.1f to "Etwas schneller").forEach { (rate, title) ->
+        if (preview.ready && voices.isEmpty()) Text(stringResource(R.string.voices_empty))
+        if (!preview.ready && preview.notice == null && !conversationActive) Text(stringResource(R.string.voices_loading))
+        Text(stringResource(R.string.speech_rate), style = MaterialTheme.typography.titleMedium)
+        listOf(0.9f to stringResource(R.string.rate_slow), 1f to stringResource(R.string.rate_normal), 1.1f to stringResource(R.string.rate_fast)).forEach { (rate, title) ->
             FilterChip(selected = preview.settings.rate == rate, onClick = { preview.rate(rate) },
                 enabled = preview.ready && !conversationActive, label = { Text(title) })
         }
         Button(onClick = preview::play, enabled = preview.ready && !preview.playing && !conversationActive,
-            modifier = Modifier.fillMaxWidth()) { Text("Hörprobe abspielen") }
+            modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.preview_play)) }
         OutlinedButton(onClick = preview::stop, enabled = preview.playing,
-            modifier = Modifier.fillMaxWidth()) { Text("Hörprobe stoppen") }
-        Text("Hörprobe mit festem Beispielsatz – ohne Mikrofon oder KI-Anfrage.", style = MaterialTheme.typography.bodySmall)
+            modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.preview_stop)) }
+        Text(stringResource(R.string.preview_hint), style = MaterialTheme.typography.bodySmall)
         preview.notice?.let { Text(it) }
-        OutlinedButton(onClick = back, modifier = Modifier.fillMaxWidth()) { Text("Zurück zum Gespräch") }
+        OutlinedButton(onClick = back, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.back_conversation)) }
     }
     onlineChoice?.let { voice ->
-        AlertDialog(onDismissRequest = { onlineChoice = null }, title = { Text("Online-Stimme verwenden?") },
-            text = { Text("Der vorgelesene Text kann an deinen Android-Sprachdienst übertragen werden – auch bei Antworten von OpenAI und Claude. Dafür wird kein zusätzlicher OpenAI- oder Claude-API-Aufruf verwendet.") },
-            confirmButton = { TextButton(onClick = { if (!conversationActive) preview.choose(voice); onlineChoice = null }) { Text("Online-Stimme wählen") } },
-            dismissButton = { TextButton(onClick = { onlineChoice = null }) { Text("Abbrechen") } })
+        AlertDialog(onDismissRequest = { onlineChoice = null }, title = { Text(stringResource(R.string.online_voice_title)) },
+            text = { Text(stringResource(R.string.online_voice_warning)) },
+            confirmButton = { TextButton(onClick = { if (!conversationActive) preview.choose(voice); onlineChoice = null }) { Text(stringResource(R.string.online_voice_choose)) } },
+            dismissButton = { TextButton(onClick = { onlineChoice = null }) { Text(stringResource(R.string.cancel)) } })
     }
 }

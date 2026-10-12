@@ -1,4 +1,4 @@
-# Einzelne Chats als Textdatei speichern – 0.1.11
+# Einzelne Chats als Textdatei speichern – 0.1.12
 
 Der Textexport speichert einen ausgewählten Chat als lesbare UTF-8-Datei. Er enthält
 Titel, Anbieter, Modell, letzten Änderungszeitpunkt in UTC und **alle Nachrichten**
@@ -9,7 +9,7 @@ verhindert den Export nicht.
 
 ## Bedienung
 
-1. Unter **Verlauf** einen Chat öffnen und das Sprachgespräch gegebenenfalls beenden.
+1. Unter **Verlauf** einen Chat öffnen und das Gespräch gegebenenfalls beenden.
 2. Unter dem Chattitel auf **Als Textdatei exportieren** tippen.
 3. Den Hinweis zur unverschlüsselten Kopie lesen. **Abbrechen** belässt alles unverändert.
 4. **Speicherort wählen** öffnet Androids Speicherdialog. Vorgeschlagen wird
@@ -72,6 +72,8 @@ der vollständige Inhalt dieses getesteten Chats praktisch bestätigt. Cloud-Zie
 und Rotation während der Auswahl sind dadurch nicht bestätigt.
 
 Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt. Die DHU-Oberfläche
-0.1.2-prototype bleibt erhalten und bietet keinen Export.
+0.1.12-prototype bietet weiterhin keinen Export; Layout und Aktionen bleiben erhalten.
 
 [Bedienung](PHONE_UI.md) · [Installation](VOICE.md) · [Testbericht](BUILD_AND_TEST.md)
+
+Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).

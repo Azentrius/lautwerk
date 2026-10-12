@@ -79,6 +79,23 @@ class VoiceControllerTest {
         fun phrase(text: String) = audio.heard(Recognition.Text(text))
     }
 
+    @Test fun englishCommandsSwitchAndStopWithoutBecomingProviderRequests() {
+        val old=dev.openautoai.core.i18n.AppLanguage.preferences
+        try {
+            dev.openautoai.core.i18n.AppLanguage.preferences={listOf(java.util.Locale.ENGLISH)}
+            val f=Fixture(); f.ready()
+            assertTrue(f.controller.state.status.startsWith("Listening"))
+            f.phrase("Switch to Claude.")
+            assertEquals(listOf(Provider.CLAUDE),f.backend.switches)
+            f.backend.switched(Result.success(f.conversation(Provider.CLAUDE)))
+            assertEquals("We are now talking to Claude / Anthropic. This is a new conversation.",f.audio.spoken.last())
+            f.audio.finished(null);f.clock.advance(350)
+            f.phrase("End conversation!")
+            assertFalse(f.controller.state.active);assertEquals("Conversation ended",f.controller.state.status)
+            assertTrue(f.backend.phrases.isEmpty())
+        } finally { dev.openautoai.core.i18n.AppLanguage.preferences=old }
+    }
+
     @Test fun bothProvidersFollowListenThinkSpeakAndListenWithoutOverlap() {
         Provider.entries.forEach { provider ->
             val f = Fixture(); f.ready(provider)

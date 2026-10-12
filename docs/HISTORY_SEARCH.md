@@ -1,4 +1,4 @@
-# Chats durchsuchen und filtern – 0.1.11
+# Chats durchsuchen und filtern – 0.1.12
 
 Unter **Verlauf** lassen sich gespeicherte Chats nach Text durchsuchen und auf einen
 Anbieter eingrenzen. Der Nutzer bestätigt am 12.10.2026 nach dem Testauftrag für
@@ -18,7 +18,7 @@ Suche in älteren Nachrichten, Anbieterfilter, Öffnen eines Treffers und Zurüc
    **Treffer in Nachricht …**; die App springt zur ersten passenden Nachricht.
    Ältere Nachrichten werden dafür automatisch in der Ansicht verfügbar gemacht.
    Bei einem Treffer schon im Titel/Anbieter/Modell öffnet sich der Chat am Anfang
-   der Gesprächsansicht. Es startet kein Sprachgespräch und keine KI-Anfrage.
+   der Gesprächsansicht. Es startet kein Gespräch und keine KI-Anfrage.
 5. Über **Verlauf** zurückkehren: Suchtext und Filter bleiben für diese Sitzung erhalten.
    **Suche zurücksetzen** leert beides und zeigt wieder alle vorhandenen Chats.
 
@@ -38,7 +38,7 @@ Chats des gewählten Anbieters. Das Archiv und Nachrichtentexte bleiben unverän
   Chats**, unabhängig von Suchtext, Filter und angezeigtem Ausschnitt.
 - Löschen verwendet weiterhin die Bestätigung für die konkrete Chat-ID. Nach einer
   Archivaktualisierung wird die Suche erneut auf dem aktuellen Stand ausgeführt.
-- Die DHU-Oberfläche bleibt auf dem bestätigten Stand 0.1.2-prototype; sie bekommt
+- Die DHU-Oberfläche erhält englische Texte in 0.1.12-prototype; sie bekommt
   keine Suchoberfläche, keine neue Berechtigung und keine Sprachfunktion.
 
 ## Reaktion und Datenhaltung
@@ -74,11 +74,14 @@ Die Oberflächentests öffnen Treffer in Nachricht 4 von 140 und Nachricht 96 vo
 direkt, ohne vorheriges manuelles Einblenden oder Scrollen. Suchansicht mit erfundenen
 Chats visuell geprüft. Der Praxistest des Nutzers bestätigt die Kernbedienung.
 
-Rotation/Prozessneustart wurden für die Suche nicht als eigene End-to-End-Gerätetests
-ausgeführt. Die Lebensdauer bleibt an das vorhandene ViewModel gebunden. Anruf- und
+Activity-Neuerstellung und Sprachwechsel sind seit 0.1.12 mit behaltenem Suchtext,
+Filter und älterem Treffer geprüft. Ein vollständiger Prozessabbruch wurde nicht
+als End-to-End-Gerätetest ausgeführt. Die Lebensdauer bleibt an das ViewModel gebunden. Anruf- und
 Headset-/Bluetooth-Tests bleiben auf Nutzerwunsch ausdrücklich zurückgestellt.
 
 Grundlagen: [Compose-Listen und Scrollposition](https://developer.android.com/develop/ui/compose/lists#controlling-scroll-position)
 und [LaunchedEffect](https://developer.android.com/develop/ui/compose/side-effects#launchedeffect).
 
 [Bedienung](PHONE_UI.md) · [Installation](VOICE.md) · [Testbericht](BUILD_AND_TEST.md)
+
+Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).

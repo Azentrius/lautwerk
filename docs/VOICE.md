@@ -1,4 +1,4 @@
-# Smartphone-Sprachfunktion – 0.1.11
+# Smartphone-Sprachfunktion – 0.1.12
 
 OpenAI und Claude verwenden jetzt denselben getesteten Gesprächsablauf:
 Android erkennt die Sprache, der gewählte Anbieter verarbeitet den erkannten
@@ -58,7 +58,7 @@ und [Voice-Metadaten](https://developer.android.com/reference/android/speech/tts
 2. Unter **„Einstellungen“** Anbieter und Modell auswählen. Den eigenen API-Schlüssel ausschließlich
    auf dem Smartphone eintragen und speichern, nicht in Git oder einen Chat.
    Ein vorhandener Schlüssel bleibt gespeichert, obwohl das Eingabefeld leer ist.
-3. Unten auf „Sprachgespräch starten“ tippen. Der Knopf bleibt beim Scrollen sichtbar. Mikrofon freigeben; Android fragt auf
+3. Unten auf „Gespräch starten“ tippen. Der Knopf bleibt beim Scrollen sichtbar. Mikrofon freigeben; Android fragt auf
    neueren Versionen auch nach Benachrichtigungen. Eine abgelehnte Mikrofonfreigabe
    verhindert die Aufnahme. Ohne Benachrichtigungsfreigabe bleibt Beenden in der App möglich.
 4. Auf **„Ich höre zu“** warten und eine kurze Frage stellen, etwa „Sag mir in
@@ -224,7 +224,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
 ```
 
-Für die Download-APK den Pfad auf `OpenAutoAI-0.1.11-assistant-debug.apk` ändern.
+Für die Download-APK den Pfad auf `OpenAutoAI-0.1.12-assistant-debug.apk` ändern.
 Bei anderen Geräten die Seriennummer ersetzen. Bei abweichender Signatur nicht
 deinstallieren oder Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 Die bestehenden [DHU-Schritte](START_WINDOWS.md) bleiben gültig.
@@ -249,15 +249,11 @@ Wiedergabe anzufordern und danach abzugeben:
 
 ## Teststand und Grenzen
 
-**78 automatisierte Prüfungen wurden für 0.1.11 ausgeführt und bestanden:**
-53 Assistant-Gerätetests, 7 DHU/Auswahl und 18 Core-JVM-Prüfungen. 0.1.11-dev /
-Code 12 ist als Update auf dem Pixel installiert. Die Erweiterung betrifft die
-[Verlaufssuche](HISTORY_SEARCH.md), nicht Audio oder API-Adapter. Der Nutzer bestätigt
-die Suche und Treffer-Navigation; der lokale Textexport ist seit 0.1.10 bestätigt. Die 64 JVM-Prüfungen
-der unveränderten Anbieter-/Sprachmodule bestanden zuletzt unter 0.1.8 und wurden
-hier nicht wiederholt.
-Keine hörbare Ausgabe, Mikrofonaufnahme oder echte KI-Anfrage wird automatisiert
-gestartet; persönliche Daten und gewählte Stimme werden nicht verändert.
+**157 verschiedene automatisierte Prüfungen bestehen für 0.1.12:**
+22 Core-JVM, 21 Anbieter-JVM, 45 Gesprächs-JVM, 61 Assistant-Gerätetests und
+8 DHU-/Auswahltests. Assistant 0.1.12-dev / Code 13 ist installiert. Deutsch/Englisch,
+Startabbruch und Neuerstellung sind geprüft. Der Nutzer bestätigt am 12.10.2026
+für 0.1.12: „Funktioniert bei beiden einwandfrei.“ Deutsch/Englisch sind ebenfalls bestätigt.
 
 Der Nutzer bestätigte Erkennung, Vorlesen und Beenden für beide Anbieter unter
 0.1.6 und einen deutlich besseren Klang mit der Stimmwahl in 0.1.7. Am 12.10.2026
@@ -265,6 +261,8 @@ bestätigt er für 0.1.8 Stoppen und Neustarten per Schaltfläche sowie Beenden 
 Display-aus für OpenAI und Claude. Anruf- und Headset-/Bluetooth-Tests sind
 auf Wunsch des Nutzers zurückgestellt und bleiben ungeprüft;
 die Rückmeldung bestätigt nicht jede mögliche zeitliche Überschneidung separat.
-Die Bedienung mit realen Gesprächen in der neuen 0.1.9-Oberfläche ist noch nicht
-manuell bestätigt. Android-Auto-Audio und reale Fahrzeugnutzung sind nicht bestätigt.
-Die DHU-Oberfläche bleibt bei 0.1.2-prototype. Details: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+Die aktuelle Smartphone-Bedienung wurde unter 0.1.12 mit realen Gesprächen
+für beide Anbieter bestätigt. Android-Auto-Audio und reale Fahrzeugnutzung sind nicht bestätigt.
+Die DHU-Oberfläche bleibt funktional erhalten und erhält englische Texte in 0.1.12-prototype. Details: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+
+Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).

@@ -1,4 +1,4 @@
-# OpenAI-/Claude-Adapter – Projektstand 0.1.11
+# OpenAI-/Claude-Adapter – Projektstand 0.1.12
 
 ## Verhalten und Grenzen
 
@@ -98,7 +98,7 @@ keinen Modellzugriff und keinen erfolgreichen Voice-End-to-End-Ablauf.
    DHU-Test weiterhin `dev.openautoai.prototype.dhu` heißt. Beide tragen derzeit
    den Anzeigenamen OpenAuto AI; im Zweifel per ADB gezielt öffnen (siehe unten).
 2. Auf dem Smartphone unter „Einstellungen“ Anbieter und Modell wählen. Einen eigenen API-Schlüssel
-   ausschließlich dort eingeben. Beim Start eines Sprachgesprächs werden Mikrofon
+   ausschließlich dort eingeben. Beim Start eines Gesprächs werden Mikrofon
    und echte API-Nutzung aktiv; dabei können die normalen API-Kosten entstehen.
 3. Eine kurze Frage stellen. Antwort, Verlauf, Stoppen und eventuelle Hinweise prüfen.
 4. Gespräch beenden. Den anderen Anbieter separat wählen und testen. Vorhandene
@@ -123,3 +123,5 @@ Für das Download-APK den Installationspfad durch den vollständigen Pfad zu
 da das gespeicherte Daten löschen würde; denselben Debug-Schlüssel verwenden.
 
 Die bestehenden [DHU-Schritte](START_WINDOWS.md) bleiben gültig.
+
+Seit 0.1.12: [Deutsch/Englisch und Wiederaufnahme](LOCALIZATION.md).

@@ -1,0 +1,48 @@
+name: Android build and JVM tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: android-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@07d1f8453baaff67fb503883367f8b13e6158a54 # v6
+      - name: Install the pinned Android SDK components
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;35.0.0"'
+      - name: Test, lint and build both phone variants and the DHU prototype
+        run: >-
+          bash ./gradlew --no-daemon :core:test :providers:test :voice:test
+          :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest
+          :prototype-app:assemblePhoneDebug :prototype-app:assembleDhuDebug
+          :prototype-app:assembleDhuDebugAndroidTest
+      - name: Preserve test and lint reports
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: android-reports
+          retention-days: 14
+          path: |
+            core/build/reports/tests/
+            providers/build/reports/tests/
+            voice/build/reports/tests/
+            app/build/reports/lint-results-debug.*
+# Device/DHU/audio checks run separately on the Pixel; no secrets or live API calls in CI.
