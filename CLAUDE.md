@@ -31,7 +31,7 @@ The same in every Azentrius repository.
   squash-merged once the `test` check is green; the branch is deleted afterwards. The PR title becomes
   the commit on `main`: short, imperative, English, without version numbers.
 - **Authorship.** Commits on `main` are authored by the maintainer (the squash merge takes care of
-  that). AI help is credited with a `Co-Authored-By:` trailer, never as the author.
+  that). Commits, pull requests and files carry no co-author trailers and no “generated with” lines.
 
 Existing German docs (README.md, ROADMAP.md, docs/) are translated once the open feature stack is merged; new and changed docs are written in English from now on.
 
