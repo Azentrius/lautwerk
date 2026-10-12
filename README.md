@@ -1,4 +1,4 @@
-# OpenAuto AI 0.1.13 – Sprachfunktion für OpenAI und Claude
+# OpenAuto AI 0.1.14 – Android-Auto-Design
 
 Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
 die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
@@ -7,25 +7,33 @@ Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
 von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Neu in 0.1.13:** Die Smartphone-Oberfläche verwendet das freigegebene
-Azentrius-Design mit heller/dunkler Darstellung, DM Sans, gelieferten Icons,
-Nachrichtenblasen, Optionsfeldern für Stimmen und getrennten Gesprächs-/Exportlabels.
-Reiter passen ihre Anordnung an den gemessenen Platz und die Systemschrift an.
-Deutsch/Englisch, Chat-/Schlüsselspeicherung, Anbieter und Sprachablauf bleiben erhalten.
+**Neu in 0.1.14:** Die experimentelle DHU-Oberfläche fordert die freigegebenen
+Azentrius-Farben für „Starten“ an. MessageTemplate, Titel, App-Symbol, Texte und
+Testzähler bleiben erhalten. Die Umsetzung 0.1.14 basiert auf Design-Commit `eb827c8`.
+Die aktuelle [Design-Referenz](design/azentrius/README.md) ist auf `9ed4032` aktualisiert,
+einschließlich Host-Präzisierungen und neuem App-Symbol. Dies ändert die geprüfte
+App-Version 0.1.14 nicht; das neue Symbol ist noch nicht in die App eingebunden.
+Der Android-Auto-Host entscheidet über die tatsächliche Darstellung.
 
-169 verschiedene automatisierte Prüfungen bestehen: 88 JVM-Prüfungen,
-73 Assistant-Gerätetests und 8 DHU-/Auswahltests. Lint: 0 Fehler, 30 Warnungen,
-1 Hinweis. Helles/dunkles Thema und große Schrift wurden mit Testdaten geprüft.
-Der Nutzer bestätigt: „Darstellung und Bedienung passen“.
-Anruf- und Headset-/Bluetooth-Praxistests bleiben zurückgestellt.
+DHU-Debug und Test-APK bauen erfolgreich; GitHub-CI für den Implementierungsstand
+ist erfolgreich, DHU-Lint meldet 0 Fehler und 6 Warnungen.
+**0.1.14 ist auf dem Pixel installiert; alle 11 Prototype-Gerätetests bestehen.**
+64 DHU-Kombinationen aus vier Formaten, Deutsch/Englisch, Tag/Nacht, beiden
+Anbietern und Touch/Rotary sind geprüft; englischer Fallback bei Französisch ebenfalls.
+Ausgangsversion und Update bestehen sechs Starts ohne Reset. Der Host zeigt die
+Startaktion hellblau statt Gold/Bronze; Kontrast 8,47–8,98:1 gegenüber 8,25:1 vorher.
+Live-Auswahl und vollständige Texte bleiben erhalten. Host-Car-API 8 und alle
+Umgebungsdaten sind im Testbericht erfasst. Anruf-/Headset-Tests bleiben zurückgestellt.
 
-Die **Assistenten-APK ist 0.1.13-dev / Code 14**. Die **DHU-/Phone-Testvariante
-bleibt 0.1.12-prototype / Code 4**; ihr Quellcode und Template wurden nicht geändert.
-Voice bleibt ausschließlich in der Assistenten-App.
+Die **DHU-APK ist 0.1.14-prototype / Code 5**. Die Assistenten-App bleibt
+**0.1.13-dev / Code 14**, die Phone-Vergleichsvariante **0.1.12-prototype / Code 4**.
+Das bestätigte Smartphone-Design bleibt erhalten. Voice bleibt ausschließlich
+in der Assistenten-App. Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt.
 
-Details: [Design-System und Update](docs/DESIGN_SYSTEM.md),
-[Sprache und Wiederaufnahme](docs/LOCALIZATION.md), [Verlaufssuche](docs/HISTORY_SEARCH.md),
-[Textexport](docs/CHAT_EXPORT.md), [Testbericht](docs/BUILD_AND_TEST.md).
+Details: [Auto-Design und Installation](docs/ANDROID_AUTO_DESIGN.md),
+[Testbericht mit A1–A11](docs/BUILD_AND_TEST.md),
+[Smartphone-Design](docs/DESIGN_SYSTEM.md),
+[Sprache und Wiederaufnahme](docs/LOCALIZATION.md).
 
 ## Schnellstart unter Windows
 

@@ -1,0 +1,59 @@
+<!-- @dsCard height=288 -->
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Azentrius</title>
+<style>
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--bg-page); color: var(--text); overflow: hidden; }
+  .cover { position: relative; height: 288px; overflow: hidden; }
+  .art { position: absolute; top: 0; left: 480px; width: 480px; height: 288px; overflow: hidden; }
+  .art svg { display: block; width: 480px; height: 288px; }
+  .gold { fill: var(--brand-gold); }
+  .deep { fill: var(--text); }
+  .act { fill: var(--primary); }
+  .cut { fill: var(--bg-page); }
+  .words { position: absolute; left: var(--space-lg); bottom: var(--space-lg); max-width: 440px; }
+  .name { margin: 0; font-family: var(--font-brand); font-weight: 400; font-size: 88px; line-height: .92; letter-spacing: .005em; color: var(--text); }
+  .name span { color: var(--signature); }
+  .tag { margin: var(--space-sm) 0 0 3px; font-family: var(--font-text); font-size: 14px; line-height: 20px; color: var(--text-subtle); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="0 0 480 288" width="480" height="288">
+<!--
+  blocks      brand-gold 168×288 bled off the top (the brand, largest) · text 200×192 bled off the right (the host's ink: dark on light, paper on dark) · primary 88×36 pill (a button: blue in Cockpit, gold or ink at home) — ≈30% of 960×288; no status colour, gold is never a status
+  arrangement one tall gold slab with satellites; bottoms on one line space-lg above the edge, space-md gutters
+  pattern     pills, from "Alles Bedienbare ist eine Pille": space-sm-tall pills at a space-lg pitch in brand-gold, thinning upward between slab and ink; three cut into the ink block in bg-page
+  scales      sides in space-sm multiples; gutters space-md; pitch space-lg; slab and ink corners radius-medium; every pill rx = half its height (radius-pill)
+-->
+<rect class="gold" x="24" y="-24" width="168" height="288" rx="16"/>
+<rect class="deep" x="304" y="72" width="200" height="192" rx="16"/>
+<rect class="act" x="208" y="228" width="88" height="36" rx="18"/>
+<rect class="gold" x="208" y="192" width="24" height="8" rx="4"/>
+<rect class="gold" x="240" y="192" width="48" height="8" rx="4"/>
+<rect class="gold" x="208" y="168" width="56" height="8" rx="4"/>
+<rect class="gold" x="272" y="168" width="16" height="8" rx="4"/>
+<rect class="gold" x="208" y="144" width="32" height="8" rx="4"/>
+<rect class="gold" x="248" y="144" width="40" height="8" rx="4"/>
+<rect class="gold" x="216" y="120" width="48" height="8" rx="4"/>
+<rect class="gold" x="208" y="96" width="24" height="8" rx="4"/>
+<rect class="gold" x="248" y="96" width="24" height="8" rx="4"/>
+<rect class="gold" x="224" y="72" width="32" height="8" rx="4"/>
+<rect class="gold" x="216" y="48" width="16" height="8" rx="4"/>
+<rect class="gold" x="248" y="24" width="16" height="8" rx="4"/>
+<rect class="cut" x="328" y="216" width="64" height="8" rx="4"/>
+<rect class="cut" x="400" y="216" width="40" height="8" rx="4"/>
+<rect class="cut" x="328" y="240" width="96" height="8" rx="4"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Azentrius<span>.</span></h1>
+<p class="tag">Zu Gast nativ, zu Hause Azentrius.</p>
+</div>
+</div>
+</body>
+</html>
