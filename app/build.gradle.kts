@@ -10,8 +10,8 @@ android {
         applicationId = "dev.openautoai.app"
         minSdk = 29
         targetSdk = 36
-        versionCode = 5
-        versionName = "0.1.4-dev"
+        versionCode = 9
+        versionName = "0.1.8-dev"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true }
@@ -32,6 +32,7 @@ dependencies {
     implementation(project(":settings"))
     implementation(project(":providers"))
     implementation(project(":storage"))
+    implementation(project(":voice"))
     implementation(platform("androidx.compose:compose-bom:2025.08.01"))
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.foundation:foundation")

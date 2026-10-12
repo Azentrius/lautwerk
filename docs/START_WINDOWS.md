@@ -1,8 +1,8 @@
 # Windows: Bauen, Installieren und DHU prüfen
 
-Projektstand 0.1.4: Die DHU-/Phone-Oberfläche bleibt auf 0.1.2-prototype.
-Die neue Assistenten-App 0.1.4-dev ist separat; ihre Installation und der noch
-offene echte API-/Sprachtest stehen in [PROVIDER_ADAPTERS.md](PROVIDER_ADAPTERS.md).
+Projektstand 0.1.8: Die DHU-/Phone-Oberfläche bleibt auf 0.1.2-prototype.
+Die neue Assistenten-App 0.1.8-dev ist separat; ihre Installation und der
+praktische API-/Sprachtest stehen in [VOICE.md](VOICE.md).
 
 ## 1. Projekt bauen
 
@@ -169,5 +169,5 @@ wählen oder übrige Testgeräte trennen.
 Dieses Modul trägt weiterhin das ursprüngliche Paket `dev.openautoai.app`.
 Es wurde für den DHU-Sichtbarkeitstest nicht mit dem Car-Service verbunden.
 Lokale Speicherung, Keystore und Fehlerfälle sind mit isolierten Testdaten geprüft;
-Details in [LOCAL_STORAGE.md](LOCAL_STORAGE.md). Echte API-/Sprach-End-to-End-Tests
-bleiben ein späterer Schritt.
+Details in [LOCAL_STORAGE.md](LOCAL_STORAGE.md). Anleitung und bestätigter Stand
+der neuen Sprachfunktion stehen in [VOICE.md](VOICE.md).

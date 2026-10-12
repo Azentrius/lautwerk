@@ -1,22 +1,27 @@
-# OpenAuto AI 0.1.4 – KI-Auswahl, Anbieter und lokale Speicherung
+# OpenAuto AI 0.1.8 – Sprachfunktion für OpenAI und Claude
 
-Fortsetzung des gelieferten Quellcodes 0.1.0 und des bestätigten DHU-Prototyps.
-OpenAI und Claude teilen einen Anbieter-/Modellkatalog und eine Chat-Schnittstelle.
-Die vorhandenen lokalen Chats und API-Schlüssel sind jetzt in einem eigenen
-Speichermodul gekapselt: mit gemeinsamen Sperren, geprüftem Schreiben und
-Fehlerhinweisen bei unlesbaren Daten. Bestehende Formate und Schlüssel bleiben erhalten.
+Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
+die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
+Android-Spracherkennung, vorhandener Text-Adapter und Android-Sprachausgabe.
+Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
+von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
+bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Teststand 0.1.4:** Alle drei APKs gebaut; 19 JVM-Tests und 26 Gerätetests bestanden.
-Android-Lint: 0 Fehler (Assistant: 8 Warnungen; Speicherung: 3; DHU: 6).
-Getestet wurden lokale Speicherung, simulierte API-Antworten und die Oberflächen;
-kein echter API-Aufruf und kein vollständiger Sprachtest mit einem API-Konto.
-Siehe [Testbericht](docs/BUILD_AND_TEST.md), [lokale Speicherung](docs/LOCAL_STORAGE.md)
-und [Anbieter-Anbindung](docs/PROVIDER_ADAPTERS.md).
+**Neu in 0.1.8:** Beenden bricht den einzelnen laufenden Netzwerkaufruf aktiv ab.
+Verspätete Ergebnisse und alte Abbruchsignale beeinflussen keine neue Sitzung.
+Bei ausgeschaltetem/gesperrtem Display, gemeldetem Anruf-/Kommunikationsmodus oder
+geänderten angeschlossenen Audio-Ausgabegeräten endet das Gespräch ohne automatischen Neustart.
+Die gemeinsame Stimmwahl mit Tempo und Hörprobe bleibt erhalten.
 
-Die **Assistenten-APK ist 0.1.4-dev**. Die Oberflächen von `prototype-app` bleiben
-auf dem funktionierenden **0.1.2-prototype**-Stand: Auswahl, Titel und Starten.
-Der Nutzer hat diese Auswahl und Starten bereits im echten DHU bestätigt.
-Netzwerk- und Speichermodul sind ausschließlich in `app` eingebunden.
+90 automatisierte Prüfungen bestehen; Assistant 0.1.8-dev ist auf dem Pixel installiert.
+Lint: 0 Fehler, 9 bestehende Warnungen. Der Nutzer bestätigt Stoppen/Neustarten
+per Schaltfläche und Beenden bei Display-aus für beide Anbieter. Die manuellen
+Anruf- und Bluetooth-/Headset-Tests sind auf Nutzerwunsch zurückgestellt und bleiben ungeprüft.
+Details: [Sprachanleitung](docs/VOICE.md) und [Testbericht](docs/BUILD_AND_TEST.md).
+
+Die **Assistenten-APK ist 0.1.8-dev**. Die DHU-/Phone-Testoberflächen bleiben auf
+dem bestätigten **0.1.2-prototype**-Stand mit Auswahl, Titel und Starten.
+Die neuen Sprachbausteine sind nur in der Assistenten-App eingebunden.
 
 ## Schnellstart unter Windows
 
@@ -75,16 +80,18 @@ offizieller Verteilungsweg, aber keine Zusage der Kategoriezulässigkeit.
 - `storage`: verschlüsselte Chats und Zugangsdaten, prozessweite Sperren, feste Fehler und kompatibles Archivformat.
 - `settings`: app-private Speicherung der Auswahl, pro Anbieter ein Modell,
   Beobachtung von Änderungen während der UI-Lebensdauer. Keine Schlüssel/Chatdaten.
-- `app`: fortgeführte Compose-/Voice-App mit gemeinsamem Katalog und Auswahlstore.
+- `voice`: gemeinsame Gesprächssteuerung, Worker-/Audio-Schnittstellen, Archiv-/Anbieteranbindung und TTS-Textaufteilung.
+- `app`: Android-Sprachadapter, Mikrofon-Vordergrunddienst und fortgeführte Compose-App mit gemeinsamem Katalog und Auswahlstore.
   Die Namen `OPENAI`/`CLAUDE`, Schlüsselkennungen und Archivformate bleiben erhalten.
 - `car-ui`: bestehender Car-App-Service mit Hostprüfung, MessageTemplate,
   Starten-Aktion und aktueller Auswahl als Text.
 - `prototype-app`: Smartphone-Auswahl und zwei Testvarianten; keine API-/Audio-Aufrufe.
 
-Weitere Arbeit: Voice-Schnittstelle, Speicherzugriff im Hintergrund sowie echte, kontrollierte API-/Sprachtests.
+Weitere Arbeit: Sprachablauf mit echten Konten praktisch prüfen, Audio-Routing testen,
+sofortigen Netzwerkabbruch und Hintergrundzugriff auch in der übrigen Speicher-UI ergänzen.
 Ein Anbieterwechsel im bisherigen VoiceService verwendet jetzt das pro Anbieter
 gemerkte Modell und beginnt weiterhin einen neuen Chat ohne fremden Verlauf.
-API-/Voice-End-to-End wurde dabei nicht getestet. Einzelheiten: [ROADMAP.md](ROADMAP.md).
+Den jeweils bestätigten Sprachteststand beschreibt [VOICE.md](docs/VOICE.md). Weitere Planung: [ROADMAP.md](ROADMAP.md).
 
 ## Build-Werkzeuge
 

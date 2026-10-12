@@ -10,7 +10,8 @@ internal class ClaudeAdapter : ProviderAdapter {
         JSONObject().put("model", request.selection.modelId)
             .put("system", VOICE_INSTRUCTIONS)
             .put("messages", request.messagesJson())
-            .put("max_tokens", OUTPUT_TOKENS).toString()
+            .put("max_tokens", OUTPUT_TOKENS).toString(),
+        request.cancellation
     )
 
     override fun parse(response: JSONObject): ChatReply {
