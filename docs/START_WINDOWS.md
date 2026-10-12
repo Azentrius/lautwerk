@@ -11,8 +11,8 @@ mit Installationsschritten steht in [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md).
 
 Android Studio: Projektordner öffnen. Unter Settings > Build, Execution,
 Deployment > Build Tools > Gradle ein installiertes **JDK 17** wählen.
-Dieses Projekt nutzt Gradle 8.13; das auf diesem PC ebenfalls vorhandene
-JDK 25 ist für diese Kombination nicht geeignet. Der vorgefundene JAVA_HOME-Wert
+Dieses Projekt nutzt Gradle 9.8.1 und AGP 9.4.1 und wird mit JDK 17 gebaut und geprüft;
+das auf diesem PC ebenfalls vorhandene JDK 25 ist dafür nicht erprobt. Der vorgefundene JAVA_HOME-Wert
 zeigte auf ein nicht vorhandenes JDK-Verzeichnis und wurde nicht global geändert.
 
 PowerShell auf diesem PC:
@@ -25,8 +25,8 @@ $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 ```
 
 Andere Rechner: JAVA_HOME auf das dort installierte JDK 17 und ANDROID_HOME
-auf den dortigen Android-SDK-Ordner setzen. SDK API 36 und Build Tools 35.0.0
-werden benötigt. Der erste Build lädt öffentliche Maven-Abhängigkeiten.
+auf den dortigen Android-SDK-Ordner setzen. SDK Platform 37 (Android 17) und
+Build Tools 36.0.0 werden benötigt. Der erste Build lädt öffentliche Maven-Abhängigkeiten.
 
 Das wichtigste APK liegt anschließend hier:
 `prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk`.

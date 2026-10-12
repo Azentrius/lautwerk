@@ -1,10 +1,9 @@
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
 }
 android {
     namespace = "dev.openautoai.settings"
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig { minSdk = 28 }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

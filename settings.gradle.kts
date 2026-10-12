@@ -25,15 +25,12 @@ fun isOlder(version: String, than: String): Boolean {
 fun patchedToolingVersion(group: String, name: String, version: String?): String? {
     if (version.isNullOrEmpty()) return null
     val patched = when {
-        group == "io.netty" && version.startsWith("4.1.") -> "4.1.137.Final"
         group == "org.bouncycastle" && name.endsWith("-jdk18on") -> "1.85"
         group == "com.google.protobuf" && version.startsWith("3.") &&
             name in setOf("protobuf-java", "protobuf-java-util", "protobuf-kotlin") -> "3.25.5"
         group == "org.jdom" && name == "jdom2" -> "2.0.6.1"
         group == "org.bitbucket.b_c" && name == "jose4j" -> "0.9.6"
-        group == "org.apache.commons" && name == "commons-compress" -> "1.26.0"
-        group == "org.apache.commons" && name == "commons-lang3" -> "3.18.0" // comes with commons-compress 1.26
-        group == "io.opentelemetry" && name in setOf("opentelemetry-api", "opentelemetry-context") -> "1.62.0"
+        group == "org.apache.commons" && name == "commons-lang3" -> "3.18.0" // comes with commons-compress
         else -> return null
     }
     return if (isOlder(version, patched)) patched else null

@@ -17,7 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.unit.dp
 import dev.openautoai.core.i18n.AppLanguage
 import dev.openautoai.app.design.*
@@ -60,10 +60,10 @@ internal data class VoiceOption(val id:String?,val title:String,val description:
 
 @Composable private fun SpeechSettingsContent(preview:SpeechPreview,conversationActive:Boolean,back:()->Unit) {
     LaunchedEffect(conversationActive) { if(conversationActive)preview.close() }
-    val context=LocalContext.current
+    val resources=LocalResources.current
     val options=listOf(VoiceOption(null,stringResource(R.string.android_default)))+preview.voices.mapIndexed { index,voice ->
-        VoiceOption(voice.name,context.getString(R.string.az_voice_name,index+1,voice.locale.getDisplayCountry(AppLanguage.locale())),
-            context.getString(if(voice.isNetworkConnectionRequired)R.string.online else R.string.on_device),voice.isNetworkConnectionRequired)
+        VoiceOption(voice.name,resources.getString(R.string.az_voice_name,index+1,voice.locale.getDisplayCountry(AppLanguage.locale())),
+            resources.getString(if(voice.isNetworkConnectionRequired)R.string.online else R.string.on_device),voice.isNetworkConnectionRequired)
     }
     LazyColumn(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing).testTag("speech-list"),
         contentPadding=PaddingValues(Az.inset),verticalArrangement=Arrangement.spacedBy(16.dp)) {

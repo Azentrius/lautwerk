@@ -1,11 +1,10 @@
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
 }
 
 android {
     namespace = "dev.openautoai.prototype"
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         applicationId = "dev.openautoai.prototype"
         minSdk = 28
@@ -48,9 +47,9 @@ dependencies {
     implementation(project(":settings"))
     implementation(project(":core"))
     "dhuImplementation"(project(":car-ui"))
-    androidTestImplementation("androidx.test:core:1.6.1")
-    androidTestImplementation("androidx.test:runner:1.6.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test:core:1.7.0")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
     "androidTestDhuImplementation"("androidx.car.app:app-testing:1.8.0-rc01") {
         // Device tests must not load Robolectric service providers.
         exclude(group = "org.robolectric")

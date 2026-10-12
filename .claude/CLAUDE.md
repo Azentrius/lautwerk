@@ -86,27 +86,31 @@ the DHU session (`adb forward tcp:5277 tcp:5277`, `desktop-head-unit.exe`): `doc
 
 ## Releases and the repository
 
-- The version lives in `versionName` (and `versionCode`) in `app/build.gradle.kts`: `0.1.3-dev` / 4.
-  The DHU test app has its own `versionName` in `prototype-app/build.gradle.kts` (`0.1.2-prototype` / 3),
-  raised only when that app changes.
+- The version lives in `versionName` (and `versionCode`) in `app/build.gradle.kts`: `0.1.15-dev` / 15.
+  The DHU test app has its own `versionName` in `prototype-app/build.gradle.kts` (`0.1.15-prototype`,
+  `versionCode` 5 for `phone` and 6 for `dhu`), raised only when that app changes.
 - Raise version and `versionCode` and add the `CHANGELOG.md` section in the same pull request. Tags are
   `vX.Y.Z`; there is no release workflow yet, so releases are tagged by the maintainer until one exists.
-- CI: `.github/workflows/android.yml`, job `test` (JVM tests, lint, all debug builds) on every pull
-  request and push to `main`; `test` is the required check. The open feature stack carries its own
-  version of this file (job `build`, plus `:voice:test`): when rebasing, keep the stack's steps and the
-  job name `test`.
+- CI: `.github/workflows/android.yml`, job `test` (JVM tests of `core`, `providers` and `voice`, lint,
+  all debug builds) on every pull request and push to `main`; `test` is the required check. It installs
+  exactly the SDK platform and Build Tools named under “Toolchain”; keep both in step.
 - Never in Git: APKs/AABs, `local.properties`, keystores, `diagnostics/`. Security reports: `SECURITY.md`.
 
 ## Useful knowledge
 
-- **Toolchain:** Gradle 8.13 (pinned wrapper checksum), AGP 8.13.2, Kotlin 2.2.20, JDK 17 (JDK 25 does
-  not work with Gradle 8.13), compile/target SDK 36, Build Tools 35.0.0; minSdk 29 in `app`, else 28.
+- **Toolchain:** Gradle 9.8.1 (pinned distribution checksum), AGP 9.4.1 with built-in Kotlin (no
+  `org.jetbrains.kotlin.android` plugin), Kotlin 2.4.21, JDK 17, compile SDK 37 (SDK package
+  `platforms;android-37.0`), Build Tools 36.0.0 (the AGP 9.4 default); minSdk 29 in `app`, else 28.
+  Target SDK stays 36 until the Android 17 behavior changes are tested on the device.
 - **Patched build tooling:** `settings.gradle.kts` lifts vulnerable libraries of the build tooling
-  (netty, Bouncy Castle, protobuf, jdom2, jose4j, commons-compress, commons-lang3, OpenTelemetry) in the plugin
-  classpath and every project configuration. None of them is in an APK. After an AGP or Kotlin
-  upgrade, drop the entries the tooling now brings in a patched version by itself.
+  (Bouncy Castle, protobuf, jdom2, jose4j, commons-lang3) in the plugin classpath and every project
+  configuration. None of them is in an APK. After an AGP or Kotlin upgrade, drop the entries the
+  tooling now brings in a patched version by itself. To check, run CI once with a `logger.lifecycle`
+  line in `liftBuildTooling` plus `buildEnvironment` and `:<module>:dependencies` for every module;
+  with AGP 9.4.1 netty, OpenTelemetry and commons-compress dropped out that way.
 - **Car App Library 1.8.0-rc01** is a deliberately pinned pre-release (Google names a security fix for
-  it); do not call it stable. **Compose BOM 2025.08.01**, because 2026.09.00 needs SDK 37 and AGP 9.1+.
+  it); do not call it stable. **Compose BOM 2026.09.00** needs compile SDK 37 and AGP 9.1+. Its lint
+  rejects `LocalContext.current.getString` in composables; use `LocalResources.current`.
 - **`providers` is plain Kotlin/JVM:** `org.json` is `compileOnly` (Android supplies it) and a test
   dependency; no JSON jar goes into the APK.
 - **Protocols:** Claude `POST /v1/messages` with `anthropic-version: 2023-06-01` (`ClaudeAdapter`); OpenAI
