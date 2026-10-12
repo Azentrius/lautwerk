@@ -10,8 +10,8 @@ android {
         applicationId = "dev.openautoai.app"
         minSdk = 29
         targetSdk = 36
-        versionCode = 9
-        versionName = "0.1.8-dev"
+        versionCode = 10
+        versionName = "0.1.9-dev"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures { compose = true }
@@ -29,6 +29,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     androidTestImplementation("androidx.test:runner:1.7.0")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel:2.9.4")
     implementation(project(":settings"))
     implementation(project(":providers"))
     implementation(project(":storage"))
