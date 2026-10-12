@@ -1,4 +1,4 @@
-# Smartphone-Sprachfunktion – 0.1.9
+# Smartphone-Sprachfunktion – 0.1.10
 
 OpenAI und Claude verwenden jetzt denselben getesteten Gesprächsablauf:
 Android erkennt die Sprache, der gewählte Anbieter verarbeitet den erkannten
@@ -224,7 +224,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
 ```
 
-Für die Download-APK den Pfad auf `OpenAutoAI-0.1.9-assistant-debug.apk` ändern.
+Für die Download-APK den Pfad auf `OpenAutoAI-0.1.10-assistant-debug.apk` ändern.
 Bei anderen Geräten die Seriennummer ersetzen. Bei abweichender Signatur nicht
 deinstallieren oder Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 Die bestehenden [DHU-Schritte](START_WINDOWS.md) bleiben gültig.
@@ -249,11 +249,12 @@ Wiedergabe anzufordern und danach abzugeben:
 
 ## Teststand und Grenzen
 
-**34 Gerätetests wurden für 0.1.9 ausgeführt und bestanden:** 27 Assistant,
-7 DHU/Auswahl. 0.1.9-dev / Code 10 ist als Update auf dem Pixel installiert.
-Die neuen Prüfungen betreffen Smartphone-Bedienung und Speicherarbeit. Die 69
-JVM-Prüfungen der unveränderten Core-/Anbieter-/Sprachmodule bestanden zuletzt
-unter 0.1.8 und wurden für diese Oberflächenänderung nicht wiederholt.
+**59 automatisierte Prüfungen wurden für 0.1.10 ausgeführt und bestanden:**
+41 Assistant-Gerätetests, 7 DHU/Auswahl und 11 Core-JVM-Prüfungen. 0.1.10-dev /
+Code 11 ist als Update auf dem Pixel installiert. Die Erweiterung betrifft den
+[Textexport](CHAT_EXPORT.md), nicht Audio oder API-Adapter. Die 64 JVM-Prüfungen
+der unveränderten Anbieter-/Sprachmodule bestanden zuletzt unter 0.1.8 und wurden
+hier nicht wiederholt.
 Keine hörbare Ausgabe, Mikrofonaufnahme oder echte KI-Anfrage wird automatisiert
 gestartet; persönliche Daten und gewählte Stimme werden nicht verändert.
 

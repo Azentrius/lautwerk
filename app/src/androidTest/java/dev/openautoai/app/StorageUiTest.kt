@@ -23,13 +23,14 @@ class StorageUiTest {
     private val f = HomeTestFixture()
     private var starts = 0
     private var stops = 0
+    private var exportPicks = 0
     @After fun tearDown() { f.close() }
     private fun render() {
         f.create()
         compose.setContent { MaterialTheme { MainContent(f.home, { starts++ }, {
             stops++
             AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, "Gespräch beendet")
-        }) } }
+        }, onExportDocument = { exportPicks++ }) } }
         compose.waitUntil(5000) { !f.home.state.loading }
     }
     private fun page(name: String) { compose.onNodeWithTag("page-$name").performClick() }
@@ -143,6 +144,47 @@ class StorageUiTest {
         compose.waitUntil(5000) { !f.home.state.loading && f.home.state.selectedId == null }
         assertEquals(1, f.archive.deletes.get())
         assertTrue(f.archive.items.isEmpty()); assertEquals(0, starts)
+    }
+
+    @Test fun exportDisclosureCanCancelAndConfirmedExportRequestsOnePickerOnly() {
+        f.archive.items = listOf(chat("export")); render(); page("Verlauf")
+        compose.onNodeWithTag("history-export").performClick(); scroll("Als Textdatei exportieren")
+        compose.onNodeWithTag("export-chat").performClick()
+        compose.onNodeWithText("Chat als Textdatei exportieren?").assertIsDisplayed()
+        compose.onNodeWithText("unverschlüsselten Text", substring = true).assertExists()
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        instrumentation.waitForIdleSync()
+        Thread.sleep(500) // Allow the platform dialog-window animation to finish before capture.
+        instrumentation.uiAutomation.takeScreenshot()?.let { bitmap ->
+            File(instrumentation.targetContext.cacheDir, "export-disclosure-test.png").outputStream().use {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
+            }
+            bitmap.recycle()
+        }
+        compose.onNodeWithText("Abbrechen").performClick()
+        assertEquals(0, exportPicks); assertEquals(0, f.exports.writes.get())
+        compose.onNodeWithTag("export-chat").performClick()
+        compose.onNodeWithText("Speicherort wählen").performClick()
+        compose.waitUntil(5000) { exportPicks == 1 }
+        page("Einstellungen"); page("Gespräch")
+        assertEquals(1, exportPicks); assertEquals(0, f.keys.reads.get())
+        compose.runOnIdle { f.home.finishExportSelection(null) }
+        compose.waitUntil(5000) { !f.home.state.loading }
+        compose.onNodeWithTag("conversation-start").assertIsEnabled()
+        assertEquals(0, starts); assertEquals(0, f.exports.writes.get())
+    }
+
+    @Test fun exportButtonIsDisabledDuringVoiceAndRetiredChatsCanStillExport() {
+        val old = chat("old").copy(modelId = "retired")
+        f.archive.items = listOf(old); render(); page("Verlauf")
+        compose.onNodeWithTag("history-old").performClick(); scroll("Als Textdatei exportieren")
+        compose.onNodeWithTag("conversation-start").assertIsNotEnabled()
+        compose.onNodeWithTag("export-chat").assertIsEnabled()
+        compose.runOnIdle { AppState.update(true, old.provider, old.modelId, old.id, "Test") }
+        scroll("Als Textdatei exportieren")
+        compose.onNodeWithTag("export-chat").assertIsNotEnabled()
+        compose.onNodeWithTag("conversation-stop").assertIsDisplayed()
+        assertEquals(0, exportPicks)
     }
 
     @Test fun conversationScreenShowsControlsAndCanBeReviewedWithInventedDataOnly() {

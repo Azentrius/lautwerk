@@ -1,77 +1,81 @@
-# Build- und Testbericht 0.1.9
+# Build- und Testbericht 0.1.10
 
-Stand: 12.10.2026. **34 Gerätetests bestanden: 27 Assistant, 7 DHU/Auswahl.**
-Assistant **0.1.9-dev / Code 10** als Update auf Pixel 10 Pro / Android 17 installiert.
-Keine Datenlöschung. DHU-/Phone-Oberfläche bleibt **0.1.2-prototype / Code 3**.
+Stand: 12.10.2026. **59 automatisierte Prüfungen bestanden: 11 Core-JVM,
+41 Assistant-Gerätetests und 7 DHU-/Auswahltests.** Assistant **0.1.10-dev / Code 11**
+als Update auf Pixel 10 Pro / Android 17 installiert. Keine Datenlöschung.
+DHU-/Phone-Oberfläche bleibt **0.1.2-prototype / Code 3**.
 
 ## Änderung
 
-Die Smartphone-Oberfläche trennt Gespräch, Einstellungen und Verlauf. Status und
-Starten/Beenden stehen in einer festen unteren Leiste. Verschlüsselte Speicherzugriffe
-laufen über einen seriellen Hintergrund-Worker. Ein ViewModel hält Auswahl und
-Auftragszustand; Schlüsseltexte sind nicht Teil seines Zustands. Gleichzeitige
-Schreibaufträge werden verhindert, Aktualisierungen gebündelt und veraltete Lese-
-oder Startresultate abgefangen. Nicht mehr vorhandene oder anders zugeordnete Chats
-werden nicht automatisch durch einen neuen Chat ersetzt.
-
-Lange Listen werden nur im sichtbaren Bereich gezeichnet. Ein Chat zeigt zunächst
-die letzten 50 Nachrichten und kann um jeweils 50 ältere erweitert werden. Keine
-Nachrichten werden abgeschnitten oder aus dem Archiv gelöscht. Löschen benötigt
-eine an die ursprüngliche Chat-ID gebundene Bestätigung.
+Einzelne Chats können nach einem Klartexthinweis über Androids Dateidialog als
+UTF-8-Text exportiert werden. Alle Nachrichten werden übernommen; keine UI-Begrenzung
+auf 50 Nachrichten im Export. Die Bestätigung gilt nur für den gewählten Chat.
+Vorbereitung und Schreiben laufen im Hintergrund, weitere Mutationen sind gesperrt.
+Eine feste Kopie wird bis zur Zielauswahl nur im ViewModel gehalten; Schlüsselstore,
+Sprachdienst und API-Adapter sind am Export nicht beteiligt. Keine neuen Berechtigungen.
 
 ## Ausgeführte Prüfungen
 
 | Prüfung | Ergebnis |
 |---|---|
-| `:app:assembleDebug`, `:app:assembleDebugAndroidTest` | erfolgreich |
-| `:app:lintDebug` | 0 Fehler, 10 Warnungen und 1 KTX-Hinweis; zusätzlicher Versionshinweis durch explizite Deklaration des bereits verwendeten ViewModel 2.9.4 |
-| `HomeViewModelTest` | 7 bestanden: beide Anbieter, Arbeit außerhalb Hauptthread, Doppelstart, gebündelte Aktualisierung, veraltete Leseergebnisse, Startabbruch beim Schließen, fehlende/geänderte Chats und alte Löschbestätigungen |
-| `StorageUiTest` | 9 bestanden: Speicherfehler/Wiederholen, alte Modelle, 200 Chats und 120 Nachrichten, ältere Nachrichten, sichtbare Steuerung, langsames Schlüsselspeichern, Startabbruch, Löschbestätigung und Vorschau |
-| Bestehende Assistant-Tests | 11 bestanden: Anbieter/Android, Unterbrechungsbeobachter, Worker, Stimmwahl, TTS-Konfiguration, Einstellungsseite |
-| DHU-/Auswahltests | 7 bestanden: Car-Template, Auswahl und Starten |
-| Visuelle Prüfung | Pixel-Screenshot der Gesprächsansicht mit ausschließlich erfundenen Chats; Steuerung und Bereiche sichtbar |
+| Assistant-Debug-App und Test-APK | erfolgreich gebaut und installiert |
+| DHU-Debug-App und Test-APK | neu gebaut und als Update installiert; Quellen der DHU-Oberfläche unverändert |
+| `:app:lintDebug` | 0 Fehler, 10 bestehende Warnungen und 1 KTX-Hinweis |
+| Core-JVM | 11 bestanden: 5 bestehende und 6 Exportprüfungen für beide Anbieter, Unicode, Vollständigkeit, große Texte, Abbruch und Schreibfehler |
+| `ChatExportTest` | 8 bestanden: Hintergrundarbeit, beide Anbieter/alte Modelle, keine Schlüsselzugriffe, unverändertes Archiv, Abbruch, Doppelrückmeldungen, fester Schnappschuss, fehlende/geänderte Auswahl, Speicherfehler und fehlender Zustand nach Prozessverlust |
+| `DocumentConversationExporterTest` | 4 bestanden: tatsächlicher App-Intentvertrag, UTF-8-Ausgabe in temporäre Datei, Ressourcenfreigabe, Zugriffs-/Schreib-/Flush-/Schließfehler, Abbruch und URI-Prüfung |
+| `StorageUiTest` | 11 bestanden, darunter 2 neue Exportprüfungen für Offenlegung/Abbruch/einmalige Auswahl und Sperre während Voice |
+| Bestehende übrige Assistant-Tests | 18 bestanden: Home-Zustand/Worker, Anbieter/Android, Unterbrechungsbeobachter, Stimmwahl und Einstellungen |
+| DHU-/Auswahltests | 7 bestanden: echtes Car-Template mit TestCarContext, Starten, Auswahl und Smartphone-Oberfläche |
+| Visuelle Prüfung | Gesprächsseite und Klartexthinweis mit ausschließlich erfundenen Chats auf dem Pixel geprüft |
 
-Die Tests verwenden isolierte Einstellungen und Speicherattrappen. Sie starten
-weder Mikrofon, hörbare Sprachausgabe noch echte Anbieteranfragen und lesen keine
-persönlichen Chats oder Zugangsdaten. Ein Test markiert jeden Speicheraufruf auf
-dem Hauptthread als Fehler; alle geprüften Aufrufe erfolgten im Hintergrund.
+Die erste Geräteserie zeigte eine fehlende `CATEGORY_OPENABLE`-Kategorie im
+Standard-CreateDocument-Vertrag. Die App setzt diese jetzt ausdrücklich; der
+Test prüft den tatsächlich verwendeten App-Vertrag. Die abschließende Serie besteht.
 
-Die 69 JVM-Prüfungen der unveränderten Module `core`, `providers` und `voice`
-bestanden zuletzt unter 0.1.8 und wurden hier nicht wiederholt. Auch das
-unveränderte Speichermodul wurde nicht erneut separat getestet. Änderungen betreffen
-die Smartphone-Anbindung und deren Tests, nicht Datei-/Verschlüsselungsformate.
+Die Tests verwenden ausschließlich erfundene Chats, Attrappen, isolierte Einstellungen
+und eigene temporäre Dateien. Persönliche Chats und Schlüssel werden nicht ausgelesen,
+keine echten Exporte in Nutzerordner vorgenommen, keine Mikrofonaufnahme, hörbare TTS
+oder echte API-Anfrage gestartet. Die Dateischreibprüfung verwendet einen eingespeisten
+Stream in eine eigene Testdatei; sie ist kein End-to-End-Test eines DocumentsProvider.
 
 ## Erhaltener Stand und offene Grenzen
 
-Quellen in `core`, `providers`, `voice`, `storage`, `settings`, `prototype-app` und
-`car-ui` bleiben gegenüber 0.1.8 unverändert. Keine neuen Berechtigungen, keine
-Car-App-Kategoriebehauptung und keine geänderte Hostprüfung. API-Schlüssel, Chats,
-Stimme und Modellauswahl werden nicht migriert. Der Nutzer bestätigte unter 0.1.8
-Stoppen/Neustarten per Knopf und Display-aus für beide Anbieter.
+`providers`, `voice`, `storage`, `settings`, `prototype-app` und `car-ui` bleiben
+quellseitig unverändert. `core` erhält nur den unabhängigen Textformatter und dessen
+Tests. Keine Migration, Änderung am Modellkatalog, neue Car-Kategorie oder geänderte
+Hostprüfung. Schlüssel, Chats und gewählte Stimme bleiben erhalten.
 
-Der praktische Sprachtest mit der neuen 0.1.9-Oberfläche steht noch aus. Anruf-
-und Headset-/Bluetooth-Tests bleiben auf Nutzerwunsch zurückgestellt und ungeprüft.
+Die 64 JVM-Prüfungen der unveränderten Anbieter-/Sprachmodule bestanden zuletzt unter
+0.1.8 und wurden nicht wiederholt. Das unveränderte Speichermodul wurde nicht erneut
+separat getestet. DHU-Template-Tests belegen keine neue reale Launcher-Verbindung;
+die bisherige Launcher-/Starten-Bestätigung des Nutzers gilt für 0.1.2-prototype.
+
+Der echte Android-Dateidialog mit einem lokalen/Cloud-Dateidienst sowie Rotation mit
+geöffnetem Dialog müssen noch praktisch geprüft werden. Der Test für Prozessverlust
+simuliert ein Ergebnis ohne zurückbehaltenen Auftrag; er beendet nicht den echten Prozess.
+Ein Ausgabefehler oder Prozessende kann eine leere/teilweise Textdatei zurücklassen.
+Cloud-Synchronisation wird nicht bestätigt, nur das erfolgreiche Schreiben/Schließen
+des angebotenen Streams. Der Textexport ist kein verschlüsseltes Backup oder Importformat.
+Große Archive werden weiterhin vollständig gelesen; Ausgabe erfolgt stückweise.
+
+Die neue Smartphone-Bedienung seit 0.1.9 ist noch nicht manuell mit realen Gesprächen
+bestätigt. Anruf- und Headset-/Bluetooth-Tests bleiben ausdrücklich zurückgestellt;
 Auto-Audio und reale Fahrzeugnutzung sind weiterhin nicht bestätigt.
-
-Das Archiv wird weiterhin komplett im Hintergrund gelesen und bei Änderungen
-neu verschlüsselt; große Dateien können Aufträge verzögern und Speicher belegen.
-Die begrenzte Ansicht ist keine Datenbank-Paginierung. Ein begonnener atomarer
-Schreibvorgang kann trotz Startabbruch noch abschließen. Activity-Neuerstellung
-wird über ViewModel-Zustand unterstützt; ein echter Rotationstest während eines
-Schreibvorgangs wurde in diesem Lauf nicht durchgeführt.
 
 ## Wiederholen
 
-JDK 17/SDK gemäß [START_WINDOWS.md](START_WINDOWS.md) setzen. Für UI-Tests DHU
-regulär beenden und das Pixel entsperrt lassen.
+JDK 17/SDK gemäß [START_WINDOWS.md](START_WINDOWS.md) setzen. Für UI-Tests das Pixel
+entsperrt und unbedient lassen, eine aktive DHU-Sitzung zuvor regulär beenden.
 
 ```powershell
-.\gradlew.bat :app:assembleDebug :app:assembleDebugAndroidTest :app:lintDebug
+.\gradlew.bat :core:test :app:assembleDebug :app:assembleDebugAndroidTest :app:lintDebug
 .\gradlew.bat :app:connectedDebugAndroidTest
 .\gradlew.bat :prototype-app:connectedDhuDebugAndroidTest
 ```
 
-Gebautes Testpaket über `adb shell am instrument -w`: `OK (27 tests)`.
-Unveränderte installierte DHU-Testpakete: `OK (7 tests)`.
-Bedienung: [PHONE_UI.md](PHONE_UI.md). Installation: [VOICE.md](VOICE.md).
-Vorheriger Bericht einschließlich Nutzerbestätigung: [0.1.8](history/BUILD_AND_TEST-0.1.8.md).
+In diesem Lauf gebaut/installiert und über `adb shell am instrument -w` ausgeführt:
+Assistant `OK (41 tests)`, DHU `OK (7 tests)`.
+
+[Export-Anleitung](CHAT_EXPORT.md) · [Bedienung](PHONE_UI.md) · [Installation](VOICE.md)
+Vorheriger Bericht: [0.1.9](history/BUILD_AND_TEST-0.1.9.md).

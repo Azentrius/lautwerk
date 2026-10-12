@@ -1,4 +1,4 @@
-# Smartphone-Bedienung – 0.1.9
+# Smartphone-Bedienung – 0.1.10
 
 Die Hauptseite hat drei Bereiche. Der Gesprächsknopf und der aktuelle Status
 bleiben am unteren Rand erreichbar, auch wenn die Liste gescrollt wird.
@@ -22,6 +22,19 @@ Bei langen Chats werden zunächst die letzten 50 Nachrichten angeboten. „Älte
 Nachrichten anzeigen“ erweitert um jeweils 50. Alle gespeicherten Nachrichten
 bleiben erhalten. Das Löschen eines Chats benötigt eine Bestätigung; Abbrechen
 belässt ihn unverändert. Die Bestätigung gilt nur für die ursprünglich gewählte Chat-ID.
+
+## Chat als Textdatei exportieren
+
+Unter dem Titel des geöffneten Chats **Als Textdatei exportieren** wählen. Nach dem
+Hinweis auf die unverschlüsselte Kopie führt **Speicherort wählen** in Androids
+Dateidialog. Die Datei enthält alle Nachrichten, auch ältere ausgeblendete, und
+keine gespeicherten API-Zugangsdaten. Eingetippte persönliche Angaben im Chattext
+bleiben enthalten. Für eine lokale Kopie einen lokalen Ordner wählen; Cloud-Ziele
+übertragen die Datei an den gewählten Dienst. Export ist während Voice gesperrt.
+
+Erst die Meldung **Textdatei gespeichert** bestätigt den Abschluss. Bei Fehlern
+kann eine unvollständige Datei zurückbleiben. Der Export verändert den Chat nicht
+und ist kein Backup-/Importformat. Details: [CHAT_EXPORT.md](CHAT_EXPORT.md).
 
 ## Reaktion bei langsamem Speicher
 
@@ -62,7 +75,8 @@ Grundlagen: [Lazy Lists](https://developer.android.com/develop/ui/compose/lists)
 
 Anruf- und Headset-/Bluetooth-Tests bleiben auf Nutzerwunsch zurückgestellt.
 Die neue Oberfläche wurde automatisiert und mit einem Screenshot ausschließlich
-erfundener Daten geprüft; der erneute manuelle Sprachtest unter 0.1.9 steht noch aus.
+erfundener Daten geprüft; der erneute manuelle Sprachtest seit 0.1.9 und der vollständige
+Systemdialog-/Dateidienst-Test des Exports stehen noch aus.
 Keine Änderung an der bestätigten DHU-Oberfläche 0.1.2-prototype.
 
 Bauen/Installieren: [VOICE.md](VOICE.md). DHU: [START_WINDOWS.md](START_WINDOWS.md).

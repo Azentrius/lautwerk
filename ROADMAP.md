@@ -1,4 +1,4 @@
-# Roadmap ab 0.1.9
+# Roadmap ab 0.1.10
 
 Erledigt: Auf Basis von 0.1.0 ist der minimale DHU-Prototyp 0.1.1 gebaut und vom
 Nutzer bestätigt. 0.1.2 ergänzt einen gemeinsamen Anbieter-/Modellkatalog und
@@ -20,6 +20,9 @@ auf Nutzerwunsch vom 12.10.2026 zurückgestellt und bleiben ungeprüft.
 0.1.9 trennt Gespräch/Einstellungen/Verlauf, hält Starten/Beenden sichtbar und führt
 Speicherarbeit der Oberfläche im Hintergrund aus. Lange Verläufe werden bedarfsgerecht
 gezeichnet; ältere Nachrichten bleiben erreichbar. 34 Gerätetests bestehen.
+0.1.10 ergänzt den ausdrücklich gewählten Textexport einzelner Chats ohne Änderung
+des verschlüsselten Archivs. 59 automatisierte Prüfungen bestehen. Der praktische
+Test des Android-Speicherdialogs mit einem Dateidienst bleibt offen.
 
 1. Bestätigten DHU-Stand erhalten: Auch die Auswahl und Starten sind für 0.1.2
    vom Nutzer im echten DHU bestätigt. Künftige Erweiterungen separat regressionsprüfen.
@@ -29,10 +32,11 @@ gezeichnet; ältere Nachrichten bleiben erreichbar. 34 Gerätetests bestehen.
    Fehlerfälle und Android-JSON sind offline geprüft; Modellzugriff und Voice-End-to-End
    sind nur nach einem bestätigten praktischen Test belegt; siehe `docs/VOICE.md`.
    Der DHU-Prototyp löst weiterhin keine API-Anfrage aus.
-4. Die neue Smartphone-Bedienung 0.1.9 praktisch abnehmen. Die vollständige Archivdatei
-   wird weiterhin im Hintergrund gelesen; echte Seitennachladung und Größenregeln
-   für sehr große Archive planen. Export/Import, Gerätewechsel und explizite
-   Wiederherstellung folgen später; keine stillschweigende Migration oder Löschung.
+4. Smartphone-Bedienung und Textexport 0.1.10 praktisch abnehmen. Die vollständige
+   Archivdatei wird weiterhin im Hintergrund gelesen; echte Seitennachladung und
+   Größenregeln für sehr große Archive planen. Verschlüsseltes Backup/Import,
+   Gerätewechsel und explizite Wiederherstellung folgen später. Der neue Textexport
+   ist kein Wiederherstellungsformat; keine stillschweigende Migration oder Löschung.
 5. Die implementierten Voice-Schnittstellen praktisch prüfen: Mikrofonfreigaben,
    Audiofokus, hörbares TTS, Wiederaufnahme und Abbruch mit beiden API-Konten.
    Zurückgestellt auf Nutzerwunsch: Anruf- und Headset-/Bluetooth-Unterbrechungen

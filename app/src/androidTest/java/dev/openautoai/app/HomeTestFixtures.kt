@@ -1,6 +1,7 @@
 package dev.openautoai.app
 
 import android.content.Context
+import android.net.Uri
 import android.os.Looper
 import androidx.lifecycle.ViewModelStore
 import androidx.test.platform.app.InstrumentationRegistry
@@ -22,6 +23,7 @@ internal class HomeTestFixture {
     val onMain = AtomicBoolean(false)
     val archive = Archive { checkThread() }
     val keys = Keys { checkThread() }
+    val exports = Exports { checkThread() }
     val selections = ModelSelectionStore(context.getSharedPreferences(name, Context.MODE_PRIVATE))
     lateinit var home: HomeViewModel
     private fun checkThread() { if (Looper.myLooper() == Looper.getMainLooper()) onMain.set(true) }
@@ -29,7 +31,7 @@ internal class HomeTestFixture {
     fun create() = main {
         AppState.update(false, Provider.OPENAI, ModelCatalog.default(Provider.OPENAI), null, "Bereit")
         AppState.reportIssue(null)
-        home = HomeViewModel(selections, keys, archive)
+        home = HomeViewModel(selections, keys, archive, exports)
         owner.put("home", home)
     }
     fun close() {
@@ -63,6 +65,7 @@ internal class HomeTestFixture {
     class Archive(private val checkThread: () -> Unit) : ConversationRepository {
         @Volatile var items = emptyList<Conversation>()
         @Volatile var failRead = false
+        @Volatile var beforeGet: (() -> Unit)? = null
         @Volatile var beforeAll: (() -> Unit)? = null
         val reads = AtomicInteger()
         val creates = AtomicInteger()
@@ -74,7 +77,7 @@ internal class HomeTestFixture {
             if (failRead) throw StorageFailure(StorageError.ARCHIVE_READ)
             return snapshot
         }
-        override fun get(id: String): Conversation? { checkThread(); return items.find { it.id == id } }
+        override fun get(id: String): Conversation? { checkThread(); beforeGet?.invoke(); return items.find { it.id == id } }
         override fun create(provider: Provider, modelId: String): Conversation {
             checkThread()
             val chat = Conversation("created-${creates.incrementAndGet()}", "Test", provider, modelId, 0, emptyList())
@@ -84,16 +87,28 @@ internal class HomeTestFixture {
         override fun append(id: String, turn: Turn) { checkThread() }
         override fun delete(id: String) { checkThread(); deletes.incrementAndGet(); items = items.filterNot { it.id == id } }
     }
+    class Exports(private val checkThread: () -> Unit) : ConversationExportWriter {
+        val writes = AtomicInteger()
+        @Volatile var chat: Conversation? = null
+        @Volatile var beforeWrite: (() -> Unit)? = null
+        @Volatile var failure: Exception? = null
+        override fun write(destination: Uri, chat: Conversation, cancellation: RequestCancellation) {
+            checkThread(); writes.incrementAndGet(); beforeWrite?.invoke(); cancellation.check()
+            failure?.let { throw it }
+            this.chat = chat
+        }
+    }
     class Keys(private val checkThread: () -> Unit) : CredentialStore {
         @Volatile var failRead = false
         @Volatile var failClear = false
         @Volatile var beforeRead: (() -> Unit)? = null
         @Volatile var beforeSave: (() -> Unit)? = null
+        val reads = AtomicInteger()
         val saves = AtomicInteger()
         val clears = AtomicInteger()
         @Volatile var savedProvider: Provider? = null
         override fun read(provider: Provider): String? {
-            checkThread(); beforeRead?.invoke()
+            checkThread(); reads.incrementAndGet(); beforeRead?.invoke()
             if (failRead) throw StorageFailure(StorageError.CREDENTIAL_READ)
             return "dummy-key"
         }

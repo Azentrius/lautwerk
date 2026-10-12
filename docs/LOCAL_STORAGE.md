@@ -1,4 +1,4 @@
-# Lokale Chats und API-Schlüssel – Projektstand 0.1.9
+# Lokale Chats und API-Schlüssel – Projektstand 0.1.10
 
 Die vorhandene Speicherung aus 0.1.0–0.1.3 ist jetzt ein eigener Baustein.
 Die Smartphone-Oberfläche, die Anbieter-Brücke und der Sprachdienst verwenden
@@ -63,7 +63,7 @@ Die Verschlüsselung nutzt weiterhin den Android Keystore.
 
 ## Auf dem Pixel prüfen
 
-0.1.9-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
+0.1.10-dev wird als Update von `dev.openautoai.app` installiert. Die DHU-Test-App
 ist ein anderes Paket mit eigenem Speicher. Bei einem Signaturkonflikt nicht
 deinstallieren oder App-Daten löschen, sondern denselben Debug-Schlüssel verwenden.
 
@@ -76,7 +76,7 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 ```
 
 Für die Download-APK den Installationspfad durch den vollständigen Pfad zu
-`OpenAutoAI-0.1.9-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
+`OpenAutoAI-0.1.10-assistant-debug.apk` ersetzen. Auf einem anderen Gerät dessen
 Seriennummer aus `adb devices -l` verwenden.
 
 Vorhandene Chats lassen sich ohne API-Aufruf öffnen und lesen. Zum späteren
@@ -114,13 +114,16 @@ Sehr große Archive können Hintergrundaufträge weiter verzögern. Eine später
 indexierte Ablage/Seitennachladung und explizite Größenregeln bleiben offene Arbeit.
 
 Der Verlust eines Keystore-Schlüssels macht die damit verschlüsselten Daten
-unlesbar. Es gibt hier noch keinen Export, Import oder Wiederherstellungsassistenten.
+unlesbar. Seit 0.1.10 gibt es einen ausdrücklich gewählten [Textexport](CHAT_EXPORT.md)
+einzelner Chats. Dieser ist unverschlüsselt und kein Backup-/Importformat; er liest
+keine gespeicherten Zugangsdaten und verändert das Archiv nicht. Verschlüsseltes
+Backup, Import und ein Wiederherstellungsassistent sind weiterhin offene Arbeit.
 Kein automatisches Löschen als Fehlerbehebung. Backup-/Gerätetransfer-Regeln
 bleiben ein offener Punkt des Prototyps. Die vorhandene `allowBackup=false`-Angabe
 ersetzt keinen geprüften Ablauf für Gerätewechsel.
 
-Ein kompletter Sprachdialog mit echtem API-Konto sowie Mikrofon-/TTS-Lebenszyklus
-und sofortiger Netzwerkabbruch sind weiterhin nicht getestet. Die geprüfte lokale
-Speicherung wird seit 0.1.5 vom neuen [Sprachablauf](VOICE.md) verwendet. Dort steht
-auch der aktuelle Stand des praktischen Sprachtests.
+Der Nutzer bestätigte den grundlegenden Sprachdialog mit beiden Anbietern unter
+0.1.6 sowie Stoppen/Neustarten und Display-aus unter 0.1.8. Der erneute praktische
+Test der Oberfläche seit 0.1.9 steht noch aus. Anruf- und Headset-/Bluetooth-Tests
+bleiben zurückgestellt. Den genauen Stand beschreibt [VOICE.md](VOICE.md).
 Alle Ergebnisse: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
