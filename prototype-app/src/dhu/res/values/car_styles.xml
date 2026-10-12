@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Azentrius android-auto.md B2, commit eb827c8. These are usage variants,
+         not day/night overrides. The host can replace them for contrast. -->
+    <style name="CarAppTheme">
+        <item name="carColorPrimary">#C8A96E</item>
+        <item name="carColorPrimaryDark">#7D5F22</item>
+    </style>
+</resources>

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.car.app.CarContext
 import androidx.car.app.Screen
 import androidx.car.app.model.Action
+import androidx.car.app.model.CarColor
 import androidx.car.app.model.MessageTemplate
 import androidx.car.app.model.Template
 import dev.openautoai.core.PrototypeSession
@@ -44,6 +45,7 @@ class OpenAutoScreen(
             .setHeaderAction(Action.APP_ICON)
             .addAction(Action.Builder()
                 .setTitle(carContext.getString(R.string.car_start))
+                .setBackgroundColor(CarColor.PRIMARY)
                 .setOnClickListener {
                     session.start()
                     Log.i(OpenAutoCarService.TAG, "car.start count=${session.startCount}")

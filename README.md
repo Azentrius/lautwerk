@@ -1,4 +1,4 @@
-# OpenAuto AI 0.1.13 – Sprachfunktion für OpenAI und Claude
+# OpenAuto AI 0.1.14 – Android-Auto-Design
 
 Aufbauend auf dem gelieferten Projekt und dem bestätigten DHU-Prototyp verwendet
 die Smartphone-App jetzt einen gemeinsamen Sprachablauf für beide Anbieter:
@@ -7,25 +7,27 @@ Starten, Stoppen, verspätete Rückmeldungen, Fehler und Anbieterwechsel werden
 von einer getrennt testbaren Gesprächssteuerung behandelt. Chats und Schlüssel
 bleiben im bestehenden verschlüsselten Format erhalten.
 
-**Neu in 0.1.13:** Die Smartphone-Oberfläche verwendet das freigegebene
-Azentrius-Design mit heller/dunkler Darstellung, DM Sans, gelieferten Icons,
-Nachrichtenblasen, Optionsfeldern für Stimmen und getrennten Gesprächs-/Exportlabels.
-Reiter passen ihre Anordnung an den gemessenen Platz und die Systemschrift an.
-Deutsch/Englisch, Chat-/Schlüsselspeicherung, Anbieter und Sprachablauf bleiben erhalten.
+**Neu in 0.1.14:** Die experimentelle DHU-Oberfläche fordert die freigegebenen
+Azentrius-Farben für „Starten“ an. MessageTemplate, Titel, App-Symbol, Texte und
+Testzähler bleiben erhalten. Das Design-System ist auf Commit `eb827c8` festgelegt.
+Der Android-Auto-Host entscheidet über die tatsächliche Darstellung.
 
-169 verschiedene automatisierte Prüfungen bestehen: 88 JVM-Prüfungen,
-73 Assistant-Gerätetests und 8 DHU-/Auswahltests. Lint: 0 Fehler, 30 Warnungen,
-1 Hinweis. Helles/dunkles Thema und große Schrift wurden mit Testdaten geprüft.
-Der Nutzer bestätigt: „Darstellung und Bedienung passen“.
-Anruf- und Headset-/Bluetooth-Praxistests bleiben zurückgestellt.
+DHU-Debug und Test-APK bauen erfolgreich; DHU-Lint meldet 0 Fehler und 6 Warnungen.
+Installation und visueller Vergleich im DHU stehen noch aus, weil das Pixel beim
+Testaufbau für ein Telefonat verwendet wurde. **Noch keine DHU-Abnahme für 0.1.14.**
+Ausgangsfarbe/Kontrast und sechs Starts werden vor dem Update als Vergleich erfasst.
+Ein bereits vorhandener A7-Fehler blockiert 0.1.14 nach Nutzerfreigabe nicht;
+ein neuer Fehler ist eine Regression.
 
-Die **Assistenten-APK ist 0.1.13-dev / Code 14**. Die **DHU-/Phone-Testvariante
-bleibt 0.1.12-prototype / Code 4**; ihr Quellcode und Template wurden nicht geändert.
-Voice bleibt ausschließlich in der Assistenten-App.
+Die **DHU-APK ist 0.1.14-prototype / Code 5**. Die Assistenten-App bleibt
+**0.1.13-dev / Code 14**, die Phone-Vergleichsvariante **0.1.12-prototype / Code 4**.
+Das bestätigte Smartphone-Design bleibt erhalten. Voice bleibt ausschließlich
+in der Assistenten-App. Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt.
 
-Details: [Design-System und Update](docs/DESIGN_SYSTEM.md),
-[Sprache und Wiederaufnahme](docs/LOCALIZATION.md), [Verlaufssuche](docs/HISTORY_SEARCH.md),
-[Textexport](docs/CHAT_EXPORT.md), [Testbericht](docs/BUILD_AND_TEST.md).
+Details: [Auto-Design und Installation](docs/ANDROID_AUTO_DESIGN.md),
+[Testbericht mit A1–A11](docs/BUILD_AND_TEST.md),
+[Smartphone-Design](docs/DESIGN_SYSTEM.md),
+[Sprache und Wiederaufnahme](docs/LOCALIZATION.md).
 
 ## Schnellstart unter Windows
 
