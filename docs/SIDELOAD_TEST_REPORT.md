@@ -2,9 +2,10 @@
 
 Stand 12.10.2026. App-Code und APK bleiben auf dem bestätigten Stand 0.1.15,
 Quellcode-Commit `5600446fbe08a8bbdf460f31a9e3b9fbbeaedead`. Die
-[Testanleitung](SIDELOADING.md) beschreibt den Vergleich. Noch liegt kein
-bestätigtes Ergebnis für Kia oder ID.7 vor. Auf Nutzerwunsch wird jetzt der ID.7
-mit nativer drahtloser Verbindung geprüft; alle Kia-Versuche sind zurückgestellt.
+[Testanleitung](SIDELOADING.md) beschreibt den Vergleich. Der Nutzer berichtet,
+dass OpenAuto AI am 12.10.2026 gegen 17 Uhr im ID.7 nicht sichtbar war.
+Ein funktionierender Fahrzeugweg ist damit weiterhin nicht bestätigt. Der ID.7
+bleibt das Testfahrzeug; alle Kia-Versuche sind zurückgestellt.
 
 ## Am angeschlossenen Pixel gemessen
 
@@ -40,7 +41,8 @@ Hardwarekennung sind am verbundenen Adapter noch zu bestätigen.
 | Kia mit AAWireless, Ausgangszustand | noch zu erfassen | offen / offen / offen / offen | nicht gemessen | Auf Nutzerwunsch zurückgestellt |
 | Kia mit Adapter-Entwicklermodus | erst nach Ausgangsmessung | offen / offen / offen / offen | nicht gemessen | Auf Nutzerwunsch zurückgestellt |
 | Kia nach Wiederherstellung | ursprüngliche Werte | offen / offen / offen / offen | nicht gemessen | Auf Nutzerwunsch zurückgestellt |
-| ID.7 nativ drahtlos | ohne AAWireless, bisherige Einstellungen | offen / offen / offen / offen | nicht gemessen | Nutzer um Ausgangstest gebeten |
+| ID.7 gegen 17 Uhr am 12.10.2026 | laut Kontext native Funkverbindung; damalige Versionen und Detailkonfiguration nicht ausgelesen | App nicht sichtbar / nicht geprüft / nicht geprüft / nicht geprüft | nicht gemessen | Nutzerbeobachtung, keine zeitgleichen Logs |
+| ID.7 mit aktuell vorbereiteter 0.1.15 | ohne AAWireless, bisherige Einstellungen | offen / offen / offen / offen | nicht gemessen | Kein erneuter unveränderter Versuch erforderlich; zunächst konkrete technische Änderung oder Diagnose vorbereiten |
 
 Für jeden tatsächlichen Lauf ergänzen: Zeitpunkt mit Zeitzone, Infotainment-Version,
 beim Kia genaue Adapter-Firmware und beide Einstellungswerte, Anzahl erfolgreicher
@@ -54,8 +56,17 @@ und Android Auto 17.7.663654-release/177663654 erneut per ADB bestätigt.
 Kein laufender DHU-Prozess wurde am PC gefunden. Die Geräteuhr lieferte
 als Startmarke für die spätere Logauswertung Unix-Zeit `1791839347`.
 Das ist eine vorbereitende Zeitgrenze, kein Nachweis einer Fahrzeugverbindung.
-Das Pixel wird für diesen Test regulär vom PC getrennt und nativ drahtlos
-mit dem stehenden ID.7 verbunden. Noch kein Ergebnis und keine Car-API gemessen.
+Ein neuer Fahrzeuglauf mit dieser Zeitgrenze ist nicht bestätigt. Nach der
+Rückmeldung zur Fahrt gegen 17 Uhr wird kein unveränderter Wiederholungstest
+mehr angefordert. Die Beobachtung von 17 Uhr liegt vor dieser Startmarke.
+
+Der Git-Vergleich nach 17 Uhr zeigt Design-Referenzdateien, das App-Symbol/
+Startbild in 0.1.15 und anschließend reine Dokumentationsänderungen.
+Car-Service-Registrierung, Kategorie, HostValidator, Session und Car-Template-
+Logik blieben dabei unverändert. Der Installationsweg blieb ADB. Es wurde kein
+Sichtbarkeitsproblem im Fahrzeug behoben; aus diesen Änderungen ist kein anderer
+Launcher-Befund zu erwarten. Die gegen 17 Uhr tatsächlich installierte App-Version
+ist nicht belegt, daher wird der Befund nicht als durchgeführter 0.1.15-Test geführt.
 
 ## Aussagegrenzen
 
