@@ -91,7 +91,10 @@ the DHU session (`adb forward tcp:5277 tcp:5277`, `desktop-head-unit.exe`): `doc
   raised only when that app changes.
 - Raise version and `versionCode` and add the `CHANGELOG.md` section in the same pull request. Tags are
   `vX.Y.Z`; there is no release workflow yet, so releases are tagged by the maintainer until one exists.
-- No CI workflow on `main` yet; `.github/workflows/android.yml` arrives with the open feature stack.
+- CI: `.github/workflows/android.yml`, job `test` (JVM tests, lint, all debug builds) on every pull
+  request and push to `main`; `test` is the required check. The open feature stack carries its own
+  version of this file (job `build`, plus `:voice:test`): when rebasing, keep the stack's steps and the
+  job name `test`.
 - Never in Git: APKs/AABs, `local.properties`, keystores, `diagnostics/`. Security reports: `SECURITY.md`.
 
 ## Useful knowledge
