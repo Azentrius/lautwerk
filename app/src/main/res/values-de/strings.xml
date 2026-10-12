@@ -75,4 +75,22 @@
     <string name="online_voice_title">Online-Stimme verwenden?</string>
     <string name="online_voice_warning">Der vorgelesene Text kann an deinen Android-Sprachdienst übertragen werden – auch bei Antworten von OpenAI und Claude. Dafür wird kein zusätzlicher OpenAI- oder Claude-API-Aufruf verwendet.</string>
     <string name="online_voice_choose">Online-Stimme wählen</string>
+    <string name="az_ready">Bereit</string>
+    <string name="az_preparing">Wird vorbereitet</string>
+    <string name="az_listening">Hört zu</string>
+    <string name="az_thinking">Anbieter antwortet</string>
+    <string name="az_speaking">Spricht</string>
+    <string name="az_ended">Beendet</string>
+    <string name="az_export_preparing">Export wird vorbereitet</string>
+    <string name="az_export_writing">Wird exportiert</string>
+    <string name="az_export_done">Exportiert</string>
+    <string name="az_export_failed">Export fehlgeschlagen</string>
+    <string name="az_export_cancelled">Export abgebrochen</string>
+    <string name="az_assistant_role">Assistent</string>
+    <string name="az_licenses">Lizenzen</string>
+    <string name="az_close">Schließen</string>
+    <string name="az_empty_history">Noch keine Gespräche</string>
+    <string name="az_voice_section">Stimme</string>
+    <string name="az_tempo_section">Tempo</string>
+    <string name="az_voice_name">Stimme %1$d · %2$s</string>
 </resources>

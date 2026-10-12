@@ -1,7 +1,8 @@
 package dev.openautoai.app
 
 import android.graphics.Bitmap
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -27,14 +28,17 @@ class StorageUiTest {
     @After fun tearDown() { f.close() }
     private fun render() {
         f.create()
-        compose.setContent { MaterialTheme { MainContent(f.home, { starts++ }, {
+        compose.setContent {
+            val view=LocalView.current
+            SideEffect { view.importantForAutofill=android.view.View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS }
+            dev.openautoai.app.design.AzentriusTheme { MainContent(f.home, { starts++ }, {
             stops++
             AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, "Gespräch beendet")
         }, onExportDocument = { exportPicks++ }) } }
         compose.waitUntil(5000) { !f.home.state.loading && !f.home.state.historySearching }
     }
     private fun page(name: String) { compose.onNodeWithTag("page-$name").performClick() }
-    private fun scroll(text: String) { compose.onNodeWithTag("home-list").performScrollToNode(hasText(text)) }
+    private fun scroll(text: String) { compose.onNodeWithTag("home-list").performScrollToNode(if(text.startsWith("Du:"))hasContentDescription(text) else hasText(text)) }
     private fun chat(id: String, turns: List<Turn> = emptyList()) =
         Conversation(id, "Testgespräch $id", Provider.CLAUDE, ModelCatalog.default(Provider.CLAUDE), 0, turns)
 
@@ -66,7 +70,7 @@ class StorageUiTest {
         render(); page("history")
         compose.onNodeWithTag("history-old").performClick()
         scroll("Du: Erhaltene Nachricht")
-        compose.onNodeWithText("Du: Erhaltene Nachricht").assertExists()
+        compose.onNodeWithContentDescription("Du: Erhaltene Nachricht").assertExists()
         compose.onNodeWithText("Gespräch fortsetzen").assertIsNotEnabled()
         assertEquals(0, starts)
     }
@@ -81,11 +85,11 @@ class StorageUiTest {
         assertEquals(Provider.CLAUDE, f.home.state.selection.provider)
         assertEquals("199", f.home.state.selectedId)
         scroll("Du: Testnachricht 119")
-        compose.onNodeWithText("Du: Testnachricht 119").assertIsDisplayed()
+        compose.onNodeWithContentDescription("Du: Testnachricht 119").assertIsDisplayed()
         compose.onNodeWithTag("conversation-start").assertIsDisplayed()
         scroll("Ältere Nachrichten anzeigen"); compose.onNodeWithText("Ältere Nachrichten anzeigen").performClick()
         scroll("Ältere Nachrichten anzeigen"); compose.onNodeWithText("Ältere Nachrichten anzeigen").performClick()
-        scroll("Du: Testnachricht 0"); compose.onNodeWithText("Du: Testnachricht 0").assertIsDisplayed()
+        scroll("Du: Testnachricht 0"); compose.onNodeWithContentDescription("Du: Testnachricht 0").assertIsDisplayed()
         assertEquals(120, f.archive.items.last().turns.size)
     }
 
@@ -148,7 +152,7 @@ class StorageUiTest {
 
     @Test fun exportDisclosureCanCancelAndConfirmedExportRequestsOnePickerOnly() {
         f.archive.items = listOf(chat("export")); render(); page("history")
-        compose.onNodeWithTag("history-export").performClick(); scroll("Als Textdatei exportieren")
+        compose.onNodeWithTag("history-export").performClick()
         compose.onNodeWithTag("export-chat").performClick()
         compose.onNodeWithText("Chat als Textdatei exportieren?").assertIsDisplayed()
         compose.onNodeWithText("unverschlüsselten Text", substring = true).assertExists()
@@ -177,11 +181,10 @@ class StorageUiTest {
     @Test fun exportButtonIsDisabledDuringVoiceAndRetiredChatsCanStillExport() {
         val old = chat("old").copy(modelId = "retired")
         f.archive.items = listOf(old); render(); page("history")
-        compose.onNodeWithTag("history-old").performClick(); scroll("Als Textdatei exportieren")
+        compose.onNodeWithTag("history-old").performClick()
         compose.onNodeWithTag("conversation-start").assertIsNotEnabled()
         compose.onNodeWithTag("export-chat").assertIsEnabled()
         compose.runOnIdle { AppState.update(true, old.provider, old.modelId, old.id, "Test") }
-        scroll("Als Textdatei exportieren")
         compose.onNodeWithTag("export-chat").assertIsNotEnabled()
         compose.onNodeWithTag("conversation-stop").assertIsDisplayed()
         assertEquals(0, exportPicks)

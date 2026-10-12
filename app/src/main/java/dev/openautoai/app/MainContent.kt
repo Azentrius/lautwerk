@@ -1,6 +1,18 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 package dev.openautoai.app
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.semantics.*
+import dev.openautoai.app.design.*
+import dev.openautoai.app.design.AzPrimaryButton as Button
+import dev.openautoai.app.design.AzSecondaryButton as OutlinedButton
+import dev.openautoai.app.design.AzTextButton as TextButton
+import dev.openautoai.app.design.AzChip as FilterChip
+import dev.openautoai.app.design.AzTextField as OutlinedTextField
+import dev.openautoai.app.design.AzDialog as AlertDialog
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.lazy.LazyColumn
@@ -38,6 +50,7 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
     var keyText by remember(state.selection.provider) { mutableStateOf("") }
     var deleteId by remember { mutableStateOf<String?>(null) }
     var exportId by remember { mutableStateOf<String?>(null) }
+    var licenses by rememberSaveable { mutableStateOf(false) }
     val keyboard = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
     val list = rememberLazyListState()
@@ -65,8 +78,8 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
             withFrameNanos { } // Let the expanded LazyColumn receive its older messages first.
             val first = (shown.turns.size - visibleTurns).coerceAtLeast(0)
             val notices = listOf(state.message, AppState.notice, state.archiveError).count { it != null } + if (state.loading) 1 else 0
-            // Provider, settings, explanation, title, export; optionally the older-messages button.
-            val index = notices + 5 + (if (first > 0) 1 else 0) + focus.turnIndex - first
+            // Provider, settings, explanation, title; optionally the older-messages button.
+            val index = notices + 4 + (if (first > 0) 1 else 0) + focus.turnIndex - first
             list.scrollToItem(index)
             home.finishHistoryFocus(focus)
         } else if (changed) list.scrollToItem(0)
@@ -83,59 +96,32 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
     }
 
     Scaffold(
+        containerColor = Az.colors["bg-page"],
         topBar = {
-            Surface(tonalElevation = 2.dp) {
-                Column(Modifier.fillMaxWidth().statusBarsPadding().padding(horizontal = 20.dp, vertical = 8.dp)) {
-                    Text(stringResource(R.string.app_name), style = MaterialTheme.typography.headlineSmall)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        listOf("conversation" to R.string.conversation, "settings" to R.string.settings, "history" to R.string.history).forEach { (name, title) ->
-                            FilterChip(selected = page == name, onClick = { keyboard?.hide(); page = name },
-                                label = { Text(stringResource(title)) }, modifier = Modifier.testTag("page-$name"))
-                        }
-                    }
-                }
+            Column(Modifier.fillMaxWidth().background(Az.colors["bg-page"]).statusBarsPadding()) {
+                Text(stringResource(R.string.app_name), style=AzType.title,modifier=Modifier.padding(horizontal=Az.inset,vertical=8.dp))
+                AzTabs(page) { keyboard?.hide();page=it }
             }
         },
         bottomBar = {
-            Surface(tonalElevation = 3.dp) {
-                Column(Modifier.fillMaxWidth().navigationBarsPadding().imePadding().padding(horizontal = 20.dp, vertical = 10.dp),
-                    verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text(state.operation?.label ?: AppState.status, style = MaterialTheme.typography.bodyMedium,
-                        maxLines = 2, overflow = TextOverflow.Ellipsis)
-                    if (active) {
-                        Button(onClick = onStop, modifier = Modifier.fillMaxWidth().testTag("conversation-stop")) {
-                            Text(stringResource(R.string.conversation_stop))
-                        }
-                    } else if (state.operation == HomeOperation.PREPARE_EXPORT) {
-                        OutlinedButton(onClick = home::cancelExportPreparation, modifier = Modifier.fillMaxWidth()) {
-                            Text(stringResource(R.string.export_cancel))
-                        }
-                    } else if (pending) {
-                        OutlinedButton(onClick = home::cancelStart, modifier = Modifier.fillMaxWidth().testTag("start-cancel")) {
-                            Text(stringResource(R.string.start_cancel))
-                        }
-                    } else {
-                        Button(onClick = { keyboard?.hide(); home.prepareStart() },
-                            enabled = editable && !state.loading && state.archiveError == null &&
-                                state.selected?.let { ModelCatalog.valid(it.provider, it.modelId) } != false,
-                            modifier = Modifier.fillMaxWidth().testTag("conversation-start")) {
-                            Text(stringResource(if (state.selectedId != null) R.string.conversation_resume else R.string.conversation_start))
-                        }
-                    }
-                }
-            }
+            ConversationBar(state,{ keyboard?.hide();home.prepareStart() },onStop,home::cancelStart,
+                home::cancelExportPreparation,{ shown?.let { exportId=it.id } })
         }
     ) { padding ->
         LazyColumn(Modifier.fillMaxSize().padding(padding).consumeWindowInsets(padding).testTag("home-list"),
-            state = list, contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            state = list, contentPadding = PaddingValues(Az.inset), verticalArrangement = Arrangement.spacedBy(0.dp)) {
             if (state.message != null) item("storage-message") { Text(state.message, Modifier.testTag("storage-message")) }
-            if (AppState.notice != null) item("voice-notice") { Text(AppState.notice!!, color = MaterialTheme.colorScheme.error) }
+            if (AppState.notice != null) item("voice-notice") { Text(AppState.notice!!, color = Az.colors["danger-text"]) }
             if (state.loading) item("archive-loading") { Text(stringResource(R.string.history_loading)) }
             if (state.archiveError != null) item("archive-error") {
+                Spacer(Modifier.height(Az.inset))
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text(state.archiveError, color = MaterialTheme.colorScheme.error)
+                    Text(state.archiveError, color = Az.colors["danger-text"])
                     OutlinedButton(onClick = home::refresh, enabled = state.operation == null) { Text(stringResource(R.string.history_reload)) }
                 }
+            }
+            if(state.operation in listOf(HomeOperation.SAVE_KEY,HomeOperation.CLEAR_KEY,HomeOperation.DELETE_CHAT)) item("operation-message") {
+                Text(state.operation!!.label)
             }
             when (page) {
                 "conversation" -> {
@@ -146,47 +132,52 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
                         Text(model, style = MaterialTheme.typography.bodyMedium)
                     }
                     item("conversation-settings") {
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            OutlinedButton(onClick = { page = "settings" }, enabled = editable, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.provider_model)) }
-                            OutlinedButton(onClick = onSpeechSettings, enabled = editable, modifier = Modifier.weight(1f)) { Text(stringResource(R.string.voice_settings)) }
+                        Spacer(Modifier.height(Az.inset))
+                        AzActions {
+                            OutlinedButton(onClick = { page = "settings" }, enabled = editable) { Text(stringResource(R.string.provider_model)) }
+                            OutlinedButton(onClick = onSpeechSettings, enabled = editable) { Text(stringResource(R.string.voice_settings)) }
                         }
                     }
                     item("voice-explanation") {
+                        Spacer(Modifier.height(Az.inset))
                         Text(stringResource(R.string.conversation_hint))
-                        Text(stringResource(R.string.command_hint), style = MaterialTheme.typography.bodySmall)
+                        Text(stringResource(R.string.command_hint), color=Az.colors["text-subtle"], style = MaterialTheme.typography.bodySmall)
                     }
                     if (shown == null) item("empty-chat") {
+                        Spacer(Modifier.height(Az.inset))
                         Text(stringResource(R.string.empty_chat))
                     } else {
-                        item("chat-title") { Text(stringResource(R.string.opened_chat, shown.title), style = MaterialTheme.typography.titleMedium) }
-                        item("export-chat") {
-                            OutlinedButton(onClick = { exportId = shown.id },
-                                enabled = editable && !state.loading && state.archiveError == null,
-                                modifier = Modifier.testTag("export-chat")) { Text(stringResource(R.string.export_chat)) }
-                        }
+                        item("chat-title") { Text(stringResource(R.string.opened_chat, shown.title), style = MaterialTheme.typography.titleMedium,modifier=Modifier.padding(top=24.dp,bottom=8.dp)) }
                         if (shown.turns.size > visibleTurns) item("older-turns") {
+                            Spacer(Modifier.height(Az.inset))
                             OutlinedButton(onClick = { visibleTurns += 50 }) { Text(stringResource(R.string.older_messages)) }
                         }
                         val first = (shown.turns.size - visibleTurns).coerceAtLeast(0)
                         items(shown.turns.size - first, key = { "turn-${shown.id}-${first + it}" }) { offset ->
                             val turn = shown.turns[first + offset]
-                            Text(stringResource(R.string.message_content, stringResource(if (turn.role == "user") R.string.user_role else R.string.assistant_role), turn.content),
-                                Modifier.testTag("chat-turn-${first + offset}"))
+                            val index=first+offset
+                            val gap=if(index>first && shown.turns[index-1].role==turn.role)8.dp else 24.dp
+                            AzMessage(turn.role,turn.content,stringResource(R.string.message_content,
+                                stringResource(if(turn.role=="user")R.string.user_role else R.string.az_assistant_role),turn.content),
+                                Modifier.padding(top=gap).testTag("chat-turn-$index"))
                         }
                         item("delete-chat") {
+                            Spacer(Modifier.height(Az.inset))
                             OutlinedButton(onClick = { deleteId = shown.id }, enabled = editable && !state.loading && state.archiveError == null) {
                                 Text(stringResource(R.string.delete_chat))
                             }
                         }
                     }
                     item("voice-limits") {
-                        Text(stringResource(R.string.conversation_limits), style = MaterialTheme.typography.bodySmall)
+                        Spacer(Modifier.height(Az.inset))
+                        Text(stringResource(R.string.conversation_limits), color=Az.colors["text-subtle"], style = MaterialTheme.typography.bodySmall)
                     }
                 }
                 "settings" -> {
                     item("providers") {
-                        Text(stringResource(R.string.provider_label), style = MaterialTheme.typography.titleMedium)
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Spacer(Modifier.height(Az.inset))
+                        Text(stringResource(R.string.provider_label), style = MaterialTheme.typography.titleMedium,modifier=Modifier.padding(top=8.dp,bottom=8.dp))
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Provider.entries.forEach { provider ->
                                 FilterChip(selected = state.selection.provider == provider,
                                     onClick = { home.selectProvider(provider) }, enabled = editable,
@@ -195,43 +186,55 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
                         }
                     }
                     item("models-label") { Text(stringResource(R.string.model_access)) }
-                    items(ModelCatalog.forProvider(state.selection.provider), key = { "model-${it.id}" }) { model ->
-                        FilterChip(selected = state.selection.modelId == model.id,
-                            onClick = { home.selectModel(ModelSelection(state.selection.provider, model.id)) },
-                            enabled = editable, label = { Text(model.label) })
+                    item("models") {
+                        FlowRow(horizontalArrangement=Arrangement.spacedBy(8.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
+                            ModelCatalog.forProvider(state.selection.provider).forEach { model ->
+                                FilterChip(selected=state.selection.modelId==model.id,
+                                    onClick={ home.selectModel(ModelSelection(state.selection.provider,model.id)) },
+                                    enabled=editable,label={Text(model.label)})
+                            }
+                        }
                     }
                     item("key-label") {
-                        Text(stringResource(R.string.credentials), style = MaterialTheme.typography.titleMedium)
+                        Spacer(Modifier.height(Az.inset))
+                        Text(stringResource(R.string.credentials), style = MaterialTheme.typography.titleMedium,modifier=Modifier.padding(top=8.dp,bottom=8.dp))
                         Text(stringResource(R.string.key_hint, state.selection.provider.displayName))
                     }
                     item("key-input") {
+                        Spacer(Modifier.height(Az.inset))
                         OutlinedTextField(value = keyText, onValueChange = { keyText = it }, enabled = editable,
                             visualTransformation = PasswordVisualTransformation(), singleLine = true,
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                             modifier = Modifier.fillMaxWidth().testTag("api-key-input"),
+                            fieldLabel=stringResource(R.string.key_label,state.selection.provider.displayName),
                             label = { Text(stringResource(R.string.key_label, state.selection.provider.displayName)) })
                     }
                     item("key-actions") {
+                        Spacer(Modifier.height(Az.inset))
                         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             Button(onClick = { if (home.saveKey(keyText)) { keyText = ""; keyboard?.hide() } },
                                 enabled = editable && keyText.isNotBlank(), modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.key_save)) }
                             OutlinedButton(onClick = { if (home.clearKey()) keyText = "" }, enabled = editable) { Text(stringResource(R.string.remove)) }
                         }
                     }
+                    item("licenses") { TextButton(onClick={licenses=true}) { Text(stringResource(R.string.az_licenses)) } }
                     item("privacy") {
+                        Spacer(Modifier.height(Az.inset))
                         Text(stringResource(R.string.privacy))
-                        Text(stringResource(R.string.auto_audio_pending), style = MaterialTheme.typography.bodySmall)
+                        Text(stringResource(R.string.auto_audio_pending), color=Az.colors["text-subtle"], style = MaterialTheme.typography.bodySmall)
                     }
                 }
                 "history" -> {
                     item("history-search") {
+                        Spacer(Modifier.height(Az.inset))
                         OutlinedTextField(value = state.historyQuery, onValueChange = home::setHistoryQuery,
                             singleLine = true, modifier = Modifier.fillMaxWidth().testTag("history-search"),
+                            fieldLabel=stringResource(R.string.history_search),
                             label = { Text(stringResource(R.string.history_search)) },
                             supportingText = { Text(stringResource(R.string.history_search_hint)) },
                             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
                             keyboardActions = KeyboardActions(onSearch = { keyboard?.hide(); focusManager.clearFocus() }))
-                        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             listOf<Provider?>(null, Provider.OPENAI, Provider.CLAUDE).forEach { provider ->
                                 FilterChip(selected = state.historyProvider == provider,
                                     onClick = { keyboard?.hide(); focusManager.clearFocus(); home.setHistoryProvider(provider) },
@@ -247,44 +250,54 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
                     }
                     if (state.historySearching && !state.loading) item("history-searching") { Text(stringResource(R.string.history_searching)) }
                     if (state.historyError != null) item("history-search-error") {
+                        Spacer(Modifier.height(Az.inset))
                         Column {
-                            Text(state.historyError, color = MaterialTheme.colorScheme.error)
+                            Text(state.historyError, color = Az.colors["danger-text"])
                             OutlinedButton(onClick = home::retryHistorySearch) { Text(stringResource(R.string.history_retry)) }
                         }
                     }
                     if (!state.loading && !state.historySearching && state.archiveError == null && state.historyError == null) item("history-count") {
+                        Spacer(Modifier.height(Az.inset))
                         Text(pluralStringResource(R.plurals.history_count, state.sessions.size, state.historyMatches.size, state.sessions.size), Modifier.testTag("history-count"))
                         if (state.sessions.isNotEmpty() && state.historyMatches.isEmpty()) Text(stringResource(R.string.history_no_matches))
                     }
                     item("new-chat") {
+                        Spacer(Modifier.height(Az.inset))
                         OutlinedButton(onClick = { home.newChat(); page = "conversation" }, enabled = editable) { Text(stringResource(R.string.new_chat)) }
+                        Spacer(Modifier.height(16.dp))
                     }
-                    if (state.sessions.isEmpty() && !state.loading && state.archiveError == null) item("empty-history") { Text(stringResource(R.string.history_empty)) }
-                    items(state.historyMatches, key = { "chat-${it.conversation.id}" }) { match ->
-                        val chat = match.conversation
-                        OutlinedButton(onClick = { if (home.openHistoryMatch(chat.id)) { keyboard?.hide(); focusManager.clearFocus(); page = "conversation" } },
-                            enabled = editable && !state.loading && state.archiveError == null && !state.historySearching,
-                            modifier = Modifier.fillMaxWidth().testTag("history-${chat.id}")) {
-                            Column(Modifier.fillMaxWidth()) {
-                                Text(chat.title, maxLines = 2, overflow = TextOverflow.Ellipsis)
-                                Text(stringResource(R.string.chat_summary, chat.provider.displayName, chat.modelId, chat.turns.size), style = MaterialTheme.typography.bodySmall)
-                                match.firstMatchingTurn?.let { Text(stringResource(R.string.message_match, it + 1), style = MaterialTheme.typography.bodySmall) }
-                            }
+                    if (state.sessions.isEmpty() && !state.loading && state.archiveError == null) item("empty-history") {
+                        Column(Modifier.padding(vertical=48.dp),verticalArrangement=Arrangement.spacedBy(16.dp)) {
+                            CompositionLocalProvider(LocalContentColor provides Az.colors["text-subtle"]) { AzIcon(R.drawable.ic_az_history,48.dp) }
+                            Text(stringResource(R.string.az_empty_history),style=AzType.dialog)
+                            Text(stringResource(R.string.history_empty),color=Az.colors["text-subtle"])
                         }
+                    }
+                    items(state.historyMatches.size, key = { "chat-${state.historyMatches[it].conversation.id}" }) { index ->
+                        val match=state.historyMatches[index]
+                        val chat = match.conversation
+                        AzHistoryRow(chat.title,"${historyDate(chat.updatedAt)} · ${chat.provider.displayName} · ${chat.modelId}",
+                            match.firstMatchingTurn?.let { stringResource(R.string.message_match,it+1) },
+                            { if(home.openHistoryMatch(chat.id)) { keyboard?.hide();focusManager.clearFocus();page="conversation" } },
+                            enabled=editable&&!state.loading&&state.archiveError==null&&!state.historySearching,
+                            first=index==0,last=index==state.historyMatches.lastIndex,
+                            modifier=Modifier.testTag("history-${chat.id}"))
                     }
                 }
             }
         }
     }
 
+    if(licenses) LicenseDialog { licenses=false }
+
     if (exportId != null) AlertDialog(onDismissRequest = { exportId = null },
         title = { Text(stringResource(R.string.export_title)) },
         text = { Text(stringResource(R.string.export_warning)) },
-        confirmButton = { TextButton(onClick = { home.prepareExport(exportId); exportId = null }, enabled = editable) { Text(stringResource(R.string.choose_location)) } },
+        confirmButton = { Button(onClick = { home.prepareExport(exportId); exportId = null }, enabled = editable) { Text(stringResource(R.string.choose_location)) } },
         dismissButton = { TextButton(onClick = { exportId = null }) { Text(stringResource(R.string.cancel)) } })
 
     if (deleteId != null) AlertDialog(onDismissRequest = { deleteId = null },
         title = { Text(stringResource(R.string.delete_title)) }, text = { Text(stringResource(R.string.delete_warning)) },
-        confirmButton = { TextButton(onClick = { home.deleteSelected(deleteId); deleteId = null }, enabled = editable) { Text(stringResource(R.string.delete)) } },
+        confirmButton = { AzButton(kind=AzButtonKind.DANGER,onClick = { home.deleteSelected(deleteId); deleteId = null }, enabled = editable) { Text(stringResource(R.string.delete)) } },
         dismissButton = { TextButton(onClick = { deleteId = null }) { Text(stringResource(R.string.cancel)) } })
 }

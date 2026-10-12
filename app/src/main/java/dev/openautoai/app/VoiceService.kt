@@ -65,7 +65,7 @@ class VoiceService : Service() {
     private fun publish(state: VoiceState) {
         val conversation = state.conversation
         AppState.update(state.active, conversation?.provider ?: AppState.provider,
-            conversation?.modelId ?: AppState.modelId, conversation?.id ?: AppState.sessionId, state.status)
+            conversation?.modelId ?: AppState.modelId, conversation?.id ?: AppState.sessionId, state.status, state.phase)
         AppState.reportIssue(state.notice)
         if (destroying) return
         if (state.active) {

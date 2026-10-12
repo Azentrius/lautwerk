@@ -18,13 +18,16 @@ import java.io.File
 class SpeechSettingsScreenTest {
     @get:Rule val compose = createAndroidComposeRule<SpeechSettingsActivity>()
 
-    @Test fun catalogLoadsAndPickerOpensWithoutStartingAPreview() {
+    @Test fun catalogLoadsAsAListWithoutStartingAPreview() {
         compose.waitUntil(15_000) {
-            compose.onAllNodesWithTag("speech-voice-picker").fetchSemanticsNodes()
+            compose.onAllNodesWithTag("voice-option-default").fetchSemanticsNodes()
                 .any { !it.config.contains(SemanticsProperties.Disabled) }
         }
         compose.onNodeWithText("Stimme und Tempo").assertIsDisplayed()
+        compose.onNodeWithTag("speech-list").performScrollToNode(hasText("Hörprobe stoppen"))
         compose.onNodeWithText("Hörprobe stoppen").assertIsNotEnabled()
+        compose.waitForIdle()
+        android.os.SystemClock.sleep(500)
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         instrumentation.uiAutomation.takeScreenshot()?.let { bitmap ->
             File(instrumentation.targetContext.cacheDir, "speech-settings-test.png").outputStream().use {
@@ -32,8 +35,9 @@ class SpeechSettingsScreenTest {
             }
             bitmap.recycle()
         }
-        compose.onNodeWithTag("speech-voice-picker").performClick()
+        compose.onNodeWithTag("speech-list").performScrollToNode(hasTestTag("speech-voice-picker"))
         assertTrue(compose.onAllNodesWithText("Auf dem Gerät", substring = true).fetchSemanticsNodes().isNotEmpty())
+        compose.onNodeWithTag("speech-list").performScrollToNode(hasText("Hörprobe stoppen"))
         compose.onNodeWithText("Hörprobe stoppen").assertIsNotEnabled()
     }
 }

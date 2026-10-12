@@ -36,6 +36,7 @@ internal data class HomeState(
     val message: String? = null,
     val readyStart: Conversation? = null,
     val exportPickerPending: Boolean = false,
+    val exportPresentation: ExportPresentation = ExportPresentation.NONE,
     val historyQuery: String = "",
     val historyProvider: Provider? = null,
     val historyMatches: List<ConversationMatch> = emptyList(),
@@ -208,12 +209,17 @@ internal class HomeViewModel(
         val token = ++operationVersion
         readVersion++ // A read started before this mutation must not overwrite its result.
         reloadWanted = true
-        state = state.copy(operation = kind, message = null)
+        state = state.copy(operation = kind, message = null, exportPresentation = when(kind) {
+            HomeOperation.START -> ExportPresentation.NONE
+            HomeOperation.PREPARE_EXPORT -> ExportPresentation.PREPARING
+            else -> state.exportPresentation
+        })
         mutation = tasks.run(work) { result ->
             mutation = null
             if (closed || token != operationVersion) return@run
             state = state.copy(operation = null)
             result.fold(success) { error ->
+                if(kind == HomeOperation.PREPARE_EXPORT) state = state.copy(exportPresentation = ExportPresentation.FAILED)
                 state = state.copy(message = error.storageMessage(when (kind) {
                     HomeOperation.START -> Messages.OPEN_FAILED.text()
                     HomeOperation.SAVE_KEY -> Messages.KEY_SAVE_FAILED.text()
@@ -316,7 +322,7 @@ internal class HomeViewModel(
         operationVersion++
         mutation?.cancel(); mutation = null
         exportSnapshot = null
-        state = state.copy(operation = null, exportPickerPending = false, message = Messages.EXPORT_CANCELLED.text())
+        state = state.copy(operation = null, exportPickerPending = false, message = Messages.EXPORT_CANCELLED.text(), exportPresentation = ExportPresentation.CANCELLED)
         refresh()
     }
 
@@ -324,7 +330,7 @@ internal class HomeViewModel(
         if (closed || state.operation != HomeOperation.PICK_EXPORT) return
         exportSnapshot = null
         state = state.copy(operation = null, exportPickerPending = false,
-            message = Messages.EXPORT_PICK_FAILED.text())
+            message = Messages.EXPORT_PICK_FAILED.text(), exportPresentation = ExportPresentation.FAILED)
         refresh()
     }
 
@@ -333,23 +339,23 @@ internal class HomeViewModel(
         val chat = exportSnapshot
         if (state.operation != HomeOperation.PICK_EXPORT || chat == null) {
             // E.g. process death while the picker was open. Never guess which chat to disclose.
-            if (destination != null && state.operation == null) state = state.copy(message = EXPORT_INTERRUPTED)
+            if (destination != null && state.operation == null) state = state.copy(message = EXPORT_INTERRUPTED, exportPresentation = ExportPresentation.FAILED)
             return
         }
         exportSnapshot = null
         state = state.copy(exportPickerPending = false)
         if (destination == null) {
-            state = state.copy(operation = null, message = Messages.EXPORT_CANCELLED.text())
+            state = state.copy(operation = null, message = Messages.EXPORT_CANCELLED.text(), exportPresentation = ExportPresentation.CANCELLED)
             refresh()
             return
         }
         val token = ++operationVersion
-        state = state.copy(operation = HomeOperation.WRITE_EXPORT, message = null)
+        state = state.copy(operation = HomeOperation.WRITE_EXPORT, message = null, exportPresentation = ExportPresentation.WRITING)
         mutation = tasks.run({ cancel -> exporter.write(destination, chat, cancel) }) { result ->
             mutation = null
             if (closed || token != operationVersion) return@run
             state = state.copy(operation = null, message = if (result.isSuccess)
-                Messages.EXPORTED.text() else EXPORT_FAILED)
+                Messages.EXPORTED.text() else EXPORT_FAILED, exportPresentation = if(result.isSuccess) ExportPresentation.DONE else ExportPresentation.FAILED)
             refresh()
         }
     }

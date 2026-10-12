@@ -1,93 +1,53 @@
-# Build- und Testbericht 0.1.12
+# Build- und Testbericht 0.1.13
 
-Stand: 12.10.2026. **157 verschiedene automatisierte Prüfungen bestanden:**
-22 Core-JVM, 21 Anbieter-JVM, 45 Gesprächs-JVM, 61 Assistant-Gerätetests und
-8 DHU-/Auswahltests. Assistant **0.1.12-dev / Code 13** und DHU-Test-App
-**0.1.12-prototype / Code 4** als Updates auf Pixel 10 Pro / Android 17 installiert.
-Assistant geöffnet, installierte Version und aktive MainActivity geprüft.
-
-## Änderungen
-
-Deutsch/Englisch entsprechend Androids Sprachpräferenzen, Englisch als Rückfall.
-„Gespräch starten“ ersetzt „Sprachgespräch starten“. Oberflächen, feste Meldungen,
-Hörprobe, Anweisungen an beide Anbieter und Exportbeschriftungen folgen der Sprache.
-Stimmwahl wird je Sprache bewahrt; vorhandene Auswahl wird über Android-Metadaten
-zugeordnet. Bestehende Chats und Schlüssel bleiben im gleichen verschlüsselten Format.
-
-Startaufträge werden nur in einer fortgesetzten Oberfläche verbraucht. Abbruch und
-verspätete Berechtigungsrückmeldung können kein neues Gespräch autorisieren.
-Ein Prozessneustart stellt keinen Startauftrag aus einem Bundle wieder her.
-Navigation und Nachrichtenposition überstehen die Neuerstellung der Oberfläche.
+Stand: 12.10.2026. Assistant **0.1.13-dev / Code 14** auf dem Pixel 10 Pro mit
+Android 17 installiert. DHU-/Phone-Prototyp unverändert **0.1.12-prototype / Code 4**.
+Die Umsetzung folgt dem freigegebenen Design-Paket und der Reiter-Ergänzung
+`Azentrius/design-system@ab59a45`; siehe [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md).
 
 ## Ergebnisse
 
 | Prüfung | Ergebnis |
 |---|---|
-| Core-JVM | 22 bestanden, einschließlich Sprachreihenfolge, Rückfall, dynamischer Fehlermeldungen und Exportlabels ohne Änderung der Inhalte |
-| Anbieter-JVM | 21 bestanden; beide Sprachvarianten in Requests beider Anbieter, gleiches Modell und Antwortbudget, keine echte API-Anfrage |
-| Gesprächs-JVM | 45 bestanden; bestehende Abbruch-/Unterbrechungsprüfungen und englischer Anbieterwechsel/Ende ohne Weiterleitung als Benutzerfrage |
-| Assistant-Gerätetests | 61 verschiedene Tests bestanden, siehe Wiederholung unten |
-| DHU-/Auswahltests | 8 bestanden; bisherige deutsche Prüfungen plus englisches Template mit Titel, Auswahl und funktionierender Start-Aktion |
-| Android-Lint | 0 Fehler, 11 Warnungen und 1 KTX-Hinweis; eine zusätzliche Empfehlung zum Preferences-KTX-Stil gegenüber 0.1.11 |
-| Visuelle Prüfung | Deutsch und Englisch mit ausschließlich erfundenen Chats; Beschriftungen und feste Startsteuerung sichtbar |
+| Core-JVM | 22 bestanden; unveränderter Code, lokaler Gradle-Lauf up-to-date |
+| Anbieter-JVM | 21 bestanden; unveränderter Code, lokaler Gradle-Lauf up-to-date |
+| Gesprächs-JVM | 45 bestanden; unveränderter Code, lokaler Gradle-Lauf up-to-date |
+| Assistant auf Pixel | 73 verschiedene Tests im abschließenden Gesamtlauf bestanden |
+| DHU-/Auswahltests auf Pixel | 8 bestanden: Auswahl, Titel, Start-Aktion, Activity-Neuerstellung und englisches Template |
+| Builds | Assistant-Debug, Assistant-Test, DHU-Debug, DHU-Test und Phone-Debug erfolgreich |
+| Android-Lint | 0 Fehler, 30 Warnungen, 1 Hinweis |
+| Visuelle Prüfung | Helles Deutsch, dunkles Englisch, Exportdialog, Stimmwahl und 200 % Schrift mit Testdaten |
 
-Der erste Assistant-Lauf bestand 52 von 61 Tests. Neun bisherige UI-Tests suchten
-noch die alten deutschen internen Seitenkennungen. Nach Umstellung der betroffenen
-Testaufrufe bestand die gesamte betroffene Klasse `StorageUiTest` mit 11 Tests.
-Die Produktions-App wurde zwischen diesen Läufen nicht verändert. Es handelt sich
-um 61 verschiedene bestandene Tests, nicht um 72 verschiedene Prüfungen.
+Zusammen **169 verschiedene automatisierte Tests**. Wiederholte Läufe zählen nicht
+zusätzlich. Die ersten 71 Smartphone-Tests bestanden. Ein ergänzter Reiter-Test
+beanstandete zunächst Compose-Rundung zwischen Fließkomma-Textbreite und ganzzahliger
+Layoutgröße. Der abschließende Test vergleicht den verfügbaren Platz, vollständige
+Zeilenenden und unbeschnittene Reitergrenzen. Alle drei Anordnungen bestehen.
+Eine weitere Prüfung bestätigt das Scrollen und Schließen der lokalen Lizenzen.
 
-Die neuen vier `LocalizationLifecycleTest`-Prüfungen bestehen: reale Activity-
-Neuerstellung mit behaltenem ViewModel, Sprachwechsel mit Suchtext/Filter,
-erhaltener älterer Nachricht und Scrollposition, Hintergrundwechsel während eines
-langsamen Starts und einmaliger anschließender Start. Ein separater Debug-Testhost
-verwendet die echte MainContent/HomeViewModel-Anbindung, ausschließlich Speicherattrappen
-und einen Startzähler; er kann keinen Sprachdienst oder Anbieteraufruf starten.
-Er ist nicht exportiert und nicht in Release-Builds enthalten.
+Die 12 zusätzlichen Tests sichern Präsentation mit Start/Beenden, Exportphasen,
+deaktivierten Aktionen, Online-Stimmen-Bestätigung, Screenreader-Nachrichten,
+Datumsformaten, Reiter-Anordnung, Lizenzen und drei visuellen Szenarien ab.
+Bestehende Exporttests prüfen zusätzlich die neuen Anzeigen. Die 19 zusätzlichen
+Lint-Warnungen betreffen importierte, noch ungenutzte Design-Ressourcen und zwei
+Compose-Modifier-Konventionen. Bestehende Warnungen bleiben dokumentiert; keine Lint-Fehler.
 
-Die drei Start-Gate-Tests prüfen Abbruch/verspätete Freigaben, Vordergrund-/Mikrofon-
-Voraussetzungen, optionale Benachrichtigungsfreigabe sowie einen frischen Prozesszustand.
-Der Stimmtest prüft die Übernahme einer alten deutschen Auswahl und eine davon
-unabhängige englische Auswahl. Keine persönlichen Chats oder Schlüssel ausgelesen,
-keine Aufnahme oder hörbare TTS gestartet. Die Gerätesprache blieb unangetastet.
+## Isolation und Grenzen
 
-## Grenzen und Praxistest
+Tests verwenden erfundene Chats/Schlüssel und getrennte Speicherattrappen.
+Kein echtes Anbieter-Konto, Mikrofon, hörbare TTS, Anruf oder Headset-Test gestartet.
+Die Gerätesprache und globale Schriftgröße wurden nicht verändert: der Debug-Testhost
+verwendet eigene Konfigurationen. Ein Speichervorschlag des Passwortmanagers für eine erfundene Testeingabe wurde
+ohne Speichern geschlossen; die Stimmenseite wurde anschließend separat geprüft.
+Die Produktions-App und die Systemeinstellung des Passwortmanagers bleiben unverändert.
 
-Der Nutzer bestätigt am 12.10.2026 für 0.1.12 nach dem Testauftrag mit Starten,
-Antwort anhören und Beenden: **„Funktioniert bei beiden einwandfrei.“** Für den
-Gerätesprachwechsel Englisch/Deutsch einschließlich Rückkehr zur deutschen
-Stimmwahl lautet die Rückmeldung: **„Deutsch und Englisch funktionieren.“**
-Ein vollständiges englischsprachiges Gespräch wurde nicht gesondert bestätigt.
+Build/Tests der Car-App sind keine neue Sichtprüfung einer echten DHU-Verbindung.
+Das bestätigte Car-Template, seine Aktionen, Kategorie-Deklaration und Hostprüfung
+sind gegenüber 0.1.12 unverändert. Auto-Audio wird nicht eingeführt.
 
-Activity-Neuerstellung im Test ersetzt keinen vollständigen Prozessabbruch mit
-offenem Systemdialog. Echtes englisches Vorlesen, Cloud-Ziele und Rotation im
-externen Export-Dateidialog sind nicht automatisiert abgenommen. Die Sprachauswahl
-des Modells ist nur anhand ausgehender Test-Requests geprüft.
+Ein realer Gesprächsdurchlauf mit beiden Anbietern wurde für 0.1.12 vom Nutzer
+bestätigt, für 0.1.13 noch nicht erneut manuell bestätigt. TalkBack/D-Pad und
+Rotation im externen Dateidialog sind nicht vollständig praktisch abgenommen.
+Cloud-Exportziele sowie **Anruf- und Headset-/Bluetooth-Tests bleiben zurückgestellt**.
 
-**Anruf- und Headset-/Bluetooth-Praxistests bleiben zurückgestellt.** Eine neue
-reale DHU-Verbindung und Auto-Audio wurden nicht geprüft. DHU-Layout/Aktionen,
-Kategorie-Platzhalter und Hostprüfung bleiben erhalten; keine Zulassungsbehauptung.
-Die DHU-Versionsnummer steigt wegen der zusätzlichen Übersetzung, nicht wegen
-einer neuen Auto-Funktion. Der Debug-Release-Schutz bleibt aktiv.
-
-GitHub-CI ist konfiguriert; der erste Online-Lauf wird getrennt dokumentiert.
-Das Speichermodul erhält nur den lokalisierten Titel neuer leerer Chats; seine
-separaten Verschlüsselungs-Gerätetests wurden nicht wiederholt.
-
-## Wiederholen
-
-JDK 17 und SDK gemäß [START_WINDOWS.md](START_WINDOWS.md) setzen.
-
-```powershell
-.\gradlew.bat :core:test :providers:test :voice:test :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest
-.\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:assembleDhuDebugAndroidTest
-.\gradlew.bat :app:connectedDebugAndroidTest :prototype-app:connectedDhuDebugAndroidTest
-```
-
-Die bisherigen Gerätefixtures erwarten Deutsch. Neue Englisch-/Rückfalltests
-verwenden isolierte Konfigurationskontexte. JVM-Tests setzen die deutsche
-Baseline unabhängig von der Sprache des Build-Rechners; neue Sprachtests prüfen
-Englisch zusätzlich explizit.
-
-[Sprache und Wiederaufnahme](LOCALIZATION.md) · [Bedienung](PHONE_UI.md)
-Vorheriger Bericht: [0.1.11](history/BUILD_AND_TEST-0.1.11.md).
+Der vorherige Testbericht liegt unter [history/BUILD_AND_TEST_0.1.12.md](history/BUILD_AND_TEST_0.1.12.md).
