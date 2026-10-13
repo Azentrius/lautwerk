@@ -6,10 +6,12 @@ specifically `android.md`, `android-auto.md` and `tokens.json` in
 Historical copies remain available; [reference metadata](../design/azentrius/README.md) describes them.
 The upstream repository was read only. No upstream scripts were run.
 
-Baseline: application `main` at `c8620957616393263d46a3efcd5f800fec41a993`, version 0.1.16/code 116.
+Final baseline: application `main` at `5a3520b14e77eb1978d3c86e6d6e0d5255b621ac`, version 0.1.17/code 117.
+The work began on `c862095` (0.1.16); PRs #27 and #28 merged during the audit. This branch was
+rebased onto the new main, preserving the car voice implementation and dependency updates.
 The maintainer approved **0.1.18/code 118**, retaining the shared version rule, because 0.1.17 is
-used by the separate voice PR. Both apps receive 118; the prototype phone UI changes too.
-This PR contains no changes from the separate voice branch.
+used by the now-merged voice PR. Both apps receive 118; the prototype phone UI changes too.
+This PR does not rewrite the merged voice behavior.
 
 Statuses: **fulfilled** = existing implementation meets the applicable rule;
 **adjusted** = purely visual correction in this PR; **open** = conflict, missing specification,
@@ -47,7 +49,7 @@ explicitly; it is not a reason to add behavior. All paths below are relative to 
 |---|---|---|
 | Primary/secondary/danger/text buttons, five states and dimensions | `AzButton`; prototype `PrototypeButtonBackground.kt`, `activity_main.xml` | adjusted — assistant already matches; native Start uses primary palette, full pill, 48 dp minimum, 24 dp horizontal padding and app-control. |
 | Icon button 48 dp circle, 24 dp icon, action description | `AzIconButton`; uses in `MainContent`, `ConversationBar`, `SpeechSettingsActivity` | fulfilled — existing localized action descriptions retained. |
-| Only one primary per action group; danger only in delete confirmation | `MainContent.kt`, `ConversationBar.kt`, `VoiceConsentDialog` | fulfilled — action placement and conditions unchanged. |
+| Only one primary per action group; danger only in delete confirmation | `MainContent.kt`, `ConversationBar.kt`, `VoiceOptions` confirmation | fulfilled — action placement and conditions unchanged. |
 | Text fields: label above, radius 6, min 48, h16, 4 dp gaps, text/cursor/focus/disabled | `AzTextField`; settings and history search in `MainContent.kt` | fulfilled — normal/focused/disabled presentation uses supplied values. |
 | Inline field error after blur/save, red outline and instruction | `AzTextField`, `HomeViewModel`, `MainContent.kt` | open — existing validation/storage errors are page-level messages, not field-owned error state. Do not invent validation timing, attribution or new instructions. Upstream should describe existing behavior. |
 | Chips 32 dp visual / 48 dp touch, h16, check18+gap8, wrapping and states | `AzChip`; settings/search/tempo FlowRows | fulfilled — existing immediate selection and disabled rules retained. |
@@ -74,29 +76,37 @@ explicitly; it is not a reason to add behavior. All paths below are relative to 
 | Start/continue/end based on activity/selected chat; preparation-only cancel | `ConversationBar.kt`, `DesignUiTest` | fulfilled — no change to conversation state machine or start gate. |
 | Export preparation cancel / system picker cancel / no cancellation during write | `ConversationBar.kt`, `MainActivity`, `DocumentConversationExporter` | fulfilled — no new operation or cancellation path. |
 | User bubble80%, right, tint-neutral, h16/v8, radius16/lower-right6; assistant full width | `AzMessage`, message items in `MainContent` | fulfilled — existing role semantics; 8 dp same-role / 24 dp changed-role gap. |
-| Preserve accessibility role prefix and existing wording | `MainContent.kt`, localized `user_message` | fulfilled — existing German address retained. Examples in the specification do not authorize translation changes. |
+| Preserve accessibility role prefix and existing wording | `MainContent.kt`, localized `user_role` | fulfilled — existing German address retained. Examples in the specification do not authorize translation changes. |
 | Interim speech: outline-only then filled final bubble | No interim transcript in current UI | fulfilled (not applicable) — do not add partial speech recognition behavior. |
 | History title/body single line; last-modified/provider/model metadata; trailing angle24 | `AzHistoryRow`, `historyDate`, `MainContent.kt` | fulfilled — ellipsis at the end, date first, locale-aware relative/calendar dates, no invented duration. |
 | Search message match third line only, label/subtle, min88; no snippets/highlights | `AzHistoryRow`, `MainContent.kt` | fulfilled — title/provider/model-only matches do not get a third line. |
 | Day groups if present; empty icon48/title20/body; delete confirmation | `MainContent.kt` history | fulfilled — empty/delete presentation exists; no day-grouping feature added. |
 | Separate Voice and speed page entered from Conversation, same location | `MainContent.kt`, `SpeechSettingsActivity.kt` | fulfilled — no Settings entry added. |
 | Voice row title/body and description/label; Online only for known online voice | `VoiceOptions`, `voice/SpeechSettings` | fulfilled — default remains unmarked, existing labels/descriptions retained. |
-| Confirm every explicit online choice; no stored consent; cancel keeps selection | `VoiceConsentDialog`, `SpeechPreview` and screen tests | fulfilled — appearance only, no permission or persistence changes. |
+| Confirm every explicit online choice; no stored consent; cancel keeps selection | `VoiceOptions` confirmation, `SpeechPreview` and screen tests | fulfilled — appearance only, no permission or persistence changes. |
 | Preview current voice only; two always-visible secondary buttons, play/stop, gap8/stack | `SpeechSettingsContent`, `AzActions` | fulfilled — same enablement, no per-row preview, no selection change. |
 | Tempo uses current control | `SpeechSettingsContent` | fulfilled — three existing rate chips retained. |
 | State/color/icon table; listening strong info, thinking/speaking tinted info, others neutral | `ConversationBar.kt`, `AzStatusLabel` | fulfilled — no gold/green conversation phase, no spinner/pulse; error reason in danger label. |
 | State exactly once, in lower bar | `MainContent.kt:voice-notice`, `ConversationBar.kt:issue` | open — an existing stopped error can appear both as a page notice and in the bar. Removing an existing error presentation conflicts with the instruction to preserve texts/behavior. Keep it and request an upstream clarification. |
 | Adaptive icon108, safe circle66, ink/gold, monochrome/evenOdd, roundIcon | Both app manifests and supplied `ic_launcher*` files | fulfilled — existing icon files verified byte-identical to the reference; no asset regeneration. |
 | Splash ink, static icon, no text/animation; pre-12 window background | Both modules' `values`, `values-v31`, `values-v33` styles | fulfilled — startup icon/background unchanged; runtime page colors do not replace startup ink. |
-| Notification white24 silhouette, no gold setColor, title unchanged | `VoiceService.kt`, `drawable/ic_stat_openauto.xml` | fulfilled — existing icon verified against upstream; notification code untouched. |
+| Notification white24 silhouette, no gold setColor, title unchanged | `VoiceService.kt`, `CarVoiceService.kt`, both `ic_stat_openauto.xml` assets | adjusted — assistant already matches; newly merged car service now uses the same byte-identical white silhouette. Notification titles, channels and actions unchanged. |
 | No car-specific launcher icon; Play image only for publication | Manifests / upstream app-icon assets | fulfilled — same adaptive icon; no publication artwork or Play claim added. |
 | Font licenses shipped; preserve actual third-party attribution | `NOTICE`, both modules' `assets/licenses`, `LicenseDialog` | adjusted — italic font covered by existing OFL; prototype includes both font licenses. |
 | Icon licensing stated as MIT in reference | Upstream LICENSE / android.md versus existing `NOTICE` | open — 29 existing icons are Font Awesome CC BY 4.0, only pending is PatternFly MIT. Keep correct application attribution; report the upstream discrepancy without editing the snapshot. |
 
+## Newly merged car phone setup
+
+| Rule | Code location | Result |
+|---|---|---|
+| Readable page after ink startup, system light/dark palette | `VoiceSetupActivity.kt`, prototype `az_theme.xml` | adjusted — runtime page explicitly resolves the supplied background color, avoiding light-theme text on the ink launch window. No key/permission/audio callback changes. |
+| Existing car audio setup and entry button have no dedicated mapping in the reference | `VoiceSetupActivity.kt`, DHU `VoiceEntryPoint.kt` | open — android.md describes the original assistant's pages, not the new test-mode/permission/key setup. Its native button/radio/input presentation and legacy 28 dp inset need a coherent upstream mapping, including primary-action grouping. Do not invent one or move controls. |
+
 ## Android Auto: complete source comparison
 
-`car-ui/`, `prototype-app/src/dhu/`, all existing localized strings, app identity assets,
-providers, selection/storage contracts and voice code are unchanged from the stated baseline.
+`OpenAutoScreen.kt`, `prototype-app/src/dhu/`, all existing localized strings, launcher assets,
+providers, selection/storage contracts and audio logic are unchanged from the final baseline.
+The only car-ui edits are the supplied notification icon and the phone setup background.
 The prototype phone title is styled locally; no styled spans, typefaces or phone surface colors
 are passed to the car host. Native phone resources do not replace CarAppTheme.
 
@@ -106,13 +116,13 @@ are passed to the car host. Native phone resources do not replace CarAppTheme.
 | B1 MessageTemplate, APP_ICON, message, exactly one action, no strip/icon/loading | `car-ui/.../OpenAutoScreen.kt` | fulfilled — source unchanged. |
 | B2 primary C8A96E / primaryDark 7D5F22, no secondary pair | `prototype-app/src/dhu/res/values/car_styles.xml`, DHU manifest metadata | fulfilled — exact existing theme and manifest unchanged. |
 | B3 action PRIMARY, no ForegroundCarColorSpan/icon/FLAG_PRIMARY | `OpenAutoScreen.kt` action builder | fulfilled — unchanged. |
-| B4 existing title/status/provider/model/action texts and order | `OpenAutoScreen.kt`, `car-ui/src/main/res/values*/strings.xml` | fulfilled — no shortening, spans or translations added. |
+| B4 existing title/status/provider/model/action texts and order | `OpenAutoScreen.kt`, `car-ui/src/main/res/values*/strings.xml` | open — current main has real Start/End and voice status, whereas the reference still specifies an offline counter. Preserve current texts/order and behavior, including plain title; upstream must be updated. |
 | B5 no phone tokens/fonts/layout passed to host | `OpenAutoScreen.kt`, DHU resources | fulfilled — only B2 pair and existing launcher icon. |
 | Host owns background, typography, spacing, focus, pressed feedback and final colors | `OpenAutoScreen.kt` | fulfilled — no attempt to impose phone rendering or assumed black background. |
 | Primary pair is not a day/night palette; host replacements permitted | `CarAppTheme`, historical 0.1.14 evidence | fulfilled — requested colors are not claimed as actual colors; cause of historical replacement is unknown. |
 | Icon only in header; UI-test action icon gap | `OpenAutoScreen.kt`, launcher resources | fulfilled — no new icon; missing UI-test icon needs no decision while B1/B3 forbid it. |
-| Ready/started counter, live provider selection, localization | `PrototypeSession`, `OpenAutoScreen`, `CarTemplateTest` | fulfilled — unchanged flow; tests distinguish model contracts from real host rendering. |
-| Template budget / O4 | `OpenAutoScreen.kt` | open — changing the counter template could alter behavior. Retain existing implementation; a baseline A7 failure is known, only a newly introduced failure is a regression. |
+| Ready/started counter, live provider selection, localization | `PrototypeSession`, `OpenAutoScreen`, `CarTemplateTest` | open — counter remains only on the prototype phone page. Car templates now use active voice state; tests preserve current Start/End intent, localization and live selection. Do not restore the obsolete car counter. |
+| Template budget / O4 | `OpenAutoScreen.kt` | open — the old six-counter-start scenario no longer models current voice behavior. No flow change here. Any host regression must be compared with the current main, not inferred from the obsolete counter scenario. |
 | O1 decided; O2 only after failed measured contrast; O3 only after clipping | Icon assets, `CarAppTheme`, catalog | fulfilled — O1 already implemented; no unmeasured O2 fallback or content-changing O3 workaround. |
 
 ## Android Auto acceptance boundaries (A1–A11)
@@ -131,12 +141,12 @@ These observations are not tokens or a promised result on another host.
 | A3 actual accent in day/night, including host replacement | `CarAppTheme`, historical A3 measurements | open — no new host color measurement; B2/B3 unchanged. |
 | A4 measured text/background ≥4.5, unchanged message/title | Historical `docs/evidence/0.1.14/`; B2/B3 | open — phone contrast below is not a replacement for new DHU pixel measurements. |
 | A5 full longest/shortest provider-model in each display/language | `ModelCatalog`, `OpenAutoScreen` | open — no new host truncation matrix. Do not shorten labels or assume emulator unit tests prove it. |
-| A6 touch/rotary counter and log match | `CarTemplateTest`, `PrototypeSession` | fulfilled at template-test level; host touch/rotary remains unrerun. |
-| A7 six starts at800×480, baseline distinction | `CarTemplateTest`, `OpenAutoScreen` | open — no new host six-click run. Existing baseline failures do not block this design change; only regressions do. |
+| A6 touch/rotary counter and log match | `CarTemplateTest`, `PrototypeSession` | open — counter requirement is obsolete for the car; current Start/End intent and live model selection are tested with an audio fake. Actual host input was not rerun. |
+| A7 six starts at800×480, baseline distinction | `CarTemplateTest`, `OpenAutoScreen` | open — no new host run; current voice app has no car counter. Existing baseline failures do not block this design change; only regressions do. Upstream needs a scenario matching current behavior. |
 | A8 host rotary focus day/night | Host-owned focus | open — no new physical/host focus test; no application focus styling added. |
 | A9 German/English/fallback, no mixed language | Resource folders, localized car tests | fulfilled at resource/template-test level; full host language matrix not rerun. |
 | A10 live phone selection without reconnect | `ModelSelectionStore`, `CarTemplateTest` lifecycle test | fulfilled at template-test level; real projection session not rerun. |
-| A11 no false conversation/category/approval claim | Text and manifest audit | fulfilled — unchanged offline UI-test wording. |
+| A11 no false conversation/category/approval claim | Text and manifest audit | open — no category/approval claim is added, but legitimate voice-state text now exists. The reference's prohibition on indicating any conversation is obsolete; preserve current behavior. |
 
 ## Open points to return to the design-system maintainer
 
@@ -146,6 +156,10 @@ These observations are not tokens or a promised result on another host.
    or selection flow from the assistant's chip layout; current native selectors remain native.
 4. Clarify the existing duplicate stopped-error notice versus “state exactly once”.
 5. Correct the reference's icon attribution; the application's CC BY 4.0 notices remain intact.
+6. Update android-auto.md for current main's real voice Start/End/status, replacing the obsolete
+   offline-counter content and acceptance scenarios without changing the implementation here.
+7. Add the native car audio setup and its entry action to the phone component mapping; include
+   layout, field states, radio rows and primary/secondary action grouping. Existing callbacks stay.
 
 Unrun DHU host checks and template-budget behavior are validation/behavior limitations, not new
 design choices. No values, new user-facing strings or additional consent state were invented.
@@ -154,10 +168,12 @@ design choices. No values, new user-facing strings or additional consent state w
 
 See [evidence and measured contrast](evidence/0.1.16/README.md). The requested evidence directory
 keeps its original name; every new screenshot and result there belongs to **0.1.18/code 118**.
+The Pixel full suite passes 78/78. A supplementary emulator suite reported four failures; the
+evidence records the original run and targeted baseline/final comparison, without treating it as green.
 Before merging, inspect the title in light/dark and with 200% device font, both supported languages,
 the voice list with description rows, and the separately installed prototype phone page.
 TalkBack should read the title once. Automated semantics do not replace an audible TalkBack check.
 
 No live provider requests, audio previews, microphone capture, calls or headset tests are required
-for this design change. The existing car voice build on the Pixel is not replaced by the offline
-main-branch prototype; template tests use an isolated emulator.
+for this design change. The existing car voice build on the Pixel is not replaced by the newly rebuilt
+car prototype; template tests use an isolated emulator.

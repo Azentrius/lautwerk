@@ -3,19 +3,19 @@
 Date: 2026-10-13. This directory retains the path requested before the maintainer approved
 the corrected version. These are **0.1.18** results, not results from the earlier 0.1.16 release.
 Design reference: `edd4c67da6d7c606296c3bbd13d7aa5da548f452`.
-Baseline: `c8620957616393263d46a3efcd5f800fec41a993` on main.
+Baseline: `5a3520b14e77eb1978d3c86e6d6e0d5255b621ac` on main.
 
 ## Automated checks
 
 - Version and CHANGELOG check: passed; shared versionCode 118, both apps.
-- JVM tests: 22 core, 21 providers,
-  45 voice; zero failures/errors.
+- JVM tests: 22 core, 21 providers, 57 voice; zero failures/errors.
 - All six Android lint tasks: passed, zero errors. Existing tooling/resource warnings remain;
   the explicitly requested font-family XML is unused by Compose, which loads the TTF directly.
 - All debug builds: assistant, prototype phone and prototype DHU; their instrumentation APKs built.
+- Additional full assistant run on the emulator: **74/78 passed**, four failures; see the comparison below.
 - Physical Pixel 10 Pro / Android 17: **78 tests passed**. See `pixel-instrumentation.txt`.
-- Isolated Android 14/API 34 emulator: **12 prototype/DHU-template tests passed**.
-  See `emulator-dhu-tests.txt`. The native title test additionally passed at 100%/200% in both themes.
+- Isolated Android 14/API 34 emulator: **19 prototype/DHU-template tests passed; two opt-in audio tests skipped**.
+  See `emulator-dhu-tests.txt`. The native title and secure setup-background tests additionally passed at 100%/200% in both themes (8 checks).
 - No real API requests, speech synthesis playback or microphone capture. No call/headset tests.
 - Existing car voice APK on the Pixel was retained; only the separate assistant package was updated.
 - The new test checks one semantic text “OpenAuto AI”, no duplicate description, the correct AI span,
@@ -69,9 +69,47 @@ reference files. Historical files were restored directly from their original app
 No actual Android Auto/DHU host session was started for this phone-only rendering change.
 Car API negotiation and current host colors therefore have **no new measurement**. The historical
 0.1.14 host versions and A1–A11 evidence are distinguished in [the audit](../../DESIGN_SYSTEM.md).
-`car-ui/`, the DHU manifest/theme, localized strings, identity assets and non-UI logic have no diff
-from the baseline. Template tests do not prove current launcher visibility or host rendering.
+The car template, DHU manifest/theme, localized strings, launcher assets and non-UI logic have no
+diff from the final baseline. car-ui only receives the supplied notification icon and a readable
+phone setup background; its audio flow and secure-input flag are retained. Template tests do not prove current launcher visibility or host rendering.
 
 Before merge: on the Pixel inspect both themes, 200% font, German/English, voice rows with
 descriptions, and optionally read the title with TalkBack. No conversation needs to start.
-The native selectors still need an upstream mapping; all design contradictions are listed in the audit.
+The native selectors and the newly merged car phone setup still need an upstream mapping;
+all design contradictions are listed in the audit.
+
+## Test-run reconciliation
+
+The first pass on the earlier main completed 88 JVM tests, 78 Pixel tests and 12 prototype tests.
+After PRs #27 and #28 merged, the branch was rebased and the full CI task list ran again successfully.
+The Pixel's automatic screen lock interrupted the first repeat; that run is not counted as passing.
+After the maintainer unlocked it, all 78 tests passed on the final build. German car-template tests
+now explicitly localize their test context: the first emulator repeat exposed reliance on a cached
+English context after application-locale changes. No production localization was changed.
+The successful final Pixel and car logs supersede their interrupted attempts. The additional
+assistant emulator failures are retained separately below; they are not counted as passes.
+
+The imported current snapshot's Git tree ID is `7487fe48e12d0b633b816cef779523aec395fc0a`, identical
+to upstream. This checks file names, bytes and modes, in addition to the SHA-256 manifest.
+
+
+
+## Additional assistant emulator failures
+
+The full assistant run on the isolated emulator reported 74 passes and four failures
+([raw log](emulator-app-tests.txt)). The same test APK passed all 78 tests on the Pixel.
+To check the failures without changing production code, the four cases were repeated after
+installing the unmodified main application at `5a3520b`, then again after reinstalling 0.1.18.
+Both targeted runs had the same result: three passes and the existing language expectation failure.
+See [baseline](emulator-baseline-four.txt) and [final](emulator-final-four.txt).
+
+| Test | Original full-run failure | Targeted baseline / final result |
+|---|---|---|
+| HistorySearchTest.failureIsSafeAndRetryRecoversWithoutLeakingQueryOrChatText | Test expects a German error, but the emulator's process uses English. | Same failure on both; pre-existing device-language assumption in the test. |
+| StorageUiTest.slowKeyWriteDoesNotBlockNavigationAndCannotBeSubmittedTwice | Save gate was not entered within three seconds; an immediate single-test retry also failed. | Pass on both after reinstall. The earlier gate timeout's precise cause is not established; do not call it a confirmed product regression or claim it was fixed. |
+| SpeechSettingsScreenTest.catalogLoadsAsAListWithoutStartingAPreview | No local-voice label was present in the current catalog. | Pass on both with the fresh en-US process and installed local English voices. |
+| SpeechSettingsTest.realAndroidEngineAcceptsAvailableLocalChoiceAndRejectsMissingOrChangedEngine | No local voice for the process's language. | Pass on both; each log records nine local en-US voices. No synthesis is started. |
+
+This comparison does not turn the original full run green. The mixed-locale emulator suite needs
+separate test-environment isolation work. No production language, storage or voice behavior was
+changed to accommodate it. The physical Pixel is the successful final full-suite run.

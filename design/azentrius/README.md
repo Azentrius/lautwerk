@@ -18,4 +18,4 @@ See each snapshot's LICENSE and LICENSES, and the application NOTICE.
 Do not edit snapshots: report gaps to the maintainer for resolution in the design system.
 
 The application audit, deliberate exceptions and validation are in
-[docs/DESIGN_SYSTEM.md](../../../docs/DESIGN_SYSTEM.md).
+[docs/DESIGN_SYSTEM.md](../../docs/DESIGN_SYSTEM.md).

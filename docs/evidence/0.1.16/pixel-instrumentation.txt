@@ -1120,7 +1120,7 @@ INSTRUMENTATION_STATUS: test=voiceAndRatePersistIndependentlyAndInvalidRatesAreS
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_RESULT: stream=
 
-Time: 65,532
+Time: 66,316
 
 OK (78 tests)
 

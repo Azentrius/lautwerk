@@ -33,7 +33,13 @@ class VoiceSetupActivity : Activity() {
             val inset = (28 * resources.displayMetrics.density).toInt() // Existing prototype phone spacing.
             setPadding(inset, inset, inset, inset)
         }
-        val scroll = ScrollView(this).apply { addView(content) }
+        val scroll = ScrollView(this).apply {
+            // The launch window stays ink; the phone page follows its light/dark theme.
+            val page = android.util.TypedValue()
+            theme.resolveAttribute(android.R.attr.colorBackground, page, true)
+            setBackgroundColor(page.data)
+            addView(content)
+        }
         scroll.setOnApplyWindowInsetsListener { view, insets ->
             if (Build.VERSION.SDK_INT >= 30) {
                 val bars = insets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime())

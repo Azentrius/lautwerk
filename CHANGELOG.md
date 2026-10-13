@@ -11,6 +11,8 @@ Apply the Azentrius app title and refresh the read-only design reference.
   light/dark palette. Keep its controls, texts and selection flow.
 - Restore historical design snapshots and import the complete, byte-verified `edd4c67` tree.
   Record the full Android and Android Auto audit, open specification points and evidence.
+- Use the supplied small notification icon for the newly merged car voice service and keep its phone
+  setup page readable in the selected theme. Its remaining native component mapping is an open point.
 - Keep the car template, B2/B3, strings, provider selection, storage and conversation behavior.
   Both apps use the existing shared version rule: 0.1.18, versionCode 118.
 

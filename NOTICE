@@ -25,7 +25,7 @@ and converted to Android vector drawables:
 Not covered by the Apache License: the OpenAuto AI app icon from the Azentrius
 design system and the Azentrius name and word mark. The app icon files, in app/
 and in prototype-app/, are src/main/res/drawable/ic_launcher_*.xml,
-src/main/res/drawable/ic_stat_openauto.xml (app only),
+src/main/res/drawable/ic_stat_openauto.xml (app and car-ui),
 src/main/res/mipmap-anydpi/ic_launcher*.xml and
 src/main/res/values/ic_launcher_background.xml.
   Copyright (c) 2026 Stefan Popp. All rights reserved.
