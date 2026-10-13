@@ -179,11 +179,13 @@ events for reports; full Android Auto logs and dashboard screenshots can contain
 | Initial no-speech mic attempt | Ended with NO_INPUT; not counted as a recognized-speech test |
 | One interrupted DHU transport | Reconnected; announced but unstarted test repeated successfully |
 | Claude live conversation/follow-up | Pending independent user/API test |
-| Final phone/template/recognition-listener instrumentation suite | Built; run pending because the Pixel disconnected before final update |
+| Final APK update | Installed 2026-10-13 at 14:19 CEST; installed SHA-256 matches the prepared APK; installer remains com.android.vending |
+| Final phone/template/recognition-listener instrumentation suite | Passed: 14 checks, two opt-in audio probes skipped in this run |
+| Final DHU template | Title, Claude Haiku 4.5, short status and the single action visible together; host API 8 retained |
 | Vehicle voice (ID.7 / Kia) | Not tested in this audio change; earlier launcher visibility is not audio evidence |
 | Call and headset interruption | Deferred at user's request |
 
-The full CI Gradle task list passed locally: 94 JVM tests (core 22, providers 21, voice 51), lint
+The full CI Gradle task list passed locally and in GitHub Actions on commit `17073c6`: 94 JVM tests (core 22, providers 21, voice 51), lint
 for all Android modules/variants with zero errors (36 warnings), all three debug APKs and both
 instrumentation APKs. Version/changelog validation passed. The same checks also passed from a clean
 source snapshot under JDK 17; unrelated local Android Studio daemon/JVM configuration changes were
@@ -192,11 +194,16 @@ excluded. The resulting car APK is byte-identical between both builds.
 Prepared final APK: `OpenAutoAI-0.1.17-dhu-debug.apk`.
 SHA-256: `86bd96e9ab0b281a2f3a61b6866c85264433d69df7594deeb98a92b66e77a6e8`.
 
-At the last check, the Pixel was no longer reachable through ADB. The confirmed audio probes above
-ran on the earlier installed 0.1.17 test build. The final APK additionally shortens car status text,
-keeps fixed error details available after reconnect and clarifies phone setup. Its installation and
-the new normal instrumentation tests must still be completed. No live Claude request has been
-performed in this car-voice validation; an API key is to be entered by the owner in the app only.
+After reconnecting the Pixel, the final APK was installed and verified byte-for-byte. It additionally
+shortens car status text, keeps fixed error details available after reconnect and clarifies phone
+setup. The device suite first exposed one stale expectation for the old English UI-test status; the
+test now expects the intended short `Ready.` text. All 14 ordinary checks then passed. The two opt-in
+audio probes were deliberately skipped in that suite and retain their separate earlier results.
+
+Conversation mode was explicitly selected and confirmed on the setup page before the live test.
+The earlier attempted switch had not selected the radio option after the phone page scrolled;
+the resulting MICROPHONE event was correctly identified as an audio diagnostic, not a Claude call.
+Live Claude question/follow-up validation is still pending user feedback; keys stay in the app only.
 
 ## References
 
