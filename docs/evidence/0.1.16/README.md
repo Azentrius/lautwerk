@@ -133,8 +133,9 @@ this small follow-up. The current APK hashes are in `apk-sha256.json`, with the 
 hashes retained in `apk-sha256-before-pronunciation.json`.
 
 The updated assistant APK is installed on the Pixel and its Voice and speed page was opened for
-the maintainer's local-voice listening check. Audible pronunciation is awaiting that confirmation;
-automated span/serialization assertions alone do not prove how a TTS engine sounds. No API request,
-microphone, car session, call or headset test is needed for the fixed sample.
+the maintainer's listening check. On 2026-10-13 the maintainer confirmed that the sample sounded
+better and was acceptable. This records acceptance of the heard sample, not a listening matrix
+covering every voice or both languages. Automated span/serialization checks remain separate from
+this manual confirmation. No API request, microphone, car session, call or headset test was added.
 
 Android reference: [TtsSpan.VerbatimBuilder](https://developer.android.com/reference/android/text/style/TtsSpan.VerbatimBuilder).
