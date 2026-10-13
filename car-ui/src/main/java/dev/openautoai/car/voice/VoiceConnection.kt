@@ -11,7 +11,8 @@ import java.io.Closeable
 interface CarVoicePort : Closeable {
     val state: CarVoiceState
     fun connect(changed: () -> Unit)
-    fun toggle()
+    fun start()
+    fun stop()
 }
 
 class VoiceConnection(private val context: Context, private val car: CarContext? = null) : CarVoicePort {
@@ -38,13 +39,14 @@ class VoiceConnection(private val context: Context, private val car: CarContext?
         if (bound) return
         bound = context.bindService(Intent(context, CarVoiceService::class.java), connection, Context.BIND_AUTO_CREATE)
     }
-    override fun toggle() {
+    override fun start() {
         val current = service
         if (current == null) {
             state = CarVoiceState(status = context.getString(R.string.voice_service_wait),
                 summary = context.getString(R.string.voice_preparing)); changed()
-        } else current.toggle(this, car, VoicePreferences(context).mode)
+        } else current.start(this, car, VoicePreferences(context).mode)
     }
+    override fun stop() { service?.stop() }
     override fun close() {
         service?.release(this)
         observer?.close(); observer = null; service = null

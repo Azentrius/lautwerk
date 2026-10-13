@@ -25,6 +25,7 @@ class OpenAutoScreen(
     private var visible = false
     private var requestingPermission = false
     private var permissionIssue = false
+    private var permissionGeneration = 0L
 
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
@@ -35,6 +36,8 @@ class OpenAutoScreen(
             }
             override fun onStop(owner: LifecycleOwner) {
                 visible = false
+                permissionGeneration++
+                requestingPermission = false
                 subscription?.close()
                 subscription = null
                 voice.close()
@@ -44,6 +47,7 @@ class OpenAutoScreen(
 
     @Suppress("DEPRECATION") // API-1 title/header remains usable on older hosts.
     override fun onGetTemplate(): Template {
+        val endsSession = voice.state.active
         Log.i(OpenAutoCarService.TAG, "car.onGetTemplate active=${voice.state.active}")
         val message = if (permissionIssue) carContext.getString(R.string.car_permission)
             else voice.state.summary.ifBlank { carContext.getString(R.string.car_ready) }
@@ -54,28 +58,36 @@ class OpenAutoScreen(
             .setTitle(carContext.getString(R.string.car_title))
             .setHeaderAction(Action.APP_ICON)
             .addAction(Action.Builder()
-                .setTitle(carContext.getString(if (voice.state.active) R.string.voice_stop else R.string.car_start))
+                .setTitle(carContext.getString(if (endsSession) R.string.voice_stop else R.string.car_start))
                 .setBackgroundColor(CarColor.PRIMARY)
                 .setOnClickListener {
-                    startOrStop()
+                    // The host can deliver a click from an older template. Preserve its intent.
+                    Log.i(OpenAutoCarService.TAG, "car.voice.action=${if (endsSession) "stop" else "start"}")
+                    if (endsSession) {
+                        permissionGeneration++
+                        requestingPermission = false
+                        voice.stop()
+                    } else start()
                 }.build())
             .build()
     }
 
-    private fun startOrStop() {
-        if (requestingPermission) return
+    private fun start() {
+        if (requestingPermission || voice.state.active) return
         permissionIssue = false
         if (!voice.state.active && VoicePreferences(carContext).mode != VoiceMode.PLAYBACK &&
             carContext.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             requestingPermission = true
+            val token = ++permissionGeneration
             try {
                 carContext.requestPermissions(listOf(Manifest.permission.RECORD_AUDIO), carContext.mainExecutor) { approved, _ ->
+                    if (token != permissionGeneration) return@requestPermissions
                     requestingPermission = false
                     permissionIssue = Manifest.permission.RECORD_AUDIO !in approved
-                    if (visible && Manifest.permission.RECORD_AUDIO in approved) voice.toggle()
+                    if (visible && Manifest.permission.RECORD_AUDIO in approved) voice.start()
                     invalidate()
                 }
             } catch (_: Exception) { requestingPermission = false; permissionIssue = true; invalidate() }
-        } else voice.toggle()
+        } else voice.start()
     }
 }

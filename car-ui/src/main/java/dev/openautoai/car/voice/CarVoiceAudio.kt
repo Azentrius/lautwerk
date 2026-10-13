@@ -20,7 +20,8 @@ internal class CarVoiceAudio(
     private val context: Context,
     private val car: CarContext?,
     private val main: Handler,
-    private val worker: ExecutorService
+    private val worker: ExecutorService,
+    private val microphoneControl: ExecutorService
 ) : VoiceAudio {
     private var generation = 0L
     private var tts: TextToSpeech? = null
@@ -99,9 +100,23 @@ internal class CarVoiceAudio(
                     Log.i(VoiceFocus.TAG, "voice.recognition.error code=$error car=${car != null}")
                     finish(Recognition.Failed(problem(error)))
                 }, endOfSpeech = {
-                    if (token == generation) { capture?.cancel(); capture = null }
-                }) {
+                    // This marks a speech boundary, not the end of an external audio session.
+                    Log.i(VoiceFocus.TAG, "voice.recognition.endOfSpeech car=${car != null}")
+                }, segmented = car != null) {
                 override fun onReadyForSpeech(params: Bundle?) { Log.i(VoiceFocus.TAG, "voice.recognition.ready car=${car != null} local=$local") }
+                override fun onBeginningOfSpeech() { Log.i(VoiceFocus.TAG, "voice.recognition.beginOfSpeech") }
+                override fun onResults(results: Bundle?) {
+                    Log.i(VoiceFocus.TAG, "voice.recognition.final kind=legacy")
+                    super.onResults(results)
+                }
+                override fun onSegmentResults(segmentResults: Bundle) {
+                    Log.i(VoiceFocus.TAG, "voice.recognition.final kind=segment")
+                    super.onSegmentResults(segmentResults)
+                }
+                override fun onEndOfSegmentedSession() {
+                    Log.i(VoiceFocus.TAG, "voice.recognition.segmentedEnd")
+                    super.onEndOfSegmentedSession()
+                }
             })
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
@@ -113,7 +128,7 @@ internal class CarVoiceAudio(
                 val descriptors = ParcelFileDescriptor.createPipe()
                 pipe = descriptors
                 ExternalSpeechInput.attach(intent, descriptors[0])
-                capture = CarMicrophone(car, main, worker).stream(descriptors[1]) {
+                capture = CarMicrophone(car, main, worker, microphoneControl).stream(descriptors[1]) {
                     finish(Recognition.Failed(it))
                 }
             }

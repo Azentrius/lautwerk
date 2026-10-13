@@ -21,19 +21,23 @@ object ExternalSpeechInput {
         .putExtra(RecognizerIntent.EXTRA_AUDIO_SOURCE_SAMPLING_RATE, 16000)
 }
 
-/** Both final callbacks are terminal for a single question; late/duplicate callbacks are ignored. */
+/** Only a nonempty segment completes external input. Silence/legacy empty results do not close it. */
 open class FinalSpeechListener(
     private val recognized: (String) -> Unit,
     private val failed: (Int) -> Unit,
-    private val endOfSpeech: () -> Unit = {}
+    private val endOfSpeech: () -> Unit = {},
+    private val segmented: Boolean = false
 ) : RecognitionListener {
     private var delivered = false
-    override fun onResults(results: Bundle?) {
+    private fun deliver(results: Bundle?) {
         if (delivered) return
+        val text = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull().orEmpty()
+        if (segmented && text.isBlank()) return
         delivered = true
-        recognized(results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull().orEmpty())
+        recognized(text)
     }
-    override fun onSegmentResults(segmentResults: Bundle) = onResults(segmentResults)
+    override fun onResults(results: Bundle?) = deliver(results)
+    override fun onSegmentResults(segmentResults: Bundle) = deliver(segmentResults)
     override fun onEndOfSegmentedSession() { if (!delivered) onError(SpeechRecognizer.ERROR_NO_MATCH) }
     override fun onError(error: Int) { if (!delivered) { delivered = true; failed(error) } }
     override fun onReadyForSpeech(params: Bundle?) = Unit

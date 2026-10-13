@@ -94,7 +94,7 @@ class VoiceSetupActivity : Activity() {
         }
         status = label(getString(R.string.car_ready)).apply { accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE }
         connection = VoiceConnection(this)
-        start = button(R.string.voice_phone_start) { connection.toggle() }
+        start = button(R.string.voice_phone_start) { connection.start() }
         label(getString(R.string.voice_phone_help))
     }
     override fun onStart() {
@@ -102,6 +102,8 @@ class VoiceSetupActivity : Activity() {
         connection.connect {
             status.text = connection.state.status.ifBlank { getString(R.string.car_ready) }
             start.setText(if (connection.state.active) R.string.voice_stop else R.string.voice_phone_start)
+            val endsSession = connection.state.active
+            start.setOnClickListener { if (endsSession) connection.stop() else connection.start() }
         }
     }
     override fun onStop() { connection.close(); super.onStop() }

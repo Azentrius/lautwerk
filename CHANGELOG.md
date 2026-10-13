@@ -15,6 +15,11 @@ Connect the experimental Android Auto surface to independently testable audio an
   No key transfer from the separate assistant package, no keys or conversation contents in logs.
 - Add bounded foreground audio sessions, stop/disconnect cleanup, fixed English/German errors and
   opt-in device probes for TTS playback and external PCM recognition. Call/headset tests remain deferred.
+- Fix repeated listening after empty recognition segments: keep external PCM open across speech
+  boundaries until a nonempty final segment, actual session end, cancellation or timeout. Host microphone
+  dismissal ends the session without a silence retry. Start and End retain their explicit intent even
+  when Android Auto delivers a click from an older template. Host microphone start/stop run on a serial
+  background executor so End does not wait for host IPC; no-input has its own neutral status.
 
 Device evidence and remaining checks: [car voice report](docs/CAR_VOICE.md).
 

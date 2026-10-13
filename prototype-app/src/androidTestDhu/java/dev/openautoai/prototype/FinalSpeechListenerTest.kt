@@ -12,10 +12,34 @@ class FinalSpeechListenerTest {
         putStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION, arrayListOf(text))
     }
 
+    @Test fun emptyCarSegmentsAndSpeechBoundariesKeepWaitingForTheQuestion() {
+        val texts = mutableListOf<String>()
+        val errors = mutableListOf<Int>()
+        val listener = FinalSpeechListener(texts::add, errors::add, segmented = true)
+        listener.onResults(Bundle())
+        listener.onSegmentResults(result("  "))
+        listener.onEndOfSpeech()
+        assertEquals(emptyList<String>(), texts)
+        assertEquals(emptyList<Int>(), errors)
+        listener.onSegmentResults(result("Later question"))
+        listener.onEndOfSegmentedSession()
+        listener.onResults(result("Duplicate"))
+        assertEquals(listOf("Later question"), texts)
+        assertEquals(emptyList<Int>(), errors)
+    }
+
+    @Test fun emptyPhoneResultIsStillTerminal() {
+        val texts = mutableListOf<String>()
+        val listener = FinalSpeechListener(texts::add, { throw AssertionError("Unexpected error") })
+        listener.onResults(Bundle())
+        listener.onResults(result("Too late"))
+        assertEquals(listOf(""), texts)
+    }
+
     @Test fun segmentedResultIsDeliveredOnceDespiteLaterResultsAndErrors() {
         val texts = mutableListOf<String>()
         val errors = mutableListOf<Int>()
-        val listener = FinalSpeechListener(texts::add, errors::add)
+        val listener = FinalSpeechListener(texts::add, errors::add, segmented = true)
         listener.onSegmentResults(result("Synthetic question"))
         listener.onResults(Bundle())
         listener.onSegmentResults(result("Duplicate"))
@@ -28,7 +52,8 @@ class FinalSpeechListenerTest {
     @Test fun partialResultsAreNeverSubmittedAndEmptySessionFailsOnce() {
         val texts = mutableListOf<String>()
         val errors = mutableListOf<Int>()
-        val listener = FinalSpeechListener(texts::add, errors::add)
+        val listener = FinalSpeechListener(texts::add, errors::add, segmented = true)
+        listener.onResults(Bundle())
         listener.onPartialResults(result("Unfinished question"))
         listener.onEndOfSegmentedSession()
         listener.onResults(result("Too late"))

@@ -28,12 +28,37 @@ class CarTemplateTest {
         override var state = CarVoiceState()
         private var changed: () -> Unit = {}
         override fun connect(changed: () -> Unit) { this.changed = changed }
-        override fun toggle() {
-            state = CarVoiceState(!state.active, context.getString(if (state.active)
-                dev.openautoai.car.R.string.voice_stopped else dev.openautoai.car.R.string.voice_speaking))
+        override fun start() {
+            state = CarVoiceState(true, context.getString(dev.openautoai.car.R.string.voice_speaking))
+            changed()
+        }
+        override fun stop() {
+            state = CarVoiceState(false, context.getString(dev.openautoai.car.R.string.voice_stopped))
             changed()
         }
         override fun close() { state = CarVoiceState(); changed = {} }
+    }
+    @Test fun staleActionsKeepTheirOriginalIntent() {
+        val instrumentation = InstrumentationRegistry.getInstrumentation()
+        instrumentation.runOnMainSync {
+            val context = TestCarContext.createCarContext(instrumentation.targetContext)
+            val audio = AudioPort(context)
+            val screen = OpenAutoScreen(context, voice = audio)
+            val start = (screen.onGetTemplate() as MessageTemplate).actions.single().onClickDelegate!!
+            val done = object : OnDoneCallback {
+                override fun onSuccess(response: Bundleable?) = Unit
+                override fun onFailure(response: Bundleable) { throw AssertionError("Action failed") }
+            }
+            start.sendClick(done)
+            start.sendClick(done)
+            org.junit.Assert.assertTrue("An old Start must never stop an active session", audio.state.active)
+            val end = (screen.onGetTemplate() as MessageTemplate).actions.single().onClickDelegate!!
+            // A session may end on its own before the host delivers the cached End action.
+            audio.stop()
+            end.sendClick(done)
+            end.sendClick(done)
+            org.junit.Assert.assertFalse("An old End must never start a new session", audio.state.active)
+        }
     }
     @Test fun englishTemplateKeepsTitleAndWorkingStartAction() {
         val instrumentation=InstrumentationRegistry.getInstrumentation()

@@ -38,7 +38,9 @@ class VoicePlaybackDeviceTest {
                         completed.countDown()
                     }
                 }
-                service!!.toggle(caller, null, VoiceMode.PLAYBACK)
+                service!!.start(caller, null, VoiceMode.PLAYBACK)
+                service!!.start(caller, null, VoiceMode.PLAYBACK)
+                assertTrue("Repeated Start must not toggle the active session off", service!!.state.active)
             }
         }
         ActivityScenario.launch(VoiceSetupActivity::class.java).use {

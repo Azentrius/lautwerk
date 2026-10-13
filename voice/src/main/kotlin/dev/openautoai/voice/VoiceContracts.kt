@@ -29,6 +29,8 @@ sealed interface Recognition {
 }
 
 enum class VoiceProblem(private val text: Messages) {
+    /** Host dismissal is terminal, unlike a recognizer's retryable no-match result. */
+    CAPTURE_STOPPED(Messages.ENDED),
     NO_INPUT(Messages.VOICE_NO_INPUT),
     PERMISSION(Messages.VOICE_PERMISSION),
     RECOGNIZER_UNAVAILABLE(Messages.VOICE_RECOGNIZER_UNAVAILABLE),

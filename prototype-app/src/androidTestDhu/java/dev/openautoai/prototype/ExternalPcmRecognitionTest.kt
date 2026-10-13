@@ -87,7 +87,7 @@ class ExternalPcmRecognitionTest {
                                 resultLength = result.length
                                 matched = matchingWords >= 3
                                 finished.countDown()
-                            }, failed = { error -> errorCode = error; ready.countDown(); finished.countDown() }) {
+                            }, failed = { error -> errorCode = error; ready.countDown(); finished.countDown() }, segmented = true) {
                             override fun onReadyForSpeech(params: Bundle?) { ready.countDown() }
                         })
                         startListening(ExternalSpeechInput.attach(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -101,7 +101,8 @@ class ExternalPcmRecognitionTest {
                 val writer = Thread {
                     runCatching {
                         ParcelFileDescriptor.AutoCloseOutputStream(pipe!![1]).use { stream ->
-                            val fixture = ByteArray(16000) + pcm + ByteArray(96000)
+                            // Four seconds of silence must not trigger a premature empty final result.
+                            val fixture = ByteArray(128000) + pcm + ByteArray(96000)
                             var offset = 0
                             while (offset < fixture.size && finished.count > 0) {
                                 val size = minOf(512, fixture.size - offset)

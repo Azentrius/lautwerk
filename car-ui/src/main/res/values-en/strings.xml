@@ -6,7 +6,8 @@
     <string name="car_start">Start</string>
     <string name="car_selection">%1$s\n%2$s · %3$s</string>
     <string name="car_check_done">Audio check ended.</string>
-    <string name="car_voice_error">Audio error. Details on the phone.</string>
+    <string name="car_voice_error">Error. Details on the phone.</string>
+    <string name="car_no_input">No speech detected.</string>
     <string name="car_thinking">Preparing the reply.</string>
     <string name="car_permission">Allow microphone on the phone.</string>
 </resources>

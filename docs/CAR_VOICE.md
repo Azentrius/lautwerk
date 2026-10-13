@@ -26,7 +26,10 @@ Three explicitly selected modes in **Audio and conversation setup** on the phone
 Car capture uses `CarAudioRecord`, 16 kHz mono PCM16, piped directly to the Android on-device
 SpeechRecognizer. Android 13+ and Car API 5+ are required for this path. `EXTRA_SEGMENTED_SESSION`
 and `onSegmentResults` are necessary on the tested Pixel; listening only for `onResults` produced
-an empty final bundle. The shared adapter handles both final callbacks once and ignores partials.
+an empty final bundle. The shared adapter accepts the first nonempty final result and ignores partials
+and empty intermediate segments. `onEndOfSpeech` is a speech boundary, not a request to close the PCM
+stream. The stream stays open until a nonempty result, actual session end, cancellation or the existing
+deadline. The ordinary phone recognizer still treats its empty final result as terminal.
 Unsupported car input ends with a fixed error; it does not deliberately fall back to the phone mic.
 Android recognizer implementations may ignore external input, so the synthetic PCM probe is required
 before claiming support on another device/service version.
@@ -62,6 +65,13 @@ short focus leases. Negative focus changes stop capture/playback. Android's non-
 also ends the session. A session is limited to ten minutes; diagnostics to sixty seconds. Late
 callbacks cannot restart a stopped session. Cancellation cannot retract a request already received
 by the provider. Call and headset interruption hardware tests are still deferred.
+
+The car host can display its own microphone overlay above the template while capturing. Dismissing
+that overlay closes the host stream and is treated as a terminal capture stop, not retryable silence.
+The app does not control the overlay's position or styling. Start and End are explicit, idempotent
+actions; an old End action cannot start a new session. Host recorder start/stop calls are serialized
+off the UI thread, including across service recreation. End invalidates callbacks and publishes the
+inactive state immediately; completion of host audio teardown can follow separately.
 
 ## Build and install on Windows
 
@@ -172,38 +182,48 @@ events for reports; full Android Auto logs and dashboard screenshots can contain
 | Check | Result |
 |---|---|
 | Phone independent output | Focus/TTS start/completion passed; user confirmed audible |
-| Synthetic external PCM recognition | Passed on Pixel using production input configuration and segmented-result listener |
+| Synthetic external PCM recognition | Passed on Pixel; regression probe also passed with four seconds of leading silence and the corrected production listener |
 | DHU discovery and template | Launcher entry and opening retained; actual host API 8 |
 | DHU output | Foreground service and TTS completed from the car action |
 | DHU real PC microphone echo | Passed: 116736 PCM bytes, recognition success, TTS success; user confirmed correct audible sentence |
 | Initial no-speech mic attempt | Ended with NO_INPUT; not counted as a recognized-speech test |
 | One interrupted DHU transport | Reconnected; announced but unstarted test repeated successfully |
-| Claude live conversation/follow-up | Pending independent user/API test |
-| Final APK update | Installed 2026-10-13 at 14:19 CEST; installed SHA-256 matches the prepared APK; installer remains com.android.vending |
-| Final phone/template/recognition-listener instrumentation suite | Passed: 14 checks, two opt-in audio probes skipped in this run |
+| Claude live conversation/follow-up | User confirmed both answers audible. Repeated listening, intermittent error summaries and slow End were then reported; reliability was not accepted |
+| Stability APK update | Installed 2026-10-13 at about 14:53 CEST; installed SHA-256 matches the prepared APK; installer remains com.android.vending |
+| Stability phone/template/recognition-listener instrumentation suite | Passed: 17 checks, two opt-in audio probes skipped in this run |
+| Separate output probe after stability update | Passed, including repeated Start on the real service; no microphone or AI request |
+| DHU listening stability | A single capture stayed open for 25 seconds across empty segments; no premature recognition failure or second capture |
+| DHU host microphone dismissal after correction | CAPTURE_STOPPED, then inactive/Ended, no retry. Local service stop 7 ms; host recorder stop 1 ms. These are event timings, not a claim about acoustic latency |
+| Human echo/stop and Claude retest after correction | Pending |
 | Final DHU template | Title, Claude Haiku 4.5, short status and the single action visible together; host API 8 retained |
 | Vehicle voice (ID.7 / Kia) | Not tested in this audio change; earlier launcher visibility is not audio evidence |
 | Call and headset interruption | Deferred at user's request |
 
-The full CI Gradle task list passed locally and in GitHub Actions on commit `17073c6`: 94 JVM tests (core 22, providers 21, voice 51), lint
-for all Android modules/variants with zero errors (36 warnings), all three debug APKs and both
-instrumentation APKs. Version/changelog validation passed. The same checks also passed from a clean
-source snapshot under JDK 17; unrelated local Android Studio daemon/JVM configuration changes were
-excluded. The resulting car APK is byte-identical between both builds.
+The initial full CI task list passed locally and in GitHub Actions on commits `17073c6` and `2f477c3`.
+After the stability correction the same full task list passed locally: 100 JVM tests (core 22,
+providers 21, voice 57), lint for all Android modules/variants with zero errors (36 warnings), all
+three debug APKs and both instrumentation APKs. Unrelated local Android Studio daemon/JVM settings
+remain outside this change. Tests cover blocked host start/cancellation, old-stop/new-start ordering,
+start/read failure cleanup, duplicate template actions, empty segments followed by valid text and
+host dismissal without retry or a late provider request.
 
 Prepared final APK: `OpenAutoAI-0.1.17-dhu-debug.apk`.
-SHA-256: `86bd96e9ab0b281a2f3a61b6866c85264433d69df7594deeb98a92b66e77a6e8`.
-
-After reconnecting the Pixel, the final APK was installed and verified byte-for-byte. It additionally
-shortens car status text, keeps fixed error details available after reconnect and clarifies phone
-setup. The device suite first exposed one stale expectation for the old English UI-test status; the
-test now expects the intended short `Ready.` text. All 14 ordinary checks then passed. The two opt-in
-audio probes were deliberately skipped in that suite and retain their separate earlier results.
+SHA-256: `a5da94c143c9f5984fc4c5d001e19edaa5629cb9438a165a5580f60ec2b6cccf`.
 
 Conversation mode was explicitly selected and confirmed on the setup page before the live test.
 The earlier attempted switch had not selected the radio option after the phone page scrolled;
 the resulting MICROPHONE event was correctly identified as an audio diagnostic, not a Claude call.
-Live Claude question/follow-up validation is still pending user feedback; keys stay in the app only.
+The subsequent live event sequence includes successful recognition, provider processing, completed
+TTS and return to listening; the user confirmed audible Claude answers. No transcript or key was
+collected.
+
+That live session also exposed an early empty result followed by a second listening attempt. The
+old code closed external PCM on `onEndOfSpeech` and accepted empty segments as terminal. During the
+stability check the host microphone overlay exposed another retry source: host dismissal was mapped
+to NO_INPUT. Both paths are now distinct from normal silence. The original synchronous recorder
+stop could also wait for host IPC on the UI thread, and a stale End template click could toggle an
+already stopped session back on. These code paths are corrected, but human acceptance of the new
+voice flow remains open until the echo/stop and Claude follow-up checks are repeated.
 
 ## References
 

@@ -69,8 +69,8 @@ class CarVoiceService : Service() {
         listeners.add(changed); changed(state)
         return Closeable { listeners.remove(changed) }
     }
-    fun toggle(caller: Any, car: CarContext?, mode: VoiceMode) {
-        if (state.active) { stop(); return }
+    fun start(caller: Any, car: CarContext?, mode: VoiceMode) {
+        if (state.active || destroyed) return
         stop()
         if (mode != VoiceMode.PLAYBACK && checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             fail(getString(R.string.voice_permission)); return
@@ -96,13 +96,13 @@ class CarVoiceService : Service() {
         publish(CarVoiceState(true, getString(R.string.voice_preparing), selected))
         main.post(monitor)
         Log.i(VoiceFocus.TAG, "voice.session.start mode=$mode car=${car != null}")
-        val audio = PlaybackFocusAudio(CarVoiceAudio(this, car, main, worker), VoiceFocus(this, main))
+        val audio = PlaybackFocusAudio(CarVoiceAudio(this, car, main, worker, microphoneControl), VoiceFocus(this, main))
         if (mode != VoiceMode.CONVERSATION) {
             check = AudioCheck(audio, timer) { phase, problem ->
                 if (token == session) {
                     Log.i(VoiceFocus.TAG, "voice.check.phase=$phase problem=${problem?.name ?: "none"}")
                     if (phase == VoicePhase.STOPPED) stop(problem?.message ?: getString(R.string.voice_check_done),
-                        getString(if (problem == null) R.string.car_check_done else R.string.car_voice_error))
+                        if (problem == null) getString(R.string.car_check_done) else errorSummary(problem.message))
                     else publish(state.copy(status = phaseText(phase), summary = phaseText(phase)))
                 }
             }.also { it.start(mode == VoiceMode.MICROPHONE, getString(R.string.voice_sample)) }
@@ -116,7 +116,7 @@ class CarVoiceService : Service() {
                 if (token == session) {
                     Log.i(VoiceFocus.TAG, "voice.conversation.phase=${next.phase}")
                     if (!next.active) stop(next.notice ?: next.status,
-                        getString(if (next.notice == null) R.string.voice_stopped else R.string.car_voice_error))
+                        if (next.notice == null) getString(R.string.voice_stopped) else errorSummary(next.notice!!))
                     else publish(CarVoiceState(true, next.notice ?: next.status,
                         next.conversation?.let { ModelSelection(it.provider, it.modelId) } ?: selected, phaseText(next.phase)))
                 }
@@ -140,19 +140,26 @@ class CarVoiceService : Service() {
         }
     }
     fun release(caller: Any) { if (owner === caller) stop() }
-    private fun fail(message: String) = stop(message, getString(R.string.car_voice_error))
+    private fun errorSummary(message: String) = getString(when (message) {
+        VoiceProblem.NO_INPUT.message -> R.string.car_no_input
+        VoiceProblem.CAPTURE_STOPPED.message -> R.string.voice_stopped
+        else -> R.string.car_voice_error
+    })
+    private fun fail(message: String) = stop(message, errorSummary(message))
     fun stop(message: String = getString(R.string.voice_stopped), summary: String = getString(R.string.voice_stopped)) {
+        val started = SystemClock.elapsedRealtime()
+        Log.i(VoiceFocus.TAG, "voice.session.stop.request active=${state.active}")
         session++
         main.removeCallbacks(monitor)
         owner = null
+        publish(CarVoiceState(status = message, summary = summary))
         creating?.cancel(); creating = null
         preparingDeadline?.cancel(); preparingDeadline = null
         val previous = controller; controller = null; previous?.stop()
         check?.cancel(); check = null
         stopForeground(STOP_FOREGROUND_REMOVE)
         VoicePreferences(this).rememberOutcome(message, summary)
-        publish(CarVoiceState(status = message, summary = summary))
-        Log.i(VoiceFocus.TAG, "voice.session.stop")
+        Log.i(VoiceFocus.TAG, "voice.session.stop elapsedMs=${SystemClock.elapsedRealtime() - started}")
     }
     private fun phaseText(phase: VoicePhase) = getString(when (phase) {
         VoicePhase.LISTENING -> R.string.voice_listening
@@ -182,6 +189,8 @@ class CarVoiceService : Service() {
         super.onDestroy()
     }
     companion object {
+        // Process-owned: a newly bound service must also wait for an older host stop to finish.
+        private val microphoneControl = Executors.newSingleThreadExecutor()
         private const val CHANNEL = "car_voice"
         private const val NOTIFICATION = 3418
         private const val STOP = "dev.openautoai.car.STOP"
