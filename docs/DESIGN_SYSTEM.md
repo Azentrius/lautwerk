@@ -7,9 +7,9 @@ The DHU UI keeps its existing Android Auto templates.
 
 ## Current reference and implementation sources
 
-Current design reference: [170dd38](https://github.com/Azentrius/design-system/tree/170dd38be84a9f107440a730eb29361087fc63ea)
+Current design reference: [8eb2321](https://github.com/Azentrius/design-system/tree/8eb2321c2e0d15ef5f57bc6d83630cd87a6ff2d9)
 in the private repository Azentrius/design-system.
-It contains the DHU refinements and the new app icon from `6a7a951`.
+It contains the DHU refinements and the new app icon from `65a48d5`.
 The original import was a pure source update. In 0.1.15 the app icon, splash screen and service
 icon were integrated; see [APP_IDENTITY.md](APP_IDENTITY.md).
 The confirmed page design is kept.
@@ -18,7 +18,7 @@ The following historical sources document the implementation of 0.1.13:
 
 - Original package (ZIP), imported unchanged; the copy has since been removed from this
   repository. ZIP SHA256: `fdf2805c9690584e6ea12b36032972bb021285070758245c666ac42b873d984f`.
-- Addition: [Design system 7601a14](https://github.com/Azentrius/design-system/tree/7601a14763258e8d0b7929efd4a3689e10d31cab).
+- Addition: [Design system c6cdaf1](https://github.com/Azentrius/design-system/tree/c6cdaf1b43c0c937418093542824dfe693194fef).
   Its Android rule takes precedence over the Android section of the ZIP.
 - Color values and Android assets match both sources. Four TTFs, the XML font family and
   30 vector drawables were taken over unchanged.
