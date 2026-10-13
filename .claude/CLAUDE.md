@@ -59,7 +59,8 @@ source archive `openauto-ai-VERSION.tar.gz` (`git archive`; `.gitattributes` kee
 `.github/` and the Git files out), no APKs. SPDX headers: `//` on top of Kotlin and Gradle files,
 `<!-- -->` after the XML declaration. Exceptions: the `ic_az_*` icons carry `CC-BY-4.0` (Font Awesome)
 or `MIT` (`pending`, PatternFly); the app icon files from the design system stay exactly as generated,
-without a header (`NOTICE` lists them); DHU profiles (`tools/dhu/*.ini`), license texts and test evidence
+without a header (`NOTICE` lists them); byte-identical upstream font-family XML retains its
+original OFL attribution rather than an application SPDX header; DHU profiles (`tools/dhu/*.ini`), license texts and test evidence
 are data. New third-party material goes into `NOTICE`, `app/src/main/assets/licenses/` and the list in
 `LicenseDialog`.
 
@@ -168,5 +169,8 @@ the DHU session (`adb forward tcp:5277 tcp:5277`, `desktop-head-unit.exe`): `doc
 - **`INSTALL_FAILED_UPDATE_INCOMPATIBLE`:** another debug key; do not uninstall, that deletes app data.
 - **Two languages:** user-facing texts exist in English and German (Android resources, `i18n` in `core`
   for the JVM modules); the first supported device language wins, otherwise English.
-- **The design system is private:** `Azentrius/design-system` is not public and not copied into this
-  repository; docs link to it by commit. Its app icon files are taken over unchanged.
+- **The design system is private and read-only:** `Azentrius/design-system` is maintained upstream.
+  At the maintainer's explicit request, `design/azentrius/` contains complete, unmodified reference
+  snapshots, including historical copies. Preserve their bytes, original language and licenses;
+  never edit them to resolve a design gap. Authored application documentation stays in English.
+  New reference imports require the maintainer's request. See `docs/DESIGN_SYSTEM.md` for the audit.

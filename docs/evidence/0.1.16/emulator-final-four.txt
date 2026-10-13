@@ -1,0 +1,107 @@
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.StorageUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+dev.openautoai.app.StorageUiTest:
+INSTRUMENTATION_STATUS: test=slowKeyWriteDoesNotBlockNavigationAndCannotBeSubmittedTwice
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.StorageUiTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=slowKeyWriteDoesNotBlockNavigationAndCannotBeSubmittedTwice
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.HistorySearchTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+dev.openautoai.app.HistorySearchTest:
+INSTRUMENTATION_STATUS: test=failureIsSafeAndRetryRecoversWithoutLeakingQueryOrChatText
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.HistorySearchTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stack=org.junit.ComparisonFailure: expected:<[Der Verlauf konnte nicht durchsucht werden. Bitte erneut versuche]n.> but was:<[The history could not be searched. Please try agai]n.>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at dev.openautoai.app.HistorySearchTest.failureIsSafeAndRetryRecoversWithoutLeakingQueryOrChatText(HistorySearchTest.kt:106)
+
+INSTRUMENTATION_STATUS: stream=
+Error in failureIsSafeAndRetryRecoversWithoutLeakingQueryOrChatText(dev.openautoai.app.HistorySearchTest):
+org.junit.ComparisonFailure: expected:<[Der Verlauf konnte nicht durchsucht werden. Bitte erneut versuche]n.> but was:<[The history could not be searched. Please try agai]n.>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at dev.openautoai.app.HistorySearchTest.failureIsSafeAndRetryRecoversWithoutLeakingQueryOrChatText(HistorySearchTest.kt:106)
+
+INSTRUMENTATION_STATUS: test=failureIsSafeAndRetryRecoversWithoutLeakingQueryOrChatText
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsScreenTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+dev.openautoai.app.voice.SpeechSettingsScreenTest:
+INSTRUMENTATION_STATUS: test=catalogLoadsAsAListWithoutStartingAPreview
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsScreenTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=catalogLoadsAsAListWithoutStartingAPreview
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=
+dev.openautoai.app.voice.SpeechSettingsTest:
+INSTRUMENTATION_STATUS: test=realAndroidEngineAcceptsAvailableLocalChoiceAndRejectsMissingOrChangedEngine
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=
+Voice inventory: 9 local, 8 online; locale=en-US; engine=com.google.android.tts
+en-US-language: network=false, quality=400, locale=en-US
+en-us-x-iob-local: network=false, quality=400, locale=en-US
+en-us-x-iog-local: network=false, quality=400, locale=en-US
+en-us-x-iol-local: network=false, quality=400, locale=en-US
+en-us-x-iom-local: network=false, quality=400, locale=en-US
+en-us-x-sfg-local: network=false, quality=400, locale=en-US
+en-us-x-tpc-local: network=false, quality=400, locale=en-US
+en-us-x-tpd-local: network=false, quality=400, locale=en-US
+en-us-x-tpf-local: network=false, quality=400, locale=en-US
+en-us-x-iob-network: network=true, quality=400, locale=en-US
+en-us-x-iog-network: network=true, quality=400, locale=en-US
+en-us-x-iol-network: network=true, quality=400, locale=en-US
+en-us-x-iom-network: network=true, quality=400, locale=en-US
+en-us-x-sfg-network: network=true, quality=400, locale=en-US
+en-us-x-tpc-network: network=true, quality=400, locale=en-US
+en-us-x-tpd-network: network=true, quality=400, locale=en-US
+en-us-x-tpf-network: network=true, quality=400, locale=en-US
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=4
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=realAndroidEngineAcceptsAvailableLocalChoiceAndRejectsMissingOrChangedEngine
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 14.633
+There was 1 failure:
+1) failureIsSafeAndRetryRecoversWithoutLeakingQueryOrChatText(dev.openautoai.app.HistorySearchTest)
+org.junit.ComparisonFailure: expected:<[Der Verlauf konnte nicht durchsucht werden. Bitte erneut versuche]n.> but was:<[The history could not be searched. Please try agai]n.>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at dev.openautoai.app.HistorySearchTest.failureIsSafeAndRetryRecoversWithoutLeakingQueryOrChatText(HistorySearchTest.kt:106)
+
+FAILURES!!!
+Tests run: 4,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

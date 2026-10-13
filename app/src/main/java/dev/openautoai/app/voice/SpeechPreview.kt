@@ -9,13 +9,15 @@ import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.speech.tts.Voice
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.TtsSpan
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import dev.openautoai.voice.Cancel
 import dev.openautoai.voice.VoiceProblem
 import dev.openautoai.core.i18n.AppLanguage
-import java.util.Locale
 
 /** Fixed-text preview only: no microphone, provider, credentials or chat access. Main thread only. */
 internal class SpeechPreview(private val context: Context, private val store: SpeechSettingsStore) {
@@ -93,7 +95,7 @@ internal class SpeechPreview(private val context: Context, private val store: Sp
             playing = true
             timeout = Runnable { if (utterance == id) { stop(); notice = Messages.PREVIEW_TIMEOUT.text() } }
                 .also { main.postDelayed(it, 20_000) }
-            if (current.speak(Messages.PREVIEW_SENTENCE.text(),
+            if (current.speak(previewSpeechText(Messages.PREVIEW_SENTENCE.text()),
                     TextToSpeech.QUEUE_FLUSH, Bundle(), id) != TextToSpeech.SUCCESS) {
                 stop(); notice = Messages.PREVIEW_START_FAILED.text()
             }
@@ -119,5 +121,17 @@ internal class SpeechPreview(private val context: Context, private val store: Sp
         voices = emptyList()
         val old = engine; engine = null
         runCatching { old?.shutdown() }
+    }
+}
+
+/** Spell the brand suffix in the fixed sample without rewriting the localized sentence. */
+internal fun previewSpeechText(sentence: String): CharSequence {
+    val name = "OpenAuto AI"
+    val nameStart = sentence.indexOf(name)
+    if (nameStart < 0) return sentence
+    val suffixStart = nameStart + name.length - 2
+    return SpannableString(sentence).apply {
+        setSpan(TtsSpan.VerbatimBuilder("AI").build(), suffixStart, suffixStart + 2,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
 }

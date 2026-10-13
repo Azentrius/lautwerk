@@ -24,6 +24,14 @@ import org.junit.runner.RunWith
 /** Exercises the real template action delegate; does not prove DHU discovery. */
 @RunWith(AndroidJUnit4::class)
 class CarTemplateTest {
+    // Do not depend on the emulator's system language or contexts cached before an app-locale change.
+    private fun germanContext(context: Context): TestCarContext {
+        val config = android.content.res.Configuration(context.resources.configuration).apply {
+            setLocale(java.util.Locale.GERMAN)
+        }
+        return TestCarContext.createCarContext(context.createConfigurationContext(config))
+    }
+
     private class AudioPort(private val context: Context) : CarVoicePort {
         override var state = CarVoiceState()
         private var changed: () -> Unit = {}
@@ -41,7 +49,7 @@ class CarTemplateTest {
     @Test fun staleActionsKeepTheirOriginalIntent() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         instrumentation.runOnMainSync {
-            val context = TestCarContext.createCarContext(instrumentation.targetContext)
+            val context = germanContext(instrumentation.targetContext)
             val audio = AudioPort(context)
             val screen = OpenAutoScreen(context, voice = audio)
             val start = (screen.onGetTemplate() as MessageTemplate).actions.single().onClickDelegate!!
@@ -95,7 +103,7 @@ class CarTemplateTest {
     @Test fun observesPhoneSelectionWhileStartedAndRefreshesOnReturn() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         instrumentation.runOnMainSync {
-            val context = TestCarContext.createCarContext(instrumentation.targetContext)
+            val context = germanContext(instrumentation.targetContext)
             val prefs = instrumentation.targetContext.getSharedPreferences("car_lifecycle_test", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             val screen = OpenAutoScreen(context, ModelSelectionStore(prefs), AudioPort(context))
@@ -122,7 +130,7 @@ class CarTemplateTest {
     @Test fun templateHasTitleAndWorkingStartAction() {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         instrumentation.runOnMainSync {
-            val context = TestCarContext.createCarContext(instrumentation.targetContext)
+            val context = germanContext(instrumentation.targetContext)
             val prefs = instrumentation.targetContext.getSharedPreferences("car_selection_test", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             val store = ModelSelectionStore(prefs)

@@ -27,7 +27,7 @@ Call and headset tests remain deferred. The separate assistant app retains its e
 
 Details: [app icon and installation](docs/APP_IDENTITY.md), [current test report](docs/BUILD_AND_TEST.md),
 [phone design](docs/DESIGN_SYSTEM.md),
-[design reference](https://github.com/Azentrius/design-system/tree/8eb2321c2e0d15ef5f57bc6d83630cd87a6ff2d9)
+[design reference](https://github.com/Azentrius/design-system/tree/edd4c67da6d7c606296c3bbd13d7aa5da548f452)
 (private repository).
 
 ## Sideloading and real cars

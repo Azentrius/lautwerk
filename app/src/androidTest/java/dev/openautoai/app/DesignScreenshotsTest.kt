@@ -2,6 +2,14 @@
 package dev.openautoai.app
 
 import android.graphics.Bitmap
+import androidx.compose.ui.semantics.SemanticsActions
+import androidx.compose.ui.semantics.SemanticsProperties
+import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import dev.openautoai.app.design.AzDark
+import dev.openautoai.app.design.AzLight
+import org.junit.Assert.*
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createEmptyComposeRule
 import androidx.test.core.app.ActivityScenario
@@ -37,6 +45,31 @@ class DesignScreenshotsTest {
         val i=InstrumentationRegistry.getInstrumentation()
         i.uiAutomation.takeScreenshot()?.let { b->File(i.targetContext.cacheDir,name).outputStream().use { b.compress(Bitmap.CompressFormat.PNG,100,it) };b.recycle() }
     }
+    private fun titleEvidence(dark: Boolean, locale: Locale, scale: Float, name: String) {
+        launch(dark, locale, scale)
+        val node = compose.onNodeWithTag("app-title").assertIsDisplayed()
+        compose.onAllNodesWithText("OpenAuto AI").assertCountEquals(1)
+        val text = node.fetchSemanticsNode().config[SemanticsProperties.Text].single()
+        assertEquals("OpenAuto AI", text.text)
+        assertFalse(node.fetchSemanticsNode().config.contains(SemanticsProperties.ContentDescription))
+        val suffix = text.spanStyles.single()
+        assertEquals("AI", text.text.substring(suffix.start, suffix.end))
+        assertEquals(FontStyle.Italic, suffix.item.fontStyle)
+        assertEquals(FontWeight.Normal, suffix.item.fontWeight)
+        assertEquals((if (dark) AzDark else AzLight)["signature"], suffix.item.color)
+        val results = mutableListOf<TextLayoutResult>()
+        node.performSemanticsAction(SemanticsActions.GetTextLayoutResult) { it(results) }
+        val layout = results.single()
+        assertFalse("The complete app title must fit its width", layout.didOverflowWidth)
+        assertFalse("The title must grow with the system font", layout.didOverflowHeight)
+        assertEquals(text.length, layout.getLineEnd(layout.lineCount - 1, visibleEnd = true))
+        capture(name)
+    }
+    @Test fun titleLightGerman() = titleEvidence(false, Locale.GERMANY, 1f, "title-light-100.png")
+    @Test fun titleDarkEnglish() = titleEvidence(true, Locale.ENGLISH, 1f, "title-dark-100.png")
+    @Test fun titleLightGermanAtTwoHundredPercent() = titleEvidence(false, Locale.GERMANY, 2f, "title-light-200.png")
+    @Test fun titleDarkEnglishAtTwoHundredPercent() = titleEvidence(true, Locale.ENGLISH, 2f, "title-dark-200.png")
+
     @Test fun lightGermanPhone() {
         launch(false,Locale.GERMANY,1f)
         compose.onNodeWithTag("page-history").performClick();capture("az-light-history.png")

@@ -31,6 +31,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.ImeAction
@@ -100,7 +104,19 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
         containerColor = Az.colors["bg-page"],
         topBar = {
             Column(Modifier.fillMaxWidth().background(Az.colors["bg-page"]).statusBarsPadding()) {
-                Text(stringResource(R.string.app_name), style=AzType.title,modifier=Modifier.padding(horizontal=Az.inset,vertical=8.dp))
+                val name = stringResource(R.string.app_name)
+                val signature = Az.colors["signature"]
+                val title = buildAnnotatedString {
+                    append(name)
+                    // The existing resource stays one accessibility text; only its suffix is styled.
+                    val suffix = name.lastIndexOf("AI")
+                    if (suffix >= 0) addStyle(SpanStyle(fontFamily = AzType.serifItalic,
+                        fontStyle = FontStyle.Italic, fontWeight = FontWeight.Normal,
+                        color = signature), suffix, name.length)
+                }
+                Text(title, style = AzType.title, color = Az.colors["text"],
+                    modifier = Modifier.padding(horizontal = Az.inset, vertical = 8.dp)
+                        .testTag("app-title"))
                 AzTabs(page) { keyboard?.hide();page=it }
             }
         },

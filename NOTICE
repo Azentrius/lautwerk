@@ -5,11 +5,11 @@ Licensed under the Apache License, Version 2.0. See LICENSE.
 This project includes third-party material under its own license. The app shows
 these licenses under "Licenses" (app/src/main/assets/licenses/).
 
-DM Sans (app/src/main/res/font/dm_sans_*.ttf)
+DM Sans (app/ and prototype-app/: src/main/res/font/dm_sans_*.ttf)
   Copyright 2014 The DM Sans Project Authors (https://github.com/googlefonts/dm-fonts)
   SIL Open Font License 1.1, see app/src/main/assets/licenses/OFL-DM-Sans.txt
 
-DM Serif Display (app/src/main/res/font/dm_serif_display_regular.ttf)
+DM Serif Display (app/ and prototype-app/: src/main/res/font/dm_serif_display_*.ttf)
   Copyright 2014 - 2017 Adobe Systems Incorporated (http://www.adobe.com/), with
   Reserved Font Name 'Source'. Copyright 2019 Google LLC.
   SIL Open Font License 1.1, see app/src/main/assets/licenses/OFL-DM-Serif-Display.txt
@@ -25,7 +25,13 @@ and converted to Android vector drawables:
 Not covered by the Apache License: the OpenAuto AI app icon from the Azentrius
 design system and the Azentrius name and word mark. The app icon files, in app/
 and in prototype-app/, are src/main/res/drawable/ic_launcher_*.xml,
-src/main/res/drawable/ic_stat_openauto.xml (app only),
+src/main/res/drawable/ic_stat_openauto.xml (app and car-ui),
 src/main/res/mipmap-anydpi/ic_launcher*.xml and
 src/main/res/values/ic_launcher_background.xml.
   Copyright (c) 2026 Stefan Popp. All rights reserved.
+
+The prototype also includes the DM Sans and DM Serif Display OFL texts in
+prototype-app/src/main/assets/licenses/.
+The unchanged Azentrius reference snapshots and original package in design/azentrius/
+retain their own licenses, including proprietary Azentrius material. See the LICENSE
+and LICENSES files in each snapshot. They are not covered by this project's Apache License.

@@ -125,7 +125,7 @@ import java.util.Locale
 @Composable internal fun AzVoiceRow(title:String,selected:Boolean,onClick:()->Unit,enabled:Boolean,modifier:Modifier=Modifier,description:String?=null) {
     val c=Az.colors;val interaction=remember { MutableInteractionSource() };val pressed by interaction.collectIsPressedAsState()
     val focused by interaction.collectIsFocusedAsState()
-    Row(modifier.fillMaxWidth().heightIn(min=56.dp)
+    Row(modifier.fillMaxWidth().heightIn(min=if(description != null)72.dp else 56.dp)
         .focusRing(focused&&androidx.compose.ui.platform.LocalInputModeManager.current.inputMode==androidx.compose.ui.input.InputMode.Keyboard,RoundedCornerShape(0.dp),c["focus"])
         .background(if(pressed&&enabled)c["bg-hover"] else if(!enabled)c["tint-neutral"] else Color.Transparent)
         .selectable(selected,interactionSource=interaction,indication=null,enabled=enabled,role=Role.RadioButton,onClick=onClick)

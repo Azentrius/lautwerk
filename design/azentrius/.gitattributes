@@ -1,0 +1,6 @@
+# Keep every historical and current source snapshot byte-identical.
+* -text
+README.md text eol=lf
+UPSTREAM.json text eol=lf
+UPSTREAM.sha256 text eol=lf
+.gitattributes text eol=lf

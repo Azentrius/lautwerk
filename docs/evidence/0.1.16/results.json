@@ -1,0 +1,71 @@
+{
+  "core": {
+    "tests": 22,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "providers": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "voice": {
+    "tests": 57,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "pixel": {
+    "tests": 78,
+    "passed": 78,
+    "skipped": 0,
+    "failures": 0
+  },
+  "emulatorCar": {
+    "tests": 21,
+    "passed": 19,
+    "skipped": 2,
+    "failures": 0
+  },
+  "prototypeThemeMatrix": {
+    "runs": 4,
+    "testsPerRun": 2,
+    "passed": 8
+  },
+  "pixelEnvironment": "Pixel 10 Pro, Android 17",
+  "emulatorEnvironment": "Android 14 / API 34 Google APIs x86_64",
+  "actualDhuHostTested": false,
+  "version": "0.1.18",
+  "versionCode": 118,
+  "baseCommit": "5a3520b14e77eb1978d3c86e6d6e0d5255b621ac",
+  "designCommit": "edd4c67da6d7c606296c3bbd13d7aa5da548f452",
+  "designTree": "7487fe48e12d0b633b816cef779523aec395fc0a",
+  "emulatorAssistant": {
+    "tests": 78,
+    "passed": 74,
+    "failures": 4,
+    "skipped": 0
+  },
+  "emulatorTargetedBaseline": {
+    "tests": 4,
+    "passed": 3,
+    "failures": 1,
+    "commit": "5a3520b14e77eb1978d3c86e6d6e0d5255b621ac"
+  },
+  "emulatorTargetedFinal": {
+    "tests": 4,
+    "passed": 3,
+    "failures": 1
+  },
+  "pullRequestBaseCommit": "f1982ba8eea276be770a370749e9b79aeb721c0c",
+  "pronunciationFollowup": {
+    "scope": "Fixed phone voice sample only; added after the design-build checks above.",
+    "pixelTargetedTests": 7,
+    "passed": 7,
+    "failures": 0,
+    "fullBuildAndLintTasks": "passed",
+    "audiblePronunciation": "Maintainer accepted the heard sample on 2026-10-13: better and acceptable. No all-voices/languages listening matrix claimed."
+  }
+}
