@@ -1,0 +1,122 @@
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechPreviewPronunciationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+dev.openautoai.app.voice.SpeechPreviewPronunciationTest:
+INSTRUMENTATION_STATUS: test=aSampleWithoutTheBrandIsReturnedUnchanged
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechPreviewPronunciationTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=aSampleWithoutTheBrandIsReturnedUnchanged
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechPreviewPronunciationTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=germanAndEnglishSamplesKeepTheirTextAndSpellOnlyTheBrandSuffixAcrossParcel
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechPreviewPronunciationTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=germanAndEnglishSamplesKeepTheirTextAndSpellOnlyTheBrandSuffixAcrossParcel
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+dev.openautoai.app.voice.SpeechSettingsTest:
+INSTRUMENTATION_STATUS: test=realAndroidEngineAcceptsAvailableLocalChoiceAndRejectsMissingOrChangedEngine
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=
+Voice inventory: 5 local, 4 online; locale=de-DE; engine=com.google.android.tts
+de-DE-language: network=false, quality=400, locale=de-DE
+de-de-x-dea-local: network=false, quality=400, locale=de-DE
+de-de-x-deb-local: network=false, quality=400, locale=de-DE
+de-de-x-deg-local: network=false, quality=400, locale=de-DE
+de-de-x-nfh-local: network=false, quality=400, locale=de-DE
+de-de-x-dea-network: network=true, quality=400, locale=de-DE
+de-de-x-deb-network: network=true, quality=400, locale=de-DE
+de-de-x-deg-network: network=true, quality=400, locale=de-DE
+de-de-x-nfh-network: network=true, quality=400, locale=de-DE
+
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=3
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=realAndroidEngineAcceptsAvailableLocalChoiceAndRejectsMissingOrChangedEngine
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=languageSpecificChoicesKeepLegacyGermanVoiceWhenUsingEnglish
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=4
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=languageSpecificChoicesKeepLegacyGermanVoiceWhenUsingEnglish
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=catalogExcludesMissingDataAndOtherLanguagesWithStableLocalFirstOrder
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=5
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=catalogExcludesMissingDataAndOtherLanguagesWithStableLocalFirstOrder
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+INSTRUMENTATION_STATUS: test=voiceAndRatePersistIndependentlyAndInvalidRatesAreSafe
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsTest
+INSTRUMENTATION_STATUS: current=6
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=voiceAndRatePersistIndependentlyAndInvalidRatesAreSafe
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsScreenTest
+INSTRUMENTATION_STATUS: current=7
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=
+dev.openautoai.app.voice.SpeechSettingsScreenTest:
+INSTRUMENTATION_STATUS: test=catalogLoadsAsAListWithoutStartingAPreview
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=dev.openautoai.app.voice.SpeechSettingsScreenTest
+INSTRUMENTATION_STATUS: current=7
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=7
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=catalogLoadsAsAListWithoutStartingAPreview
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 2,729
+
+OK (7 tests)
+
+
+INSTRUMENTATION_CODE: -1

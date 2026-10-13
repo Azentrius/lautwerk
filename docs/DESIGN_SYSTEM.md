@@ -13,7 +13,10 @@ The maintainer approved **0.1.18/code 118**, retaining the shared version rule, 
 used by the now-merged voice PR. Both apps receive 118; the prototype phone UI changes too.
 PR #29 subsequently updated upstream commit references only; its documentation and CarAppTheme
 comment changes are retained. The device-tested application code baseline remains `5a3520b`.
-This PR does not rewrite the merged voice behavior.
+This PR does not rewrite the merged conversation behavior. After the design review, the
+maintainer separately requested a pronunciation correction in the fixed phone voice sample:
+only its AI suffix receives a spelling annotation. This is an explicitly approved follow-up,
+not behavior inferred from the design system. The sample wording and visible name are unchanged.
 
 Statuses: **fulfilled** = existing implementation meets the applicable rule;
 **adjusted** = purely visual correction in this PR; **open** = conflict, missing specification,

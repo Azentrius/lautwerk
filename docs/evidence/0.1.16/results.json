@@ -59,5 +59,13 @@
     "passed": 3,
     "failures": 1
   },
-  "pullRequestBaseCommit": "f1982ba8eea276be770a370749e9b79aeb721c0c"
+  "pullRequestBaseCommit": "f1982ba8eea276be770a370749e9b79aeb721c0c",
+  "pronunciationFollowup": {
+    "scope": "Fixed phone voice sample only; added after the design-build checks above.",
+    "pixelTargetedTests": 7,
+    "passed": 7,
+    "failures": 0,
+    "fullBuildAndLintTasks": "passed",
+    "audiblePronunciation": "Awaiting maintainer confirmation; not established by structural tests."
+  }
 }

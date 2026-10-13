@@ -7,7 +7,7 @@ Device-tested code baseline: `5a3520b14e77eb1978d3c86e6d6e0d5255b621ac` on main.
 Final PR base: `f1982ba8eea276be770a370749e9b79aeb721c0c`; the intervening PR #29 changes
 only design-reference documentation and an XML comment, with no runtime changes.
 
-## Automated checks
+## Design-build checks before the pronunciation follow-up
 
 - Version and CHANGELOG check: passed; shared versionCode 118, both apps.
 - JVM tests: 22 core, 21 providers, 57 voice; zero failures/errors.
@@ -115,3 +115,26 @@ See [baseline](emulator-baseline-four.txt) and [final](emulator-final-four.txt).
 This comparison does not turn the original full run green. The mixed-locale emulator suite needs
 separate test-environment isolation work. No production language, storage or voice behavior was
 changed to accommodate it. The physical Pixel is the successful final full-suite run.
+
+
+## Requested voice-sample pronunciation follow-up
+
+After reviewing the installed design build, the maintainer reported that the German voice read
+the AI suffix as one sound and explicitly requested spelling it as separate letters. The same
+unmerged 0.1.18 PR now adds a `TtsSpan.TYPE_VERBATIM` annotation around only those two letters in
+the fixed phone sample. The sample's visible text, app name, voice catalog, saved voice/rate,
+online-voice confirmation and conversation/car output paths are unchanged.
+
+The full local CI task list above passed again. Seven targeted Pixel tests passed, including the
+new German/English annotation check across Android Parcel serialization, the existing real-engine
+settings checks, and the voice-settings screen check. See [raw results](pixel-pronunciation.txt).
+The earlier full 78-test Pixel run remains evidence for the design build; it was not repeated for
+this small follow-up. The current APK hashes are in `apk-sha256.json`, with the preceding build's
+hashes retained in `apk-sha256-before-pronunciation.json`.
+
+The updated assistant APK is installed on the Pixel and its Voice and speed page was opened for
+the maintainer's local-voice listening check. Audible pronunciation is awaiting that confirmation;
+automated span/serialization assertions alone do not prove how a TTS engine sounds. No API request,
+microphone, car session, call or headset test is needed for the fixed sample.
+
+Android reference: [TtsSpan.VerbatimBuilder](https://developer.android.com/reference/android/text/style/TtsSpan.VerbatimBuilder).

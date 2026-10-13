@@ -6,6 +6,8 @@ Apply the Azentrius app title and refresh the read-only design reference.
 
 - Render the existing phone title as one accessible text: DM Sans OpenAuto and italic DM Serif
   Display AI in the theme's signature color. The native prototype phone title follows the same rule.
+- Spell the AI suffix as separate letters in the fixed voice sample, using an Android TTS
+  pronunciation span. Keep the visible name, sample wording, voice choice and conversation flow.
 - Give voice rows with a description the specified 72 dp minimum height.
 - Bring the prototype phone page's typography, surface, text and primary button into the supplied
   light/dark palette. Keep its controls, texts and selection flow.
