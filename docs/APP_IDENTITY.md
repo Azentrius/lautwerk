@@ -1,8 +1,8 @@
 # App icon and splash screen 0.1.15
 
 OpenAuto AI uses the approved speech bubble with a dot from the
-[design system 170dd38](https://github.com/Azentrius/design-system/blob/170dd38be84a9f107440a730eb29361087fc63ea/android.md),
-O1 from `6a7a951`. The six supplied Android files are taken over byte-identical in the assistant; the
+[design system 8eb2321](https://github.com/Azentrius/design-system/blob/8eb2321c2e0d15ef5f57bc6d83630cd87a6ff2d9/android.md),
+O1 from `65a48d5`. The six supplied Android files are taken over byte-identical in the assistant; the
 prototype contains the same five launcher files, without the service icon it does not need. The
 generator was not run. There are no custom mark, size or color values.
 

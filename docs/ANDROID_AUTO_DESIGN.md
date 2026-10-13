@@ -6,11 +6,11 @@ is a local debug experiment; "Start" only increments the UI test counter.
 
 ## Source and scope
 
-The approved implementation and the 0.1.14 acceptance test are based on [Azentrius/design-system, commit 7fe60bf](https://github.com/Azentrius/design-system/blob/7fe60bfb1b244d9e36464c6e5c590dfa228ee4dc/android-auto.md) (private repository).
+The approved implementation and the 0.1.14 acceptance test are based on [Azentrius/design-system, commit d5990f3](https://github.com/Azentrius/design-system/blob/d5990f399290c7b9ee6203f76c9bf78f1ba55ed6/android-auto.md) (private repository).
 
-The current design reference is now [commit 170dd38](https://github.com/Azentrius/design-system/blob/170dd38be84a9f107440a730eb29361087fc63ea/android-auto.md).
+The current design reference is now [commit 8eb2321](https://github.com/Azentrius/design-system/blob/8eb2321c2e0d15ef5f57bc6d83630cd87a6ff2d9/android-auto.md).
 It refines host colors/background based on this acceptance test and contains the O1 decision on
-the new app icon from `6a7a951`. B2/B3 are unchanged; nothing needs to be caught up in 0.1.14.
+the new app icon from `65a48d5`. B2/B3 are unchanged; nothing needs to be caught up in 0.1.14.
 The icon files were then integrated in 0.1.15; see
 [App icon and current installation](APP_IDENTITY.md).
 The following details still describe the historical state of 0.1.14.

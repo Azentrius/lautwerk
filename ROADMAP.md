@@ -13,7 +13,7 @@ confirmed, is in [CHANGELOG.md](CHANGELOG.md).
 
 - The minimal DHU prototype (0.1.1) and the shared provider and model selection for the phone and the
   car template of the same test app (0.1.2) are confirmed by the user in a real DHU.
-- 0.1.14 applies rules B1–B5 of the Android Auto design `7fe60bf`: only the approved car color pair and
+- 0.1.14 applies rules B1–B5 of the Android Auto design `d5990f3`: only the approved car color pair and
   the primary color request for "Start". 64 DHU combinations and both six-start tests pass; the host
   replaces the color value with a readable light blue.
 - The assistant app has separate provider adapters (0.1.3), encapsulated encrypted storage (0.1.4), one
