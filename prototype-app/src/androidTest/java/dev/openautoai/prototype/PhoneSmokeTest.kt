@@ -14,6 +14,11 @@ import android.widget.TextView
 import androidx.test.core.app.ActivityScenario
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
+import android.text.Spanned
+import android.text.style.TypefaceSpan
+import android.text.style.ForegroundColorSpan
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -62,6 +67,27 @@ class PhoneSmokeTest {
         ActivityScenario.launch(MainActivity::class.java).use { scenario ->
             scenario.onActivity {
                 assertEquals("Claude Haiku 4.5", it.findViewById<Spinner>(R.id.model).selectedItem)
+            }
+        }
+    }
+
+    @Test fun titleIsOneCompleteTextWithTheRealItalicFont() {
+        ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+            instrumentation.waitForIdleSync()
+            scenario.onActivity { activity ->
+                val title = activity.findViewById<TextView>(R.id.app_title)
+                val text = title.text as Spanned
+                assertEquals("OpenAuto AI", text.toString())
+                assertEquals(null, title.contentDescription)
+                val font = text.getSpans(0, text.length, TypefaceSpan::class.java).single()
+                assertEquals(9, text.getSpanStart(font))
+                assertEquals(11, text.getSpanEnd(font))
+                assertTrue(font.typeface!!.isItalic)
+                assertFalse(font.typeface!!.isBold)
+                assertEquals(activity.getColor(R.color.az_signature),
+                    text.getSpans(0, text.length, ForegroundColorSpan::class.java).single().foregroundColor)
+                assertEquals(text.length, title.layout.getLineEnd(title.layout.lineCount - 1))
+                assertEquals(0, title.layout.getEllipsisCount(title.layout.lineCount - 1))
             }
         }
     }

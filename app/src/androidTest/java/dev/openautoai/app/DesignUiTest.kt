@@ -68,6 +68,30 @@ class DesignUiTest {
         selectedIsVisible("conversation")
     }
 
+    @Test fun voiceRowsReserveSpaceForDescriptionAndGrowWithLargeText() {
+        var scale by mutableStateOf(1f)
+        compose.setContent {
+            val density = LocalDensity.current
+            CompositionLocalProvider(LocalDensity provides Density(density.density, scale)) {
+                AzentriusTheme {
+                    Column(Modifier.width(280.dp)) {
+                        AzVoiceRow("System default", true, {}, true, Modifier.testTag("one-line"))
+                        AzVoiceRow("Example voice", false, {}, true, Modifier.testTag("two-lines"),
+                            "Online · Example engine")
+                    }
+                }
+            }
+        }
+        compose.onNodeWithTag("one-line").assertHeightIsAtLeast(56.dp)
+        compose.onNodeWithTag("two-lines").assertHeightIsAtLeast(72.dp)
+        compose.runOnIdle { scale = 2f }
+        val results = mutableListOf<TextLayoutResult>()
+        compose.onNodeWithText("Online · Example engine", useUnmergedTree = true)
+            .performSemanticsAction(SemanticsActions.GetTextLayoutResult) { it(results) }
+        assertFalse(results.single().didOverflowHeight)
+        compose.onNodeWithTag("two-lines").assertHeightIsAtLeast(72.dp)
+    }
+
     @Test fun bundledLicensesRemainScrollableAndCanBeClosedInDarkTheme() {
         var open by mutableStateOf(true)
         compose.setContent { AzentriusTheme(dark=true) { if(open) LicenseDialog { open=false } } }

@@ -2,42 +2,48 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root" android:layout_width="match_parent"
     android:layout_height="match_parent" android:fillViewport="true"
-    android:background="#101C24">
+    android:background="@color/az_bg_page">
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="vertical" android:gravity="center_vertical" android:padding="28dp">
+        android:clipChildren="false" android:clipToPadding="false"
+        android:orientation="vertical" android:gravity="center_vertical" android:padding="@dimen/az_page_inset">
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:text="@string/app_name" android:textSize="34sp" android:textStyle="bold"
-            android:textColor="#F3F9FC" android:accessibilityHeading="true" />
+            android:id="@+id/app_title" android:text="@string/app_name"
+            android:textSize="22sp" android:lineHeight="28sp" android:fontFamily="@font/dm_sans_semibold"
+            android:includeFontPadding="false" android:letterSpacing="0" android:hyphenationFrequency="none"
+            android:textColor="@color/az_text" android:accessibilityHeading="true" />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="16dp" android:text="@string/prototype_note"
-            android:textSize="18sp" android:textColor="#CBD9E2" />
+            style="@style/AzBody" />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="24dp" android:text="@string/provider_label"
-            android:labelFor="@id/provider" android:textSize="16sp" android:textColor="#CBD9E2" />
+            android:labelFor="@id/provider" style="@style/AzLabel" />
         <Spinner android:id="@+id/provider" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:minHeight="56dp"
+            android:layout_height="wrap_content" android:minHeight="48dp"
             android:spinnerMode="dropdown" android:saveEnabled="false" />
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="12dp" android:text="@string/model_label"
-            android:labelFor="@id/model" android:textSize="16sp" android:textColor="#CBD9E2" />
+            android:layout_marginTop="16dp" android:text="@string/model_label"
+            android:labelFor="@id/model" style="@style/AzLabel" />
         <Spinner android:id="@+id/model" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:minHeight="56dp"
+            android:layout_height="wrap_content" android:minHeight="48dp"
             android:spinnerMode="dropdown" android:saveEnabled="false" />
         <TextView android:id="@+id/selection_status" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginTop="12dp"
-            android:textSize="14sp" android:textColor="#A6BAC8"
+            android:layout_height="wrap_content" android:layout_marginTop="16dp"
+            style="@style/AzLabel"
             android:accessibilityLiveRegion="polite" />
         <TextView android:id="@+id/status" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginTop="32dp"
-            android:text="@string/ready" android:textSize="22sp" android:textColor="#63DDC1"
+            android:layout_height="wrap_content" android:layout_marginTop="24dp"
+            android:text="@string/ready" style="@style/AzBody" android:textColor="@color/az_text"
             android:accessibilityLiveRegion="polite" />
         <Button android:id="@+id/start" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:minHeight="56dp"
-            android:layout_marginTop="20dp" android:text="@string/start"
-            android:textAllCaps="false" android:textSize="20sp"
-            android:backgroundTint="#63DDC1" android:textColor="#10232C" />
+            android:layout_height="wrap_content" android:minHeight="48dp"
+            android:layout_marginTop="16dp" android:text="@string/start"
+            android:textAllCaps="false" android:textSize="15sp" android:lineHeight="20sp"
+            android:fontFamily="@font/dm_sans_medium" android:letterSpacing="0"
+            android:includeFontPadding="false" android:hyphenationFrequency="none"
+            android:paddingStart="24dp" android:paddingEnd="24dp"
+            android:stateListAnimator="@null" android:textColor="@color/az_button_text" />
         <TextView android:id="@+id/variant_note" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginTop="28dp"
-            android:textSize="14sp" android:textColor="#A6BAC8" />
+            android:layout_height="wrap_content" android:layout_marginTop="24dp"
+            style="@style/AzLabel" />
     </LinearLayout>
 </ScrollView>

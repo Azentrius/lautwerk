@@ -1,0 +1,34 @@
+[
+  {
+    "theme": "azentrius-hell",
+    "foregroundToken": "text",
+    "foreground": "#0a0a0f",
+    "background": "#f2f1ee",
+    "ratio": 17.4867,
+    "pass": true
+  },
+  {
+    "theme": "azentrius-hell",
+    "foregroundToken": "signature",
+    "foreground": "#7d5f22",
+    "background": "#f2f1ee",
+    "ratio": 5.264,
+    "pass": true
+  },
+  {
+    "theme": "azentrius-dunkel",
+    "foregroundToken": "text",
+    "foreground": "#e8e6e0",
+    "background": "#0a0a0f",
+    "ratio": 15.8257,
+    "pass": true
+  },
+  {
+    "theme": "azentrius-dunkel",
+    "foregroundToken": "signature",
+    "foreground": "#c8a96e",
+    "background": "#0a0a0f",
+    "ratio": 8.7999,
+    "pass": true
+  }
+]

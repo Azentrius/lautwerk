@@ -1,0 +1,37 @@
+{
+  "core": {
+    "tests": 22,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "providers": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "voice": {
+    "tests": 45,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "pixel": {
+    "model": "Pixel 10 Pro",
+    "android": "17",
+    "tests": 78,
+    "failures": 0
+  },
+  "emulator": {
+    "image": "Android 14 / API 34 Google APIs x86_64",
+    "prototypeDhuTests": 12,
+    "additionalTitleMatrixRuns": 4,
+    "failures": 0,
+    "actualDhuHost": false
+  },
+  "version": "0.1.18",
+  "versionCode": 118,
+  "baseCommit": "c8620957616393263d46a3efcd5f800fec41a993",
+  "designCommit": "edd4c67da6d7c606296c3bbd13d7aa5da548f452"
+}

@@ -1,0 +1,13 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <color name="az_bg_page">#f2f1ee</color>
+    <color name="az_text">#0a0a0f</color>
+    <color name="az_text_subtle">#57544d</color>
+    <color name="az_text_disabled">#a8a49b</color>
+    <color name="az_primary">#0a0a0f</color>
+    <color name="az_primary_hover">#2b2b33</color>
+    <color name="az_on_primary">#ffffff</color>
+    <color name="az_focus">#7d5f22</color>
+    <color name="az_tint_neutral">#e7e4dd</color>
+    <color name="az_signature">#7d5f22</color>
+</resources>

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.18 – 2026-10-13
+
+Apply the Azentrius app title and refresh the read-only design reference.
+
+- Render the existing phone title as one accessible text: DM Sans OpenAuto and italic DM Serif
+  Display AI in the theme's signature color. The native prototype phone title follows the same rule.
+- Give voice rows with a description the specified 72 dp minimum height.
+- Bring the prototype phone page's typography, surface, text and primary button into the supplied
+  light/dark palette. Keep its controls, texts and selection flow.
+- Restore historical design snapshots and import the complete, byte-verified `edd4c67` tree.
+  Record the full Android and Android Auto audit, open specification points and evidence.
+- Keep the car template, B2/B3, strings, provider selection, storage and conversation behavior.
+  Both apps use the existing shared version rule: 0.1.18, versionCode 118.
+
 ## 0.1.17 – 2026-10-13
 
 Connect the experimental Android Auto surface to independently testable audio and the existing conversation flow.

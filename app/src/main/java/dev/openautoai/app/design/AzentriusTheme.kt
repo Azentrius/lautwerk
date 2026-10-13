@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.*
 import dev.openautoai.app.R
 
 internal object AzType {
+    val serifItalic = FontFamily(Font(R.font.dm_serif_display_italic,
+        FontWeight.Normal, androidx.compose.ui.text.font.FontStyle.Italic))
     private val sans = FontFamily(Font(R.font.dm_sans_regular, FontWeight.Normal),
         Font(R.font.dm_sans_medium, FontWeight.Medium), Font(R.font.dm_sans_semibold, FontWeight.SemiBold))
     private fun style(size: Int, height: Int, weight: FontWeight) = TextStyle(fontFamily = sans,

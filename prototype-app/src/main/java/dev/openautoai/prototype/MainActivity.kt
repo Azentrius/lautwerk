@@ -32,6 +32,12 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         session = PrototypeSession(savedInstanceState?.getInt("starts") ?: 0)
         setContentView(R.layout.activity_main)
+        if (android.os.Build.VERSION.SDK_INT >= 29) window.isNavigationBarContrastEnforced = false
+        stylePhoneTitle()
+        findViewById<Button>(R.id.start).apply {
+            backgroundTintList = null
+            background = PrototypeButtonBackground(this@MainActivity)
+        }
         findViewById<View>(R.id.root).setOnApplyWindowInsetsListener { view, insets ->
             // Native insets keep the small phone UI usable on Android 15/16/17.
             if (android.os.Build.VERSION.SDK_INT >= 30) {
@@ -108,6 +114,20 @@ class MainActivity : Activity() {
         findViewById<TextView>(R.id.selection_status).text = getString(
             R.string.selection_saved, selection.provider.displayName, selection.model.label
         )
+    }
+
+    private fun stylePhoneTitle() {
+        val title = findViewById<TextView>(R.id.app_title)
+        val name = getString(R.string.app_name)
+        val styled = android.text.SpannableString(name)
+        val suffix = name.lastIndexOf("AI")
+        if (suffix >= 0) {
+            styled.setSpan(android.text.style.TypefaceSpan(resources.getFont(R.font.dm_serif_display_italic)),
+                suffix, name.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            styled.setSpan(android.text.style.ForegroundColorSpan(getColor(R.color.az_signature)),
+                suffix, name.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        title.text = styled
     }
 
     private fun adapter(items: List<String>) = ArrayAdapter(
