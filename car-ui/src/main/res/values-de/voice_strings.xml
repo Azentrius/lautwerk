@@ -1,0 +1,34 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="voice_setup">Audio und Gespräch einrichten</string>
+    <string name="voice_stop">Beenden</string>
+    <string name="voice_preparing">Audio wird vorbereitet…</string>
+    <string name="voice_listening">Hört zu</string>
+    <string name="voice_speaking">Spricht</string>
+    <string name="voice_stopped">Beendet</string>
+    <string name="voice_permission">Erlauben Sie den Mikrofonzugriff am Telefon unter „Audio und Gespräch einrichten“ und tippen Sie erneut auf Starten.</string>
+    <string name="voice_car_unavailable">Für die Erkennung des Automikrofons werden Car API 5, Android 13 oder neuer und eine installierte lokale Spracherkennung benötigt. Testen Sie zunächst am Telefon.</string>
+    <string name="voice_foreground_failed">Android konnte den Audiodienst nicht starten. Öffnen Sie „Audio und Gespräch einrichten“ am Telefon und versuchen Sie es erneut. Keine Aufnahme gestartet.</string>
+    <string name="voice_interrupted">Ein anderer Audiovorgang hat Vorrang. Das Gespräch wurde beendet.</string>
+    <string name="voice_failed">Das Gespräch konnte nicht starten. Bitte versuchen Sie es erneut.</string>
+    <string name="voice_check_done">Audiotest abgeschlossen. Prüfen Sie, ob die Ausgabe hörbar war. Es wurde keine KI-Anfrage gesendet.</string>
+    <string name="voice_sample">OpenAuto AI. Dies ist der Test der Sprachausgabe. Es wird keine KI-Anfrage gesendet.</string>
+    <string name="voice_disconnected">Audiodienst getrennt. Tippen Sie auf Starten, um es erneut zu versuchen.</string>
+    <string name="voice_service_wait">Audiodienst verbindet sich. Bitte tippen Sie erneut auf Starten.</string>
+    <string name="voice_setup_help">Testen Sie zuerst die Ausgabe, dann das Mikrofon, dann das Gespräch. Der gewählte Modus gilt für Starten in Android Auto und den Telefontest. Der Mikrofontest liest einen Satz zurück, ohne ihn an einen KI-Anbieter zu senden oder zu speichern. Die Erkennung im Auto erfolgt lokal; ein Telefondienst kann Audio online verarbeiten. Ein Gespräch sendet erkannten Text an den gewählten Anbieter, verbraucht Ihr API-Guthaben und speichert den Chat verschlüsselt in dieser Test-App. Testen Sie im Stand.</string>
+    <string name="voice_mode_playback">1. Ausgabetest — ohne Mikrofon und KI</string>
+    <string name="voice_mode_microphone">2. Mikrofon- und Erkennungstest — ohne KI</string>
+    <string name="voice_mode_conversation">3. Gespräch — gewählter KI-Anbieter</string>
+    <string name="voice_permissions">Mikrofon und Benachrichtigungen erlauben</string>
+    <string name="voice_key_label">API-Schlüssel für %1$s</string>
+    <string name="voice_key_hint">Schlüssel nur auf diesem Telefon eingeben</string>
+    <string name="voice_key_separate">Die Android-Auto-Test-App hat einen eigenen verschlüsselten Schlüsselspeicher, getrennt von der Assistenten-App. Audiotests benötigen keinen Schlüssel.</string>
+    <string name="voice_key_save">Schlüssel speichern</string>
+    <string name="voice_key_clear">Schlüssel löschen</string>
+    <string name="voice_key_saved">Schlüssel verschlüsselt gespeichert.</string>
+    <string name="voice_key_cleared">Schlüssel gelöscht.</string>
+    <string name="voice_key_empty">Bitte geben Sie einen Schlüssel ein. Ein leeres Feld löscht den gespeicherten Schlüssel nicht.</string>
+    <string name="voice_key_failed">Der Schlüssel konnte nicht gespeichert oder gelöscht werden. Bitte versuchen Sie es erneut.</string>
+    <string name="voice_phone_start">Auf dem Telefon starten</string>
+    <string name="voice_phone_help">Der Telefontest verwendet das Telefonmikrofon. Für das Automikrofon wählen Sie hier den Modus, öffnen OpenAuto AI in Android Auto und tippen dort auf Starten. Beenden stoppt Erkennung, Ausgabe und offene Anfragen. Beim Verlassen der aktiven Oberfläche endet deren Sitzung. Kein automatischer Neustart.</string>
+</resources>

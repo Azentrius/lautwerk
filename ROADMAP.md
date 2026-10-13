@@ -1,9 +1,15 @@
 # Roadmap
 
-As of 0.1.16 (2026-10-13). What each version changed, with its tests and the checks the user
+As of 0.1.17 (2026-10-13). What each version changed, with its tests and the checks the user
 confirmed, is in [CHANGELOG.md](CHANGELOG.md).
 
 ## Where things stand
+
+- 0.1.17 connects the existing car package to independent output/microphone checks and the shared
+  conversation controller. The Pixel/DHU microphone echo is user-confirmed; provider and vehicle
+  audio validation are tracked separately in [CAR_VOICE.md](docs/CAR_VOICE.md).
+- The user reports that the app now opens from the vehicle launcher after the explicitly authorized
+  installation-origin experiment. This is no general distribution or Play-category approval.
 
 - The minimal DHU prototype (0.1.1) and the shared provider and model selection for the phone and the
   car template of the same test app (0.1.2) are confirmed by the user in a real DHU.
@@ -37,8 +43,8 @@ confirmed, is in [CHANGELOG.md](CHANGELOG.md).
    test placeholder, not a product release.
 3. **Live tests of the provider adapters.** Test the existing OpenAI and Claude adapters with own API
    accounts, under control. Error cases and Android's JSON are tested offline; model access and voice end
-   to end count as shown only after a confirmed practical test, see `docs/VOICE.md`. The DHU prototype
-   still sends no API request.
+   to end count as shown only after a confirmed practical test, see `docs/VOICE.md` and `docs/CAR_VOICE.md`.
+   The DHU's two diagnostic modes send no AI request; its explicit Conversation mode uses the provider.
 4. **History and archive.** History search (0.1.11) and local text export (0.1.10) are confirmed; check
    cloud destinations and rotation during the picker later. The user confirmed phone handling with real
    conversations with both providers under 0.1.12. The whole archive file is still read in the
@@ -48,8 +54,8 @@ confirmed, is in [CHANGELOG.md](CHANGELOG.md).
 5. **Voice in practice.** Check the implemented voice interfaces: microphone permissions, audio focus,
    audible text-to-speech, resuming and cancelling with both API accounts. Deferred at the user's
    request: the call and headset/Bluetooth interruptions from 0.1.8; there is no confirmed result yet.
-   `CarAudioRecord` and car audio routing only once the platform permission is clear; no voice function
-   in the DHU prototype.
+   `CarAudioRecord` and local recognition now pass the independent DHU echo check. Validate complete
+   conversations, stop/restart and the actual vehicle audio path before claiming them supported.
 6. **Model catalog.** Maintain it deliberately and offer model migrations explicitly; never change an
    existing selection or a chat's model unnoticed.
 7. **Toolchain on the device.** Run the device tests with the 0.1.16 toolchain

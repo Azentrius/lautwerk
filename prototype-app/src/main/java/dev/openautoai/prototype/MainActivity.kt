@@ -54,6 +54,7 @@ class MainActivity : Activity() {
         }
         configureSelection()
         renderStatus()
+        VoiceEntryPoint.attach(this)
         Log.i("OpenAutoAI", "phone.onCreate dhu=${BuildConfig.DHU_EXPERIMENT}")
     }
 

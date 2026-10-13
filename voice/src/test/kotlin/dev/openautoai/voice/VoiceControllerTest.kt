@@ -7,6 +7,18 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class VoiceControllerTest {
+    @Test fun hostMicrophoneDismissalStopsWithoutRetryOrLateProviderRequest() {
+        val f = Fixture(); f.ready(Provider.CLAUDE)
+        val late = f.audio.heard
+        f.audio.heard(Recognition.Failed(VoiceProblem.CAPTURE_STOPPED))
+        assertFalse(f.controller.state.active)
+        f.clock.advance(60_000)
+        late(Recognition.Text("Stale question"))
+        assertEquals(1, f.audio.listens)
+        assertTrue(f.backend.phrases.isEmpty())
+        f.ready(Provider.CLAUDE)
+        assertEquals(2, f.audio.listens)
+    }
     private class Clock : VoiceScheduler {
         data class Job(val at: Long, val action: () -> Unit, var cancelled: Boolean = false)
         var now = 0L

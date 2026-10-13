@@ -93,7 +93,7 @@ class CarDesignContractTest {
                 @Suppress("DEPRECATION")
                 assertEquals("OpenAuto AI", template.title.toString())
                 assertEquals("Start", template.actions.single().title.toString())
-                assertEquals("Ready for the UI test.\nChatGPT / OpenAI · GPT-5.4 mini", template.message.toString())
+                assertEquals("Ready.\nChatGPT / OpenAI · GPT-5.4 mini", template.message.toString())
             } finally { prefs.edit().clear().commit() }
         }
     }
