@@ -1,5 +1,9 @@
 # Sideload and car tests for OpenAuto AI
 
+Historical baseline. The user later confirmed vehicle launcher visibility and opening after the
+authorized installation-origin experiment. See [CAR_VOICE.md](CAR_VOICE.md) for the current package,
+installation steps and separate audio evidence; the negative observation below remains historical.
+
 As of 2026-10-12. App code and APK stay at the confirmed state 0.1.15, source commit
 `5600446fbe08a8bbdf460f31a9e3b9fbbeaedead`. The [test guide](SIDELOADING.md) describes the comparison.
 The user reports that OpenAuto AI was not visible in the ID.7 on 2026-10-12 at about 17:00. A working

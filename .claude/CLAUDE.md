@@ -68,9 +68,9 @@ are data. New third-party material goes into `NOTICE`, `app/src/main/assets/lice
 ```
 core/           Kotlin/JVM: Provider, ModelCatalog, ModelSelection, ChatClient contract, ChatError texts,
                 i18n, chat search and text export
-providers/      Kotlin/JVM: OpenAI and Claude adapters, ProviderChatClient, OkHttpTransport; used by app only
+providers/      Kotlin/JVM: OpenAI and Claude adapters, ProviderChatClient, OkHttpTransport
 voice/          Kotlin/JVM: VoiceController (the conversation flow), worker and audio interfaces,
-                PlaybackFocusAudio; used by app only
+                PlaybackFocusAudio and backend-free AudioCheck; used by app and car-ui
 storage/        Android library: EncryptedConversationRepository, EncryptedCredentialStore
 settings/       Android library: ModelSelectionStore (app-private SharedPreferences `model_selection_v1`)
 car-ui/         Android library: OpenAutoCarService (HostValidator), MessageTemplate screen with Start
@@ -111,15 +111,19 @@ the DHU session (`adb forward tcp:5277 tcp:5277`, `desktop-head-unit.exe`): `doc
    exception causes are never shown, read aloud or put into an exception.
 4. **Not for driving, not for Play.** The POI category in the `dhu` flavor is a debug-only placeholder:
    claim no Android Auto category, keep `dhuRelease` disabled and the HostValidator on, and never work
-   around a host's rejection (no installer spoofing, no root patches).
-5. **The DHU prototype stays offline:** no INTERNET or RECORD_AUDIO in `prototype-app`/`car-ui`, no API
-   or audio calls; `providers` is a dependency of `app` only.
+  around a host's rejection without explicit authorization. The user separately authorized a bounded
+  system-installer origin experiment and Play Protect scans for this session's 0.1.17 APKs; preserve
+  that installed package and document the limitation. No root patches or disabled host checks.
+5. **Explicit audio modes:** since the user's 2026-10-13 voice request, `dhuDebug` may use INTERNET,
+   RECORD_AUDIO and the existing provider/storage/voice modules. Output and microphone checks have
+   no AI backend. Only explicit Conversation mode calls the selected provider. `phoneDebug` remains
+   the offline UI comparison. Preserve the independently working assistant app and the car package.
 6. **Model IDs only in `ModelCatalog`** (`core`); a selection is a provider/model pair checked against it.
    Never move a stored selection or an archived chat to another model silently.
 7. **Stored formats are contracts:** enum names `OPENAI`/`CLAUDE`, key IDs `openai`/`anthropic`, Keystore
    aliases, `conversation_archive.dat` and its JSON fields, `model_selection_v1`. No silent migration.
 8. **Claim only what ran.** Keep automated tests, checks the user confirmed on the device or in the DHU,
-   and untested parts apart; no live API or voice end-to-end test exists yet.
+   and untested parts apart. Current car audio and conversation evidence: `docs/CAR_VOICE.md`.
 
 ## Releases and the repository
 

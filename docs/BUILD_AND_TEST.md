@@ -1,5 +1,7 @@
 # Build and test report 0.1.15
 
+Historical report. The 0.1.17 car audio changes and current validation are in [CAR_VOICE.md](CAR_VOICE.md).
+
 As of 2026-10-12. **The assistant and the DHU test app are installed on the Pixel as updates.**
 The new speech bubble with a dot, the native splash screen and the small service icon follow the
 design system `170dd38` / O1 `6a7a951` without changes.

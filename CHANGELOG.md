@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.1.17 – 2026-10-13
+
+Connect the experimental Android Auto surface to independently testable audio and the existing conversation flow.
+
+- Keep the car package, signed-host validation, title, provider/model line and single action. Start now
+  invokes the selected audio test or conversation; End cancels capture, playback and pending work.
+- Add phone-only setup inside the car test package: output test, microphone/recognition echo test and
+  conversation mode. Output is the initial mode; both audio checks have no AI backend or key dependency.
+- Use AudioManager focus and local TextToSpeech output. Car capture uses CarAudioRecord (Car API 5+),
+  PCM 16-bit mono at 16 kHz and the Android on-device recognition input (Android 13+).
+  Explicit phone testing uses the phone recognizer; the car path never deliberately switches microphones.
+- Reuse VoiceController, ConversationVoiceBackend, ProviderChatClient and encrypted credentials/chats.
+  No key transfer from the separate assistant package, no keys or conversation contents in logs.
+- Add bounded foreground audio sessions, stop/disconnect cleanup, fixed English/German errors and
+  opt-in device probes for TTS playback and external PCM recognition. Call/headset tests remain deferred.
+
+Device evidence and remaining checks: [car voice report](docs/CAR_VOICE.md).
+
 ## 0.1.16 – 2026-10-13
 
 The build moves to the current Android toolchain, and the repository gets one version, a release

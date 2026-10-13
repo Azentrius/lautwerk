@@ -8,7 +8,9 @@ import androidx.car.app.model.Action
 import androidx.car.app.model.CarColor
 import androidx.car.app.model.MessageTemplate
 import androidx.car.app.model.Template
-import dev.openautoai.core.PrototypeSession
+import android.Manifest
+import android.content.pm.PackageManager
+import dev.openautoai.car.voice.*
 import dev.openautoai.settings.ModelSelectionStore
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -16,42 +18,64 @@ import java.io.Closeable
 
 class OpenAutoScreen(
     carContext: CarContext,
-    private val selections: ModelSelectionStore = ModelSelectionStore(carContext)
+    private val selections: ModelSelectionStore = ModelSelectionStore(carContext),
+    private val voice: CarVoicePort = VoiceConnection(carContext, carContext)
 ) : Screen(carContext) {
-    private val session = PrototypeSession()
     private var subscription: Closeable? = null
+    private var visible = false
+    private var requestingPermission = false
+    private var permissionIssue = false
 
     init {
         lifecycle.addObserver(object : DefaultLifecycleObserver {
             override fun onStart(owner: LifecycleOwner) {
+                visible = true
                 subscription = selections.observe { invalidate() }
+                voice.connect { invalidate() }
             }
             override fun onStop(owner: LifecycleOwner) {
+                visible = false
                 subscription?.close()
                 subscription = null
+                voice.close()
             }
         })
     }
 
     @Suppress("DEPRECATION") // API-1 title/header remains usable on older hosts.
     override fun onGetTemplate(): Template {
-        Log.i(OpenAutoCarService.TAG, "car.onGetTemplate count=${session.startCount}")
-        val message = if (session.startCount == 0) carContext.getString(R.string.car_ready)
-            else carContext.getString(R.string.car_started, session.startCount)
-        val selected = selections.load()
+        Log.i(OpenAutoCarService.TAG, "car.onGetTemplate active=${voice.state.active}")
+        val message = if (permissionIssue) carContext.getString(R.string.car_permission)
+            else voice.state.summary.ifBlank { carContext.getString(R.string.car_ready) }
+        val selected = voice.state.selection ?: selections.load()
         val content = carContext.getString(R.string.car_selection, message,
             selected.provider.displayName, selected.model.label)
         return MessageTemplate.Builder(content)
             .setTitle(carContext.getString(R.string.car_title))
             .setHeaderAction(Action.APP_ICON)
             .addAction(Action.Builder()
-                .setTitle(carContext.getString(R.string.car_start))
+                .setTitle(carContext.getString(if (voice.state.active) R.string.voice_stop else R.string.car_start))
                 .setBackgroundColor(CarColor.PRIMARY)
                 .setOnClickListener {
-                    session.start()
-                    Log.i(OpenAutoCarService.TAG, "car.start count=${session.startCount}")
-                    invalidate()
+                    startOrStop()
                 }.build())
             .build()
+    }
+
+    private fun startOrStop() {
+        if (requestingPermission) return
+        permissionIssue = false
+        if (!voice.state.active && VoicePreferences(carContext).mode != VoiceMode.PLAYBACK &&
+            carContext.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            requestingPermission = true
+            try {
+                carContext.requestPermissions(listOf(Manifest.permission.RECORD_AUDIO), carContext.mainExecutor) { approved, _ ->
+                    requestingPermission = false
+                    permissionIssue = Manifest.permission.RECORD_AUDIO !in approved
+                    if (visible && Manifest.permission.RECORD_AUDIO in approved) voice.toggle()
+                    invalidate()
+                }
+            } catch (_: Exception) { requestingPermission = false; permissionIssue = true; invalidate() }
+        } else voice.toggle()
     }
 }

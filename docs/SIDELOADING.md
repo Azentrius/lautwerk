@@ -1,5 +1,9 @@
 # OpenAuto AI via sideload on the car display
 
+Historical 0.1.15 baseline below. The user subsequently confirmed visibility/opening on the vehicle
+display after an explicitly authorized installation-origin experiment. The 0.1.17 installation and
+audio evidence are in [CAR_VOICE.md](CAR_VOICE.md); its Start action no longer runs a car UI counter.
+
 As of 2026-10-12. The goal is an APK distributed through GitHub that users can install on their phone
 and open in the car. To get there, we first check the unchanged UI prototype 0.1.15 in a stationary
 car. A confirmed path for OpenAuto AI on real head units does not exist yet.

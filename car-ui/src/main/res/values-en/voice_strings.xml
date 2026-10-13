@@ -1,0 +1,34 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="voice_setup">Audio and conversation setup</string>
+    <string name="voice_stop">End</string>
+    <string name="voice_preparing">Preparing audio…</string>
+    <string name="voice_listening">Listening</string>
+    <string name="voice_speaking">Speaking</string>
+    <string name="voice_stopped">Ended</string>
+    <string name="voice_permission">Allow microphone access on the phone under Audio and conversation setup, then press Start again.</string>
+    <string name="voice_car_unavailable">Car microphone recognition needs Car API 5, Android 13 or later and an installed on-device speech recognizer. Test on the phone first.</string>
+    <string name="voice_foreground_failed">Android could not start the audio service. Open Audio and conversation setup on the phone and retry. No recording started.</string>
+    <string name="voice_interrupted">Another audio operation has priority. The conversation has ended.</string>
+    <string name="voice_failed">The conversation could not start. Please try again.</string>
+    <string name="voice_check_done">Audio check complete. Please confirm that you heard the output. No AI request was sent.</string>
+    <string name="voice_sample">OpenAuto AI. This is the audio output test. No AI request is being sent.</string>
+    <string name="voice_disconnected">Audio service disconnected. Press Start to retry.</string>
+    <string name="voice_service_wait">Audio service is connecting. Please press Start again.</string>
+    <string name="voice_setup_help">First test output, then the microphone, then conversation. The selected mode applies to Start in Android Auto and to the phone test. Microphone test reads back one sentence without sending it to an AI provider or saving it. Car recognition is on-device; a phone speech service may process audio online. Conversation sends recognized text to the selected provider, uses your API credits and saves the chat encrypted in this test app. Test while parked.</string>
+    <string name="voice_mode_playback">1. Output test — no microphone or AI</string>
+    <string name="voice_mode_microphone">2. Microphone and recognition test — no AI</string>
+    <string name="voice_mode_conversation">3. Conversation — selected AI provider</string>
+    <string name="voice_permissions">Allow microphone and notifications</string>
+    <string name="voice_key_label">API key for %1$s</string>
+    <string name="voice_key_hint">Enter key on this phone only</string>
+    <string name="voice_key_separate">The Android Auto test app has its own encrypted key storage, separate from the assistant app. Audio tests do not need a key.</string>
+    <string name="voice_key_save">Save key</string>
+    <string name="voice_key_clear">Delete key</string>
+    <string name="voice_key_saved">Key saved encrypted.</string>
+    <string name="voice_key_cleared">Key deleted.</string>
+    <string name="voice_key_empty">Please enter a key. An empty field does not delete the saved key.</string>
+    <string name="voice_key_failed">The key could not be saved or deleted. Please try again.</string>
+    <string name="voice_phone_start">Start on phone</string>
+    <string name="voice_phone_help">Phone test uses the phone microphone. To test the car microphone, choose the mode here, open OpenAuto AI in Android Auto and press Start there. End stops recognition, playback and pending requests. Leaving the active surface ends its session. No automatic restart.</string>
+</resources>

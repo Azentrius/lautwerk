@@ -15,20 +15,15 @@ What changed in each version: [CHANGELOG.md](CHANGELOG.md). What comes next: [RO
 
 ## Status
 
-The last device check was 0.1.15, which added the approved app icon "speech bubble with a dot" from
-design commit `170dd38` to the assistant and the prototype, with its monochrome layer, a native splash
-screen on ink and a small notification icon. The 11 Android files match the source byte for byte.
+0.1.17 connects the existing Android Auto package to audio and the shared conversation controller.
+The title, app icon, provider/model line, host colors and single action remain. Start runs the mode
+chosen on the phone; while active, the same action becomes End.
 
-**Assistant 0.1.15-dev (code 15) and DHU 0.1.15-prototype (code 6) are installed on the Pixel.** All 28
-selected device tests pass. Build and lint succeed (0 errors). App icon, splash screen, the existing
-phone pages, DHU touch and rotary, and six starts without reset were checked.
-
-The DHU UI, B2/B3 and their functions are unchanged; the host still shows the Start action in light blue.
-Call, headset and Bluetooth tests stay deferred. The phone comparison variant was built as
-0.1.15-prototype (code 5). Voice stays in the assistant app only.
-
-0.1.16 moves the build to the current toolchain and gives both apps one version; the device tests with
-the new toolchain are still open.
+On the Pixel 10 Pro / Android 17, independent TTS playback and external PCM recognition passed.
+In the DHU, CarAudioRecord captured the PC microphone, local recognition succeeded and the user
+confirmed hearing the sentence read back correctly. These checks use no AI provider. Claude conversation
+validation and the precise build/device results are tracked separately in [CAR_VOICE.md](docs/CAR_VOICE.md).
+Call and headset tests remain deferred. The separate assistant app retains its existing UI and voice flow.
 
 Details: [app icon and installation](docs/APP_IDENTITY.md), [current test report](docs/BUILD_AND_TEST.md),
 [phone design](docs/DESIGN_SYSTEM.md),
@@ -38,36 +33,39 @@ Details: [app icon and installation](docs/APP_IDENTITY.md), [current test report
 ## Sideloading and real cars
 
 Since 2026-10-12, at the user's request, we check distribution outside Google Play. At the user's request
-we first test native wireless Android Auto in the ID.7 with the APK that is already installed. The tests in
-the Kia with AAWireless are deferred. A working path for OpenAuto AI is not confirmed yet. The
+we first test native wireless Android Auto in the ID.7. The user subsequently confirmed launcher
+visibility and opening on the vehicle display after the explicitly authorized installation-origin
+experiment. This is a device-specific observation, not a general distribution guarantee. The tests in
+the Kia with AAWireless are deferred. The
 [sideloading guide](docs/SIDELOADING.md) and the [car test report](docs/SIDELOAD_TEST_REPORT.md) keep
-preparation, observations and open tests apart. App and DHU stay at 0.1.15 for these tests.
+preparation, observations and open tests apart. Those reports describe the original 0.1.15 baseline;
+the current audio work and installation procedure are in [CAR_VOICE.md](docs/CAR_VOICE.md).
 
 ## Quick start on Windows
 
 1. Open this project in Android Studio and set the Gradle JDK to **JDK 17**.
 2. Install SDK Platform **Android 17 / API 37** and Build Tools **36.0.0** if they are missing.
 3. Choose the build variant `prototype-app: dhuDebug`; this APK holds the phone UI AND the car service.
-4. Follow the steps in [docs/START_WINDOWS.md](docs/START_WINDOWS.md).
+4. Follow [car audio setup and tests](docs/CAR_VOICE.md). The original SDK/DHU setup is in
+   [docs/START_WINDOWS.md](docs/START_WINDOWS.md).
 
-`OpenAuto AI`, the provider and model choice and `Start` appear on the phone. In the car template, Start
-changes the text from "Ready for the UI test." to "Started · Test 1". This test has no network or
-microphone permission and makes no API calls.
+On the test app's phone page, choose the provider/model and open **Audio and conversation setup**.
+First run Output test, then Microphone and recognition test. Both are independent of the AI backend.
+Only Conversation mode sends recognized text to the selected provider using a key entered in this
+test app. The old Start button on the phone's selection page remains a UI counter.
 
 ## Three separate builds
 
 | Module / variant | Package | Purpose |
 |---|---|---|
-| `prototype-app:dhuDebug` | `dev.openautoai.prototype.dhu` | Minimal phone test plus the experimental car app service |
+| `prototype-app:dhuDebug` | `dev.openautoai.prototype.dhu` | Experimental car service, audio diagnostics and conversation setup |
 | `prototype-app:phoneDebug` | `dev.openautoai.prototype.phone` | Comparison app without car registration |
 | `app:debug` | `dev.openautoai.app` | The phone app continued from 0.1.0, with providers, history and voice |
 
 The test packages do not replace the old app and take over none of its data. Inside
 `dev.openautoai.prototype.dhu`, phone and DHU share their selection. The three APKs use the same
-selection code but each has its own private storage. The model catalog holds the five IDs from 0.1.0;
-the selection does not check actual API account access. The phone and car test counters are independent
-and only in memory; on the phone the counter survives recreating the activity. No persistent test
-session.
+selection code but each has its own private storage. The selection does not check actual API account
+access. The car test app does not import the assistant's keys, voice preference or chat history.
 
 ## Category: a deliberately limited experiment
 
@@ -81,8 +79,10 @@ test scaffold is not meant for publishing on Play or for use while driving.
 
 Android Auto may reject or hide the app even after a successful build and ADB install. The app's own
 HostValidator check stays on and uses the signed host entries of the AndroidX library. Conversely, it
-grants no approval by Android Auto. There is no installer spoofing, no root patch and no disabling of
-host checks.
+grants no approval by Android Auto. There is no root patch or disabling of host checks. A user-authorized
+local installation-origin experiment recorded Google Play as installer through Android's system
+installer; this deliberately misrepresents origin and is neither a Play installation nor an official
+distribution method. See the bounded procedure and observed limits in [CAR_VOICE.md](docs/CAR_VOICE.md).
 
 According to Google's testing documentation, the "Unknown sources" option explicitly does not unlock
 Car App Library apps. Whether the app is technically available outside Google Play is now checked in the
@@ -92,8 +92,8 @@ promise the category either.
 ## Modules and later work
 
 - `core`: provider and model types, validated selection, chat and storage interfaces, UI test counter.
-- `providers`: OpenAI and Claude adapters, replaceable HTTP transport and safe error mapping; used by the
-  assistant app only.
+- `providers`: OpenAI and Claude adapters, replaceable HTTP transport and safe error mapping; shared by
+  the assistant and the experimental car conversation.
 - `storage`: encrypted chats and API keys, process-wide locks, fixed errors and a compatible archive
   format.
 - `settings`: app-private storage of the selection, one model per provider, observing changes while the
@@ -102,9 +102,10 @@ promise the category either.
   and text-to-speech text splitting.
 - `app`: Android speech adapters, the microphone foreground service and the continued Compose app with
   the shared catalog and selection store. The names `OPENAI`/`CLAUDE`, key IDs and archive formats stay.
-- `car-ui`: the car app service with host validation, `MessageTemplate`, the Start action and the current
-  selection as text.
-- `prototype-app`: phone selection and two test variants; no API or audio calls.
+- `car-ui`: host validation, the existing `MessageTemplate`, phone-only setup, foreground audio service,
+  CarAudioRecord input and on-device recognition, local TTS and binding to the shared voice controller.
+- `prototype-app`: phone selection and two variants; `phoneDebug` stays offline, `dhuDebug` adds audio
+  checks and an explicitly selected conversation mode.
 
 Later work: check cloud destinations of the text export, plan encrypted backup and import and size rules
 for very large archives. Call and headset tests stay deferred. A provider switch in the voice service
