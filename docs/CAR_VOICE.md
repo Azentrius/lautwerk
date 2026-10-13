@@ -68,8 +68,14 @@ by the provider. Call and headset interruption hardware tests are still deferred
 
 The car host can display its own microphone overlay above the template while capturing. Dismissing
 that overlay closes the host stream and is treated as a terminal capture stop, not retryable silence.
-The app does not control the overlay's position or styling. Start and End are explicit, idempotent
-actions; an old End action cannot start a new session. Host recorder start/stop calls are serialized
+The app does not control the overlay's position or styling. The wave is a microphone indicator,
+not the lifetime of the whole conversation. After a recognized question the app closes capture,
+processes the question and reads the answer through a separate TTS playback path. The overlay can
+therefore disappear while the answer is audible. The app should continue to show Speaking and End;
+only after TTS completion does it return to Listening. The user confirmed this display during the
+evening Claude retest below. Disappearance by itself is not a premature stop or an audio error.
+
+Start and End are explicit, idempotent actions; an old End action cannot start a new session. Host recorder start/stop calls are serialized
 off the UI thread, including across service recreation. End invalidates callbacks and publishes the
 inactive state immediately; completion of host audio teardown can follow separately.
 
@@ -188,16 +194,16 @@ events for reports; full Android Auto logs and dashboard screenshots can contain
 | DHU real PC microphone echo | Passed: 116736 PCM bytes, recognition success, TTS success; user confirmed correct audible sentence |
 | Initial no-speech mic attempt | Ended with NO_INPUT; not counted as a recognized-speech test |
 | One interrupted DHU transport | Reconnected; announced but unstarted test repeated successfully |
-| Claude live conversation/follow-up | User confirmed both answers audible. Repeated listening, intermittent error summaries and slow End were then reported; reliability was not accepted |
+| Initial Claude live conversation/follow-up | User confirmed both answers audible. Repeated listening, intermittent error summaries and slow End were then reported; reliability was not accepted |
 | Stability APK update | Installed 2026-10-13 at about 14:53 CEST; installed SHA-256 matches the prepared APK; installer remains com.android.vending |
 | Stability phone/template/recognition-listener instrumentation suite | Passed: 17 checks, two opt-in audio probes skipped in this run |
 | Separate output probe after stability update | Passed, including repeated Start on the real service; no microphone or AI request |
 | DHU listening stability | A single capture stayed open for 25 seconds across empty segments; no premature recognition failure or second capture |
 | DHU host microphone dismissal after correction | CAPTURE_STOPPED, then inactive/Ended, no retry. Local service stop 7 ms; host recorder stop 1 ms. These are event timings, not a claim about acoustic latency |
 | Human echo/stop after correction | Passed, confirmed by the user on 2026-10-13 ("Alle Tests erfolgreich"). The corresponding sessions at 15:16–15:17 CEST were in MICROPHONE mode: successful recognition and TTS, host dismissal, then explicit restart and another dismissal |
-| Claude retest after correction | Pending; the successful MICROPHONE sessions above make no provider request |
+| Claude retest after correction | Completed later on 2026-10-13 with Claude Haiku 4.5: the user reported overall operation working and confirmed Speaking/End during audible output. Captured events include two completed answers in one session, return to listening, explicit stop and explicit restart. See the separate evening evidence below; this is not a vehicle or latency benchmark |
 | Final DHU template | Title, Claude Haiku 4.5, short status and the single action visible together; host API 8 retained |
-| Vehicle voice (ID.7 / Kia) | Not tested in this audio change; earlier launcher visibility is not audio evidence |
+| Vehicle voice (ID.7 / Kia) | Not tested in this audio change. The user deferred the planned parked ID.7 test; Kia/AAWireless remains deferred. Earlier launcher visibility is not audio evidence |
 | Call and headset interruption | Deferred at user's request |
 
 The initial full CI task list passed locally and in GitHub Actions on commits `17073c6` and `2f477c3`.
@@ -230,8 +236,27 @@ stop could also wait for host IPC on the UI thread, and a stale End template cli
 already stopped session back on. These code paths are corrected. The user has now accepted the
 independent echo, host dismissal and restart checks. The diagnostic events show host-dismissal
 stops of 6 ms and 5 ms in the local service, with no automatic retry; later starts have explicit
-`car.voice.action=start` events. A complete Claude follow-up retest after this correction is still
-open. Vehicle audio and the deferred call/headset checks are not covered by this acceptance.
+`car.voice.action=start` events. These were microphone-mode checks; the separate evening retest
+below now records Claude conversation evidence. Vehicle audio and the deferred call/headset
+checks are not covered by either acceptance.
+
+## Evening Claude retest — 2026-10-13
+
+The existing **0.1.17-prototype/code 117** car APK was retained. Its installed SHA-256 was checked
+against the final artifact above. The separate assistant was on 0.1.18/code 118; that does not make
+this a test of a newly installed 0.1.18 car APK. Conversation mode and Claude Haiku 4.5 were selected.
+
+The user initially reported a remaining problem, then clarified that it was the wave overlay
+disappearing while the answer remained audible, with no error text. The user subsequently reported
+that the conversation worked overall and explicitly confirmed that Speaking and End remained
+visible during the answer. This resolves the reported overlay observation as expected capture/
+playback separation; no application change was needed. It does not establish measured acoustic
+stop latency or a pass across every host, provider or repeated-start scenario.
+
+[The evening evidence](evidence/0.1.17/dhu-claude-acceptance.md) records the environment, installed
+artifact, selected technical events and the boundary between logs and the user's confirmation.
+The ID.7 vehicle test is deferred at the user's request. OpenAI car conversation, vehicle audio,
+call/headset interruptions and the full current DHU design matrix remain unvalidated here.
 
 ## References
 
