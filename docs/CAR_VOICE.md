@@ -194,18 +194,23 @@ events for reports; full Android Auto logs and dashboard screenshots can contain
 | Separate output probe after stability update | Passed, including repeated Start on the real service; no microphone or AI request |
 | DHU listening stability | A single capture stayed open for 25 seconds across empty segments; no premature recognition failure or second capture |
 | DHU host microphone dismissal after correction | CAPTURE_STOPPED, then inactive/Ended, no retry. Local service stop 7 ms; host recorder stop 1 ms. These are event timings, not a claim about acoustic latency |
-| Human echo/stop and Claude retest after correction | Pending |
+| Human echo/stop after correction | Passed, confirmed by the user on 2026-10-13 ("Alle Tests erfolgreich"). The corresponding sessions at 15:16–15:17 CEST were in MICROPHONE mode: successful recognition and TTS, host dismissal, then explicit restart and another dismissal |
+| Claude retest after correction | Pending; the successful MICROPHONE sessions above make no provider request |
 | Final DHU template | Title, Claude Haiku 4.5, short status and the single action visible together; host API 8 retained |
 | Vehicle voice (ID.7 / Kia) | Not tested in this audio change; earlier launcher visibility is not audio evidence |
 | Call and headset interruption | Deferred at user's request |
 
 The initial full CI task list passed locally and in GitHub Actions on commits `17073c6` and `2f477c3`.
-After the stability correction the same full task list passed locally: 100 JVM tests (core 22,
+After the stability correction the same full task list passed locally and in GitHub Actions on
+`b92d0d0`: 100 JVM tests (core 22,
 providers 21, voice 57), lint for all Android modules/variants with zero errors (36 warnings), all
 three debug APKs and both instrumentation APKs. Unrelated local Android Studio daemon/JVM settings
 remain outside this change. Tests cover blocked host start/cancellation, old-stop/new-start ordering,
 start/read failure cleanup, duplicate template actions, empty segments followed by valid text and
 host dismissal without retry or a late provider request.
+The full task list also passed from a clean Git snapshot under JDK 17. Every APK ZIP entry has the
+same content as the installed incremental build; the archive checksum itself differs. The checksum
+below identifies the installed and downloadable APK.
 
 Prepared final APK: `OpenAutoAI-0.1.17-dhu-debug.apk`.
 SHA-256: `a5da94c143c9f5984fc4c5d001e19edaa5629cb9438a165a5580f60ec2b6cccf`.
@@ -222,8 +227,11 @@ old code closed external PCM on `onEndOfSpeech` and accepted empty segments as t
 stability check the host microphone overlay exposed another retry source: host dismissal was mapped
 to NO_INPUT. Both paths are now distinct from normal silence. The original synchronous recorder
 stop could also wait for host IPC on the UI thread, and a stale End template click could toggle an
-already stopped session back on. These code paths are corrected, but human acceptance of the new
-voice flow remains open until the echo/stop and Claude follow-up checks are repeated.
+already stopped session back on. These code paths are corrected. The user has now accepted the
+independent echo, host dismissal and restart checks. The diagnostic events show host-dismissal
+stops of 6 ms and 5 ms in the local service, with no automatic retry; later starts have explicit
+`car.voice.action=start` events. A complete Claude follow-up retest after this correction is still
+open. Vehicle audio and the deferred call/headset checks are not covered by this acceptance.
 
 ## References
 
