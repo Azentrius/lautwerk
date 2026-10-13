@@ -6,11 +6,13 @@ specifically `android.md`, `android-auto.md` and `tokens.json` in
 Historical copies remain available; [reference metadata](../design/azentrius/README.md) describes them.
 The upstream repository was read only. No upstream scripts were run.
 
-Final baseline: application `main` at `5a3520b14e77eb1978d3c86e6d6e0d5255b621ac`, version 0.1.17/code 117.
+Final baseline: application `main` at `f1982ba8eea276be770a370749e9b79aeb721c0c`, version 0.1.17/code 117.
 The work began on `c862095` (0.1.16); PRs #27 and #28 merged during the audit. This branch was
 rebased onto the new main, preserving the car voice implementation and dependency updates.
 The maintainer approved **0.1.18/code 118**, retaining the shared version rule, because 0.1.17 is
 used by the now-merged voice PR. Both apps receive 118; the prototype phone UI changes too.
+PR #29 subsequently updated upstream commit references only; its documentation and CarAppTheme
+comment changes are retained. The device-tested application code baseline remains `5a3520b`.
 This PR does not rewrite the merged voice behavior.
 
 Statuses: **fulfilled** = existing implementation meets the applicable rule;

@@ -3,7 +3,9 @@
 Date: 2026-10-13. This directory retains the path requested before the maintainer approved
 the corrected version. These are **0.1.18** results, not results from the earlier 0.1.16 release.
 Design reference: `edd4c67da6d7c606296c3bbd13d7aa5da548f452`.
-Baseline: `5a3520b14e77eb1978d3c86e6d6e0d5255b621ac` on main.
+Device-tested code baseline: `5a3520b14e77eb1978d3c86e6d6e0d5255b621ac` on main.
+Final PR base: `f1982ba8eea276be770a370749e9b79aeb721c0c`; the intervening PR #29 changes
+only design-reference documentation and an XML comment, with no runtime changes.
 
 ## Automated checks
 
