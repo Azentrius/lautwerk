@@ -62,7 +62,7 @@ These are software callback/state checks on the Pixel. They do not measure acous
 latency or prove car-speaker routing. The earlier standalone engine evaluation has
 separate measured latency and user-confirmed audible cancellation; see POCKET_TTS.md.
 The visible DHU output was subsequently confirmed audibly by the user, as recorded
-below. No live provider conversation is claimed for this integration.
+below. The later live Claude acceptance is recorded in its own section.
 
 ## Actual DHU and vehicle scope
 
@@ -100,10 +100,49 @@ unrelated location information.
 ID.7, call and headset checks remain deferred. This fixed-output acceptance does
 not replace a later live provider conversation with Alba in the parked vehicle.
 
+## Live Claude conversation acceptance
+
+Later on 2026-10-14, at the user's explicit request, Pocket/Alba was selected in the
+car app and left selected. Conversation mode and Claude Haiku 4.5 were verified in
+the existing UI. The user was informed that recognized questions would be sent to
+Anthropic and could consume API credit. No API key or archived conversation was
+read by the test tools. The assistant app and system-wide TTS default were unchanged.
+
+The visible DHU used the same configuration as the successful fixed-output check.
+The user asked a question through the PC microphone, heard the answer, asked a
+follow-up and heard the second answer. After ending that session, the user started
+again, asked another question and pressed the car's Stop button during the answer.
+The user explicitly reported that the complete scenario worked.
+
+The scoped diagnostic events independently show:
+
+- Two `CONVERSATION car=true` sessions with `local=true pocket=true` output.
+- Three successful recognition results and three Thinking-to-Speaking transitions.
+- Two complete speech callbacks, with listening re-entered between questions.
+- The third answer cancelled by the car Stop action. The app's stop handler logged
+  13 ms; this is not acoustic latency. The engine recorded cancellation and no later
+  speech completion or automatic restart followed.
+
+The first session ended when the host closed capture after the second completed
+answer (`voice.car.capture.hostStopped`), then the app stopped. There is no car
+Stop-button event for that first termination, so it is not counted as a separate
+button-stop measurement. The button stop during the second session is explicit.
+The user reported no visible or audible problem. This distinction is retained in
+the evidence rather than treating every stop as the same event.
+
+Only state/engine diagnostics are included in `dhu-live/`; no recognized words,
+provider responses, recorded audio, credentials or screenshots containing Maps
+data are exported. The existing app retains its normal encrypted conversation
+history. No conversation was deleted by the test tools.
+
+The DHU and temporary ADB forward were closed after acceptance. Alba and
+Conversation mode remain selected in the car app as requested. This is a real
+Claude/DHU acceptance, not a vehicle, call or headset test; those remain deferred.
+
 ## Remaining setup limits
 
-Alba is selectable; it has not been silently selected for the user. Each app keeps
-its own choice. The corrected companion and model remain separate installations,
+Alba is selectable and was explicitly selected for the car app in the later live
+acceptance above. Each app keeps its own choice. The corrected companion and model remain separate installations,
 not bundled in the OpenAuto AI APK. The new pack's bytes and manifest were checked;
 its manual importer UI was not exercised in this run, which used the already
 installed equivalent Alba fixture. German and normal speed are the evaluated
