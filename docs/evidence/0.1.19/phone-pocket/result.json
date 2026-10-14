@@ -1,0 +1,6 @@
+{
+  "suite": "phone-pocket",
+  "passed": true,
+  "privateVoicePreferencesBefore": "6a2f806f6d14052206cfcedd4353663025da84bb4c0d902231658b15c8d32905",
+  "privateVoicePreferencesAfter": "6a2f806f6d14052206cfcedd4353663025da84bb4c0d902231658b15c8d32905"
+}

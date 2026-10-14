@@ -1,0 +1,42 @@
+--------- beginning of main
+10-14 23:17:15.518 11374 12576 I PocketTTS: VOICE_LOADED pack=german-fp32 voice=alba-mackenna-casual name=german-fp32::alba-mackenna-casual
+10-14 23:17:16.108 11374 12576 I PocketTTS: VOICE_LOADED pack=german-fp32 voice=alba-mackenna-casual name=german-fp32::alba-mackenna-casual
+10-14 23:17:16.128 11374 12576 I PocketTTS: SYNTH_START pack=german-fp32 voice=alba-mackenna-casual requestVoice=german-fp32::alba-mackenna-casual loadedVoice=german-fp32::alba-mackenna-casual locale=deu-DEU-VFED456D chars=84 maxBuffer=8192
+10-14 23:17:16.128 11374 12576 I PocketTTS: ENGINE_LOAD pack=german-fp32 precision=fp32 temperature=0.5 lsd=1 threads=4 pauseMs=250 maxTextTokens=50
+10-14 23:17:16.991 11374 12576 I PocketTTS: ENGINE_READY pack=german-fp32
+10-14 23:17:16.991 11374 12576 I PocketTTS: SYNTH_CANCELLED before audio start
+10-14 23:17:16.992 11374 12576 I PocketTTS: SYNTH_START pack=german-fp32 voice=alba-mackenna-casual requestVoice=german-fp32::alba-mackenna-casual loadedVoice=german-fp32::alba-mackenna-casual locale=deu-DEU-VFED456D chars=84 maxBuffer=8192
+10-14 23:17:17.093 11374 12576 I PocketTTS: SYNTH_AUDIO samples=1920 total=1920 blocks=1
+10-14 23:17:17.931 11374 12576 I PocketTTS: SYNTH_AUDIO samples=28800 total=30720 blocks=9
+10-14 23:17:18.155 11374 12576 I PocketTTS: SYNTH_AUDIO samples=6000 total=36720 blocks=11
+10-14 23:17:18.156 11374 12576 I PocketTTS: SYNTH_AUDIO samples=1920 total=38640 blocks=12
+10-14 23:17:19.476 11374 12576 I PocketTTS: SYNTH_AUDIO samples=28800 total=67440 blocks=20
+10-14 23:17:19.915 11374 12576 I PocketTTS: SYNTH_AUDIO samples=13440 total=80880 blocks=24
+10-14 23:17:20.135 11374 12576 I PocketTTS: SYNTH_AUDIO samples=6000 total=86880 blocks=26
+10-14 23:17:20.136 11374 12576 I PocketTTS: SYNTH_AUDIO samples=1920 total=88800 blocks=27
+10-14 23:17:21.458 11374 12576 I PocketTTS: SYNTH_AUDIO samples=28800 total=117600 blocks=35
+10-14 23:17:22.120 11374 12576 I PocketTTS: SYNTH_AUDIO samples=15360 total=132960 blocks=39
+10-14 23:17:22.339 11374 12576 I PocketTTS: SYNTH_AUDIO samples=6000 total=138960 blocks=41
+10-14 23:17:22.339 11374 12576 I PocketTTS: SYNTH_DONE result=0 samples=138960 blocks=41
+10-14 23:17:23.477 11374 12576 I PocketTTS: VOICE_LOADED pack=german-fp32 voice=alba-mackenna-casual name=german-fp32::alba-mackenna-casual
+10-14 23:17:23.491 11374 12576 I PocketTTS: SYNTH_START pack=german-fp32 voice=alba-mackenna-casual requestVoice=german-fp32::alba-mackenna-casual loadedVoice=german-fp32::alba-mackenna-casual locale=deu-DEU-VFED456D chars=84 maxBuffer=8192
+10-14 23:17:23.616 11374 12576 I PocketTTS: SYNTH_AUDIO samples=1920 total=1920 blocks=1
+10-14 23:17:24.470 11374 12576 I PocketTTS: SYNTH_AUDIO samples=28800 total=30720 blocks=9
+10-14 23:17:24.694 11374 12576 I PocketTTS: SYNTH_AUDIO samples=6000 total=36720 blocks=11
+10-14 23:17:24.695 11374 12576 I PocketTTS: SYNTH_AUDIO samples=1920 total=38640 blocks=12
+10-14 23:17:24.897 11374 12576 E PocketTTS: SYNTH_AUDIO_REJECTED block=13 offset=8192 length=8192
+10-14 23:17:25.318 11374 12576 I PocketTTS: SYNTH_CANCELLED samples=38640 blocks=13
+10-14 23:17:25.320 11374 12576 I PocketTTS: SYNTH_START pack=german-fp32 voice=alba-mackenna-casual requestVoice=german-fp32::alba-mackenna-casual loadedVoice=german-fp32::alba-mackenna-casual locale=deu-DEU-VFED456D chars=84 maxBuffer=8192
+10-14 23:17:25.424 11374 12576 I PocketTTS: SYNTH_AUDIO samples=1920 total=1920 blocks=1
+10-14 23:17:26.293 11374 12576 I PocketTTS: SYNTH_AUDIO samples=28800 total=30720 blocks=9
+10-14 23:17:26.296 11374 12576 I PocketTTS: SYNTH_AUDIO samples=1920 total=32640 blocks=10
+10-14 23:17:26.514 11374 12576 I PocketTTS: SYNTH_AUDIO samples=6000 total=38640 blocks=12
+10-14 23:17:26.734 11374 12576 I PocketTTS: SYNTH_AUDIO samples=1920 total=40560 blocks=13
+10-14 23:17:27.836 11374 12576 I PocketTTS: SYNTH_AUDIO samples=28800 total=69360 blocks=21
+10-14 23:17:28.499 11374 12576 I PocketTTS: SYNTH_AUDIO samples=19200 total=88560 blocks=26
+10-14 23:17:28.718 11374 12576 I PocketTTS: SYNTH_AUDIO samples=6000 total=94560 blocks=28
+10-14 23:17:28.937 11374 12576 I PocketTTS: SYNTH_AUDIO samples=1920 total=96480 blocks=29
+10-14 23:17:30.260 11374 12576 I PocketTTS: SYNTH_AUDIO samples=28800 total=125280 blocks=37
+10-14 23:17:31.138 11374 12576 I PocketTTS: SYNTH_AUDIO samples=23040 total=148320 blocks=43
+10-14 23:17:31.358 11374 12576 I PocketTTS: SYNTH_AUDIO samples=6000 total=154320 blocks=45
+10-14 23:17:31.360 11374 12576 I PocketTTS: SYNTH_DONE result=0 samples=154320 blocks=45

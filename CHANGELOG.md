@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.19 – 2026-10-14
+
+Add the tested Pocket/Alba engine as an explicit local voice.
+
+- Offer Pocket · Alba alongside Android voices on the phone, with fixed-text preview and cancellation.
+- Reuse the same explicit local output selection in the car package’s phone setup, keeping the car template unchanged.
+- Require the evaluated cancellation-fixed companion engine and offline German Alba voice; report missing setup rather than silently substituting another voice.
+- Keep Android voice speed and per-language preferences. Explain that this Pocket build uses its normal speed and supports German only.
+- Add isolated selection and opt-in audio regression tests, setup instructions and evaluation attribution.
+
 ## 0.1.18 – 2026-10-13
 
 Apply the Azentrius app title and refresh the read-only design reference.

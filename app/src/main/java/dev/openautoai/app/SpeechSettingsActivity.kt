@@ -24,6 +24,8 @@ import dev.openautoai.core.i18n.AppLanguage
 import dev.openautoai.app.design.*
 import dev.openautoai.app.voice.SpeechPreview
 import dev.openautoai.app.voice.SpeechSettingsStore
+import dev.openautoai.speech.PocketAlba
+import dev.openautoai.speech.R as SpeechR
 
 /** Previews retain their existing lifetime and never run outside this foreground screen. */
 class SpeechSettingsActivity : ComponentActivity() {
@@ -37,7 +39,7 @@ class SpeechSettingsActivity : ComponentActivity() {
     override fun onStop() { preview.close();super.onStop() }
 }
 
-internal data class VoiceOption(val id:String?,val title:String,val description:String?=null,val online:Boolean=false)
+internal data class VoiceOption(val id:String?,val title:String,val description:String?=null,val online:Boolean=false,val enabled:Boolean=true)
 
 /** Presentation-only confirmation: choosing still persists through the original callback. */
 @Composable internal fun VoiceOptions(options:List<VoiceOption>,selectedId:String?,enabled:Boolean,onChoose:(String?)->Unit) {
@@ -47,7 +49,7 @@ internal data class VoiceOption(val id:String?,val title:String,val description:
         options.forEachIndexed { index,option ->
             AzVoiceRow(option.title,selectedId==option.id,{
                 if(option.online)pending=option else onChoose(option.id)
-            },enabled,Modifier.testTag("voice-option-${option.id ?: "default"}"),description=option.description)
+            },enabled && option.enabled,Modifier.testTag("voice-option-${option.id ?: "default"}"),description=option.description)
             if(index<options.lastIndex) HorizontalDivider(Modifier.padding(start=16.dp),color=Az.colors["line"],thickness=1.dp)
         }
     }
@@ -62,10 +64,13 @@ internal data class VoiceOption(val id:String?,val title:String,val description:
 @Composable private fun SpeechSettingsContent(preview:SpeechPreview,conversationActive:Boolean,back:()->Unit) {
     LaunchedEffect(conversationActive) { if(conversationActive)preview.close() }
     val resources=LocalResources.current
-    val options=listOf(VoiceOption(null,stringResource(R.string.android_default)))+preview.voices.mapIndexed { index,voice ->
+    val options=listOf(VoiceOption(null,stringResource(R.string.android_default),enabled=preview.androidReady))+preview.voices.mapIndexed { index,voice ->
         VoiceOption(voice.name,resources.getString(R.string.az_voice_name,index+1,voice.locale.getDisplayCountry(AppLanguage.locale())),
             resources.getString(if(voice.isNetworkConnectionRequired)R.string.online else R.string.on_device),voice.isNetworkConnectionRequired)
     }
+    val allOptions = options + VoiceOption(PocketAlba.VOICE, stringResource(SpeechR.string.pocket_alba),
+        preview.pocketNotice ?: stringResource(SpeechR.string.pocket_local), enabled=preview.pocketReady)
+    val isPocket = PocketAlba.selected(preview.settings)
     LazyColumn(Modifier.fillMaxSize().windowInsetsPadding(WindowInsets.safeDrawing).testTag("speech-list"),
         contentPadding=PaddingValues(Az.inset),verticalArrangement=Arrangement.spacedBy(16.dp)) {
         item { Text(stringResource(R.string.voice_settings),style=AzType.title) }
@@ -74,21 +79,24 @@ internal data class VoiceOption(val id:String?,val title:String,val description:
         item { Text(stringResource(R.string.online_voice_hint),style=AzType.label,color=Az.colors["text-subtle"]) }
         item {
             Text(stringResource(R.string.az_voice_section),style=AzType.section,modifier=Modifier.padding(top=8.dp,bottom=8.dp))
-            VoiceOptions(options,preview.settings.voice,preview.ready&&!conversationActive) { id ->
-                if(id==null)preview.choose(null) else preview.voices.find { it.name==id }?.let(preview::choose)
+            VoiceOptions(allOptions,preview.settings.voice,preview.ready&&!conversationActive) { id ->
+                if(id==PocketAlba.VOICE)preview.choosePocket()
+                else if(id==null)preview.choose(null) else preview.voices.find { it.name==id }?.let(preview::choose)
             }
         }
-        if(preview.settings.voice!=null && preview.voices.none { it.name==preview.settings.voice }) item { Text(stringResource(R.string.voice_missing)) }
-        if(preview.ready&&preview.voices.isEmpty())item { Text(stringResource(R.string.voices_empty)) }
+        if(!isPocket && preview.settings.voice!=null && preview.voices.none { it.name==preview.settings.voice }) item { Text(stringResource(R.string.voice_missing)) }
+        item { Text(stringResource(SpeechR.string.pocket_help),style=AzType.label,color=Az.colors["text-subtle"]) }
+        if(preview.androidReady&&preview.voices.isEmpty())item { Text(stringResource(R.string.voices_empty)) }
         if(!preview.ready&&preview.notice==null&&!conversationActive)item { Text(stringResource(R.string.voices_loading)) }
         item {
             Text(stringResource(R.string.az_tempo_section),style=AzType.section,modifier=Modifier.padding(top=8.dp,bottom=8.dp))
             FlowRow(horizontalArrangement=Arrangement.spacedBy(8.dp),verticalArrangement=Arrangement.spacedBy(8.dp)) {
                 listOf(.9f to R.string.rate_slow,1f to R.string.rate_normal,1.1f to R.string.rate_fast).forEach { (rate,title) ->
-                    AzChip(preview.settings.rate==rate,{preview.rate(rate)}, { Text(stringResource(title)) },enabled=preview.ready&&!conversationActive)
+                    AzChip((if(isPocket)1f else preview.settings.rate)==rate,{preview.rate(rate)}, { Text(stringResource(title)) },enabled=preview.ready&&!conversationActive&&!isPocket)
                 }
             }
         }
+        if(isPocket)item { Text(stringResource(SpeechR.string.pocket_rate),style=AzType.label,color=Az.colors["text-subtle"]) }
         item {
             AzActions(Modifier.fillMaxWidth()) {
                 AzSecondaryButton(preview::play,enabled=preview.ready&&!preview.playing&&!conversationActive) {

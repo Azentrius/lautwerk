@@ -16,6 +16,7 @@ dependencies {
     implementation(project(":settings"))
     implementation(project(":core"))
     implementation(project(":voice"))
+    implementation(project(":speech-output"))
     implementation(project(":providers"))
     implementation(project(":storage"))
     api("androidx.car.app:app:1.9.0-alpha03")

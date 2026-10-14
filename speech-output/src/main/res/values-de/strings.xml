@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="pocket_alba">Pocket · Alba</string>
+    <string name="pocket_local">Lokal · Deutsch · Experimentell</string>
+    <string name="pocket_help">Verwendet die separat installierte Pocket-Engine mit deutschem Modell und Alba. Die Sprachausgabe bleibt auf diesem Gerät; Spracherkennung und KI-Anfragen nutzen ihre bisherigen Verbindungen.</string>
+    <string name="pocket_rate">Pocket verwendet derzeit sein normales Tempo. Ihr Tempo für Android-Stimmen bleibt gespeichert.</string>
+    <string name="pocket_setup">Pocket einrichten</string>
+    <string name="pocket_car_voice">Stimme für diese Android-Auto-App</string>
+    <string name="pocket_android_local">Android-Stimme (lokal)</string>
+    <string name="pocket_car_help">Diese Auswahl gilt nur für diese App. Sie ist unabhängig von der Stimmwahl im Assistenten.</string>
+</resources>

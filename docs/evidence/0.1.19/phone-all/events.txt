@@ -1,0 +1,2 @@
+--------- beginning of main
+10-14 23:14:50.191 11374 11392 I PocketTTS: VOICE_LOADED pack=german-fp32 voice=alba-mackenna-casual name=german-fp32::alba-mackenna-casual

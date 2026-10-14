@@ -53,4 +53,4 @@ gradle.beforeProject {
 }
 
 rootProject.name = "OpenAutoAI"
-include(":app", ":prototype-app", ":core", ":settings", ":car-ui", ":providers", ":storage", ":voice")
+include(":app", ":prototype-app", ":core", ":settings", ":car-ui", ":providers", ":storage", ":voice", ":speech-output")

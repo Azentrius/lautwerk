@@ -1,0 +1,76 @@
+{
+  "jvm": {
+    "core": {
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "providers": {
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "voice": {
+      "tests": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "lint": {
+    "app/lint-results-debug": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 24,
+      "Information": 0
+    },
+    "prototype-app/lint-results-dhuDebug": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 4,
+      "Information": 0
+    },
+    "prototype-app/lint-results-phoneDebug": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 3,
+      "Information": 0
+    },
+    "car-ui/lint-results-debug": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 1,
+      "Information": 0
+    },
+    "settings/lint-results-debug": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 0,
+      "Information": 0
+    },
+    "storage/lint-results-debug": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 1,
+      "Information": 0
+    },
+    "speech-output/lint-results-debug": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 0,
+      "Information": 0
+    }
+  },
+  "debugBuilds": [
+    "appDebug",
+    "prototypePhoneDebug",
+    "prototypeDhuDebug"
+  ],
+  "instrumentationBuilds": [
+    "appDebugAndroidTest",
+    "prototypeDhuDebugAndroidTest"
+  ],
+  "versionCheck": "0.1.19"
+}
