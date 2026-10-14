@@ -23,6 +23,12 @@ Statuses: **fulfilled** = existing implementation meets the applicable rule;
 or validation that cannot be inferred from source. Absence of an optional feature is stated
 explicitly; it is not a reason to add behavior. All paths below are relative to the repository.
 
+This audit records the design change merged in PR #30. The subsequent
+[Claude DHU retest](CAR_VOICE.md#evening-claude-retest--2026-10-13) used the retained 0.1.17 car APK,
+not the newly built 0.1.18 car variant. It does not close the unrun A1–A11 design checks below.
+The seven upstream questions are expanded into an actionable handoff near the end of this report;
+none is marked resolved and no read-only reference file is changed.
+
 ## Android: units, typography, touch, layout and state
 
 | Rule | Code location | Result |
@@ -155,16 +161,97 @@ These observations are not tokens or a promised result on another host.
 
 ## Open points to return to the design-system maintainer
 
-1. Make the AI suffix the explicit exception to the generic ban on italics.
-2. Describe existing page-level validation errors, or specify a separately approved behavior change.
-3. Specify the native prototype's collapsed selector and popup together. Do not infer a new control
-   or selection flow from the assistant's chip layout; current native selectors remain native.
-4. Clarify the existing duplicate stopped-error notice versus “state exactly once”.
-5. Correct the reference's icon attribution; the application's CC BY 4.0 notices remain intact.
-6. Update android-auto.md for current main's real voice Start/End/status, replacing the obsolete
-   offline-counter content and acceptance scenarios without changing the implementation here.
-7. Add the native car audio setup and its entry action to the phone component mapping; include
-   layout, field states, radio rows and primary/secondary action grouping. Existing callbacks stay.
+Handoff prepared for the maintainer to send to Claude. The comparison is against the audited
+`edd4c67` snapshot and application `main` at `c262a3a` (0.1.18); it does not claim a new audit of a
+later upstream commit. **All seven points remain open.** The design describes existing behavior;
+any requested behavior change must be identified separately for the app owner to approve. Do not
+change application code, wording, provider/storage logic, car template or B2/B3 to settle these gaps.
+
+### 1. App-name italics exception
+
+- Reference: `android.md`, Typography and App header.
+- Evidence: the general rule bans italic text, but the name suffix is explicitly italic. The owner
+  approved and the app implements that specific exception in `MainContent.kt` and native
+  `MainActivity.stylePhoneTitle`. Android Auto still receives a plain text title.
+- Request: make the exception explicit in the general rule, without changing the approved title,
+  fonts, colors, visible name, accessibility text or other typography.
+
+### 2. Page-level validation messages
+
+- Reference: `android.md`, text-field error state and timing.
+- Evidence: `app/src/main/java/dev/openautoai/app/MainContent.kt`, `HomeViewModel.kt` and
+  `design/AzComponents.kt` keep existing validation/storage messages at page level. They do not
+  have field-owned error state or a new validation-on-blur flow.
+- Request: describe the existing message placement and its presentation. Do not require new
+  validation triggers, field attribution, instructions or message text as a visual correction.
+
+### 3. Native provider/model selectors
+
+- Reference: `android.md`, menus and the prototype phone surface.
+- Evidence: `prototype-app/src/main/java/dev/openautoai/prototype/MainActivity.kt` uses native
+  Spinners, including their collapsed presentation and dropdown rows. Selecting an item immediately
+  updates the existing selection store; these controls are separate from the assistant's chips.
+- Request: specify the complete visual mapping for the collapsed selector and popup together:
+  typography, supplied tokens, spacing, touch targets, applicable selected/pressed/focused/disabled
+  states, and large-font behavior. Preserve native selection, item order and immediate persistence.
+  Do not introduce a replacement flow or controls from an unrelated screen.
+
+### 4. Stopped-error presentation
+
+- Reference: `android.md`, conversation states shown exactly once in the bottom bar.
+- Evidence: `MainContent.kt` renders `AppState.notice` as the `voice-notice` page item, while
+  `ConversationBar.kt` uses the same notice as its label when the conversation is inactive.
+- Request: clarify how the rule accommodates these existing presentations. Removing one notice,
+  changing its lifecycle or rewriting its text is not assumed to be a purely visual change; if that
+  is desired, identify it as a separate owner decision. Preserve both until resolved.
+
+### 5. Icon attribution
+
+- Reference: `android.md` asset/license list and the snapshot's license statements.
+- Evidence: application `NOTICE` and drawable SPDX headers distinguish 29 Font Awesome Free 5
+  icons (CC BY 4.0) from the PatternFly pending icon (MIT). Obtaining them through the PatternFly
+  package does not make the Font Awesome icons MIT.
+- Request: reconcile upstream asset provenance and per-asset attribution with the source licenses.
+  Keep the existing correct application notices; do not relabel all icons as MIT or replace artwork
+  merely to resolve the documentation discrepancy. The app symbol has separate Azentrius terms.
+
+### 6. Actual car conversation and microphone overlay
+
+- Reference: `android-auto.md`, prototype scope, B4/content/states, A6, A7, A11 and O4.
+- Evidence: `car-ui/src/main/java/dev/openautoai/car/OpenAutoScreen.kt` and `voice/CarVoiceService.kt`
+  now expose a real selected audio-test/conversation mode, short status, provider/model and one
+  Start/End action. The old offline counter remains on the prototype phone page only. The DHU user
+  confirmed audible Claude answers and Speaking/End while the host's microphone wave was absent.
+- Request: replace obsolete car counter/no-conversation statements with the current behavior,
+  keeping the existing MessageTemplate, title/order/strings, host ownership and B2/B3. Describe the
+  host wave as capture UI: capture ends before separate TTS playback, Speaking/End stay available,
+  and the next listening turn begins after playback. Do not require a persistent/custom wave or
+  keep recording merely to retain the overlay.
+- Request for acceptance: A6 must describe the existing explicit Start/End actions rather than
+  counter increments. A7/O4 need a repeat-cycle scenario matching real voice sessions, with the
+  baseline recorded first; an existing baseline failure is known, only a new failure is a regression.
+  A11 must prohibit false category/approval claims without banning truthful conversation status.
+  These are specification requests, not a new A1–A11 pass or permission to change behavior.
+- Keep real host colors/background as measured observations, not guaranteed tokens; record Android
+  Auto, DHU and negotiated Car API for future host tests. ID.7, call and headset tests are deferred.
+
+### 7. Car test app's phone audio setup
+
+- Reference: missing dedicated mapping in `android.md` for the newer native setup surface.
+- Evidence: `car-ui/src/main/java/dev/openautoai/car/voice/VoiceSetupActivity.kt` and
+  `prototype-app/src/dhu/java/dev/openautoai/prototype/VoiceEntryPoint.kt`. The page contains help,
+  three mode radio rows, permission action, masked key field with save/delete/status, and a phone
+  Start/End action. It retains native controls and its existing 28 dp content inset.
+- Request: provide a coherent mapping for that page and its entry button, including layout/insets,
+  type, field/status/radio/button states, primary/secondary action grouping and large text. Use
+  existing tokens wherever applicable and explicitly decide missing mappings upstream.
+- Preserve the current order, texts, immediate mode selection, permission request timing, key
+  storage and clearing, separate package stores, phone-versus-car microphone route, secure window
+  and start/stop callbacks. Do not add consent persistence, provider calls, key copying or a new
+  settings entry point as part of styling.
+
+Return a commit and a point-by-point resolution for these seven requests. Importing that future
+reference and implementing its purely visual changes are separate work; this handoff does neither.
 
 Unrun DHU host checks and template-budget behavior are validation/behavior limitations, not new
 design choices. No values, new user-facing strings or additional consent state were invented.

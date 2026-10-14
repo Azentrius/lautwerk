@@ -15,15 +15,21 @@ What changed in each version: [CHANGELOG.md](CHANGELOG.md). What comes next: [RO
 
 ## Status
 
+Current repository version: **0.1.18**. The approved phone design and voice-sample pronunciation
+change are merged. The physical Pixel's car tests still use the retained 0.1.17-prototype/code 117
+APK; the separate assistant is installed as 0.1.18/code 118.
+
 0.1.17 connects the existing Android Auto package to audio and the shared conversation controller.
 The title, app icon, provider/model line, host colors and single action remain. Start runs the mode
 chosen on the phone; while active, the same action becomes End.
 
 On the Pixel 10 Pro / Android 17, independent TTS playback and external PCM recognition passed.
 In the DHU, CarAudioRecord captured the PC microphone, local recognition succeeded and the user
-confirmed hearing the sentence read back correctly. These checks use no AI provider. Claude conversation
-validation and the precise build/device results are tracked separately in [CAR_VOICE.md](docs/CAR_VOICE.md).
-Call and headset tests remain deferred. The separate assistant app retains its existing UI and voice flow.
+confirmed hearing the sentence read back correctly. These checks use no AI provider. A later DHU
+retest with Claude Haiku 4.5 was confirmed as working overall; Speaking and End remained visible
+while the answer played after the host microphone overlay disappeared. See the precise scope in
+[CAR_VOICE.md](docs/CAR_VOICE.md). The planned ID.7 audio test, call and headset tests are deferred.
+OpenAI car conversation and vehicle audio are not established by these Claude DHU results.
 
 Details: [app icon and installation](docs/APP_IDENTITY.md), [current test report](docs/BUILD_AND_TEST.md),
 [phone design](docs/DESIGN_SYSTEM.md),
