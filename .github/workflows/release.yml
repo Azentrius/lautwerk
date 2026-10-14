@@ -72,7 +72,7 @@ jobs:
           bash ./gradlew --no-daemon
           :core:test :providers:test :voice:test
           :app:lintDebug :prototype-app:lintPhoneDebug :prototype-app:lintDhuDebug
-          :car-ui:lintDebug :settings:lintDebug :storage:lintDebug
+          :car-ui:lintDebug :settings:lintDebug :storage:lintDebug :speech-output:lintDebug
           :app:assembleDebug :app:assembleDebugAndroidTest
           :prototype-app:assemblePhoneDebug :prototype-app:assembleDhuDebug
           :prototype-app:assembleDhuDebugAndroidTest

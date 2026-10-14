@@ -154,3 +154,10 @@ Apache-2.0, see [LICENSE](LICENSE). Fonts, icons and the app icon come with thei
 - [Test distribution and the limit of "Unknown sources"](https://developer.android.com/training/cars/testing)
 - [AndroidX Car App release notes](https://developer.android.com/jetpack/androidx/releases/car-app)
 - [AGP 9.4 compatibility](https://developer.android.com/build/releases/agp-9-4-0-release-notes)
+
+## Optional local Pocket / Alba voice
+
+Version 0.1.19 adds an explicit **Pocket · Alba** choice using the separately installed,
+cancellation-fixed engine. German output runs locally; provider requests and recognition
+keep their existing behavior. The native runtime/model are not bundled. See
+[setup, attribution and limitations](docs/POCKET_TTS.md) before enabling it.

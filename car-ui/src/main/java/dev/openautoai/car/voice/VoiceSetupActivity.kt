@@ -6,6 +6,10 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.*
 import android.text.InputType
+import android.speech.tts.TextToSpeech
+import dev.openautoai.speech.PocketAlba
+import dev.openautoai.speech.SpeechSettingsStore
+import dev.openautoai.speech.R as SpeechR
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
@@ -23,6 +27,54 @@ class VoiceSetupActivity : Activity() {
     private val worker = Executors.newSingleThreadExecutor()
     private val main = Handler(Looper.getMainLooper())
     private var alive = true
+    private var voiceGeneration = 0L
+    private var pocket: TextToSpeech? = null
+    private var pocketReady = false
+    private lateinit var androidChoice: RadioButton
+    private lateinit var albaChoice: RadioButton
+    private lateinit var voiceStatus: TextView
+    private var voiceTimeout: Runnable? = null
+
+    private fun refreshVoiceAvailability() {
+        closeVoiceCheck()
+        val token = voiceGeneration
+        val problem = PocketAlba.installationProblem(this)
+        voiceStatus.text = problem?.message ?: getString(SpeechR.string.pocket_local)
+        updateVoiceControls()
+        if (problem != null) return
+        voiceTimeout = Runnable {
+            if (token == voiceGeneration && !pocketReady) {
+                closeVoiceCheck()
+                voiceStatus.text = dev.openautoai.core.i18n.Messages.PREVIEW_TIMEOUT_INIT.text()
+            }
+        }.also { main.postDelayed(it, 12_000) }
+        try { pocket = TextToSpeech(this, { result -> main.post {
+            if (token != voiceGeneration) return@post
+            voiceTimeout?.let(main::removeCallbacks); voiceTimeout = null
+            val engine = pocket
+            val unavailable = if (result != TextToSpeech.SUCCESS || engine == null)
+                dev.openautoai.voice.VoiceProblem.POCKET_UNAVAILABLE
+                else runCatching { PocketAlba.apply(engine, PocketAlba.settings()) }
+                    .getOrDefault(dev.openautoai.voice.VoiceProblem.POCKET_VOICE_UNAVAILABLE)
+            pocketReady = unavailable == null
+            voiceStatus.text = unavailable?.message ?: getString(SpeechR.string.pocket_local)
+            updateVoiceControls()
+        } }, PocketAlba.ENGINE) } catch (_: Exception) {
+            closeVoiceCheck()
+            voiceStatus.text = dev.openautoai.voice.VoiceProblem.POCKET_UNAVAILABLE.message
+            updateVoiceControls()
+        }
+    }
+    private fun updateVoiceControls() {
+        val active = connection.state.active
+        androidChoice.isEnabled = !active
+        albaChoice.isEnabled = !active && pocketReady
+    }
+    private fun closeVoiceCheck() {
+        voiceGeneration++; pocketReady = false
+        voiceTimeout?.let(main::removeCallbacks); voiceTimeout = null
+        val old = pocket; pocket = null; runCatching { old?.shutdown() }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +150,28 @@ class VoiceSetupActivity : Activity() {
                 main.post { if (alive) keyStatus.setText(if (cleared) R.string.voice_key_cleared else R.string.voice_key_failed) }
             }
         }
+        label(getString(SpeechR.string.pocket_car_voice))
+        val speechStore = SpeechSettingsStore(this)
+        val speechChoices = RadioGroup(this)
+        androidChoice = RadioButton(this).apply {
+            id = View.generateViewId(); setText(SpeechR.string.pocket_android_local)
+            isChecked = !PocketAlba.selected(speechStore.load())
+        }
+        albaChoice = RadioButton(this).apply {
+            id = View.generateViewId(); setText(SpeechR.string.pocket_alba)
+            isChecked = PocketAlba.selected(speechStore.load()); isEnabled = false
+        }
+        speechChoices.addView(androidChoice); speechChoices.addView(albaChoice)
+        content.addView(speechChoices)
+        voiceStatus = label(getString(SpeechR.string.pocket_local))
+        label(getString(SpeechR.string.pocket_help))
+        label(getString(SpeechR.string.pocket_car_help))
+        speechChoices.setOnCheckedChangeListener { _, checked ->
+            if (!connection.state.active) {
+                if (checked == albaChoice.id && pocketReady) speechStore.choose(PocketAlba.ENGINE, PocketAlba.VOICE)
+                else if (checked == androidChoice.id) speechStore.choose(null, null)
+            }
+        }
         status = label(getString(R.string.car_ready)).apply { accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE }
         connection = VoiceConnection(this)
         start = button(R.string.voice_phone_start) { connection.start() }
@@ -105,13 +179,15 @@ class VoiceSetupActivity : Activity() {
     }
     override fun onStart() {
         super.onStart()
+        refreshVoiceAvailability()
         connection.connect {
+            updateVoiceControls()
             status.text = connection.state.status.ifBlank { getString(R.string.car_ready) }
             start.setText(if (connection.state.active) R.string.voice_stop else R.string.voice_phone_start)
             val endsSession = connection.state.active
             start.setOnClickListener { if (endsSession) connection.stop() else connection.start() }
         }
     }
-    override fun onStop() { connection.close(); super.onStop() }
+    override fun onStop() { closeVoiceCheck(); connection.close(); super.onStop() }
     override fun onDestroy() { alive = false; worker.shutdownNow(); main.removeCallbacksAndMessages(null); super.onDestroy() }
 }

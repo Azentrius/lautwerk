@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-14",
+  "androidAuto": "17.8.663874-release",
+  "dhu": "2.0-windows (2022-03-30-438482292)",
+  "profile": "1280x720-touch",
+  "hostCarApi": 8,
+  "mode": "PLAYBACK",
+  "engine": "org.pockettts.android.engine.openautotest",
+  "voice": "german-fp32::alba-mackenna-casual",
+  "headless": {
+    "callbacksPassed": true,
+    "userHeardAudio": false
+  },
+  "visible": {
+    "callbacksPassed": true,
+    "userHeardAudio": true,
+    "userConfirmedCleanStop": true,
+    "userConfirmedRestartWithoutOverlap": true
+  },
+  "providerRequests": 0,
+  "microphoneUsed": false,
+  "carVoiceRestored": "Android local",
+  "carModeRestored": "CONVERSATION",
+  "systemTtsChanged": false,
+  "carCredentialFileModified": false,
+  "callAndHeadsetTests": "deferred",
+  "vehicleTest": "deferred"
+}

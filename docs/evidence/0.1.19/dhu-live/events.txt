@@ -1,0 +1,182 @@
+10-14 23:38:53.173 14330 14330 I OpenAutoAI: car.voice.action=start
+10-14 23:38:53.174 14330 14330 I OpenAutoAI: voice.session.stop.request active=false
+10-14 23:38:53.177 14330 14330 I OpenAutoAI: voice.session.stop elapsedMs=3
+10-14 23:38:53.198 14330 14330 I OpenAutoAI: voice.session.start mode=CONVERSATION car=true
+10-14 23:38:53.217 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:38:53.278 14330 14330 I OpenAutoAI: voice.conversation.phase=PREPARING
+10-14 23:38:53.294 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:38:53.321 14330 14330 I OpenAutoAI: voice.conversation.phase=PREPARING
+10-14 23:38:53.330 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:38:53.344 14330 14330 I OpenAutoAI: voice.tts.ready local=true pocket=true
+10-14 23:38:53.344 11374 15958 I PocketTTS: VOICE_LOADED pack=german-fp32 voice=alba-mackenna-casual name=german-fp32::alba-mackenna-casual
+10-14 23:38:53.344 14330 14330 I OpenAutoAI: voice.conversation.phase=PREPARING
+10-14 23:38:53.361 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:38:53.600 14330 14330 I OpenAutoAI: voice.conversation.phase=LISTENING
+10-14 23:38:53.607 14330 14330 I OpenAutoAI: voice.focus capture=true granted=true
+10-14 23:38:53.614 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:38:53.617 14330 20193 I OpenAutoAI: voice.car.capture.start rate=16000 channels=1 pcm=16
+10-14 23:38:53.637 14330 14330 I OpenAutoAI: voice.recognition.ready car=true local=true
+10-14 23:38:53.792 14330 20197 I OpenAutoAI: voice.car.capture.firstFrame
+10-14 23:38:54.601 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:38:54.885 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:38:55.027 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:38:55.028 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:38:55.402 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:38:55.520 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:38:55.587 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:00.401 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:39:00.513 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:39:00.517 14330 14330 I OpenAutoAI: voice.recognition.result success=true
+10-14 23:39:00.519 14330 14330 I OpenAutoAI: voice.conversation.phase=THINKING
+10-14 23:39:00.520 14330 20193 I OpenAutoAI: voice.car.capture.stopped elapsedMs=6
+10-14 23:39:00.522 14330 20197 I OpenAutoAI: voice.car.capture.hostStopped
+10-14 23:39:00.532 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:02.832 14330 14330 I OpenAutoAI: voice.conversation.phase=SPEAKING
+10-14 23:39:02.867 14330 14330 I OpenAutoAI: voice.focus capture=false granted=true
+10-14 23:39:02.871 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:02.901 11374 15958 I PocketTTS: SYNTH_START pack=german-fp32 voice=alba-mackenna-casual requestVoice=german-fp32::alba-mackenna-casual loadedVoice=german-fp32::alba-mackenna-casual locale=deu-DEU-VFED456D chars=297 maxBuffer=8192
+10-14 23:39:02.901 11374 15958 I PocketTTS: ENGINE_LOAD pack=german-fp32 precision=fp32 temperature=0.5 lsd=1 threads=4 pauseMs=250 maxTextTokens=50
+10-14 23:39:03.778 11374 15958 I PocketTTS: ENGINE_READY pack=german-fp32
+10-14 23:39:03.778 14330 15816 I OpenAutoAI: voice.tts.start
+10-14 23:39:03.901 11374 15958 I PocketTTS: SYNTH_AUDIO samples=1920 total=1920 blocks=1
+10-14 23:39:04.225 11374 15958 I PocketTTS: SYNTH_AUDIO samples=21120 total=23040 blocks=7
+10-14 23:39:04.448 11374 15958 I PocketTTS: SYNTH_AUDIO samples=6000 total=29040 blocks=9
+10-14 23:39:04.448 11374 15958 I PocketTTS: SYNTH_AUDIO samples=1920 total=30960 blocks=10
+10-14 23:39:05.835 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=59760 blocks=18
+10-14 23:39:06.988 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=88560 blocks=26
+10-14 23:39:08.374 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=117360 blocks=34
+10-14 23:39:08.605 11374 15958 I PocketTTS: SYNTH_AUDIO samples=11520 total=128880 blocks=37
+10-14 23:39:08.835 11374 15958 I PocketTTS: SYNTH_AUDIO samples=6000 total=134880 blocks=39
+10-14 23:39:09.068 11374 15958 I PocketTTS: SYNTH_AUDIO samples=1920 total=136800 blocks=40
+10-14 23:39:10.223 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=165600 blocks=48
+10-14 23:39:11.378 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=194400 blocks=56
+10-14 23:39:12.765 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=223200 blocks=64
+10-14 23:39:13.919 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=252000 blocks=72
+10-14 23:39:15.074 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=280800 blocks=80
+10-14 23:39:15.538 11374 15958 I PocketTTS: SYNTH_AUDIO samples=13440 total=294240 blocks=84
+10-14 23:39:15.767 11374 15958 I PocketTTS: SYNTH_AUDIO samples=6000 total=300240 blocks=86
+10-14 23:39:15.772 11374 15958 I PocketTTS: SYNTH_AUDIO samples=1920 total=302160 blocks=87
+10-14 23:39:17.153 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=330960 blocks=95
+10-14 23:39:17.616 11374 15958 I PocketTTS: SYNTH_AUDIO samples=15360 total=346320 blocks=99
+10-14 23:39:17.847 11374 15958 I PocketTTS: SYNTH_AUDIO samples=6000 total=352320 blocks=101
+10-14 23:39:18.078 11374 15958 I PocketTTS: SYNTH_AUDIO samples=1920 total=354240 blocks=102
+10-14 23:39:19.463 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=383040 blocks=110
+10-14 23:39:20.617 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=411840 blocks=118
+10-14 23:39:21.772 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=440640 blocks=126
+10-14 23:39:22.004 11374 15958 I PocketTTS: SYNTH_AUDIO samples=5760 total=446400 blocks=128
+10-14 23:39:22.006 11374 15958 I PocketTTS: SYNTH_AUDIO samples=6000 total=452400 blocks=130
+10-14 23:39:22.006 11374 15958 I PocketTTS: SYNTH_DONE result=0 samples=452400 blocks=130
+10-14 23:39:23.115 14330 14330 I OpenAutoAI: voice.tts.end success=true
+10-14 23:39:23.118 14330 14330 I OpenAutoAI: voice.conversation.phase=PREPARING
+10-14 23:39:23.131 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:23.475 14330 14330 I OpenAutoAI: voice.conversation.phase=LISTENING
+10-14 23:39:23.479 14330 14330 I OpenAutoAI: voice.focus capture=true granted=true
+10-14 23:39:23.480 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:23.482 14330 20193 I OpenAutoAI: voice.car.capture.start rate=16000 channels=1 pcm=16
+10-14 23:39:23.495 14330 14330 I OpenAutoAI: voice.recognition.ready car=true local=true
+10-14 23:39:23.625 14330 20191 I OpenAutoAI: voice.car.capture.firstFrame
+10-14 23:39:24.211 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:24.638 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:39:24.639 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:39:24.717 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:25.404 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:39:25.405 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:39:25.486 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:26.263 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:39:26.356 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:39:26.372 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:30.222 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:39:30.223 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:39:30.225 14330 14330 I OpenAutoAI: voice.recognition.result success=true
+10-14 23:39:30.225 14330 20193 I OpenAutoAI: voice.car.capture.stopped elapsedMs=1
+10-14 23:39:30.225 14330 14330 I OpenAutoAI: voice.conversation.phase=THINKING
+10-14 23:39:30.227 14330 20191 I OpenAutoAI: voice.car.capture.hostStopped
+10-14 23:39:30.233 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:31.804 14330 14330 I OpenAutoAI: voice.conversation.phase=SPEAKING
+10-14 23:39:31.812 14330 14330 I OpenAutoAI: voice.focus capture=false granted=true
+10-14 23:39:31.818 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:31.819 11374 15958 I PocketTTS: SYNTH_START pack=german-fp32 voice=alba-mackenna-casual requestVoice=german-fp32::alba-mackenna-casual loadedVoice=german-fp32::alba-mackenna-casual locale=deu-DEU-VFED456D chars=208 maxBuffer=8192
+10-14 23:39:31.821 14330 14354 I OpenAutoAI: voice.tts.start
+10-14 23:39:31.963 11374 15958 I PocketTTS: SYNTH_AUDIO samples=1920 total=1920 blocks=1
+10-14 23:39:32.961 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=30720 blocks=9
+10-14 23:39:34.114 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=59520 blocks=17
+10-14 23:39:35.038 11374 15958 I PocketTTS: SYNTH_AUDIO samples=21120 total=80640 blocks=23
+10-14 23:39:35.270 11374 15958 I PocketTTS: SYNTH_AUDIO samples=6000 total=86640 blocks=25
+10-14 23:39:35.271 11374 15958 I PocketTTS: SYNTH_AUDIO samples=1920 total=88560 blocks=26
+10-14 23:39:36.659 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=117360 blocks=34
+10-14 23:39:37.814 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=146160 blocks=42
+10-14 23:39:38.971 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=174960 blocks=50
+10-14 23:39:39.201 11374 15958 I PocketTTS: SYNTH_AUDIO samples=11520 total=186480 blocks=53
+10-14 23:39:39.431 11374 15958 I PocketTTS: SYNTH_AUDIO samples=6000 total=192480 blocks=55
+10-14 23:39:39.664 11374 15958 I PocketTTS: SYNTH_AUDIO samples=1920 total=194400 blocks=56
+10-14 23:39:41.048 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=223200 blocks=64
+10-14 23:39:42.203 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=252000 blocks=72
+10-14 23:39:42.665 11374 15958 I PocketTTS: SYNTH_AUDIO samples=15360 total=267360 blocks=76
+10-14 23:39:42.895 11374 15958 I PocketTTS: SYNTH_AUDIO samples=6000 total=273360 blocks=78
+10-14 23:39:42.896 11374 15958 I PocketTTS: SYNTH_DONE result=0 samples=273360 blocks=78
+10-14 23:39:43.943 14330 14330 I OpenAutoAI: voice.tts.end success=true
+10-14 23:39:43.948 14330 14330 I OpenAutoAI: voice.conversation.phase=PREPARING
+10-14 23:39:43.958 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:44.306 14330 14330 I OpenAutoAI: voice.conversation.phase=LISTENING
+10-14 23:39:44.314 14330 14330 I OpenAutoAI: voice.focus capture=true granted=true
+10-14 23:39:44.319 14330 20193 I OpenAutoAI: voice.car.capture.start rate=16000 channels=1 pcm=16
+10-14 23:39:44.325 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:44.337 14330 14330 I OpenAutoAI: voice.recognition.ready car=true local=true
+10-14 23:39:44.442 14330 20189 I OpenAutoAI: voice.car.capture.firstFrame
+10-14 23:39:45.030 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:45.325 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:39:45.330 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:39:45.407 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:46.033 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:39:46.041 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:39:46.113 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:46.240 14330 20189 I OpenAutoAI: voice.car.capture.hostStopped
+10-14 23:39:46.241 14330 20193 I OpenAutoAI: voice.car.capture.stopped elapsedMs=0
+10-14 23:39:46.243 14330 14330 I OpenAutoAI: voice.recognition.result success=false
+10-14 23:39:46.245 14330 14330 I OpenAutoAI: voice.conversation.phase=STOPPED
+10-14 23:39:46.245 14330 14330 I OpenAutoAI: voice.session.stop.request active=true
+10-14 23:39:46.248 14330 14330 I OpenAutoAI: voice.session.stop elapsedMs=2
+10-14 23:39:46.260 14330 14330 I OpenAutoAI: car.onGetTemplate active=false
+10-14 23:39:48.016 14330 14330 I OpenAutoAI: car.voice.action=start
+10-14 23:39:48.017 14330 14330 I OpenAutoAI: voice.session.stop.request active=false
+10-14 23:39:48.019 14330 14330 I OpenAutoAI: voice.session.stop elapsedMs=2
+10-14 23:39:48.030 14330 14330 I OpenAutoAI: voice.session.start mode=CONVERSATION car=true
+10-14 23:39:48.033 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:48.093 14330 14330 I OpenAutoAI: voice.conversation.phase=PREPARING
+10-14 23:39:48.100 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:48.136 14330 14330 I OpenAutoAI: voice.conversation.phase=PREPARING
+10-14 23:39:48.144 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:48.182 11374 15958 I PocketTTS: VOICE_LOADED pack=german-fp32 voice=alba-mackenna-casual name=german-fp32::alba-mackenna-casual
+10-14 23:39:48.184 14330 14330 I OpenAutoAI: voice.tts.ready local=true pocket=true
+10-14 23:39:48.184 14330 14330 I OpenAutoAI: voice.conversation.phase=PREPARING
+10-14 23:39:48.195 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:48.445 14330 14330 I OpenAutoAI: voice.conversation.phase=LISTENING
+10-14 23:39:48.455 14330 14330 I OpenAutoAI: voice.focus capture=true granted=true
+10-14 23:39:48.462 14330 20193 I OpenAutoAI: voice.car.capture.start rate=16000 channels=1 pcm=16
+10-14 23:39:48.463 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:48.474 14330 14330 I OpenAutoAI: voice.recognition.ready car=true local=true
+10-14 23:39:48.621 14330 20189 I OpenAutoAI: voice.car.capture.firstFrame
+10-14 23:39:48.838 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:49.301 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:39:49.301 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:39:49.323 14330 14330 I OpenAutoAI: voice.recognition.beginOfSpeech
+10-14 23:39:51.185 14330 14330 I OpenAutoAI: voice.recognition.endOfSpeech car=true
+10-14 23:39:51.349 14330 14330 I OpenAutoAI: voice.recognition.final kind=segment
+10-14 23:39:51.350 14330 20193 I OpenAutoAI: voice.car.capture.stopped elapsedMs=1
+10-14 23:39:51.352 14330 14330 I OpenAutoAI: voice.recognition.result success=true
+10-14 23:39:51.352 14330 14330 I OpenAutoAI: voice.conversation.phase=THINKING
+10-14 23:39:51.355 14330 20189 I OpenAutoAI: voice.car.capture.hostStopped
+10-14 23:39:51.362 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:53.045 14330 14330 I OpenAutoAI: voice.conversation.phase=SPEAKING
+10-14 23:39:53.053 14330 14330 I OpenAutoAI: voice.focus capture=false granted=true
+10-14 23:39:53.056 14330 14330 I OpenAutoAI: car.onGetTemplate active=true
+10-14 23:39:53.058 11374 15958 I PocketTTS: SYNTH_START pack=german-fp32 voice=alba-mackenna-casual requestVoice=german-fp32::alba-mackenna-casual loadedVoice=german-fp32::alba-mackenna-casual locale=deu-DEU-VFED456D chars=223 maxBuffer=8192
+10-14 23:39:53.059 14330 14344 I OpenAutoAI: voice.tts.start
+10-14 23:39:53.209 11374 15958 I PocketTTS: SYNTH_AUDIO samples=1920 total=1920 blocks=1
+10-14 23:39:54.192 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=30720 blocks=9
+10-14 23:39:55.343 14330 14330 I OpenAutoAI: car.voice.action=stop
+10-14 23:39:55.343 14330 14330 I OpenAutoAI: voice.session.stop.request active=true
+10-14 23:39:55.349 11374 15958 I PocketTTS: SYNTH_AUDIO samples=28800 total=59520 blocks=17
+10-14 23:39:55.355 14330 14330 I OpenAutoAI: voice.session.stop elapsedMs=13
+10-14 23:39:55.356 14330 14330 I OpenAutoAI: car.onGetTemplate active=false
+10-14 23:39:55.456 11374 15958 I PocketTTS: SYNTH_CANCELLED samples=59520 blocks=17

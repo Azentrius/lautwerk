@@ -1,0 +1,15 @@
+{
+  "package": "dev.openautoai.prototype.dhu",
+  "before": [
+    "versionCode=117 minSdk=28 targetSdk=36",
+    "versionName=0.1.17-prototype",
+    "installerPackageName=com.android.vending"
+  ],
+  "after": [
+    "versionCode=119 minSdk=28 targetSdk=36",
+    "versionName=0.1.19-prototype",
+    "installerPackageName=com.android.vending"
+  ],
+  "sha256": "8e8404d1d6e8dbf7c7ae5a9088e49dee464553dd72c0fb93ac97d75ee5ddb3d7",
+  "privateDataCleared": false
+}

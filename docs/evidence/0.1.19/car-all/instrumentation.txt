@@ -1,0 +1,19 @@
+
+dev.openautoai.prototype.CarDesignContractTest:...
+dev.openautoai.prototype.CarPhoneDesignTest:.
+dev.openautoai.prototype.CarTemplateTest:....
+dev.openautoai.prototype.ExternalPcmRecognitionTest:
+dev.openautoai.prototype.ExternalPcmRecognitionTest:
+dev.openautoai.prototype.FinalSpeechListenerTest:.....
+dev.openautoai.prototype.ModelSelectionStoreTest:...
+dev.openautoai.prototype.PhoneSmokeTest:...
+dev.openautoai.prototype.PocketCarPlaybackTest:
+dev.openautoai.prototype.PocketCarPlaybackTest:
+dev.openautoai.prototype.VoicePlaybackDeviceTest:
+dev.openautoai.prototype.VoicePlaybackDeviceTest:
+
+Time: 4,21
+
+OK (22 tests)
+
+

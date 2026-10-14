@@ -1,0 +1,558 @@
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+new file mode 100644
+index 0000000..9f75d54
+--- /dev/null
++++ b/CHANGELOG.md
+@@ -0,0 +1,14 @@
++## 0.5.3-openauto-cancel.1 – 2026-10-14
++
++Cancel Android synthesis without leaving the previous request running.
++
++- Keep synthesis on Android's synthesis thread until all callback work completes.
++- Track cancellation during model loading and before native stream publication.
++- Serialize native stream publication/cancellation/removal to prevent stale-pointer access.
++- Protect native handle lifetime across synthesis, stop and close.
++- Release the native lifetime lock before deleting the engine that owns its mutex.
++- Install debug builds under a separate application ID for comparison with upstream 0.5.3.
++- Keep Android path-security tests valid on Windows using the JDK's Unix-style ZIP filesystem.
++- Avoid downloading unused dr_libs test submodules with paths too long for Windows.
++
++This is a local evaluation build, not an upstream Pocket TTS release.
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+index 0c19fc4..f59cd0b 100644
+--- a/app/build.gradle.kts
++++ b/app/build.gradle.kts
+@@ -32,8 +32,8 @@ android {
+         applicationId = "org.pockettts.android.engine"
+         minSdk = 26
+         targetSdk = 35
+-        versionCode = 23
+-        versionName = "0.5.3"
++        versionCode = 24
++        versionName = "0.5.3-openauto-cancel.1"
+         ndk { abiFilters += listOf("arm64-v8a") }
+         externalNativeBuild {
+             cmake { cppFlags += listOf("-std=c++17", "-O3") }
+@@ -59,6 +59,9 @@ android {
+         }
+     }
+     buildTypes {
++        getByName("debug") {
++            applicationIdSuffix = ".openautotest"
++        }
+         getByName("release") {
+             if (hasReleaseSigning) {
+                 signingConfig = signingConfigs.getByName("release")
+diff --git a/app/src/debug/AndroidManifest.xml b/app/src/debug/AndroidManifest.xml
+new file mode 100644
+index 0000000..1a49060
+--- /dev/null
++++ b/app/src/debug/AndroidManifest.xml
+@@ -0,0 +1,7 @@
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools">
++    <application android:label="Pocket TTS (stop test)" tools:replace="android:label">
++        <service android:name="org.pockettts.android.engine.PocketTtsService"
++            android:label="Pocket TTS (stop test)" tools:replace="android:label" />
++    </application>
++</manifest>
+diff --git a/app/src/main/cpp/CMakeLists.txt b/app/src/main/cpp/CMakeLists.txt
+index b03eed4..a854fad 100644
+--- a/app/src/main/cpp/CMakeLists.txt
++++ b/app/src/main/cpp/CMakeLists.txt
+@@ -31,7 +31,8 @@ set(SPM_PROTOBUF_PROVIDER "internal" CACHE STRING "" FORCE)
+ set(SPM_ABSL_PROVIDER "internal" CACHE STRING "" FORCE)
+ set(SPM_ENABLE_NFKC_COMPILE OFF CACHE BOOL "" FORCE)
+ FetchContent_Declare(sentencepiece GIT_REPOSITORY https://github.com/google/sentencepiece.git GIT_TAG v0.2.1 GIT_SHALLOW TRUE)
+-FetchContent_Declare(dr_libs GIT_REPOSITORY https://github.com/mackron/dr_libs.git GIT_TAG 50bb723e6a459dbb781e26cefee4fd9ca6714d6a)
++# Only dr_wav.h is used; avoid unrelated test submodules and their long Windows paths.
++FetchContent_Declare(dr_libs GIT_REPOSITORY https://github.com/mackron/dr_libs.git GIT_TAG 50bb723e6a459dbb781e26cefee4fd9ca6714d6a GIT_SUBMODULES "")
+ FetchContent_MakeAvailable(sentencepiece dr_libs)
+ target_compile_options(sentencepiece-static PRIVATE -w)
+ # SentencePiece's command-line helper targets are built by its upstream CMake
+diff --git a/app/src/main/cpp/jni_bridge.cpp b/app/src/main/cpp/jni_bridge.cpp
+index f7b557d..ee4600e 100644
+--- a/app/src/main/cpp/jni_bridge.cpp
++++ b/app/src/main/cpp/jni_bridge.cpp
+@@ -1,5 +1,4 @@
+ #include <jni.h>
+-#include <atomic>
+ #include <mutex>
+ #include <string>
+ 
+@@ -15,7 +14,9 @@ void ptt_free_audio(float*);
+ 
+ struct Engine {
+     void* tts = nullptr;
+-    std::atomic<void*> stream{nullptr};
++    // A stop must not retain a pointer while the synthesis owner frees it.
++    void* stream = nullptr;
++    std::mutex stream_mutex;
+     std::mutex synth_mutex;
+ };
+ 
+@@ -49,17 +50,33 @@ Java_org_pockettts_android_engine_NativePocketTts_nativeSynthesize(
+     auto* engine = engine_from(value);
+     if (!engine || !engine->tts) return JNI_FALSE;
+     std::lock_guard<std::mutex> guard(engine->synth_mutex);
++    jclass sink_class = env->GetObjectClass(sink);
++    jmethodID on_audio = env->GetMethodID(sink_class, "onAudio", "([F)Z");
++    jmethodID is_cancelled = env->GetMethodID(sink_class, "isCancelled", "()Z");
++    if (!on_audio || !is_cancelled || env->ExceptionCheck()) {
++        env->ExceptionClear();
++        return JNI_FALSE;
++    }
++    const auto cancelled = [&]() {
++        const bool result = env->CallBooleanMethod(sink, is_cancelled);
++        if (env->ExceptionCheck()) { env->ExceptionClear(); return true; }
++        return result;
++    };
++    if (cancelled()) return JNI_FALSE;
+     const char* utf8 = env->GetStringUTFChars(text, nullptr);
+     const char* voice_utf8 = env->GetStringUTFChars(voice, nullptr);
+     void* stream = ptt_stream_start(engine->tts, utf8, voice_utf8);
+     env->ReleaseStringUTFChars(text, utf8);
+     env->ReleaseStringUTFChars(voice, voice_utf8);
+     if (!stream) return JNI_FALSE;
+-    engine->stream.store(stream);
+-    jclass sink_class = env->GetObjectClass(sink);
+-    jmethodID on_audio = env->GetMethodID(sink_class, "onAudio", "([F)Z");
+-    bool success = on_audio != nullptr;
++    {
++        std::lock_guard<std::mutex> lock(engine->stream_mutex);
++        engine->stream = stream;
++    }
++    // Covers stop between the initial cancellation check and stream publication.
++    bool success = !cancelled();
+     while (success) {
++        if (cancelled()) { success = false; break; }
+         float* samples = nullptr;
+         int count = 0;
+         const int state = ptt_stream_read(stream, &samples, &count);
+@@ -73,7 +90,10 @@ Java_org_pockettts_android_engine_NativePocketTts_nativeSynthesize(
+         env->DeleteLocalRef(chunk);
+         if (env->ExceptionCheck() || !accepted) { env->ExceptionClear(); success = false; break; }
+     }
+-    engine->stream.store(nullptr);
++    {
++        std::lock_guard<std::mutex> lock(engine->stream_mutex);
++        engine->stream = nullptr;
++    }
+     ptt_stream_end(stream);
+     return success ? JNI_TRUE : JNI_FALSE;
+ }
+@@ -81,15 +101,24 @@ Java_org_pockettts_android_engine_NativePocketTts_nativeSynthesize(
+ extern "C" JNIEXPORT void JNICALL
+ Java_org_pockettts_android_engine_NativePocketTts_nativeStop(JNIEnv*, jobject, jlong value) {
+     auto* engine = engine_from(value);
+-    if (engine) if (void* stream = engine->stream.load()) ptt_stream_cancel(stream);
++    if (!engine) return;
++    std::lock_guard<std::mutex> lock(engine->stream_mutex);
++    if (engine->stream) ptt_stream_cancel(engine->stream);
+ }
+ 
+ extern "C" JNIEXPORT void JNICALL
+ Java_org_pockettts_android_engine_NativePocketTts_nativeDestroy(JNIEnv*, jobject, jlong value) {
+     auto* engine = engine_from(value);
+     if (!engine) return;
+-    if (void* stream = engine->stream.load()) ptt_stream_cancel(stream);
+-    std::lock_guard<std::mutex> guard(engine->synth_mutex);
+-    ptt_destroy(engine->tts);
++    {
++        std::lock_guard<std::mutex> lock(engine->stream_mutex);
++        if (engine->stream) ptt_stream_cancel(engine->stream);
++    }
++    {
++        std::lock_guard<std::mutex> guard(engine->synth_mutex);
++        ptt_destroy(engine->tts);
++        engine->tts = nullptr;
++    }
++    // The lock guard must release its mutex before that mutex is destroyed.
+     delete engine;
+ }
+diff --git a/app/src/main/java/org/pockettts/android/engine/NativePocketTts.kt b/app/src/main/java/org/pockettts/android/engine/NativePocketTts.kt
+index 5f3bdad..4f786c7 100644
+--- a/app/src/main/java/org/pockettts/android/engine/NativePocketTts.kt
++++ b/app/src/main/java/org/pockettts/android/engine/NativePocketTts.kt
+@@ -1,5 +1,9 @@
+ package org.pockettts.android.engine
+ 
++import java.util.concurrent.locks.ReentrantReadWriteLock
++import kotlin.concurrent.read
++import kotlin.concurrent.write
++
+ /** Thin lifetime-safe JNI wrapper around the streaming PocketTTS C API. */
+ internal class NativePocketTts(
+     modelsDir: String,
+@@ -12,6 +16,7 @@ internal class NativePocketTts(
+     maxTextTokens: Int
+ ) : AutoCloseable {
+     private var handle: Long = 0
++    private val lifetime = ReentrantReadWriteLock()
+ 
+     init {
+         System.loadLibrary("pockettts_jni")
+@@ -28,12 +33,18 @@ internal class NativePocketTts(
+         check(handle != 0L) { "Pocket-TTS-Modell konnte nicht geladen werden." }
+     }
+ 
+-    fun synthesize(text: String, voiceFile: String, sink: AudioSink): Boolean =
+-        nativeSynthesize(handle, text, voiceFile, sink)
+-    fun stop() { if (handle != 0L) nativeStop(handle) }
+-    override fun close() { if (handle != 0L) nativeDestroy(handle).also { handle = 0 } }
++    fun synthesize(text: String, voiceFile: String, sink: AudioSink): Boolean = lifetime.read {
++        handle != 0L && !sink.isCancelled() && nativeSynthesize(handle, text, voiceFile, sink)
++    }
++    fun stop() = lifetime.read { if (handle != 0L) nativeStop(handle) }
++    override fun close() = lifetime.write {
++        if (handle != 0L) nativeDestroy(handle).also { handle = 0 }
++    }
+ 
+-    interface AudioSink { fun onAudio(samples: FloatArray): Boolean }
++    interface AudioSink {
++        fun isCancelled(): Boolean = false
++        fun onAudio(samples: FloatArray): Boolean
++    }
+ 
+     private external fun nativeCreate(
+         modelsDir: String,
+diff --git a/app/src/main/java/org/pockettts/android/engine/PocketTtsService.kt b/app/src/main/java/org/pockettts/android/engine/PocketTtsService.kt
+index 2879b8a..9e6b4ce 100644
+--- a/app/src/main/java/org/pockettts/android/engine/PocketTtsService.kt
++++ b/app/src/main/java/org/pockettts/android/engine/PocketTtsService.kt
+@@ -10,11 +10,14 @@ import android.util.Log
+ import java.nio.ByteBuffer
+ import java.nio.ByteOrder
+ import java.util.Locale
+-import java.util.concurrent.Executors
++import java.util.concurrent.atomic.AtomicBoolean
+ import kotlin.math.min
+ 
+ class PocketTtsService : TextToSpeechService() {
+-    private val executor = Executors.newSingleThreadExecutor()
++    private val synthesisLock = Any()
++    private val requestLock = Any()
++    private val destroyed = AtomicBoolean(false)
++    private var activeRequest: ActiveSynthesis? = null
+     @Volatile private var engine: NativePocketTts? = null
+     @Volatile private var loadedVoiceName: String? = null
+     private var engineKey: EngineKey? = null
+@@ -80,67 +83,93 @@ class PocketTtsService : TextToSpeechService() {
+     }
+ 
+     override fun onSynthesizeText(request: SynthesisRequest, callback: SynthesisCallback) {
+-        executor.execute {
+-            val text = request.charSequenceText.toString()
+-            val locale = Locale(request.language.orEmpty(), request.country.orEmpty(), request.variant.orEmpty())
+-            val explicit = ModelPackRepository.findVoiceByName(this, request.voiceName)
+-            val localeVoice = ModelPackRepository.findVoiceByLocale(this, locale)
+-            val loaded = ModelPackRepository.findVoiceByName(this, loadedVoiceName)?.takeIf {
+-                ModelPackRepository.languageMatches(it.first.locale, locale)
++        // Android owns this synthesis thread. Do not return while a worker still
++        // retains the callback: Android otherwise loses the current stop target.
++        synchronized(synthesisLock) {
++            val active = ActiveSynthesis()
++            synchronized(requestLock) { activeRequest = active }
++            try {
++                if (!destroyed.get()) synthesize(request, callback, active)
++            } finally {
++                synchronized(requestLock) { activeRequest = null }
+             }
+-            val resolved = explicit ?: localeVoice ?: loaded ?: ModelPackRepository.resolveVoice(this, request.voiceName, locale)
+-            if (resolved == null) {
+-                Log.e(TAG, "SYNTH_FAILED no installed voice for ${locale.toLanguageTag()}")
+-                callback.error(TextToSpeech.ERROR_NOT_INSTALLED_YET)
+-                return@execute
+-            }
+-            val (pack, voice) = resolved
+-            Log.i(
+-                TAG,
+-                "SYNTH_START pack=${pack.id} voice=${voice.id} requestVoice=${request.voiceName} " +
+-                    "loadedVoice=$loadedVoiceName locale=${request.language}-${request.country}-${request.variant} " +
+-                    "chars=${text.length} maxBuffer=${callback.maxBufferSize}"
+-            )
+-            val tts = runCatching { obtainEngine(pack) }.getOrElse {
+-                Log.e(TAG, "Pocket TTS model was unavailable for synthesis", it)
++        }
++    }
++
++    private fun synthesize(request: SynthesisRequest, callback: SynthesisCallback, active: ActiveSynthesis) {
++        val text = request.charSequenceText.toString()
++        val locale = Locale(request.language.orEmpty(), request.country.orEmpty(), request.variant.orEmpty())
++        val explicit = ModelPackRepository.findVoiceByName(this, request.voiceName)
++        val localeVoice = ModelPackRepository.findVoiceByLocale(this, locale)
++        val loaded = ModelPackRepository.findVoiceByName(this, loadedVoiceName)?.takeIf {
++            ModelPackRepository.languageMatches(it.first.locale, locale)
++        }
++        val resolved = explicit ?: localeVoice ?: loaded ?: ModelPackRepository.resolveVoice(this, request.voiceName, locale)
++        if (resolved == null) {
++            Log.e(TAG, "SYNTH_FAILED no installed voice for ${locale.toLanguageTag()}")
++            callback.error(TextToSpeech.ERROR_NOT_INSTALLED_YET)
++            return
++        }
++        val (pack, voice) = resolved
++        Log.i(
++            TAG,
++            "SYNTH_START pack=${pack.id} voice=${voice.id} requestVoice=${request.voiceName} " +
++                "loadedVoice=$loadedVoiceName locale=${request.language}-${request.country}-${request.variant} " +
++                "chars=${text.length} maxBuffer=${callback.maxBufferSize}"
++        )
++        val tts = runCatching { obtainEngine(pack) }.getOrElse {
++            if (!active.cancelled.get()) {
++                Log.e(TAG, "Pocket TTS model was unavailable for synthesis")
+                 callback.error(TextToSpeech.ERROR_SERVICE)
+-                return@execute
+             }
+-            if (callback.start(SAMPLE_RATE, AudioFormat.ENCODING_PCM_16BIT, 1) != TextToSpeech.SUCCESS) {
++            return
++        }
++        synchronized(requestLock) { active.engine = tts }
++        if (active.cancelled.get()) {
++            Log.i(TAG, "SYNTH_CANCELLED before audio start")
++            return
++        }
++        if (callback.start(SAMPLE_RATE, AudioFormat.ENCODING_PCM_16BIT, 1) != TextToSpeech.SUCCESS) {
++            if (!active.cancelled.get()) {
+                 Log.e(TAG, "SYNTH_START_REJECTED")
+                 callback.error(TextToSpeech.ERROR_OUTPUT)
+-                return@execute
+             }
+-            var totalSamples = 0L
+-            var androidBlocks = 0
+-            val maxBlockBytes = callback.maxBufferSize.coerceAtLeast(2).let { it - (it % 2) }
+-            val ok = tts.synthesize(text, voice.fileName, object : NativePocketTts.AudioSink {
+-                override fun onAudio(samples: FloatArray): Boolean {
+-                    val pcm = ByteBuffer.allocate(samples.size * 2).order(ByteOrder.LITTLE_ENDIAN)
+-                    samples.forEach { pcm.putShort((it.coerceIn(-1f, 1f) * 32767f).toInt().toShort()) }
+-                    val bytes = pcm.array()
+-                    var offset = 0
+-                    while (offset < bytes.size) {
+-                        val length = min(maxBlockBytes, bytes.size - offset)
+-                        if (callback.audioAvailable(bytes, offset, length) != TextToSpeech.SUCCESS) {
+-                            Log.e(TAG, "SYNTH_AUDIO_REJECTED block=$androidBlocks offset=$offset length=$length")
+-                            return false
+-                        }
+-                        offset += length
+-                        androidBlocks++
++            return
++        }
++        var totalSamples = 0L
++        var androidBlocks = 0
++        val maxBlockBytes = callback.maxBufferSize.coerceAtLeast(2).let { it - (it % 2) }
++        val ok = tts.synthesize(text, voice.fileName, object : NativePocketTts.AudioSink {
++            override fun isCancelled(): Boolean = active.cancelled.get()
++            override fun onAudio(samples: FloatArray): Boolean {
++                if (isCancelled()) return false
++                val pcm = ByteBuffer.allocate(samples.size * 2).order(ByteOrder.LITTLE_ENDIAN)
++                samples.forEach { pcm.putShort((it.coerceIn(-1f, 1f) * 32767f).toInt().toShort()) }
++                val bytes = pcm.array()
++                var offset = 0
++                while (offset < bytes.size) {
++                    if (isCancelled()) return false
++                    val length = min(maxBlockBytes, bytes.size - offset)
++                    if (callback.audioAvailable(bytes, offset, length) != TextToSpeech.SUCCESS) {
++                        if (!isCancelled()) Log.e(TAG, "SYNTH_AUDIO_REJECTED block=$androidBlocks offset=$offset length=$length")
++                        return false
+                     }
+-                    totalSamples += samples.size
+-                    Log.i(TAG, "SYNTH_AUDIO samples=${samples.size} total=$totalSamples blocks=$androidBlocks")
+-                    return true
++                    offset += length
++                    androidBlocks++
+                 }
+-            })
+-            if (ok && totalSamples > 0) {
+-                val done = callback.done()
+-                Log.i(TAG, "SYNTH_DONE result=$done samples=$totalSamples blocks=$androidBlocks")
+-            } else {
+-                Log.e(TAG, "SYNTH_FAILED samples=$totalSamples blocks=$androidBlocks")
+-                callback.error(TextToSpeech.ERROR_SYNTHESIS)
++                totalSamples += samples.size
++                Log.i(TAG, "SYNTH_AUDIO samples=${samples.size} total=$totalSamples blocks=$androidBlocks")
++                return true
+             }
++        })
++        if (active.cancelled.get()) {
++            Log.i(TAG, "SYNTH_CANCELLED samples=$totalSamples blocks=$androidBlocks")
++        } else if (ok && totalSamples > 0) {
++            val done = callback.done()
++            Log.i(TAG, "SYNTH_DONE result=$done samples=$totalSamples blocks=$androidBlocks")
++        } else {
++            Log.e(TAG, "SYNTH_FAILED samples=$totalSamples blocks=$androidBlocks")
++            callback.error(TextToSpeech.ERROR_SYNTHESIS)
+         }
+     }
+ 
+@@ -180,15 +209,32 @@ class PocketTtsService : TextToSpeechService() {
+         }
+     }
+ 
+-    override fun onStop() { engine?.stop() }
++    override fun onStop() {
++        // Serialize request handoff, not model loading or inference. A late stop
++        // for the old request cannot reach an engine already serving the next one.
++        synchronized(requestLock) {
++            activeRequest?.let { active ->
++                active.cancelled.set(true)
++                active.engine?.stop()
++            }
++        }
++    }
+ 
+     override fun onDestroy() {
+-        executor.shutdownNow()
+-        engine?.close()
+-        engine = null
++        destroyed.set(true)
++        onStop()
++        synchronized(synthesisLock) {
++            engine?.close()
++            engine = null
++        }
+         super.onDestroy()
+     }
+ 
++    private class ActiveSynthesis {
++        val cancelled = AtomicBoolean(false)
++        var engine: NativePocketTts? = null // guarded by requestLock
++    }
++
+     private data class EngineKey(
+         val packId: String,
+         val precision: String,
+diff --git a/app/src/test/java/org/pockettts/android/engine/ImportSecurityTest.kt b/app/src/test/java/org/pockettts/android/engine/ImportSecurityTest.kt
+index 9a98b90..a9db99a 100644
+--- a/app/src/test/java/org/pockettts/android/engine/ImportSecurityTest.kt
++++ b/app/src/test/java/org/pockettts/android/engine/ImportSecurityTest.kt
+@@ -2,7 +2,9 @@ package org.pockettts.android.engine
+ 
+ import java.io.ByteArrayInputStream
+ import java.io.ByteArrayOutputStream
+-import java.nio.file.Paths
++import java.net.URI
++import java.nio.file.FileSystems
++import java.nio.file.Files
+ import java.util.zip.ZipEntry
+ import java.util.zip.ZipInputStream
+ import java.util.zip.ZipOutputStream
+@@ -10,9 +12,22 @@ import org.junit.Assert.assertEquals
+ import org.junit.Assert.assertFalse
+ import org.junit.Assert.assertTrue
+ import org.junit.Test
++import org.junit.After
+ 
+ class ImportSecurityTest {
+-    private val root = Paths.get("/app-private/model-packs/.import-test")
++    // Android document paths use Unix syntax, including colons in path segments.
++    // The JDK zip filesystem supplies those semantics on Windows without dependencies.
++    private val temp = Files.createTempDirectory("pocket-android-paths-")
++    private val archive = temp.resolve("paths.zip")
++    private val fileSystem = FileSystems.newFileSystem(URI.create("jar:" + archive.toUri()), mapOf("create" to "true"))
++    private val root = fileSystem.getPath("/app-private/model-packs/.import-test")
++
++    @After
++    fun closeFileSystem() {
++        fileSystem.close()
++        Files.deleteIfExists(archive)
++        Files.deleteIfExists(temp)
++    }
+ 
+     @Test
+     fun resolvesNestedArchiveEntryInsideRoot() {
+@@ -59,18 +74,18 @@ class ImportSecurityTest {
+ 
+     @Test
+     fun normalizesDocumentTraversalBeforePrivatePathCheck() {
+-        val normalized = Paths.get("/safe/../../data/data/private.txt").normalize()
++        val normalized = fileSystem.getPath("/safe/../../data/data/private.txt").normalize()
+ 
+-        assertEquals(Paths.get("/data/data/private.txt"), normalized)
++        assertEquals(fileSystem.getPath("/data/data/private.txt"), normalized)
+         assertTrue(ImportSecurity.isBlockedDocumentPath(normalized))
+     }
+ 
+     @Test
+     fun blocksSensitiveSystemRootsAndAllowsRegularDocumentPaths() {
+         listOf("/data/file", "/proc/self/maps", "/sys/kernel", "/dev/null").forEach {
+-            assertTrue(ImportSecurity.isBlockedDocumentPath(Paths.get(it)))
++            assertTrue(ImportSecurity.isBlockedDocumentPath(fileSystem.getPath(it)))
+         }
+-        assertFalse(ImportSecurity.isBlockedDocumentPath(Paths.get("/document/primary:Download/model.zip")))
++        assertFalse(ImportSecurity.isBlockedDocumentPath(fileSystem.getPath("/document/primary:Download/model.zip")))
+     }
+ 
+     private fun assertRejected(entryName: String) {
+diff --git a/docs/OPENAUTO_CANCELLATION.md b/docs/OPENAUTO_CANCELLATION.md
+new file mode 100644
+index 0000000..989f188
+--- /dev/null
++++ b/docs/OPENAUTO_CANCELLATION.md
+@@ -0,0 +1,68 @@
++# Android synthesis cancellation evaluation
++
++This local evaluation starts from upstream PocketTTS-Android-Engine 0.5.3,
++commit `37809d23d68ea17fdeb5faad5edc97771022cf9a`. It is not an upstream release.
++The functional correction is in `PocketTtsService.kt`, `NativePocketTts.kt` and
++`jni_bridge.cpp`. Model selection, model bytes and voice conditioning are unchanged.
++
++## Problem and correction
++
++The service previously returned from `onSynthesizeText` immediately after dispatching
++the work to its own executor. Android could therefore stop playback while native
++synthesis continued, or lose the stop target before playback had started. A new
++request then waited behind the old work. On the evaluation Pixel, that caused
++13–14 second restart delays during playback and a 47 second delay after early stop.
++
++The service now completes all synthesis work on Android's synthesis thread before
++returning. Each active request owns a cancellation flag and an optional reference
++to its native engine. Stop marks the request cancelled without waiting for model
++loading. Cancellation is checked after loading, before native stream creation,
++after stream publication, and before delivering PCM blocks. Cancelled requests do
++not emit a success or synthesis-failure callback from the service.
++
++The request handoff lock prevents a stop already targeting the old request from
++reaching the engine after that request has finished. It is not held across loading
++or inference. The native stream mutex protects publication, cancellation and removal
++of the stream pointer. The JNI handle remains alive while synthesis or stop uses it;
++close waits until those calls finish. Native stream teardown still waits for the
++current inference work to reach a cancellation point; this is not a hard real-time
++termination guarantee.
++
++Android's contract is documented in
++[TextToSpeechService](https://developer.android.com/reference/android/speech/tts/TextToSpeechService).
++
++## Isolated installation
++
++The debug application ID is `org.pockettts.android.engine.openautotest`, labelled
++`Pocket TTS (stop test)`. It coexists with the unmodified release engine. Both the
++OpenAuto AI assistant and its working DHU package remain unchanged. The test client
++selects the test engine explicitly; the system default TTS engine remains Google.
++
++The test build needs the same German FP32 model and licensed Alba reference as the
++baseline. These are separate assets, not bundled in the APK or source archive.
++For device automation, the known public assets are placed into the test app's own
++debug sandbox. This does not test the file-picker/import UI and does not read the
++release engine's private files.
++
++## Checks
++
++Build with JDK 17, the pinned Gradle wrapper, Android SDK 37, NDK 27.2.12479018 and
++CMake 3.22.1. Obtain ONNX Runtime 1.20.0 using the hashes in
++`scripts/prepare_android_native_deps.sh`, then run:
++
++```text
++./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
++```
++
++The Windows test adjustment uses the JDK ZIP filesystem to represent Android's Unix
++paths, including colon-containing document IDs. It retains all security assertions.
++The CMake adjustment omits dr_libs' unused test submodules to avoid long Windows paths.
++
++The separate instrumentation client covers full offline output, stop during playback,
++immediate restart, process-cold early stop, rapid start/stop sequences, queue flush and
++client shutdown/reconnect. Results and exact APK hashes belong in the accompanying
++evaluation report; this document does not substitute for device results.
++
++No API requests, microphone captures, vehicle sessions, call tests or headset tests
++are involved. Callback latency is not acoustic latency. Listening confirmation is
++reported separately. This evaluation does not integrate Pocket into OpenAuto AI yet.

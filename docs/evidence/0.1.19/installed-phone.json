@@ -1,0 +1,15 @@
+{
+  "package": "dev.openautoai.app",
+  "before": [
+    "versionCode=118 minSdk=29 targetSdk=36",
+    "versionName=0.1.18",
+    "installerPackageName=null"
+  ],
+  "after": [
+    "versionCode=119 minSdk=29 targetSdk=36",
+    "versionName=0.1.19",
+    "installerPackageName=null"
+  ],
+  "sha256": "9eecaf2001b7062c1a1329a656ba2fb63df7234b41fe2a232f9027290974041e",
+  "privateDataCleared": false
+}

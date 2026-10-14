@@ -1,0 +1,7 @@
+{
+  "wifi_on": "1",
+  "mobile_data": "1",
+  "airplane_mode_on": "0",
+  "bluetooth_on": "1",
+  "tts_default_synth": "com.google.android.tts"
+}
