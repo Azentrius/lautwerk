@@ -61,16 +61,44 @@ file hashes; car reports hash a canonical preference map (empty and absent match
 These are software callback/state checks on the Pixel. They do not measure acoustic
 latency or prove car-speaker routing. The earlier standalone engine evaluation has
 separate measured latency and user-confirmed audible cancellation; see POCKET_TTS.md.
-No new audible acceptance or live provider conversation is claimed for this integration.
+The visible DHU output was subsequently confirmed audibly by the user, as recorded
+below. No live provider conversation is claimed for this integration.
 
 ## Actual DHU and vehicle scope
 
-The current attempt to connect the DHU could not establish a link: the Head Unit
-Server was not reachable through the normal forwarded port. A request to start it
-is pending. No new host API level, actual-host screenshot or DHU audio result is
-claimed yet. Car template tests passed, but they do not establish launcher visibility.
-The MessageTemplate, car screen, host validation and microphone path have no diff.
-ID.7, call and headset checks remain deferred.
+A normal forwarded-port connection was established after the initial unavailable
+server/connection attempt. Android Auto 17.8.663874-release, DHU 2.0-windows
+(2022-03-30-438482292), profile 1280x720-touch; the new session logged
+`car.onCreateScreen api=8`.
+
+The app opened through its existing Android Auto icon. Its title, provider/model,
+MessageTemplate and Start/Stop control remained unchanged. The phone setup UI was
+used to select output-only mode and Pocket/Alba temporarily. No microphone or
+provider request was made. Host checks remained enabled.
+
+The first headless attempt produced successful TTS callbacks and UI changes, but
+the user heard nothing. It is **not** an audible pass. The DHU was then restarted
+with its normal visible window. The identical fixed-sentence stop/restart test
+completed, and the user explicitly confirmed audible PC-speaker output, clean
+stopping and a complete second sentence without overlap. This establishes output
+through this DHU configuration, not an ID.7 or other vehicle result.
+
+In the visible run the app's stop handler took 9 ms in its log; this is software
+handler time, not a measurement of acoustic stop latency. One earlier explicit
+stop logged `SYNTH_AUDIO_REJECTED`/`SYNTH_FAILED` at the closed playback sink; no app
+error appeared and the following output completed. Cancellation can race that
+engine diagnostic classification; it is retained in the evidence, not hidden.
+
+The previous car voice (Android local) and mode (Conversation) were restored via
+the UI and the checked controls verified. The credential file's modification time
+remained on the prior day; its contents were not read. The assistant voice and
+system TTS default were unchanged. The DHU and temporary ADB forward were closed.
+Evidence includes scoped engine/app events and the user's acceptance result.
+Raw host screenshots are not published because their adjacent Maps pane includes
+unrelated location information.
+
+ID.7, call and headset checks remain deferred. This fixed-output acceptance does
+not replace a later live provider conversation with Alba in the parked vehicle.
 
 ## Remaining setup limits
 
