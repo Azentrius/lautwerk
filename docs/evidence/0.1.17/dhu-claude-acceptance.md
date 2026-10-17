@@ -1,4 +1,4 @@
-# Claude DHU follow-up — 2026-10-13
+# Claude DHU follow-up – 2026-10-13
 
 This report supplements the earlier [car voice evidence](../../CAR_VOICE.md). It records a
 manual follow-up, not a new application build or an automated test suite. Times below are CEST

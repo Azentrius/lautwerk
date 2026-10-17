@@ -1,4 +1,4 @@
-# Pocket/Alba integration validation — 2026-10-14
+# Pocket/Alba integration validation – 2026-10-14
 
 ## Build and device
 
