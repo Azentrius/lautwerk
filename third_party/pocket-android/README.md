@@ -1,6 +1,6 @@
 # Evaluated Pocket Android cancellation patch
 
-This is an optional companion engine, not a native dependency embedded in OpenAuto AI.
+This is an optional companion engine, not a native dependency embedded in Lautwerk.
 The original engine is MIT-licensed; preserve the adjacent `LICENSE` and all upstream
 native/model notices. `cancellation.patch` is a complete diff against upstream commit
 `37809d23d68ea17fdeb5faad5edc97771022cf9a` (0.5.3). It includes the isolated debug package,
@@ -20,7 +20,7 @@ CMake 3.22.1, following the upstream `docs/BUILDING.md`:
 git clone https://github.com/The-unknown-Shadowman/PocketTTS-Android-Engine.git
 cd PocketTTS-Android-Engine
 git checkout 37809d23d68ea17fdeb5faad5edc97771022cf9a
-git apply /path/to/openauto-ai/third_party/pocket-android/cancellation.patch
+git apply /path/to/lautwerk/third_party/pocket-android/cancellation.patch
 bash scripts/prepare_android_native_deps.sh
 ./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
 ```
