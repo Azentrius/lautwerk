@@ -18,6 +18,9 @@ Move the Android package names to com.azentrius.lautwerk following the move to a
   installer metadata do not transfer to the new package; validate visibility separately.
 - All three apps use versionCode 300; the assistant is 0.3.0 and the prototypes are 0.3.0-prototype.
   Historical evidence, design snapshots and earlier changelog entries are preserved.
+- The design reference in `design/azentrius/` is now a single snapshot of design-system commit 94009ab
+  (155 files, checksums in `UPSTREAM.sha256`). Earlier snapshots and the original package files are
+  removed from the working tree and remain in the Git history.
 
 ## 0.2.0 – 2026-10-18
 

@@ -1,0 +1,72 @@
+Azentrius Design System
+Copyright (c) 2026 Stefan Popp.
+
+1. Gegenstand
+
+Dieses Repository enthält das Azentrius Design System: Regeln und Texte,
+Design-Tokens, CSS, Komponenten-Beschreibungen und -Vorschauen, Skripte,
+Grafiken sowie die Marke mit der Wortmarke „Azentrius.“, dem Zeichen „A.“,
+den Zeichen der Apps und den Produktnamen (zusammen „das Designsystem“).
+Für die Teile gelten unterschiedliche Bedingungen: Ziffer 2 für den Code,
+Ziffer 3 für alles andere, Ziffer 5 für Bestandteile Dritter.
+
+2. Code unter Apache-2.0
+
+Die folgenden Teile stehen unter der Apache License, Version 2.0. Der
+Lizenztext liegt in LICENSES/Apache-2.0.txt.
+
+- tokens.json und tokens.css
+- components/bundle.css
+- der Code von azentrius-theme.js, wie er in cockpit.md steht
+- die daraus erzeugten Dateien azentrius.css und azentrius-theme.js, die
+  die Azentrius-Addons ausliefern
+- das Home-Assistant-Theme home-assistant/themes/azentrius.yaml und
+  home-assistant/www/azentrius/azentrius.js
+
+Die Apache License räumt keine Rechte an Marken, Namen oder Zeichen ein
+(Abschnitt 6 der Lizenz). Für die Marke gilt Ziffer 3.
+
+3. Alle Rechte vorbehalten
+
+Für alle Teile des Designsystems, die nicht unter Ziffer 2 oder 5 fallen,
+insbesondere Regeln und Texte, Komponenten-Beschreibungen und -Vorschauen,
+Skripte, Grafiken und die Marke, gilt: Sämtliche Rechte liegen
+ausschließlich beim Rechteinhaber. Es wird keine Lizenz und kein
+Nutzungsrecht eingeräumt, weder ausdrücklich noch stillschweigend. Ohne
+vorherige schriftliche Zustimmung des Rechteinhabers ist es insbesondere
+nicht gestattet, diese Teile ganz oder teilweise zu nutzen, zu
+vervielfältigen, zu bearbeiten, zu veröffentlichen, zu verbreiten,
+öffentlich zugänglich zu machen, unterzulizenzieren oder als Grundlage
+eigener Designsysteme, Produkte oder Marken zu verwenden.
+
+4. Zugang
+
+Der Zugang zu diesem Repository, etwa als Mitglied, Mitwirkender oder
+über ein angebundenes Werkzeug, berechtigt nur dazu, die unter Ziffer 3
+genannten Teile im Auftrag des Rechteinhabers für dessen eigene Projekte
+zu verwenden. Er begründet keine eigenen Rechte. Mit Ende des Auftrags
+oder des Zugangs endet auch diese Berechtigung.
+
+5. Bestandteile Dritter
+
+Folgende Bestandteile stehen unter ihren eigenen Lizenzen, die im Ordner
+LICENSES/ und in android/LICENSES/ beiliegen und Vorrang haben:
+
+- Schriften DM Sans, DM Serif Display, Red Hat Text, Red Hat Display und
+  Red Hat Mono, einschließlich der daraus erzeugten Android-Schnitte:
+  SIL Open Font License 1.1
+- Icons aus Font Awesome Free 5.15.4 (Fonticons, Inc.), übernommen über
+  @patternfly/react-icons 6.4.0, alle außer "pending": CC BY 4.0
+- PatternFly-Icon "pending" aus @patternfly/react-icons 6.4.0
+  (Red Hat, Inc.): MIT-Lizenz
+
+6. Haftung
+
+Das Designsystem wird ohne Gewähr bereitgestellt. Die Haftung des
+Rechteinhabers ist, soweit gesetzlich zulässig, ausgeschlossen. Für die
+Teile unter Ziffer 2 gelten zusätzlich die Abschnitte 7 und 8 der Apache
+License.
+
+7. Recht
+
+Es gilt das Recht der Bundesrepublik Deutschland.

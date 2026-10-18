@@ -32,9 +32,9 @@ src/main/res/values/ic_launcher_background.xml.
 
 The prototype also includes the DM Sans and DM Serif Display OFL texts in
 prototype-app/src/main/assets/licenses/.
-The unchanged Azentrius reference snapshots and original package in design/azentrius/
-retain their own licenses, including proprietary Azentrius material. See the LICENSE
-and LICENSES files in each snapshot. They are not covered by this project's Apache License.
+The unchanged Azentrius reference snapshot in design/azentrius/
+retains its own licenses, including proprietary Azentrius material. See the LICENSE
+and LICENSES files in the snapshot. They are not covered by this project's Apache License.
 
 Optional Pocket / Alba integration (speech-output/): no native/model/voice assets bundled.
   Engine: Pocket TTS Android Engine contributors, 2026, MIT.
