@@ -162,4 +162,4 @@ reports: [SECURITY.md](SECURITY.md).
 Apache-2.0, see [LICENSE](LICENSE). Fonts, icons and the app icon come with their own terms, see
 [NOTICE](NOTICE).
 
-Made by [Azentrius](https://azentrius.de).
+Made by [Azentrius](https://azentrius.com).
