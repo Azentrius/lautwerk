@@ -1,0 +1,26 @@
+[
+  {
+    "path": "storage/build/outputs/apk/androidTest/debug/storage-debug-androidTest.apk",
+    "sha256": "8745d86845b3ffdb7ed244117bc342f91aa74c341f11d031c9988f960888ffb6"
+  },
+  {
+    "path": "prototype-app/build/outputs/apk/phone/debug/prototype-app-phone-debug.apk",
+    "sha256": "3af57b0366a571971121c918dfe3616a341287db2474004c5c74d6d1a98b2aaf"
+  },
+  {
+    "path": "prototype-app/build/outputs/apk/dhu/debug/prototype-app-dhu-debug.apk",
+    "sha256": "7d86af91ffa7e6f91a5a36abd5f376626a486e25868777d6c6052a65cb45249b"
+  },
+  {
+    "path": "prototype-app/build/outputs/apk/androidTest/dhu/debug/prototype-app-dhu-debug-androidTest.apk",
+    "sha256": "9fc87d0492969b0b156350886921e385d494b8db2e4cc7b5de36dc13bb988d89"
+  },
+  {
+    "path": "app/build/outputs/apk/debug/app-debug.apk",
+    "sha256": "85ba8086ef5dcf1ab993d3c2c31ae62a902c2d5e08f1faecbeedeff459c6bc2f"
+  },
+  {
+    "path": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+    "sha256": "9ae0062d3667fea659036833d7e44b6641ef67a428fe2592baffa236fd5bb4a1"
+  }
+]

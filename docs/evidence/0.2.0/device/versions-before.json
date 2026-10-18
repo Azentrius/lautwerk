@@ -1,0 +1,44 @@
+{
+  "dev.openautoai.app": {
+    "installed": true,
+    "versionName": "0.1.19",
+    "versionCode": 119,
+    "installerPackageName": "null"
+  },
+  "dev.openautoai.prototype.dhu": {
+    "installed": true,
+    "versionName": "0.1.19-prototype",
+    "versionCode": 119,
+    "installerPackageName": "com.android.vending"
+  },
+  "de.azentrius.lautwerk": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "de.azentrius.lautwerk.prototype.dhu": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "de.azentrius.lautwerk.test": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "de.azentrius.lautwerk.prototype.dhu.test": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "de.azentrius.lautwerk.storage.test": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  }
+}

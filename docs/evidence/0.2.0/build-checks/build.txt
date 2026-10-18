@@ -1,0 +1,404 @@
+Starting a Gradle Daemon, 1 incompatible and 1 stopped Daemons could not be reused, use --status for details
+
+> Configure project :app
+w: file:///<workspace>/app/build.gradle.kts:6:40: 'fun ExtraPropertiesExtension.provideDelegate(receiver: Any?, property: KProperty<*>): MutablePropertyDelegate' is deprecated. Use 'val property = extra[name] as Type' instead. See the Gradle 9.6 upgrading guide.
+
+> Configure project :prototype-app
+w: file:///<workspace>/prototype-app/build.gradle.kts:5:40: 'fun ExtraPropertiesExtension.provideDelegate(receiver: Any?, property: KProperty<*>): MutablePropertyDelegate' is deprecated. Use 'val property = extra[name] as Type' instead. See the Gradle 9.6 upgrading guide.
+
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :core:processResources NO-SOURCE
+> Task :providers:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :providers:processResources NO-SOURCE
+> Task :voice:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :voice:processResources NO-SOURCE
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :settings:preBuild UP-TO-DATE
+> Task :settings:preDebugBuild UP-TO-DATE
+> Task :settings:processDebugNavigationResources
+> Task :speech-output:preBuild UP-TO-DATE
+> Task :speech-output:preDebugBuild UP-TO-DATE
+> Task :speech-output:processDebugNavigationResources
+> Task :storage:preBuild UP-TO-DATE
+> Task :storage:preDebugBuild UP-TO-DATE
+> Task :storage:processDebugNavigationResources
+> Task :app:processDebugNavigationResources
+> Task :settings:generateDebugResources
+> Task :settings:packageDebugResources
+> Task :speech-output:generateDebugResources
+> Task :settings:javaPreCompileDebug
+> Task :settings:parseDebugLocalResources
+> Task :speech-output:packageDebugResources
+> Task :speech-output:javaPreCompileDebug
+> Task :storage:generateDebugResources
+> Task :speech-output:parseDebugLocalResources
+> Task :app:parseDebugLocalResources
+> Task :storage:packageDebugResources
+> Task :settings:generateDebugRFile
+> Task :app:generateDebugRFile
+> Task :speech-output:generateDebugRFile
+> Task :storage:javaPreCompileDebug
+> Task :storage:parseDebugLocalResources
+> Task :app:javaPreCompileDebug
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :settings:generateDebugAssets UP-TO-DATE
+> Task :storage:generateDebugRFile
+> Task :settings:mergeDebugAssets
+> Task :speech-output:generateDebugAssets UP-TO-DATE
+> Task :speech-output:mergeDebugAssets
+> Task :storage:generateDebugAssets UP-TO-DATE
+> Task :storage:mergeDebugAssets
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:generateDebugGlobalSynthetics
+> Task :app:desugarDebugFileDependencies
+> Task :speech-output:writeDebugAarMetadata
+> Task :settings:writeDebugAarMetadata
+> Task :storage:writeDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
+> Task :app:checkDebugDuplicateClasses
+> Task :app:checkDebugAarMetadata
+> Task :app:compileDebugNavigationResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :settings:extractDeepLinksDebug
+> Task :speech-output:extractDeepLinksDebug
+> Task :storage:extractDeepLinksDebug
+> Task :settings:mapDebugSourceSetPaths
+> Task :speech-output:mapDebugSourceSetPaths
+> Task :settings:compileDebugLibraryResources
+> Task :speech-output:compileDebugLibraryResources
+> Task :storage:mapDebugSourceSetPaths
+> Task :storage:compileDebugLibraryResources
+> Task :app:mergeDebugJniLibFolders
+> Task :settings:mergeDebugJniLibFolders
+> Task :settings:processDebugManifest
+> Task :settings:mergeDebugNativeLibs NO-SOURCE
+> Task :speech-output:processDebugManifest
+> Task :storage:processDebugManifest
+> Task :settings:copyDebugJniLibsProjectOnly
+> Task :app:mergeDebugResources
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :speech-output:mergeDebugJniLibFolders
+> Task :speech-output:mergeDebugNativeLibs NO-SOURCE
+> Task :speech-output:copyDebugJniLibsProjectOnly
+> Task :storage:mergeDebugJniLibFolders
+> Task :storage:mergeDebugNativeLibs NO-SOURCE
+> Task :storage:copyDebugJniLibsProjectOnly
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResources
+> Task :app:packageDebugAndroidTestResources
+> Task :app:processDebugAndroidTestNavigationResources
+> Task :app:generateDebugAndroidTestAssets UP-TO-DATE
+> Task :app:javaPreCompileDebugAndroidTest
+> Task :app:parseDebugAndroidTestLocalResources
+> Task :app:mergeDebugAndroidTestAssets
+> Task :app:compressDebugAndroidTestAssets
+> Task :app:generateDebugAndroidTestRFile
+> Task :app:generateDebugAndroidTestGlobalSynthetics
+> Task :app:desugarDebugAndroidTestFileDependencies
+> Task :app:checkDebugAndroidTestDuplicateClasses
+> Task :app:checkDebugAndroidTestAarMetadata
+> Task :app:mapDebugAndroidTestSourceSetPaths
+> Task :app:compileDebugAndroidTestNavigationResources
+> Task :app:mergeExtDexDebugAndroidTest
+> Task :app:mergeExtDexDebug
+> Task :app:mergeDebugAndroidTestResources
+> Task :app:mergeDebugAndroidTestManifest
+> Task :app:processDebugAndroidTestManifest
+> Task :app:mergeDebugAndroidTestJniLibFolders
+> Task :app:validateSigningDebugAndroidTest
+> Task :app:writeDebugAndroidTestSigningConfigVersions
+> Task :prototype-app:preBuild UP-TO-DATE
+> Task :prototype-app:prePhoneDebugBuild UP-TO-DATE
+> Task :prototype-app:mergePhoneDebugNativeDebugMetadata NO-SOURCE
+> Task :prototype-app:generatePhoneDebugBuildConfig
+> Task :prototype-app:generatePhoneDebugResources
+> Task :prototype-app:packagePhoneDebugResources
+> Task :prototype-app:processPhoneDebugNavigationResources
+> Task :prototype-app:generatePhoneDebugAssets UP-TO-DATE
+> Task :prototype-app:javaPreCompilePhoneDebug
+> Task :prototype-app:parsePhoneDebugLocalResources
+> Task :prototype-app:mergePhoneDebugAssets
+> Task :prototype-app:generatePhoneDebugRFile
+> Task :prototype-app:compressPhoneDebugAssets
+
+> Task :core:compileKotlin
+w: file:///<workspace>/core/src/main/kotlin/de/azentrius/lautwerk/core/ai/RequestCancellation.kt:33:77 Expression is unused.
+
+> Task :app:processDebugAndroidTestResources
+> Task :prototype-app:generatePhoneDebugGlobalSynthetics
+> Task :prototype-app:checkPhoneDebugDuplicateClasses
+> Task :prototype-app:desugarPhoneDebugFileDependencies
+> Task :prototype-app:checkPhoneDebugAarMetadata
+> Task :prototype-app:mapPhoneDebugSourceSetPaths
+> Task :prototype-app:compilePhoneDebugNavigationResources
+> Task :prototype-app:createPhoneDebugCompatibleScreenManifests
+> Task :prototype-app:extractDeepLinksPhoneDebug
+> Task :prototype-app:mergePhoneDebugResources
+> Task :prototype-app:processPhoneDebugMainManifest
+> Task :core:compileJava NO-SOURCE
+> Task :core:classes UP-TO-DATE
+> Task :prototype-app:mergeExtDexPhoneDebug
+> Task :core:jar
+> Task :app:processDebugManifestForPackage
+> Task :prototype-app:processPhoneDebugManifest
+> Task :prototype-app:mergePhoneDebugJniLibFolders
+> Task :prototype-app:mergePhoneDebugNativeLibs NO-SOURCE
+> Task :prototype-app:stripPhoneDebugDebugSymbols NO-SOURCE
+> Task :prototype-app:validateSigningPhoneDebug
+> Task :prototype-app:writePhoneDebugAppMetadata
+> Task :prototype-app:writePhoneDebugSigningConfigVersions
+> Task :prototype-app:preDhuDebugBuild UP-TO-DATE
+> Task :prototype-app:mergeDhuDebugNativeDebugMetadata NO-SOURCE
+> Task :car-ui:preBuild UP-TO-DATE
+> Task :car-ui:preDebugBuild UP-TO-DATE
+> Task :car-ui:generateDebugResources
+> Task :car-ui:packageDebugResources
+> Task :car-ui:processDebugNavigationResources
+> Task :car-ui:javaPreCompileDebug
+> Task :car-ui:parseDebugLocalResources
+> Task :prototype-app:generateDhuDebugBuildConfig
+> Task :car-ui:generateDebugRFile
+> Task :prototype-app:generateDhuDebugResources
+> Task :prototype-app:packageDhuDebugResources
+> Task :settings:compileDebugKotlin
+> Task :prototype-app:processDhuDebugNavigationResources
+> Task :settings:compileDebugJavaWithJavac NO-SOURCE
+> Task :settings:processDebugJavaRes
+> Task :settings:bundleLibRuntimeToDirDebug
+> Task :car-ui:generateDebugAssets UP-TO-DATE
+> Task :prototype-app:javaPreCompileDhuDebug
+> Task :settings:bundleLibCompileToJarDebug
+> Task :car-ui:mergeDebugAssets
+> Task :prototype-app:parseDhuDebugLocalResources
+> Task :app:processDebugResources
+> Task :prototype-app:generateDhuDebugAssets UP-TO-DATE
+> Task :prototype-app:generateDhuDebugRFile
+> Task :prototype-app:mergeLibDexPhoneDebug
+> Task :prototype-app:mergeDhuDebugAssets
+> Task :prototype-app:compressDhuDebugAssets
+> Task :storage:compileDebugKotlin
+> Task :prototype-app:generateDhuDebugGlobalSynthetics
+> Task :storage:compileDebugJavaWithJavac NO-SOURCE
+> Task :storage:bundleLibCompileToJarDebug
+> Task :storage:processDebugJavaRes
+> Task :storage:bundleLibRuntimeToDirDebug
+> Task :prototype-app:desugarDhuDebugFileDependencies
+> Task :car-ui:mapDebugSourceSetPaths
+> Task :car-ui:writeDebugAarMetadata
+> Task :car-ui:compileDebugLibraryResources
+> Task :prototype-app:mapDhuDebugSourceSetPaths
+> Task :prototype-app:checkDhuDebugDuplicateClasses
+> Task :prototype-app:compileDhuDebugNavigationResources
+> Task :prototype-app:checkDhuDebugAarMetadata
+> Task :providers:compileKotlin
+> Task :providers:compileJava NO-SOURCE
+> Task :providers:classes UP-TO-DATE
+> Task :providers:jar
+> Task :prototype-app:createDhuDebugCompatibleScreenManifests
+> Task :car-ui:extractDeepLinksDebug
+
+> Task :prototype-app:compilePhoneDebugKotlin
+w: file:///<workspace>/prototype-app/src/main/java/de/azentrius/lautwerk/prototype/PrototypeButtonBackground.kt:39:43 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+
+> Task :prototype-app:extractDeepLinksDhuDebug
+> Task :car-ui:processDebugManifest
+> Task :car-ui:mergeDebugJniLibFolders
+> Task :prototype-app:processDhuDebugMainManifest
+> Task :prototype-app:processDhuDebugManifest
+> Task :car-ui:mergeDebugNativeLibs NO-SOURCE
+> Task :prototype-app:mergeDhuDebugResources
+> Task :car-ui:copyDebugJniLibsProjectOnly
+> Task :prototype-app:mergeDhuDebugJniLibFolders
+> Task :prototype-app:validateSigningDhuDebug
+> Task :prototype-app:writeDhuDebugAppMetadata
+> Task :prototype-app:writeDhuDebugSigningConfigVersions
+> Task :prototype-app:preDhuDebugAndroidTestBuild SKIPPED
+> Task :prototype-app:mergeDhuDebugAndroidTestManifest
+> Task :prototype-app:processDhuDebugAndroidTestManifest
+> Task :prototype-app:generateDhuDebugAndroidTestBuildConfig
+> Task :prototype-app:generateDhuDebugAndroidTestResources
+> Task :prototype-app:packageDhuDebugAndroidTestResources
+> Task :prototype-app:processDhuDebugAndroidTestNavigationResources
+> Task :prototype-app:parseDhuDebugAndroidTestLocalResources
+> Task :voice:compileKotlin
+> Task :prototype-app:mergeExtDexDhuDebug
+> Task :prototype-app:compilePhoneDebugJavaWithJavac
+> Task :voice:compileJava NO-SOURCE
+> Task :voice:classes UP-TO-DATE
+> Task :voice:jar
+> Task :prototype-app:processDhuDebugManifestForPackage
+> Task :prototype-app:processPhoneDebugJavaRes
+> Task :app:mergeDebugNativeLibs
+> Task :app:mergeDebugAndroidTestNativeLibs NO-SOURCE
+> Task :app:stripDebugAndroidTestDebugSymbols NO-SOURCE
+
+> Task :app:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libandroidx.graphics.path.so. Run with --info option to learn more.
+
+> Task :prototype-app:mergeDhuDebugNativeLibs NO-SOURCE
+> Task :prototype-app:stripDhuDebugDebugSymbols NO-SOURCE
+> Task :prototype-app:generateDhuDebugAndroidTestAssets UP-TO-DATE
+> Task :prototype-app:javaPreCompileDhuDebugAndroidTest
+> Task :prototype-app:generateDhuDebugAndroidTestRFile
+> Task :prototype-app:mergeDhuDebugAndroidTestAssets
+> Task :prototype-app:compressDhuDebugAndroidTestAssets
+> Task :prototype-app:mergePhoneDebugJavaResource
+> Task :prototype-app:processDhuDebugResources
+> Task :prototype-app:generateDhuDebugAndroidTestGlobalSynthetics
+> Task :prototype-app:checkDhuDebugAndroidTestDuplicateClasses
+> Task :prototype-app:desugarDhuDebugAndroidTestFileDependencies
+> Task :prototype-app:checkDhuDebugAndroidTestAarMetadata
+> Task :prototype-app:processPhoneDebugManifestForPackage
+> Task :prototype-app:mapDhuDebugAndroidTestSourceSetPaths
+> Task :prototype-app:compileDhuDebugAndroidTestNavigationResources
+> Task :prototype-app:processPhoneDebugResources
+> Task :prototype-app:mergeExtDexDhuDebugAndroidTest
+> Task :speech-output:compileDebugKotlin
+> Task :speech-output:compileDebugJavaWithJavac NO-SOURCE
+> Task :speech-output:bundleLibCompileToJarDebug
+> Task :speech-output:processDebugJavaRes
+> Task :prototype-app:mergeDhuDebugAndroidTestResources
+> Task :speech-output:bundleLibRuntimeToDirDebug
+> Task :prototype-app:dexBuilderPhoneDebug
+> Task :prototype-app:mergeProjectDexPhoneDebug
+> Task :app:mergeLibDexDebugAndroidTest
+> Task :app:mergeLibDexDebug
+> Task :prototype-app:mergeDhuDebugAndroidTestJniLibFolders
+> Task :prototype-app:mergeDhuDebugAndroidTestNativeLibs NO-SOURCE
+> Task :prototype-app:stripDhuDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :prototype-app:validateSigningDhuDebugAndroidTest
+> Task :prototype-app:writeDhuDebugAndroidTestSigningConfigVersions
+> Task :storage:preDebugAndroidTestBuild UP-TO-DATE
+> Task :storage:generateDebugAndroidTestResources
+> Task :storage:packageDebugAndroidTestResources
+> Task :storage:processDebugAndroidTestNavigationResources
+> Task :storage:generateDebugAndroidTestAssets UP-TO-DATE
+> Task :storage:javaPreCompileDebugAndroidTest
+> Task :storage:parseDebugAndroidTestLocalResources
+> Task :storage:mergeDebugAndroidTestAssets
+> Task :storage:compressDebugAndroidTestAssets
+> Task :storage:generateDebugAndroidTestRFile
+> Task :prototype-app:processDhuDebugAndroidTestResources
+> Task :storage:generateDebugAndroidTestGlobalSynthetics
+> Task :storage:checkDebugAndroidTestDuplicateClasses
+> Task :storage:desugarDebugAndroidTestFileDependencies
+> Task :storage:checkDebugAndroidTestAarMetadata
+> Task :storage:mapDebugAndroidTestSourceSetPaths
+> Task :storage:mergeLibDexDebugAndroidTest
+> Task :storage:compileDebugAndroidTestNavigationResources
+> Task :storage:mergeDebugAndroidTestResources
+> Task :storage:mergeDebugAndroidTestManifest
+> Task :storage:processDebugAndroidTestManifest
+> Task :storage:mergeDebugAndroidTestJniLibFolders
+> Task :storage:mergeDebugAndroidTestNativeLibs NO-SOURCE
+> Task :storage:stripDebugAndroidTestDebugSymbols NO-SOURCE
+> Task :storage:validateSigningDebugAndroidTest
+> Task :storage:writeDebugAndroidTestSigningConfigVersions
+> Task :prototype-app:packagePhoneDebug
+> Task :prototype-app:createPhoneDebugApkListingFileRedirect
+> Task :prototype-app:assemblePhoneDebug
+> Task :storage:processDebugAndroidTestResources
+> Task :storage:mergeExtDexDebugAndroidTest
+> Task :storage:compileDebugAndroidTestKotlin
+> Task :storage:compileDebugAndroidTestJavaWithJavac NO-SOURCE
+> Task :storage:processDebugAndroidTestJavaRes
+> Task :storage:mergeDebugAndroidTestJavaResource
+> Task :storage:dexBuilderDebugAndroidTest
+> Task :storage:mergeProjectDexDebugAndroidTest
+> Task :storage:packageDebugAndroidTest
+> Task :storage:createDebugAndroidTestApkListingFileRedirect
+> Task :storage:assembleDebugAndroidTest
+> Task :car-ui:compileDebugKotlin
+> Task :car-ui:compileDebugJavaWithJavac NO-SOURCE
+> Task :car-ui:bundleLibCompileToJarDebug
+> Task :car-ui:processDebugJavaRes
+> Task :car-ui:bundleLibRuntimeToDirDebug
+> Task :prototype-app:mergeLibDexDhuDebugAndroidTest
+> Task :prototype-app:mergeLibDexDhuDebug
+
+> Task :prototype-app:compileDhuDebugKotlin
+w: file:///<workspace>/prototype-app/src/main/java/de/azentrius/lautwerk/prototype/PrototypeButtonBackground.kt:39:43 This declaration overrides a deprecated member but is not marked as deprecated itself. Add the '@Deprecated' annotation or suppress the diagnostic.
+
+> Task :prototype-app:compileDhuDebugJavaWithJavac
+> Task :prototype-app:processDhuDebugJavaRes
+> Task :prototype-app:dexBuilderDhuDebug
+> Task :prototype-app:bundleDhuDebugClassesToCompileJar
+> Task :prototype-app:mergeProjectDexDhuDebug
+> Task :prototype-app:mergeDhuDebugJavaResource
+> Task :prototype-app:packageDhuDebug
+> Task :prototype-app:createDhuDebugApkListingFileRedirect
+> Task :prototype-app:assembleDhuDebug
+
+> Task :prototype-app:compileDhuDebugAndroidTestKotlin
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/ExternalPcmRecognitionTest.kt:52:43 Unnecessary non-null assertion (!!) on a non-null receiver of type 'TextToSpeech'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/ExternalPcmRecognitionTest.kt:54:39 Unnecessary non-null assertion (!!) on a non-null receiver of type 'TextToSpeech'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/ExternalPcmRecognitionTest.kt:56:27 Unnecessary non-null assertion (!!) on a non-null receiver of type 'TextToSpeech'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/ExternalPcmRecognitionTest.kt:57:27 Unnecessary non-null assertion (!!) on a non-null receiver of type 'TextToSpeech'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/ExternalPcmRecognitionTest.kt:63:62 Unnecessary non-null assertion (!!) on a non-null receiver of type 'TextToSpeech'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/PocketCarPlaybackTest.kt:61:65 Unnecessary non-null assertion (!!) on a non-null receiver of type 'CarVoiceService'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/PocketCarPlaybackTest.kt:62:45 Unnecessary non-null assertion (!!) on a non-null receiver of type 'CarVoiceService'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/PocketCarPlaybackTest.kt:69:36 Unnecessary non-null assertion (!!) on a non-null receiver of type 'CarVoiceService'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/VoicePlaybackDeviceTest.kt:34:35 Unnecessary non-null assertion (!!) on a non-null receiver of type 'CarVoiceService'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/VoicePlaybackDeviceTest.kt:41:24 Unnecessary non-null assertion (!!) on a non-null receiver of type 'CarVoiceService'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/VoicePlaybackDeviceTest.kt:42:24 Unnecessary non-null assertion (!!) on a non-null receiver of type 'CarVoiceService'.
+w: file:///<workspace>/prototype-app/src/androidTestDhu/java/de/azentrius/lautwerk/prototype/VoicePlaybackDeviceTest.kt:43:92 Unnecessary non-null assertion (!!) on a non-null receiver of type 'CarVoiceService'.
+
+> Task :prototype-app:compileDhuDebugAndroidTestJavaWithJavac
+> Task :prototype-app:processDhuDebugAndroidTestJavaRes
+> Task :prototype-app:mergeDhuDebugAndroidTestJavaResource
+> Task :prototype-app:dexBuilderDhuDebugAndroidTest
+> Task :prototype-app:mergeProjectDexDhuDebugAndroidTest
+> Task :prototype-app:packageDhuDebugAndroidTest
+> Task :prototype-app:createDhuDebugAndroidTestApkListingFileRedirect
+> Task :prototype-app:assembleDhuDebugAndroidTest
+> Task :app:compileDebugKotlin
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:processDebugJavaRes
+> Task :app:dexBuilderDebug
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:mergeProjectDexDebug
+> Task :app:mergeDebugJavaResource
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+
+> Task :app:compileDebugAndroidTestKotlin
+w: file:///<workspace>/app/src/androidTest/java/de/azentrius/lautwerk/app/DesignScreenshotsTest.kt:23:27 'fun createEmptyComposeRule(effectContext: CoroutineContext = ...): ComposeTestRule' is deprecated. Use `androidx.compose.ui.test.junit4.v2.createEmptyComposeRule` instead. The v2 APIs use StandardTestDispatcher instead of UnconfinedTestDispatcher, which aligns with standard coroutine behavior by queuing tasks rather than executing them immediately. Tests relying on immediate execution may require explicit synchronization. Please refer to the migration guide for more details.
+w: file:///<workspace>/app/src/androidTest/java/de/azentrius/lautwerk/app/DesignUiTest.kt:26:27 'fun createComposeRule(effectContext: CoroutineContext = ...): ComposeContentTestRule' is deprecated. Use `androidx.compose.ui.test.junit4.v2.createComposeRule` instead. The v2 APIs use StandardTestDispatcher instead of UnconfinedTestDispatcher, which aligns with standard coroutine behavior by queuing tasks rather than executing them immediately. Tests relying on immediate execution may require explicit synchronization. Please refer to the migration guide for more details.
+w: file:///<workspace>/app/src/androidTest/java/de/azentrius/lautwerk/app/HistorySearchUiTest.kt:20:29 'fun createComposeRule(effectContext: CoroutineContext = ...): ComposeContentTestRule' is deprecated. Use `androidx.compose.ui.test.junit4.v2.createComposeRule` instead. The v2 APIs use StandardTestDispatcher instead of UnconfinedTestDispatcher, which aligns with standard coroutine behavior by queuing tasks rather than executing them immediately. Tests relying on immediate execution may require explicit synchronization. Please refer to the migration guide for more details.
+w: file:///<workspace>/app/src/androidTest/java/de/azentrius/lautwerk/app/LocalizationLifecycleTest.kt:20:27 'fun createEmptyComposeRule(effectContext: CoroutineContext = ...): ComposeTestRule' is deprecated. Use `androidx.compose.ui.test.junit4.v2.createEmptyComposeRule` instead. The v2 APIs use StandardTestDispatcher instead of UnconfinedTestDispatcher, which aligns with standard coroutine behavior by queuing tasks rather than executing them immediately. Tests relying on immediate execution may require explicit synchronization. Please refer to the migration guide for more details.
+w: file:///<workspace>/app/src/androidTest/java/de/azentrius/lautwerk/app/StorageUiTest.kt:24:29 'fun createComposeRule(effectContext: CoroutineContext = ...): ComposeContentTestRule' is deprecated. Use `androidx.compose.ui.test.junit4.v2.createComposeRule` instead. The v2 APIs use StandardTestDispatcher instead of UnconfinedTestDispatcher, which aligns with standard coroutine behavior by queuing tasks rather than executing them immediately. Tests relying on immediate execution may require explicit synchronization. Please refer to the migration guide for more details.
+w: file:///<workspace>/app/src/androidTest/java/de/azentrius/lautwerk/app/voice/AndroidVoiceEnvironmentTest.kt:32:78 Unnecessary non-null assertion (!!) on a non-null receiver of type 'Cancel'.
+w: file:///<workspace>/app/src/androidTest/java/de/azentrius/lautwerk/app/voice/AndroidVoiceTasksTest.kt:91:29 Unnecessary non-null assertion (!!) on a non-null receiver of type 'Cancel'.
+w: file:///<workspace>/app/src/androidTest/java/de/azentrius/lautwerk/app/voice/SpeechSettingsScreenTest.kt:20:29 'fun <reified A : ComponentActivity> createAndroidComposeRule(effectContext: CoroutineContext = ...): AndroidComposeTestRule<ActivityScenarioRule<A>, A>' is deprecated. Use `androidx.compose.ui.test.junit4.v2.createAndroidComposeRule` instead. The v2 APIs use StandardTestDispatcher instead of UnconfinedTestDispatcher, which aligns with standard coroutine behavior by queuing tasks rather than executing them immediately. Tests relying on immediate execution may require explicit synchronization. Please refer to the migration guide for more details.
+
+> Task :app:compileDebugAndroidTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugAndroidTestJavaRes
+> Task :app:mergeDebugAndroidTestJavaResource
+> Task :app:dexBuilderDebugAndroidTest
+> Task :app:mergeProjectDexDebugAndroidTest
+> Task :app:packageDebugAndroidTest
+> Task :app:createDebugAndroidTestApkListingFileRedirect
+> Task :app:assembleDebugAndroidTest
+
+[Incubating] Problems report is available at: file:///<workspace>/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.8.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 57s
+280 actionable tasks: 280 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.8.1/userguide/configuration_cache_enabling.html

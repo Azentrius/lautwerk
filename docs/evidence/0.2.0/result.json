@@ -1,0 +1,50 @@
+{
+  "sourceCommit": "879d7dddb6a5f959efefbb042fa85586181ebb51",
+  "version": "0.2.0",
+  "versionCode": 200,
+  "passed": true,
+  "counts": {
+    "passed": 114,
+    "failed": 0,
+    "skipped": 5
+  },
+  "suites": [
+    {
+      "suite": "phone-all",
+      "counts": {
+        "passed": 81,
+        "failed": 0,
+        "skipped": 2
+      },
+      "passed": true,
+      "settingsRestored": true
+    },
+    {
+      "suite": "car-all",
+      "counts": {
+        "passed": 19,
+        "failed": 0,
+        "skipped": 3
+      },
+      "passed": true,
+      "settingsRestored": true
+    },
+    {
+      "suite": "storage-all",
+      "counts": {
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0
+      },
+      "passed": true,
+      "settingsRestored": true
+    }
+  ],
+  "titleScreenshotsReviewed": 4,
+  "manualLiveAudioAcceptance": false,
+  "dhuTested": false,
+  "vehicleTested": false,
+  "appCodeChanged": false,
+  "deviceSettingsRestored": true,
+  "oldPackagesRetained": true
+}
