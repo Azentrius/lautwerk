@@ -51,7 +51,7 @@ the current audio work and installation procedure are in [CAR_VOICE.md](docs/CAR
 
 1. Open this project in Android Studio and set the Gradle JDK to **JDK 17**.
 2. Install SDK Platform **Android 17 / API 37** and Build Tools **36.0.0** if they are missing.
-3. Choose the build variant `prototype-app: dhuDebug`; this APK holds the phone UI AND the car service.
+3. Choose the build variant `prototype-app: dhuDebug`; this APK holds the phone UI and the car service.
 4. Follow [car audio setup and tests](docs/CAR_VOICE.md). The original SDK/DHU setup is in
    [docs/START_WINDOWS.md](docs/START_WINDOWS.md).
 
@@ -119,6 +119,13 @@ uses the model remembered for that provider and still starts a new chat without 
 confirmed state of the voice tests is in [VOICE.md](docs/VOICE.md); further planning in
 [ROADMAP.md](ROADMAP.md).
 
+## Optional local Pocket / Alba voice
+
+Version 0.1.19 adds an explicit **Pocket · Alba** choice using the separately installed,
+cancellation-fixed engine. German output runs locally; provider requests and recognition
+keep their existing behavior. The native runtime/model are not bundled. See
+[setup, attribution and limitations](docs/POCKET_TTS.md) before enabling it.
+
 ## Build tools
 
 Gradle 9.8.1 with the complete wrapper and a checked distribution; AGP 9.4.1 with built-in Kotlin;
@@ -142,11 +149,6 @@ Sources, wrapper, license, docs and tests belong in the repository. `local.prope
 directories, keys and diagnostic output are excluded; APKs are not part of the Git history. Security
 reports: [SECURITY.md](SECURITY.md).
 
-## License
-
-Apache-2.0, see [LICENSE](LICENSE). Fonts, icons and the app icon come with their own terms, see
-[NOTICE](NOTICE).
-
 ## Official references (checked 2026-10-11)
 
 - [Car App Library and categories](https://developer.android.com/training/cars/apps/library)
@@ -155,9 +157,9 @@ Apache-2.0, see [LICENSE](LICENSE). Fonts, icons and the app icon come with thei
 - [AndroidX Car App release notes](https://developer.android.com/jetpack/androidx/releases/car-app)
 - [AGP 9.4 compatibility](https://developer.android.com/build/releases/agp-9-4-0-release-notes)
 
-## Optional local Pocket / Alba voice
+## License
 
-Version 0.1.19 adds an explicit **Pocket · Alba** choice using the separately installed,
-cancellation-fixed engine. German output runs locally; provider requests and recognition
-keep their existing behavior. The native runtime/model are not bundled. See
-[setup, attribution and limitations](docs/POCKET_TTS.md) before enabling it.
+Apache-2.0, see [LICENSE](LICENSE). Fonts, icons and the app icon come with their own terms, see
+[NOTICE](NOTICE).
+
+Made by [Azentrius](https://azentrius.de).
