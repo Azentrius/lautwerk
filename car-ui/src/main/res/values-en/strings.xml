@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <string name="car_title">OpenAuto AI</string>
+    <string name="car_title">Lautwerk</string>
     <string name="car_ready">Ready.</string>
     <string name="car_started">Started · Test %1$d</string>
     <string name="car_start">Start</string>

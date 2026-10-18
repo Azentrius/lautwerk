@@ -24,7 +24,7 @@ class DocumentConversationExporterTest {
         val intent = contract.createIntent(context, ConversationTextExport.FILE_NAME)
         assertEquals(Intent.ACTION_CREATE_DOCUMENT, intent.action)
         assertEquals("text/plain", intent.type); assertTrue(intent.hasCategory(Intent.CATEGORY_OPENABLE))
-        assertEquals("OpenAutoAI-Chat.txt", intent.getStringExtra(Intent.EXTRA_TITLE))
+        assertEquals("Lautwerk-Chat.txt", intent.getStringExtra(Intent.EXTRA_TITLE))
         assertNull(contract.parseResult(android.app.Activity.RESULT_CANCELED, Intent().setData(uri)))
         assertEquals(uri, contract.parseResult(android.app.Activity.RESULT_OK, Intent().setData(uri)))
     }

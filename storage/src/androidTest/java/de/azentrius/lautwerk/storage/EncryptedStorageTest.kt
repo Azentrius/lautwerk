@@ -44,7 +44,7 @@ class EncryptedStorageTest {
 
     @Before fun setUp() {
         val suffix = UUID.randomUUID().toString()
-        alias = "openautoai-storage-test-$suffix"
+        alias = "lautwerk-storage-test-$suffix"
         directory = File(context.cacheDir, alias).apply { mkdirs() }
         file = File(directory, "conversation_archive.dat")
         preferencesName = alias

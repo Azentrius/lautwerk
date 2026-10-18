@@ -16,7 +16,7 @@ class EncryptedCredentialStore internal constructor(
 ) : CredentialStore {
     constructor(context: Context) : this(
         context.applicationContext.getSharedPreferences("api_credentials", Context.MODE_PRIVATE),
-        AndroidKeystoreCipher("openautoai-key-v1"),
+        AndroidKeystoreCipher("lautwerk-key-v1"),
         StorageLocks.forName("credentials:${context.applicationContext.packageName}:api_credentials")
     )
 

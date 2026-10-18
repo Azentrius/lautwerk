@@ -80,7 +80,7 @@ class CarTemplateTest {
                 val screen=LautwerkScreen(context,ModelSelectionStore(prefs),AudioPort(context))
                 val template=screen.onGetTemplate() as MessageTemplate
                 @Suppress("DEPRECATION")
-                assertEquals("OpenAuto AI",template.title.toString())
+                assertEquals("Lautwerk",template.title.toString())
                 assertEquals("Start",template.actions.single().title.toString())
                 assertEquals("Ready.\nChatGPT / OpenAI · GPT-5.4 mini",template.message.toString())
                 template.actions.single().onClickDelegate!!.sendClick(object:OnDoneCallback {
@@ -137,7 +137,7 @@ class CarTemplateTest {
             val screen = LautwerkScreen(context, store, AudioPort(context))
             val template = screen.onGetTemplate() as MessageTemplate
             @Suppress("DEPRECATION")
-            assertEquals("OpenAuto AI", template.title.toString())
+            assertEquals("Lautwerk", template.title.toString())
             assertEquals("Bereit.\nChatGPT / OpenAI · GPT-5.4 mini", template.message.toString())
             assertEquals(1, template.actions.size)
             assertEquals("Starten", template.actions.single().title.toString())

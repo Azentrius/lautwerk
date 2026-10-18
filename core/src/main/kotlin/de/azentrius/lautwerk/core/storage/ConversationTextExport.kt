@@ -9,7 +9,7 @@ import de.azentrius.lautwerk.core.i18n.AppLanguage
 
 /** A readable copy, not a backup format. No credential store or external I/O here. */
 object ConversationTextExport {
-    const val FILE_NAME = "OpenAutoAI-Chat.txt"
+    const val FILE_NAME = "Lautwerk-Chat.txt"
     const val MIME_TYPE = "text/plain"
 
     fun write(chat: Conversation, output: Writer, cancellation: RequestCancellation = RequestCancellation.NONE, locale: Locale = AppLanguage.locale()) {
@@ -25,7 +25,7 @@ object ConversationTextExport {
             }
         }
         cancellation.check()
-        text(label("OpenAuto AI – Gesprächsexport\nUnverschlüsselte Textkopie; kein Wiederherstellungsformat.\n\n", "OpenAuto AI – Conversation export\nUnencrypted text copy; not a backup format.\n\n"))
+        text(label("Lautwerk – Gesprächsexport\nUnverschlüsselte Textkopie; kein Wiederherstellungsformat.\n\n", "Lautwerk – Conversation export\nUnencrypted text copy; not a backup format.\n\n"))
         text(label("Titel:\n", "Title:\n")); text(chat.title)
         text(label("\n\nAnbieter: ", "\n\nProvider: ")); text(chat.provider.displayName)
         text(label("\nModell: ", "\nModel: ")); text(chat.modelId)

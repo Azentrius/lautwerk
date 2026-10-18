@@ -37,7 +37,7 @@ class ConversationTextExportTest {
     @Test fun emptyConversationStillHasAUsefulHeaderAndFileNameContainsNoChatData() {
         val out = StringWriter(); ConversationTextExport.write(chat().copy(turns = emptyList()), out)
         assertTrue(out.toString().contains("Nachrichten: 0"))
-        assertEquals("OpenAutoAI-Chat.txt", ConversationTextExport.FILE_NAME)
+        assertEquals("Lautwerk-Chat.txt", ConversationTextExport.FILE_NAME)
         assertEquals("text/plain", ConversationTextExport.MIME_TYPE)
     }
 

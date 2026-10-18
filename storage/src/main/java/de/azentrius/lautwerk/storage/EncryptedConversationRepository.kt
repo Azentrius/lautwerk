@@ -17,7 +17,7 @@ class EncryptedConversationRepository internal constructor(
 ) : ConversationRepository {
     constructor(context: Context) : this(
         AtomicArchiveFile(File(context.applicationContext.filesDir, "conversation_archive.dat")),
-        AndroidKeystoreCipher("openautoai-chat-archive-v1")
+        AndroidKeystoreCipher("lautwerk-chat-archive-v1")
     )
 
     private val lock = StorageLocks.forName("archive:${file.identity}")

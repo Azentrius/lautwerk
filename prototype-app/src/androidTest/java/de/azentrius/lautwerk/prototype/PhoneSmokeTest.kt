@@ -77,7 +77,7 @@ class PhoneSmokeTest {
             scenario.onActivity { activity ->
                 val title = activity.findViewById<TextView>(R.id.app_title)
                 val text = title.text as Spanned
-                assertEquals("OpenAuto AI", text.toString())
+                assertEquals("Lautwerk", text.toString())
                 assertEquals(null, title.contentDescription)
                 val font = text.getSpans(0, text.length, TypefaceSpan::class.java).single()
                 assertEquals(9, text.getSpanStart(font))

@@ -91,7 +91,7 @@ class CarDesignContractTest {
             try {
                 val template = LautwerkScreen(context, ModelSelectionStore(prefs)).onGetTemplate() as MessageTemplate
                 @Suppress("DEPRECATION")
-                assertEquals("OpenAuto AI", template.title.toString())
+                assertEquals("Lautwerk", template.title.toString())
                 assertEquals("Start", template.actions.single().title.toString())
                 assertEquals("Ready.\nChatGPT / OpenAI · GPT-5.4 mini", template.message.toString())
             } finally { prefs.edit().clear().commit() }

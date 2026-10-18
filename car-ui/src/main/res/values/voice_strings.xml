@@ -30,5 +30,5 @@
     <string name="voice_key_empty">Please enter a key. An empty field does not delete the saved key.</string>
     <string name="voice_key_failed">The key could not be saved or deleted. Please try again.</string>
     <string name="voice_phone_start">Start on phone</string>
-    <string name="voice_phone_help">Phone test uses the phone microphone. To test the car microphone, choose the mode here, open OpenAuto AI in Android Auto and press Start there. End stops recognition, playback and pending requests. Leaving the active surface ends its session. No automatic restart.</string>
+    <string name="voice_phone_help">Phone test uses the phone microphone. To test the car microphone, choose the mode here, open Lautwerk in Android Auto and press Start there. End stops recognition, playback and pending requests. Leaving the active surface ends its session. No automatic restart.</string>
 </resources>
