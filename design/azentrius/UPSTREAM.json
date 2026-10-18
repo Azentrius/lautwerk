@@ -1,11 +1,11 @@
 {
   "repository": "https://github.com/Azentrius/design-system",
-  "commit": "f2c9df4a4c099cf5175ad29c1e783e432f6d1b73",
-  "snapshot": "upstream-f2c9df4",
+  "commit": "94009ab6e4b1ef895aeac324fa98989e17ce863e",
+  "snapshot": "upstream-94009ab",
   "imported": "2026-10-18",
-  "files": 151,
+  "files": 155,
   "content": "Complete, unmodified Git tree; no .git directory; scripts copied, not executed.",
   "checksums": "UPSTREAM.sha256",
-  "applicationVersion": "0.2.0",
-  "applicationStatus": "Read-only reference for the rename to Lautwerk. The design audit in docs/DESIGN_SYSTEM.md still refers to upstream-edd4c67; design changes between edd4c67 and f2c9df4 that are not part of the rename are not yet audited."
+  "applicationVersion": "0.3.0",
+  "applicationStatus": "Read-only design reference. The design audit in docs/DESIGN_SYSTEM.md refers to design-system commit edd4c67; design changes after edd4c67 are not yet audited for the application."
 }

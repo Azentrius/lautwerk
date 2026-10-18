@@ -1,14 +1,15 @@
 # Azentrius design audit – 0.1.18
 
 Reference: [Azentrius/design-system at edd4c67](https://github.com/Azentrius/design-system/tree/edd4c67da6d7c606296c3bbd13d7aa5da548f452),
-specifically `android.md`, `android-auto.md` and `tokens.json` in
-`design/azentrius/upstream-edd4c67/`. The complete 134-file tree is unchanged and byte-verified.
-Historical copies remain available; [reference metadata](../design/azentrius/README.md) describes them.
+specifically `android.md`, `android-auto.md` and `tokens.json`. The audit used the complete,
+byte-verified 134-file tree in `design/azentrius/upstream-edd4c67/`; that copy was removed on
+18 October 2026 and remains in the Git history (last in commit `2454482`).
+[Reference metadata](../design/azentrius/README.md) describes the current snapshot.
 The upstream repository was read only. No upstream scripts were run.
 
 Since 0.2.0 the app is called Lautwerk. File, class and resource names below follow the renamed
-sources; the findings describe 0.1.18. The 0.2.0 word mark and the design changes up to
-`upstream-f2c9df4` are not part of this audit.
+sources; the findings describe 0.1.18. The 0.2.0 word mark and the design changes after
+edd4c67 (up to the current snapshot `upstream-94009ab`) are not part of this audit.
 
 Final baseline: application `main` at `f1982ba8eea276be770a370749e9b79aeb721c0c`, version 0.1.17/code 117.
 The work began on `c862095` (0.1.16); PRs #27 and #28 merged during the audit. This branch was
