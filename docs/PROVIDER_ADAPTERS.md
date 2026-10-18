@@ -2,7 +2,7 @@
 
 ## Behavior and limits
 
-The existing phone assistant app `dev.openautoai.app` now uses a shared `ChatClient` interface. The
+The existing phone assistant app `de.azentrius.lautwerk` now uses a shared `ChatClient` interface. The
 selected provider and the existing model ID determine exactly one API adapter. There is no automatic
 provider switch, no automatic retry and no automatic continuation with a higher token budget.
 
@@ -84,8 +84,8 @@ any actual account credit, model access or a successful voice end-to-end flow.
 
 ## Manual test of the assistant app
 
-1. Install `app:debug`. The package is called `dev.openautoai.app`, while the DHU test is still
-   called `dev.openautoai.prototype.dhu`. Both currently have the display name OpenAuto AI; if in
+1. Install `app:debug`. The package is called `de.azentrius.lautwerk`, while the DHU test is
+   called `de.azentrius.lautwerk.prototype.dhu`. Both have the display name Lautwerk; if in
    doubt, open the app directly via ADB (see below).
 2. On the phone, choose provider and model under "Settings". Enter your own API key only there.
    Starting a conversation activates the microphone and real API use; the normal API costs may
@@ -98,17 +98,16 @@ The current feedback on the real API/voice test is in [VOICE.md](VOICE.md).
 The DHU "Start" button still does not trigger an API request after this step either.
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI'
+Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\Lautwerk'
 $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot'
 $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 .\gradlew.bat :app:assembleDebug
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 install -r '.\app\build\outputs\apk\debug\app-debug.apk'
-& $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
+& $adb -s 56161FDCH000H8 shell am start -n 'de.azentrius.lautwerk/de.azentrius.lautwerk.app.MainActivity'
 ```
 
-For the download APK, replace the install path with the full path to
-`OpenAutoAI-0.1.9-assistant-debug.apk`. Other devices: get the serial number with
+For a supplied APK, replace the install path with its full path. Other devices: get the serial number with
 `adb devices -l`. In case of signature conflicts, do not uninstall automatically, since that would
 delete saved data; use the same debug key.
 

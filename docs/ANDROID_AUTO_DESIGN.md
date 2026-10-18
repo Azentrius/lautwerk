@@ -37,16 +37,15 @@ and night, and A7 with six starts. Otherwise the comparison is missing. The base
 here is 0.1.12-prototype / Code 4.
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI'
+Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\Lautwerk'
 $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot'
 .\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:assembleDhuDebugAndroidTest :prototype-app:lintDhuDebug
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 install -r '.\prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk'
-& $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.prototype.dhu/dev.openautoai.prototype.MainActivity'
+& $adb -s 56161FDCH000H8 shell am start -n 'de.azentrius.lautwerk.prototype.dhu/de.azentrius.lautwerk.prototype.MainActivity'
 ```
 
-For the download, replace the APK path with the full path to
-`OpenAutoAI-0.1.14-dhu-debug.apk`. Expected: `Success` and version
+For a supplied APK, replace the APK path with its full path. Expected: `Success` and version
 0.1.14-prototype / Code 5. Do not uninstall or clear app data.
 
 ## DHU check
@@ -66,7 +65,7 @@ In the DHU console, use `day`, `night` and `screenshot FILENAME.png`.
 Close a session normally with `quit`. For rotary, start the corresponding profile with
 `-i rotary`; operate it with the arrow keys or `dpad click`.
 Do not reset a template or disable a restriction to pass the six-start test. Take screenshots
-only inside OpenAuto AI, without including other apps, call data or map positions in published
+only inside Lautwerk, without including other apps, call data or map positions in published
 evidence.
 
 Capture versions and the app log:
@@ -74,7 +73,7 @@ Capture versions and the app log:
 ```powershell
 & $dhu --version
 & $adb -s 56161FDCH000H8 shell dumpsys package com.google.android.projection.gearhead | Select-String 'versionCode|versionName'
-& $adb -s 56161FDCH000H8 logcat -d -s OpenAutoAI:I '*:S'
+& $adb -s 56161FDCH000H8 logcat -d -s Lautwerk:I '*:S'
 ```
 
 `car.onCreateScreen api=…` is the negotiated **Car API level of the host**;

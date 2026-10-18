@@ -3,7 +3,7 @@ plugins {
     id("com.android.library")
 }
 android {
-    namespace = "dev.openautoai.settings"
+    namespace = "de.azentrius.lautwerk.settings"
     compileSdk = 37
     defaultConfig { minSdk = 28 }
     compileOptions {

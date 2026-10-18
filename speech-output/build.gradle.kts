@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 plugins { id("com.android.library") }
 android {
-    namespace = "dev.openautoai.speech"
+    namespace = "de.azentrius.lautwerk.speech"
     compileSdk = 37
     defaultConfig { minSdk = 28 }
     compileOptions {

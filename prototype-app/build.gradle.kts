@@ -5,10 +5,10 @@ plugins {
 val appVersionCode: Int by rootProject.extra
 
 android {
-    namespace = "dev.openautoai.prototype"
+    namespace = "de.azentrius.lautwerk.prototype"
     compileSdk = 37
     defaultConfig {
-        applicationId = "dev.openautoai.prototype"
+        applicationId = "de.azentrius.lautwerk.prototype"
         minSdk = 28
         targetSdk = 36
         versionCode = appVersionCode

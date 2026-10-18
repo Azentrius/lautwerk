@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.2.0 – 2026-10-18
+
+Rename the app from OpenAuto AI to Lautwerk. For Android it is a new app: nothing is carried over
+from installations of earlier versions.
+
+- New package IDs: the assistant is `de.azentrius.lautwerk` (previously `dev.openautoai.app`), the test
+  app `de.azentrius.lautwerk.prototype.dhu` and `.phone` (previously `dev.openautoai.prototype.dhu` and
+  `.phone`). Kotlin packages and namespaces are `de.azentrius.lautwerk.*` (previously `dev.openautoai.*`).
+- New Android Keystore aliases `lautwerk-key-v1` and `lautwerk-chat-archive-v1` (previously
+  `openautoai-key-v1` and `openautoai-chat-archive-v1`). API keys have to be entered again. Chats of the
+  old packages can only be kept as a text export; there is no import.
+- Display name, Android Auto title, notification and the text export (`Lautwerk-Chat.txt`, header
+  "Lautwerk – Conversation export"; previously `OpenAutoAI-Chat.txt`) use the new name.
+- The phone title shows the word mark "Lautwerk." with the dot in the signature color, in the app and on
+  the prototype's phone page; screen readers read "Lautwerk". The car title stays plain text.
+- The voice sample and the car audio test name Lautwerk. The pronunciation aids that spelled "AI"
+  (Android TTS span, "A I" for Pocket) and their tests are removed.
+- Classes `LautwerkApplication`, `LautwerkCarService`, `LautwerkScreen` and `LautwerkSession` (previously
+  `OpenAutoApplication`, `OpenAutoCarService`, `OpenAutoScreen` and `OpenAutoSession`), theme
+  `Theme.Lautwerk` (previously `Theme.OpenAutoAI`), log tag `Lautwerk` (previously `OpenAutoAI`),
+  notification icon `ic_stat_lautwerk` (previously `ic_stat_openauto`) and Gradle project name `Lautwerk`.
+- Active design reference is snapshot `upstream-f2c9df4`, the design-system commit with the rename. The
+  app icon files come from it; only their header comment changed. Its other changes since `edd4c67` are
+  not yet audited.
+- Release archives are called `lautwerk-<version>.tar.gz` (previously `openauto-ai-<version>.tar.gz`). The
+  repository moves to `Azentrius/lautwerk`; GitHub redirects the old address.
+- Docs use the new names and IDs in their commands. Test results recorded for earlier versions refer
+  to the old packages; `docs/evidence/` is unchanged.
+- Unchanged: the Pocket test engine `org.pockettts.android.engine.openautotest`, chat and key formats,
+  providers, voice flow and the car template. Both apps use version 0.2.0, versionCode 200.
+
 ## 0.1.19 – 2026-10-14
 
 Add the tested Pocket/Alba engine as an explicit local voice.

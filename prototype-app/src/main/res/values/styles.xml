@@ -1,12 +1,12 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <style name="Theme.OpenAutoAI.Base" parent="Theme.OpenAutoAI.Palette">
+    <style name="Theme.Lautwerk.Base" parent="Theme.Lautwerk.Palette">
         <item name="android:fontFamily">@font/dm_sans_regular</item>
         <item name="android:windowBackground">@color/ic_launcher_background</item>
         <item name="android:statusBarColor">@color/az_bg_page</item>
         <item name="android:navigationBarColor">@color/az_bg_page</item>
     </style>
-    <style name="Theme.OpenAutoAI" parent="Theme.OpenAutoAI.Base" />
+    <style name="Theme.Lautwerk" parent="Theme.Lautwerk.Base" />
     <style name="AzBody">
         <item name="android:textSize">15sp</item>
         <item name="android:lineHeight">22sp</item>

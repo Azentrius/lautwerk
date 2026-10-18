@@ -1,6 +1,6 @@
 # Pocket / Alba local speech output
 
-OpenAuto AI 0.1.19 can explicitly use the tested Pocket/Alba companion engine.
+Lautwerk (since 0.1.19) can explicitly use the tested Pocket/Alba companion engine.
 The selected AI provider is unchanged: both OpenAI and Claude can supply the text
 that is read locally. This makes **speech output** offline, not the whole conversation.
 Existing speech-recognition and provider network behavior remains unchanged.
@@ -44,7 +44,7 @@ Input hashes:
 - German FP32 ZIP: `e45e5d0b70dadc9ab9f86f30ae519d79dbfd8adf013d42826af9205545cfdcb3`
 - Alba WAV: `46264e83cb99115c3d210260e029117566d9c64f20266d10daa78107759ede3e`
 
-The pack is approximately 207 MB compressed / 440 MB installed. The OpenAuto AI
+The pack is approximately 207 MB compressed / 440 MB installed. The Lautwerk
 APKs do not contain these assets or the native engine. No automatic download,
 model replacement or transfer of keys/chat archives is performed by the app.
 
@@ -55,9 +55,9 @@ model replacement or transfer of keys/chat archives is performed by the app.
 - Pocket currently ignores Android's speaking-rate argument. Its normal speed is
   shown and tempo controls are disabled while selected; the prior Android rate is
   retained and restored when choosing an Android voice.
-- The fixed Pocket preview spells `OpenAuto A I` in plain text because this engine
-  discards Android pronunciation spans. Provider responses and stored messages
-  are never rewritten. Android voice previews retain their existing TtsSpan.
+- The fixed preview names Lautwerk and is spoken as written by every engine;
+  it needs no pronunciation span. Provider responses and stored messages are
+  never rewritten.
 - Output uses the existing focus, timeout, chunking, stop and lifecycle logic.
   The corrected engine prevents cancelled native work blocking the next utterance.
 - The car MessageTemplate, host validation, microphone path and B2/B3 are unchanged.

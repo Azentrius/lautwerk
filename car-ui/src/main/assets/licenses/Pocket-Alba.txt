@@ -1,6 +1,6 @@
 Pocket / Alba: optional, separately installed speech engine
 
-No Pocket native runtime, model weights or voice recording is bundled in OpenAuto AI.
+No Pocket native runtime, model weights or voice recording is bundled in Lautwerk.
 This app can explicitly connect to the evaluated local Android engine. The provider
 response text is sent locally to that selected engine; no key or chat archive is sent.
 
@@ -26,7 +26,7 @@ speech is synthetic and does not imply endorsement by the performer or Kyutai.
 Other recordings in the upstream voice collection can have different licenses.
 
 The separate engine also contains its own native dependency notices. Preserve those
-notices when distributing it. OpenAuto AI's Apache-2.0 license does not replace them.
+notices when distributing it. Lautwerk's Apache-2.0 license does not replace them.
 
 MIT License
 

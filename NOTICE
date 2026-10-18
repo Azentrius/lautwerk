@@ -1,4 +1,4 @@
-OpenAuto AI
+Lautwerk
 Copyright 2026 Azentrius
 Licensed under the Apache License, Version 2.0. See LICENSE.
 
@@ -22,10 +22,10 @@ and converted to Android vector drawables:
   Creative Commons Attribution 4.0 International, https://creativecommons.org/licenses/by/4.0/
   (see app/src/main/assets/licenses/CC-BY-4.0-Font-Awesome.txt)
 
-Not covered by the Apache License: the OpenAuto AI app icon from the Azentrius
+Not covered by the Apache License: the Lautwerk app icon from the Azentrius
 design system and the Azentrius name and word mark. The app icon files, in app/
 and in prototype-app/, are src/main/res/drawable/ic_launcher_*.xml,
-src/main/res/drawable/ic_stat_openauto.xml (app and car-ui),
+src/main/res/drawable/ic_stat_lautwerk.xml (app and car-ui),
 src/main/res/mipmap-anydpi/ic_launcher*.xml and
 src/main/res/values/ic_launcher_background.xml.
   Copyright (c) 2026 Stefan Popp. All rights reserved.

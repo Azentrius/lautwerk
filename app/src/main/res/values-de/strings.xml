@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <string name="app_name">OpenAuto AI</string>
+    <string name="app_name">Lautwerk</string>
     <string name="conversation">Gespräch</string>
     <string name="settings">Einstellungen</string>
     <string name="history">Verlauf</string>

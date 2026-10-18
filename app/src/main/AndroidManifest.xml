@@ -11,14 +11,14 @@
         <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
     </queries>
     <application
-        android:name=".OpenAutoApplication"
+        android:name=".LautwerkApplication"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:usesCleartextTraffic="false"
-        android:label="OpenAuto AI"
+        android:label="Lautwerk"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@style/Theme.OpenAutoAI">
+        android:theme="@style/Theme.Lautwerk">
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

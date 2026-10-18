@@ -6,11 +6,11 @@
             android:resource="@xml/automotive_app_desc" />
         <meta-data android:name="androidx.car.app.minCarApiLevel" android:value="1" />
         <meta-data android:name="androidx.car.app.theme" android:resource="@style/CarAppTheme" />
-        <service android:name="dev.openautoai.car.OpenAutoCarService"
+        <service android:name="de.azentrius.lautwerk.car.LautwerkCarService"
             android:exported="true" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="androidx.car.app.CarAppService" />
-                <!-- DEBUG-ONLY template discovery probe. OpenAuto AI is NOT a POI
+                <!-- DEBUG-ONLY template discovery probe. Lautwerk is NOT a POI
                      application. This does not establish category eligibility,
                      Play approval, or permission to run in real vehicles.
                      No general AI-assistant category is claimed or invented. -->

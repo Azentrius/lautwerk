@@ -52,5 +52,5 @@ gradle.beforeProject {
     configurations.configureEach { resolutionStrategy.liftBuildTooling() }
 }
 
-rootProject.name = "OpenAutoAI"
+rootProject.name = "Lautwerk"
 include(":app", ":prototype-app", ":core", ":settings", ":car-ui", ":providers", ":storage", ":voice", ":speech-output")

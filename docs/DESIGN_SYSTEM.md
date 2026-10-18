@@ -6,6 +6,10 @@ specifically `android.md`, `android-auto.md` and `tokens.json` in
 Historical copies remain available; [reference metadata](../design/azentrius/README.md) describes them.
 The upstream repository was read only. No upstream scripts were run.
 
+Since 0.2.0 the app is called Lautwerk. File, class and resource names below follow the renamed
+sources; the findings describe 0.1.18. The 0.2.0 word mark and the design changes up to
+`upstream-f2c9df4` are not part of this audit.
+
 Final baseline: application `main` at `f1982ba8eea276be770a370749e9b79aeb721c0c`, version 0.1.17/code 117.
 The work began on `c862095` (0.1.16); PRs #27 and #28 merged during the audit. This branch was
 rebased onto the new main, preserving the car voice implementation and dependency updates.
@@ -78,7 +82,7 @@ none is marked resolved and no read-only reference file is changed.
 
 | Rule | Code location | Result |
 |---|---|---|
-| App header: existing name, one baseline and one accessible text | `MainContent.kt` top bar; prototype `MainActivity.stylePhoneTitle` | adjusted: AnnotatedString / SpannableString from existing app_name, OpenAuto in DM Sans22/600/text, AI in real DM Serif Display italic22/400/signature. No duplicate content description. |
+| App header: existing name, one baseline and one accessible text | `MainContent.kt` top bar; prototype `MainActivity.stylePhoneTitle` | adjusted: AnnotatedString / SpannableString from existing app_name, the name before its suffix in DM Sans22/600/text, the suffix AI in real DM Serif Display italic22/400/signature. No duplicate content description. |
 | Copy italic font and XML family exactly | `app/src/main/res/font/dm_serif_display_italic.ttf`, `dm_serif_display.xml` | adjusted: byte-identical upstream files; prototype uses the identical TTF directly through native TypefaceSpan. |
 | No renamed label/notification title or new translatable name | Existing values/values-de, manifests and `VoiceService` | fulfilled: strings and labels unchanged; car title remains plain host text. |
 | Conversation / Settings / History order, icons and section typography | `MainContent.kt`, `AzTabs` | fulfilled: existing arrangement, section17/22 with 24 dp above/8 below. |
@@ -101,7 +105,7 @@ none is marked resolved and no read-only reference file is changed.
 | State exactly once, in lower bar | `MainContent.kt:voice-notice`, `ConversationBar.kt:issue` | open: an existing stopped error can appear both as a page notice and in the bar. Removing an existing error presentation conflicts with the instruction to preserve texts/behavior. Keep it and request an upstream clarification. |
 | Adaptive icon108, safe circle66, ink/gold, monochrome/evenOdd, roundIcon | Both app manifests and supplied `ic_launcher*` files | fulfilled: existing icon files verified byte-identical to the reference; no asset regeneration. |
 | Splash ink, static icon, no text/animation; pre-12 window background | Both modules' `values`, `values-v31`, `values-v33` styles | fulfilled: startup icon/background unchanged; runtime page colors do not replace startup ink. |
-| Notification white24 silhouette, no gold setColor, title unchanged | `VoiceService.kt`, `CarVoiceService.kt`, both `ic_stat_openauto.xml` assets | adjusted: assistant already matches; newly merged car service now uses the same byte-identical white silhouette. Notification titles, channels and actions unchanged. |
+| Notification white24 silhouette, no gold setColor, title unchanged | `VoiceService.kt`, `CarVoiceService.kt`, both `ic_stat_lautwerk.xml` assets | adjusted: assistant already matches; newly merged car service now uses the same byte-identical white silhouette. Notification titles, channels and actions unchanged. |
 | No car-specific launcher icon; Play image only for publication | Manifests / upstream app-icon assets | fulfilled: same adaptive icon; no publication artwork or Play claim added. |
 | Font licenses shipped; preserve actual third-party attribution | `NOTICE`, both modules' `assets/licenses`, `LicenseDialog` | adjusted: italic font covered by existing OFL; prototype includes both font licenses. |
 | Icon licensing stated as MIT in reference | Upstream LICENSE / android.md versus existing `NOTICE` | open: 29 existing icons are Font Awesome CC BY 4.0, only pending is PatternFly MIT. Keep correct application attribution; report the upstream discrepancy without editing the snapshot. |
@@ -115,7 +119,7 @@ none is marked resolved and no read-only reference file is changed.
 
 ## Android Auto: complete source comparison
 
-`OpenAutoScreen.kt`, `prototype-app/src/dhu/`, all existing localized strings, launcher assets,
+`LautwerkScreen.kt`, `prototype-app/src/dhu/`, all existing localized strings, launcher assets,
 providers, selection/storage contracts and audio logic are unchanged from the final baseline.
 The only car-ui edits are the supplied notification icon and the phone setup background.
 The prototype phone title is styled locally; no styled spans, typefaces or phone surface colors
@@ -123,17 +127,17 @@ are passed to the car host. Native phone resources do not replace CarAppTheme.
 
 | Rule | Code location | Result |
 |---|---|---|
-| Scope: debug experiment, no approved category/release or driving claim | DHU manifest, variant configuration, `OpenAutoCarService` | fulfilled: placeholder, HostValidator and disabled dhuRelease unchanged. |
-| B1 MessageTemplate, APP_ICON, message, exactly one action, no strip/icon/loading | `car-ui/.../OpenAutoScreen.kt` | fulfilled: source unchanged. |
+| Scope: debug experiment, no approved category/release or driving claim | DHU manifest, variant configuration, `LautwerkCarService` | fulfilled: placeholder, HostValidator and disabled dhuRelease unchanged. |
+| B1 MessageTemplate, APP_ICON, message, exactly one action, no strip/icon/loading | `car-ui/.../LautwerkScreen.kt` | fulfilled: source unchanged. |
 | B2 primary C8A96E / primaryDark 7D5F22, no secondary pair | `prototype-app/src/dhu/res/values/car_styles.xml`, DHU manifest metadata | fulfilled: exact existing theme and manifest unchanged. |
-| B3 action PRIMARY, no ForegroundCarColorSpan/icon/FLAG_PRIMARY | `OpenAutoScreen.kt` action builder | fulfilled: unchanged. |
-| B4 existing title/status/provider/model/action texts and order | `OpenAutoScreen.kt`, `car-ui/src/main/res/values*/strings.xml` | open: current main has real Start/End and voice status, whereas the reference still specifies an offline counter. Preserve current texts/order and behavior, including plain title; upstream must be updated. |
-| B5 no phone tokens/fonts/layout passed to host | `OpenAutoScreen.kt`, DHU resources | fulfilled: only B2 pair and existing launcher icon. |
-| Host owns background, typography, spacing, focus, pressed feedback and final colors | `OpenAutoScreen.kt` | fulfilled: no attempt to impose phone rendering or assumed black background. |
+| B3 action PRIMARY, no ForegroundCarColorSpan/icon/FLAG_PRIMARY | `LautwerkScreen.kt` action builder | fulfilled: unchanged. |
+| B4 existing title/status/provider/model/action texts and order | `LautwerkScreen.kt`, `car-ui/src/main/res/values*/strings.xml` | open: current main has real Start/End and voice status, whereas the reference still specifies an offline counter. Preserve current texts/order and behavior, including plain title; upstream must be updated. |
+| B5 no phone tokens/fonts/layout passed to host | `LautwerkScreen.kt`, DHU resources | fulfilled: only B2 pair and existing launcher icon. |
+| Host owns background, typography, spacing, focus, pressed feedback and final colors | `LautwerkScreen.kt` | fulfilled: no attempt to impose phone rendering or assumed black background. |
 | Primary pair is not a day/night palette; host replacements permitted | `CarAppTheme`, historical 0.1.14 evidence | fulfilled: requested colors are not claimed as actual colors; cause of historical replacement is unknown. |
-| Icon only in header; UI-test action icon gap | `OpenAutoScreen.kt`, launcher resources | fulfilled: no new icon; missing UI-test icon needs no decision while B1/B3 forbid it. |
-| Ready/started counter, live provider selection, localization | `PrototypeSession`, `OpenAutoScreen`, `CarTemplateTest` | open: counter remains only on the prototype phone page. Car templates now use active voice state; tests preserve current Start/End intent, localization and live selection. Do not restore the obsolete car counter. |
-| Template budget / O4 | `OpenAutoScreen.kt` | open: the old six-counter-start scenario no longer models current voice behavior. No flow change here. Any host regression must be compared with the current main, not inferred from the obsolete counter scenario. |
+| Icon only in header; UI-test action icon gap | `LautwerkScreen.kt`, launcher resources | fulfilled: no new icon; missing UI-test icon needs no decision while B1/B3 forbid it. |
+| Ready/started counter, live provider selection, localization | `PrototypeSession`, `LautwerkScreen`, `CarTemplateTest` | open: counter remains only on the prototype phone page. Car templates now use active voice state; tests preserve current Start/End intent, localization and live selection. Do not restore the obsolete car counter. |
+| Template budget / O4 | `LautwerkScreen.kt` | open: the old six-counter-start scenario no longer models current voice behavior. No flow change here. Any host regression must be compared with the current main, not inferred from the obsolete counter scenario. |
 | O1 decided; O2 only after failed measured contrast; O3 only after clipping | Icon assets, `CarAppTheme`, catalog | fulfilled: O1 already implemented; no unmeasured O2 fallback or content-changing O3 workaround. |
 
 ## Android Auto acceptance boundaries (A1–A11)
@@ -147,13 +151,13 @@ These observations are not tokens or a promised result on another host.
 
 | Rule | Code location | Result |
 |---|---|---|
-| A1 complete icon/title | `OpenAutoScreen`, launcher assets; historical DHU evidence | open: actual host display not rerun for this phone-only change; source and assets unchanged. |
-| A2 complete Start caption | `OpenAutoScreen`, localized resources | open: template content covered automatically; real host layout still needs its own session. |
+| A1 complete icon/title | `LautwerkScreen`, launcher assets; historical DHU evidence | open: actual host display not rerun for this phone-only change; source and assets unchanged. |
+| A2 complete Start caption | `LautwerkScreen`, localized resources | open: template content covered automatically; real host layout still needs its own session. |
 | A3 actual accent in day/night, including host replacement | `CarAppTheme`, historical A3 measurements | open: no new host color measurement; B2/B3 unchanged. |
 | A4 measured text/background ≥4.5, unchanged message/title | Historical `docs/evidence/0.1.14/`; B2/B3 | open: phone contrast below is not a replacement for new DHU pixel measurements. |
-| A5 full longest/shortest provider-model in each display/language | `ModelCatalog`, `OpenAutoScreen` | open: no new host truncation matrix. Do not shorten labels or assume emulator unit tests prove it. |
+| A5 full longest/shortest provider-model in each display/language | `ModelCatalog`, `LautwerkScreen` | open: no new host truncation matrix. Do not shorten labels or assume emulator unit tests prove it. |
 | A6 touch/rotary counter and log match | `CarTemplateTest`, `PrototypeSession` | open: counter requirement is obsolete for the car; current Start/End intent and live model selection are tested with an audio fake. Actual host input was not rerun. |
-| A7 six starts at800×480, baseline distinction | `CarTemplateTest`, `OpenAutoScreen` | open: no new host run; current voice app has no car counter. Existing baseline failures do not block this design change; only regressions do. Upstream needs a scenario matching current behavior. |
+| A7 six starts at800×480, baseline distinction | `CarTemplateTest`, `LautwerkScreen` | open: no new host run; current voice app has no car counter. Existing baseline failures do not block this design change; only regressions do. Upstream needs a scenario matching current behavior. |
 | A8 host rotary focus day/night | Host-owned focus | open: no new physical/host focus test; no application focus styling added. |
 | A9 German/English/fallback, no mixed language | Resource folders, localized car tests | fulfilled at resource/template-test level; full host language matrix not rerun. |
 | A10 live phone selection without reconnect | `ModelSelectionStore`, `CarTemplateTest` lifecycle test | fulfilled at template-test level; real projection session not rerun. |
@@ -178,7 +182,7 @@ change application code, wording, provider/storage logic, car template or B2/B3 
 ### 2. Page-level validation messages
 
 - Reference: `android.md`, text-field error state and timing.
-- Evidence: `app/src/main/java/dev/openautoai/app/MainContent.kt`, `HomeViewModel.kt` and
+- Evidence: `app/src/main/java/de/azentrius/lautwerk/app/MainContent.kt`, `HomeViewModel.kt` and
   `design/AzComponents.kt` keep existing validation/storage messages at page level. They do not
   have field-owned error state or a new validation-on-blur flow.
 - Request: describe the existing message placement and its presentation. Do not require new
@@ -187,7 +191,7 @@ change application code, wording, provider/storage logic, car template or B2/B3 
 ### 3. Native provider/model selectors
 
 - Reference: `android.md`, menus and the prototype phone surface.
-- Evidence: `prototype-app/src/main/java/dev/openautoai/prototype/MainActivity.kt` uses native
+- Evidence: `prototype-app/src/main/java/de/azentrius/lautwerk/prototype/MainActivity.kt` uses native
   Spinners, including their collapsed presentation and dropdown rows. Selecting an item immediately
   updates the existing selection store; these controls are separate from the assistant's chips.
 - Request: specify the complete visual mapping for the collapsed selector and popup together:
@@ -217,7 +221,7 @@ change application code, wording, provider/storage logic, car template or B2/B3 
 ### 6. Actual car conversation and microphone overlay
 
 - Reference: `android-auto.md`, prototype scope, B4/content/states, A6, A7, A11 and O4.
-- Evidence: `car-ui/src/main/java/dev/openautoai/car/OpenAutoScreen.kt` and `voice/CarVoiceService.kt`
+- Evidence: `car-ui/src/main/java/de/azentrius/lautwerk/car/LautwerkScreen.kt` and `voice/CarVoiceService.kt`
   now expose a real selected audio-test/conversation mode, short status, provider/model and one
   Start/End action. The old offline counter remains on the prototype phone page only. The DHU user
   confirmed audible Claude answers and Speaking/End while the host's microphone wave was absent.
@@ -237,8 +241,8 @@ change application code, wording, provider/storage logic, car template or B2/B3 
 ### 7. Car test app's phone audio setup
 
 - Reference: missing dedicated mapping in `android.md` for the newer native setup surface.
-- Evidence: `car-ui/src/main/java/dev/openautoai/car/voice/VoiceSetupActivity.kt` and
-  `prototype-app/src/dhu/java/dev/openautoai/prototype/VoiceEntryPoint.kt`. The page contains help,
+- Evidence: `car-ui/src/main/java/de/azentrius/lautwerk/car/voice/VoiceSetupActivity.kt` and
+  `prototype-app/src/dhu/java/de/azentrius/lautwerk/prototype/VoiceEntryPoint.kt`. The page contains help,
   three mode radio rows, permission action, masked key field with save/delete/status, and a phone
   Start/End action. It retains native controls and its existing 28 dp content inset.
 - Request: provide a coherent mapping for that page and its entry button, including layout/insets,

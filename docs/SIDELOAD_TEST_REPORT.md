@@ -1,4 +1,4 @@
-# Sideload and car tests for OpenAuto AI
+# Sideload and car tests
 
 Historical baseline. A later manual test confirmed vehicle launcher visibility and opening after the
 approved installation-origin experiment. See [CAR_VOICE.md](CAR_VOICE.md) for the current package,
@@ -6,7 +6,9 @@ installation steps and separate audio evidence; the negative observation below r
 
 As of 2026-10-12. App code and APK stay at the confirmed state 0.1.15, source commit
 `5600446fbe08a8bbdf460f31a9e3b9fbbeaedead`. The [test guide](SIDELOADING.md) describes the comparison.
-On 2026-10-12 at about 17:00, OpenAuto AI was not visible in the ID.7. A working
+Package and class names of that version differ from today's; [CHANGELOG.md](../CHANGELOG.md) (0.2.0)
+lists them.
+On 2026-10-12 at about 17:00, the app was not visible in the ID.7. A working
 path in the car is therefore still not confirmed. The ID.7 remains the test car; all Kia attempts are
 deferred.
 
@@ -20,10 +22,10 @@ deferred.
 | Active Android Auto | 17.7.663654-release, code 177663654 |
 | Active Google Play services | 26.39.63 (260400-995553646), code 263963035 |
 | AAWireless phone app | 8.5.2819, code 8052819; no adapter firmware |
-| Test app | dev.openautoai.prototype.dhu, 0.1.15-prototype, code 6 |
-| Assistant (separate) | dev.openautoai.app, 0.1.15-dev, code 15 |
+| Test app | DHU test package, 0.1.15-prototype, code 6 |
+| Assistant (separate) | assistant package, 0.1.15-dev, code 15 |
 | Installation source of the test app | installerPackageName=null; initiatingPackageName=com.android.shell |
-| Registered car service | dev.openautoai.car.OpenAutoCarService, exactly one match |
+| Registered car service | car service of the test package, exactly one match |
 | Local test APK SHA-256 | F580E27ACEC2395AE0097E0A8E7ACE4F7B62288B1CEAD6B6698042A6505F5D70 |
 
 The SHA-256 refers to the local build output

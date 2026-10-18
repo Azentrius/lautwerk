@@ -18,9 +18,9 @@ The following identifiers and data stay identical:
 | Data | Existing format |
 |---|---|
 | Chat file | `files/conversation_archive.dat` |
-| Archive key | Android Keystore alias `openautoai-chat-archive-v1` |
+| Archive key | Android Keystore alias `lautwerk-chat-archive-v1` |
 | Credentials | SharedPreferences `api_credentials`, entries `openai` and `anthropic` |
-| Credentials key | Android Keystore alias `openautoai-key-v1` |
+| Credentials key | Android Keystore alias `lautwerk-key-v1` |
 | Encrypted content | 12-byte IV, followed by AES/GCM ciphertext including 128-bit tag; credentials additionally Base64 |
 | JSON archive | `id`, `title`, `provider`, `model`, `updated`, `turns`; messages with `role` and `content` |
 
@@ -59,20 +59,19 @@ Encryption still uses the Android Keystore.
 
 ## Checking on the Pixel
 
-0.1.12-dev is installed as an update of `dev.openautoai.app`. The DHU test app is a different
+0.1.12-dev is installed as an update of the assistant package (`de.azentrius.lautwerk` since 0.2.0). The DHU test app is a different
 package with its own storage. In case of a signature conflict, do not uninstall or clear app data;
 use the same debug key instead.
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI'
+Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\Lautwerk'
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb devices -l
 & $adb -s 56161FDCH000H8 install -r '.\app\build\outputs\apk\debug\app-debug.apk'
-& $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
+& $adb -s 56161FDCH000H8 shell am start -n 'de.azentrius.lautwerk/de.azentrius.lautwerk.app.MainActivity'
 ```
 
-For the download APK, replace the install path with the full path to
-`OpenAutoAI-0.1.12-assistant-debug.apk`. On another device, use its serial number from
+For a supplied APK, replace the install path with its full path. On another device, use its serial number from
 `adb devices -l`.
 
 Existing chats can be opened and read without an API call. For the later real API/voice test, see
