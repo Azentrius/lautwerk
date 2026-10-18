@@ -18,7 +18,7 @@ translated nor rewritten; new empty conversations get a matching title.
 
 Speech recognition, Android text-to-speech and the existing instruction to OpenAI and Claude also
 follow the supported language. An actual model answer in that language is not guaranteed by this.
-The instructions were checked offline; under 0.1.12 the user confirmed the conversation flow for
+The instructions were checked offline; under 0.1.12 a manual test confirmed the conversation flow for
 both providers and the German/English UI. Endpoints, models and answer budget stay the same.
 
 While listening, the existing German commands as well as **Stop**, **End conversation**,
@@ -72,8 +72,8 @@ The existing handling of screen off and other interruptions is unchanged.
 5. Start one short conversation each with OpenAI and Claude, listen to the answer and end it.
    Real API calls can incur costs; enter API keys only in the app.
 
-The automated language and UI checks use only fictional content. The user's own device language
-was not changed for them. A full process kill with a real operating-system permission dialog and
+The automated language and UI checks use only fictional content. The device language of the test
+phone was not changed for them. A full process kill with a real operating-system permission dialog and
 audible English reading out were not run as automated tests.
 
 ## GitHub checks

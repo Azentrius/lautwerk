@@ -151,9 +151,9 @@ Basis: [AudioManager](https://developer.android.com/reference/android/media/Audi
 Limits: the app monitors connected output devices, not every internal routing change between
 devices that are already connected. A telephony/VoIP app that does not report a matching audio mode
 is not guaranteed to be detected this way. Audio focus loss while reading out and recognition errors
-remain additional stop signals. The user has confirmed in practice stopping/restarting via the
+remain additional stop signals. Manual tests confirmed stopping/restarting via the
 button and ending on screen-off for both providers. Physical calls and Bluetooth/headset changes are
-deferred at the user's request and still untested; simulated signals alone do not confirm these
+deferred and still untested; simulated signals alone do not confirm these
 cases.
 
 ### Targeted manual acceptance test
@@ -166,7 +166,7 @@ logs or chat):
    ending during listening and reading out.
 2. Turn the display off during a session, then unlock. The conversation must stay ended and may only
    continue after a new start.
-3. **Deferred at the user's request (2026-10-12), for a later test:**
+3. **Deferred since 2026-10-12, for a later test:**
    Start a session with a headset and disconnect/connect the headset. It must stay ended. Check an
    ordinary incoming call separately; no test calls and no call answering by the app itself.
 
@@ -230,13 +230,13 @@ afterwards:
 **157 distinct automated checks pass for 0.1.12:**
 22 core JVM, 21 provider JVM, 45 conversation JVM, 61 assistant device tests and 8 DHU/selection
 tests. Assistant 0.1.12-dev / code 13 is installed. German/English, start cancellation and
-recreation are checked. On 2026-10-12 the user confirmed for 0.1.12: "Works flawlessly with both."
+recreation are checked. On 2026-10-12 a manual test confirmed for 0.1.12: "Works flawlessly with both."
 German/English are confirmed as well.
 
-The user confirmed recognition, reading out and ending for both providers under 0.1.6, and a
-clearly better sound with the voice selection in 0.1.7. On 2026-10-12 the user confirmed for 0.1.8
+Manual tests confirmed recognition, reading out and ending for both providers under 0.1.6, and a
+clearly better sound with the voice selection in 0.1.7. On 2026-10-12 a manual test confirmed for 0.1.8
 stopping and restarting via the button as well as ending on screen-off for OpenAI and Claude. Call
-and headset/Bluetooth tests are deferred at the user's request and remain untested;
+and headset/Bluetooth tests are deferred and remain untested;
 the feedback does not separately confirm every possible timing overlap.
 The current phone UI was confirmed under 0.1.12 with real conversations for both providers. Android
 Auto audio and real use in a car are not confirmed.

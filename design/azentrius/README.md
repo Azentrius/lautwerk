@@ -6,7 +6,7 @@ from [Azentrius/design-system](https://github.com/Azentrius/design-system/tree/e
 with paths relative to this directory. Every file was also checked against its Git blob.
 No upstream script was executed, and no change was made to the design-system repository.
 
-The maintainer explicitly requested this read-only copy and the restoration of older
+The maintainer requested this read-only copy and the restoration of older
 references for this change. The historical `upstream-9ed4032/`, `upstream-eb827c8/`,
 `upstream-ab59a45/` and original package files were restored unchanged from application
 commit `394bc23`. They are evidence, not the active design specification.

@@ -146,8 +146,8 @@ The phone app adopts the approved Azentrius design in light and dark.
   template. Assistant 0.1.13-dev (code 14); the DHU variant stays at 0.1.12-prototype.
 - 169 distinct automated tests pass: 88 unchanged JVM tests, 73 assistant device tests on a Pixel 10 Pro
   (Android 17) and 8 DHU/selection tests; lint shows 0 errors.
-- Light German, dark English, dialogs, the voice list and 200 % font size were checked visually; the user
-  confirmed look and handling on the device. TalkBack/D-pad acceptance and call and headset tests are
+- Light German, dark English, dialogs, the voice list and 200 % font size were checked visually; look and
+  handling were confirmed manually on the device. TalkBack/D-pad acceptance and call and headset tests are
   still open.
 
 ## 0.1.12 – 2026-10-12
@@ -171,7 +171,7 @@ The app follows the device language in German or English, and starting a convers
 - 157 distinct automated tests pass: 22 core, 21 provider and 45 conversation JVM tests, 61 assistant
   device tests and 8 DHU/selection tests; recreation and backgrounding were checked in a non-exported
   debug test host with synthetic data. Lint shows 0 errors.
-- The user confirmed start, answer and stop with both providers and switching the device between English
+- Manually confirmed: start, answer and stop with both providers and switching the device between English
   and German; a full English conversation was not confirmed separately.
 
 ## 0.1.11 – 2026-10-12
@@ -190,7 +190,7 @@ The chat history can be searched by text and filtered by provider.
 - No new permission, API request or storage format change. Assistant 0.1.11-dev (code 12).
 - 78 automated tests pass: 18 core JVM, 53 assistant device tests and 7 DHU/selection tests, including
   1,000 synthetic chats and direct jumps to message 4 of 140 and 96 of 100; lint shows 0 errors.
-- The user confirmed search, filters and opening hits on the Pixel. There is no fuzzy search or accent
+- Manually confirmed on the Pixel: search, filters and opening hits. There is no fuzzy search or accent
   folding, and the archive is still loaded as a whole.
 
 ## 0.1.10 – 2026-10-12
@@ -210,7 +210,7 @@ Single chats can be exported as UTF-8 text files.
 - Assistant 0.1.10-dev (code 11). 59 automated tests pass: 11 core JVM, 41 assistant device tests and
   7 DHU/selection tests; lint shows 0 errors. The first device run showed `CATEGORY_OPENABLE` missing;
   the app now sets it explicitly.
-- The user confirmed exporting a chat to Downloads and opening the file. Cloud file providers and rotation
+- Manually confirmed: exporting a chat to Downloads and opening the file. Cloud file providers and rotation
   during the picker are untested; after errors an empty or partial file may remain. The text export is
   not a backup or import format.
 
@@ -254,8 +254,8 @@ Stopping a voice conversation cancels the running provider request, and interrup
 - 90 automated checks pass: 69 JVM tests (5 core, 20 provider, 44 voice) and 21 device tests
   (14 assistant, 7 DHU/selection). Local socket tests cancel while waiting for headers and during a
   partial response.
-- The user confirmed stop and restart by button and stop on screen-off for both providers. Call and
-  headset/Bluetooth tests are deferred at the user's request; older Android versions were not tested.
+- Manually confirmed: stop and restart by button and stop on screen-off for both providers. Call and
+  headset/Bluetooth tests are deferred; older Android versions were not tested.
 
 ## 0.1.7 – 2026-10-12
 
@@ -272,8 +272,8 @@ A new page lets the user choose the voice and speech rate for both providers.
 - Assistant 0.1.7-dev (code 8). 75 automated checks pass: 57 JVM tests and 18 device tests (11 assistant,
   7 DHU/selection), including setting a real local voice on the Pixel's TTS engine; lint shows 0 errors.
 - Google's speech service on the Pixel reports five local and four online voices for de-DE; four of them
-  are local/online pairs with the same base ID. The user confirmed that the voice choice sounds clearly
-  better.
+  are local/online pairs with the same base ID. A listening check confirmed that the voice choice sounds
+  clearly better.
 
 ## 0.1.6 – 2026-10-12
 
@@ -289,7 +289,7 @@ Fixes voice conversations that ended right after starting because of an audio fo
 - Assistant 0.1.6-dev (code 7), installed as an update; the DHU UI stays at 0.1.2-prototype.
 - 71 automated checks pass: 57 JVM tests (38 voice including 11 new focus tests, 17 provider, 2 core) and
   14 device tests (7 assistant, 7 DHU/selection); lint shows 0 errors. Storage tests were not rerun.
-- The user confirmed recognition, read-out and stopping for OpenAI and Claude, but found the voice poor.
+- Manually confirmed: recognition, read-out and stopping for OpenAI and Claude; the voice sounded poor.
 
 ## 0.1.5 – 2026-10-12
 
@@ -360,7 +360,7 @@ Phone and car template of the DHU test app share one provider and model selectio
 - The assistant app uses the same types and store; switches are disabled during a voice conversation,
   and the voice command to switch provider uses that provider's last model and still starts a new chat.
 - The model catalog keeps the five IDs from 0.1.0.
-- Selection and Start confirmed by the user in a real DHU.
+- Selection and Start confirmed manually in a real DHU.
 
 ## 0.1.1 – 2026-10-11
 
@@ -382,7 +382,7 @@ The 0.1.0 source becomes a buildable project with a minimal Android Auto prototy
 - The `dhu` flavor declares the POI category only as a debug-only test placeholder; `dhuRelease` is
   disabled.
 - Device tests for the phone Start button and the car template's click callback.
-- Launcher visibility, title and Start confirmed by the user in a real DHU.
+- Launcher visibility, title and Start confirmed manually in a real DHU.
 - The original 0.1.0 README and roadmap were kept as history; the 0.1.0 section below sums them up.
 
 ## 0.1.0

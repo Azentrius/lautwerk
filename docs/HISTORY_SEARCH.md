@@ -1,8 +1,8 @@
 # Searching and filtering chats – 0.1.12
 
 Under **History**, saved chats can be searched by text and narrowed down to one provider. On
-2026-10-12, after the test assignment for search in older messages, provider filter, opening a
-match and reset, the user confirmed:
+2026-10-12 a manual test of search in older messages, provider filter, opening a
+match and reset confirmed:
 **"Search, filter and matches work."**
 
 ## Usage
@@ -69,13 +69,13 @@ Automated tests cover, among other things, both providers, old models, umlauts/e
 special characters, 1,000 synthetic chats, search across a text chunk boundary, cancellation in
 a long message, late results and archive errors.
 The UI tests open matches in message 4 of 140 and message 96 of 100 directly, without manually
-expanding or scrolling first. The search view was checked visually with fictional chats. The
-user's hands-on test confirms the core operation.
+expanding or scrolling first. The search view was checked visually with fictional chats. A
+manual test confirms the core operation.
 
 Since 0.1.12, Activity recreation and language changes have been tested with a retained search
 text, filter and an older match. A full process kill was not run as an end-to-end device test.
-The lifetime remains bound to the ViewModel. Call and headset/Bluetooth tests remain explicitly
-deferred at the user's request.
+The lifetime remains bound to the ViewModel. Call and headset/Bluetooth tests remain
+deferred.
 
 References: [Compose lists and scroll position](https://developer.android.com/develop/ui/compose/lists#controlling-scroll-position)
 and [LaunchedEffect](https://developer.android.com/develop/ui/compose/side-effects#launchedeffect).

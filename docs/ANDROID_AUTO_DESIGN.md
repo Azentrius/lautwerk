@@ -94,7 +94,7 @@ The English fallback is additionally checked with an unsupported language.
   anti-aliased edge pixels; at least 4.5:1. Record day and night separately. The configured
   color value does not prove how the host renders it.
 - **A7:** Six starts in the same 800×480 session, without a reset. If the baseline version already
-  fails, this is, with the user's approval, a known bug that does not block 0.1.14. A newly
+  fails, this is, by agreement, a known bug that does not block 0.1.14. A newly
   occurring failure is a regression. A comparison that has not been run yet is neither passed
   nor a known bug.
 - **O2:** If the contrast is insufficient, the approved fallback is `CarColor.DEFAULT` with a new
@@ -102,4 +102,4 @@ The English fallback is additionally checked with an unsupported language.
 - **O3:** If the host truncates provider/model, report the deviation and get a decision on
   display names. Do not invent truncations or design values.
 
-Call and headset/Bluetooth tests remain deferred as requested.
+Call and headset/Bluetooth tests remain deferred.

@@ -27,7 +27,7 @@ The following identifiers and data stay identical:
 `OPENAI` and `CLAUDE` as well as the model ID of each chat are preserved. The compatibility test
 creates data with an independent re-implementation of the old codec, reads and extends it with the
 new module and reads the result again with the old codec. This tests format compatibility with
-synthetic data; the user's personal chats and keys were not read for this.
+synthetic data; no real chats or keys were read for this.
 
 ## Improved behavior
 
@@ -116,7 +116,7 @@ Encrypted backup, import and a recovery wizard are still open work. No automatic
 recovery. Backup/device transfer rules remain an open point of the prototype. The existing
 `allowBackup=false` setting does not replace a tested flow for changing devices.
 
-The user confirmed the basic voice dialog with both providers under 0.1.6, as well as
+Manual tests confirmed the basic voice dialog with both providers under 0.1.6, as well as
 stopping/restarting and screen-off under 0.1.8. The renewed practical test of the UI since 0.1.9 is
 still pending. Call and headset/Bluetooth tests remain deferred. The exact status is described in
 [VOICE.md](VOICE.md). All results: [BUILD_AND_TEST.md](BUILD_AND_TEST.md).

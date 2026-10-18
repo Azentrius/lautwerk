@@ -29,7 +29,7 @@ matter. Entries with **Match in message …** open directly at that point, also 
 selection. **Reset search** shows all chats again. During a voice session, ending stays reachable;
 another chat can only be opened after the session has ended.
 
-The user confirmed search, filter and matches on 2026-10-12.
+Search, filter and matches were confirmed manually on 2026-10-12.
 Details and limits: [HISTORY_SEARCH.md](HISTORY_SEARCH.md).
 
 ## Exporting a chat as a text file
@@ -79,10 +79,10 @@ References: [Lazy Lists](https://developer.android.com/develop/ui/compose/lists)
 4. When convenient, repeat for the second provider. Use only disposable test chats to check the
    delete confirmation.
 
-Call and headset/Bluetooth tests remain deferred at the user's request.
+Call and headset/Bluetooth tests remain deferred.
 The new UI was checked by automated tests and with a screenshot of fictional data only; the
 repeated manual voice test since 0.1.9 and the full test of cloud file services/rotation are
-still pending. On 2026-10-12 the user confirmed the local text export and the complete, readable
+still pending. On 2026-10-12 a manual test confirmed the local text export and the complete, readable
 file. The DHU layout and actions are unchanged; 0.1.12-prototype adds English texts.
 
 Build/install: [VOICE.md](VOICE.md). DHU: [START_WINDOWS.md](START_WINDOWS.md).

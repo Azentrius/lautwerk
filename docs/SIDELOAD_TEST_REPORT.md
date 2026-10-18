@@ -1,12 +1,12 @@
 # Sideload and car tests for OpenAuto AI
 
-Historical baseline. The user later confirmed vehicle launcher visibility and opening after the
-authorized installation-origin experiment. See [CAR_VOICE.md](CAR_VOICE.md) for the current package,
+Historical baseline. A later manual test confirmed vehicle launcher visibility and opening after the
+approved installation-origin experiment. See [CAR_VOICE.md](CAR_VOICE.md) for the current package,
 installation steps and separate audio evidence; the negative observation below remains historical.
 
 As of 2026-10-12. App code and APK stay at the confirmed state 0.1.15, source commit
 `5600446fbe08a8bbdf460f31a9e3b9fbbeaedead`. The [test guide](SIDELOADING.md) describes the comparison.
-The user reports that OpenAuto AI was not visible in the ID.7 on 2026-10-12 at about 17:00. A working
+On 2026-10-12 at about 17:00, OpenAuto AI was not visible in the ID.7. A working
 path in the car is therefore still not confirmed. The ID.7 remains the test car; all Kia attempts are
 deferred.
 
@@ -32,7 +32,7 @@ No APK was reinstalled or extracted from the phone during this preparation. The 
 installed version and the ADB installation path.
 
 The system and stub versions that Android also lists are not taken as the active Android Auto or Play
-services version. The user describes the adapter as the first AAWireless model with firmware "7.xxx";
+services version. The adapter is described as the first AAWireless model with firmware "7.xxx";
 the exact firmware and hardware ID still have to be confirmed on the connected adapter.
 
 ## Results per connection
@@ -40,9 +40,9 @@ the exact firmware and hardware ID still have to be confirmed on the connected a
 | Run | Settings | Launcher / Open / Start / Reconnect | Car API | Status |
 | --- | --- | --- | --- | --- |
 | DHU from the 0.1.15 acceptance | PC configuration at the time | passed, see the report from that time | see the report from that time | Historical control result, not a new car test |
-| Kia with AAWireless, baseline | still to be recorded | open / open / open / open | not measured | Deferred at the user's request |
-| Kia with adapter developer mode | only after the baseline measurement | open / open / open / open | not measured | Deferred at the user's request |
-| Kia after restoring | original values | open / open / open / open | not measured | Deferred at the user's request |
+| Kia with AAWireless, baseline | still to be recorded | open / open / open / open | not measured | Deferred |
+| Kia with adapter developer mode | only after the baseline measurement | open / open / open / open | not measured | Deferred |
+| Kia after restoring | original values | open / open / open / open | not measured | Deferred |
 | ID.7 at about 17:00 on 2026-10-12 | native wireless connection according to context; versions and detailed configuration at the time not read out | app not visible / not checked / not checked / not checked | not measured | User observation, no logs from the same time |
 | ID.7 with the currently prepared 0.1.15 | without AAWireless, previous settings | open / open / open / open | not measured | No new unchanged attempt needed; first prepare a concrete technical change or diagnosis |
 

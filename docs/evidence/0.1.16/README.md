@@ -12,7 +12,7 @@ only design-reference documentation and an XML comment, with no runtime changes.
 - Version and CHANGELOG check: passed; shared versionCode 118, both apps.
 - JVM tests: 22 core, 21 providers, 57 voice; zero failures/errors.
 - All six Android lint tasks: passed, zero errors. Existing tooling/resource warnings remain;
-  the explicitly requested font-family XML is unused by Compose, which loads the TTF directly.
+  the requested font-family XML is unused by Compose, which loads the TTF directly.
 - All debug builds: assistant, prototype phone and prototype DHU; their instrumentation APKs built.
 - Additional full assistant run on the emulator: **74/78 passed**, four failures; see the comparison below.
 - Physical Pixel 10 Pro / Android 17: **78 tests passed**. See `pixel-instrumentation.txt`.
@@ -39,7 +39,7 @@ Full local build command (JDK 17, installed SDK, Windows `gradlew.bat`):
 
 No screenshot was resized, cropped, recolored or otherwise edited in this directory.
 Pixel screenshots use the existing isolated debug activity and invented fixtures, with activity-local
-theme, locale and fontScale overrides. The user's system font, theme and stored chats were not changed.
+theme, locale and fontScale overrides. The device's system font, theme and stored chats were not changed.
 Prototype screenshots use the isolated emulator's theme/font settings, restored after capture.
 
 | Surface | Light / 100% | Dark / 100% | Light / 200% | Dark / 200% |
@@ -120,7 +120,7 @@ changed to accommodate it. The physical Pixel is the successful final full-suite
 ## Requested voice-sample pronunciation follow-up
 
 After reviewing the installed design build, the maintainer reported that the German voice read
-the AI suffix as one sound and explicitly requested spelling it as separate letters. The same
+the AI suffix as one sound and asked for it to be spelled as separate letters. The same
 unmerged 0.1.18 PR now adds a `TtsSpan.TYPE_VERBATIM` annotation around only those two letters in
 the fixed phone sample. The sample's visible text, app name, voice catalog, saved voice/rate,
 online-voice confirmation and conversation/car output paths are unchanged.

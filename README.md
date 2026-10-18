@@ -24,8 +24,8 @@ The title, app icon, provider/model line, host colors and single action remain. 
 chosen on the phone; while active, the same action becomes End.
 
 On the Pixel 10 Pro / Android 17, independent TTS playback and external PCM recognition passed.
-In the DHU, CarAudioRecord captured the PC microphone, local recognition succeeded and the user
-confirmed hearing the sentence read back correctly. These checks use no AI provider. A later DHU
+In the DHU, CarAudioRecord captured the PC microphone, local recognition succeeded and the
+sentence was heard read back correctly. These checks use no AI provider. A later DHU
 retest with Claude Haiku 4.5 was confirmed as working overall; Speaking and End remained visible
 while the answer played after the host microphone overlay disappeared. See the precise scope in
 [CAR_VOICE.md](docs/CAR_VOICE.md). The planned ID.7 audio test, call and headset tests are deferred.
@@ -38,10 +38,9 @@ Details: [app icon and installation](docs/APP_IDENTITY.md), [current test report
 
 ## Sideloading and real cars
 
-Since 2026-10-12, at the user's request, we check distribution outside Google Play. At the user's request
-we first test native wireless Android Auto in the ID.7. The user subsequently confirmed launcher
-visibility and opening on the vehicle display after the explicitly authorized installation-origin
-experiment. This is a device-specific observation, not a general distribution guarantee. The tests in
+Since 2026-10-12 we check distribution outside Google Play, first with native wireless Android Auto
+in the ID.7. A manual test then confirmed launcher visibility and opening on the vehicle display
+after the approved installation-origin experiment. This is a device-specific observation, not a general distribution guarantee. The tests in
 the Kia with AAWireless are deferred. The
 [sideloading guide](docs/SIDELOADING.md) and the [car test report](docs/SIDELOAD_TEST_REPORT.md) keep
 preparation, observations and open tests apart. Those reports describe the original 0.1.15 baseline;
@@ -85,7 +84,7 @@ test scaffold is not meant for publishing on Play or for use while driving.
 
 Android Auto may reject or hide the app even after a successful build and ADB install. The app's own
 HostValidator check stays on and uses the signed host entries of the AndroidX library. Conversely, it
-grants no approval by Android Auto. There is no root patch or disabling of host checks. A user-authorized
+grants no approval by Android Auto. There is no root patch or disabling of host checks. An approved
 local installation-origin experiment recorded Google Play as installer through Android's system
 installer; this deliberately misrepresents origin and is neither a Play installation nor an official
 distribution method. See the bounded procedure and observed limits in [CAR_VOICE.md](docs/CAR_VOICE.md).

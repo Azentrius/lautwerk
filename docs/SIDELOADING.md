@@ -1,7 +1,7 @@
 # OpenAuto AI via sideload on the car display
 
-Historical 0.1.15 baseline below. The user subsequently confirmed visibility/opening on the vehicle
-display after an explicitly authorized installation-origin experiment. The 0.1.17 installation and
+Historical 0.1.15 baseline below. A later manual test confirmed visibility/opening on the vehicle
+display after an approved installation-origin experiment. The 0.1.17 installation and
 audio evidence are in [CAR_VOICE.md](CAR_VOICE.md); its Start action no longer runs a car UI counter.
 
 As of 2026-10-12. The goal is an APK distributed through GitHub that users can install on their phone
@@ -9,7 +9,7 @@ and open in the car. To get there, we first check the unchanged UI prototype 0.1
 car. A confirmed path for OpenAuto AI on real head units does not exist yet.
 
 **Active attempt: ID.7 with native wireless connection, without AAWireless.**
-The Kia/adapter attempts are deferred at the user's request. First, the unchanged state is measured in
+The Kia/adapter attempts are deferred. First, the unchanged state is measured in
 the ID.7; the adapter notes stay documented as a later option and are not instructions for the ID.7's
 native connection.
 

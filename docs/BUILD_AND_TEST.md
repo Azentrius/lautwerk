@@ -121,6 +121,6 @@ microphone for this. A local shell notification attempt gave no visible evidence
 a passed visual test. The monochrome layer is included unchanged; the personal launcher configuration
 was not switched.
 
-Call, headset and Bluetooth tests remain deferred at the user's request.
+Call, headset and Bluetooth tests remain deferred.
 No AI request, no change to API keys, histories or voice logic, and no uninstall or deletion of app
 data. No new missing design values were found for this scope.
