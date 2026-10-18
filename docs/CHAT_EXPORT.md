@@ -62,8 +62,8 @@ or paged loading.
 Automated tests cover both providers, old models, Unicode, 121 messages, large single texts,
 cancellation, duplicate dialog callbacks, missing chats, storage errors, UTF-8 output to a real
 temporary test file and the confirmation in the UI.
-The tests use only fictional content. On 2026-10-12, after the test assignment for a
-non-sensitive chat and the local destination Downloads, the user confirmed:
+The tests use only fictional content. On 2026-10-12 a manual test with a
+non-sensitive chat and the local destination Downloads confirmed:
 **"Export and file work."** This confirms in practice the local export, opening the file and the
 complete content of this tested chat. Cloud destinations and rotation during selection are not
 confirmed by this.

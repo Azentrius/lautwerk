@@ -42,7 +42,7 @@ none is marked resolved and no read-only reference file is changed.
 | Zero letter spacing and no added font padding | `AzType.style`; prototype `styles.xml`, `activity_main.xml` | fulfilled: explicit zero spacing and disabled extra padding. |
 | 200% font, growing content and stacked actions | `AzActions`, `AzTabs`, `MainContent`; prototype `ScrollView` | fulfilled: title layout and screenshot matrix test normal/200%; intrinsic action measurement stacks controls. |
 | No hyphenation, complete tab words, no all-caps labels | `AzType.style`, `AzTabs`; prototype XML | fulfilled: tabs use one line without wrapping/ellipsis; actions retain original casing. |
-| General “no italic” versus new italic AI exception | `android.md` Typography / App header; `MainContent.kt` | open: the reference contradicts itself. The maintainer explicitly ordered the more specific AI style; applied only there. Clarify the general sentence upstream. |
+| General “no italic” versus new italic AI exception | `android.md` Typography / App header; `MainContent.kt` | open: the reference contradicts itself. The maintainer chose the more specific AI style; applied only there. Clarify the general sentence upstream. |
 | brand-display only on About; no text on splash | `app` and `prototype-app` splash themes | fulfilled: no About screen exists; no new screen or brand heading was added. |
 | Minimum 48×48 dp, non-overlapping touch targets and 8 dp gaps | `AzButton`, `AzIconButton`, `AzChip`, `AzActions`, `AzVoiceRow`, `AzTabs` | fulfilled: controls have explicit minimum targets and wrapping; status labels are noninteractive. |
 | 16/24 dp responsive screen/card inset and card spacing; dialog 24 dp | `AzentriusTheme.kt:LocalSpace`, `AzCard`, `AzDialog`; prototype `az_dimensions.xml` | adjusted: assistant already matches; prototype page inset now follows available width. |
@@ -163,13 +163,13 @@ These observations are not tokens or a promised result on another host.
 
 The comparison is against the audited `edd4c67` snapshot and application `main` at `c262a3a`
 (0.1.18); it does not claim a new audit of a later upstream commit. **All seven points remain open.** The design describes existing behavior;
-any requested behavior change must be identified separately for the app owner to approve. Do not
+any requested behavior change must be identified separately for the maintainer to approve. Do not
 change application code, wording, provider/storage logic, car template or B2/B3 to settle these gaps.
 
 ### 1. App-name italics exception
 
 - Reference: `android.md`, Typography and App header.
-- Evidence: the general rule bans italic text, but the name suffix is explicitly italic. The owner
+- Evidence: the general rule bans italic text, but the name suffix is explicitly italic. The maintainer
   approved and the app implements that specific exception in `MainContent.kt` and native
   `MainActivity.stylePhoneTitle`. Android Auto still receives a plain text title.
 - Request: make the exception explicit in the general rule, without changing the approved title,
@@ -202,7 +202,7 @@ change application code, wording, provider/storage logic, car template or B2/B3 
   `ConversationBar.kt` uses the same notice as its label when the conversation is inactive.
 - Request: clarify how the rule accommodates these existing presentations. Removing one notice,
   changing its lifecycle or rewriting its text is not assumed to be a purely visual change; if that
-  is desired, identify it as a separate owner decision. Preserve both until resolved.
+  is desired, identify it as a separate maintainer decision. Preserve both until resolved.
 
 ### 5. Icon attribution
 

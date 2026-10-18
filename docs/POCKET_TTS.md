@@ -72,7 +72,7 @@ The separate engine's seven offline test suites passed on Pixel 10 Pro / Android
 54 utterance records, 34 cancelled/replaced requests, no PCM after cancellation.
 Immediate restart first PCM: 142–496 ms (baseline 13.4–13.9 s). A process-cold early
 stop produced no PCM; replacement first PCM arrived after 828 ms (baseline 47.3 s).
-The user confirmed clean audible stopping and no old sentence after early stop.
+A listening check confirmed clean audible stopping and no old sentence after early stop.
 These numbers measure callbacks/PCM, not acoustic latency.
 
 Integration test results belong in [the 0.1.19 report](evidence/0.1.19/pocket-integration.md).

@@ -9,7 +9,7 @@
   exact installed German `german-fp32::alba-mackenna-casual` voice. No INTERNET permission.
 - Android Auto 17.8.663874-release. DHU executable 2.0-windows,
   build 2022-03-30-438482292.
-- The user explicitly authorized updating the separate DHU package while retaining its
+- The maintainer approved updating the separate DHU package while retaining its
   experimental `com.android.vending` installer attribution and any required 0.1.19 scans.
   Both updates succeeded without a new scan dialog. This attribution is not real Play
   distribution or evidence of category eligibility. No host checks were changed.
@@ -39,7 +39,7 @@ fixed the harness. The successful rerun is the evidence retained here.
 
 The tests used synthetic German sentences only, with no provider requests and no
 microphone recognition. Active default network was `none` during the explicit
-Pocket suites. Existing keys, chats, provider selection and the user's selected
+Pocket suites. Existing keys, chats, provider selection and the selected
 voice were not changed. The car service test restores its non-secret mode/status
 map as well as the voice map. Voice preference hashes in the phone report are raw
 file hashes; car reports hash a canonical preference map (empty and absent match).
@@ -60,8 +60,8 @@ file hashes; car reports hash a canonical preference map (empty and absent match
 
 These are software callback/state checks on the Pixel. They do not measure acoustic
 latency or prove car-speaker routing. The earlier standalone engine evaluation has
-separate measured latency and user-confirmed audible cancellation; see POCKET_TTS.md.
-The visible DHU output was subsequently confirmed audibly by the user, as recorded
+separate measured latency and manually confirmed audible cancellation; see POCKET_TTS.md.
+The visible DHU output was subsequently confirmed audibly in a manual check, as recorded
 below. The later live Claude acceptance is recorded in its own section.
 
 ## Actual DHU and vehicle scope
@@ -77,9 +77,9 @@ used to select output-only mode and Pocket/Alba temporarily. No microphone or
 provider request was made. Host checks remained enabled.
 
 The first headless attempt produced successful TTS callbacks and UI changes, but
-the user heard nothing. It is **not** an audible pass. The DHU was then restarted
+nothing was audible. It is **not** an audible pass. The DHU was then restarted
 with its normal visible window. The identical fixed-sentence stop/restart test
-completed, and the user explicitly confirmed audible PC-speaker output, clean
+completed, and the tester confirmed audible PC-speaker output, clean
 stopping and a complete second sentence without overlap. This establishes output
 through this DHU configuration, not an ID.7 or other vehicle result.
 
@@ -93,7 +93,7 @@ The previous car voice (Android local) and mode (Conversation) were restored via
 the UI and the checked controls verified. The credential file's modification time
 remained on the prior day; its contents were not read. The assistant voice and
 system TTS default were unchanged. The DHU and temporary ADB forward were closed.
-Evidence includes scoped engine/app events and the user's acceptance result.
+Evidence includes scoped engine/app events and the manual acceptance result.
 Raw host screenshots are not published because their adjacent Maps pane includes
 unrelated location information.
 
@@ -102,17 +102,17 @@ not replace a later live provider conversation with Alba in the parked vehicle.
 
 ## Live Claude conversation acceptance
 
-Later on 2026-10-14, at the user's explicit request, Pocket/Alba was selected in the
+Later on 2026-10-14, Pocket/Alba was selected in the
 car app and left selected. Conversation mode and Claude Haiku 4.5 were verified in
-the existing UI. The user was informed that recognized questions would be sent to
-Anthropic and could consume API credit. No API key or archived conversation was
+the existing UI. Recognized questions are sent to
+Anthropic and can consume API credit. No API key or archived conversation was
 read by the test tools. The assistant app and system-wide TTS default were unchanged.
 
 The visible DHU used the same configuration as the successful fixed-output check.
-The user asked a question through the PC microphone, heard the answer, asked a
-follow-up and heard the second answer. After ending that session, the user started
+The tester asked a question through the PC microphone, heard the answer, asked a
+follow-up and heard the second answer. After ending that session, the tester started
 again, asked another question and pressed the car's Stop button during the answer.
-The user explicitly reported that the complete scenario worked.
+The tester reported that the complete scenario worked.
 
 The scoped diagnostic events independently show:
 
@@ -127,7 +127,7 @@ The first session ended when the host closed capture after the second completed
 answer (`voice.car.capture.hostStopped`), then the app stopped. There is no car
 Stop-button event for that first termination, so it is not counted as a separate
 button-stop measurement. The button stop during the second session is explicit.
-The user reported no visible or audible problem. This distinction is retained in
+The tester reported no visible or audible problem. This distinction is retained in
 the evidence rather than treating every stop as the same event.
 
 Only state/engine diagnostics are included in `dhu-live/`; no recognized words,
@@ -136,7 +136,7 @@ data are exported. The existing app retains its normal encrypted conversation
 history. No conversation was deleted by the test tools.
 
 The DHU and temporary ADB forward were closed after acceptance. Alba and
-Conversation mode remain selected in the car app as requested. This is a real
+Conversation mode remain selected in the car app. This is a real
 Claude/DHU acceptance, not a vehicle, call or headset test; those remain deferred.
 
 ## Remaining setup limits

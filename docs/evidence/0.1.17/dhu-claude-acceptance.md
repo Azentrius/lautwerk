@@ -24,7 +24,7 @@ origin, root patch, host-check change or new Play Protect submission took place 
 
 Selected events from app-tag-only capture (`OpenAutoAI`) establish the following sequence.
 The capture covers part of the evening session; it is not a complete acoustic recording or a
-benchmark. Log capture does not establish whether the user heard every completed TTS utterance.
+benchmark. Log capture does not establish whether every completed TTS utterance was heard.
 
 | Time | Observation |
 |---|---|
@@ -41,15 +41,15 @@ benchmark. Log capture does not establish whether the user heard every completed
 | 23:26:33.994 | Next LISTENING phase |
 | 23:26:35.212–23:26:35.228 | Host capture stopped; recognition ended without text, conversation STOPPED, local service stop 4 ms, inactive template |
 
-The last host-stop event alone does not identify the user's gesture or a transport cause. It must
+The last host-stop event alone does not identify the tester's gesture or a transport cause. It must
 not be relabeled an explicit End-button click. Likewise the 14 ms and 4 ms values measure local
 service work, not the time until sound stopped at the PC speakers. No acoustic latency was measured.
 
-## User confirmation and resolved observation
+## Manual confirmation and resolved observation
 
-After the requested question/follow-up/End/restart exercise, the user first reported a remaining
+After the question/follow-up/End/restart exercise, the tester first reported a remaining
 problem. On clarification there was no error text: the answer was still audible after the wave
-overlay had disappeared. The user then stated that operation worked overall and explicitly
+overlay had disappeared. The tester then stated that operation worked overall and
 confirmed that **Speaking and End remained visible during the audible answer**.
 
 This observation matches the implementation: `CarVoiceAudio` closes recognition/capture after
@@ -59,13 +59,13 @@ Speaking summary and the active session retains End. The host-owned microphone w
 does not represent the lifetime of the whole conversation. Its disappearance alone is not an
 audio failure and did not require a code or design change.
 
-The user confirmation establishes the reported functional Claude DHU flow and resolves this
+The manual confirmation establishes the reported functional Claude DHU flow and resolves this
 specific overlay concern. It is not a guarantee of zero buffering, all repeated-start timings,
 all providers, every voice or every host.
 
 ## Still outside this evidence
 
-- The parked ID.7 native wireless audio test is deferred at the user's request; no vehicle output,
+- The parked ID.7 native wireless audio test is deferred; no vehicle output,
   microphone, conversation or reconnect acceptance is claimed. Kia/AAWireless remains deferred.
 - Call and headset/Bluetooth interruption tests remain deferred.
 - A complete OpenAI car conversation test is not covered by this Claude retest.
