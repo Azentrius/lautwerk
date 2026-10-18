@@ -1,11 +1,9 @@
 # Lautwerk
 
-*A voice box for your AI*
-
-An experimental Android app for voice conversations with OpenAI and Claude on your own API keys, and a
-minimal Android Auto prototype (Car App Library) tested in the Desktop Head Unit (DHU). It is a
-prototype: there is no approved Android Auto category for it, it is not for use while driving and it is
-not on Google Play.
+A voice box for your AI: an experimental Android app for voice conversations with OpenAI and Claude on
+your own API keys, and a minimal Android Auto prototype (Car App Library) tested in the Desktop Head
+Unit (DHU). It is a prototype: there is no approved Android Auto category for it, it is not for use
+while driving and it is not on Google Play.
 
 The phone app uses one voice flow for both providers: Android speech recognition, the provider's text
 adapter and Android text-to-speech. A separately testable conversation controller handles start, stop,
