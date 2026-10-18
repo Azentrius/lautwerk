@@ -4,7 +4,7 @@ package de.azentrius.lautwerk.app
 import android.app.Application
 import de.azentrius.lautwerk.core.i18n.AppLanguage
 
-class OpenAutoApplication : Application() {
+class LautwerkApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         AppLanguage.preferences = {

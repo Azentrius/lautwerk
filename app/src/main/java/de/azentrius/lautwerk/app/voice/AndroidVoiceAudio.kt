@@ -144,7 +144,7 @@ internal class AndroidVoiceAudio(
     }
 
     private fun speakChunk() {
-        val id = "openauto-$operation-$chunkIndex"
+        val id = "lautwerk-$operation-$chunkIndex"
         utterance = id
         val result = runCatching { tts?.speak(chunks[chunkIndex], TextToSpeech.QUEUE_FLUSH, Bundle(), id) }.getOrNull()
         if (result != TextToSpeech.SUCCESS) finishSpeech(VoiceProblem.TTS_FAILED)

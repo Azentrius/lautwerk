@@ -6,7 +6,7 @@ import androidx.car.app.CarAppService
 import androidx.car.app.Session
 import androidx.car.app.validation.HostValidator
 
-class OpenAutoCarService : CarAppService() {
+class LautwerkCarService : CarAppService() {
     override fun createHostValidator(): HostValidator {
         Log.i(TAG, "car.createHostValidator (signature allowlist enabled)")
         // Keep host identity checks enabled, including in the DHU debug build.
@@ -18,8 +18,8 @@ class OpenAutoCarService : CarAppService() {
 
     override fun onCreateSession(): Session {
         Log.i(TAG, "car.onCreateSession")
-        return OpenAutoSession()
+        return LautwerkSession()
     }
 
-    companion object { const val TAG = "OpenAutoAI" }
+    companion object { const val TAG = "Lautwerk" }
 }

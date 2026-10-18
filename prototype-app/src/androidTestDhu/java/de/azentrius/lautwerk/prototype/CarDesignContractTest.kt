@@ -13,7 +13,7 @@ import androidx.car.app.model.MessageTemplate
 import androidx.car.app.testing.TestCarContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import de.azentrius.lautwerk.car.OpenAutoScreen
+import de.azentrius.lautwerk.car.LautwerkScreen
 import de.azentrius.lautwerk.settings.ModelSelectionStore
 import java.util.Locale
 import org.junit.Assert.*
@@ -59,7 +59,7 @@ class CarDesignContractTest {
             val prefs = context.getSharedPreferences("car_design_contract", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             try {
-                val template = OpenAutoScreen(context, ModelSelectionStore(prefs)).onGetTemplate() as MessageTemplate
+                val template = LautwerkScreen(context, ModelSelectionStore(prefs)).onGetTemplate() as MessageTemplate
                 @Suppress("DEPRECATION")
                 assertEquals(Action.APP_ICON, template.headerAction)
                 @Suppress("DEPRECATION")
@@ -89,7 +89,7 @@ class CarDesignContractTest {
             val prefs = localized.getSharedPreferences("car_fallback_locale", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             try {
-                val template = OpenAutoScreen(context, ModelSelectionStore(prefs)).onGetTemplate() as MessageTemplate
+                val template = LautwerkScreen(context, ModelSelectionStore(prefs)).onGetTemplate() as MessageTemplate
                 @Suppress("DEPRECATION")
                 assertEquals("OpenAuto AI", template.title.toString())
                 assertEquals("Start", template.actions.single().title.toString())

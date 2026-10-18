@@ -1,11 +1,11 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <style name="Theme.OpenAutoAI.Base" parent="android:style/Theme.Material.Light.NoActionBar">
+    <style name="Theme.Lautwerk.Base" parent="android:style/Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/ic_launcher_background</item>
         <item name="android:statusBarColor">@color/ic_launcher_background</item>
         <item name="android:navigationBarColor">@color/ic_launcher_background</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
     </style>
-    <style name="Theme.OpenAutoAI" parent="Theme.OpenAutoAI.Base" />
+    <style name="Theme.Lautwerk" parent="Theme.Lautwerk.Base" />
 </resources>

@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <style name="Theme.OpenAutoAI" parent="Theme.OpenAutoAI.Base">
+    <style name="Theme.Lautwerk" parent="Theme.Lautwerk.Base">
         <item name="android:windowSplashScreenBackground">@color/ic_launcher_background</item>
         <!-- The platform uses the static adaptive launcher icon. No custom branding or animation. -->
     </style>

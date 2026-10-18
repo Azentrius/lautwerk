@@ -176,7 +176,7 @@ class CarVoiceService : Service() {
     private fun notification(status: String): Notification {
         val open = PendingIntent.getActivity(this, 1, Intent(this, VoiceSetupActivity::class.java), PendingIntent.FLAG_IMMUTABLE)
         val stop = PendingIntent.getService(this, 2, Intent(this, CarVoiceService::class.java).setAction(STOP), PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_stat_openauto)
+        return Notification.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_stat_lautwerk)
             .setContentTitle(getString(R.string.car_title)).setContentText(status).setContentIntent(open)
             .setVisibility(Notification.VISIBILITY_PRIVATE).setOngoing(true).setOnlyAlertOnce(true)
             .addAction(Notification.Action.Builder(null, getString(R.string.voice_stop), stop).build()).build()

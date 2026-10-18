@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <style name="Theme.OpenAutoAI.Palette" parent="android:style/Theme.Material.NoActionBar">
+    <style name="Theme.Lautwerk.Palette" parent="android:style/Theme.Material.NoActionBar">
         <item name="android:colorBackground">@color/az_bg_page</item>
         <item name="android:colorAccent">@color/az_primary</item>
         <item name="android:textColorPrimary">@color/az_text</item>

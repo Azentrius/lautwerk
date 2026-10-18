@@ -13,7 +13,7 @@ import androidx.car.app.model.MessageTemplate
 import androidx.car.app.testing.TestCarContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import de.azentrius.lautwerk.car.OpenAutoScreen
+import de.azentrius.lautwerk.car.LautwerkScreen
 import de.azentrius.lautwerk.car.voice.CarVoicePort
 import de.azentrius.lautwerk.car.voice.CarVoiceState
 import org.junit.Assert.assertEquals
@@ -51,7 +51,7 @@ class CarTemplateTest {
         instrumentation.runOnMainSync {
             val context = germanContext(instrumentation.targetContext)
             val audio = AudioPort(context)
-            val screen = OpenAutoScreen(context, voice = audio)
+            val screen = LautwerkScreen(context, voice = audio)
             val start = (screen.onGetTemplate() as MessageTemplate).actions.single().onClickDelegate!!
             val done = object : OnDoneCallback {
                 override fun onSuccess(response: Bundleable?) = Unit
@@ -77,7 +77,7 @@ class CarTemplateTest {
             val prefs=localized.getSharedPreferences("car_english_test",Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             try {
-                val screen=OpenAutoScreen(context,ModelSelectionStore(prefs),AudioPort(context))
+                val screen=LautwerkScreen(context,ModelSelectionStore(prefs),AudioPort(context))
                 val template=screen.onGetTemplate() as MessageTemplate
                 @Suppress("DEPRECATION")
                 assertEquals("OpenAuto AI",template.title.toString())
@@ -106,7 +106,7 @@ class CarTemplateTest {
             val context = germanContext(instrumentation.targetContext)
             val prefs = instrumentation.targetContext.getSharedPreferences("car_lifecycle_test", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
-            val screen = OpenAutoScreen(context, ModelSelectionStore(prefs), AudioPort(context))
+            val screen = LautwerkScreen(context, ModelSelectionStore(prefs), AudioPort(context))
             val controller = ScreenController(screen).moveToState(Lifecycle.State.RESUMED)
             try {
                 val phoneStore = ModelSelectionStore(prefs)
@@ -134,7 +134,7 @@ class CarTemplateTest {
             val prefs = instrumentation.targetContext.getSharedPreferences("car_selection_test", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             val store = ModelSelectionStore(prefs)
-            val screen = OpenAutoScreen(context, store, AudioPort(context))
+            val screen = LautwerkScreen(context, store, AudioPort(context))
             val template = screen.onGetTemplate() as MessageTemplate
             @Suppress("DEPRECATION")
             assertEquals("OpenAuto AI", template.title.toString())

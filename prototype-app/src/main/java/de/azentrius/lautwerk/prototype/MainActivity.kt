@@ -56,12 +56,12 @@ class MainActivity : Activity() {
         findViewById<Button>(R.id.start).setOnClickListener {
             session.start()
             renderStatus()
-            Log.i("OpenAutoAI", "phone.start count=${session.startCount}")
+            Log.i("Lautwerk", "phone.start count=${session.startCount}")
         }
         configureSelection()
         renderStatus()
         VoiceEntryPoint.attach(this)
-        Log.i("OpenAutoAI", "phone.onCreate dhu=${BuildConfig.DHU_EXPERIMENT}")
+        Log.i("Lautwerk", "phone.onCreate dhu=${BuildConfig.DHU_EXPERIMENT}")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

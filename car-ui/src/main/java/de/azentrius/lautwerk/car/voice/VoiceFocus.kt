@@ -32,7 +32,7 @@ internal class VoiceFocus(context: Context, private val main: Handler, private v
         return Cancel { release() }
     }
     companion object {
-        const val TAG = "OpenAutoAI"
+        const val TAG = "Lautwerk"
         val attributes: AudioAttributes = AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ASSISTANT)
             .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build()
     }

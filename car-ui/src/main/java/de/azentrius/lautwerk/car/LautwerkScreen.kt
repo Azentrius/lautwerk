@@ -16,7 +16,7 @@ import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import java.io.Closeable
 
-class OpenAutoScreen(
+class LautwerkScreen(
     carContext: CarContext,
     private val selections: ModelSelectionStore = ModelSelectionStore(carContext),
     private val voice: CarVoicePort = VoiceConnection(carContext, carContext)
@@ -48,7 +48,7 @@ class OpenAutoScreen(
     @Suppress("DEPRECATION") // API-1 title/header remains usable on older hosts.
     override fun onGetTemplate(): Template {
         val endsSession = voice.state.active
-        Log.i(OpenAutoCarService.TAG, "car.onGetTemplate active=${voice.state.active}")
+        Log.i(LautwerkCarService.TAG, "car.onGetTemplate active=${voice.state.active}")
         val message = if (permissionIssue) carContext.getString(R.string.car_permission)
             else voice.state.summary.ifBlank { carContext.getString(R.string.car_ready) }
         val selected = voice.state.selection ?: selections.load()
@@ -62,7 +62,7 @@ class OpenAutoScreen(
                 .setBackgroundColor(CarColor.PRIMARY)
                 .setOnClickListener {
                     // The host can deliver a click from an older template. Preserve its intent.
-                    Log.i(OpenAutoCarService.TAG, "car.voice.action=${if (endsSession) "stop" else "start"}")
+                    Log.i(LautwerkCarService.TAG, "car.voice.action=${if (endsSession) "stop" else "start"}")
                     if (endsSession) {
                         permissionGeneration++
                         requestingPermission = false
