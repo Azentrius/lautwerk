@@ -1,0 +1,147 @@
+{
+  "suite": "car-all",
+  "passed": true,
+  "counts": {
+    "passed": 19,
+    "failed": 0,
+    "skipped": 3
+  },
+  "durationSeconds": 8.85,
+  "command": "adb -s <serial> shell am instrument -w -r com.azentrius.lautwerk.prototype.dhu.test/androidx.test.runner.AndroidJUnitRunner",
+  "optInArguments": [],
+  "settingsRestored": true,
+  "tests": [
+    {
+      "class": "com.azentrius.lautwerk.prototype.CarDesignContractTest",
+      "test": "packagedCarThemeContainsOnlyTheApprovedColorPairInBothModes",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.CarDesignContractTest",
+      "test": "unsupportedLocaleFallsBackToEnglishWithoutMixedTemplateText",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.CarDesignContractTest",
+      "test": "templateKeepsItsSinglePlainActionAndUnchangedStructure",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.CarPhoneDesignTest",
+      "test": "setupPageUsesTheRuntimePaletteInsteadOfTheInkLaunchWindow",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.CarTemplateTest",
+      "test": "templateHasTitleAndWorkingStartAction",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.CarTemplateTest",
+      "test": "staleActionsKeepTheirOriginalIntent",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.CarTemplateTest",
+      "test": "observesPhoneSelectionWhileStartedAndRefreshesOnReturn",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.CarTemplateTest",
+      "test": "englishTemplateKeepsTitleAndWorkingStartAction",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.ExternalPcmRecognitionTest",
+      "test": "localRecognizerConsumesInjectedPcmInsteadOfThePhoneMicrophone",
+      "statusCode": -4,
+      "result": "skipped"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.FinalSpeechListenerTest",
+      "test": "emptyPhoneResultIsStillTerminal",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.FinalSpeechListenerTest",
+      "test": "phoneResultsAndEndOfSpeechUseTheSameFinalCallback",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.FinalSpeechListenerTest",
+      "test": "emptyCarSegmentsAndSpeechBoundariesKeepWaitingForTheQuestion",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.FinalSpeechListenerTest",
+      "test": "segmentedResultIsDeliveredOnceDespiteLaterResultsAndErrors",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.FinalSpeechListenerTest",
+      "test": "partialResultsAreNeverSubmittedAndEmptySessionFailsOnce",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.ModelSelectionStoreTest",
+      "test": "malformedAndCrossProviderPreferencesFallBackWithoutOverwritingData",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.ModelSelectionStoreTest",
+      "test": "remembersEachProviderAndNewStoreInstance",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.ModelSelectionStoreTest",
+      "test": "observersSeeAtomicPairsAndStopAfterClose",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.PhoneSmokeTest",
+      "test": "choosesModelsRemembersEachProviderAndRestoresAfterRelaunch",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.PhoneSmokeTest",
+      "test": "titleIsTheWordMarkWithTheDotInSignature",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.PhoneSmokeTest",
+      "test": "startButtonAndActivityRecreation",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.PocketCarPlaybackTest",
+      "test": "pocketOutputStopsDuringPreparationAndPlaybackAndRestarts",
+      "statusCode": -4,
+      "result": "skipped"
+    },
+    {
+      "class": "com.azentrius.lautwerk.prototype.VoicePlaybackDeviceTest",
+      "test": "foregroundServicePlaysTheFixedSampleWithoutMicrophoneOrProvider",
+      "statusCode": -4,
+      "result": "skipped"
+    }
+  ]
+}

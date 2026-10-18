@@ -1,0 +1,20 @@
+[
+  {
+    "package": "com.azentrius.lautwerk",
+    "activity": "com.azentrius.lautwerk.app.MainActivity",
+    "status": "ok",
+    "foregroundVerified": true
+  },
+  {
+    "package": "com.azentrius.lautwerk.prototype.phone",
+    "activity": "com.azentrius.lautwerk.prototype.MainActivity",
+    "status": "ok",
+    "foregroundVerified": true
+  },
+  {
+    "package": "com.azentrius.lautwerk.prototype.dhu",
+    "activity": "com.azentrius.lautwerk.prototype.MainActivity",
+    "status": "ok",
+    "foregroundVerified": true
+  }
+]

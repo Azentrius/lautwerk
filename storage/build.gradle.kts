@@ -3,7 +3,7 @@ plugins {
     id("com.android.library")
 }
 android {
-    namespace = "de.azentrius.lautwerk.storage"
+    namespace = "com.azentrius.lautwerk.storage"
     compileSdk = 37
     defaultConfig {
         minSdk = 28

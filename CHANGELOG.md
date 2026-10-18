@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0 – 2026-10-18
+
+Move the Android package names to com.azentrius.lautwerk following the move to azentrius.com.
+
+- New application IDs: `com.azentrius.lautwerk`, `com.azentrius.lautwerk.prototype.dhu` and
+  `com.azentrius.lautwerk.prototype.phone`. All module namespaces, source packages, fully qualified
+  components and internal intent identifiers use `com.azentrius.lautwerk.*`.
+- Android treats these as new apps. Uninstall the old packages `de.azentrius.lautwerk`,
+  `de.azentrius.lautwerk.prototype.dhu` and `de.azentrius.lautwerk.prototype.phone` before installing
+  the new APKs. Uninstalling deletes their local data; export any chats you want to keep first.
+- API keys and conversation histories do not move to the new apps. Android Keystore access is bound
+  to the app identity; there is no migration. Enter keys and select providers, models and voices again
+  in each new app. The existing encrypted formats and Keystore alias strings are unchanged.
+- Keep the Lautwerk name, design, provider and voice behavior, car template, category declaration,
+  HostValidator and external Pocket engine identity unchanged. Previous Android Auto acceptance and
+  installer metadata do not transfer to the new package; validate visibility separately.
+- All three apps use versionCode 300; the assistant is 0.3.0 and the prototypes are 0.3.0-prototype.
+  Historical evidence, design snapshots and earlier changelog entries are preserved.
+
 ## 0.2.0 – 2026-10-18
 
 Rename the app from OpenAuto AI to Lautwerk. For Android it is a new app: nothing is carried over

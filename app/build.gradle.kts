@@ -5,10 +5,10 @@ plugins {
 }
 val appVersionCode: Int by rootProject.extra
 android {
-    namespace = "de.azentrius.lautwerk.app"
+    namespace = "com.azentrius.lautwerk.app"
     compileSdk = 37
     defaultConfig {
-        applicationId = "de.azentrius.lautwerk"
+        applicationId = "com.azentrius.lautwerk"
         minSdk = 29
         targetSdk = 36
         versionCode = appVersionCode

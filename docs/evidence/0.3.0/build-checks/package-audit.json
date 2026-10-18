@@ -1,0 +1,2751 @@
+{
+  "passed": true,
+  "sourceFilesMechanicallyRenamed": 116,
+  "historicalFilesByteUnchanged": 545,
+  "existingChangelogEntriesUnchanged": true,
+  "unexpectedLegacyMatches": 0,
+  "allowedLocations": [
+    {
+      "search": "oldDotPrefix",
+      "file": "CHANGELOG.md",
+      "line": 10,
+      "allowance": "approved-030-changelog-uninstall-notice"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "CHANGELOG.md",
+      "line": 11,
+      "allowance": "approved-030-changelog-uninstall-notice"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "CHANGELOG.md",
+      "line": 27,
+      "allowance": "existing-changelog-entry"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "CHANGELOG.md",
+      "line": 28,
+      "allowance": "existing-changelog-entry"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "CHANGELOG.md",
+      "line": 29,
+      "allowance": "existing-changelog-entry"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "design/azentrius/upstream-f2c9df4/android-auto.md",
+      "line": 9,
+      "allowance": "immutable-design-snapshot"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/SIDELOADING.md",
+      "line": 16,
+      "allowance": "approved-installation-uninstall-command"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/SIDELOADING.md",
+      "line": 17,
+      "allowance": "approved-installation-uninstall-command"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/SIDELOADING.md",
+      "line": 18,
+      "allowance": "approved-installation-uninstall-command"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/README.md",
+      "line": 43,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/README.md",
+      "line": 115,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/README.md",
+      "line": 116,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/README.md",
+      "line": 117,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/README.md",
+      "line": 119,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/README.md",
+      "line": 120,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/README.md",
+      "line": 121,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/README.md",
+      "line": 145,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 1,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 6,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 9,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 16,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 23,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 30,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 37,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 44,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 49,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 52,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 59,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 64,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 67,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 74,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 81,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 88,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 95,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 102,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 109,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 116,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 121,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 124,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 131,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 134,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 137,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 142,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 145,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 152,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 159,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 166,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 173,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 180,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 187,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 194,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 201,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 208,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 213,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 216,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 223,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 230,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 237,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 244,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 251,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 256,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 259,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 266,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 273,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 280,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 287,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 294,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 299,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 302,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 309,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 312,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 315,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 320,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 323,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 330,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/instrumentation.txt",
+      "line": 333,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 10,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 15,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 21,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 27,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 33,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 39,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 45,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 51,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 57,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 63,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 69,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 75,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 81,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 87,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 93,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 99,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 105,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 111,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 117,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 123,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 129,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 135,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/car-all/result.json",
+      "line": 141,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/car-service.txt",
+      "line": 4,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-after.json",
+      "line": 14,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-after.json",
+      "line": 20,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-after.json",
+      "line": 26,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-after.json",
+      "line": 32,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-after.json",
+      "line": 38,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-before.json",
+      "line": 14,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-before.json",
+      "line": 20,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-before.json",
+      "line": 26,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-before.json",
+      "line": 32,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-before.json",
+      "line": 38,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-final.json",
+      "line": 14,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-final.json",
+      "line": 20,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-final.json",
+      "line": 26,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-final.json",
+      "line": 32,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/device/versions-final.json",
+      "line": 38,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 6,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 9,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 16,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 23,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 30,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 37,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 44,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 51,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 58,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 65,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 72,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 79,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 86,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 93,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 100,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 107,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 114,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 119,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 122,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 129,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 136,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 143,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 150,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 157,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 162,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 165,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 172,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 179,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 186,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 193,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 200,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 207,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 214,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 221,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 228,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 235,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 242,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 249,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 256,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 261,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 264,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 271,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 278,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 285,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 292,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 299,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 306,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 313,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 320,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 327,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 334,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 341,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 348,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 355,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 362,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 369,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 376,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 383,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 390,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 397,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 402,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 405,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 412,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 419,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 426,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 433,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 440,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 447,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 454,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 459,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 462,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 469,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 476,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 483,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 490,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 497,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 504,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 511,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 518,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 525,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 532,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 539,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 546,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 553,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 558,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 561,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 568,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 575,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 582,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 589,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 596,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 603,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 610,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 617,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 624,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 629,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 632,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 639,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 646,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 653,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 660,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 667,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 674,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 681,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 688,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 695,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 702,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 709,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 716,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 723,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 728,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 731,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 738,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 745,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 752,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 759,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 766,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 773,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 780,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 785,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 788,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 795,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 802,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 809,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 816,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 823,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 828,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 831,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 838,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 845,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 852,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 859,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 866,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 873,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 880,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 887,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 894,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 901,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 908,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 915,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 922,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 929,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 936,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 943,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 950,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 957,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 964,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 971,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 978,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 983,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 986,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 993,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 998,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1001,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1008,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1015,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1022,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1029,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1036,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1041,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1044,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1051,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1052,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1055,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1058,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1065,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1072,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1073,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1078,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1083,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1086,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1093,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1100,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1107,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1114,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1121,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1126,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1129,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1136,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1141,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1157,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1164,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1171,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1178,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1185,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1192,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/instrumentation.txt",
+      "line": 1199,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 10,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 15,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 21,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 27,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 33,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 39,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 45,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 51,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 57,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 63,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 69,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 75,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 81,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 87,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 93,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 99,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 105,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 111,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 117,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 123,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 129,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 135,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 141,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 147,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 153,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 159,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 165,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 171,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 177,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 183,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 189,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 195,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 201,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 207,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 213,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 219,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 225,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 231,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 237,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 243,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 249,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 255,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 261,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 267,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 273,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 279,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 285,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 291,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 297,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 303,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 309,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 315,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 321,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 327,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 333,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 339,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 345,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 351,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 357,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 363,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 369,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 375,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 381,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 387,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 393,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 399,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 405,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 411,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 417,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 423,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 429,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 435,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 441,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 447,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 453,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 459,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 465,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 471,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 477,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 483,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 489,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 495,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 501,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/phone-all/result.json",
+      "line": 507,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 1,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 6,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 9,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 16,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 23,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 30,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 37,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 44,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 51,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 58,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 65,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 72,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 79,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 86,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 93,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 100,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 107,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 114,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 121,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 128,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 135,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 142,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 149,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 156,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 163,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 170,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 177,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 184,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/instrumentation.txt",
+      "line": 191,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 10,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 15,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 21,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 27,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 33,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 39,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 45,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 51,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 57,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 63,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 69,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 75,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 81,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 87,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldDotPrefix",
+      "file": "docs/evidence/0.2.0/storage-all/result.json",
+      "line": 93,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "design/azentrius/upstream-f2c9df4/android-auto.md",
+      "line": 272,
+      "allowance": "immutable-design-snapshot"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 135,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 211,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 330,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 343,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 344,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 345,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 346,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 347,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 348,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 349,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 350,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 351,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 352,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 353,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 354,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 376,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 377,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 378,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 379,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 380,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 381,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 382,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/build.txt",
+      "line": 383,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/rename-audit.txt",
+      "line": 2,
+      "allowance": "historical-device-evidence"
+    },
+    {
+      "search": "oldSlashPrefix",
+      "file": "docs/evidence/0.2.0/build-checks/rename-audit.txt",
+      "line": 3,
+      "allowance": "historical-device-evidence"
+    }
+  ]
+}

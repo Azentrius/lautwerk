@@ -1,0 +1,80 @@
+{
+  "legacy-assistant": {
+    "installed": true,
+    "versionName": "0.2.0",
+    "versionCode": 200,
+    "installerPackageName": "null"
+  },
+  "legacy-dhu": {
+    "installed": true,
+    "versionName": "0.2.0-prototype",
+    "versionCode": 200,
+    "installerPackageName": "com.android.vending"
+  },
+  "legacy-phone": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "previous-assistant": {
+    "installed": true,
+    "versionName": "0.1.19",
+    "versionCode": 119,
+    "installerPackageName": "null"
+  },
+  "previous-dhu": {
+    "installed": true,
+    "versionName": "0.1.19-prototype",
+    "versionCode": 119,
+    "installerPackageName": "com.android.vending"
+  },
+  "alba-comparison": {
+    "installed": true,
+    "versionName": "1.0-diagnostic",
+    "versionCode": 1,
+    "installerPackageName": "null"
+  },
+  "pocket-engine": {
+    "installed": true,
+    "versionName": "0.5.3-openauto-cancel.1",
+    "versionCode": 24,
+    "installerPackageName": "null"
+  },
+  "com.azentrius.lautwerk": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "com.azentrius.lautwerk.prototype.dhu": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "com.azentrius.lautwerk.prototype.phone": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "com.azentrius.lautwerk.test": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "com.azentrius.lautwerk.prototype.dhu.test": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "com.azentrius.lautwerk.storage.test": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  }
+}

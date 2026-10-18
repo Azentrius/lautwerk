@@ -3,7 +3,7 @@ plugins {
     id("com.android.library")
 }
 android {
-    namespace = "de.azentrius.lautwerk.car"
+    namespace = "com.azentrius.lautwerk.car"
     compileSdk = 37
     defaultConfig { minSdk = 28 }
     compileOptions {

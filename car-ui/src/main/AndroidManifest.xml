@@ -11,8 +11,8 @@
         <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
     </queries>
     <application android:usesCleartextTraffic="false">
-        <activity android:name="de.azentrius.lautwerk.car.voice.VoiceSetupActivity" android:exported="false" />
-        <service android:name="de.azentrius.lautwerk.car.voice.CarVoiceService" android:exported="false"
+        <activity android:name="com.azentrius.lautwerk.car.voice.VoiceSetupActivity" android:exported="false" />
+        <service android:name="com.azentrius.lautwerk.car.voice.CarVoiceService" android:exported="false"
             android:foregroundServiceType="microphone|mediaPlayback" />
     </application>
 </manifest>

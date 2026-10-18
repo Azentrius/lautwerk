@@ -1,6 +1,9 @@
 # Windows: build, install and check in the DHU
 
-Project state 0.1.14: DHU UI 0.1.14-prototype with the requested Azentrius colors; the phone comparison
+Current version: 0.3.0, code 300. Use the [package replacement steps](SIDELOADING.md#installing-030)
+for a first installation of the new IDs. The design notes below describe the earlier UI baseline.
+
+Historical project state 0.1.14: DHU UI 0.1.14-prototype with the requested Azentrius colors; the phone comparison
 variant stays at 0.1.12-prototype. The German/English flow is unchanged.
 Car design, baseline measurement and acceptance: [ANDROID_AUTO_DESIGN.md](ANDROID_AUTO_DESIGN.md).
 The assistant app 0.1.13-dev is separate; its installation and the hands-on API and voice test are in
@@ -35,6 +38,9 @@ The phone comparison variant `phoneDebug` deliberately registers NO car app.
 
 ## 2. Install only the DHU prototype
 
+For 0.3.0, first complete the [package replacement steps](SIDELOADING.md#installing-030).
+The new application ID does not inherit old keys, histories, permissions or Android Auto acceptance.
+
 Unlock the Pixel, enable USB debugging, confirm the RSA prompt if asked.
 
 ```powershell
@@ -50,7 +56,7 @@ with the Pixel's serial number.
 $serial = 'SERIAL_FROM_ADB_DEVICES'
 $apk = Join-Path (Get-Location) 'prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk'
 & $adb -s $serial install -r $apk
-& $adb -s $serial shell am start -n 'de.azentrius.lautwerk.prototype.dhu/de.azentrius.lautwerk.prototype.MainActivity'
+& $adb -s $serial shell am start -n 'com.azentrius.lautwerk.prototype.dhu/com.azentrius.lautwerk.prototype.MainActivity'
 ```
 
 For the downloaded APK, set `$apk` to its full path instead. With only one connected device,
@@ -65,17 +71,17 @@ The template shows the selection below the test status.
 `INSTALL_FAILED_UPDATE_INCOMPATIBLE` means the package was built with a different debug certificate.
 Do not uninstall automatically: that would delete package data. Either use the same signing key or
 decide on the path deliberately. A fresh local build uses your local Android debug key.
-The assistant package `de.azentrius.lautwerk` is not affected by these commands.
+The assistant package `com.azentrius.lautwerk` is not affected by these commands.
 
 ## 3. Check the service registration
 
 ```powershell
-& $adb -s $serial shell pm path de.azentrius.lautwerk.prototype.dhu
-& $adb -s $serial shell cmd package query-services --brief -a androidx.car.app.CarAppService -p de.azentrius.lautwerk.prototype.dhu
-& $adb -s $serial shell dumpsys package de.azentrius.lautwerk.prototype.dhu
+& $adb -s $serial shell pm path com.azentrius.lautwerk.prototype.dhu
+& $adb -s $serial shell cmd package query-services --brief -a androidx.car.app.CarAppService -p com.azentrius.lautwerk.prototype.dhu
+& $adb -s $serial shell dumpsys package com.azentrius.lautwerk.prototype.dhu
 ```
 
-Expected service: `de.azentrius.lautwerk.car.LautwerkCarService`.
+Expected service: `com.azentrius.lautwerk.car.LautwerkCarService`.
 If the service is missing, check the package and build variant first. An existing service
 registration only proves that Android knows the service, not that Android Auto allows it or shows it
 in the launcher.
@@ -164,7 +170,7 @@ disconnect the other test devices.
 ## 7. Existing assistant app
 
 `:app:assembleDebug` produces `app\build\outputs\apk\debug\app-debug.apk`.
-This module has its own package `de.azentrius.lautwerk`.
+This module has its own package `com.azentrius.lautwerk`.
 It was not connected to the car service for the DHU visibility test.
 Local storage, Keystore and error cases are checked with isolated test data; details in
 [LOCAL_STORAGE.md](LOCAL_STORAGE.md). Instructions and the confirmed state of the new voice feature

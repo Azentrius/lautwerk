@@ -59,7 +59,7 @@ Encryption still uses the Android Keystore.
 
 ## Checking on the Pixel
 
-0.1.12-dev is installed as an update of the assistant package (`de.azentrius.lautwerk` since 0.2.0). The DHU test app is a different
+0.1.12-dev is installed as an update of the assistant package (`com.azentrius.lautwerk` since 0.2.0). The DHU test app is a different
 package with its own storage. In case of a signature conflict, do not uninstall or clear app data;
 use the same debug key instead.
 
@@ -68,7 +68,7 @@ Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\Lautwerk'
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb devices -l
 & $adb -s 56161FDCH000H8 install -r '.\app\build\outputs\apk\debug\app-debug.apk'
-& $adb -s 56161FDCH000H8 shell am start -n 'de.azentrius.lautwerk/de.azentrius.lautwerk.app.MainActivity'
+& $adb -s 56161FDCH000H8 shell am start -n 'com.azentrius.lautwerk/com.azentrius.lautwerk.app.MainActivity'
 ```
 
 For a supplied APK, replace the install path with its full path. On another device, use its serial number from

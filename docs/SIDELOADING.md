@@ -1,5 +1,47 @@
 # Lautwerk via sideload on the car display
 
+## Installing 0.3.0
+
+The new packages are `com.azentrius.lautwerk`, `com.azentrius.lautwerk.prototype.dhu` and
+`com.azentrius.lautwerk.prototype.phone`. Android installs them as new apps, not updates of 0.2.0.
+Before removing an old app, export any chats you want to keep as text. Uninstalling deletes its local
+keys, chat archive and settings. Android Keystore access is tied to the app identity, so no keys or
+histories are migrated and the new apps cannot import the text exports. Enter keys only in each new
+app, then select its provider, model and voice again.
+
+With exactly the intended phone selected via `ANDROID_SERIAL`, remove only the three previous app
+packages that are installed. Skip any package that is absent:
+
+```sh
+adb uninstall de.azentrius.lautwerk
+adb uninstall de.azentrius.lautwerk.prototype.dhu
+adb uninstall de.azentrius.lautwerk.prototype.phone
+```
+
+Build with JDK 17 as described in [START_WINDOWS.md](START_WINDOWS.md), then install from the project root:
+
+```sh
+adb install -r app/build/outputs/apk/debug/app-debug.apk
+adb install -r prototype-app/build/outputs/apk/dhu/debug/prototype-app-dhu-debug.apk
+adb install -r prototype-app/build/outputs/apk/phone/debug/prototype-app-phone-debug.apk
+adb shell am start -n com.azentrius.lautwerk/com.azentrius.lautwerk.app.MainActivity
+adb shell am start -n com.azentrius.lautwerk.prototype.dhu/com.azentrius.lautwerk.prototype.MainActivity
+adb shell am start -n com.azentrius.lautwerk.prototype.phone/com.azentrius.lautwerk.prototype.MainActivity
+adb shell cmd package query-services --brief -a androidx.car.app.CarAppService -p com.azentrius.lautwerk.prototype.dhu
+```
+
+Expected: version 0.3.0 (assistant) or 0.3.0-prototype (both prototypes), code 300, and exactly one
+`com.azentrius.lautwerk.car.LautwerkCarService` in the DHU package. A registered service and successful
+phone launch do not establish Android Auto launcher visibility. Installer metadata and previous host
+acceptance do not transfer from the old package. These are ordinary ADB installations, without a
+Google Play installer override. Stop on a signature conflict rather than deleting data from a new app.
+
+The Pocket companion engine, its model pack and separate diagnostic apps are not removed by these
+commands. The historical experiments below are not acceptance evidence for the new IDs. See the
+[0.3.0 automated device report](evidence/0.3.0/README.md) for the actual test scope.
+
+## Historical sideload baseline
+
 Historical 0.1.15 baseline below. A later manual test confirmed visibility/opening on the vehicle
 display after an approved installation-origin experiment. The 0.1.17 installation and
 audio evidence are in [CAR_VOICE.md](CAR_VOICE.md); its Start action no longer runs a car UI counter.
@@ -53,10 +95,10 @@ $serial = 'SERIAL_FROM_ADB_DEVICES'
 $apk = Join-Path (Get-Location) 'prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk'
 Get-FileHash -Algorithm SHA256 -LiteralPath $apk
 & $adb -s $serial install -r $apk
-& $adb -s $serial shell cmd package query-services --brief -a androidx.car.app.CarAppService -p de.azentrius.lautwerk.prototype.dhu
+& $adb -s $serial shell cmd package query-services --brief -a androidx.car.app.CarAppService -p com.azentrius.lautwerk.prototype.dhu
 ```
 
-Expected are `Success` and `de.azentrius.lautwerk.car.LautwerkCarService`. If the same test version is
+Expected are `Success` and `com.azentrius.lautwerk.car.LautwerkCarService`. If the same test version is
 already installed, skip the reinstall. If the signature differs, do not uninstall or clear package
 data: that would not be an update and could lose data. No Play installer ID is set for the comparison.
 
