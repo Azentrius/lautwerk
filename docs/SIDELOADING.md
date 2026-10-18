@@ -1,4 +1,4 @@
-# OpenAuto AI via sideload on the car display
+# Lautwerk via sideload on the car display
 
 Historical 0.1.15 baseline below. A later manual test confirmed visibility/opening on the vehicle
 display after an approved installation-origin experiment. The 0.1.17 installation and
@@ -6,20 +6,20 @@ audio evidence are in [CAR_VOICE.md](CAR_VOICE.md); its Start action no longer r
 
 As of 2026-10-12. The goal is an APK distributed through GitHub that users can install on their phone
 and open in the car. To get there, we first check the unchanged UI prototype 0.1.15 in a stationary
-car. A confirmed path for OpenAuto AI on real head units does not exist yet.
+car. A confirmed path for Lautwerk on real head units does not exist yet.
 
 **Active attempt: ID.7 with native wireless connection, without AAWireless.**
 The Kia/adapter attempts are deferred. First, the unchanged state is measured in
 the ID.7; the adapter notes stay documented as a later option and are not instructions for the ID.7's
 native connection.
 
-The test app `dev.openautoai.prototype.dhu` shows the title, provider, model and a Start test counter.
-The actual AI conversations currently run only in `dev.openautoai.app`. A successful visibility test
+The test app (DHU variant of `prototype-app`) shows the title, provider, model and a Start test counter.
+The actual AI conversations currently run only in the assistant app (`app`). A successful visibility test
 would therefore be the first step towards the car app, not yet a working AI conversation in the car.
 
 ## Paths we check
 
-| Path | Assessment for OpenAuto AI |
+| Path | Assessment for Lautwerk |
 | --- | --- |
 | Normal APK installation and native Android Auto connection | Baseline test in the ID.7. Installation alone does not prove launcher visibility. |
 | Normal APK installation and AAWireless | Baseline test in the Kia with the previous settings recorded. |
@@ -53,10 +53,10 @@ $serial = 'SERIAL_FROM_ADB_DEVICES'
 $apk = Join-Path (Get-Location) 'prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk'
 Get-FileHash -Algorithm SHA256 -LiteralPath $apk
 & $adb -s $serial install -r $apk
-& $adb -s $serial shell cmd package query-services --brief -a androidx.car.app.CarAppService -p dev.openautoai.prototype.dhu
+& $adb -s $serial shell cmd package query-services --brief -a androidx.car.app.CarAppService -p de.azentrius.lautwerk.prototype.dhu
 ```
 
-Expected are `Success` and `dev.openautoai.car.OpenAutoCarService`. If the same test version is
+Expected are `Success` and `de.azentrius.lautwerk.car.LautwerkCarService`. If the same test version is
 already installed, skip the reinstall. If the signature differs, do not uninstall or clear package
 data: that would not be an update and could lose data. No Play installer ID is set for the comparison.
 
@@ -68,7 +68,7 @@ of the AAWireless phone app and the current values of developer mode and passthr
 phone app version are separate values. No firmware update during a comparison pair.
 
 1. Close a running DHU normally. Connect the phone normally to exactly one car.
-2. Look for "OpenAuto AI" in the Android Auto launcher. If the app is only offered under
+2. Look for "Lautwerk" in the Android Auto launcher. If the app is only offered under
    "Customize launcher" but is deselected, note this and select it.
 3. If visible: open the app, check the title and provider/model. Tap "Start" three times. A rising
    test counter is expected. No microphone and no AI request.
@@ -110,7 +110,7 @@ evidence.
 ```powershell
 & $adb -s $serial shell dumpsys package com.google.android.projection.gearhead |
     Select-String '^\s*version(Name|Code)=' | Select-Object -First 2
-& $adb -s $serial logcat -d -v time 'OpenAutoAI:I' '*:S' |
+& $adb -s $serial logcat -d -v time 'Lautwerk:I' '*:S' |
     Select-String 'car\.(createHostValidator|onCreateSession|onCreateScreen|onGetTemplate|start)'
 ```
 
@@ -140,7 +140,7 @@ resulting audio and lifecycle questions are a separate development step.
 
 - [Google: real vehicles and the limit of unknown sources](https://developer.android.com/training/cars/testing#test-in-real-vehicles)
 - [Google: APK distribution outside Google Play](https://developer.android.com/distribute/marketing-tools/alternative-distribution)
-- [Fermata developer: AAWireless developer mode on Android 16](https://github.com/AndreyPavlenko/Fermata/discussions/756) – statement about Fermata, not a test of OpenAuto AI or Android 17.
+- [Fermata developer: AAWireless developer mode on Android 16](https://github.com/AndreyPavlenko/Fermata/discussions/756) – statement about Fermata, not a test of Lautwerk or Android 17.
 - [AAAD: known limitations from Android 14 on](https://github.com/shmykelsa/AAAD)
 - [KingInstaller: described installation source](https://github.com/fcaronte/KingInstaller)
 

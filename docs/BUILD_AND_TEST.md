@@ -17,7 +17,7 @@ design system `8eb2321` / O1 `65a48d5` without changes.
 | Phone comparison, only built | 0.1.15-prototype / code 5 |
 | Android Auto active | 17.7.663654-release / 177663654 |
 | DHU | 2.0-windows, build 2022-03-30-438482292 |
-| Host Car API | 8; `10-12 22:20:37.863 I/OpenAutoAI(25368): car.onCreateScreen api=8` |
+| Host Car API | 8; log line `car.onCreateScreen api=8` at 10-12 22:20:37.863 |
 | Device languages and night mode | `de-DE,en-US`, night mode `yes`; restored and unchanged respectively |
 
 The Android Auto system stub version 1.2.562600-stub, which is also listed, is not the active test
@@ -78,7 +78,7 @@ documented text area. Coordinates and RGB values: [contrast.json](evidence/0.1.1
 [Six starts](evidence/0.1.15/six-starts.json), [car events](evidence/0.1.15/car-events.txt).
 
 The full 64-view acceptance test of 0.1.14 is not claimed as run again; it remains in the
-[archived (German) 0.1.14 test report](https://github.com/Azentrius/openauto-ai/blob/24732451155dd8cde52f7437872dd9c6fceff0cc/docs/history/BUILD_AND_TEST-0.1.14.md).
+[archived (German) 0.1.14 test report](https://github.com/Azentrius/lautwerk/blob/24732451155dd8cde52f7437872dd9c6fceff0cc/docs/history/BUILD_AND_TEST-0.1.14.md).
 
 ### Open host observation: rotary focus
 

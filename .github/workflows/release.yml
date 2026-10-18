@@ -81,21 +81,21 @@ jobs:
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          name=openauto-ai-$VERSION
+          name=lautwerk-$VERSION
           git archive --format=tar.gz --prefix="$name/" -o "$name.tar.gz" HEAD
           sha256sum "$name.tar.gz" > SHA256SUMS
 
       - name: Build provenance for the tarball
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
-          subject-path: openauto-ai-${{ steps.version.outputs.version }}.tar.gz
+          subject-path: lautwerk-${{ steps.version.outputs.version }}.tar.gz
 
       - name: Release notes
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           sh tools/release-notes.sh "$VERSION" > notes.md
-          name=openauto-ai-$VERSION
+          name=lautwerk-$VERSION
           {
             echo
             echo "### Source"
@@ -116,8 +116,8 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
           PRERELEASE: ${{ inputs.prerelease }}
         run: |
-          set -- --target "$GITHUB_SHA" --title "OpenAuto AI $VERSION" --notes-file notes.md
+          set -- --target "$GITHUB_SHA" --title "Lautwerk $VERSION" --notes-file notes.md
           if [ "$PRERELEASE" = "true" ]; then
             set -- "$@" --prerelease
           fi
-          gh release create "v$VERSION" "openauto-ai-$VERSION.tar.gz" SHA256SUMS "$@"
+          gh release create "v$VERSION" "lautwerk-$VERSION.tar.gz" SHA256SUMS "$@"

@@ -1,4 +1,6 @@
-# OpenAuto AI
+# Lautwerk
+
+*A voice box for your AI*
 
 An experimental Android app for voice conversations with OpenAI and Claude on your own API keys, and a
 minimal Android Auto prototype (Car App Library) tested in the Desktop Head Unit (DHU). It is a
@@ -15,9 +17,10 @@ What changed in each version: [CHANGELOG.md](CHANGELOG.md). What comes next: [RO
 
 ## Status
 
-Current repository version: **0.1.18**. The approved phone design and voice-sample pronunciation
-change are merged. The physical Pixel's car tests still use the retained 0.1.17-prototype/code 117
-APK; the separate assistant is installed as 0.1.18/code 118.
+Current repository version: **0.2.0**. With 0.2.0 the app got its name Lautwerk and new package
+IDs. Android treats it as a new app: API keys and chats of earlier installations are not carried over;
+the [CHANGELOG](CHANGELOG.md) lists the previous names and IDs. The device checks below were made with
+earlier versions; the Pixel, DHU and ID.7 checks of 0.2.0 are still to be done.
 
 0.1.17 connects the existing Android Auto package to audio and the shared conversation controller.
 The title, app icon, provider/model line, host colors and single action remain. Start runs the mode
@@ -32,9 +35,9 @@ while the answer played after the host microphone overlay disappeared. See the p
 OpenAI car conversation and vehicle audio are not established by these Claude DHU results.
 
 Details: [app icon and installation](docs/APP_IDENTITY.md), [current test report](docs/BUILD_AND_TEST.md),
-[phone design](docs/DESIGN_SYSTEM.md),
-[design reference](https://github.com/Azentrius/design-system/tree/edd4c67da6d7c606296c3bbd13d7aa5da548f452)
-(private repository).
+[phone design audit of 0.1.18](docs/DESIGN_SYSTEM.md),
+[design reference f2c9df4](https://github.com/Azentrius/design-system/tree/f2c9df4a4c099cf5175ad29c1e783e432f6d1b73)
+(private repository, snapshot in [design/azentrius](design/azentrius/README.md)).
 
 ## Sideloading and real cars
 
@@ -63,18 +66,18 @@ test app. The old Start button on the phone's selection page remains a UI counte
 
 | Module / variant | Package | Purpose |
 |---|---|---|
-| `prototype-app:dhuDebug` | `dev.openautoai.prototype.dhu` | Experimental car service, audio diagnostics and conversation setup |
-| `prototype-app:phoneDebug` | `dev.openautoai.prototype.phone` | Comparison app without car registration |
-| `app:debug` | `dev.openautoai.app` | The phone app continued from 0.1.0, with providers, history and voice |
+| `prototype-app:dhuDebug` | `de.azentrius.lautwerk.prototype.dhu` | Experimental car service, audio diagnostics and conversation setup |
+| `prototype-app:phoneDebug` | `de.azentrius.lautwerk.prototype.phone` | Comparison app without car registration |
+| `app:debug` | `de.azentrius.lautwerk` | The phone app continued from 0.1.0, with providers, history and voice |
 
 The test packages do not replace the old app and take over none of its data. Inside
-`dev.openautoai.prototype.dhu`, phone and DHU share their selection. The three APKs use the same
+`de.azentrius.lautwerk.prototype.dhu`, phone and DHU share their selection. The three APKs use the same
 selection code but each has its own private storage. The selection does not check actual API account
 access. The car test app does not import the assistant's keys, voice preference or chat history.
 
 ## Category: a deliberately limited experiment
 
-**OpenAuto AI is not a POI app and has no proven permitted Android Auto category for general AI
+**Lautwerk is not a POI app and has no proven permitted Android Auto category for general AI
 conversations.**
 
 Only `dhuDebug` declares `androidx.car.app.category.POI`, as the template registration for this local UI

@@ -19,7 +19,7 @@ network connection and no claimed new car category.
 3. **"Play sample"** reads out a fixed sample sentence without microphone, chat data or AI request.
    **"Stop sample"** ends it at any time.
 4. If needed, choose "A little slower", "Normal" or "A little faster". Voice and speech rate are
-   saved immediately and only for OpenAuto AI. The system-wide Android settings stay unchanged.
+   saved immediately and only for Lautwerk. The system-wide Android settings stay unchanged.
 5. Choose **"Back to conversation"** and start a conversation. Both providers use the same
    selection. Leaving the settings page stops the preview and releases its audio focus.
 
@@ -45,8 +45,8 @@ and [Voice metadata](https://developer.android.com/reference/android/speech/tts/
 
 ## Trying it on the Pixel
 
-1. Open the assistant app `dev.openautoai.app`. It is separate from the DHU test app
-   `dev.openautoai.prototype.dhu`; both are currently called OpenAuto AI.
+1. Open the assistant app `de.azentrius.lautwerk`. It is separate from the DHU test app
+   `de.azentrius.lautwerk.prototype.dhu`; both are called Lautwerk.
 2. Under **"Settings"**, choose provider and model. Enter and save your own API key only on the
    phone, never in Git or a chat. An existing key stays saved even though the input field is empty.
 3. Tap "Start conversation" at the bottom. The button stays visible while scrolling. Allow the
@@ -195,25 +195,25 @@ processing and billing stop. See [PHONE_UI.md](PHONE_UI.md).
 ## Building and opening directly
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\OpenAuto AI'
+Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\Lautwerk'
 $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot'
 $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 .\gradlew.bat :app:assembleDebug
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb devices -l
 & $adb -s 56161FDCH000H8 install -r '.\app\build\outputs\apk\debug\app-debug.apk'
-& $adb -s 56161FDCH000H8 shell am start -n 'dev.openautoai.app/dev.openautoai.app.MainActivity'
+& $adb -s 56161FDCH000H8 shell am start -n 'de.azentrius.lautwerk/de.azentrius.lautwerk.app.MainActivity'
 ```
 
-For the download APK, change the path to `OpenAutoAI-0.1.12-assistant-debug.apk`. For other
+For a supplied APK, change the path to its full path. For other
 devices, replace the serial number. If the signature differs, do not uninstall or clear data; use
 the same debug key instead. The existing [DHU steps](START_WINDOWS.md) remain valid.
 
 ## Fix for the immediate cancellation in 0.1.6
 
-On the Pixel, `dev.openautoai.app` requested playback focus on 2026-10-12 at 00:58:52.043. At
+On the Pixel, the assistant app requested playback focus on 2026-10-12 at 00:58:52.043. At
 00:58:52.627 the Google speech service that had been started (`com.google.android.tts`) requested
-its own exclusive focus. OpenAuto AI received `AUDIOFOCUS_LOSS_TRANSIENT` and ended the recognition
+its own exclusive focus. The app received `AUDIOFOCUS_LOSS_TRANSIENT` and ended the recognition
 that had just started. This pattern repeated on further attempts. The package name of the Google
 service is not proof here that reading out was already in progress; the recording history reported
 `VOICE_RECOGNITION`.

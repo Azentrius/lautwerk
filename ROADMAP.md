@@ -1,6 +1,6 @@
 # Roadmap
 
-As of 0.1.18 (2026-10-13). What each version changed, with its tests and the manual
+As of 0.2.0 (2026-10-18). What each version changed, with its tests and the manual
 checks, is in [CHANGELOG.md](CHANGELOG.md).
 
 ## Where things stand
@@ -12,6 +12,9 @@ checks, is in [CHANGELOG.md](CHANGELOG.md).
 - 0.1.18 adds the approved styled phone title, updates the read-only design reference and spells AI
   in the fixed phone voice sample. A listening check accepted the sample. The Pixel retains the separately
   installed 0.1.17 car build, so phone and car evidence must keep their installed versions distinct.
+- 0.2.0 renames the app to Lautwerk, with new package IDs, Keystore aliases and export name (see
+  [CHANGELOG.md](CHANGELOG.md)). For Android it is a new app, so the Pixel, DHU and ID.7 checks below
+  have to be repeated with the new packages before they count for 0.2.0.
 - A manual check shows that the app now opens from the vehicle launcher after the approved
   installation-origin experiment. This is no general distribution or Play-category approval.
 
@@ -77,5 +80,5 @@ checks, is in [CHANGELOG.md](CHANGELOG.md).
    its documented failures. Keep successful Pixel tests separate from that unresolved emulator run.
    Raise the target SDK to 37 only after testing the Android 17 behavior changes on the device;
    running on Android 17 with target SDK 36 is not that validation.
-8. **Repository.** Maintain the source in [Azentrius/openauto-ai](https://github.com/Azentrius/openauto-ai)
+8. **Repository.** Maintain the source in [Azentrius/lautwerk](https://github.com/Azentrius/lautwerk)
    with its CI and release workflow. Weigh real test results before adding more car functions.

@@ -12,7 +12,7 @@ does not prevent the export.
 2. Below the chat title, tap **Export as text file**.
 3. Read the notice about the unencrypted copy. **Cancel** leaves everything unchanged.
 4. **Choose location** opens Android's save dialog. The suggested name is
-   `OpenAutoAI-Chat.txt`, without any part of your chat text in the file name.
+   `Lautwerk-Chat.txt`, without any part of your chat text in the file name.
 5. For a local copy, choose a local folder, e.g. **Downloads**, and save.
    With a cloud service, the file is transferred there by that service.
 6. Only **Text file saved** confirms that the write has completed.
@@ -25,7 +25,7 @@ chosen file is unencrypted and independent of the encrypted app archive. It rema
 the chat is deleted.
 
 The export is a text copy, not an encrypted backup and not an import format.
-It does not back up keys, settings or voice messages and cannot be restored into OpenAuto AI
+It does not back up keys, settings or voice messages and cannot be restored into Lautwerk
 automatically. The app archive is not changed.
 
 ## Cancellation and errors

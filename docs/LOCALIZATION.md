@@ -8,7 +8,7 @@ are **Start conversation**, **Continue conversation** and **End conversation**.
 
 Android selects German or English based on the device's language preferences.
 The first supported language in the list is used; if neither is present, English applies.
-There is no additional language switch in the app, and OpenAuto AI does not change the
+There is no additional language switch in the app, and Lautwerk does not change the
 system-wide device language.
 
 The phone UI, dialogs, fixed status and error messages, the notification, voice settings,

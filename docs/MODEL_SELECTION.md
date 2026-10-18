@@ -24,8 +24,8 @@ Invalid or corrupted settings fall back to a matching default without rewriting 
 
 The phone activity and the CarAppService of the DHU APK run in the same process and use this store.
 Both unregister their observers when the visible UI is left.
-The separately installed packages `dev.openautoai.app`, `dev.openautoai.prototype.phone`
-and `dev.openautoai.prototype.dhu` each have their own storage.
+The separately installed packages `de.azentrius.lautwerk`, `de.azentrius.lautwerk.prototype.phone`
+and `de.azentrius.lautwerk.prototype.dhu` each have their own storage.
 There is no exchange of data or keys between these APKs.
 
 `ChatApi`, `ConversationStore` and `SecretStore` use the extracted types.
@@ -61,7 +61,7 @@ account access or API behavior. No model migration and no paid call took place.
    [full Windows steps](START_WINDOWS.md).
 2. On the phone, in exactly this app, choose Claude / Anthropic and Claude Haiku 4.5.
 3. Close and reopen the app: the selection must be kept.
-4. Open OpenAuto AI in the connected DHU: check the title, provider and model.
+4. Open Lautwerk in the connected DHU: check the title, provider and model.
 5. Tap "Start": "Started · Test 1" must appear together with the selection.
 6. On the phone, choose OpenAI / GPT-5.4: the selection visible in the DHU should change.
 7. Switch back to Claude: Claude Haiku 4.5 must be selected again.
