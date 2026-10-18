@@ -3,7 +3,7 @@ plugins {
     id("com.android.library")
 }
 android {
-    namespace = "de.azentrius.lautwerk.settings"
+    namespace = "com.azentrius.lautwerk.settings"
     compileSdk = 37
     defaultConfig { minSdk = 28 }
     compileOptions {

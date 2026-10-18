@@ -1,0 +1,336 @@
+{
+  "passed": true,
+  "baseCommit": "1343bd5c5180eb08ab95efea3ff38c1da4d555c6",
+  "version": "0.3.0",
+  "versionCode": 300,
+  "jdk": "Eclipse Adoptium 17.0.19+10",
+  "gradle": "9.8.1",
+  "allCiGradleTasksPassed": true,
+  "extraDeviceBuild": ":storage:assembleDebugAndroidTest",
+  "jvm": {
+    "core": {
+      "totals": {
+        "tests": 22,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "suites": [
+        {
+          "name": "com.azentrius.lautwerk.core.ai.CancellationSourceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.core.ai.ModelSelectionTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.core.i18n.LocalizationTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.core.storage.ConversationSearchTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.core.storage.ConversationTextExportTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "providers": {
+      "totals": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "suites": [
+        {
+          "name": "com.azentrius.lautwerk.providers.OkHttpTransportTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.providers.ProviderChatClientTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.providers.ProviderLanguageTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "voice": {
+      "totals": {
+        "tests": 57,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "suites": [
+        {
+          "name": "com.azentrius.lautwerk.voice.AudioCheckTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.voice.ConversationVoiceBackendTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.voice.PlaybackFocusAudioTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.voice.SerialAudioCaptureTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.voice.SpeechChunksTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.voice.VoiceControllerTest",
+          "tests": 20,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "name": "com.azentrius.lautwerk.voice.VoiceInterruptionsTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ]
+    }
+  },
+  "lint": [
+    {
+      "module": "app",
+      "variant": "debug",
+      "errors": 0,
+      "warnings": 24,
+      "issues": [
+        {
+          "id": "OldTargetApi",
+          "severity": "Warning"
+        },
+        {
+          "id": "GradleDependency",
+          "severity": "Warning"
+        },
+        {
+          "id": "GradleDependency",
+          "severity": "Warning"
+        },
+        {
+          "id": "ModifierParameter",
+          "severity": "Warning"
+        },
+        {
+          "id": "ModifierParameter",
+          "severity": "Warning"
+        },
+        {
+          "id": "DataExtractionRules",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        },
+        {
+          "id": "UnusedResources",
+          "severity": "Warning"
+        }
+      ]
+    },
+    {
+      "module": "prototype-app",
+      "variant": "phoneDebug",
+      "errors": 0,
+      "warnings": 3,
+      "issues": [
+        {
+          "id": "OldTargetApi",
+          "severity": "Warning"
+        },
+        {
+          "id": "DataExtractionRules",
+          "severity": "Warning"
+        },
+        {
+          "id": "Overdraw",
+          "severity": "Warning"
+        }
+      ]
+    },
+    {
+      "module": "prototype-app",
+      "variant": "dhuDebug",
+      "errors": 0,
+      "warnings": 4,
+      "issues": [
+        {
+          "id": "OldTargetApi",
+          "severity": "Warning"
+        },
+        {
+          "id": "ExportedService",
+          "severity": "Warning"
+        },
+        {
+          "id": "DataExtractionRules",
+          "severity": "Warning"
+        },
+        {
+          "id": "Overdraw",
+          "severity": "Warning"
+        }
+      ]
+    },
+    {
+      "module": "car-ui",
+      "variant": "debug",
+      "errors": 0,
+      "warnings": 1,
+      "issues": [
+        {
+          "id": "PrivateResource",
+          "severity": "Warning"
+        }
+      ]
+    },
+    {
+      "module": "settings",
+      "variant": "debug",
+      "errors": 0,
+      "warnings": 0,
+      "issues": []
+    },
+    {
+      "module": "storage",
+      "variant": "debug",
+      "errors": 0,
+      "warnings": 1,
+      "issues": [
+        {
+          "id": "ApplySharedPref",
+          "severity": "Warning"
+        }
+      ]
+    },
+    {
+      "module": "speech-output",
+      "variant": "debug",
+      "errors": 0,
+      "warnings": 0,
+      "issues": []
+    }
+  ],
+  "localBuildRecovery": "Initial incremental dexing used stale artifacts from the former checkout path. A clean build with the build cache disabled passed; no source workaround was added."
+}

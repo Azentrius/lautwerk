@@ -1,0 +1,80 @@
+{
+  "legacy-assistant": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "legacy-dhu": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "legacy-phone": {
+    "installed": false,
+    "versionName": null,
+    "versionCode": null,
+    "installerPackageName": null
+  },
+  "previous-assistant": {
+    "installed": true,
+    "versionName": "0.1.19",
+    "versionCode": 119,
+    "installerPackageName": "null"
+  },
+  "previous-dhu": {
+    "installed": true,
+    "versionName": "0.1.19-prototype",
+    "versionCode": 119,
+    "installerPackageName": "com.android.vending"
+  },
+  "alba-comparison": {
+    "installed": true,
+    "versionName": "1.0-diagnostic",
+    "versionCode": 1,
+    "installerPackageName": "null"
+  },
+  "pocket-engine": {
+    "installed": true,
+    "versionName": "0.5.3-openauto-cancel.1",
+    "versionCode": 24,
+    "installerPackageName": "null"
+  },
+  "com.azentrius.lautwerk": {
+    "installed": true,
+    "versionName": "0.3.0",
+    "versionCode": 300,
+    "installerPackageName": "null"
+  },
+  "com.azentrius.lautwerk.prototype.dhu": {
+    "installed": true,
+    "versionName": "0.3.0-prototype",
+    "versionCode": 300,
+    "installerPackageName": "null"
+  },
+  "com.azentrius.lautwerk.prototype.phone": {
+    "installed": true,
+    "versionName": "0.3.0-prototype",
+    "versionCode": 300,
+    "installerPackageName": "null"
+  },
+  "com.azentrius.lautwerk.test": {
+    "installed": true,
+    "versionName": "null",
+    "versionCode": 0,
+    "installerPackageName": "null"
+  },
+  "com.azentrius.lautwerk.prototype.dhu.test": {
+    "installed": true,
+    "versionName": "null",
+    "versionCode": 0,
+    "installerPackageName": "null"
+  },
+  "com.azentrius.lautwerk.storage.test": {
+    "installed": true,
+    "versionName": "null",
+    "versionCode": 0,
+    "installerPackageName": "null"
+  }
+}

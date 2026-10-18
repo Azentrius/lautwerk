@@ -182,7 +182,7 @@ change application code, wording, provider/storage logic, car template or B2/B3 
 ### 2. Page-level validation messages
 
 - Reference: `android.md`, text-field error state and timing.
-- Evidence: `app/src/main/java/de/azentrius/lautwerk/app/MainContent.kt`, `HomeViewModel.kt` and
+- Evidence: `app/src/main/java/com/azentrius/lautwerk/app/MainContent.kt`, `HomeViewModel.kt` and
   `design/AzComponents.kt` keep existing validation/storage messages at page level. They do not
   have field-owned error state or a new validation-on-blur flow.
 - Request: describe the existing message placement and its presentation. Do not require new
@@ -191,7 +191,7 @@ change application code, wording, provider/storage logic, car template or B2/B3 
 ### 3. Native provider/model selectors
 
 - Reference: `android.md`, menus and the prototype phone surface.
-- Evidence: `prototype-app/src/main/java/de/azentrius/lautwerk/prototype/MainActivity.kt` uses native
+- Evidence: `prototype-app/src/main/java/com/azentrius/lautwerk/prototype/MainActivity.kt` uses native
   Spinners, including their collapsed presentation and dropdown rows. Selecting an item immediately
   updates the existing selection store; these controls are separate from the assistant's chips.
 - Request: specify the complete visual mapping for the collapsed selector and popup together:
@@ -221,7 +221,7 @@ change application code, wording, provider/storage logic, car template or B2/B3 
 ### 6. Actual car conversation and microphone overlay
 
 - Reference: `android-auto.md`, prototype scope, B4/content/states, A6, A7, A11 and O4.
-- Evidence: `car-ui/src/main/java/de/azentrius/lautwerk/car/LautwerkScreen.kt` and `voice/CarVoiceService.kt`
+- Evidence: `car-ui/src/main/java/com/azentrius/lautwerk/car/LautwerkScreen.kt` and `voice/CarVoiceService.kt`
   now expose a real selected audio-test/conversation mode, short status, provider/model and one
   Start/End action. The old offline counter remains on the prototype phone page only. The DHU user
   confirmed audible Claude answers and Speaking/End while the host's microphone wave was absent.
@@ -241,8 +241,8 @@ change application code, wording, provider/storage logic, car template or B2/B3 
 ### 7. Car test app's phone audio setup
 
 - Reference: missing dedicated mapping in `android.md` for the newer native setup surface.
-- Evidence: `car-ui/src/main/java/de/azentrius/lautwerk/car/voice/VoiceSetupActivity.kt` and
-  `prototype-app/src/dhu/java/de/azentrius/lautwerk/prototype/VoiceEntryPoint.kt`. The page contains help,
+- Evidence: `car-ui/src/main/java/com/azentrius/lautwerk/car/voice/VoiceSetupActivity.kt` and
+  `prototype-app/src/dhu/java/com/azentrius/lautwerk/prototype/VoiceEntryPoint.kt`. The page contains help,
   three mode radio rows, permission action, masked key field with save/delete/status, and a phone
   Start/End action. It retains native controls and its existing 28 dp content inset.
 - Request: provide a coherent mapping for that page and its entry button, including layout/insets,

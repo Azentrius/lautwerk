@@ -37,15 +37,17 @@ In the project folder with JDK 17, SDK Platform 37 and Build Tools 36.0.0:
 .\gradlew.bat :app:assembleDebug :prototype-app:assemblePhoneDebug :prototype-app:assembleDhuDebug
 ```
 
-The packages are separate and keep using their own existing data:
+Current package IDs are listed below. For 0.3.0, first follow the
+[package replacement steps](SIDELOADING.md#installing-030); earlier app data does not migrate.
+The icon observations in this document are historical and do not establish new-package acceptance:
 
-| Variant | Version / code | Package since 0.2.0 |
+| Variant | Current version / code | Package since 0.3.0 |
 |---|---|---|
-| Assistant | 0.1.15-dev / 15 | `de.azentrius.lautwerk` |
-| DHU test | 0.1.15-prototype / 6 | `de.azentrius.lautwerk.prototype.dhu` |
-| Phone comparison | 0.1.15-prototype / 5 | `de.azentrius.lautwerk.prototype.phone` |
+| Assistant | 0.3.0 / 300 | `com.azentrius.lautwerk` |
+| DHU test | 0.3.0-prototype / 300 | `com.azentrius.lautwerk.prototype.dhu` |
+| Phone comparison | 0.3.0-prototype / 300 | `com.azentrius.lautwerk.prototype.phone` |
 
-The assistant and DHU were updated on the Pixel, the phone comparison was only built.
+In the original icon check, the assistant and DHU were updated on the Pixel and the phone comparison was only built.
 Installation from the project folder; for supplied APKs, replace the two APK paths with their full
 paths:
 
@@ -54,10 +56,11 @@ $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb devices -l
 & $adb -s 56161FDCH000H8 install -r .\app\build\outputs\apk\debug\app-debug.apk
 & $adb -s 56161FDCH000H8 install -r .\prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk
-& $adb -s 56161FDCH000H8 shell am start -n de.azentrius.lautwerk/.app.MainActivity
+& $adb -s 56161FDCH000H8 shell am start -n com.azentrius.lautwerk/.app.MainActivity
 ```
 
-Expected: `Success` twice; no uninstall and no deletion of app data.
+Expected: `Success` twice. Remove the previous package IDs only through the linked 0.3.0 replacement steps;
+subsequent updates of the same new package must preserve its data.
 For another device, use its serial from `devices -l`.
 
 ## DHU check

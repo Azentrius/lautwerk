@@ -1,0 +1,513 @@
+{
+  "suite": "phone-all",
+  "passed": true,
+  "counts": {
+    "passed": 81,
+    "failed": 0,
+    "skipped": 2
+  },
+  "durationSeconds": 73.19,
+  "command": "adb -s <serial> shell am instrument -w -r com.azentrius.lautwerk.test/androidx.test.runner.AndroidJUnitRunner",
+  "optInArguments": [],
+  "settingsRestored": true,
+  "tests": [
+    {
+      "class": "com.azentrius.lautwerk.app.ChatExportTest",
+      "test": "slowWriteReportsSuccessOnlyAfterCompletionAndCapturesExactSnapshot",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ChatExportTest",
+      "test": "pickerCancellationAndLaunchFailureReleaseUiWithoutWritingAnything",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ChatExportTest",
+      "test": "activeVoiceAndUnreadableArchiveBlockExport",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ChatExportTest",
+      "test": "bothProvidersExportAllTurnsOnceWithoutReadingKeysOrChangingArchive",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ChatExportTest",
+      "test": "cancelledSlowPreparationNeverOpensPickerOrWrites",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ChatExportTest",
+      "test": "staleConfirmationAndMissingChatCannotExportAnotherChat",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ChatExportTest",
+      "test": "resultWithoutRetainedExportAfterProcessLossCannotWriteSelectedOrNewChat",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ChatExportTest",
+      "test": "arbitraryProviderErrorsNeverLeakPathsOrChatTextAndRetryWorks",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ConversationStartGateTest",
+      "test": "backgroundAndMissingPermissionsPreventHandoffAndOptionalDenialAllowsIt",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ConversationStartGateTest",
+      "test": "newProcessHasNoRestoredStartAndIgnoresOldCallbacks",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ConversationStartGateTest",
+      "test": "cancelledPermissionResultCannotStartOldOrNewConversation",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignScreenshotsTest",
+      "test": "titleDarkEnglish",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignScreenshotsTest",
+      "test": "titleLightGerman",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignScreenshotsTest",
+      "test": "largeGermanTextKeepsStartAndNavigationReachable",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignScreenshotsTest",
+      "test": "titleLightGermanAtTwoHundredPercent",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignScreenshotsTest",
+      "test": "lightGermanPhone",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignScreenshotsTest",
+      "test": "titleDarkEnglishAtTwoHundredPercent",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignScreenshotsTest",
+      "test": "darkEnglishPhone",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "onlineSelectionAlwaysConfirmsAndCancelOrOfflineChoiceNeverImplicitlyAcceptsIt",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "messageIsOneAccessibleElementWithRoleAndFullContent",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "exportPreparationPickerWritingAndCompletionExposeOnlyExistingActions",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "resumeAndRetiredModelExportKeepIndependentAvailability",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "bundledLicensesRemainScrollableAndCanBeClosedInDarkTheme",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "tabsChangeTogetherWithMeasuredWidthAndKeepSelectedTabFullyVisible",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "historyUsesLastModifiedTimeAndDeviceLocaleAcrossCalendarBoundaries",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "voiceRowsReserveSpaceForDescriptionAndGrowWithLargeText",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "disabledCatalogCannotChooseOrOpenAConfirmation",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DesignUiTest",
+      "test": "activePreparingAlwaysStopsAndPendingInactiveStartOnlyCancels",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DocumentConversationExporterTest",
+      "test": "nullStreamOpenWriteFlushAndCloseFailuresPropagate",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DocumentConversationExporterTest",
+      "test": "cancellationAndNonContentUriCannotOpenAnyDestination",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DocumentConversationExporterTest",
+      "test": "writesUtf8AndClosesActualTestFileWithoutTouchingArchiveOrCredentials",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.DocumentConversationExporterTest",
+      "test": "androidCreateDocumentContractUsesTextMimeAndSafeFilenameAndHandlesCancel",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchTest",
+      "test": "failureIsSafeAndRetryRecoversWithoutLeakingQueryOrChatText",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchTest",
+      "test": "closingOwnerRejectsNewQueriesAndLateResults",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchTest",
+      "test": "delayedOldSearchCannotReplaceNewQueryAndDebounceKeepsLatestInput",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchTest",
+      "test": "providerFilterAndQueryAreReadOnlyAndOpeningHitKeepsChatAssignment",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchTest",
+      "test": "archiveRefreshInvalidatesInFlightSearchAndRemovedChatCannotReappear",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchTest",
+      "test": "unreadableArchiveClearsResultsAndRecoveryRetainsFilter",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchTest",
+      "test": "activeVoiceAllowsReadOnlySearchButNotOpeningAnotherChat",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchUiTest",
+      "test": "searchAndProviderFilterShowCountsAndResetRestoresHistoryWithoutStartingVoice",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchUiTest",
+      "test": "searchViewCanBeReviewedWithInventedConversationsOnly",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchUiTest",
+      "test": "openingOldMessageHitExpandsHistoryAndJumpsDirectlyToMessage",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchUiTest",
+      "test": "filteringDuringVoiceLeavesStopVisibleAndCannotSwitchChat",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HistorySearchUiTest",
+      "test": "hitNearEndInRetiredModelKeepsReadOnlyStartAndVisibleMessage",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HomeViewModelTest",
+      "test": "writeDuringSlowReadInvalidatesTheReadAndKeepsProviderCaptured",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HomeViewModelTest",
+      "test": "deletedChatReturnsMissingErrorWithoutCreatingReplacement",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HomeViewModelTest",
+      "test": "staleDeletionConfirmationCannotDeleteNewSelection",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HomeViewModelTest",
+      "test": "bothProvidersStartOnceWithSelectedModelAndStoreWorkIsOffMain",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HomeViewModelTest",
+      "test": "changedSelectedChatCannotSilentlyCreateAnotherChat",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HomeViewModelTest",
+      "test": "closingScreenOwnerCancelsPendingStartWithoutLateCreation",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.HomeViewModelTest",
+      "test": "refreshBurstsAreCoalescedAndOldSnapshotIsNeverPublished",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.LocalizationLifecycleTest",
+      "test": "selectedOlderMessageAndScrollSurviveRecreation",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.LocalizationLifecycleTest",
+      "test": "englishAndFallbackResourcesCoverSafetyDialogsAndLabels",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.LocalizationLifecycleTest",
+      "test": "slowStartCannotLaunchAfterBackgroundAndFreshStartRunsOnce",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.LocalizationLifecycleTest",
+      "test": "recreationAndLanguageChangeRetainSearchFilterAndDoNotStartConversation",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ProviderAndroidSmokeTest",
+      "test": "productionTransportInitializesOnAndroidAndPreCancelledWorkNeverReadsCredentials",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ProviderAndroidSmokeTest",
+      "test": "bothAdaptersAcceptExistingTurnsOnAndroidWithoutNetworkOrKeys",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.ProviderAndroidSmokeTest",
+      "test": "mismatchedArchiveModelCannotReachAProvider",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "retiredModelHistoryRemainsReadableButCannotBeStarted",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "pendingStartCanBeCancelledBeforeSlowCredentialReadReturns",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "keyReadAndClearErrorsStayInUiAndDoNotStartVoice",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "slowKeyWriteDoesNotBlockNavigationAndCannotBeSubmittedTwice",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "unreadableArchiveShowsRetryAndDisablesStartUntilRecovery",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "conversationScreenShowsControlsAndCanBeReviewedWithInventedDataOnly",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "exportButtonIsDisabledDuringVoiceAndRetiredChatsCanStillExport",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "exportDisclosureCanCancelAndConfirmedExportRequestsOnePickerOnly",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "longHistoryAndOlderMessagesRemainReachableWithStartAlwaysVisible",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "deleteRequiresConfirmationAndCancellingKeepsTheChat",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.StorageUiTest",
+      "test": "stopRemainsVisibleWhileScrollingAndSettingsCannotMutateActiveSession",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.AndroidVoiceEnvironmentTest",
+      "test": "realObserverDeliversOnMainAndUnregistersWithoutLateCallbacks",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.AndroidVoiceTasksTest",
+      "test": "cancelSuppressesCompletionEvenWhenBlockingWorkReturnsLate",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.AndroidVoiceTasksTest",
+      "test": "cancellationReleasesBlockedWorkAndAllowsImmediateFreshTask",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.AndroidVoiceTasksTest",
+      "test": "blockingWorkIsOffMainAndCompletionReturnsToMain",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.PocketPlaybackTest",
+      "test": "conversationOutputCancelsBeforeAudioAndDuringPlaybackThenRestarts",
+      "statusCode": -4,
+      "result": "skipped"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.PocketPlaybackTest",
+      "test": "chosenPreviewStopsRestartsAndKeepsTheStoredSelection",
+      "statusCode": -4,
+      "result": "skipped"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.PocketSelectionTest",
+      "test": "aFallbackAndroidEngineCannotAcceptThePocketChoice",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.PocketSelectionTest",
+      "test": "pocketChoiceKeepsAndroidRateAndOtherLanguageChoice",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.PocketSelectionTest",
+      "test": "acceptsOnlyTheExactInstalledOfflineGermanAlbaVoice",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.SpeechSettingsScreenTest",
+      "test": "catalogLoadsAsAListWithoutStartingAPreview",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.SpeechSettingsTest",
+      "test": "realAndroidEngineAcceptsAvailableLocalChoiceAndRejectsMissingOrChangedEngine",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.SpeechSettingsTest",
+      "test": "languageSpecificChoicesKeepLegacyGermanVoiceWhenUsingEnglish",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.SpeechSettingsTest",
+      "test": "catalogExcludesMissingDataAndOtherLanguagesWithStableLocalFirstOrder",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.app.voice.SpeechSettingsTest",
+      "test": "voiceAndRatePersistIndependentlyAndInvalidRatesAreSafe",
+      "statusCode": 0,
+      "result": "passed"
+    }
+  ]
+}

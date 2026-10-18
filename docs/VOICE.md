@@ -45,8 +45,8 @@ and [Voice metadata](https://developer.android.com/reference/android/speech/tts/
 
 ## Trying it on the Pixel
 
-1. Open the assistant app `de.azentrius.lautwerk`. It is separate from the DHU test app
-   `de.azentrius.lautwerk.prototype.dhu`; both are called Lautwerk.
+1. Open the assistant app `com.azentrius.lautwerk`. It is separate from the DHU test app
+   `com.azentrius.lautwerk.prototype.dhu`; both are called Lautwerk.
 2. Under **"Settings"**, choose provider and model. Enter and save your own API key only on the
    phone, never in Git or a chat. An existing key stays saved even though the input field is empty.
 3. Tap "Start conversation" at the bottom. The button stays visible while scrolling. Allow the
@@ -202,7 +202,7 @@ $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb devices -l
 & $adb -s 56161FDCH000H8 install -r '.\app\build\outputs\apk\debug\app-debug.apk'
-& $adb -s 56161FDCH000H8 shell am start -n 'de.azentrius.lautwerk/de.azentrius.lautwerk.app.MainActivity'
+& $adb -s 56161FDCH000H8 shell am start -n 'com.azentrius.lautwerk/com.azentrius.lautwerk.app.MainActivity'
 ```
 
 For a supplied APK, change the path to its full path. For other

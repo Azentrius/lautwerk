@@ -1,0 +1,99 @@
+{
+  "suite": "storage-all",
+  "passed": true,
+  "counts": {
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0
+  },
+  "durationSeconds": 9.17,
+  "command": "adb -s <serial> shell am instrument -w -r com.azentrius.lautwerk.storage.test/androidx.test.runner.AndroidJUnitRunner",
+  "optInArguments": [],
+  "settingsRestored": true,
+  "tests": [
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "missingCredentialKeyBlocksReadAndReplacementUntilExplicitClear",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "unknownProviderAndDuplicateIdsAreNotSilentlyRewritten",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "missingArchiveKeyDoesNotGetReplacedOrDestroyCiphertext",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "parallelRepositoriesDoNotLoseAppendsOrCreates",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "originalArchiveCanBeReadUpdatedAndReadByOriginalCodec",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "abortedAtomicWriteRetainsPreviousConversation",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "diskFailuresAreReportedWithoutRawDetailsAndKeepPriorArchive",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "backupOnlyArchiveIsRecoveredInsteadOfTreatedAsEmpty",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "originalCredentialsStayCompatibleAndProvidersStaySeparate",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "deletedConversationCannotBeAppendedOrResurrected",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "damagedArchiveIsNotOverwrittenByAnyMutation",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "missingAndUnreadableCredentialsAreDifferent",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "parallelFirstWritesShareOneKeyAndKeepBothConversations",
+      "statusCode": 0,
+      "result": "passed"
+    },
+    {
+      "class": "com.azentrius.lautwerk.storage.EncryptedStorageTest",
+      "test": "failedPreferenceCommitRestoresOldEntryAndNeverReportsSuccess",
+      "statusCode": 0,
+      "result": "passed"
+    }
+  ]
+}

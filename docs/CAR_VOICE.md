@@ -2,11 +2,15 @@
 
 ## Scope and data flow
 
+Commands below use `com.azentrius.lautwerk.prototype.dhu`, the package since 0.3.0.
+Follow the [package replacement steps](SIDELOADING.md#installing-030); old data, permissions and
+installer metadata are not carried over. The historical audio results below do not validate this new ID.
+
 The original car Start action only incremented `PrototypeSession`. The independent assistant app
 already had working speech, provider adapters and encrypted storage, but it was a different Android
 package. Nothing connected that voice flow to the car screen.
 
-0.1.17 keeps the DHU test package (`de.azentrius.lautwerk.prototype.dhu` since 0.2.0), its signing identity, HostValidator, MessageTemplate,
+The voice flow introduced in 0.1.17 keeps the HostValidator and MessageTemplate,
 title, icon, provider/model line and host-controlled colors. Its one action now starts the selected
 mode and becomes End while active. Long messages are shown in phone setup; short car summaries
 leave room for the model. No transcript is placed on the car screen.
@@ -54,7 +58,7 @@ There is no history browser in this small setup page yet; the assistant's histor
    the UI counter; it does not start audio.
 5. Only after both audio checks pass, enter an Anthropic API key in the setup page and press Save key.
    The field clears immediately; the key is stored through Android Keystore-backed AES-GCM. Never put
-   keys into source, ADB commands, logs or an issue. Keys from `de.azentrius.lautwerk` are not copied.
+   keys into source, ADB commands, logs or an issue. Keys from `com.azentrius.lautwerk` are not copied.
 6. Choose Conversation, start from Android Auto, ask a short question and wait for its spoken answer.
    Ask a follow-up when Listening appears. End stops the session. This test sends text to Anthropic
    and can use paid API credits. Test while parked.
@@ -94,12 +98,18 @@ $apk = Join-Path (Get-Location) 'prototype-app\build\outputs\apk\dhu\debug\proto
 Get-FileHash -Algorithm SHA256 -LiteralPath $apk
 ```
 
-Ordinary `adb -s $serial install -r $apk` installs the APK but does not guarantee that Android Auto
-will list it; it can also change the recorded installation origin. For these development builds the
-maintainer approved the following bounded system-installer experiment, already used for
-the visible package. It **records Google Play as installer although the APK was sideloaded**. It is
-not a genuine Play installation, a supported Google distribution path, category approval or a
-compatibility guarantee. No root or modified Android Auto is used; host validation stays enabled.
+Use ordinary `adb -s $serial install -r $apk` after the 0.3.0 package replacement steps.
+It installs the APK but does not guarantee Android Auto visibility; it can also change recorded
+installation origin. Expected version: `0.3.0-prototype`, code `300`.
+
+### Historical installation-origin experiment
+
+The following records a bounded experiment approved for earlier builds and package identities.
+It was not performed for 0.3.0. The current package name in the verification commands is not evidence
+that the experiment works with it, and earlier approvals do not cover this new package.
+The experiment **records Google Play as installer although the APK was sideloaded**. It is not a genuine
+Play installation, a supported Google distribution path, category approval or a compatibility
+guarantee. No root or modified Android Auto is used; host validation stays enabled.
 
 ```powershell
 & $adb -s $serial push $apk /sdcard/Download/Lautwerk-dhu-debug.apk
@@ -119,14 +129,14 @@ the compiled APK to Google; the maintainer approved this for the 0.1.17 builds. 
 failure is a failure to record, not a reason to disable protection. Then verify:
 
 ```powershell
-& $adb -s $serial shell dumpsys package de.azentrius.lautwerk.prototype.dhu |
+& $adb -s $serial shell dumpsys package com.azentrius.lautwerk.prototype.dhu |
   Select-String 'versionCode=|versionName=|installerPackageName=|initiatingPackageName='
 & $adb -s $serial shell cmd package query-services --brief `
-  -a androidx.car.app.CarAppService -p de.azentrius.lautwerk.prototype.dhu
+  -a androidx.car.app.CarAppService -p com.azentrius.lautwerk.prototype.dhu
 ```
 
-Expected version is `0.1.17-prototype`, code `117`. The signed debug artifact must use the same key
-as the existing install. This experiment keeps the debug POI placeholder disclosed and `dhuRelease`
+The historical test used `0.1.17-prototype`, code `117`; that is not the expected version of the
+current build. An update of the same package must use the existing signing key. This experiment keeps the debug POI placeholder disclosed and `dhuRelease`
 disabled. No general-purpose AI car category is claimed.
 
 ## DHU and device checks
@@ -149,14 +159,14 @@ Install only the instrumentation APK with ordinary ADB (this does not reinstall 
 
 ```powershell
 & $adb -s $serial install -r 'prototype-app\build\outputs\apk\androidTest\dhu\debug\prototype-app-dhu-debug-androidTest.apk'
-$runner = 'de.azentrius.lautwerk.prototype.dhu.test/androidx.test.runner.AndroidJUnitRunner'
+$runner = 'com.azentrius.lautwerk.prototype.dhu.test/androidx.test.runner.AndroidJUnitRunner'
 & $adb -s $serial shell am instrument -w $runner
 # Opt-in fixed sample, audible; no AI request:
 & $adb -s $serial shell am instrument -w -e audioPlayback true `
-  -e class de.azentrius.lautwerk.prototype.VoicePlaybackDeviceTest $runner
+  -e class com.azentrius.lautwerk.prototype.VoicePlaybackDeviceTest $runner
 # Opt-in synthetic PCM fixture, offline TTS -> pipe -> on-device recognition:
 & $adb -s $serial shell am instrument -w -e externalPcm true `
-  -e class de.azentrius.lautwerk.prototype.ExternalPcmRecognitionTest $runner
+  -e class com.azentrius.lautwerk.prototype.ExternalPcmRecognitionTest $runner
 ```
 
 The ordinary suite skips both hardware probes unless requested. The PCM test generates its own

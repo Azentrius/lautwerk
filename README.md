@@ -15,10 +15,14 @@ What changed in each version: [CHANGELOG.md](CHANGELOG.md). What comes next: [RO
 
 ## Status
 
-Current repository version: **0.2.0**. With 0.2.0 the app got its name Lautwerk and new package
-IDs. Android treats it as a new app: API keys and chats of earlier installations are not carried over;
-the [CHANGELOG](CHANGELOG.md) lists the previous names and IDs. The device checks below were made with
-earlier versions; the Pixel, DHU and ID.7 checks of 0.2.0 are still to be done.
+Current repository version: **0.3.0**. The package IDs now start with `com.azentrius.lautwerk`,
+following Azentrius's move to azentrius.com. Android treats all three variants as new apps. API keys,
+chats and preferences do not migrate. Follow the [0.3.0 installation steps](docs/SIDELOADING.md#installing-030)
+to export any wanted chats, uninstall the previous packages and install the new APKs. The Lautwerk
+name, design, provider behavior and car template stay the same.
+
+Automated checks are recorded under [0.3.0 evidence](docs/evidence/0.3.0/README.md). Historical checks
+below do not establish Android Auto visibility or live audio acceptance for the new package IDs.
 
 0.1.17 connects the existing Android Auto package to audio and the shared conversation controller.
 The title, app icon, provider/model line, host colors and single action remain. Start runs the mode
@@ -52,7 +56,7 @@ the current audio work and installation procedure are in [CAR_VOICE.md](docs/CAR
 1. Open this project in Android Studio and set the Gradle JDK to **JDK 17**.
 2. Install SDK Platform **Android 17 / API 37** and Build Tools **36.0.0** if they are missing.
 3. Choose the build variant `prototype-app: dhuDebug`; this APK holds the phone UI and the car service.
-4. Follow [car audio setup and tests](docs/CAR_VOICE.md). The original SDK/DHU setup is in
+4. Complete the [package replacement steps](docs/SIDELOADING.md#installing-030), then follow [car audio setup and tests](docs/CAR_VOICE.md). The original SDK/DHU setup is in
    [docs/START_WINDOWS.md](docs/START_WINDOWS.md).
 
 On the test app's phone page, choose the provider/model and open **Audio and conversation setup**.
@@ -64,12 +68,12 @@ test app. The old Start button on the phone's selection page remains a UI counte
 
 | Module / variant | Package | Purpose |
 |---|---|---|
-| `prototype-app:dhuDebug` | `de.azentrius.lautwerk.prototype.dhu` | Experimental car service, audio diagnostics and conversation setup |
-| `prototype-app:phoneDebug` | `de.azentrius.lautwerk.prototype.phone` | Comparison app without car registration |
-| `app:debug` | `de.azentrius.lautwerk` | The phone app continued from 0.1.0, with providers, history and voice |
+| `prototype-app:dhuDebug` | `com.azentrius.lautwerk.prototype.dhu` | Experimental car service, audio diagnostics and conversation setup |
+| `prototype-app:phoneDebug` | `com.azentrius.lautwerk.prototype.phone` | Comparison app without car registration |
+| `app:debug` | `com.azentrius.lautwerk` | The phone app continued from 0.1.0, with providers, history and voice |
 
 The test packages do not replace the old app and take over none of its data. Inside
-`de.azentrius.lautwerk.prototype.dhu`, phone and DHU share their selection. The three APKs use the same
+`com.azentrius.lautwerk.prototype.dhu`, phone and DHU share their selection. The three APKs use the same
 selection code but each has its own private storage. The selection does not check actual API account
 access. The car test app does not import the assistant's keys, voice preference or chat history.
 

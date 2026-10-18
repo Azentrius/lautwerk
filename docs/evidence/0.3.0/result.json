@@ -1,0 +1,28 @@
+{
+  "version": "0.3.0",
+  "versionCode": 300,
+  "baseCommit": "1343bd5c5180eb08ab95efea3ff38c1da4d555c6",
+  "buildAndLintPassed": true,
+  "jvmTests": 100,
+  "deviceTestCounts": {
+    "passed": 114,
+    "failed": 0,
+    "skipped": 5
+  },
+  "allThreeAppsInstalledAndLaunched": true,
+  "carServiceRegisteredExactlyOnce": true,
+  "deviceSettingsRestored": true,
+  "unexpectedLegacyMatches": 0,
+  "allowedLegacyMatchCounts": {
+    "approved-030-changelog-uninstall-notice": 2,
+    "existing-changelog-entry": 3,
+    "immutable-design-snapshot": 2,
+    "approved-installation-uninstall-command": 3,
+    "historical-device-evidence": 447
+  },
+  "apiCalls": 0,
+  "audioOptInsEnabled": false,
+  "dhuOrVehicleTested": false,
+  "callAndHeadsetTestsDeferred": true,
+  "manualTitleScreenshotReview": "passed"
+}

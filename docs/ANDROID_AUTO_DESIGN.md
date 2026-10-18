@@ -42,7 +42,7 @@ $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot'
 .\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:assembleDhuDebugAndroidTest :prototype-app:lintDhuDebug
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb -s 56161FDCH000H8 install -r '.\prototype-app\build\outputs\apk\dhu\debug\prototype-app-dhu-debug.apk'
-& $adb -s 56161FDCH000H8 shell am start -n 'de.azentrius.lautwerk.prototype.dhu/de.azentrius.lautwerk.prototype.MainActivity'
+& $adb -s 56161FDCH000H8 shell am start -n 'com.azentrius.lautwerk.prototype.dhu/com.azentrius.lautwerk.prototype.MainActivity'
 ```
 
 For a supplied APK, replace the APK path with its full path. Expected: `Success` and version

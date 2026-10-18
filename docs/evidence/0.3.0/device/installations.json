@@ -1,0 +1,38 @@
+[
+  {
+    "apk": "app/build/outputs/apk/debug/app-debug.apk",
+    "sha256": "2ff0bf2a15e3369e12f52e4627294dc6c0b5ec9533822735ae2e36bf8e3bfcc7",
+    "command": "adb -s <serial> install -r app/build/outputs/apk/debug/app-debug.apk",
+    "output": "Performing Streamed Install\r\nSuccess"
+  },
+  {
+    "apk": "prototype-app/build/outputs/apk/dhu/debug/prototype-app-dhu-debug.apk",
+    "sha256": "1078c090e58163f9b62974c58ec2471c9f39a03abae00f9b602a758aaec922f0",
+    "command": "adb -s <serial> install -r prototype-app/build/outputs/apk/dhu/debug/prototype-app-dhu-debug.apk",
+    "output": "Performing Streamed Install\r\nSuccess"
+  },
+  {
+    "apk": "prototype-app/build/outputs/apk/phone/debug/prototype-app-phone-debug.apk",
+    "sha256": "72aa422ed80b1ed2c1aa48981830972537b00ab821087f72630bc883859fb1a7",
+    "command": "adb -s <serial> install -r prototype-app/build/outputs/apk/phone/debug/prototype-app-phone-debug.apk",
+    "output": "Performing Streamed Install\r\nSuccess"
+  },
+  {
+    "apk": "app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+    "sha256": "8c32c70b57b00ae9bedd54a23f8c8e62823b2252c3c4fe6e49accce016321a16",
+    "command": "adb -s <serial> install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk",
+    "output": "Performing Streamed Install\r\nSuccess"
+  },
+  {
+    "apk": "prototype-app/build/outputs/apk/androidTest/dhu/debug/prototype-app-dhu-debug-androidTest.apk",
+    "sha256": "19084e29af3bd2542a9fe81aa76ebf64258aacdc33d68c257d3cf415c0cf8d6d",
+    "command": "adb -s <serial> install -r prototype-app/build/outputs/apk/androidTest/dhu/debug/prototype-app-dhu-debug-androidTest.apk",
+    "output": "Performing Streamed Install\r\nSuccess"
+  },
+  {
+    "apk": "storage/build/outputs/apk/androidTest/debug/storage-debug-androidTest.apk",
+    "sha256": "6900117ca28f8dd3699cc4ce5324d52a7f94c17f49ccd71263fa004c94ae0823",
+    "command": "adb -s <serial> install -r storage/build/outputs/apk/androidTest/debug/storage-debug-androidTest.apk",
+    "output": "Performing Streamed Install\r\nSuccess"
+  }
+]

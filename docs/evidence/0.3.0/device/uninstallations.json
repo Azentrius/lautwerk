@@ -1,0 +1,16 @@
+[
+  {
+    "legacyRole": "legacy-assistant",
+    "result": "uninstalled",
+    "localDataRemoved": true
+  },
+  {
+    "legacyRole": "legacy-dhu",
+    "result": "uninstalled",
+    "localDataRemoved": true
+  },
+  {
+    "legacyRole": "legacy-phone",
+    "result": "already-absent"
+  }
+]

@@ -24,8 +24,8 @@ Invalid or corrupted settings fall back to a matching default without rewriting 
 
 The phone activity and the CarAppService of the DHU APK run in the same process and use this store.
 Both unregister their observers when the visible UI is left.
-The separately installed packages `de.azentrius.lautwerk`, `de.azentrius.lautwerk.prototype.phone`
-and `de.azentrius.lautwerk.prototype.dhu` each have their own storage.
+The separately installed packages `com.azentrius.lautwerk`, `com.azentrius.lautwerk.prototype.phone`
+and `com.azentrius.lautwerk.prototype.dhu` each have their own storage.
 There is no exchange of data or keys between these APKs.
 
 `ChatApi`, `ConversationStore` and `SecretStore` use the extracted types.
