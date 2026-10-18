@@ -1,4 +1,4 @@
-# Design evidence — application 0.1.18 / code 118
+# Design evidence – application 0.1.18 / code 118
 
 Date: 2026-10-13. This directory retains the path requested before the maintainer approved
 the corrected version. These are **0.1.18** results, not results from the earlier 0.1.16 release.

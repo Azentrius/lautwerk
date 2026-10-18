@@ -1,4 +1,4 @@
-# Android Auto audio and conversation — 0.1.17
+# Android Auto audio and conversation – 0.1.17
 
 ## Scope and data flow
 
@@ -115,7 +115,7 @@ compatibility guarantee. No root or modified Android Auto is used; host validati
 ```
 
 Confirm Update in the Android system installer. If Play Protect asks to scan the APK, that submits
-the compiled APK to Google; the owner approved this session's 0.1.17 builds. A scan/installation
+the compiled APK to Google; the maintainer approved this for the 0.1.17 builds. A scan/installation
 failure is a failure to record, not a reason to disable protection. Then verify:
 
 ```powershell
@@ -174,7 +174,7 @@ nonzero-signal boolean, recognition success/error number and TTS completion. The
 recognized words, generated answers, server bodies or exception causes. Capture only these app
 events for reports; full Android Auto logs and dashboard screenshots can contain private data.
 
-## Evidence — 2026-10-13
+## Evidence – 2026-10-13
 
 | Environment | Observed version |
 |---|---|
@@ -240,7 +240,7 @@ stops of 6 ms and 5 ms in the local service, with no automatic retry; later star
 below now records Claude conversation evidence. Vehicle audio and the deferred call/headset
 checks are not covered by either acceptance.
 
-## Evening Claude retest — 2026-10-13
+## Evening Claude retest – 2026-10-13
 
 The existing **0.1.17-prototype/code 117** car APK was retained. Its installed SHA-256 was checked
 against the final artifact above. The separate assistant was on 0.1.18/code 118; that does not make
