@@ -1,0 +1,3 @@
+speech-output/src/main/AndroidManifest.xml:5:        <package android:name="org.pockettts.android.engine.openautotest" />
+speech-output/src/main/java/de/azentrius/lautwerk/speech/PocketAlba.kt:15:    const val ENGINE = "org.pockettts.android.engine.openautotest"
+speech-output/src/main/java/de/azentrius/lautwerk/speech/PocketAlba.kt:17:    const val VERSION = "0.5.3-openauto-cancel.1"

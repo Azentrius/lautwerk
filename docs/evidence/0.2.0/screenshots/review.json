@@ -1,0 +1,42 @@
+[
+  {
+    "file": "title-light-100.png",
+    "width": 1080,
+    "height": 2410,
+    "signature": "#7D5F22",
+    "exactSignaturePixelsInHeaderRegion": 42,
+    "titleFullyVisible": true,
+    "visuallyInspected": true,
+    "layoutAssertionsPassed": true
+  },
+  {
+    "file": "title-dark-100.png",
+    "width": 1080,
+    "height": 2410,
+    "signature": "#C8A96E",
+    "exactSignaturePixelsInHeaderRegion": 42,
+    "titleFullyVisible": true,
+    "visuallyInspected": true,
+    "layoutAssertionsPassed": true
+  },
+  {
+    "file": "title-light-200.png",
+    "width": 1080,
+    "height": 2410,
+    "signature": "#7D5F22",
+    "exactSignaturePixelsInHeaderRegion": 119,
+    "titleFullyVisible": true,
+    "visuallyInspected": true,
+    "layoutAssertionsPassed": true
+  },
+  {
+    "file": "title-dark-200.png",
+    "width": 1080,
+    "height": 2410,
+    "signature": "#C8A96E",
+    "exactSignaturePixelsInHeaderRegion": 119,
+    "titleFullyVisible": true,
+    "visuallyInspected": true,
+    "layoutAssertionsPassed": true
+  }
+]

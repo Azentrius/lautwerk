@@ -1,0 +1,14 @@
+
+------------------------------------------------------------
+Gradle 9.8.1
+------------------------------------------------------------
+
+Build time:    2026-10-07 16:57:46 UTC
+Revision:      39daf39feb60a18b1b6ddccde53366522fef516f
+
+Kotlin:        2.4.10
+Groovy:        4.0.33
+Ant:           Apache Ant(TM) version 1.10.17 compiled on April 6 2026
+Launcher JVM:  17.0.19 (Eclipse Adoptium 17.0.19+10)
+Daemon JVM:    <jdk17> (no Daemon JVM specified, using current Java home)
+OS:            Windows 11 10.0 amd64
