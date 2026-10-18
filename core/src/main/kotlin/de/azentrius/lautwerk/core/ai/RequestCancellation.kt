@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.core.ai
+package de.azentrius.lautwerk.core.ai
 
 /** Per-operation cancellation, shared from the worker down to its single HTTP call. */
 fun interface RequestCancellation {

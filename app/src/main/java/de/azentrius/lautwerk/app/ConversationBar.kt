@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 @file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,9 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import dev.openautoai.app.design.*
-import dev.openautoai.core.ai.ModelCatalog
-import dev.openautoai.voice.VoicePhase
+import de.azentrius.lautwerk.app.design.*
+import de.azentrius.lautwerk.core.ai.ModelCatalog
+import de.azentrius.lautwerk.voice.VoicePhase
 
 internal enum class ExportPresentation { NONE, PREPARING, WRITING, DONE, FAILED, CANCELLED }
 

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.car
+package de.azentrius.lautwerk.car
 
 import android.util.Log
 import androidx.car.app.CarContext
@@ -10,8 +10,8 @@ import androidx.car.app.model.MessageTemplate
 import androidx.car.app.model.Template
 import android.Manifest
 import android.content.pm.PackageManager
-import dev.openautoai.car.voice.*
-import dev.openautoai.settings.ModelSelectionStore
+import de.azentrius.lautwerk.car.voice.*
+import de.azentrius.lautwerk.settings.ModelSelectionStore
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import java.io.Closeable

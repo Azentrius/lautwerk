@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
-import dev.openautoai.core.ai.*
-import dev.openautoai.core.storage.*
+import de.azentrius.lautwerk.core.ai.*
+import de.azentrius.lautwerk.core.storage.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.After
 import org.junit.Assert.*

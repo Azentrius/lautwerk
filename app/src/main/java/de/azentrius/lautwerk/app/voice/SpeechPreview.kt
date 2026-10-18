@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.content.Context
 import android.os.Bundle
@@ -14,11 +14,11 @@ import android.text.style.TtsSpan
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import dev.openautoai.core.i18n.AppLanguage
-import dev.openautoai.core.i18n.Messages
-import dev.openautoai.speech.PocketAlba
-import dev.openautoai.voice.Cancel
-import dev.openautoai.voice.VoiceProblem
+import de.azentrius.lautwerk.core.i18n.AppLanguage
+import de.azentrius.lautwerk.core.i18n.Messages
+import de.azentrius.lautwerk.speech.PocketAlba
+import de.azentrius.lautwerk.voice.Cancel
+import de.azentrius.lautwerk.voice.VoiceProblem
 
 /** Fixed-text preview only. Each explicitly selected engine owns its own connection. */
 internal class SpeechPreview(private val context: Context, private val store: SpeechSettingsStore) {

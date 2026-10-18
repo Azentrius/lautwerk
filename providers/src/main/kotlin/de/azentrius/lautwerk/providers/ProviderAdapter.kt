@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.providers
+package de.azentrius.lautwerk.providers
 
-import dev.openautoai.core.i18n.AppLanguage
-import dev.openautoai.core.ai.ChatRequest
-import dev.openautoai.core.ai.ChatReply
+import de.azentrius.lautwerk.core.i18n.AppLanguage
+import de.azentrius.lautwerk.core.ai.ChatRequest
+import de.azentrius.lautwerk.core.ai.ChatReply
 import org.json.JSONArray
 import org.json.JSONObject
 

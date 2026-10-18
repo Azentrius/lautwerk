@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
-typealias Conversation = dev.openautoai.core.storage.Conversation
-typealias ConversationStore = dev.openautoai.storage.EncryptedConversationRepository
+typealias Conversation = de.azentrius.lautwerk.core.storage.Conversation
+typealias ConversationStore = de.azentrius.lautwerk.storage.EncryptedConversationRepository

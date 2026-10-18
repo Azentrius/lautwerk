@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.content.Context
 import android.os.Handler
@@ -7,8 +7,8 @@ import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.Voice
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.speech.PocketAlba
-import dev.openautoai.voice.VoiceProblem
+import de.azentrius.lautwerk.speech.PocketAlba
+import de.azentrius.lautwerk.voice.VoiceProblem
 import org.junit.Assert.*
 import org.junit.Test
 import java.util.Locale

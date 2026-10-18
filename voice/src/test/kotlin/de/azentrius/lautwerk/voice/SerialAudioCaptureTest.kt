@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.voice
+package de.azentrius.lautwerk.voice
 
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executor

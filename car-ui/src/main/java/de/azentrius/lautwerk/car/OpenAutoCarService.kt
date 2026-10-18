@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.car
+package de.azentrius.lautwerk.car
 
 import android.util.Log
 import androidx.car.app.CarAppService

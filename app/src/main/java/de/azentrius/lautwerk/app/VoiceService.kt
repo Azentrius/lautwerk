@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
-import dev.openautoai.core.i18n.Messages
+import de.azentrius.lautwerk.core.i18n.Messages
 import android.app.*
 import android.content.res.Configuration
-import dev.openautoai.core.i18n.AppLanguage
+import de.azentrius.lautwerk.core.i18n.AppLanguage
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.os.*
-import dev.openautoai.app.voice.*
-import dev.openautoai.providers.ProviderChatClient
-import dev.openautoai.settings.ModelSelectionStore
-import dev.openautoai.voice.*
+import de.azentrius.lautwerk.app.voice.*
+import de.azentrius.lautwerk.providers.ProviderChatClient
+import de.azentrius.lautwerk.settings.ModelSelectionStore
+import de.azentrius.lautwerk.voice.*
 import java.util.concurrent.Executors
 
 /** Explicitly started phone conversation; no CarAudioRecord or DHU integration. */
@@ -108,9 +108,9 @@ class VoiceService : Service() {
     }
 
     companion object {
-        const val ACTION_START = "dev.openautoai.action.START"
-        const val ACTION_STOP = "dev.openautoai.action.STOP"
-        const val EXTRA_SESSION_ID = "dev.openautoai.extra.SESSION_ID"
+        const val ACTION_START = "de.azentrius.lautwerk.action.START"
+        const val ACTION_STOP = "de.azentrius.lautwerk.action.STOP"
+        const val EXTRA_SESSION_ID = "de.azentrius.lautwerk.extra.SESSION_ID"
         private const val CHANNEL = "voice_conversation"
         private const val NOTIFICATION_ID = 3417
     }

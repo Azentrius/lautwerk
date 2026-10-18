@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.storage
+package de.azentrius.lautwerk.storage
 
-import dev.openautoai.core.i18n.Messages
+import de.azentrius.lautwerk.core.i18n.Messages
 import android.content.Context
-import dev.openautoai.core.ai.ModelCatalog
-import dev.openautoai.core.ai.Provider
-import dev.openautoai.core.storage.*
+import de.azentrius.lautwerk.core.ai.ModelCatalog
+import de.azentrius.lautwerk.core.ai.Provider
+import de.azentrius.lautwerk.core.storage.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File

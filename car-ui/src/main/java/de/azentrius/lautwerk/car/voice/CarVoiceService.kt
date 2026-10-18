@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.car.voice
+package de.azentrius.lautwerk.car.voice
 
 import android.Manifest
 import android.app.*
@@ -11,13 +11,13 @@ import android.os.*
 import android.speech.SpeechRecognizer
 import android.util.Log
 import androidx.car.app.CarContext
-import dev.openautoai.car.R
-import dev.openautoai.core.ai.*
-import dev.openautoai.core.storage.StorageFailure
-import dev.openautoai.providers.ProviderChatClient
-import dev.openautoai.settings.ModelSelectionStore
-import dev.openautoai.storage.*
-import dev.openautoai.voice.*
+import de.azentrius.lautwerk.car.R
+import de.azentrius.lautwerk.core.ai.*
+import de.azentrius.lautwerk.core.storage.StorageFailure
+import de.azentrius.lautwerk.providers.ProviderChatClient
+import de.azentrius.lautwerk.settings.ModelSelectionStore
+import de.azentrius.lautwerk.storage.*
+import de.azentrius.lautwerk.voice.*
 import java.io.Closeable
 import java.util.concurrent.Executors
 
@@ -193,6 +193,6 @@ class CarVoiceService : Service() {
         private val microphoneControl = Executors.newSingleThreadExecutor()
         private const val CHANNEL = "car_voice"
         private const val NOTIFICATION = 3418
-        private const val STOP = "dev.openautoai.car.STOP"
+        private const val STOP = "de.azentrius.lautwerk.car.STOP"
     }
 }

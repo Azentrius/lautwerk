@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.content.Context
 import android.content.ContextWrapper
@@ -9,12 +9,12 @@ import android.os.Looper
 import android.os.SystemClock
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.app.SpeechSettingsActivity
-import dev.openautoai.core.i18n.AppLanguage
-import dev.openautoai.speech.PocketAlba
-import dev.openautoai.voice.Cancel
-import dev.openautoai.voice.PlaybackFocusAudio
-import dev.openautoai.voice.VoiceProblem
+import de.azentrius.lautwerk.app.SpeechSettingsActivity
+import de.azentrius.lautwerk.core.i18n.AppLanguage
+import de.azentrius.lautwerk.speech.PocketAlba
+import de.azentrius.lautwerk.voice.Cancel
+import de.azentrius.lautwerk.voice.PlaybackFocusAudio
+import de.azentrius.lautwerk.voice.VoiceProblem
 import org.junit.Assert.*
 import org.junit.Assume.assumeTrue
 import org.junit.Test

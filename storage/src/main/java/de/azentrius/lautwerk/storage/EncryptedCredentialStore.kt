@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.storage
+package de.azentrius.lautwerk.storage
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Base64
-import dev.openautoai.core.ai.Provider
-import dev.openautoai.core.storage.CredentialStore
-import dev.openautoai.core.storage.StorageError
-import dev.openautoai.core.storage.StorageFailure
+import de.azentrius.lautwerk.core.ai.Provider
+import de.azentrius.lautwerk.core.storage.CredentialStore
+import de.azentrius.lautwerk.core.storage.StorageError
+import de.azentrius.lautwerk.core.storage.StorageFailure
 
 class EncryptedCredentialStore internal constructor(
     private val preferences: SharedPreferences,

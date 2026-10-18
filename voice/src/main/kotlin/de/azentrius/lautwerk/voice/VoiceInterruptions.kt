@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.voice
+package de.azentrius.lautwerk.voice
 
-import dev.openautoai.core.i18n.Messages
+import de.azentrius.lautwerk.core.i18n.Messages
 
 data class AudioEnvironment(val screenAvailable: Boolean, val communicationBusy: Boolean,
                             val externalOutputs: Set<Int>)

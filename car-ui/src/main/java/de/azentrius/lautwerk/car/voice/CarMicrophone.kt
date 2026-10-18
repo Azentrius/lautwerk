@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.car.voice
+package de.azentrius.lautwerk.car.voice
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -13,9 +13,9 @@ import android.util.Log
 import androidx.car.app.CarContext
 import androidx.annotation.RequiresApi
 import androidx.car.app.media.CarAudioRecord
-import dev.openautoai.voice.Cancel
-import dev.openautoai.voice.VoiceProblem
-import dev.openautoai.voice.SerialAudioCapture
+import de.azentrius.lautwerk.voice.Cancel
+import de.azentrius.lautwerk.voice.VoiceProblem
+import de.azentrius.lautwerk.voice.SerialAudioCapture
 import java.util.concurrent.ExecutorService
 
 /** Streams host PCM to a recognizer pipe. No raw audio is written to storage. Car API 5+. */

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.prototype
+package de.azentrius.lautwerk.prototype
 
 import android.app.Activity
 import android.os.Bundle
@@ -9,15 +9,15 @@ import android.view.WindowInsets
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import dev.openautoai.core.ai.ModelCatalog
-import dev.openautoai.core.ai.ModelOption
-import dev.openautoai.core.ai.ModelSelection
-import dev.openautoai.core.ai.Provider
-import dev.openautoai.settings.ModelSelectionStore
+import de.azentrius.lautwerk.core.ai.ModelCatalog
+import de.azentrius.lautwerk.core.ai.ModelOption
+import de.azentrius.lautwerk.core.ai.ModelSelection
+import de.azentrius.lautwerk.core.ai.Provider
+import de.azentrius.lautwerk.settings.ModelSelectionStore
 import java.io.Closeable
 import android.widget.Button
 import android.widget.TextView
-import dev.openautoai.core.PrototypeSession
+import de.azentrius.lautwerk.core.PrototypeSession
 
 class MainActivity : Activity() {
     private lateinit var session: PrototypeSession

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.storage
+package de.azentrius.lautwerk.storage
 
 import java.util.concurrent.ConcurrentHashMap
 

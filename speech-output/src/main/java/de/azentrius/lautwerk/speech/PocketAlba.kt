@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.speech
+package de.azentrius.lautwerk.speech
 
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.speech.tts.TextToSpeech
 import android.speech.tts.Voice
-import dev.openautoai.core.i18n.AppLanguage
-import dev.openautoai.voice.VoiceProblem
+import de.azentrius.lautwerk.core.i18n.AppLanguage
+import de.azentrius.lautwerk.voice.VoiceProblem
 import java.util.Locale
 
 /** Only the separately installed cancellation-fixed engine; never the broken upstream 0.5.3. */

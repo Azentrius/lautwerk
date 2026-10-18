@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.graphics.Bitmap
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -7,7 +7,7 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.app.SpeechSettingsActivity
+import de.azentrius.lautwerk.app.SpeechSettingsActivity
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test

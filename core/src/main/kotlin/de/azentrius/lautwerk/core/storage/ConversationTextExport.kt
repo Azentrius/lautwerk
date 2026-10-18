@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.core.storage
+package de.azentrius.lautwerk.core.storage
 
-import dev.openautoai.core.ai.RequestCancellation
+import de.azentrius.lautwerk.core.ai.RequestCancellation
 import java.io.Writer
 import java.time.Instant
 import java.util.Locale
-import dev.openautoai.core.i18n.AppLanguage
+import de.azentrius.lautwerk.core.i18n.AppLanguage
 
 /** A readable copy, not a backup format. No credential store or external I/O here. */
 object ConversationTextExport {

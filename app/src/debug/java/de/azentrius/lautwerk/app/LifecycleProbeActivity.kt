@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
 import android.content.Context
 import android.content.res.Configuration
@@ -27,7 +27,7 @@ class LifecycleProbeActivity : ComponentActivity() {
             override fun <T:ViewModel> create(modelClass:Class<T>):T = create() as T
         })[HomeViewModel::class.java]
         home.languageChanged()
-        setContent { dev.openautoai.app.design.AzentriusTheme(dark=dark) { MainContent(home,{ starts++ },{
+        setContent { de.azentrius.lautwerk.app.design.AzentriusTheme(dark=dark) { MainContent(home,{ starts++ },{
             AppState.update(false,AppState.provider,AppState.modelId,AppState.sessionId,"Test")
         }) } }
     }

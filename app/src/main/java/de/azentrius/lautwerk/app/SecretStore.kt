@@ -1,4 +1,4 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
-typealias SecretStore = dev.openautoai.storage.EncryptedCredentialStore
+typealias SecretStore = de.azentrius.lautwerk.storage.EncryptedCredentialStore

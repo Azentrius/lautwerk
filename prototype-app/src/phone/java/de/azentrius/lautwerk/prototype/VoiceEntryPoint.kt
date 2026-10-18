@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.prototype
+package de.azentrius.lautwerk.prototype
 
 import android.app.Activity
 

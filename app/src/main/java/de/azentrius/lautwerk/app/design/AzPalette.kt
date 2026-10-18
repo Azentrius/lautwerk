@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.design
+package de.azentrius.lautwerk.app.design
 
 import androidx.compose.ui.graphics.Color
 

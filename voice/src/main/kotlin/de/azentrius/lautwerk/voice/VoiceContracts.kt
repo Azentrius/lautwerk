@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.voice
+package de.azentrius.lautwerk.voice
 
-import dev.openautoai.core.i18n.Messages
-import dev.openautoai.core.ai.ChatReply
-import dev.openautoai.core.ai.Provider
-import dev.openautoai.core.storage.Conversation
+import de.azentrius.lautwerk.core.i18n.Messages
+import de.azentrius.lautwerk.core.ai.ChatReply
+import de.azentrius.lautwerk.core.ai.Provider
+import de.azentrius.lautwerk.core.storage.Conversation
 
 fun interface Cancel { fun cancel() }
-typealias CancellationCheck = dev.openautoai.core.ai.RequestCancellation
+typealias CancellationCheck = de.azentrius.lautwerk.core.ai.RequestCancellation
 
 /** Work runs off the UI thread; completion is delivered on the controller's thread. */
 interface VoiceTasks {

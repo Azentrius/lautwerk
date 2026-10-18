@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.app.KeyguardManager
 import android.content.*
 import android.media.*
 import android.os.*
-import dev.openautoai.voice.*
+import de.azentrius.lautwerk.voice.*
 
 /** Read-only system signals. No phone-state permission, call details or forced audio routing. */
 internal class AndroidVoiceEnvironment(private val context: Context, private val main: Handler) : VoiceEnvironment {

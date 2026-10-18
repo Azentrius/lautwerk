@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.storage
+package de.azentrius.lautwerk.storage
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -9,9 +9,9 @@ import android.util.AtomicFile
 import android.util.Base64
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.core.ai.ModelCatalog
-import dev.openautoai.core.ai.Provider
-import dev.openautoai.core.storage.*
+import de.azentrius.lautwerk.core.ai.ModelCatalog
+import de.azentrius.lautwerk.core.ai.Provider
+import de.azentrius.lautwerk.core.storage.*
 import org.json.JSONArray
 import org.json.JSONObject
 import org.junit.After

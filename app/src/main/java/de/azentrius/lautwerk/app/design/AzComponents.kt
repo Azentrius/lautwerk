@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 @file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
-package dev.openautoai.app.design
+package de.azentrius.lautwerk.app.design
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.*
@@ -28,7 +28,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import dev.openautoai.app.R
+import de.azentrius.lautwerk.app.R
 
 private val pill = RoundedCornerShape(50)
 internal enum class AzButtonKind { PRIMARY, SECONDARY, TEXT, DANGER }

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
 import android.graphics.Bitmap
 import androidx.compose.material3.MaterialTheme
@@ -7,7 +7,7 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.core.ai.*
+import de.azentrius.lautwerk.core.ai.*
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Rule
@@ -23,7 +23,7 @@ class HistorySearchUiTest {
     @After fun cleanup() { f.close() }
     private fun render(chats: List<Conversation>) {
         f.archive.items = chats; f.create()
-        compose.setContent { dev.openautoai.app.design.AzentriusTheme { MainContent(f.home, { starts++ }, {
+        compose.setContent { de.azentrius.lautwerk.app.design.AzentriusTheme { MainContent(f.home, { starts++ }, {
             AppState.update(false,AppState.provider,AppState.modelId,AppState.sessionId,"Bereit")
         }) } }
         ready(); compose.onNodeWithTag("page-history").performClick()

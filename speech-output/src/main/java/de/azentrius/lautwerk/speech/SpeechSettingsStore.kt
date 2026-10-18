@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.speech
+package de.azentrius.lautwerk.speech
 
 import android.content.Context
 import android.content.SharedPreferences
 import android.speech.tts.Voice
-import dev.openautoai.core.i18n.AppLanguage
+import de.azentrius.lautwerk.core.i18n.AppLanguage
 import java.util.Locale
 
 data class SpeechSettings(val engine: String? = null, val voice: String? = null, val rate: Float = 1f)

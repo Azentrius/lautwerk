@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.settings
+package de.azentrius.lautwerk.settings
 
 import android.content.Context
 import android.content.SharedPreferences
-import dev.openautoai.core.ai.ModelCatalog
-import dev.openautoai.core.ai.ModelSelection
-import dev.openautoai.core.ai.Provider
+import de.azentrius.lautwerk.core.ai.ModelCatalog
+import de.azentrius.lautwerk.core.ai.ModelSelection
+import de.azentrius.lautwerk.core.ai.Provider
 import java.io.Closeable
 
 /** Non-secret, app-private preferences. Phone and CarAppService run in the same process. */

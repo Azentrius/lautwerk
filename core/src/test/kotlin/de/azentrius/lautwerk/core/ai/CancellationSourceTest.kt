@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.core.ai
+package de.azentrius.lautwerk.core.ai
 
 import org.junit.Assert.*
 import org.junit.Test

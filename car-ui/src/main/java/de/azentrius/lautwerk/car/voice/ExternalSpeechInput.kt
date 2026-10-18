@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.car.voice
+package de.azentrius.lautwerk.car.voice
 
 import android.content.Intent
 import android.media.AudioFormat

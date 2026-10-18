@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
-import dev.openautoai.core.ai.ChatClient
-import dev.openautoai.core.ai.ChatError
-import dev.openautoai.core.ai.ChatFailure
-import dev.openautoai.core.ai.ChatMessage
-import dev.openautoai.core.ai.ChatReply
-import dev.openautoai.core.ai.ChatRequest
-import dev.openautoai.core.storage.CredentialStore
-import dev.openautoai.core.ai.ModelCatalog
-import dev.openautoai.core.ai.ModelSelection
-import dev.openautoai.core.ai.Provider
-import dev.openautoai.providers.ProviderChatClient
+import de.azentrius.lautwerk.core.ai.ChatClient
+import de.azentrius.lautwerk.core.ai.ChatError
+import de.azentrius.lautwerk.core.ai.ChatFailure
+import de.azentrius.lautwerk.core.ai.ChatMessage
+import de.azentrius.lautwerk.core.ai.ChatReply
+import de.azentrius.lautwerk.core.ai.ChatRequest
+import de.azentrius.lautwerk.core.storage.CredentialStore
+import de.azentrius.lautwerk.core.ai.ModelCatalog
+import de.azentrius.lautwerk.core.ai.ModelSelection
+import de.azentrius.lautwerk.core.ai.Provider
+import de.azentrius.lautwerk.providers.ProviderChatClient
 
 /** Compatibility bridge from the existing encrypted archive/voice code to the common chat API. */
 class ChatApi(private val client: ChatClient) {

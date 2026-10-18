@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -12,10 +12,10 @@ import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
-import dev.openautoai.app.design.*
-import dev.openautoai.core.ai.*
-import dev.openautoai.core.storage.*
-import dev.openautoai.voice.VoicePhase
+import de.azentrius.lautwerk.app.design.*
+import de.azentrius.lautwerk.core.ai.*
+import de.azentrius.lautwerk.core.storage.*
+import de.azentrius.lautwerk.voice.VoicePhase
 import org.junit.*
 import org.junit.Assert.*
 import java.time.*

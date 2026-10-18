@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: Apache-2.0
 @file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.semantics.*
-import dev.openautoai.app.design.*
-import dev.openautoai.app.design.AzPrimaryButton as Button
-import dev.openautoai.app.design.AzSecondaryButton as OutlinedButton
-import dev.openautoai.app.design.AzTextButton as TextButton
-import dev.openautoai.app.design.AzChip as FilterChip
-import dev.openautoai.app.design.AzTextField as OutlinedTextField
-import dev.openautoai.app.design.AzDialog as AlertDialog
+import de.azentrius.lautwerk.app.design.*
+import de.azentrius.lautwerk.app.design.AzPrimaryButton as Button
+import de.azentrius.lautwerk.app.design.AzSecondaryButton as OutlinedButton
+import de.azentrius.lautwerk.app.design.AzTextButton as TextButton
+import de.azentrius.lautwerk.app.design.AzChip as FilterChip
+import de.azentrius.lautwerk.app.design.AzTextField as OutlinedTextField
+import de.azentrius.lautwerk.app.design.AzDialog as AlertDialog
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.lazy.LazyColumn
@@ -40,7 +40,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import dev.openautoai.core.ai.*
+import de.azentrius.lautwerk.core.ai.*
 
 @Composable
 internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,

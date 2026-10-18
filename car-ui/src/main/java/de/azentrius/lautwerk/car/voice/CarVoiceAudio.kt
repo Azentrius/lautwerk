@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.car.voice
+package de.azentrius.lautwerk.car.voice
 
 import android.Manifest
 import android.content.Context
@@ -11,10 +11,10 @@ import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.util.Log
 import androidx.car.app.CarContext
-import dev.openautoai.core.i18n.AppLanguage
-import dev.openautoai.voice.*
-import dev.openautoai.speech.PocketAlba
-import dev.openautoai.speech.SpeechSettingsStore
+import de.azentrius.lautwerk.core.i18n.AppLanguage
+import de.azentrius.lautwerk.voice.*
+import de.azentrius.lautwerk.speech.PocketAlba
+import de.azentrius.lautwerk.speech.SpeechSettingsStore
 import java.util.concurrent.ExecutorService
 
 /** The car path only uses the on-device recognizer with external PCM; the phone path uses its mic. */

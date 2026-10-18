@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
-import dev.openautoai.core.i18n.Messages
-import dev.openautoai.core.i18n.AppLanguage
+import de.azentrius.lautwerk.core.i18n.Messages
+import de.azentrius.lautwerk.core.i18n.AppLanguage
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -10,11 +10,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import dev.openautoai.app.voice.AndroidVoiceTasks
-import dev.openautoai.core.ai.*
-import dev.openautoai.core.storage.*
-import dev.openautoai.settings.ModelSelectionStore
-import dev.openautoai.voice.Cancel
+import de.azentrius.lautwerk.app.voice.AndroidVoiceTasks
+import de.azentrius.lautwerk.core.ai.*
+import de.azentrius.lautwerk.core.storage.*
+import de.azentrius.lautwerk.settings.ModelSelectionStore
+import de.azentrius.lautwerk.voice.Cancel
 import java.util.concurrent.Executors
 
 internal enum class HomeOperation(private val text: Messages) {

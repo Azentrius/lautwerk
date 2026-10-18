@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.car.voice
+package de.azentrius.lautwerk.car.voice
 
 import android.Manifest
 import android.app.Activity
@@ -7,16 +7,16 @@ import android.content.pm.PackageManager
 import android.os.*
 import android.text.InputType
 import android.speech.tts.TextToSpeech
-import dev.openautoai.speech.PocketAlba
-import dev.openautoai.speech.SpeechSettingsStore
-import dev.openautoai.speech.R as SpeechR
+import de.azentrius.lautwerk.speech.PocketAlba
+import de.azentrius.lautwerk.speech.SpeechSettingsStore
+import de.azentrius.lautwerk.speech.R as SpeechR
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.*
-import dev.openautoai.car.R
-import dev.openautoai.settings.ModelSelectionStore
-import dev.openautoai.storage.EncryptedCredentialStore
+import de.azentrius.lautwerk.car.R
+import de.azentrius.lautwerk.settings.ModelSelectionStore
+import de.azentrius.lautwerk.storage.EncryptedCredentialStore
 import java.util.concurrent.Executors
 
 /** Phone-only setup for the existing car package. Keys never cross package or IPC boundaries. */
@@ -45,7 +45,7 @@ class VoiceSetupActivity : Activity() {
         voiceTimeout = Runnable {
             if (token == voiceGeneration && !pocketReady) {
                 closeVoiceCheck()
-                voiceStatus.text = dev.openautoai.core.i18n.Messages.PREVIEW_TIMEOUT_INIT.text()
+                voiceStatus.text = de.azentrius.lautwerk.core.i18n.Messages.PREVIEW_TIMEOUT_INIT.text()
             }
         }.also { main.postDelayed(it, 12_000) }
         try { pocket = TextToSpeech(this, { result -> main.post {
@@ -53,15 +53,15 @@ class VoiceSetupActivity : Activity() {
             voiceTimeout?.let(main::removeCallbacks); voiceTimeout = null
             val engine = pocket
             val unavailable = if (result != TextToSpeech.SUCCESS || engine == null)
-                dev.openautoai.voice.VoiceProblem.POCKET_UNAVAILABLE
+                de.azentrius.lautwerk.voice.VoiceProblem.POCKET_UNAVAILABLE
                 else runCatching { PocketAlba.apply(engine, PocketAlba.settings()) }
-                    .getOrDefault(dev.openautoai.voice.VoiceProblem.POCKET_VOICE_UNAVAILABLE)
+                    .getOrDefault(de.azentrius.lautwerk.voice.VoiceProblem.POCKET_VOICE_UNAVAILABLE)
             pocketReady = unavailable == null
             voiceStatus.text = unavailable?.message ?: getString(SpeechR.string.pocket_local)
             updateVoiceControls()
         } }, PocketAlba.ENGINE) } catch (_: Exception) {
             closeVoiceCheck()
-            voiceStatus.text = dev.openautoai.voice.VoiceProblem.POCKET_UNAVAILABLE.message
+            voiceStatus.text = de.azentrius.lautwerk.voice.VoiceProblem.POCKET_UNAVAILABLE.message
             updateVoiceControls()
         }
     }

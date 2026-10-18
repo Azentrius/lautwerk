@@ -1,4 +1,4 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
-typealias Turn = dev.openautoai.core.storage.Turn
+typealias Turn = de.azentrius.lautwerk.core.storage.Turn

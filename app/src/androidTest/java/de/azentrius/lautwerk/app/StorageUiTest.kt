@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
 import android.graphics.Bitmap
 import androidx.compose.runtime.SideEffect
@@ -8,8 +8,8 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.core.ai.*
-import dev.openautoai.core.storage.*
+import de.azentrius.lautwerk.core.ai.*
+import de.azentrius.lautwerk.core.storage.*
 import org.junit.After
 import org.junit.Assert.*
 import org.junit.Rule
@@ -32,7 +32,7 @@ class StorageUiTest {
         compose.setContent {
             val view=LocalView.current
             SideEffect { view.importantForAutofill=android.view.View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS }
-            dev.openautoai.app.design.AzentriusTheme { MainContent(f.home, { starts++ }, {
+            de.azentrius.lautwerk.app.design.AzentriusTheme { MainContent(f.home, { starts++ }, {
             stops++
             AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, "Gespräch beendet")
         }, onExportDocument = { exportPicks++ }) } }

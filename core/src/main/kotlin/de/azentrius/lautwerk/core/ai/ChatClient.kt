@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.core.ai
+package de.azentrius.lautwerk.core.ai
 
-import dev.openautoai.core.i18n.Messages
+import de.azentrius.lautwerk.core.i18n.Messages
 
 data class ChatMessage(val role: String, val content: String)
 

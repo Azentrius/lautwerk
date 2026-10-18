@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.design
+package de.azentrius.lautwerk.app.design
 
 import android.app.Activity
 import androidx.activity.SystemBarStyle
@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.*
-import dev.openautoai.app.R
+import de.azentrius.lautwerk.app.R
 
 internal object AzType {
     val serifItalic = FontFamily(Font(R.font.dm_serif_display_italic,

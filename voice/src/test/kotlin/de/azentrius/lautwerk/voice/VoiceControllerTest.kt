@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.voice
+package de.azentrius.lautwerk.voice
 
-import dev.openautoai.core.ai.*
-import dev.openautoai.core.storage.Conversation
+import de.azentrius.lautwerk.core.ai.*
+import de.azentrius.lautwerk.core.storage.Conversation
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -93,9 +93,9 @@ class VoiceControllerTest {
     }
 
     @Test fun englishCommandsSwitchAndStopWithoutBecomingProviderRequests() {
-        val old=dev.openautoai.core.i18n.AppLanguage.preferences
+        val old=de.azentrius.lautwerk.core.i18n.AppLanguage.preferences
         try {
-            dev.openautoai.core.i18n.AppLanguage.preferences={listOf(java.util.Locale.ENGLISH)}
+            de.azentrius.lautwerk.core.i18n.AppLanguage.preferences={listOf(java.util.Locale.ENGLISH)}
             val f=Fixture(); f.ready()
             assertTrue(f.controller.state.status.startsWith("Listening"))
             f.phrase("Switch to Claude.")
@@ -106,7 +106,7 @@ class VoiceControllerTest {
             f.phrase("End conversation!")
             assertFalse(f.controller.state.active);assertEquals("Conversation ended",f.controller.state.status)
             assertTrue(f.backend.phrases.isEmpty())
-        } finally { dev.openautoai.core.i18n.AppLanguage.preferences=old }
+        } finally { de.azentrius.lautwerk.core.i18n.AppLanguage.preferences=old }
     }
 
     @Test fun bothProvidersFollowListenThinkSpeakAndListenWithoutOverlap() {

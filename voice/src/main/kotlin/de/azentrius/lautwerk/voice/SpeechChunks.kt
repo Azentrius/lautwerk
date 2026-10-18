@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.voice
+package de.azentrius.lautwerk.voice
 
 /** TTS limits use UTF-16 length; never split a surrogate pair or send an oversized utterance. */
 object SpeechChunks {

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.providers
+package de.azentrius.lautwerk.providers
 
-import dev.openautoai.core.ai.*
+import de.azentrius.lautwerk.core.ai.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException

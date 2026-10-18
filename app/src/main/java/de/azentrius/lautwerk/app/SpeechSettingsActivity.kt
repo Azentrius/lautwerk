@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 @file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -20,12 +20,12 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.unit.dp
-import dev.openautoai.core.i18n.AppLanguage
-import dev.openautoai.app.design.*
-import dev.openautoai.app.voice.SpeechPreview
-import dev.openautoai.app.voice.SpeechSettingsStore
-import dev.openautoai.speech.PocketAlba
-import dev.openautoai.speech.R as SpeechR
+import de.azentrius.lautwerk.core.i18n.AppLanguage
+import de.azentrius.lautwerk.app.design.*
+import de.azentrius.lautwerk.app.voice.SpeechPreview
+import de.azentrius.lautwerk.app.voice.SpeechSettingsStore
+import de.azentrius.lautwerk.speech.PocketAlba
+import de.azentrius.lautwerk.speech.R as SpeechR
 
 /** Previews retain their existing lifetime and never run outside this foreground screen. */
 class SpeechSettingsActivity : ComponentActivity() {

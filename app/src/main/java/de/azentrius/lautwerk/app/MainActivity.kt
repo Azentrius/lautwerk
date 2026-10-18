@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
-import dev.openautoai.core.i18n.Messages
+import de.azentrius.lautwerk.core.i18n.Messages
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,7 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import dev.openautoai.app.design.AzentriusTheme
+import de.azentrius.lautwerk.app.design.AzentriusTheme
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import dev.openautoai.settings.ModelSelectionStore
+import de.azentrius.lautwerk.settings.ModelSelectionStore
 
 class MainActivity : ComponentActivity() {
     private lateinit var home: HomeViewModel
@@ -112,7 +112,7 @@ class MainActivity : ComponentActivity() {
 
     private fun failStart(message: String) {
         startGate.cancel()
-        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text(), dev.openautoai.voice.VoicePhase.STOPPED)
+        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text(), de.azentrius.lautwerk.voice.VoicePhase.STOPPED)
         AppState.reportIssue(message)
     }
 
@@ -121,7 +121,7 @@ class MainActivity : ComponentActivity() {
         startGate.cancel()
         // Do not create an idle microphone service merely to stop it.
         stopService(Intent(this, VoiceService::class.java))
-        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text(), dev.openautoai.voice.VoicePhase.STOPPED)
+        AppState.update(false, AppState.provider, AppState.modelId, AppState.sessionId, Messages.ENDED.text(), de.azentrius.lautwerk.voice.VoicePhase.STOPPED)
         AppState.reportIssue(null)
     }
 }

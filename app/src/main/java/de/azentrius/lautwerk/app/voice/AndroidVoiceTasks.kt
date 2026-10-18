@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.os.Handler
-import dev.openautoai.core.ai.CancellationSource
-import dev.openautoai.voice.*
+import de.azentrius.lautwerk.core.ai.CancellationSource
+import de.azentrius.lautwerk.voice.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.FutureTask
 

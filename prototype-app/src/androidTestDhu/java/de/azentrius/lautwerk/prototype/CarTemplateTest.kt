@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.prototype
+package de.azentrius.lautwerk.prototype
 
 import android.content.Context
 import androidx.car.app.testing.ScreenController
 import androidx.lifecycle.Lifecycle
-import dev.openautoai.core.ai.ModelSelection
-import dev.openautoai.core.ai.Provider
-import dev.openautoai.settings.ModelSelectionStore
+import de.azentrius.lautwerk.core.ai.ModelSelection
+import de.azentrius.lautwerk.core.ai.Provider
+import de.azentrius.lautwerk.settings.ModelSelectionStore
 import androidx.car.app.OnDoneCallback
 import androidx.car.app.serialization.Bundleable
 import androidx.car.app.model.MessageTemplate
 import androidx.car.app.testing.TestCarContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.car.OpenAutoScreen
-import dev.openautoai.car.voice.CarVoicePort
-import dev.openautoai.car.voice.CarVoiceState
+import de.azentrius.lautwerk.car.OpenAutoScreen
+import de.azentrius.lautwerk.car.voice.CarVoicePort
+import de.azentrius.lautwerk.car.voice.CarVoiceState
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
@@ -37,11 +37,11 @@ class CarTemplateTest {
         private var changed: () -> Unit = {}
         override fun connect(changed: () -> Unit) { this.changed = changed }
         override fun start() {
-            state = CarVoiceState(true, context.getString(dev.openautoai.car.R.string.voice_speaking))
+            state = CarVoiceState(true, context.getString(de.azentrius.lautwerk.car.R.string.voice_speaking))
             changed()
         }
         override fun stop() {
-            state = CarVoiceState(false, context.getString(dev.openautoai.car.R.string.voice_stopped))
+            state = CarVoiceState(false, context.getString(de.azentrius.lautwerk.car.R.string.voice_stopped))
             changed()
         }
         override fun close() { state = CarVoiceState(); changed = {} }

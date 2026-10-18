@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import androidx.activity.result.contract.ActivityResultContracts
 import android.net.Uri
-import dev.openautoai.core.ai.RequestCancellation
-import dev.openautoai.core.storage.Conversation
-import dev.openautoai.core.storage.ConversationTextExport
+import de.azentrius.lautwerk.core.ai.RequestCancellation
+import de.azentrius.lautwerk.core.storage.Conversation
+import de.azentrius.lautwerk.core.storage.ConversationTextExport
 import java.io.IOException
 import java.io.OutputStream
 

@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.core.storage
+package de.azentrius.lautwerk.core.storage
 
-import dev.openautoai.core.i18n.Messages
-import dev.openautoai.core.ai.CredentialSource
-import dev.openautoai.core.ai.Provider
+import de.azentrius.lautwerk.core.i18n.Messages
+import de.azentrius.lautwerk.core.ai.CredentialSource
+import de.azentrius.lautwerk.core.ai.Provider
 
 data class Turn(val role: String, val content: String)
 data class Conversation(

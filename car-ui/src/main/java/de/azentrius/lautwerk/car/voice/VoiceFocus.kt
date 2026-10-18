@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.car.voice
+package de.azentrius.lautwerk.car.voice
 
 import android.content.Context
 import android.media.AudioAttributes
@@ -7,8 +7,8 @@ import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.os.Handler
 import android.util.Log
-import dev.openautoai.voice.Cancel
-import dev.openautoai.voice.PlaybackFocus
+import de.azentrius.lautwerk.voice.Cancel
+import de.azentrius.lautwerk.voice.PlaybackFocus
 
 /** Playback and car capture acquire separate short leases; phone recognition manages its own focus. */
 internal class VoiceFocus(context: Context, private val main: Handler, private val capture: Boolean = false) : PlaybackFocus {

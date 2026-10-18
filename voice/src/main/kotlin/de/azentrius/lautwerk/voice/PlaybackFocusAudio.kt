@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.voice
+package de.azentrius.lautwerk.voice
 
 /** Returns a release handle only when playback is authorized. All callbacks use the caller's thread. */
 fun interface PlaybackFocus { fun request(onLost: () -> Unit): Cancel? }

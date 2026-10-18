@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.os.Handler
 import android.os.Looper
@@ -19,7 +19,7 @@ class AndroidVoiceEnvironmentTest {
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val observed = CountDownLatch(1)
         val calls = AtomicInteger()
-        var cleanup: dev.openautoai.voice.Cancel? = null
+        var cleanup: de.azentrius.lautwerk.voice.Cancel? = null
         instrumentation.runOnMainSync {
             val environment = AndroidVoiceEnvironment(instrumentation.targetContext, Handler(Looper.getMainLooper()))
             environment.current()

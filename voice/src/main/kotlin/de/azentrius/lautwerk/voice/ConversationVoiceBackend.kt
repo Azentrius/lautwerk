@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.voice
+package de.azentrius.lautwerk.voice
 
-import dev.openautoai.core.ai.*
-import dev.openautoai.core.storage.*
+import de.azentrius.lautwerk.core.ai.*
+import de.azentrius.lautwerk.core.storage.*
 
 /** Persistence and API work run through the injected worker, never from speech callbacks directly. */
 class ConversationVoiceBackend(

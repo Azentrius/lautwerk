@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.voice
+package de.azentrius.lautwerk.voice
 
 /** A bounded, cancellable audio check. It has no backend, credentials or persistence dependency. */
 class AudioCheck(

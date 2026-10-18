@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.prototype
+package de.azentrius.lautwerk.prototype
 
 import android.Manifest
 import android.content.Intent
@@ -11,9 +11,9 @@ import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import androidx.test.core.app.ActivityScenario
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.car.voice.VoiceSetupActivity
-import dev.openautoai.car.voice.ExternalSpeechInput
-import dev.openautoai.car.voice.FinalSpeechListener
+import de.azentrius.lautwerk.car.voice.VoiceSetupActivity
+import de.azentrius.lautwerk.car.voice.ExternalSpeechInput
+import de.azentrius.lautwerk.car.voice.FinalSpeechListener
 import org.junit.Assert.*
 import org.junit.Assume.assumeTrue
 import org.junit.Test

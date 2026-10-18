@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.prototype
+package de.azentrius.lautwerk.prototype
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -13,8 +13,8 @@ import androidx.car.app.model.MessageTemplate
 import androidx.car.app.testing.TestCarContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.car.OpenAutoScreen
-import dev.openautoai.settings.ModelSelectionStore
+import de.azentrius.lautwerk.car.OpenAutoScreen
+import de.azentrius.lautwerk.settings.ModelSelectionStore
 import java.util.Locale
 import org.junit.Assert.*
 import org.junit.Test

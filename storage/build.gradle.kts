@@ -3,7 +3,7 @@ plugins {
     id("com.android.library")
 }
 android {
-    namespace = "dev.openautoai.storage"
+    namespace = "de.azentrius.lautwerk.storage"
     compileSdk = 37
     defaultConfig {
         minSdk = 28

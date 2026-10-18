@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.Manifest
 import android.content.Context
@@ -12,9 +12,9 @@ import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
-import dev.openautoai.voice.*
-import dev.openautoai.speech.PocketAlba
-import dev.openautoai.core.i18n.AppLanguage
+import de.azentrius.lautwerk.voice.*
+import de.azentrius.lautwerk.speech.PocketAlba
+import de.azentrius.lautwerk.core.i18n.AppLanguage
 import java.util.Locale
 
 /** Android speech services may process audio online. No raw audio is recorded or archived by this app. */

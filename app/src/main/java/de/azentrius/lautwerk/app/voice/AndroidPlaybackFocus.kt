@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
 import android.os.Handler
-import dev.openautoai.voice.Cancel
-import dev.openautoai.voice.PlaybackFocus
+import de.azentrius.lautwerk.voice.Cancel
+import de.azentrius.lautwerk.voice.PlaybackFocus
 
 /** Main-thread, short-lived playback focus. Never used to initialize or run recognition. */
 internal class AndroidPlaybackFocus(context: Context, private val main: Handler) : PlaybackFocus {

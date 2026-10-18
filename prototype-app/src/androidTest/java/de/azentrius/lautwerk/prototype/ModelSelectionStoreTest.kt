@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.prototype
+package de.azentrius.lautwerk.prototype
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import dev.openautoai.core.ai.ModelSelection
-import dev.openautoai.core.ai.Provider
-import dev.openautoai.settings.ModelSelectionStore
+import de.azentrius.lautwerk.core.ai.ModelSelection
+import de.azentrius.lautwerk.core.ai.Provider
+import de.azentrius.lautwerk.settings.ModelSelectionStore
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

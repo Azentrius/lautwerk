@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.core.ai
+package de.azentrius.lautwerk.core.ai
 
 /** A provider/model pair is valid as a unit; never silently route it to another provider. */
 data class ModelSelection(val provider: Provider, val modelId: String) {

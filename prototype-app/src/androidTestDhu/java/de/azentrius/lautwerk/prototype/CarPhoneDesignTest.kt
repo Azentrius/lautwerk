@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.prototype
+package de.azentrius.lautwerk.prototype
 
 import android.graphics.drawable.ColorDrawable
 import android.view.ViewGroup
 import android.widget.ScrollView
 import androidx.test.core.app.ActivityScenario
-import dev.openautoai.car.voice.VoiceSetupActivity
+import de.azentrius.lautwerk.car.voice.VoiceSetupActivity
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test

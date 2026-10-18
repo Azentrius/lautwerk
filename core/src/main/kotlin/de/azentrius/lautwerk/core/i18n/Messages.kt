@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.core.i18n
+package de.azentrius.lautwerk.core.i18n
 
 import java.util.Locale
 

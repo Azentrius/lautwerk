@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.car.voice
+package de.azentrius.lautwerk.car.voice
 
 import android.content.*
 import android.os.IBinder
 import androidx.car.app.CarContext
-import dev.openautoai.car.R
+import de.azentrius.lautwerk.car.R
 import java.io.Closeable
 
 /** Injectable surface contract: template tests never bind a real microphone/network service. */

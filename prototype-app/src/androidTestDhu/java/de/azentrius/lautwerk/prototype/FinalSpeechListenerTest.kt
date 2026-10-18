@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.prototype
+package de.azentrius.lautwerk.prototype
 
 import android.os.Bundle
 import android.speech.SpeechRecognizer
-import dev.openautoai.car.voice.FinalSpeechListener
+import de.azentrius.lautwerk.car.voice.FinalSpeechListener
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

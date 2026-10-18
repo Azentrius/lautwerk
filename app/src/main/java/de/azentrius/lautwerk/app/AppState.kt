@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app
+package de.azentrius.lautwerk.app
 
-import dev.openautoai.core.i18n.Messages
-import dev.openautoai.core.ai.Provider
-import dev.openautoai.core.ai.ModelCatalog
+import de.azentrius.lautwerk.core.i18n.Messages
+import de.azentrius.lautwerk.core.ai.Provider
+import de.azentrius.lautwerk.core.ai.ModelCatalog
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -12,7 +12,7 @@ import androidx.compose.runtime.setValue
 
 /** Single-process observable state. Mutations are dispatched on the main thread. */
 object AppState {
-    var phase by mutableStateOf<dev.openautoai.voice.VoicePhase?>(null)
+    var phase by mutableStateOf<de.azentrius.lautwerk.voice.VoicePhase?>(null)
         private set
     var active by mutableStateOf(false)
         private set
@@ -29,7 +29,7 @@ object AppState {
     var revision by mutableIntStateOf(0)
         private set
 
-    fun update(active: Boolean, provider: Provider, modelId: String, sessionId: String?, status: String, phase: dev.openautoai.voice.VoicePhase? = if(active) dev.openautoai.voice.VoicePhase.PREPARING else null) {
+    fun update(active: Boolean, provider: Provider, modelId: String, sessionId: String?, status: String, phase: de.azentrius.lautwerk.voice.VoicePhase? = if(active) de.azentrius.lautwerk.voice.VoicePhase.PREPARING else null) {
         this.phase = phase
         this.active = active
         this.provider = provider

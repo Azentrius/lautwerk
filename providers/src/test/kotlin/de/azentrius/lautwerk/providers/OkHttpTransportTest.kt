@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.providers
+package de.azentrius.lautwerk.providers
 
-import dev.openautoai.core.ai.*
+import de.azentrius.lautwerk.core.ai.*
 import okhttp3.Call
 import okhttp3.EventListener
 import okhttp3.mockwebserver.MockResponse

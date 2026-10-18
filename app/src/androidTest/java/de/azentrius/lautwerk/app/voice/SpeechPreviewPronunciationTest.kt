@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
-package dev.openautoai.app.voice
+package de.azentrius.lautwerk.app.voice
 
 import android.os.Parcel
 import android.text.Spanned
 import android.text.TextUtils
 import android.text.style.TtsSpan
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import dev.openautoai.core.i18n.AppLanguage
-import dev.openautoai.core.i18n.Messages
+import de.azentrius.lautwerk.core.i18n.AppLanguage
+import de.azentrius.lautwerk.core.i18n.Messages
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
