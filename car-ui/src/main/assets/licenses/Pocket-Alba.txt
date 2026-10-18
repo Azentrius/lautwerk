@@ -1,4 +1,4 @@
-Pocket / Alba — optional, separately installed speech engine
+Pocket / Alba: optional, separately installed speech engine
 
 No Pocket native runtime, model weights or voice recording is bundled in OpenAuto AI.
 This app can explicitly connect to the evaluated local Android engine. The provider

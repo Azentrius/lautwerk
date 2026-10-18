@@ -16,9 +16,9 @@
     <string name="voice_disconnected">Audio service disconnected. Press Start to retry.</string>
     <string name="voice_service_wait">Audio service is connecting. Please press Start again.</string>
     <string name="voice_setup_help">First test output, then the microphone, then conversation. The selected mode applies to Start in Android Auto and to the phone test. Microphone test reads back one sentence without sending it to an AI provider or saving it. Car recognition is on-device; a phone speech service may process audio online. Conversation sends recognized text to the selected provider, uses your API credits and saves the chat encrypted in this test app. Test while parked.</string>
-    <string name="voice_mode_playback">1. Output test — no microphone or AI</string>
-    <string name="voice_mode_microphone">2. Microphone and recognition test — no AI</string>
-    <string name="voice_mode_conversation">3. Conversation — selected AI provider</string>
+    <string name="voice_mode_playback">1. Output test: no microphone or AI</string>
+    <string name="voice_mode_microphone">2. Microphone and recognition test: no AI</string>
+    <string name="voice_mode_conversation">3. Conversation: selected AI provider</string>
     <string name="voice_permissions">Allow microphone and notifications</string>
     <string name="voice_key_label">API key for %1$s</string>
     <string name="voice_key_hint">Enter key on this phone only</string>
