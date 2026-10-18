@@ -5,8 +5,6 @@ import android.graphics.Bitmap
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.text.TextLayoutResult
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import de.azentrius.lautwerk.app.design.AzDark
 import de.azentrius.lautwerk.app.design.AzLight
 import org.junit.Assert.*
@@ -48,15 +46,17 @@ class DesignScreenshotsTest {
     private fun titleEvidence(dark: Boolean, locale: Locale, scale: Float, name: String) {
         launch(dark, locale, scale)
         val node = compose.onNodeWithTag("app-title").assertIsDisplayed()
-        compose.onAllNodesWithText("OpenAuto AI").assertCountEquals(1)
-        val text = node.fetchSemanticsNode().config[SemanticsProperties.Text].single()
-        assertEquals("OpenAuto AI", text.text)
-        assertFalse(node.fetchSemanticsNode().config.contains(SemanticsProperties.ContentDescription))
-        val suffix = text.spanStyles.single()
-        assertEquals("AI", text.text.substring(suffix.start, suffix.end))
-        assertEquals(FontStyle.Italic, suffix.item.fontStyle)
-        assertEquals(FontWeight.Normal, suffix.item.fontWeight)
-        assertEquals((if (dark) AzDark else AzLight)["signature"], suffix.item.color)
+        compose.onAllNodesWithText("Lautwerk.").assertCountEquals(1)
+        val config = node.fetchSemanticsNode().config
+        val text = config[SemanticsProperties.Text].single()
+        assertEquals("Lautwerk.", text.text)
+        assertEquals(listOf("Lautwerk"), config[SemanticsProperties.ContentDescription])
+        val dot = text.spanStyles.single()
+        assertEquals(".", text.text.substring(dot.start, dot.end))
+        assertNull("The dot keeps the title font", dot.item.fontFamily)
+        assertNull(dot.item.fontStyle)
+        assertNull(dot.item.fontWeight)
+        assertEquals((if (dark) AzDark else AzLight)["signature"], dot.item.color)
         val results = mutableListOf<TextLayoutResult>()
         node.performSemanticsAction(SemanticsActions.GetTextLayoutResult) { it(results) }
         val layout = results.single()

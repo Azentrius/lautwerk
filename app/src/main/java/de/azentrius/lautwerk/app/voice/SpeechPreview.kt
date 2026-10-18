@@ -8,9 +8,6 @@ import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.speech.tts.Voice
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.TtsSpan
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -143,10 +140,7 @@ internal class SpeechPreview(private val context: Context, private val store: Sp
             utterance = id; playing = true
             timeout = Runnable { if (utterance == id) { stop(); notice = Messages.PREVIEW_TIMEOUT.text() } }
                 .also { main.postDelayed(it, 20_000) }
-            // Pocket converts CharSequence to String and cannot honor Android TtsSpan hints.
-            val text = if (isPocket) pocketPreviewText(Messages.PREVIEW_SENTENCE.text())
-                else previewSpeechText(Messages.PREVIEW_SENTENCE.text())
-            if (current.speak(text, TextToSpeech.QUEUE_FLUSH, Bundle(), id) != TextToSpeech.SUCCESS) {
+            if (current.speak(Messages.PREVIEW_SENTENCE.text(), TextToSpeech.QUEUE_FLUSH, Bundle(), id) != TextToSpeech.SUCCESS) {
                 stop(); notice = Messages.PREVIEW_START_FAILED.text()
             }
         } catch (_: Exception) { stop(); notice = Messages.PREVIEW_START_FAILED.text() }
@@ -170,20 +164,5 @@ internal class SpeechPreview(private val context: Context, private val store: Sp
         androidReady = false; pocketReady = false; voices = emptyList()
         val old = engine; engine = null; runCatching { old?.shutdown() }
         val oldPocket = pocket; pocket = null; runCatching { oldPocket?.shutdown() }
-    }
-}
-
-/** Only the fixed preview; never rewrites a provider response or archived message. */
-internal fun pocketPreviewText(sentence: String): String = sentence.replace("OpenAuto AI", "OpenAuto A I")
-
-/** Spell the brand suffix in the fixed sample without rewriting the localized sentence. */
-internal fun previewSpeechText(sentence: String): CharSequence {
-    val name = "OpenAuto AI"
-    val nameStart = sentence.indexOf(name)
-    if (nameStart < 0) return sentence
-    val suffixStart = nameStart + name.length - 2
-    return SpannableString(sentence).apply {
-        setSpan(TtsSpan.VerbatimBuilder("AI").build(), suffixStart, suffixStart + 2,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
 }

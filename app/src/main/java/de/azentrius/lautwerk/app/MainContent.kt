@@ -33,8 +33,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.ImeAction
@@ -106,16 +105,15 @@ internal fun MainContent(home: HomeViewModel, onStart: (Conversation) -> Unit,
             Column(Modifier.fillMaxWidth().background(Az.colors["bg-page"]).statusBarsPadding()) {
                 val name = stringResource(R.string.app_name)
                 val signature = Az.colors["signature"]
+                // Word mark: the name in app-title, directly followed by the dot in signature.
+                // Screen readers read only the name, not the dot as punctuation.
                 val title = buildAnnotatedString {
                     append(name)
-                    // The existing resource stays one accessibility text; only its suffix is styled.
-                    val suffix = name.lastIndexOf("AI")
-                    if (suffix >= 0) addStyle(SpanStyle(fontFamily = AzType.serifItalic,
-                        fontStyle = FontStyle.Italic, fontWeight = FontWeight.Normal,
-                        color = signature), suffix, name.length)
+                    withStyle(SpanStyle(color = signature)) { append('.') }
                 }
                 Text(title, style = AzType.title, color = Az.colors["text"],
                     modifier = Modifier.padding(horizontal = Az.inset, vertical = 8.dp)
+                        .semantics { contentDescription = name }
                         .testTag("app-title"))
                 AzTabs(page) { keyboard?.hide();page=it }
             }

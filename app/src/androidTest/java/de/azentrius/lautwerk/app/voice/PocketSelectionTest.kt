@@ -70,9 +70,4 @@ class PocketSelectionTest {
             }
         } finally { instrumentation.runOnMainSync { tts?.shutdown() } }
     }
-
-    @Test fun pocketSampleSpellsTheBrandWithoutChangingOtherWords() {
-        assertEquals("Hallo, OpenAuto A I. Ein Test.",pocketPreviewText("Hallo, OpenAuto AI. Ein Test."))
-        assertEquals("A fixed test sentence.",pocketPreviewText("A fixed test sentence."))
-    }
 }

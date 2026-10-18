@@ -56,7 +56,7 @@ enum class Messages(private val german: String, private val english: String) {
     VOICE_SAVED("Stimme gespeichert – gilt für das nächste Gespräch mit OpenAI und Claude.", "Voice saved – applies to your next conversation with OpenAI and Claude."),
     RATE_SAVED("Sprechtempo gespeichert.", "Speaking speed saved."),
     PREVIEW_TIMEOUT("Die Hörprobe hat zu lange gedauert.", "The sample took too long."),
-    PREVIEW_SENTENCE("Hallo, ich bin OpenAuto AI. Mit dieser Stimme begleite ich dein nächstes Gespräch. Wie klingt das für dich?", "Hello, I am OpenAuto AI. This is the voice for your next conversation. How does it sound to you?"),
+    PREVIEW_SENTENCE("Hallo, ich bin Lautwerk. Mit dieser Stimme begleite ich dein nächstes Gespräch. Wie klingt das für dich?", "Hello, I am Lautwerk. This is the voice for your next conversation. How does it sound to you?"),
     PREVIEW_START_FAILED("Hörprobe konnte nicht starten.", "The sample could not start."),
     NEW_CONVERSATION("Neues Gespräch", "New conversation"),
     LANGUAGE_CHANGED("Die Sprache wurde geändert. Bitte das Gespräch erneut starten.", "The language changed. Please start the conversation again."),

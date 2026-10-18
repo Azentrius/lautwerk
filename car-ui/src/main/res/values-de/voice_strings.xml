@@ -12,7 +12,7 @@
     <string name="voice_interrupted">Ein anderer Audiovorgang hat Vorrang. Das Gespräch wurde beendet.</string>
     <string name="voice_failed">Das Gespräch konnte nicht starten. Bitte versuchen Sie es erneut.</string>
     <string name="voice_check_done">Audiotest abgeschlossen. Prüfen Sie, ob die Ausgabe hörbar war. Es wurde keine KI-Anfrage gesendet.</string>
-    <string name="voice_sample">OpenAuto AI. Dies ist der Test der Sprachausgabe. Es wird keine KI-Anfrage gesendet.</string>
+    <string name="voice_sample">Lautwerk. Dies ist der Test der Sprachausgabe. Es wird keine KI-Anfrage gesendet.</string>
     <string name="voice_disconnected">Audiodienst getrennt. Tippen Sie auf Starten, um es erneut zu versuchen.</string>
     <string name="voice_service_wait">Audiodienst verbindet sich. Bitte tippen Sie erneut auf Starten.</string>
     <string name="voice_setup_help">Testen Sie zuerst die Ausgabe, dann das Mikrofon, dann das Gespräch. Der gewählte Modus gilt für Starten in Android Auto und den Telefontest. Der Mikrofontest liest einen Satz zurück, ohne ihn an einen KI-Anbieter zu senden oder zu speichern. Die Erkennung im Auto erfolgt lokal; ein Telefondienst kann Audio online verarbeiten. Ein Gespräch sendet erkannten Text an den gewählten Anbieter, verbraucht Ihr API-Guthaben und speichert den Chat verschlüsselt in dieser Test-App. Testen Sie im Stand.</string>

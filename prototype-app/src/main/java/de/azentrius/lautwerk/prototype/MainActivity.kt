@@ -116,18 +116,16 @@ class MainActivity : Activity() {
         )
     }
 
+    /** Word mark: the name in app-title, directly followed by the dot in signature. */
     private fun stylePhoneTitle() {
         val title = findViewById<TextView>(R.id.app_title)
         val name = getString(R.string.app_name)
-        val styled = android.text.SpannableString(name)
-        val suffix = name.lastIndexOf("AI")
-        if (suffix >= 0) {
-            styled.setSpan(android.text.style.TypefaceSpan(resources.getFont(R.font.dm_serif_display_italic)),
-                suffix, name.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            styled.setSpan(android.text.style.ForegroundColorSpan(getColor(R.color.az_signature)),
-                suffix, name.length, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
+        val styled = android.text.SpannableString("$name.")
+        styled.setSpan(android.text.style.ForegroundColorSpan(getColor(R.color.az_signature)),
+            name.length, name.length + 1, android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         title.text = styled
+        // Screen readers read only the name, not the dot as punctuation.
+        title.contentDescription = name
     }
 
     private fun adapter(items: List<String>) = ArrayAdapter(

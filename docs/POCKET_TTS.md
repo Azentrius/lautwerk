@@ -55,9 +55,9 @@ model replacement or transfer of keys/chat archives is performed by the app.
 - Pocket currently ignores Android's speaking-rate argument. Its normal speed is
   shown and tempo controls are disabled while selected; the prior Android rate is
   retained and restored when choosing an Android voice.
-- The fixed Pocket preview spells `OpenAuto A I` in plain text because this engine
-  discards Android pronunciation spans. Provider responses and stored messages
-  are never rewritten. Android voice previews retain their existing TtsSpan.
+- The fixed preview names Lautwerk and is spoken as written by every engine;
+  it needs no pronunciation span. Provider responses and stored messages are
+  never rewritten.
 - Output uses the existing focus, timeout, chunking, stop and lifecycle logic.
   The corrected engine prevents cancelled native work blocking the next utterance.
 - The car MessageTemplate, host validation, microphone path and B2/B3 are unchanged.
