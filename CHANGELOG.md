@@ -18,8 +18,9 @@ from installations of earlier versions.
 - The voice sample and the car audio test name Lautwerk. The pronunciation aids that spelled "AI"
   (Android TTS span, "A I" for Pocket) and their tests are removed.
 - Classes `LautwerkApplication`, `LautwerkCarService`, `LautwerkScreen` and `LautwerkSession` (previously
-  `OpenAuto…`), theme `Theme.Lautwerk`, log tag `Lautwerk` (previously `OpenAutoAI`), notification icon
-  `ic_stat_lautwerk` and Gradle project name `Lautwerk`.
+  `OpenAutoApplication`, `OpenAutoCarService`, `OpenAutoScreen` and `OpenAutoSession`), theme
+  `Theme.Lautwerk` (previously `Theme.OpenAutoAI`), log tag `Lautwerk` (previously `OpenAutoAI`),
+  notification icon `ic_stat_lautwerk` (previously `ic_stat_openauto`) and Gradle project name `Lautwerk`.
 - Active design reference is snapshot `upstream-f2c9df4`, the design-system commit with the rename. The
   app icon files come from it; only their header comment changed. Its other changes since `edd4c67` are
   not yet audited.
