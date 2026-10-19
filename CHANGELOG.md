@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.2 – 2026-10-19
+
+Return speech output to the phone's Android text-to-speech service.
+
+- Remove the optional Pocket / Alba engine binding, voice choices, setup checks and error texts
+  from the assistant and Android Auto setup, together with the companion build and pack tools.
+- Reset only saved companion selections to Android default, retaining device voice choices by
+  language and speech rate. Keys, conversations, provider selection and system TTS settings stay.
+- Keep the assistant's voice preview and online-voice confirmation. Android Auto continues to
+  select an installed local phone voice, with the existing template and Start/End behavior.
+- Preserve historical test evidence and leave separately installed engines, models and diagnostic
+  apps untouched.
+
 ## 0.3.1 – 2026-10-19
 
 Clarify the Android Auto start action using the selected audio mode.

@@ -12,7 +12,7 @@ import com.azentrius.lautwerk.app.design.*
 
 @Composable internal fun LicenseDialog(close:()->Unit) {
     val assets=LocalContext.current.assets
-    val licenses=remember { listOf("OFL-DM-Sans.txt","OFL-DM-Serif-Display.txt","MIT-PatternFly-Icons.txt","CC-BY-4.0-Font-Awesome.txt","Pocket-Alba.txt").map {
+    val licenses=remember { listOf("OFL-DM-Sans.txt","OFL-DM-Serif-Display.txt","MIT-PatternFly-Icons.txt","CC-BY-4.0-Font-Awesome.txt").map {
         assets.open("licenses/$it").bufferedReader().use { reader -> reader.readText() }
     } }
     AzDialog(close,title={Text(stringResource(R.string.az_licenses))},text={

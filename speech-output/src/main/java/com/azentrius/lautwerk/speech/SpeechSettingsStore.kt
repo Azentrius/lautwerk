@@ -12,6 +12,20 @@ data class SpeechSettings(val engine: String? = null, val voice: String? = null,
 /** Non-secret preferences, separate from credentials, chat data and system-wide TTS settings. */
 class SpeechSettingsStore(private val prefs: SharedPreferences) {
     constructor(context: Context) : this(context.getSharedPreferences("speech_output", Context.MODE_PRIVATE))
+    init {
+        // The optional companion was removed in 0.3.2. Only its old selections return to
+        // Android default; device voices, per-language choices and the shared rate survive.
+        val retiredKeys = prefs.all.filter { (key, value) ->
+            (key == "engine" || key.startsWith("engine_")) && value == RETIRED_ENGINE
+        }.keys
+        if (retiredKeys.isNotEmpty()) prefs.edit().apply {
+            retiredKeys.forEach { key ->
+                remove(key)
+                remove("voice" + key.removePrefix("engine"))
+            }
+        }.apply()
+    }
+
     fun load(locale: Locale = AppLanguage.locale()): SpeechSettings {
         val suffix = if (prefs.getBoolean("voices_migrated", false)) "_${locale.language}" else ""
         return SpeechSettings(
@@ -34,6 +48,8 @@ class SpeechSettingsStore(private val prefs: SharedPreferences) {
     }
     fun rate(value: Float) { prefs.edit().putFloat("rate", safeRate(value)).apply() }
     companion object {
+        // Migration identifier only. Never used to discover, bind or select an engine.
+        private const val RETIRED_ENGINE = "org.pockettts.android.engine.openautotest"
         private fun safeRate(value: Float) = if (value.isFinite()) value.coerceIn(0.8f, 1.2f) else 1f
     }
 }
