@@ -15,7 +15,6 @@ object AndroidSpeechSettings {
             .thenBy { it.locale.country != locale.country }.thenBy { it.name })
 
     fun apply(engine: TextToSpeech, settings: SpeechSettings, locale: Locale = AppLanguage.locale()): VoiceProblem? {
-        if (PocketAlba.selected(settings)) return PocketAlba.apply(engine, settings, locale)
         if (engine.setLanguage(locale) < TextToSpeech.LANG_AVAILABLE) return VoiceProblem.TTS_UNAVAILABLE
         if (settings.voice != null) {
             // Engine IDs are part of the preference; do not silently substitute after an engine change.

@@ -123,12 +123,13 @@ uses the model remembered for that provider and still starts a new chat without 
 confirmed state of the voice tests is in [VOICE.md](docs/VOICE.md); further planning in
 [ROADMAP.md](ROADMAP.md).
 
-## Optional local Pocket / Alba voice
+## Phone speech voices
 
-Version 0.1.19 adds an explicit **Pocket · Alba** choice using the separately installed,
-cancellation-fixed engine. German output runs locally; provider requests and recognition
-keep their existing behavior. The native runtime/model are not bundled. See
-[setup, attribution and limitations](docs/POCKET_TTS.md) before enabling it.
+Lautwerk uses the phone's configured Android text-to-speech service. The assistant keeps its
+voice picker, language-specific choices, speech rate and preview controls. Online voices reported
+by that service still require the existing explicit selection confirmation. Android Auto uses an
+installed local voice from the phone's default service; it does not share the assistant's choice.
+No separate voice engine, model pack or voice download is required by Lautwerk.
 
 ## Build tools
 

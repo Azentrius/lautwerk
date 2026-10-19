@@ -1,5 +1,15 @@
 # Lautwerk via sideload on the car display
 
+## Updating to 0.3.2
+
+Use the ordinary `adb install -r` commands below to update existing `com.azentrius.lautwerk` apps.
+Expected versions are 0.3.2 / 302 and 0.3.2-prototype / 302. Do not uninstall an existing 0.3.x app.
+Speech output uses the phone's Android TTS service; no separate speech companion is required.
+Former companion selections return to Android default. Existing device voices and speed remain
+saved, and credentials and chat histories are untouched. In the car app, output uses an installed
+local voice from the system-default service. Other installed engines and diagnostic apps remain
+under the user's control; this update neither uninstalls them nor removes their data.
+
 ## Installing 0.3.0
 
 The new packages are `com.azentrius.lautwerk`, `com.azentrius.lautwerk.prototype.dhu` and
@@ -36,7 +46,7 @@ phone launch do not establish Android Auto launcher visibility. Installer metada
 acceptance do not transfer from the old package. These are ordinary ADB installations, without a
 Google Play installer override. Stop on a signature conflict rather than deleting data from a new app.
 
-The Pocket companion engine, its model pack and separate diagnostic apps are not removed by these
+Other installed speech services, model files and separate diagnostic apps are not removed by these
 commands. The historical experiments below are not acceptance evidence for the new IDs. See the
 [0.3.0 automated device report](evidence/0.3.0/README.md) for the actual test scope.
 

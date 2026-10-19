@@ -2,7 +2,6 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <queries>
-        <package android:name="org.pockettts.android.engine.openautotest" />
         <intent><action android:name="android.intent.action.TTS_SERVICE" /></intent>
     </queries>
 </manifest>

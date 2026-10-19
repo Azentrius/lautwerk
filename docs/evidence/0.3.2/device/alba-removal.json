@@ -1,0 +1,21 @@
+{
+  "packages": [
+    {
+      "package": "de.azentrius.lautwerk.audiocompare",
+      "result": "uninstalled"
+    },
+    {
+      "package": "com.azentrius.lautwerk.albaprobe",
+      "result": "uninstalled"
+    },
+    {
+      "package": "org.pockettts.android.engine.openautotest",
+      "result": "already absent"
+    },
+    {
+      "package": "dev.openautoai.pocketprobe",
+      "result": "already absent"
+    }
+  ],
+  "otherPackagesUnchanged": true
+}

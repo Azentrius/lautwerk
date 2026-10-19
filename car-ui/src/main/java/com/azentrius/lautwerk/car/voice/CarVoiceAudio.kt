@@ -13,7 +13,6 @@ import android.util.Log
 import androidx.car.app.CarContext
 import com.azentrius.lautwerk.core.i18n.AppLanguage
 import com.azentrius.lautwerk.voice.*
-import com.azentrius.lautwerk.speech.PocketAlba
 import com.azentrius.lautwerk.speech.SpeechSettingsStore
 import java.util.concurrent.ExecutorService
 
@@ -39,10 +38,7 @@ internal class CarVoiceAudio(
         close()
         val token = ++generation
         // Playback-only diagnostics deliberately require neither a microphone nor a recognizer.
-        val selectedSettings = SpeechSettingsStore(context).load()
-        if (PocketAlba.selected(selectedSettings)) PocketAlba.installationProblem(context)?.let {
-            complete(it); return Cancel {}
-        }
+        SpeechSettingsStore(context) // Retire a previously saved companion voice selection.
         tts = TextToSpeech(context, { status -> main.post {
             if (token != generation) return@post
             val engine = tts
@@ -50,9 +46,6 @@ internal class CarVoiceAudio(
                 if (status != TextToSpeech.SUCCESS || engine == null) {
                     complete(VoiceProblem.TTS_UNAVAILABLE); return@post
                 }
-                if (PocketAlba.selected(selectedSettings)) {
-                    PocketAlba.apply(engine, selectedSettings)?.let { complete(it); return@post }
-                } else {
                 if (engine.setLanguage(AppLanguage.locale()) < 0) {
                     complete(VoiceProblem.TTS_UNAVAILABLE); return@post
                 }
@@ -63,7 +56,6 @@ internal class CarVoiceAudio(
                 val selected = engine.voice?.takeIf { it in local } ?: local.firstOrNull()
                 if (selected == null || engine.setVoice(selected) != TextToSpeech.SUCCESS) {
                     complete(VoiceProblem.TTS_VOICE_UNAVAILABLE); return@post
-                }
                 }
                 engine.setAudioAttributes(VoiceFocus.attributes)
                 engine.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
@@ -79,10 +71,10 @@ internal class CarVoiceAudio(
                     override fun onError(id: String?, code: Int) = failed(id)
                     override fun onStop(id: String?, interrupted: Boolean) = failed(id)
                 })
-                Log.i(VoiceFocus.TAG, "voice.tts.ready local=true pocket=${PocketAlba.selected(selectedSettings)}")
+                Log.i(VoiceFocus.TAG, "voice.tts.ready local=true")
                 complete(null)
             } catch (_: Exception) { complete(VoiceProblem.TTS_UNAVAILABLE) }
-        } }, if (PocketAlba.selected(selectedSettings)) PocketAlba.ENGINE else null)
+        } })
         return Cancel { if (generation == token) close() }
     }
 

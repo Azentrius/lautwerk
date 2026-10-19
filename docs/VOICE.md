@@ -6,8 +6,10 @@ voice feature built on the existing text models, not a native OpenAI Realtime or
 The principle of separate recognition, text processing and speech output is also described in
 [OpenAI Voice agents](https://developers.openai.com/api/docs/guides/voice-agents).
 
-The DHU test app stays limited to title, selection and start. It gets no microphone access, no
-network connection and no claimed new car category.
+The Android Auto audio and conversation flow is documented separately in [CAR_VOICE.md](CAR_VOICE.md).
+Since 0.3.2 both apps use the phone's configured Android TTS service; no separate companion voice
+is offered. Former companion selections return to Android default, while phone voices and speed
+remain saved. The car app continues to require an installed local voice.
 
 ## Choosing and comparing voices
 

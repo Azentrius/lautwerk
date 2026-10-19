@@ -35,11 +35,3 @@ prototype-app/src/main/assets/licenses/.
 The unchanged Azentrius reference snapshot in design/azentrius/
 retains its own licenses, including proprietary Azentrius material. See the LICENSE
 and LICENSES files in the snapshot. They are not covered by this project's Apache License.
-
-Optional Pocket / Alba integration (speech-output/): no native/model/voice assets bundled.
-  Engine: Pocket TTS Android Engine contributors, 2026, MIT.
-  Cancellation patch: third_party/pocket-android/cancellation.patch; original MIT notice retained.
-  Pocket model/ONNX derivatives: Kyutai, CC BY 4.0 and upstream model use conditions.
-  Alba voice performance: Alba MacKenna, CC BY 4.0; reference unchanged.
-  Full attribution and source links: app/src/main/assets/licenses/Pocket-Alba.txt
-  and car-ui/src/main/assets/licenses/Pocket-Alba.txt.

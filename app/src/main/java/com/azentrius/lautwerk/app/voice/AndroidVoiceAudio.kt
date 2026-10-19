@@ -13,7 +13,6 @@ import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import com.azentrius.lautwerk.voice.*
-import com.azentrius.lautwerk.speech.PocketAlba
 import com.azentrius.lautwerk.core.i18n.AppLanguage
 import java.util.Locale
 
@@ -43,18 +42,14 @@ internal class AndroidVoiceAudio(
             return Cancel {}
         }
         val store = SpeechSettingsStore(context)
-        val selected = store.load()
-        if (PocketAlba.selected(selected)) PocketAlba.installationProblem(context)?.let {
-            complete(it); return Cancel {}
-        }
         tts = TextToSpeech(context, { status -> main.post {
             if (token != operation) return@post
             val engine = tts
             try {
                 val problem = if (status != TextToSpeech.SUCCESS || engine == null) VoiceProblem.TTS_UNAVAILABLE
                     else {
-                        if (!PocketAlba.selected(selected)) store.migrateLegacy(engine.voices, engine.defaultEngine)
-                        AndroidSpeechSettings.apply(engine, if (PocketAlba.selected(selected)) selected else store.load())
+                        store.migrateLegacy(engine.voices, engine.defaultEngine)
+                        AndroidSpeechSettings.apply(engine, store.load())
                     }
                 if (problem != null || engine == null) {
                     complete(problem ?: VoiceProblem.TTS_UNAVAILABLE)
@@ -77,7 +72,7 @@ internal class AndroidVoiceAudio(
                     complete(null)
                 }
             } catch (_: Exception) { complete(VoiceProblem.TTS_UNAVAILABLE) }
-        } }, if (PocketAlba.selected(selected)) PocketAlba.ENGINE else null)
+        } })
         return Cancel { if (operation == token) close() }
     }
 

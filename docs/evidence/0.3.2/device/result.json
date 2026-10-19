@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-19",
+  "device": "Pixel 10 Pro / Android 17",
+  "version": "0.3.2",
+  "versionCode": 302,
+  "installation": "ordinary adb install -r, no installer-origin override",
+  "phone": {
+    "tests": 23,
+    "passed": 23,
+    "finalRun": "phone-recheck.txt"
+  },
+  "car": {
+    "tests": 18,
+    "passed": 18,
+    "finalRun": "car-instrumentation.txt"
+  },
+  "carPlayback": {
+    "tests": 1,
+    "passed": 1,
+    "run": "car-playback-instrumentation.txt",
+    "microphone": false,
+    "localVoice": true,
+    "humanAudibilitySeparatelyConfirmed": false
+  },
+  "uniqueSelectedInstrumentedTestsPassed": 42,
+  "initialFailure": {
+    "test": "SpeechSettingsTest.realAndroidEngineAcceptsAvailableLocalChoiceAndRejectsMissingOrChangedEngine",
+    "assertion": "Expected TextToSpeech.isSpeaking() to be false",
+    "count": 1,
+    "cause": "Not established; not reproduced in either the four-test isolated recheck or the full 23-test phone rerun",
+    "applicationCodeChanged": false,
+    "evidence": "phone-instrumentation.txt"
+  },
+  "phonePreview": {
+    "apiRequests": 0,
+    "microphoneUsed": false,
+    "voices": [
+      {
+        "row": 2,
+        "voice": "de-de-x-dea-local",
+        "engine": "com.google.android.tts",
+        "fullPreviewCompleted": true
+      },
+      {
+        "row": 3,
+        "voice": "de-de-x-deb-local",
+        "engine": "com.google.android.tts",
+        "fullPreviewCompleted": true,
+        "restartAfterStop": true,
+        "restartCompleted": true,
+        "delayBeforeStopCommandSeconds": 0.6
+      }
+    ],
+    "userPreferencesRestored": true,
+    "humanAudibility": "confirmed: both local phone voices audible and understandable; stop and restart clean, without overlap",
+    "durationSeconds": 84.09,
+    "stopLatencyMeasured": false
+  },
+  "deviceSettingsRestored": true,
+  "systemSpeechEngine": "com.google.android.tts",
+  "availableGermanVoices": {
+    "local": 5,
+    "online": 4,
+    "tested": "two explicit local voices; no online voice selected"
+  },
+  "albaPackages": {
+    "packages": [
+      {
+        "package": "de.azentrius.lautwerk.audiocompare",
+        "result": "uninstalled"
+      },
+      {
+        "package": "com.azentrius.lautwerk.albaprobe",
+        "result": "uninstalled"
+      },
+      {
+        "package": "org.pockettts.android.engine.openautotest",
+        "result": "already absent"
+      },
+      {
+        "package": "dev.openautoai.pocketprobe",
+        "result": "already absent"
+      }
+    ],
+    "otherPackagesUnchanged": true
+  },
+  "apiRequests": 0,
+  "recognitionStarted": false,
+  "callTests": false,
+  "headsetTests": false,
+  "dhuOrVehicleSession": false,
+  "retainedCarService": "com.azentrius.lautwerk.car.LautwerkCarService"
+}

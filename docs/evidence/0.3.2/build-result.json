@@ -1,0 +1,68 @@
+{
+  "jvm": {
+    "core": {
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "providers": {
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "voice": {
+      "tests": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "lint": {
+    "app/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 24
+    },
+    "prototype-app/lint-results-dhuDebug.xml": {
+      "errors": 0,
+      "warnings": 4
+    },
+    "prototype-app/lint-results-phoneDebug.xml": {
+      "errors": 0,
+      "warnings": 3
+    },
+    "car-ui/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 1
+    },
+    "settings/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "storage/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 1
+    },
+    "speech-output/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "apk": {
+    "app-debug.apk": {
+      "sha256": "ee3476aeeab5a27cce2f7cc07760742e9843fa29adf5a08a300219e1347ee0e3",
+      "removedIntegrationAbsent": true
+    },
+    "prototype-app-dhu-debug.apk": {
+      "sha256": "f8cfb06b82a3bfb2e06f53c05371c8c4679f9270aa2a75b5beee17730dc1e748",
+      "removedIntegrationAbsent": true
+    },
+    "prototype-app-phone-debug.apk": {
+      "sha256": "d1f420ca4c8e6d893980975467aa0bdfb9a151b7aeb9e8ec51a03363e9504096",
+      "removedIntegrationAbsent": true
+    }
+  },
+  "historicalFilesUnchanged": 341,
+  "previousChangelogEntriesUnchanged": true
+}
