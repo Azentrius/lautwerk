@@ -1,0 +1,6 @@
+
+com.azentrius.lautwerk.prototype.VoicePlaybackDeviceTest:.
+
+Time: 7,948
+
+OK (1 test)

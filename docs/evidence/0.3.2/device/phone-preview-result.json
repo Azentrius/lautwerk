@@ -1,0 +1,25 @@
+{
+  "apiRequests": 0,
+  "microphoneUsed": false,
+  "voices": [
+    {
+      "row": 2,
+      "voice": "de-de-x-dea-local",
+      "engine": "com.google.android.tts",
+      "fullPreviewCompleted": true
+    },
+    {
+      "row": 3,
+      "voice": "de-de-x-deb-local",
+      "engine": "com.google.android.tts",
+      "fullPreviewCompleted": true,
+      "restartAfterStop": true,
+      "restartCompleted": true,
+      "delayBeforeStopCommandSeconds": 0.6
+    }
+  ],
+  "userPreferencesRestored": true,
+  "humanAudibility": "confirmed: both local phone voices audible and understandable; stop and restart clean, without overlap",
+  "durationSeconds": 84.09,
+  "stopLatencyMeasured": false
+}

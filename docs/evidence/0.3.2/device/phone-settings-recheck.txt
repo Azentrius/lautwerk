@@ -1,0 +1,17 @@
+
+com.azentrius.lautwerk.app.voice.SpeechSettingsTest:
+Voice inventory: 5 local, 4 online; locale=de-DE; engine=com.google.android.tts
+de-DE-language: network=false, quality=400, locale=de-DE
+de-de-x-dea-local: network=false, quality=400, locale=de-DE
+de-de-x-deb-local: network=false, quality=400, locale=de-DE
+de-de-x-deg-local: network=false, quality=400, locale=de-DE
+de-de-x-nfh-local: network=false, quality=400, locale=de-DE
+de-de-x-dea-network: network=true, quality=400, locale=de-DE
+de-de-x-deb-network: network=true, quality=400, locale=de-DE
+de-de-x-deg-network: network=true, quality=400, locale=de-DE
+de-de-x-nfh-network: network=true, quality=400, locale=de-DE
+....
+
+Time: 0,606
+
+OK (4 tests)

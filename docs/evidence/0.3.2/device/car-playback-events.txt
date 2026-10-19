@@ -1,0 +1,7 @@
+10-19 19:56:53.818  6718  6718 I Lautwerk: voice.check.phase=PREPARING problem=none
+10-19 19:56:54.081  6718  6718 I Lautwerk: voice.tts.ready local=true
+10-19 19:56:54.081  6718  6718 I Lautwerk: voice.check.phase=SPEAKING problem=none
+10-19 19:56:54.088  6718  6718 I Lautwerk: voice.focus capture=false granted=true
+10-19 19:56:54.217  6718  6732 I Lautwerk: voice.tts.start
+10-19 19:57:00.903  6718  6718 I Lautwerk: voice.tts.end success=true
+10-19 19:57:00.911  6718  6718 I Lautwerk: voice.check.phase=STOPPED problem=none
