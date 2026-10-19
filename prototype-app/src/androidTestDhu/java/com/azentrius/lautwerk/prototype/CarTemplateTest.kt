@@ -13,6 +13,7 @@ import androidx.car.app.model.MessageTemplate
 import androidx.car.app.testing.TestCarContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.azentrius.lautwerk.car.voice.VoicePreferences
 import com.azentrius.lautwerk.car.LautwerkScreen
 import com.azentrius.lautwerk.car.voice.CarVoicePort
 import com.azentrius.lautwerk.car.voice.CarVoiceState
@@ -51,7 +52,9 @@ class CarTemplateTest {
         instrumentation.runOnMainSync {
             val context = germanContext(instrumentation.targetContext)
             val audio = AudioPort(context)
-            val screen = LautwerkScreen(context, voice = audio)
+            val modePrefs = context.getSharedPreferences("car_stale_action_modes", Context.MODE_PRIVATE)
+            modePrefs.edit().clear().commit()
+            val screen = LautwerkScreen(context, voice = audio, voicePreferences = VoicePreferences(modePrefs))
             val start = (screen.onGetTemplate() as MessageTemplate).actions.single().onClickDelegate!!
             val done = object : OnDoneCallback {
                 override fun onSuccess(response: Bundleable?) = Unit
@@ -77,11 +80,11 @@ class CarTemplateTest {
             val prefs=localized.getSharedPreferences("car_english_test",Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             try {
-                val screen=LautwerkScreen(context,ModelSelectionStore(prefs),AudioPort(context))
+                val screen=LautwerkScreen(context,ModelSelectionStore(prefs),AudioPort(context),VoicePreferences(prefs))
                 val template=screen.onGetTemplate() as MessageTemplate
                 @Suppress("DEPRECATION")
                 assertEquals("Lautwerk",template.title.toString())
-                assertEquals("Start",template.actions.single().title.toString())
+                assertEquals("Start audio check",template.actions.single().title.toString())
                 assertEquals("Ready.\nChatGPT / OpenAI · GPT-5.4 mini",template.message.toString())
                 template.actions.single().onClickDelegate!!.sendClick(object:OnDoneCallback {
                     override fun onSuccess(response:Bundleable?)=Unit
@@ -94,7 +97,7 @@ class CarTemplateTest {
                     override fun onSuccess(response:Bundleable?)=Unit
                     override fun onFailure(response:Bundleable) { throw AssertionError("End failed") }
                 })
-                assertEquals("Start", (screen.onGetTemplate() as MessageTemplate).actions.single().title.toString())
+                assertEquals("Start audio check", (screen.onGetTemplate() as MessageTemplate).actions.single().title.toString())
                 assertEquals("Ended\nChatGPT / OpenAI · GPT-5.4 mini", (screen.onGetTemplate() as MessageTemplate).message.toString())
             } finally { prefs.edit().clear().commit() }
         }
@@ -106,7 +109,7 @@ class CarTemplateTest {
             val context = germanContext(instrumentation.targetContext)
             val prefs = instrumentation.targetContext.getSharedPreferences("car_lifecycle_test", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
-            val screen = LautwerkScreen(context, ModelSelectionStore(prefs), AudioPort(context))
+            val screen = LautwerkScreen(context, ModelSelectionStore(prefs), AudioPort(context), VoicePreferences(prefs))
             val controller = ScreenController(screen).moveToState(Lifecycle.State.RESUMED)
             try {
                 val phoneStore = ModelSelectionStore(prefs)
@@ -134,13 +137,13 @@ class CarTemplateTest {
             val prefs = instrumentation.targetContext.getSharedPreferences("car_selection_test", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             val store = ModelSelectionStore(prefs)
-            val screen = LautwerkScreen(context, store, AudioPort(context))
+            val screen = LautwerkScreen(context, store, AudioPort(context), VoicePreferences(prefs))
             val template = screen.onGetTemplate() as MessageTemplate
             @Suppress("DEPRECATION")
             assertEquals("Lautwerk", template.title.toString())
             assertEquals("Bereit.\nChatGPT / OpenAI · GPT-5.4 mini", template.message.toString())
             assertEquals(1, template.actions.size)
-            assertEquals("Starten", template.actions.single().title.toString())
+            assertEquals("Audiotest starten", template.actions.single().title.toString())
             var error: Any? = null
             template.actions.single().onClickDelegate!!.sendClick(object : OnDoneCallback {
                 override fun onSuccess(response: Bundleable?) = Unit

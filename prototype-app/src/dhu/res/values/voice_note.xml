@@ -1,4 +1,4 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <string name="dhu_note">Selection is shared with Android Auto. Configure audio tests and conversation below. Start here remains the UI counter; Start in Android Auto uses the chosen audio mode.</string>
+    <string name="dhu_note">Selection is shared with Android Auto. Configure audio tests and conversation below. Start test here remains the UI counter; in Android Auto, Start conversation or Start audio check runs the chosen mode.</string>
 </resources>

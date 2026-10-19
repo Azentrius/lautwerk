@@ -1,0 +1,53 @@
+{
+  "jvm": {
+    "core": {
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "providers": {
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "voice": {
+      "tests": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "lint": {
+    "app/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 24
+    },
+    "prototype-app/lint-results-dhuDebug.xml": {
+      "errors": 0,
+      "warnings": 4
+    },
+    "prototype-app/lint-results-phoneDebug.xml": {
+      "errors": 0,
+      "warnings": 3
+    },
+    "car-ui/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 1
+    },
+    "settings/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "storage/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 1
+    },
+    "speech-output/lint-results-debug.xml": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "allDebugAndTestApksBuilt": true
+}

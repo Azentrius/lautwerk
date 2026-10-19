@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "tests": 9,
+  "classes": "com.azentrius.lautwerk.prototype.CarActionLabelTest,com.azentrius.lautwerk.prototype.CarTemplateTest,com.azentrius.lautwerk.prototype.CarDesignContractTest",
+  "apiRequests": 0,
+  "audioOptIns": false,
+  "hostRenderingProven": false,
+  "settingsUnchanged": true
+}

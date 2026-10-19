@@ -1,0 +1,7 @@
+com.azentrius.lautwerk.prototype.CarActionLabelTest:..
+com.azentrius.lautwerk.prototype.CarTemplateTest:....
+com.azentrius.lautwerk.prototype.CarDesignContractTest:...
+
+Time: 0,163
+
+OK (9 tests)

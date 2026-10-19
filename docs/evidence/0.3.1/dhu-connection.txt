@@ -1,0 +1,10 @@
+DHU 2.0-windows, build 2022-03-30-438482292
+Profile: tools/dhu/800x480-touch.ini
+Transport: normal ADB forwarding, headless
+[I]: Connecting over ADB to localhost:5277...
+[I]: connected.
+[E]: Don't have video focus - nothing to screenshot.
+Second screenshot attempt: same result.
+No negotiated host Car API or car.onCreateScreen log observed.
+Session closed normally with quit; the temporary ADB forward was removed.
+No installer-origin change, host setting change or restriction bypass was attempted.

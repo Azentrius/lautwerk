@@ -1,4 +1,4 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
-    <string name="dhu_note">Die Auswahl gilt auch für Android Auto. Richten Sie unten Audiotests und Gespräch ein. Starten hier bleibt der UI-Zähler; Starten in Android Auto nutzt den gewählten Audiomodus.</string>
+    <string name="dhu_note">Die Auswahl gilt auch für Android Auto. Richten Sie unten Audiotests und Gespräch ein. „Test starten“ hier bleibt der UI-Zähler; in Android Auto startet „Gespräch starten“ bzw. „Audiotest starten“ den gewählten Modus.</string>
 </resources>

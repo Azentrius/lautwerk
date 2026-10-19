@@ -1,10 +1,10 @@
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <resources>
     <string name="app_name">Lautwerk</string>
-    <string name="start">Start</string>
+    <string name="start">Start test</string>
     <string name="ready">Ready for the UI test.</string>
     <string name="started">Started · Test %1$d</string>
-    <string name="prototype_note">Choose a provider and model for the UI test. Your selection is saved; Start does not send an AI request yet.</string>
+    <string name="prototype_note">Choose a provider and model for the UI test. Your selection is saved; Start test does not send an AI request yet.</string>
     <string name="dhu_note">Your selection also appears in the DHU. Experimental car interface; AI and voice will follow later.</string>
     <string name="phone_note">Phone test without Android Auto registration.</string>
     <string name="provider_label">AI provider</string>

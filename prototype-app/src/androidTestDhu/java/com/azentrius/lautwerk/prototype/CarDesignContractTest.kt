@@ -13,6 +13,7 @@ import androidx.car.app.model.MessageTemplate
 import androidx.car.app.testing.TestCarContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.azentrius.lautwerk.car.voice.VoicePreferences
 import com.azentrius.lautwerk.car.LautwerkScreen
 import com.azentrius.lautwerk.settings.ModelSelectionStore
 import java.util.Locale
@@ -59,7 +60,7 @@ class CarDesignContractTest {
             val prefs = context.getSharedPreferences("car_design_contract", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             try {
-                val template = LautwerkScreen(context, ModelSelectionStore(prefs)).onGetTemplate() as MessageTemplate
+                val template = LautwerkScreen(context, ModelSelectionStore(prefs), voicePreferences = VoicePreferences(prefs)).onGetTemplate() as MessageTemplate
                 @Suppress("DEPRECATION")
                 assertEquals(Action.APP_ICON, template.headerAction)
                 @Suppress("DEPRECATION")
@@ -89,10 +90,10 @@ class CarDesignContractTest {
             val prefs = localized.getSharedPreferences("car_fallback_locale", Context.MODE_PRIVATE)
             prefs.edit().clear().commit()
             try {
-                val template = LautwerkScreen(context, ModelSelectionStore(prefs)).onGetTemplate() as MessageTemplate
+                val template = LautwerkScreen(context, ModelSelectionStore(prefs), voicePreferences = VoicePreferences(prefs)).onGetTemplate() as MessageTemplate
                 @Suppress("DEPRECATION")
                 assertEquals("Lautwerk", template.title.toString())
-                assertEquals("Start", template.actions.single().title.toString())
+                assertEquals("Start audio check", template.actions.single().title.toString())
                 assertEquals("Ready.\nChatGPT / OpenAI · GPT-5.4 mini", template.message.toString())
             } finally { prefs.edit().clear().commit() }
         }
