@@ -3,7 +3,8 @@
     <string name="car_title">Lautwerk</string>
     <string name="car_ready">Ready.</string>
     <string name="car_started">Started · Test %1$d</string>
-    <string name="car_start">Start</string>
+    <string name="car_start_conversation">Start conversation</string>
+    <string name="car_start_audio_check">Start audio check</string>
     <string name="car_selection">%1$s\n%2$s · %3$s</string>
     <string name="car_check_done">Audio check ended.</string>
     <string name="car_voice_error">Error. Details on the phone.</string>

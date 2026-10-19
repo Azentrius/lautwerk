@@ -19,9 +19,11 @@ import java.io.Closeable
 class LautwerkScreen(
     carContext: CarContext,
     private val selections: ModelSelectionStore = ModelSelectionStore(carContext),
-    private val voice: CarVoicePort = VoiceConnection(carContext, carContext)
+    private val voice: CarVoicePort = VoiceConnection(carContext, carContext),
+    private val voicePreferences: VoicePreferences = VoicePreferences(carContext)
 ) : Screen(carContext) {
     private var subscription: Closeable? = null
+    private var modeSubscription: Closeable? = null
     private var visible = false
     private var requestingPermission = false
     private var permissionIssue = false
@@ -32,6 +34,10 @@ class LautwerkScreen(
             override fun onStart(owner: LifecycleOwner) {
                 visible = true
                 subscription = selections.observe { invalidate() }
+                modeSubscription = voicePreferences.observeMode {
+                    // An active session still offers End; redraw its normal state changes only.
+                    if (!voice.state.active) invalidate()
+                }
                 voice.connect { invalidate() }
             }
             override fun onStop(owner: LifecycleOwner) {
@@ -40,6 +46,8 @@ class LautwerkScreen(
                 requestingPermission = false
                 subscription?.close()
                 subscription = null
+                modeSubscription?.close()
+                modeSubscription = null
                 voice.close()
             }
         })
@@ -48,6 +56,11 @@ class LautwerkScreen(
     @Suppress("DEPRECATION") // API-1 title/header remains usable on older hosts.
     override fun onGetTemplate(): Template {
         val endsSession = voice.state.active
+        val actionTitle = when {
+            endsSession -> R.string.voice_stop
+            voicePreferences.mode == VoiceMode.CONVERSATION -> R.string.car_start_conversation
+            else -> R.string.car_start_audio_check
+        }
         Log.i(LautwerkCarService.TAG, "car.onGetTemplate active=${voice.state.active}")
         val message = if (permissionIssue) carContext.getString(R.string.car_permission)
             else voice.state.summary.ifBlank { carContext.getString(R.string.car_ready) }
@@ -58,7 +71,7 @@ class LautwerkScreen(
             .setTitle(carContext.getString(R.string.car_title))
             .setHeaderAction(Action.APP_ICON)
             .addAction(Action.Builder()
-                .setTitle(carContext.getString(if (endsSession) R.string.voice_stop else R.string.car_start))
+                .setTitle(carContext.getString(actionTitle))
                 .setBackgroundColor(CarColor.PRIMARY)
                 .setOnClickListener {
                     // The host can deliver a click from an older template. Preserve its intent.
@@ -75,7 +88,7 @@ class LautwerkScreen(
     private fun start() {
         if (requestingPermission || voice.state.active) return
         permissionIssue = false
-        if (!voice.state.active && VoicePreferences(carContext).mode != VoiceMode.PLAYBACK &&
+        if (!voice.state.active && voicePreferences.mode != VoiceMode.PLAYBACK &&
             carContext.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             requestingPermission = true
             val token = ++permissionGeneration

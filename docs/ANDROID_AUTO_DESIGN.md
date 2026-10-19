@@ -1,5 +1,8 @@
 # Android Auto: Azentrius 0.1.14
 
+Current alignment and remaining host checks: [0.3.1 design audit](ANDROID_AUTO_DESIGN_0.3.1.md).
+This document preserves the earlier 0.1.14 acceptance report.
+
 The DHU prototype now requests the approved Azentrius color pair for the start button. Font,
 shape, spacing and the actual color choice are still drawn by the Android Auto host. This state
 is a local debug experiment; "Start" only increments the UI test counter.

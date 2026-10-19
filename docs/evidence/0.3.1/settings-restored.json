@@ -1,0 +1,9 @@
+{
+  "system_locales": "de-DE,en-US",
+  "font_scale": "1.3",
+  "wifi_on": "1",
+  "bluetooth_on": "1",
+  "airplane_mode_on": "0",
+  "tts_default_synth": "com.google.android.tts",
+  "night": "Night mode: yes"
+}

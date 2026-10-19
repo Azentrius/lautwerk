@@ -1,0 +1,10 @@
+{
+  "android": "17",
+  "sdk": "37",
+  "model": "Pixel 10 Pro",
+  "androidAuto": "17.8.663884-release (178663884)",
+  "dhu": "2.0-windows, build 2022-03-30-438482292",
+  "hostCarApi": null,
+  "designCommit": "1d1a742f7e54ddc98d2d6b99ff4cf5ee5ef02ad2",
+  "designAutoSha256": "26d0cd16f1e95e8e26479c751f6b1fa3cc78b9a5ca82df1a846c00c849b6f298"
+}

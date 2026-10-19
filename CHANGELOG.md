@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.1 – 2026-10-19
+
+Clarify the Android Auto start action using the selected audio mode.
+
+- Show Start conversation for conversation mode and Start audio check for the two audio tests,
+  with matching German labels and live updates while the car screen is idle. Keep End during
+  an active session and preserve the intent of cached Start and End actions.
+- Apply the matching setup instructions and rename the separate phone UI counter to Start test.
+- Retain the single MessageTemplate action, the existing gold/bronze color requests, host-drawn
+  typography, app icon, session behavior, provider selection and storage.
+- Keep the experimental Alba leading-period workaround outside the production voice engine.
+
 ## 0.3.0 – 2026-10-18
 
 Move the Android package names to com.azentrius.lautwerk following the move to azentrius.com.

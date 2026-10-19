@@ -55,11 +55,21 @@ class VoiceConnection(private val context: Context, private val car: CarContext?
     }
 }
 
-class VoicePreferences(context: Context) {
-    private val preferences = context.applicationContext.getSharedPreferences("car_voice_v1", Context.MODE_PRIVATE)
+class VoicePreferences(private val preferences: SharedPreferences) {
+    constructor(context: Context) : this(
+        context.applicationContext.getSharedPreferences("car_voice_v1", Context.MODE_PRIVATE)
+    )
     var mode: VoiceMode
         get() = runCatching { VoiceMode.valueOf(preferences.getString("mode", null).orEmpty()) }.getOrDefault(VoiceMode.PLAYBACK)
         set(value) { preferences.edit().putString("mode", value.name).apply() }
+
+    fun observeMode(changed: () -> Unit): Closeable {
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key ->
+            if (key == "mode" || key == null) changed()
+        }
+        preferences.registerOnSharedPreferenceChangeListener(listener)
+        return Closeable { preferences.unregisterOnSharedPreferenceChangeListener(listener) }
+    }
 
     // Only fixed status/error messages, never recognized text, responses or credentials.
     fun rememberOutcome(status: String, summary: String) {
