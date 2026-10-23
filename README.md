@@ -167,4 +167,8 @@ reports: [SECURITY.md](SECURITY.md).
 Apache-2.0, see [LICENSE](LICENSE). Fonts, icons and the app icon come with their own terms, see
 [NOTICE](NOTICE).
 
+Lautwerk is an independent project and is not affiliated with or endorsed by OpenAI, Anthropic or
+Google. OpenAI, ChatGPT, Anthropic, Claude, Android, Android Auto and Google Play are trademarks of
+their respective owners.
+
 Made by [Azentrius](https://azentrius.com).
