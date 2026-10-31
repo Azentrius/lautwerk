@@ -197,7 +197,7 @@ processing and billing stop. See [PHONE_UI.md](PHONE_UI.md).
 ## Building and opening directly
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\Lautwerk'
+# In the root of the Lautwerk checkout:
 $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot'
 $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 .\gradlew.bat :app:assembleDebug

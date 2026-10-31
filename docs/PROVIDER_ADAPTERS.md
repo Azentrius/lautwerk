@@ -98,7 +98,7 @@ The current feedback on the real API/voice test is in [VOICE.md](VOICE.md).
 The DHU "Start" button still does not trigger an API request after this step either.
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\Lautwerk'
+# In the root of the Lautwerk checkout:
 $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot'
 $env:ANDROID_HOME = "$env:LOCALAPPDATA\Android\Sdk"
 .\gradlew.bat :app:assembleDebug

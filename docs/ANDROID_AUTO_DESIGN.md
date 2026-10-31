@@ -40,7 +40,7 @@ and night, and A7 with six starts. Otherwise the comparison is missing. The base
 here is 0.1.12-prototype / Code 4.
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\Lautwerk'
+# In the root of the Lautwerk checkout:
 $env:JAVA_HOME = 'C:\Program Files\Eclipse Adoptium\jdk-17.0.19.10-hotspot'
 .\gradlew.bat :prototype-app:assembleDhuDebug :prototype-app:assembleDhuDebugAndroidTest :prototype-app:lintDhuDebug
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
