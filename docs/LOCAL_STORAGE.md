@@ -64,7 +64,7 @@ package with its own storage. In case of a signature conflict, do not uninstall 
 use the same debug key instead.
 
 ```powershell
-Set-Location -LiteralPath 'C:\Users\stefa\Documents\Projekte\Azentrius\Lautwerk'
+# In the root of the Lautwerk checkout:
 $adb = "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe"
 & $adb devices -l
 & $adb -s 56161FDCH000H8 install -r '.\app\build\outputs\apk\debug\app-debug.apk'
