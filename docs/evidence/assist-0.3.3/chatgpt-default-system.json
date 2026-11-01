@@ -1,0 +1,21 @@
+{
+  "sampledAtUtc": "2026-11-01T20:35:06.2664671Z",
+  "events": [
+    {
+      "assistAction": true,
+      "target": "CHATGPT",
+      "denial": false,
+      "balCodes": [
+        "BAL_ALLOW_BOUND_BY_FOREGROUND"
+      ]
+    },
+    {
+      "assistAction": true,
+      "target": "CHATGPT",
+      "denial": false,
+      "balCodes": [
+        "BAL_ALLOW_BOUND_BY_FOREGROUND"
+      ]
+    }
+  ]
+}

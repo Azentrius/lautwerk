@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- SPDX-License-Identifier: Apache-2.0 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <queries>
+        <package android:name="com.openai.chatgpt" />
+        <package android:name="com.anthropic.claude" />
+    </queries>
     <application>
+        <meta-data android:name="com.azentrius.lautwerk.car.HANDOFF_EXPERIMENT"
+            android:value="${carHandoffExperiment}" />
+        <meta-data android:name="com.azentrius.lautwerk.car.HANDOFF_ENTRY"
+            android:value="${carHandoffEntry}" />
         <meta-data android:name="com.google.android.gms.car.application"
             android:resource="@xml/automotive_app_desc" />
         <meta-data android:name="androidx.car.app.minCarApiLevel" android:value="1" />

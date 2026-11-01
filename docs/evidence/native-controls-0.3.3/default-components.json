@@ -1,0 +1,27 @@
+[
+  {
+    "name": "com.azentrius.lautwerk.car.controls.NativeControlSetupActivity",
+    "enabled": "false",
+    "permission": null
+  },
+  {
+    "name": "com.azentrius.lautwerk.car.controls.ControlVoiceInteractionService",
+    "enabled": "false",
+    "permission": "android.permission.BIND_VOICE_INTERACTION"
+  },
+  {
+    "name": "com.azentrius.lautwerk.car.controls.ControlVoiceSessionService",
+    "enabled": "false",
+    "permission": "android.permission.BIND_VOICE_INTERACTION"
+  },
+  {
+    "name": "com.azentrius.lautwerk.car.controls.ControlRecognitionService",
+    "enabled": "false",
+    "permission": "android.permission.BIND_SPEECH_RECOGNITION_SERVICE"
+  },
+  {
+    "name": "com.azentrius.lautwerk.car.controls.NativeControlListener",
+    "enabled": "false",
+    "permission": "android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"
+  }
+]

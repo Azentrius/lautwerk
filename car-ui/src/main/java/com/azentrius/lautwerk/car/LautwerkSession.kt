@@ -9,6 +9,7 @@ import androidx.car.app.Session
 class LautwerkSession : Session() {
     override fun onCreateScreen(intent: Intent): Screen {
         Log.i(LautwerkCarService.TAG, "car.onCreateScreen api=${carContext.carAppApiLevel}")
-        return LautwerkScreen(carContext)
+        return LautwerkScreen(carContext, handoffExperiment =
+            com.azentrius.lautwerk.car.handoff.HandoffExperiment.enabled(carContext))
     }
 }

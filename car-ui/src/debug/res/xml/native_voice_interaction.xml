@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<voice-interaction-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:sessionService="com.azentrius.lautwerk.car.controls.ControlVoiceSessionService"
+    android:recognitionService="com.azentrius.lautwerk.car.controls.ControlRecognitionService"
+    android:settingsActivity="com.azentrius.lautwerk.car.controls.NativeControlSetupActivity"
+    android:supportsAssist="true" android:supportsLaunchVoiceAssistFromKeyguard="false"
+    android:supportsLocalInteraction="false" android:usesAssistData="false"
+    android:usesAssistScreenshots="false" android:usesAssistStructureScreenContent="false" />

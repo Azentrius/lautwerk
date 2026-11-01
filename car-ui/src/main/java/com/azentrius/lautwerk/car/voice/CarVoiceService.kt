@@ -42,6 +42,7 @@ class CarVoiceService : Service() {
     private var preparingDeadline: Cancel? = null
     private var session = 0L
     private var destroyed = false
+    private var handingOff = false
     private val monitor = object : Runnable {
         override fun run() {
             if (!state.active) return
@@ -70,7 +71,7 @@ class CarVoiceService : Service() {
         return Closeable { listeners.remove(changed) }
     }
     fun start(caller: Any, car: CarContext?, mode: VoiceMode) {
-        if (state.active || destroyed) return
+        if (state.active || destroyed || handingOff) return
         stop()
         if (mode != VoiceMode.PLAYBACK && checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             fail(getString(R.string.voice_permission)); return
@@ -96,7 +97,7 @@ class CarVoiceService : Service() {
         publish(CarVoiceState(true, getString(R.string.voice_preparing), selected))
         main.post(monitor)
         Log.i(VoiceFocus.TAG, "voice.session.start mode=$mode car=${car != null}")
-        val audio = PlaybackFocusAudio(CarVoiceAudio(this, car, main, worker, microphoneControl), VoiceFocus(this, main))
+        val audio = PlaybackFocusAudio(CarVoiceAudio(this, car, main, worker, CarAudioResources.control), VoiceFocus(this, main))
         if (mode != VoiceMode.CONVERSATION) {
             check = AudioCheck(audio, timer) { phase, problem ->
                 if (token == session) {
@@ -140,6 +141,29 @@ class CarVoiceService : Service() {
         }
     }
     fun release(caller: Any) { if (owner === caller) stop() }
+    /** The callback acknowledges cleanup calls, never a foreign app or voice session. */
+    fun releaseForHandoff(complete: (Boolean) -> Unit): Cancel {
+        if (destroyed || handingOff) { complete(false); return Cancel {} }
+        handingOff = true
+        try { stop() } catch (_: Exception) {
+            CarAudioResources.release.markUnsafe()
+            handingOff = false
+            complete(false)
+            return Cancel {}
+        }
+        val token = session
+        var waitingActive = true
+        val waiting = CarAudioResources.release.await { released ->
+            if (waitingActive) {
+                waitingActive = false
+                handingOff = false
+                complete(released && !destroyed && token == session && !state.active)
+            }
+        }
+        return Cancel {
+            if (waitingActive) { waitingActive = false; waiting.cancel(); handingOff = false }
+        }
+    }
     private fun errorSummary(message: String) = getString(when (message) {
         VoiceProblem.NO_INPUT.message -> R.string.car_no_input
         VoiceProblem.CAPTURE_STOPPED.message -> R.string.voice_stopped
@@ -189,8 +213,6 @@ class CarVoiceService : Service() {
         super.onDestroy()
     }
     companion object {
-        // Process-owned: a newly bound service must also wait for an older host stop to finish.
-        private val microphoneControl = Executors.newSingleThreadExecutor()
         private const val CHANNEL = "car_voice"
         private const val NOTIFICATION = 3418
         private const val STOP = "com.azentrius.lautwerk.car.STOP"

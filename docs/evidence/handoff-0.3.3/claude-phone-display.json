@@ -1,0 +1,43 @@
+{
+  "schema": 2,
+  "model": "Pixel 10 Pro",
+  "androidRelease": "17",
+  "sdk": 37,
+  "securityPatch": "2026-10-05",
+  "lautwerk": {
+    "name": "0.3.3-prototype",
+    "code": "303"
+  },
+  "androidAuto": {
+    "name": "17.9.664044-release",
+    "code": "179664044"
+  },
+  "destination": "Claude",
+  "destinationVersion": {
+    "name": "1.261029.20",
+    "code": "26102920"
+  },
+  "trigger": "Manual DHU action; this script never launches an app",
+  "before": {
+    "focusFieldPresent": true,
+    "resumedDisplays": [],
+    "focusedDisplays": [],
+    "resumed": false,
+    "focused": false
+  },
+  "resumedObserved": true,
+  "focusedObserved": true,
+  "focusFieldObserved": true,
+  "resumedDisplaysObserved": [
+    0
+  ],
+  "focusedDisplaysObserved": [
+    0
+  ],
+  "firstObservationMs": 15380,
+  "voiceSession": "unknown",
+  "mcpApproval": "unknown",
+  "startedAtUtc": "2026-11-01T01:15:09.0856248Z",
+  "observationDurationMs": 30192,
+  "endedAtUtc": "2026-11-01T01:15:39.3145736Z"
+}

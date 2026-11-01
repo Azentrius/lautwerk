@@ -5,7 +5,15 @@ plugins {
 android {
     namespace = "com.azentrius.lautwerk.car"
     compileSdk = 37
-    defaultConfig { minSdk = 28 }
+    defaultConfig {
+        minSdk = 28
+        manifestPlaceholders["nativeControlsExperiment"] = providers.gradleProperty("nativeControlsExperiment")
+            .map {
+                require(it == "true" || it == "false")
+                require(it != "true" || providers.gradleProperty("carHandoffExperiment").orNull == "true")
+                it
+            }.getOrElse("false")
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

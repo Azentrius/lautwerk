@@ -1,0 +1,9 @@
+I/Lautwerk(10665): car.onCreateScreen api=8
+I/Lautwerk(10665): voice.session.stop.request active=false
+I/Lautwerk(10665): voice.session.stop elapsedMs=4
+I/Lautwerk(10665): control.start target=CHATGPT result=START_REQUESTED
+I/Lautwerk(10665): control.end target=0 result=END_REQUESTED
+I/Lautwerk(10665): voice.session.stop.request active=false
+I/Lautwerk(10665): voice.session.stop elapsedMs=2
+I/Lautwerk(10665): control.start target=CLAUDE result=START_REQUESTED
+I/Lautwerk(10665): control.end target=1 result=END_REQUESTED

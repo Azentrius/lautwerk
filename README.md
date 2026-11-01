@@ -127,6 +127,9 @@ The [personal assistant architecture spike](docs/PERSONAL_ASSISTANT_SPIKE.md) as
 handoff to official assistant apps, including the limits of voice control and permission detection.
 It does not add a new operating mode.
 
+An opt-in [Android Auto handoff experiment](docs/HANDOFF_EXPERIMENT.md) tests opening the official
+phone apps from the DHU. It is disabled by default and does not claim control of their voice sessions.
+
 ## Phone speech voices
 
 Lautwerk uses the phone's configured Android text-to-speech service. The assistant keeps its

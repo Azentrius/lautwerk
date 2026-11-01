@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="native_control_title">Lautwerk control experiment</string>
+    <string name="native_picker">Native voice controls.\nParked only. Set up on the phone.</string>
+    <string name="native_start">Start %1$s</string>
+    <string name="native_end">Hang up</string>
+    <string name="native_ready">Ready to start. Session state unknown.</string>
+    <string name="native_needs_role">Review assistant role on the phone while parked.</string>
+    <string name="native_needs_listener">Review notification access on the phone while parked.</string>
+    <string name="native_needs_shortcut">Choose the voice shortcut on the phone.</string>
+    <string name="native_busy">Controls busy. Check the phone while parked.</string>
+    <string name="native_start_requested">Start requested, not confirmed.</string>
+    <string name="native_end_requested">Hang up requested, not confirmed.</string>
+    <string name="native_action_available">Hang up available. Session state unknown.</string>
+    <string name="native_action_unavailable">Hang up unavailable. Check the phone while parked.</string>
+    <string name="native_blocked">Request blocked. Check the phone while parked.</string>
+    <string name="native_setup_disclosure">Debug experiment, parked use only. Start uses a published app shortcut. Hang up uses the current app-provided notification action. Neither confirms a conversation state. Permission prompts, including MCP, remain in the original app and are not detected or approved. No automatic start, retry or confirmation.</string>
+    <string name="native_role_settings">Review assistant role</string>
+    <string name="native_role_disclosure">Selecting Lautwerk temporarily replaces your digital assistant. Its assistant gesture does nothing and it does not provide speech recognition or hotword detection. This trial needs the active voice interaction role for shortcut access. Restore the previous assistant and its context settings after testing. Continue to Android settings?</string>
+    <string name="native_listener_settings">Review notification access</string>
+    <string name="native_listener_disclosure">Android grants broad notification access, not access to just two apps. This experiment filters ChatGPT and Claude, reads only control metadata, and never reads message text, titles, extras or MCP prompts. It retains current actions only in memory and sends Hang up only after your explicit press. Revoke access after testing. Continue to Android settings?</string>
+    <string name="native_choose_shortcut">Choose %1$s voice shortcut</string>
+    <string name="native_no_shortcuts">No supported published voice shortcut found. Only the previously observed voice actions are offered; conversation shortcuts and private-intent fallbacks are excluded.</string>
+    <string name="native_shortcut_saved">Shortcut selection saved. It was not started.</string>
+    <string name="native_check_setup">Check setup</string>
+    <string name="native_continue">Continue to settings</string>
+</resources>

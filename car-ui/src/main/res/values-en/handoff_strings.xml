@@ -1,0 +1,18 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="handoff_open">Open assistants</string>
+    <string name="handoff_chatgpt">Open ChatGPT</string>
+    <string name="handoff_claude">Open Claude</string>
+    <string name="handoff_ready">Experiment: open the phone app.\nVoice and approvals stay there.</string>
+    <string name="handoff_releasing">Releasing Lautwerk audio.</string>
+    <string name="handoff_requested">Open requested, not confirmed. If blocked:\nopen the phone app while parked.</string>
+    <string name="handoff_unavailable">App unavailable. Install or enable the official app on the phone while parked.</string>
+    <string name="handoff_blocked">Android could not open the app. Open it yourself on the phone while parked.</string>
+    <string name="handoff_locked">Unlock the phone while parked, then try again.</string>
+    <string name="handoff_release_failed">Audio release failed.\nCheck Lautwerk on the phone while parked.</string>
+    <string name="handoff_assist_chatgpt">Start ChatGPT</string>
+    <string name="handoff_assist_claude">Start Claude</string>
+    <string name="handoff_assist_ready">Experiment: invoke assistant.\nVoice start is not yet proven.</string>
+    <string name="handoff_assist_requested">Assist requested, not confirmed.\nApprovals stay in the original app.</string>
+    <string name="handoff_assist_unavailable">Assistant entry unavailable. Check the official phone app while parked.</string>
+</resources>

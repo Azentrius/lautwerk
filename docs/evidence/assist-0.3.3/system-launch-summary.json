@@ -1,0 +1,77 @@
+{
+  "sampledAtUtc": "2026-11-01T20:31:26.3427335Z",
+  "matchingSystemEvents": 9,
+  "events": [
+    {
+      "event": "OTHER",
+      "assistAction": false,
+      "denial": false,
+      "balCodes": [],
+      "target": "CHATGPT"
+    },
+    {
+      "event": "ACTIVITY_START",
+      "assistAction": true,
+      "denial": false,
+      "balCodes": [
+        "BAL_ALLOW_BOUND_BY_FOREGROUND"
+      ],
+      "target": "CHATGPT"
+    },
+    {
+      "event": "OTHER",
+      "assistAction": false,
+      "denial": false,
+      "balCodes": [],
+      "target": "CLAUDE"
+    },
+    {
+      "event": "OTHER",
+      "assistAction": false,
+      "denial": false,
+      "balCodes": [],
+      "target": "CHATGPT"
+    },
+    {
+      "event": "ACTIVITY_START",
+      "assistAction": true,
+      "denial": false,
+      "balCodes": [
+        "BAL_ALLOW_BOUND_BY_FOREGROUND"
+      ],
+      "target": "CHATGPT"
+    },
+    {
+      "event": "OTHER",
+      "assistAction": false,
+      "denial": false,
+      "balCodes": [],
+      "target": "CLAUDE"
+    },
+    {
+      "event": "ACTIVITY_START",
+      "assistAction": true,
+      "denial": false,
+      "balCodes": [
+        "BAL_ALLOW_BOUND_BY_FOREGROUND"
+      ],
+      "target": "CLAUDE"
+    },
+    {
+      "event": "OTHER",
+      "assistAction": false,
+      "denial": false,
+      "balCodes": [],
+      "target": "CLAUDE"
+    },
+    {
+      "event": "ACTIVITY_START",
+      "assistAction": false,
+      "denial": false,
+      "balCodes": [
+        "BAL_ALLOW_VISIBLE_WINDOW"
+      ],
+      "target": "CLAUDE"
+    }
+  ]
+}
