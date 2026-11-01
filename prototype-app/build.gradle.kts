@@ -28,6 +28,8 @@ android {
             buildConfigField("boolean", "DHU_EXPERIMENT", "true")
             manifestPlaceholders["carHandoffExperiment"] = providers.gradleProperty("carHandoffExperiment")
                 .map { require(it == "true" || it == "false"); it }.getOrElse("false")
+            manifestPlaceholders["carHandoffEntry"] = providers.gradleProperty("carHandoffEntry")
+                .map { require(it == "launcher" || it == "assist"); it }.getOrElse("launcher")
         }
     }
     buildFeatures { buildConfig = true }

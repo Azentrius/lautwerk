@@ -8,6 +8,8 @@ Add an opt-in Android Auto app-opening experiment.
   the official phone apps through Android's public package launcher.
 - Wait for owned car audio cleanup before dispatch; cancel on timeout, screen exit or failure.
   Report only a launch request, never a confirmed external voice session or MCP approval.
+- Add `-PcarHandoffEntry=assist` for a separate public `ACTION_ASSIST` experiment, scoped to the
+  selected official package. No automatic launcher fallback, role change or lockscreen bypass.
 - Keep the default car template, API mode, provider/model choice, phone voices and stored chats.
   No root, private voice intents, notification access or automatic permission confirmation.
 

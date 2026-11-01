@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.platform.app.InstrumentationRegistry
 import com.azentrius.lautwerk.car.LautwerkScreen
 import com.azentrius.lautwerk.car.handoff.AssistantLauncher
+import com.azentrius.lautwerk.car.handoff.AssistantEntry
 import com.azentrius.lautwerk.car.handoff.HandoffScreen
 import com.azentrius.lautwerk.car.handoff.OfficialAssistant
 import com.azentrius.lautwerk.car.voice.CarVoicePort
@@ -48,16 +49,21 @@ class HandoffScreenTest {
     @Test fun localizedActionsWaitForReleaseAndOnlyReportRequested() {
         val inst = InstrumentationRegistry.getInstrumentation()
         inst.runOnMainSync {
-            for (language in listOf("de", "en")) for (assistant in OfficialAssistant.entries) {
+            for (language in listOf("de", "en")) for (assistant in OfficialAssistant.entries) for (entry in AssistantEntry.entries) {
                 val config = Configuration(inst.targetContext.resources.configuration).apply { setLocale(Locale.forLanguageTag(language)) }
                 val context = TestCarContext.createCarContext(inst.targetContext.createConfigurationContext(config))
                 val audio = Port(); val launched = mutableListOf<OfficialAssistant>()
-                val screen = HandoffScreen(context, audio, AssistantLauncher { launched.add(it); HandoffPhase.REQUESTED })
+                val screen = HandoffScreen(context, audio, AssistantLauncher { launched.add(it); HandoffPhase.REQUESTED }, entry)
                 val controller = ScreenController(screen).moveToState(Lifecycle.State.RESUMED)
                 try {
                     val template = screen.onGetTemplate() as MessageTemplate
-                    assertEquals(if (language == "de") listOf("ChatGPT öffnen", "Claude öffnen") else
-                        listOf("Open ChatGPT", "Open Claude"), template.actions.map { it.title.toString() })
+                    val labels = when {
+                        entry == AssistantEntry.ASSIST && language == "de" -> listOf("ChatGPT starten", "Claude starten")
+                        entry == AssistantEntry.ASSIST -> listOf("Start ChatGPT", "Start Claude")
+                        language == "de" -> listOf("ChatGPT öffnen", "Claude öffnen")
+                        else -> listOf("Open ChatGPT", "Open Claude")
+                    }
+                    assertEquals(labels, template.actions.map { it.title.toString() })
                     assertEquals(2, template.actions.size)
                     template.actions.forEach { assertEquals(CarColor.PRIMARY, it.backgroundColor); assertNull(it.icon); assertEquals(0, it.flags) }
                     @Suppress("DEPRECATION")

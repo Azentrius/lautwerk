@@ -10,4 +10,9 @@
     <string name="handoff_blocked">Android konnte die App nicht öffnen. Öffnen Sie sie selbst am Telefon im Stand.</string>
     <string name="handoff_locked">Entsperren Sie das Telefon im Stand und versuchen Sie es erneut.</string>
     <string name="handoff_release_failed">Audiofreigabe fehlgeschlagen.\nPrüfen Sie Lautwerk am Telefon im Stand.</string>
+    <string name="handoff_assist_chatgpt">ChatGPT starten</string>
+    <string name="handoff_assist_claude">Claude starten</string>
+    <string name="handoff_assist_ready">Experiment: Assistenz aufrufen.\nSprachstart noch nicht nachgewiesen.</string>
+    <string name="handoff_assist_requested">Assistenz angefordert, nicht bestätigt.\nFreigaben bleiben in der Original-App.</string>
+    <string name="handoff_assist_unavailable">Assistenz-Aufruf nicht verfügbar. Prüfen Sie die offizielle App am Telefon im Stand.</string>
 </resources>

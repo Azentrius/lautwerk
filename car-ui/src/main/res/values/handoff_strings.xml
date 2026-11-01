@@ -10,4 +10,9 @@
     <string name="handoff_blocked">Android could not open the app. Open it yourself on the phone while parked.</string>
     <string name="handoff_locked">Unlock the phone while parked, then try again.</string>
     <string name="handoff_release_failed">Audio release failed.\nCheck Lautwerk on the phone while parked.</string>
+    <string name="handoff_assist_chatgpt">Start ChatGPT</string>
+    <string name="handoff_assist_claude">Start Claude</string>
+    <string name="handoff_assist_ready">Experiment: invoke assistant.\nVoice start is not yet proven.</string>
+    <string name="handoff_assist_requested">Assist requested, not confirmed.\nApprovals stay in the original app.</string>
+    <string name="handoff_assist_unavailable">Assistant entry unavailable. Check the official phone app while parked.</string>
 </resources>

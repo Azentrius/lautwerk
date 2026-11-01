@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-01",
+  "baseline": "800a90bd8aac689b765e10b164eb75b889027978",
+  "branch": "codex/android-auto-handoff",
+  "version": "0.3.3-prototype",
+  "code": 303,
+  "trigger": "Actual parked-only DHU actions, package-scoped public ACTION_ASSIST, application context",
+  "device": {
+    "model": "Pixel 10 Pro",
+    "android": 17,
+    "sdk": 37,
+    "securityPatch": "2026-10-05"
+  },
+  "androidAuto": "17.9.664044-release / 179664044",
+  "dhu": "2.0-windows / 2022-03-30-438482292",
+  "hostCarApi": 8,
+  "apps": {
+    "chatgpt": "1.2026.293 / 2629319",
+    "claude": "1.261030.19 / 26103019"
+  },
+  "cases": [
+    {
+      "target": "ChatGPT",
+      "defaultAssistant": "Google",
+      "attempts": 2,
+      "androidDispatch": "BAL_ALLOW_BOUND_BY_FOREGROUND",
+      "visibility": "No resumed/focused observation on physical display 0",
+      "user": "First observation missed; repeat confirmed no change or error",
+      "voice": "Not started"
+    },
+    {
+      "target": "Claude",
+      "defaultAssistant": "Google",
+      "attempts": 1,
+      "androidDispatch": "BAL_ALLOW_BOUND_BY_FOREGROUND",
+      "visibility": "Resumed and focused on physical display 0",
+      "user": "Normal app UI only",
+      "voice": "Not started"
+    },
+    {
+      "target": "ChatGPT",
+      "defaultAssistant": "ChatGPT",
+      "attempts": 1,
+      "androidDispatch": "BAL_ALLOW_BOUND_BY_FOREGROUND",
+      "visibility": "No resumed/focused observation on physical display 0",
+      "user": "No change or error",
+      "voice": "Not started"
+    },
+    {
+      "target": "Claude",
+      "defaultAssistant": "Claude",
+      "attempts": 1,
+      "androidDispatch": "REQUESTED; no app exception",
+      "visibility": "See claude-default.json",
+      "user": "Normal app UI only",
+      "voice": "Not started"
+    }
+  ],
+  "conclusion": "NO-GO for direct native voice start through the tested ACTION_ASSIST route on these versions. This does not negate the earlier package-launcher app-opening result or the user-tested manually started native car audio.",
+  "notTested": [
+    "Voice conversation or audio routing in this experiment",
+    "External stop/restart",
+    "Cold locked-phone start",
+    "Network loss/recovery",
+    "MCP permission handling",
+    "Calls",
+    "Headsets",
+    "Moving vehicle"
+  ],
+  "privacy": "No test prompts, MCP approvals, notifications, native chat screenshots or native content captured",
+  "cleanup": "Google assistant and all sampled system/assistant settings restored; DHU closed normally; own ADB forward removed",
+  "installed": "Assist opt-in DHU debug APK; ordinary adb install -r; no uninstall, data reset, installer-origin override or host-policy bypass"
+}

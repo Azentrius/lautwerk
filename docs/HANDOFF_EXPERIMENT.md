@@ -1,10 +1,12 @@
 # Android Auto handoff experiment
 
 Version 0.3.3, based on `main` at `d00d493` (the merged architecture spike, PR #51).
-This experiment tests app opening from the DHU, not a voice-session integration.
+The initial experiment tests app opening from the DHU. A separate opt-in now tests the public
+Android assist entry; neither route implements external voice-session control.
 See [the architecture boundaries](PERSONAL_ASSISTANT_SPIKE.md).
 Measured Pixel 10 Pro / Android 17 results and remaining acceptance work are in the
 [2026-11-01 test report](evidence/handoff-0.3.3/README.md).
+The next stage is described in [the public assist experiment](ASSIST_EXPERIMENT.md).
 
 ## Scope and isolation
 

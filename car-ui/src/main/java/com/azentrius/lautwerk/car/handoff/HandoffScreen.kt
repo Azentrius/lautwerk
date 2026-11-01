@@ -25,7 +25,8 @@ import com.azentrius.lautwerk.voice.HandoffPhase
 class HandoffScreen(
     carContext: CarContext,
     private val voice: CarVoicePort = VoiceConnection(carContext, carContext),
-    private val launcher: AssistantLauncher = AndroidAssistantLauncher(carContext)
+    private val launcher: AssistantLauncher = AndroidAssistantLauncher(carContext),
+    private val entry: AssistantEntry = HandoffExperiment.entry(carContext)
 ) : Screen(carContext) {
     private var visible = false
     private val handoff = AudioHandoff(voice::releaseForHandoff, VoiceTimer(Handler(Looper.getMainLooper()))) {
@@ -50,10 +51,10 @@ class HandoffScreen(
     @Suppress("DEPRECATION")
     override fun onGetTemplate(): Template {
         val message = when (handoff.phase) {
-            HandoffPhase.READY -> R.string.handoff_ready
+            HandoffPhase.READY -> if (entry == AssistantEntry.ASSIST) R.string.handoff_assist_ready else R.string.handoff_ready
             HandoffPhase.RELEASING -> R.string.handoff_releasing
-            HandoffPhase.REQUESTED -> R.string.handoff_requested
-            HandoffPhase.UNAVAILABLE -> R.string.handoff_unavailable
+            HandoffPhase.REQUESTED -> if (entry == AssistantEntry.ASSIST) R.string.handoff_assist_requested else R.string.handoff_requested
+            HandoffPhase.UNAVAILABLE -> if (entry == AssistantEntry.ASSIST) R.string.handoff_assist_unavailable else R.string.handoff_unavailable
             HandoffPhase.BLOCKED -> R.string.handoff_blocked
             HandoffPhase.LOCKED -> R.string.handoff_locked
             HandoffPhase.RELEASE_FAILED -> R.string.handoff_release_failed
@@ -63,7 +64,11 @@ class HandoffScreen(
             .setHeaderAction(Action.BACK)
         val enabled = handoff.phase != HandoffPhase.RELEASING && handoff.phase != HandoffPhase.REQUESTED
         OfficialAssistant.entries.forEach { assistant ->
-            builder.addAction(Action.Builder().setTitle(carContext.getString(assistant.label))
+            val label = if (entry == AssistantEntry.ASSIST) when (assistant) {
+                OfficialAssistant.CHATGPT -> R.string.handoff_assist_chatgpt
+                OfficialAssistant.CLAUDE -> R.string.handoff_assist_claude
+            } else assistant.label
+            builder.addAction(Action.Builder().setTitle(carContext.getString(label))
                 .setBackgroundColor(CarColor.PRIMARY).setEnabled(enabled)
                 .setOnClickListener(ParkedOnlyOnClickListener.create {
                     if (visible) handoff.request { launcher.open(assistant) }
