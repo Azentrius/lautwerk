@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.3 – 2026-11-01
+
+Add an opt-in Android Auto app-opening experiment.
+
+- With `-PcarHandoffExperiment=true`, add a parked-only assistant page with actions to open
+  the official phone apps through Android's public package launcher.
+- Wait for owned car audio cleanup before dispatch; cancel on timeout, screen exit or failure.
+  Report only a launch request, never a confirmed external voice session or MCP approval.
+- Keep the default car template, API mode, provider/model choice, phone voices and stored chats.
+  No root, private voice intents, notification access or automatic permission confirmation.
+
 ## 0.3.2 – 2026-10-19
 
 Return speech output to the phone's Android text-to-speech service.

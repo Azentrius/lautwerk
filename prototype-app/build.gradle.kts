@@ -26,6 +26,8 @@ android {
             dimension = "surface"
             applicationIdSuffix = ".dhu"
             buildConfigField("boolean", "DHU_EXPERIMENT", "true")
+            manifestPlaceholders["carHandoffExperiment"] = providers.gradleProperty("carHandoffExperiment")
+                .map { require(it == "true" || it == "false"); it }.getOrElse("false")
         }
     }
     buildFeatures { buildConfig = true }
@@ -48,6 +50,7 @@ dependencies {
     implementation(project(":core"))
     "dhuImplementation"(project(":car-ui"))
     "androidTestDhuImplementation"(project(":speech-output"))
+    "androidTestDhuImplementation"(project(":voice"))
     androidTestImplementation("androidx.test:core:1.7.0")
     androidTestImplementation("androidx.test:runner:1.7.0")
     androidTestImplementation("androidx.test.ext:junit:1.3.0")

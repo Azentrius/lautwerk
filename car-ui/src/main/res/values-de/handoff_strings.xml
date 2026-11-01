@@ -1,0 +1,13 @@
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="handoff_open">Assistenten öffnen</string>
+    <string name="handoff_chatgpt">ChatGPT öffnen</string>
+    <string name="handoff_claude">Claude öffnen</string>
+    <string name="handoff_ready">Experiment: App am Telefon öffnen.\nGespräch und Freigaben bleiben dort.</string>
+    <string name="handoff_releasing">Lautwerk gibt Audio frei.</string>
+    <string name="handoff_requested">Öffnen angefordert, nicht bestätigt.\nFalls blockiert: Telefon im Stand prüfen.</string>
+    <string name="handoff_unavailable">App nicht verfügbar. Installieren oder aktivieren Sie die offizielle App am Telefon im Stand.</string>
+    <string name="handoff_blocked">Android konnte die App nicht öffnen. Öffnen Sie sie selbst am Telefon im Stand.</string>
+    <string name="handoff_locked">Entsperren Sie das Telefon im Stand und versuchen Sie es erneut.</string>
+    <string name="handoff_release_failed">Audiofreigabe fehlgeschlagen.\nPrüfen Sie Lautwerk am Telefon im Stand.</string>
+</resources>
