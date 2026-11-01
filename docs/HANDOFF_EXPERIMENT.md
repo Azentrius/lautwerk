@@ -125,6 +125,8 @@ without changing version or erasing data. Do not overwrite personal settings to 
 Run all tasks from `.github/workflows/android.yml`. JVM tests cover serialized stop ordering,
 cleanup failure, cancellation after callback scheduling, timeout, stale completion, double click
 and dispatch failure. Device tests use fake launch/audio adapters; they never open official apps.
+On Windows, `./tools/test-capture-handoff.ps1` checks physical versus virtual display parsing and
+missing signals using four fixtures, without ADB or an app launch.
 
 ```powershell
 & $adb -s $serial shell am instrument -w -r -e class 'com.azentrius.lautwerk.prototype.HandoffScreenTest,com.azentrius.lautwerk.prototype.AssistantLauncherTest,com.azentrius.lautwerk.prototype.CarTemplateTest,com.azentrius.lautwerk.prototype.CarDesignContractTest,com.azentrius.lautwerk.prototype.CarActionLabelTest' com.azentrius.lautwerk.prototype.dhu.test/androidx.test.runner.AndroidJUnitRunner
@@ -161,12 +163,15 @@ used with fixed sentences and no provider request to exercise release with actua
 ```
 
 The observer enforces the explicitly selected model and Android 17 API level. It never launches an app and stores only
-version fields, timestamps and resumed/focused booleans. It refuses a destination already visible
+version fields, timestamps, display IDs and resumed/focused booleans. It refuses a destination already visible
 at the beginning. Raw activity/window dumps are transient and never saved. A positive observation
 must be paired with the app's fixed `handoff.dispatch` log and a user/host observation; it is not
 proof of a voice session. A negative observation alone does not prove why Android refused.
 Android 17 supplies the focus field in `dumpsys window displays`; the observer records whether
 the field was available. Observation offsets start before the manual click and are not launch latencies.
+Schema 2 counts only the physical Pixel display 0 as phone visibility. Native activities on a
+virtual display must not be mistaken for a visible phone launch. Coordinate the user's visual
+confirmation before changing the phone screen or testing the other destination.
 
 Commit sanitized result summaries and only Lautwerk/DHU screenshots under
 `docs/evidence/handoff-0.3.3/`. Keep raw diagnostics and APKs in ignored `diagnostics/handoff/`.

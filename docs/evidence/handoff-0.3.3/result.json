@@ -65,31 +65,46 @@
   ],
   "live": {
     "launcher": "PASS",
-    "chatgptOpenAndReopen": "PASS: resumed and focused",
-    "claudeOpenAndReopen": "PASS: resumed and focused",
+    "chatgptOpenAndReopen": "PASS: resumed and focused on physical display 0; user confirmed visible in synchronized repeat",
+    "claudeOpenAndReopen": "PASS: resumed and focused on physical display 0; user confirmed visible after microphone stop",
     "disabledRepeatClick": "PASS: no additional dispatch",
     "ttsCompletion": "PASS: local fixed sample completed",
     "ttsStopOnPageExit": "PASS: active stop before normal TTS completion; release took 18 ms",
     "dispatchAfterStop": "PASS",
     "humanAudibilityConfirmation": "PENDING",
-    "microphoneRelease": "NOT RUN: RECORD_AUDIO denied; permission approval requested",
+    "microphoneRelease": "PASS technically: one-time permission granted by ordinary Android dialog; host capture received PCM, host cancellation stopped capture before the later dispatch",
     "physicalKeyguard": "NOT RUN: locked case covered with injected Android service only",
     "forcedColdProcess": "NOT RUN: native apps were not force-stopped",
     "nativeVoiceSession": "UNKNOWN: not started or verified by this test",
-    "mcpApproval": "UNKNOWN: no detection or approval implemented"
+    "mcpApproval": "UNKNOWN: no detection or approval implemented",
+    "hostMicrophoneOverlay": "First tap dismissed host capture; second tap opened assistant page. No claim of a direct click through the host overlay.",
+    "humanVisibilityConfirmation": {
+      "ChatGPT": "Confirmed visible in synchronized repeat; earlier asynchronous question answered not visible",
+      "Claude": "Confirmed visible in synchronized check after microphone stop"
+    }
   },
   "restoration": {
     "systemSettingsEqual": true,
     "voiceMode": "PLAYBACK restored through existing UI",
-    "microphonePermission": "denied before and after",
+    "microphonePermission": "denied again; user-set and user-fixed cleared; Android retains inert ONE_TIME flag (public shell help has no per-flag clear for it)",
     "dhu": "closed normally",
     "adbForward5277": "removed",
     "uninstalledPackages": []
   },
   "decision": {
     "documentedPhoneAppOpening": "GO on this measured configuration only",
-    "fullAudioHandoffAcceptance": "PENDING live microphone release and audible overlap check",
+    "fullAudioHandoffAcceptance": "Technical host-capture stop verified; audible overlap, physical-keyguard and forced-cold-process checks remain open",
     "nativeVoiceAndMcpControl": "NO-GO: no public contract established",
     "merge": "DO NOT MERGE before review"
+  },
+  "ci": {
+    "commit": "3a1589c9492efa709429ff7cb4642e7b4cc75432",
+    "requiredTest": "PASS",
+    "run": "https://github.com/Azentrius/lautwerk/actions/runs/41259557411"
+  },
+  "observerFixtures": {
+    "passed": 4,
+    "failed": 0,
+    "deviceAccess": false
   }
 }

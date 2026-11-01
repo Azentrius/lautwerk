@@ -26,11 +26,30 @@ function Read-Visibility([string]$Package) {
     $escaped = [regex]::Escape($Package)
     $activities = Read-Adb @('shell', 'dumpsys', 'activity', 'activities')
     $windows = Read-Adb @('shell', 'dumpsys', 'window', 'displays')
-    # Keep booleans only, never activity records, window titles, intents or app content.
+    $resumedDisplays = @()
+    $focusedDisplays = @()
+    $display = $null
+    foreach ($line in ($activities -split "`n")) {
+        if ($line -match '^\s*Display #(\d+)') { $display = [int]$Matches[1] }
+        if ($null -ne $display -and $line -match "(?:mResumedActivity|topResumedActivity).*\b$escaped/") {
+            $resumedDisplays += $display
+        }
+    }
+    $display = $null
+    foreach ($line in ($windows -split "`n")) {
+        if ($line -match '^\s*Display: mDisplayId=(\d+)') { $display = [int]$Matches[1] }
+        if ($null -ne $display -and $line -match "mCurrentFocus=.*\b$escaped/") {
+            $focusedDisplays += $display
+        }
+    }
+    # Display 0 is the physical Pixel screen. A virtual-display activity is not phone visibility.
+    # Keep booleans and display IDs only, never records, titles, intents or app content.
     return [ordered]@{
         focusFieldPresent = [regex]::IsMatch($windows, 'mCurrentFocus=')
-        resumed = [regex]::IsMatch($activities, "(?m)^.*(?:mResumedActivity|topResumedActivity)[^`r`n]*\b$escaped/")
-        focused = [regex]::IsMatch($windows, "(?m)^.*mCurrentFocus=[^`r`n]*\b$escaped/")
+        resumedDisplays = @($resumedDisplays | Sort-Object -Unique)
+        focusedDisplays = @($focusedDisplays | Sort-Object -Unique)
+        resumed = $resumedDisplays -contains 0
+        focused = $focusedDisplays -contains 0
     }
 }
 
@@ -45,7 +64,7 @@ if ($before.resumed -or $before.focused) {
     throw 'The destination is already visible. Return to the phone home screen before measuring a new handoff.'
 }
 $record = [ordered]@{
-    schema = 1
+    schema = 2
     model = $model
     androidRelease = Read-Adb @('shell', 'getprop', 'ro.build.version.release')
     sdk = [int]$sdk
@@ -59,6 +78,8 @@ $record = [ordered]@{
     resumedObserved = $false
     focusedObserved = $false
     focusFieldObserved = $before.focusFieldPresent
+    resumedDisplaysObserved = @()
+    focusedDisplaysObserved = @()
     firstObservationMs = $null
     voiceSession = 'unknown'
     mcpApproval = 'unknown'
@@ -69,6 +90,8 @@ $clock = [Diagnostics.Stopwatch]::StartNew()
 while ($clock.Elapsed.TotalSeconds -lt $Seconds) {
     $visible = Read-Visibility $package
     $record.focusFieldObserved = $record.focusFieldObserved -or $visible.focusFieldPresent
+    $record.resumedDisplaysObserved = @(@($record.resumedDisplaysObserved) + @($visible.resumedDisplays) | Sort-Object -Unique)
+    $record.focusedDisplaysObserved = @(@($record.focusedDisplaysObserved) + @($visible.focusedDisplays) | Sort-Object -Unique)
     if ($visible.resumed -or $visible.focused) {
         if ($null -eq $record.firstObservationMs) { $record.firstObservationMs = $clock.ElapsedMilliseconds }
         $record.resumedObserved = $record.resumedObserved -or $visible.resumed
