@@ -69,3 +69,9 @@ simulate clicks in another app, or report an app launch as a running voice sessi
 
 No build or instrumented test was needed for this documentation-only update. Calls, headsets,
 DHU, vehicle, network recovery and live voice tests were not performed in this inspection.
+
+## Later authorized widget test
+
+The [separate widget test](../native-widget-voice-2026-11-01/README.md) subsequently entered native
+Voice twice per app and ended microphone access through each app's native End control. That result
+does not change the read-only scope of this earlier inspection or establish Android Auto control.

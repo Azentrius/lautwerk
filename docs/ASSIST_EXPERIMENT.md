@@ -10,8 +10,10 @@ The tested route is NO-GO for direct voice start. The implementation remains an 
 
 A subsequent [read-only native settings inspection](evidence/native-voice-settings-2026-11-01/README.md)
 found no auto-start switch in the installed voice settings. Both official home widgets expose a
-voice action. Those labels are a separate lead, not proof of widget behavior, a public inter-app
-voice API, or an Android Auto start/stop solution. No voice session was started for that inspection.
+voice action. A separate [authorized widget test](evidence/native-widget-voice-2026-11-01/README.md)
+then entered native Voice twice per app. The visible native End action released microphone access
+each time, and a second widget start worked. These are phone-widget results, not a public inter-app
+voice API or an Android Auto start/stop solution. No question or answer exchange was tested.
 
 ## Candidate and boundaries
 
