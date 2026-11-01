@@ -15,6 +15,12 @@ then entered native Voice twice per app. The visible native End action released 
 each time, and a second widget start worked. These are phone-widget results, not a public inter-app
 voice API or an Android Auto start/stop solution. No question or answer exchange was tested.
 
+The [shortcut and control-access audit](evidence/control-access-2026-11-01/README.md) then found
+working native launcher shortcuts and app-published Hang up notification actions for both apps.
+The existing Lautwerk UID cannot query either shortcuts or foreign media sessions. This supports
+a separately consented, isolated prototype using public shortcuts and notification actions, not
+a ready-to-use car mode. Notification actions were inspected with explicit consent, not invoked.
+
 ## Candidate and boundaries
 
 Read-only package-manager queries on the Pixel 10 Pro found an exported `ACTION_ASSIST` activity

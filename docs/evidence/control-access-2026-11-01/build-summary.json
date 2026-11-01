@@ -1,0 +1,11 @@
+{
+  "jdk": "17.0.19.10-hotspot",
+  "gradle": "9.8.2",
+  "targetedTestBuildAndDhuLint": { "result": "PASS", "elapsedSeconds": 59, "executedTasks": 7, "upToDateTasks": 213 },
+  "fullLocalCiTaskList": { "result": "PASS", "elapsedSeconds": 41, "executedTasks": 23, "upToDateTasks": 352 },
+  "jvmResults": { "tests": 110, "failures": 0, "errors": 0, "skipped": 0, "execution": "Unchanged tests up to date; existing XML reports inspected" },
+  "deviceAccessAudit": { "passed": 2, "accessDenialsObserved": 4 },
+  "defaultOptOutAudit": { "assumptionSkips": 2 },
+  "testApkSha256": "d10f3467dbc2046f5c9f3653a551d114d0b47922268b4da4221186c3a0573377",
+  "productionApkInstalled": false
+}

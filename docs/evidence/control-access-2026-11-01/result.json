@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-01",
+  "device": { "model": "Pixel 10 Pro", "android": 17, "api": 37 },
+  "apps": { "chatgpt": "1.2026.293 / 2629319", "claude": "1.261030.19 / 26103019" },
+  "shortcutChecks": [
+    { "target": "chatgpt", "label": "Audio", "phoneLauncherTapAt": "2026-11-01T22:21:53.6251282+01:00", "nativeVoiceControlsVisible": true, "microphoneRunning": true, "endedThroughNativeUi": true },
+    { "target": "claude", "label": "Sprachmodus starten", "phoneLauncherTapAt": "2026-11-01T22:18:54.7846284+01:00", "nativeVoiceControlsVisible": true, "microphoneRunning": true, "endedThroughNativeUi": true }
+  ],
+  "legacyCreateShortcut": { "chatgpt": "No activities found", "claude": "No activities found" },
+  "ordinaryAppAccessAudit": {
+    "processUidEqualsTargetAppUid": true,
+    "shortcutHostPermission": false,
+    "mediaContentControlPermission": false,
+    "shortcutQueries": { "chatgpt": "SecurityException", "claude": "SecurityException" },
+    "mediaQueries": { "chatgpt": "SecurityException", "claude": "SecurityException" },
+    "optInTestsPassed": 2,
+    "defaultTestsSkipped": 2,
+    "shellIdentityAdopted": false
+  },
+  "mediaSamples": [
+    { "target": "chatgpt", "phase": "foreground", "active": false, "actionMask": 0, "customActionsEmpty": true, "stopAdvertised": false },
+    { "target": "chatgpt", "phase": "background", "launcherVisible": true, "microphoneRunning": true, "active": false, "actionMask": 0, "customActionsEmpty": true, "stopAdvertised": false },
+    { "target": "claude", "phase": "foreground", "active": true, "actionMask": 516, "customActionsEmpty": true, "stopAdvertised": false },
+    { "target": "claude", "phase": "background", "launcherVisible": true, "microphoneRunning": true, "active": true, "actionMask": 516, "customActionsEmpty": true, "stopAdvertised": false }
+  ],
+  "notificationActionInspection": {
+    "explicitUserConsent": true,
+    "scope": "Current posted foreground-service Voice notification actions for the two target packages only; Android redaction enabled",
+    "samples": [
+      { "target": "chatgpt", "at": "2026-11-01T22:30:11.0742141+01:00", "matchingRecords": 1, "actions": [{ "label": "Auflegen", "hasActionIntent": true }, { "label": "Stummschalten", "hasActionIntent": true }] },
+      { "target": "claude", "at": "2026-11-01T22:30:25.3974991+01:00", "matchingRecords": 1, "actions": [{ "label": "Auflegen", "hasActionIntent": true }, { "label": "Stummschalten", "hasActionIntent": true }] }
+    ],
+    "notificationActionInvoked": false,
+    "notificationListenerEnabled": false,
+    "rawDumpSaved": false,
+    "titlesBodiesExtrasOrIntentDescriptionsOutput": false
+  },
+  "cleanup": {
+    "assistantRole": "com.google.android.googlequicksearchbox",
+    "homeRole": "com.google.android.apps.nexuslauncher",
+    "rolesChanged": false,
+    "permissionsGranted": false,
+    "bothNativeMicrophonesInactive": true,
+    "temporaryUiDumpAbsent": true,
+    "productionApkChanged": false,
+    "onlyInstrumentationApkUpdated": true
+  },
+  "notTested": ["Lautwerk shortcut invocation with an assistant role", "Notification action invocation", "Voice exchange", "Remote session acknowledgement", "DHU", "Car", "Cold locked start", "Network recovery", "MCP", "Calls", "Headsets"],
+  "decision": "Conditional GO for a separately consented isolated shortcut and notification-action prototype; no end-to-end car control established"
+}
