@@ -15,7 +15,7 @@ import com.azentrius.lautwerk.settings.ModelSelectionStore
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import java.io.Closeable
-import com.azentrius.lautwerk.car.handoff.HandoffScreen
+import com.azentrius.lautwerk.car.handoff.ExperimentScreenFactory
 import androidx.car.app.model.ParkedOnlyOnClickListener
 
 class LautwerkScreen(
@@ -92,7 +92,7 @@ class LautwerkScreen(
                     if (visible) {
                         permissionGeneration++
                         requestingPermission = false
-                        screenManager.push(HandoffScreen(carContext))
+                        screenManager.push(ExperimentScreenFactory.create(carContext))
                     }
                 }).build())
         }

@@ -30,6 +30,14 @@ android {
                 .map { require(it == "true" || it == "false"); it }.getOrElse("false")
             manifestPlaceholders["carHandoffEntry"] = providers.gradleProperty("carHandoffEntry")
                 .map { require(it == "launcher" || it == "assist"); it }.getOrElse("launcher")
+            manifestPlaceholders["nativeControlsExperiment"] = providers.gradleProperty("nativeControlsExperiment")
+                .map {
+                    require(it == "true" || it == "false")
+                    require(it != "true" || providers.gradleProperty("carHandoffExperiment").orNull == "true") {
+                        "Native controls require the explicit car handoff experiment."
+                    }
+                    it
+                }.getOrElse("false")
         }
     }
     buildFeatures { buildConfig = true }

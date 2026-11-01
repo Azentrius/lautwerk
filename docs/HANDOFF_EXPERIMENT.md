@@ -7,6 +7,8 @@ See [the architecture boundaries](PERSONAL_ASSISTANT_SPIKE.md).
 Measured Pixel 10 Pro / Android 17 results and remaining acceptance work are in the
 [2026-11-01 test report](evidence/handoff-0.3.3/README.md).
 The next stage is described in [the public assist experiment](ASSIST_EXPERIMENT.md).
+The later, separately gated [native control prototype](NATIVE_CONTROLS_EXPERIMENT.md) is distinct
+from both routes described below and adds no behavior to the default build.
 
 ## Scope and isolation
 

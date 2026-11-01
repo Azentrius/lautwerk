@@ -2,7 +2,7 @@
 
 ## 0.3.3 – 2026-11-01
 
-Add an opt-in Android Auto app-opening experiment.
+Add opt-in Android Auto assistant experiments.
 
 - With `-PcarHandoffExperiment=true`, add a parked-only assistant page with actions to open
   the official phone apps through Android's public package launcher.
@@ -11,7 +11,12 @@ Add an opt-in Android Auto app-opening experiment.
 - Add `-PcarHandoffEntry=assist` for a separate public `ACTION_ASSIST` experiment, scoped to the
   selected official package. No automatic launcher fallback, role change or lockscreen bypass.
 - Keep the default car template, API mode, provider/model choice, phone voices and stored chats.
-  No root, private voice intents, notification access or automatic permission confirmation.
+  No root, private voice intents or automatic permission confirmation.
+- Add a separately opted-in debug control prototype using user-selected published shortcuts and
+  current native Hang up actions. Assistant-role and notification-access grants require separate
+  user approval. Neither a request nor a notification proves a native conversation state.
+- Reject stale, ambiguous, cross-profile, reply and authentication-required controls. Consume Hang up
+  actions once, keep them only in memory, and never inspect notification bodies or MCP prompts.
 
 ## 0.3.2 – 2026-10-19
 
