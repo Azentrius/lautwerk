@@ -8,6 +8,11 @@ app is only one milestone. The existing API mode is not a replacement for that g
 did not start native Voice in either app, including with each app selected as default assistant.
 The tested route is NO-GO for direct voice start. The implementation remains an opt-in diagnostic.
 
+A subsequent [read-only native settings inspection](evidence/native-voice-settings-2026-11-01/README.md)
+found no auto-start switch in the installed voice settings. Both official home widgets expose a
+voice action. Those labels are a separate lead, not proof of widget behavior, a public inter-app
+voice API, or an Android Auto start/stop solution. No voice session was started for that inspection.
+
 ## Candidate and boundaries
 
 Read-only package-manager queries on the Pixel 10 Pro found an exported `ACTION_ASSIST` activity
