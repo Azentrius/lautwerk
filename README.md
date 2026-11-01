@@ -123,6 +123,10 @@ uses the model remembered for that provider and still starts a new chat without 
 confirmed state of the voice tests is in [VOICE.md](docs/VOICE.md); further planning in
 [ROADMAP.md](ROADMAP.md).
 
+The [personal assistant architecture spike](docs/PERSONAL_ASSISTANT_SPIKE.md) assesses a possible
+handoff to official assistant apps, including the limits of voice control and permission detection.
+It does not add a new operating mode.
+
 ## Phone speech voices
 
 Lautwerk uses the phone's configured Android text-to-speech service. The assistant keeps its
