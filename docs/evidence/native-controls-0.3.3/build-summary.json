@@ -1,0 +1,59 @@
+{
+  "core": {
+    "tests": 22,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "providers": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "voice": {
+    "tests": 70,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lint": {
+    "app\\build\\reports\\lint-results-debug.xml": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 24
+    },
+    "prototype-app\\build\\reports\\lint-results-dhuDebug.xml": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 4
+    },
+    "prototype-app\\build\\reports\\lint-results-phoneDebug.xml": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 3
+    },
+    "car-ui\\build\\reports\\lint-results-debug.xml": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 4
+    },
+    "settings\\build\\reports\\lint-results-debug.xml": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 0
+    },
+    "storage\\build\\reports\\lint-results-debug.xml": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 1
+    },
+    "speech-output\\build\\reports\\lint-results-debug.xml": {
+      "Error": 0,
+      "Fatal": 0,
+      "Warning": 0
+    }
+  },
+  "releaseNativeControlClasses": 0,
+  "releaseFactoryPresent": true
+}

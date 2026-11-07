@@ -1,0 +1,4 @@
+control.audit route=media target=0 result=DENIED
+control.audit route=media target=1 result=DENIED
+control.audit route=shortcut target=0 result=DENIED
+control.audit route=shortcut target=1 result=DENIED

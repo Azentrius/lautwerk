@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "model": "Pixel 10 Pro",
+  "androidRelease": "17",
+  "sdk": 37,
+  "securityPatch": "2026-10-05",
+  "lautwerk": {
+    "name": "0.3.3-prototype",
+    "code": "303"
+  },
+  "androidAuto": {
+    "name": "17.9.664044-release",
+    "code": "179664044"
+  },
+  "destination": "ChatGPT",
+  "destinationVersion": {
+    "name": "1.2026.293",
+    "code": "2629319"
+  },
+  "trigger": "Manual DHU action; this script never launches an app",
+  "before": {
+    "focusFieldPresent": true,
+    "resumed": false,
+    "focused": false
+  },
+  "resumedObserved": true,
+  "focusedObserved": true,
+  "focusFieldObserved": true,
+  "firstObservationMs": 33320,
+  "voiceSession": "unknown",
+  "mcpApproval": "unknown",
+  "startedAtUtc": "2026-11-01T00:55:16.3064548Z",
+  "observationDurationMs": 60166,
+  "endedAtUtc": "2026-11-01T00:56:16.6434777Z"
+}

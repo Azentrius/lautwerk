@@ -1,0 +1,273 @@
+{
+  "repositoryBaseline": "572451b",
+  "version": "0.3.3-prototype",
+  "versionCode": 303,
+  "dateLocal": "2026-11-01/2026-11-02",
+  "timezone": "Europe/Berlin",
+  "device": {
+    "model": "Pixel 10 Pro",
+    "android": "17",
+    "api": 37,
+    "unlocked": true
+  },
+  "versions": {
+    "com.azentrius.lautwerk.prototype.dhu": [
+      "versionCode=303 minSdk=28 targetSdk=36",
+      "versionName=0.3.3-prototype"
+    ],
+    "com.openai.chatgpt": [
+      "versionCode=2629319 minSdk=32 targetSdk=37",
+      "versionName=1.2026.293"
+    ],
+    "com.anthropic.claude": [
+      "versionCode=26103019 minSdk=32 targetSdk=37",
+      "versionName=1.261030.19"
+    ],
+    "com.google.android.projection.gearhead": [
+      "versionCode=179664044 minSdk=32 targetSdk=37",
+      "versionName=17.9.664044-release"
+    ]
+  },
+  "host": {
+    "dhuVersion": "2.0-windows",
+    "dhuBuild": "2022-03-30-438482292",
+    "protocol": "1.7",
+    "carApi": 8
+  },
+  "mechanism": {
+    "start": "LauncherApps.startShortcut, real application UID",
+    "end": "Current app-published notification action, PendingIntent.send without extras",
+    "entry": "Actual parked DHU button clicks",
+    "remoteSessionState": "unknown"
+  },
+  "before": {
+    "ChatGPT": {
+      "observedAtUtc": "2026-11-01T22:47:41.2207884Z",
+      "assistant": "ChatGPT",
+      "targetUiNodesPresent": false,
+      "resumedOnPhysicalDisplay": false,
+      "focusedOnPhysicalDisplay": false,
+      "endControlPresent": false,
+      "microphoneControlPresent": false,
+      "recordAudioRunning": false,
+      "remoteSessionState": "unknown"
+    },
+    "Claude": {
+      "observedAtUtc": "2026-11-01T22:47:45.4285108Z",
+      "assistant": "Claude",
+      "targetUiNodesPresent": false,
+      "resumedOnPhysicalDisplay": false,
+      "focusedOnPhysicalDisplay": false,
+      "endControlPresent": false,
+      "microphoneControlPresent": false,
+      "recordAudioRunning": false,
+      "remoteSessionState": "unknown"
+    }
+  },
+  "cycles": [
+    {
+      "assistant": "ChatGPT",
+      "cycle": "1",
+      "build": "initial labels, same control logic",
+      "start": {
+        "observedAtUtc": "2026-11-01T22:48:50.7160127Z",
+        "assistant": "ChatGPT",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": true,
+        "microphoneControlPresent": true,
+        "recordAudioRunning": true,
+        "remoteSessionState": "unknown"
+      },
+      "end": {
+        "observedAtUtc": "2026-11-01T22:51:18.9471948Z",
+        "assistant": "ChatGPT",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": false,
+        "microphoneControlPresent": false,
+        "recordAudioRunning": false,
+        "remoteSessionState": "unknown"
+      },
+      "passed": true
+    },
+    {
+      "assistant": "Claude",
+      "cycle": "1",
+      "build": "initial labels, same control logic",
+      "start": {
+        "observedAtUtc": "2026-11-01T22:52:56.6515912Z",
+        "assistant": "Claude",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": true,
+        "microphoneControlPresent": true,
+        "recordAudioRunning": true,
+        "remoteSessionState": "unknown"
+      },
+      "end": {
+        "observedAtUtc": "2026-11-01T22:53:19.6571720Z",
+        "assistant": "Claude",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": false,
+        "microphoneControlPresent": false,
+        "recordAudioRunning": false,
+        "remoteSessionState": "unknown"
+      },
+      "passed": true
+    },
+    {
+      "assistant": "ChatGPT",
+      "cycle": "2",
+      "build": "initial labels, same control logic",
+      "start": {
+        "observedAtUtc": "2026-11-01T22:51:55.8840330Z",
+        "assistant": "ChatGPT",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": true,
+        "microphoneControlPresent": true,
+        "recordAudioRunning": true,
+        "remoteSessionState": "unknown"
+      },
+      "end": {
+        "observedAtUtc": "2026-11-01T22:52:16.4218201Z",
+        "assistant": "ChatGPT",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": false,
+        "microphoneControlPresent": false,
+        "recordAudioRunning": false,
+        "remoteSessionState": "unknown"
+      },
+      "passed": true
+    },
+    {
+      "assistant": "Claude",
+      "cycle": "2",
+      "build": "initial labels, same control logic",
+      "start": {
+        "observedAtUtc": "2026-11-01T22:53:47.9314510Z",
+        "assistant": "Claude",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": true,
+        "microphoneControlPresent": true,
+        "recordAudioRunning": true,
+        "remoteSessionState": "unknown"
+      },
+      "end": {
+        "observedAtUtc": "2026-11-01T22:54:11.8089691Z",
+        "assistant": "Claude",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": false,
+        "microphoneControlPresent": false,
+        "recordAudioRunning": false,
+        "remoteSessionState": "unknown"
+      },
+      "passed": true
+    },
+    {
+      "assistant": "ChatGPT",
+      "cycle": "final",
+      "build": "final short labels",
+      "start": {
+        "observedAtUtc": "2026-11-01T22:59:00.7682040Z",
+        "assistant": "ChatGPT",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": true,
+        "microphoneControlPresent": true,
+        "recordAudioRunning": true,
+        "remoteSessionState": "unknown"
+      },
+      "end": {
+        "observedAtUtc": "2026-11-01T22:59:28.1630098Z",
+        "assistant": "ChatGPT",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": false,
+        "microphoneControlPresent": false,
+        "recordAudioRunning": false,
+        "remoteSessionState": "unknown"
+      },
+      "passed": true
+    },
+    {
+      "assistant": "Claude",
+      "cycle": "final",
+      "build": "final short labels",
+      "start": {
+        "observedAtUtc": "2026-11-01T23:00:04.5135333Z",
+        "assistant": "Claude",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": true,
+        "microphoneControlPresent": true,
+        "recordAudioRunning": true,
+        "remoteSessionState": "unknown"
+      },
+      "end": {
+        "observedAtUtc": "2026-11-01T23:00:33.2696842Z",
+        "assistant": "Claude",
+        "targetUiNodesPresent": true,
+        "resumedOnPhysicalDisplay": true,
+        "focusedOnPhysicalDisplay": true,
+        "endControlPresent": false,
+        "microphoneControlPresent": false,
+        "recordAudioRunning": false,
+        "remoteSessionState": "unknown"
+      },
+      "passed": true
+    }
+  ],
+  "apkSha256": {
+    "controls.apk": "34faf32231a738af253c7e1777725992585c8994dbcc47c4565107570a2f7933",
+    "controls-tests.apk": "a1b816481c1d328fffc710179af633a7be20c2a03ca22d39bdb357d5323681b0"
+  },
+  "tests": {
+    "jvm": 113,
+    "jvmFailures": 0,
+    "fixtureDeviceTests": 24,
+    "fixtureFailures": 0,
+    "accessBoundaryTestsBefore": 2,
+    "accessBoundaryTestsAfterRestore": 2,
+    "lintErrors": 0,
+    "lintWarningsPresent": true,
+    "fullCiTaskList": "passed before final text-only adjustment",
+    "finalOptInBuildLintAndVoiceTests": "passed",
+    "defaultComponentsDisabled": true,
+    "releaseNativeControlClasses": 0
+  },
+  "cleanup": {
+    "settingsMatch": true,
+    "googleAssistantRestored": true,
+    "prototypeListenerAccess": false,
+    "nativeRecordingInactive": true,
+    "dhuClosed": true,
+    "ownedForwardRemoved": true
+  },
+  "limits": [
+    "No spoken or written test question",
+    "No acoustic conversation acceptance",
+    "No MCP prompt inspection or approval",
+    "No locked-phone start: prototype deliberately blocks it",
+    "No network-loss, reconnect, process-death or real stale-action test",
+    "No vehicle, driving, call or headset test",
+    "No product or distribution approval",
+    "Native Voice may send microphone audio to its provider; this was not offline"
+  ]
+}

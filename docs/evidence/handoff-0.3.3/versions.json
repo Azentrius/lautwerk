@@ -1,0 +1,22 @@
+[
+  {
+    "package": "com.azentrius.lautwerk.prototype.dhu",
+    "versionName": "0.3.3-prototype",
+    "versionCode": "303"
+  },
+  {
+    "package": "com.openai.chatgpt",
+    "versionName": "1.2026.293",
+    "versionCode": "2629319"
+  },
+  {
+    "package": "com.anthropic.claude",
+    "versionName": "1.261029.20",
+    "versionCode": "26102920"
+  },
+  {
+    "package": "com.google.android.projection.gearhead",
+    "versionName": "17.9.664044-release",
+    "versionCode": "179664044"
+  }
+]

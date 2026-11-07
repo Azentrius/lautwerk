@@ -1,0 +1,21 @@
+11-01 02:11:32.761 I/Lautwerk(14427): car.onCreateScreen api=8
+11-01 02:12:18.359 I/Lautwerk(14427): handoff.phase=RELEASING
+11-01 02:12:18.361 I/Lautwerk(14427): voice.session.stop.request active=false
+11-01 02:12:18.362 I/Lautwerk(14427): voice.session.stop elapsedMs=2
+11-01 02:12:18.402 I/Lautwerk(14427): handoff.dispatch target=CHATGPT result=REQUESTED stage=DISPATCH failure=NONE
+11-01 02:12:18.402 I/Lautwerk(14427): handoff.phase=REQUESTED
+11-01 02:14:23.718 I/Lautwerk(14427): voice.session.stop.request active=false
+11-01 02:14:23.721 I/Lautwerk(14427): voice.session.stop elapsedMs=3
+11-01 02:14:23.899 I/Lautwerk(14427): voice.tts.ready local=true
+11-01 02:14:23.910 I/Lautwerk(14427): voice.focus capture=true granted=true
+11-01 02:14:23.949 I/Lautwerk(14427): voice.car.capture.start rate=16000 channels=1 pcm=16
+11-01 02:14:25.056 I/Lautwerk(14427): voice.car.capture.firstFrame
+11-01 02:14:35.654 I/Lautwerk(14427): voice.car.capture.hostStopped
+11-01 02:14:35.658 I/Lautwerk(14427): voice.car.capture.stopped elapsedMs=0
+11-01 02:14:35.663 I/Lautwerk(14427): voice.session.stop.request active=true
+11-01 02:14:35.668 I/Lautwerk(14427): voice.session.stop elapsedMs=5
+11-01 02:15:23.969 I/Lautwerk(14427): handoff.phase=RELEASING
+11-01 02:15:23.971 I/Lautwerk(14427): voice.session.stop.request active=false
+11-01 02:15:23.973 I/Lautwerk(14427): voice.session.stop elapsedMs=3
+11-01 02:15:23.989 I/Lautwerk(14427): handoff.dispatch target=CLAUDE result=REQUESTED stage=DISPATCH failure=NONE
+11-01 02:15:23.990 I/Lautwerk(14427): handoff.phase=REQUESTED

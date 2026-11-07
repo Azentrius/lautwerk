@@ -15,12 +15,15 @@ import com.azentrius.lautwerk.settings.ModelSelectionStore
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import java.io.Closeable
+import com.azentrius.lautwerk.car.handoff.ExperimentScreenFactory
+import androidx.car.app.model.ParkedOnlyOnClickListener
 
 class LautwerkScreen(
     carContext: CarContext,
     private val selections: ModelSelectionStore = ModelSelectionStore(carContext),
     private val voice: CarVoicePort = VoiceConnection(carContext, carContext),
-    private val voicePreferences: VoicePreferences = VoicePreferences(carContext)
+    private val voicePreferences: VoicePreferences = VoicePreferences(carContext),
+    private val handoffExperiment: Boolean = false
 ) : Screen(carContext) {
     private var subscription: Closeable? = null
     private var modeSubscription: Closeable? = null
@@ -67,7 +70,7 @@ class LautwerkScreen(
         val selected = voice.state.selection ?: selections.load()
         val content = carContext.getString(R.string.car_selection, message,
             selected.provider.displayName, selected.model.label)
-        return MessageTemplate.Builder(content)
+        val builder = MessageTemplate.Builder(content)
             .setTitle(carContext.getString(R.string.car_title))
             .setHeaderAction(Action.APP_ICON)
             .addAction(Action.Builder()
@@ -82,7 +85,18 @@ class LautwerkScreen(
                         voice.stop()
                     } else start()
                 }.build())
-            .build()
+        if (handoffExperiment) {
+            builder.addAction(Action.Builder().setTitle(carContext.getString(R.string.handoff_open))
+                .setBackgroundColor(CarColor.PRIMARY)
+                .setOnClickListener(ParkedOnlyOnClickListener.create {
+                    if (visible) {
+                        permissionGeneration++
+                        requestingPermission = false
+                        screenManager.push(ExperimentScreenFactory.create(carContext))
+                    }
+                }).build())
+        }
+        return builder.build()
     }
 
     private fun start() {

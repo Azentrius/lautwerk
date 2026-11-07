@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-01",
+  "source": "Visible native settings and existing home widget labels; read-only phone inspection",
+  "device": { "model": "Pixel 10 Pro", "android": 17, "api": 37 },
+  "apps": {
+    "chatgpt": {
+      "versionName": "1.2026.293",
+      "versionCode": 2629319,
+      "selectedModel": "Live",
+      "autoStartOption": "Not found on the inspected voice page or in settings search",
+      "searchQuery": "Start",
+      "searchResult": "Keine passenden Einstellungen",
+      "backgroundConversationsEnabled": true,
+      "backgroundLabel": "Hintergrundgespräche",
+      "widgetVoiceLabel": "Sprachgespräch starten"
+    },
+    "claude": {
+      "versionName": "1.261030.19",
+      "versionCode": 26103019,
+      "autoStartOption": "Not found on the inspected settings pages",
+      "voiceSettingsTitle": "Stimmeinstellungen",
+      "voiceSettingsControls": ["Stimme", "Sprache", "Tempo"],
+      "widgetVoiceLabel": "Sprachchat"
+    }
+  },
+  "widgetVoiceActionsActivated": false,
+  "nativeVoiceBehavior": "Not tested in this inspection",
+  "defaultAssistantAfter": "com.google.android.googlequicksearchbox",
+  "settingsChanged": false,
+  "phoneReturnedToHome": true,
+  "temporaryUiDumpsRemoved": true,
+  "applicationCodeChanged": false,
+  "scopeLimit": "Installed versions and current account/configuration only; no claim about other rollouts",
+  "decision": "No confirmed auto-start setting; native widget entries need separate behavioral testing and do not establish Android Auto start/stop control"
+}

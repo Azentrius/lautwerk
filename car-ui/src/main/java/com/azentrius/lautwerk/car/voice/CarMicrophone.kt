@@ -30,7 +30,7 @@ internal class CarMicrophone(private val context: CarContext, private val main: 
         val cleanup = Cancel {
             // Invalidate reads first; neither the host's start nor stop IPC can block this caller.
             capture?.cancel()
-            runCatching { output.close() }
+            CarAudioResources.release.cleanup { output.close() }
             focus.cancel()
         }
         try {
@@ -76,7 +76,7 @@ internal class CarMicrophone(private val context: CarContext, private val main: 
                     }
                     override fun stop() {
                         val started = SystemClock.elapsedRealtime()
-                        try { recorder.stopRecording() }
+                        try { CarAudioResources.release.cleanup { recorder.stopRecording() } }
                         finally { Log.i(VoiceFocus.TAG, "voice.car.capture.stopped elapsedMs=${SystemClock.elapsedRealtime() - started}") }
                     }
                 }

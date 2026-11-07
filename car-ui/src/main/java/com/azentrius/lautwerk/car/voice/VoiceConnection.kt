@@ -6,6 +6,7 @@ import android.os.IBinder
 import androidx.car.app.CarContext
 import com.azentrius.lautwerk.car.R
 import java.io.Closeable
+import com.azentrius.lautwerk.voice.Cancel
 
 /** Injectable surface contract: template tests never bind a real microphone/network service. */
 interface CarVoicePort : Closeable {
@@ -13,6 +14,10 @@ interface CarVoicePort : Closeable {
     fun connect(changed: () -> Unit)
     fun start()
     fun stop()
+    fun releaseForHandoff(complete: (Boolean) -> Unit): Cancel {
+        complete(false)
+        return Cancel {}
+    }
 }
 
 class VoiceConnection(private val context: Context, private val car: CarContext? = null) : CarVoicePort {
@@ -47,6 +52,8 @@ class VoiceConnection(private val context: Context, private val car: CarContext?
         } else current.start(this, car, VoicePreferences(context).mode)
     }
     override fun stop() { service?.stop() }
+    override fun releaseForHandoff(complete: (Boolean) -> Unit): Cancel =
+        service?.releaseForHandoff(complete) ?: super.releaseForHandoff(complete)
     override fun close() {
         service?.release(this)
         observer?.close(); observer = null; service = null

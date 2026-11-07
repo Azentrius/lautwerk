@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<resources>
+    <string name="native_control_title">Lautwerk Steuerungsversuch</string>
+    <string name="native_picker">Sprachsteuerung der Original-Apps.\nNur im Stand. Einrichtung am Telefon.</string>
+    <string name="native_start">%1$s starten</string>
+    <string name="native_end">Auflegen</string>
+    <string name="native_ready">Start bereit. Zustand unbekannt.</string>
+    <string name="native_needs_role">Assistenzrolle am Telefon im Stand prüfen.</string>
+    <string name="native_needs_listener">Zugriff am Telefon im Stand prüfen.</string>
+    <string name="native_needs_shortcut">Sprach-Verknüpfung am Telefon wählen.</string>
+    <string name="native_busy">Steuerung belegt. Telefon im Stand prüfen.</string>
+    <string name="native_start_requested">Start angefordert, nicht bestätigt.</string>
+    <string name="native_end_requested">Auflegen angefordert, nicht bestätigt.</string>
+    <string name="native_action_available">Auflegen verfügbar. Zustand unbekannt.</string>
+    <string name="native_action_unavailable">Auflegen nicht verfügbar. Telefon im Stand prüfen.</string>
+    <string name="native_blocked">Anfrage blockiert. Telefon im Stand prüfen.</string>
+    <string name="native_setup_disclosure">Debug-Versuch, nur im Stand. Start verwendet eine veröffentlichte App-Verknüpfung. Auflegen verwendet die aktuelle Benachrichtigungsaktion der Original-App. Beides bestätigt keinen Gesprächszustand. Berechtigungsfragen einschließlich MCP bleiben in der Original-App und werden weder erkannt noch bestätigt. Kein automatischer Start, Wiederholungsversuch oder Bestätigung.</string>
+    <string name="native_role_settings">Assistenzrolle prüfen</string>
+    <string name="native_role_disclosure">Die Auswahl von Lautwerk ersetzt vorübergehend Ihren digitalen Assistenten. Seine Assistenzgeste führt nichts aus; Spracherkennung und Aktivierungswort bietet er nicht. Der Versuch benötigt die aktive Sprachassistenzrolle für Verknüpfungen. Stellen Sie danach den vorherigen Assistenten und seine Kontexteinstellungen wieder her. Android-Einstellungen öffnen?</string>
+    <string name="native_listener_settings">Benachrichtigungszugriff prüfen</string>
+    <string name="native_listener_disclosure">Android erlaubt umfassenden Benachrichtigungszugriff, nicht nur auf zwei Apps. Dieser Versuch filtert ChatGPT und Claude, liest nur Steuerungsdaten und keine Nachrichtentexte, Titel, Extras oder MCP-Fragen. Aktuelle Aktionen bleiben nur im Arbeitsspeicher; Auflegen wird nur auf Ihren ausdrücklichen Tastendruck gesendet. Entziehen Sie den Zugriff nach dem Test. Android-Einstellungen öffnen?</string>
+    <string name="native_choose_shortcut">%1$s Sprach-Verknüpfung wählen</string>
+    <string name="native_no_shortcuts">Keine unterstützte Sprach-Verknüpfung gefunden. Nur die zuvor geprüften Sprach-Aktionen werden angeboten; Chat-Verknüpfungen und private Intents sind ausgeschlossen.</string>
+    <string name="native_shortcut_saved">Verknüpfung gespeichert. Sie wurde nicht gestartet.</string>
+    <string name="native_check_setup">Einrichtung prüfen</string>
+    <string name="native_continue">Weiter zu den Einstellungen</string>
+</resources>

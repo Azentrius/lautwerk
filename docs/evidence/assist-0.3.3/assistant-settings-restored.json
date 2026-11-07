@@ -1,0 +1,32 @@
+{
+  "before": "com.google.android.googlequicksearchbox",
+  "temporary": [
+    "com.openai.chatgpt",
+    "com.anthropic.claude"
+  ],
+  "after": "com.google.android.googlequicksearchbox",
+  "method": "Normal Android default-assistant settings and confirmation dialogs, with explicit user authorization",
+  "restored": [
+    {
+      "setting": "assistant",
+      "equal": true
+    },
+    {
+      "setting": "voice_interaction_service",
+      "equal": true
+    },
+    {
+      "setting": "voice_recognition_service",
+      "equal": true
+    },
+    {
+      "setting": "assist_structure_enabled",
+      "equal": true
+    },
+    {
+      "setting": "assist_screenshot_enabled",
+      "equal": true
+    }
+  ],
+  "contextSwitches": "Android turned both context switches off during role changes. Restored their previous enabled state through the normal Google assistant settings UI."
+}

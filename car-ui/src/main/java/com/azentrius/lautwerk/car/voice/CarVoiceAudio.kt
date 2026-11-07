@@ -174,15 +174,17 @@ internal class CarVoiceAudio(
     private fun stopRecognition() {
         capture?.cancel(); capture = null
         val previous = speech; speech = null
-        runCatching { previous?.cancel() }; runCatching { previous?.destroy() }
-        pipe?.forEach { runCatching { it.close() } }; pipe = null
+        CarAudioResources.release.cleanup { previous?.cancel() }
+        CarAudioResources.release.cleanup { previous?.destroy() }
+        pipe?.forEach { descriptor -> CarAudioResources.release.cleanup { descriptor.close() } }; pipe = null
     }
     override fun close() {
         generation++
         utterance = null; spoken = null; chunks = emptyList()
         stopRecognition()
         val old = tts; tts = null
-        runCatching { old?.stop() }; runCatching { old?.shutdown() }
+        if (old != null) CarAudioResources.release.cleanup { check(old.stop() == TextToSpeech.SUCCESS) }
+        CarAudioResources.release.cleanup { old?.shutdown() }
     }
     companion object {
         fun problem(code: Int): VoiceProblem = when (code) {

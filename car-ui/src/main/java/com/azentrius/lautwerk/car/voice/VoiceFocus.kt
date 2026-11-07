@@ -19,7 +19,9 @@ internal class VoiceFocus(context: Context, private val main: Handler, private v
         fun release() {
             if (released) return
             released = true
-            runCatching { manager.abandonAudioFocusRequest(request) }
+            CarAudioResources.release.cleanup {
+                check(manager.abandonAudioFocusRequest(request) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED)
+            }
         }
         request = AudioFocusRequest.Builder(if (capture) AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE else AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
             .setAudioAttributes(attributes).setAcceptsDelayedFocusGain(false).setWillPauseWhenDucked(true)

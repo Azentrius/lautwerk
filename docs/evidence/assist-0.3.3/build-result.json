@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-01",
+  "jdk": "17.0.19",
+  "gradle": "9.8.2",
+  "version": "0.3.3-prototype",
+  "code": 303,
+  "standardCiTasks": "PASS",
+  "standardDuration": "2m 11s",
+  "assistBuildAndLint": "PASS",
+  "assistDuration": "1m 16s",
+  "jvmTests": 110,
+  "jvmExecution": "UP-TO-DATE; unchanged JVM sources, zero failures in XML reports",
+  "instrumentedTests": 19,
+  "instrumentedFailures": 0,
+  "observerFixtures": 4,
+  "versionCheck": "PASS",
+  "artifacts": [
+    {
+      "name": "assist.apk",
+      "sha256": "d414590b7419e380e74602302b58933287f2fc9d0a2ae863b730989beac3c375",
+      "bytes": 9695012
+    },
+    {
+      "name": "assist-tests.apk",
+      "sha256": "439e98b93ef4354e673ffcf411dba7ab61b483be91947d04826fd0233c5b7e11",
+      "bytes": 2513987
+    },
+    {
+      "name": "standard.apk",
+      "sha256": "27b8519ecb587673db89fb98709ff5abb3bf5ac661f97688310d6ad520fa995c",
+      "bytes": 9695012
+    }
+  ]
+}

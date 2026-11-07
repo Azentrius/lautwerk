@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-01",
+  "timezone": "Europe/Berlin",
+  "baseline": "0b237f38681207188253e6b8babc6adfe8b1d0c4",
+  "device": { "model": "Pixel 10 Pro", "android": 17, "api": 37, "unlocked": true },
+  "trigger": "Taps on existing official phone widgets through ADB, not DHU or Lautwerk",
+  "endMethod": "Tap the native app's currently observed Beenden control",
+  "apps": {
+    "chatgpt": {
+      "versionName": "1.2026.293", "versionCode": 2629319,
+      "widgetLabel": "Sprachgespräch starten",
+      "voiceControls": ["Mikrofon ausschalten", "Beenden"],
+      "postEndControls": ["Diktieren", "Sprachgespräch starten"],
+      "firstCycleRecordedMicrophoneDurationSeconds": 14.060
+    },
+    "claude": {
+      "versionName": "1.261030.19", "versionCode": 26103019,
+      "widgetLabel": "Sprachchat",
+      "voiceControls": ["Mikrofon stummschalten", "Claudes Stimme stummschalten", "Beenden"],
+      "postEndControls": ["Spracheingabe starten", "Sprachmodus"],
+      "firstCycleRecordedMicrophoneDurationSeconds": 13.135
+    }
+  },
+  "cases": [
+    { "target": "chatgpt", "attempt": 1, "widgetTapAt": "2026-11-01T22:10:36.2994485+01:00", "endTapAt": "2026-11-01T22:10:51.4990641+01:00", "nativeVoiceControlsPresent": true, "microphoneRunningDuringVoice": true, "nativeEndControlGone": true, "microphoneRunningAfterEnd": false },
+    { "target": "claude", "attempt": 1, "widgetTapAt": "2026-11-01T22:11:17.9328169+01:00", "endTapAt": "2026-11-01T22:11:30.7160771+01:00", "nativeVoiceControlsPresent": true, "microphoneRunningDuringVoice": true, "nativeEndControlGone": true, "microphoneRunningAfterEnd": false },
+    { "target": "chatgpt", "attempt": 2, "widgetTapAt": "2026-11-01T22:12:02.1356784+01:00", "endTapAt": "2026-11-01T22:12:07.3715977+01:00", "nativeVoiceControlsPresent": true, "microphoneRunningDuringVoice": true, "nativeEndControlGone": true, "microphoneRunningAfterEnd": false },
+    { "target": "claude", "attempt": 2, "widgetTapAt": "2026-11-01T22:12:14.3899591+01:00", "endTapAt": "2026-11-01T22:12:19.6596416+01:00", "nativeVoiceControlsPresent": true, "microphoneRunningDuringVoice": true, "nativeEndControlGone": true, "microphoneRunningAfterEnd": false }
+  ],
+  "cleanup": {
+    "bothNativeMicrophonesInactive": true,
+    "focusedPackage": "com.google.android.apps.nexuslauncher",
+    "defaultAssistantBeforeAndAfter": "com.google.android.googlequicksearchbox",
+    "temporaryUiDumpAbsent": true,
+    "settingsChanged": false,
+    "appCodeChanged": false,
+    "installedApksChanged": false
+  },
+  "testQuestionSentByDriver": false,
+  "mcpApproval": false,
+  "nativeContentRetained": false,
+  "userAcousticOrVisualConfirmation": "Not requested; findings from UI controls and Android microphone operation samples",
+  "notTested": ["Spoken question and answer", "Remote session acknowledgement", "External start and stop", "Voice-only end command", "Locked or cold start", "Car audio routing", "DHU", "Vehicle", "Network recovery", "MCP", "Calls", "Headsets"],
+  "conclusion": "Native phone-widget Voice entry and native End passed twice per app; complete Android Auto start/stop control remains unproven"
+}
